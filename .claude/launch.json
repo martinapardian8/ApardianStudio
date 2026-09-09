@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "apardian-web",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "8788", "--directory", "/Users/martinapardian/Desktop/WEB APARDIANSTUDIO/05-WEB"],
+      "port": 8788
+    }
+  ]
+}
