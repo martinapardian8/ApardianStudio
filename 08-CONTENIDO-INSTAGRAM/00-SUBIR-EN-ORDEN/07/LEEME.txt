@@ -1,0 +1,14 @@
+PUBLICACIÓN 07 — Semana 3 · Lunes
+Platos que se venden solos
+
+QUÉ ES
+Carrusel de 8 fotos.
+
+QUÉ SUBIR, EN ESTE ORDEN
+1. El posteo: foto-1.jpg, foto-2.jpg, foto-3.jpg, foto-4.jpg, foto-5.jpg, foto-6.jpg, foto-7.jpg, foto-8.jpg
+   (subí las fotos en ese orden exacto, el carrusel cuenta una historia)
+2. El pie de foto: abrí copy.txt, copiá todo y pegalo.
+3. La historia: historia.jpg, subila el mismo día, un rato después del posteo.
+
+POR QUÉ ESTA Y NO OTRA
+Vuelve a gastronomia con formato carrusel, que rinde mas que el posteo suelto de la semana 1.

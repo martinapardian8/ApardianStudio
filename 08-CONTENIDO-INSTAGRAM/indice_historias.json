@@ -1,0 +1,302 @@
+[
+ {
+  "n": 1,
+  "tipo": "foto",
+  "titular": "Todavía tengo arroz en la cámara",
+  "archivo": "001_foto_todavia-tengo-arroz-en-la-camara.jpg"
+ },
+ {
+  "n": 2,
+  "tipo": "foto",
+  "titular": "Esta la saqué desde el piso",
+  "archivo": "002_foto_esta-la-saque-desde-el-piso.jpg"
+ },
+ {
+  "n": 3,
+  "tipo": "foto",
+  "titular": "Ocho horas para veinte platos",
+  "archivo": "003_foto_ocho-horas-para-veinte-platos.jpg"
+ },
+ {
+  "n": 4,
+  "tipo": "foto",
+  "titular": "La fiesta recién empieza a las dos",
+  "archivo": "004_foto_la-fiesta-recien-empieza-a-las-dos.jpg"
+ },
+ {
+  "n": 5,
+  "tipo": "foto",
+  "titular": "Le dije dos cosas y me callé",
+  "archivo": "005_foto_le-dije-dos-cosas-y-me-calle.jpg"
+ },
+ {
+  "n": 6,
+  "tipo": "foto",
+  "titular": "Cuarenta tomas para elegir una",
+  "archivo": "006_foto_cuarenta-tomas-para-elegir-una.jpg"
+ },
+ {
+  "n": 7,
+  "tipo": "foto",
+  "titular": "Poca luz y una sola pasada",
+  "archivo": "007_foto_poca-luz-y-una-sola-pasada.jpg"
+ },
+ {
+  "n": 8,
+  "tipo": "foto",
+  "titular": "Este no entendió nada y salió mejor que yo",
+  "archivo": "008_foto_este-no-entendio-nada-y-salio-mejor-que-yo.jpg"
+ },
+ {
+  "n": 9,
+  "tipo": "foto",
+  "titular": "Salí a caminar y volví con esto",
+  "archivo": "009_foto_sali-a-caminar-y-volvi-con-esto.jpg"
+ },
+ {
+  "n": 10,
+  "tipo": "foto",
+  "titular": "Vacío a las cinco, lleno a las nueve",
+  "archivo": "010_foto_vacio-a-las-cinco-lleno-a-las-nueve.jpg"
+ },
+ {
+  "n": 11,
+  "tipo": "dato",
+  "titular": "Ochenta y sigo contando",
+  "archivo": "011_dato_ochenta-y-sigo-contando.jpg"
+ },
+ {
+  "n": 12,
+  "tipo": "dato",
+  "titular": "Ese es mi plazo de entrega",
+  "archivo": "012_dato_ese-es-mi-plazo-de-entrega.jpg"
+ },
+ {
+  "n": 13,
+  "tipo": "dato",
+  "titular": "Foto, video, web y edición",
+  "archivo": "013_dato_foto-video-web-y-edicion.jpg"
+ },
+ {
+  "n": 14,
+  "tipo": "dato",
+  "titular": "El 70% te va a mirar desde el celular",
+  "archivo": "014_dato_el-70-te-va-a-mirar-desde-el-celular.jpg"
+ },
+ {
+  "n": 15,
+  "tipo": "dato",
+  "titular": "Lo que tardo en editar un lote",
+  "archivo": "015_dato_lo-que-tardo-en-editar-un-lote.jpg"
+ },
+ {
+  "n": 16,
+  "tipo": "antes",
+  "titular": "Esto es revelado, no filtro",
+  "archivo": "016_antes_esto-es-revelado-no-filtro.jpg"
+ },
+ {
+  "n": 17,
+  "tipo": "antes",
+  "titular": "La comida se edita distinto",
+  "archivo": "017_antes_la-comida-se-edita-distinto.jpg"
+ },
+ {
+  "n": 18,
+  "tipo": "antes",
+  "titular": "La piel no se plancha",
+  "archivo": "018_antes_la-piel-no-se-plancha.jpg"
+ },
+ {
+  "n": 19,
+  "tipo": "antes",
+  "titular": "Poca luz no es excusa",
+  "archivo": "019_antes_poca-luz-no-es-excusa.jpg"
+ },
+ {
+  "n": 20,
+  "tipo": "antes",
+  "titular": "Fondo blanco de verdad",
+  "archivo": "020_antes_fondo-blanco-de-verdad.jpg"
+ },
+ {
+  "n": 21,
+  "tipo": "pregunta",
+  "titular": "¿Ceremonia de día o de noche?",
+  "archivo": "021_pregunta_ceremonia-de-dia-o-de-noche.jpg"
+ },
+ {
+  "n": 22,
+  "tipo": "pregunta",
+  "titular": "¿Qué foto te da más hambre?",
+  "archivo": "022_pregunta_que-foto-te-da-mas-hambre.jpg"
+ },
+ {
+  "n": 23,
+  "tipo": "pregunta",
+  "titular": "¿Color o blanco y negro?",
+  "archivo": "023_pregunta_color-o-blanco-y-negro.jpg"
+ },
+ {
+  "n": 24,
+  "tipo": "pregunta",
+  "titular": "¿Posás o te da vergüenza?",
+  "archivo": "024_pregunta_posas-o-te-da-verguenza.jpg"
+ },
+ {
+  "n": 25,
+  "tipo": "pregunta",
+  "titular": "¿Foto o video en tu fiesta?",
+  "archivo": "025_pregunta_foto-o-video-en-tu-fiesta.jpg"
+ },
+ {
+  "n": 26,
+  "tipo": "detras",
+  "titular": "Dos cámaras y ningún plan B",
+  "archivo": "026_detras_dos-camaras-y-ningun-plan-b.jpg"
+ },
+ {
+  "n": 27,
+  "tipo": "detras",
+  "titular": "El plato se enfría en tres minutos",
+  "archivo": "027_detras_el-plato-se-enfria-en-tres-minutos.jpg"
+ },
+ {
+  "n": 28,
+  "tipo": "detras",
+  "titular": "El fondo blanco no es una pared blanca",
+  "archivo": "028_detras_el-fondo-blanco-no-es-una-pared-blanca.jpg"
+ },
+ {
+  "n": 29,
+  "tipo": "detras",
+  "titular": "Trabajo casi siempre con luz de ventana",
+  "archivo": "029_detras_trabajo-casi-siempre-con-luz-de-ventana.jpg"
+ },
+ {
+  "n": 30,
+  "tipo": "detras",
+  "titular": "Me muevo rápido y en silencio",
+  "archivo": "030_detras_me-muevo-rapido-y-en-silencio.jpg"
+ },
+ {
+  "n": 31,
+  "tipo": "dato",
+  "titular": "El instante que no se repite",
+  "archivo": "031_dato_el-instante-que-no-se-repite.jpg"
+ },
+ {
+  "n": 32,
+  "tipo": "dato",
+  "titular": "Lo que entra por los ojos antes que por la boca",
+  "archivo": "032_dato_lo-que-entra-por-los-ojos-antes-que-por-la-b.jpg"
+ },
+ {
+  "n": 33,
+  "tipo": "dato",
+  "titular": "Una persona, sin pose y sin apuro",
+  "archivo": "033_dato_una-persona-sin-pose-y-sin-apuro.jpg"
+ },
+ {
+  "n": 34,
+  "tipo": "dato",
+  "titular": "Los que nunca posan y siempre miran",
+  "archivo": "034_dato_los-que-nunca-posan-y-siempre-miran.jpg"
+ },
+ {
+  "n": 35,
+  "tipo": "dato",
+  "titular": "Dos personas y todo el resto de la vida esperando",
+  "archivo": "035_dato_dos-personas-y-todo-el-resto-de-la-vida-espe.jpg"
+ },
+ {
+  "n": 36,
+  "tipo": "foto",
+  "titular": "Uruguay también es esto",
+  "archivo": "036_foto_uruguay-tambien-es-esto.jpg"
+ },
+ {
+  "n": 37,
+  "tipo": "foto",
+  "titular": "Nadie en kilómetros",
+  "archivo": "037_foto_nadie-en-kilometros.jpg"
+ },
+ {
+  "n": 38,
+  "tipo": "foto",
+  "titular": "Me miró y se fue",
+  "archivo": "038_foto_me-miro-y-se-fue.jpg"
+ },
+ {
+  "n": 39,
+  "tipo": "foto",
+  "titular": "No se movió en veinte minutos",
+  "archivo": "039_foto_no-se-movio-en-veinte-minutos.jpg"
+ },
+ {
+  "n": 40,
+  "tipo": "foto",
+  "titular": "Esto salió del horno hace un minuto",
+  "archivo": "040_foto_esto-salio-del-horno-hace-un-minuto.jpg"
+ },
+ {
+  "n": 41,
+  "tipo": "foto",
+  "titular": "Producto uruguayo, foto uruguaya",
+  "archivo": "041_foto_producto-uruguayo-foto-uruguaya.jpg"
+ },
+ {
+  "n": 42,
+  "tipo": "foto",
+  "titular": "Se casaron con viento a favor",
+  "archivo": "042_foto_se-casaron-con-viento-a-favor.jpg"
+ },
+ {
+  "n": 43,
+  "tipo": "foto",
+  "titular": "Quince años, cero poses",
+  "archivo": "043_foto_quince-anos-cero-poses.jpg"
+ },
+ {
+  "n": 44,
+  "tipo": "foto",
+  "titular": "Tres canciones y se acabó la luz",
+  "archivo": "044_foto_tres-canciones-y-se-acabo-la-luz.jpg"
+ },
+ {
+  "n": 45,
+  "tipo": "foto",
+  "titular": "Mañana esto va a estar lleno",
+  "archivo": "045_foto_manana-esto-va-a-estar-lleno.jpg"
+ },
+ {
+  "n": 46,
+  "tipo": "foto",
+  "titular": "No hay segunda toma",
+  "archivo": "046_foto_no-hay-segunda-toma.jpg"
+ },
+ {
+  "n": 47,
+  "tipo": "foto",
+  "titular": "Una foto que sí se puede mandar",
+  "archivo": "047_foto_una-foto-que-si-se-puede-mandar.jpg"
+ },
+ {
+  "n": 48,
+  "tipo": "foto",
+  "titular": "Fotos de equipo que no dan vergüenza",
+  "archivo": "048_foto_fotos-de-equipo-que-no-dan-verguenza.jpg"
+ },
+ {
+  "n": 49,
+  "tipo": "dato",
+  "titular": "Quedan fechas para diciembre",
+  "archivo": "049_dato_quedan-fechas-para-diciembre.jpg"
+ },
+ {
+  "n": 50,
+  "tipo": "dato",
+  "titular": "Tengo lugar para editar dos lotes esta semana",
+  "archivo": "050_dato_tengo-lugar-para-editar-dos-lotes-esta-seman.jpg"
+ }
+]

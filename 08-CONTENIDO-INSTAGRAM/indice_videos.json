@@ -1,0 +1,92 @@
+[
+ {
+  "n": 1,
+  "campana": "bodas",
+  "formato": "feed",
+  "archivo": "001_bodas_tu-casamiento-pasa-una-sola-vez_feed.mp4"
+ },
+ {
+  "n": 9,
+  "campana": "gastronomia",
+  "formato": "feed",
+  "archivo": "009_gastronomia_la-gente-pide-con-los-ojos_feed.mp4"
+ },
+ {
+  "n": 17,
+  "campana": "edicion",
+  "formato": "feed",
+  "archivo": "017_edicion_fotografias-vos-edito-yo_feed.mp4"
+ },
+ {
+  "n": 24,
+  "campana": "marcas",
+  "formato": "feed",
+  "archivo": "024_marcas_tu-producto-merece-una-foto-que-lo-venda_feed.mp4"
+ },
+ {
+  "n": 30,
+  "campana": "web",
+  "formato": "feed",
+  "archivo": "030_web_tu-instagram-no-es-tu-pagina-web_feed.mp4"
+ },
+ {
+  "n": 37,
+  "campana": "retratos",
+  "formato": "feed",
+  "archivo": "037_retratos_una-foto-tuya-que-no-te-da-verguenza-man_feed.mp4"
+ },
+ {
+  "n": 41,
+  "campana": "eventos",
+  "formato": "feed",
+  "archivo": "041_eventos_la-fiesta-dura-una-noche_feed.mp4"
+ },
+ {
+  "n": 47,
+  "campana": "cuadros",
+  "formato": "feed",
+  "archivo": "047_cuadros_una-foto-en-el-telefono-no-decora-nada_feed.mp4"
+ },
+ {
+  "n": 50,
+  "campana": "empresas",
+  "formato": "feed",
+  "archivo": "050_empresas_que-te-llevas_feed.mp4"
+ },
+ {
+  "n": 18,
+  "campana": "edicion",
+  "formato": "feed",
+  "archivo": "018_edicion_sacas-800-fotos-y-las-editas-de-a-una_feed.mp4"
+ },
+ {
+  "n": 1,
+  "campana": "bodas",
+  "formato": "historia",
+  "archivo": "001_bodas_tu-casamiento-pasa-una-sola-vez_historia.mp4"
+ },
+ {
+  "n": 17,
+  "campana": "edicion",
+  "formato": "historia",
+  "archivo": "017_edicion_fotografias-vos-edito-yo_historia.mp4"
+ },
+ {
+  "n": 9,
+  "campana": "gastronomia",
+  "formato": "historia",
+  "archivo": "009_gastronomia_la-gente-pide-con-los-ojos_historia.mp4"
+ },
+ {
+  "n": 30,
+  "campana": "web",
+  "formato": "historia",
+  "archivo": "030_web_tu-instagram-no-es-tu-pagina-web_historia.mp4"
+ },
+ {
+  "n": 37,
+  "campana": "retratos",
+  "formato": "historia",
+  "archivo": "037_retratos_una-foto-tuya-que-no-te-da-verguenza-man_historia.mp4"
+ }
+]

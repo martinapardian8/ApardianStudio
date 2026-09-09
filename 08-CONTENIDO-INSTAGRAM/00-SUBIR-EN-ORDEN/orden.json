@@ -1,0 +1,86 @@
+[
+ {
+  "n": 1,
+  "cuando": "Hoy",
+  "titulo": "Nadie posó",
+  "tipo": "Carrusel de 8 fotos",
+  "archivos": 8
+ },
+ {
+  "n": 2,
+  "cuando": "Miércoles",
+  "titulo": "La gente pide con los ojos",
+  "tipo": "Posteo de una foto",
+  "archivos": 1
+ },
+ {
+  "n": 3,
+  "cuando": "Viernes",
+  "titulo": "Fotografiás vos. Edito yo.",
+  "tipo": "Video de 6 segundos",
+  "archivos": 1
+ },
+ {
+  "n": 4,
+  "cuando": "Semana 2 · Lunes",
+  "titulo": "Casamientos",
+  "tipo": "Carrusel de 8 fotos",
+  "archivos": 8
+ },
+ {
+  "n": 5,
+  "cuando": "Semana 2 · Miércoles",
+  "titulo": "Tu Instagram no es tu página web",
+  "tipo": "Posteo de una foto",
+  "archivos": 1
+ },
+ {
+  "n": 6,
+  "cuando": "Semana 2 · Viernes",
+  "titulo": "Antes y después",
+  "tipo": "Carrusel de 5 fotos",
+  "archivos": 5
+ },
+ {
+  "n": 7,
+  "cuando": "Semana 3 · Lunes",
+  "titulo": "Platos que se venden solos",
+  "tipo": "Carrusel de 8 fotos",
+  "archivos": 8
+ },
+ {
+  "n": 8,
+  "cuando": "Semana 3 · Miércoles",
+  "titulo": "No es mi primera boda",
+  "tipo": "Posteo de una foto",
+  "archivos": 1
+ },
+ {
+  "n": 9,
+  "cuando": "Semana 3 · Viernes",
+  "titulo": "Marcas uruguayas que fotografié",
+  "tipo": "Carrusel de 8 fotos",
+  "archivos": 8
+ },
+ {
+  "n": 10,
+  "cuando": "Semana 4 · Lunes",
+  "titulo": "Lo que pasa cuando se apagan las luces",
+  "tipo": "Carrusel de 8 fotos",
+  "archivos": 8
+ },
+ {
+  "n": 11,
+  "cuando": "Semana 4 · Miércoles",
+  "titulo": "Una foto tuya que no te da vergüenza mandar",
+  "tipo": "Video de 6 segundos",
+  "archivos": 1
+ },
+ {
+  "n": 12,
+  "cuando": "Semana 4 · Viernes",
+  "titulo": "Cómo trabajo",
+  "tipo": "Carrusel de 8 fotos",
+  "archivos": 8
+ }
+]
