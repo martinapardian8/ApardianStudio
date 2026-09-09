@@ -1,0 +1,257 @@
+/* =========================================================
+   EDITOR VISUAL — Apardian Studio
+   Se activa con ?edit=1 . Fuera de ese modo no pinta nada.
+   ========================================================= */
+
+/* ---------- dock de contacto (siempre visible) ---------- */
+.dock{
+  position:fixed;right:18px;bottom:18px;z-index:880;
+  display:flex;flex-direction:column;gap:10px;align-items:flex-end;
+}
+.dock-btn{
+  display:inline-flex;align-items:center;gap:9px;
+  font-family:"Work Sans",system-ui,sans-serif;font-weight:600;
+  font-size:12px;letter-spacing:.1em;text-transform:uppercase;
+  padding:13px 18px;border-radius:999px;cursor:pointer;
+  box-shadow:0 6px 24px rgba(0,0,0,.22);
+  transition:transform .2s var(--ease,ease), box-shadow .2s;
+  white-space:nowrap;
+}
+.dock-btn:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(0,0,0,.3)}
+.dock-wa{background:#25D366;color:#0A2E17}
+.dock-ai{background:#171717;color:#F8F7F6;border:1px solid rgba(248,247,246,.16)}
+.dock-ai .dot{width:7px;height:7px;border-radius:50%;background:#FF0033;flex:none}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+.dock-ai .dot{animation:pulse 2.2s ease-in-out infinite}
+@media (prefers-reduced-motion:reduce){ .dock-ai .dot{animation:none} }
+
+/* ---------- panel del agente ---------- */
+.ai-panel{
+  position:fixed;right:18px;bottom:84px;z-index:885;
+  width:min(380px, calc(100vw - 36px));height:min(520px, calc(100vh - 130px));
+  background:#171717;color:#F8F7F6;border:1px solid rgba(248,247,246,.14);
+  border-radius:16px;overflow:hidden;display:none;flex-direction:column;
+  box-shadow:0 24px 60px rgba(0,0,0,.45);
+}
+.ai-panel.on{display:flex}
+.ai-head{padding:15px 18px;border-bottom:1px solid rgba(248,247,246,.12);display:flex;justify-content:space-between;align-items:center;gap:10px}
+.ai-head b{font-family:"Koulen",Impact,sans-serif;font-weight:400;font-size:19px;letter-spacing:.02em;text-transform:uppercase}
+.ai-head small{display:block;color:#9C9388;font-size:11px;letter-spacing:.08em;text-transform:uppercase;margin-top:2px}
+.ai-close{color:#9C9388;font-size:22px;line-height:1;padding:2px 6px}
+.ai-close:hover{color:#FF0033}
+.ai-log{flex:1;overflow-y:auto;padding:16px 18px;display:flex;flex-direction:column;gap:12px}
+.ai-msg{max-width:88%;padding:11px 14px;border-radius:13px;font-size:14.5px;line-height:1.5}
+.ai-msg.bot{background:#232323;align-self:flex-start;border-bottom-left-radius:4px}
+.ai-msg.me{background:#FF0033;color:#fff;align-self:flex-end;border-bottom-right-radius:4px}
+.ai-chips{display:flex;flex-wrap:wrap;gap:7px;padding:0 18px 12px}
+.ai-chips button{
+  border:1px solid rgba(248,247,246,.22);color:#F8F7F6;background:transparent;
+  font-size:12px;padding:7px 11px;border-radius:999px;cursor:pointer;transition:.2s;
+}
+.ai-chips button:hover{background:#FF0033;border-color:#FF0033}
+.ai-form{display:flex;gap:8px;padding:12px 14px;border-top:1px solid rgba(248,247,246,.12)}
+.ai-form input{
+  flex:1;background:#0F0F0F;border:1px solid rgba(248,247,246,.16);color:#F8F7F6;
+  padding:11px 13px;border-radius:10px;font-family:inherit;font-size:14px;
+}
+.ai-form input:focus{outline:none;border-color:#FF0033}
+.ai-form button{background:#FF0033;color:#fff;border-radius:10px;padding:0 16px;font-weight:600;font-size:13px}
+
+/* =========================================================
+   MODO EDICIÓN
+   ========================================================= */
+body.ed-on{padding-top:56px}
+body.ed-on .dock{display:none}
+
+/* barra superior */
+.ed-bar{
+  position:fixed;top:0;left:0;right:0;height:56px;z-index:2000;
+  background:#0F0F10;color:#F8F7F6;display:flex;align-items:center;
+  gap:8px;padding:0 14px;border-bottom:1px solid rgba(248,247,246,.12);
+  font-family:"Work Sans",system-ui,sans-serif;
+}
+.ed-bar .brand{font-family:"Koulen",Impact,sans-serif;font-size:19px;letter-spacing:.02em;margin-right:6px;white-space:nowrap}
+.ed-bar .brand i{color:#FF0033;font-style:normal}
+.ed-sep{width:1px;height:26px;background:rgba(248,247,246,.14);margin:0 4px;flex:none}
+.ed-btn{
+  display:inline-flex;align-items:center;gap:6px;
+  background:transparent;border:1px solid rgba(248,247,246,.2);color:#F8F7F6;
+  padding:8px 12px;border-radius:8px;font-size:12px;font-weight:500;
+  letter-spacing:.05em;cursor:pointer;transition:.18s;white-space:nowrap;
+}
+.ed-btn:hover:not(:disabled){background:rgba(248,247,246,.1)}
+.ed-btn:disabled{opacity:.35;cursor:default}
+.ed-btn.on{background:#FF0033;border-color:#FF0033}
+.ed-btn.go{background:#FF0033;border-color:#FF0033;font-weight:600}
+.ed-btn.go:hover{background:#e0002d}
+.ed-spacer{flex:1}
+.ed-status{font-size:11px;color:#8A8785;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap}
+.ed-status.ok{color:#00c758}
+
+/* panel lateral */
+.ed-side{
+  position:fixed;top:56px;right:0;bottom:0;width:300px;z-index:1990;
+  background:#141416;color:#F8F7F6;border-left:1px solid rgba(248,247,246,.12);
+  overflow-y:auto;padding:18px;transform:translateX(100%);
+  transition:transform .3s cubic-bezier(.16,1,.3,1);
+  font-family:"Work Sans",system-ui,sans-serif;
+}
+.ed-side.on{transform:none}
+body.ed-side-on{padding-right:300px}
+.ed-side h3{font-family:"Koulen",Impact,sans-serif;font-size:17px;margin:0 0 4px;letter-spacing:.02em;text-transform:uppercase}
+.ed-side .hint{color:#8A8785;font-size:12px;margin:0 0 16px;line-height:1.45}
+.ed-group{border-top:1px solid rgba(248,247,246,.1);padding-top:14px;margin-top:14px}
+.ed-group:first-of-type{border-top:none;margin-top:0;padding-top:0}
+.ed-label{display:block;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#8A8785;margin-bottom:7px}
+.ed-row{display:flex;align-items:center;gap:8px;margin-bottom:9px}
+.ed-row input[type=range]{flex:1;accent-color:#FF0033}
+.ed-row input[type=color]{width:38px;height:30px;border:none;background:none;padding:0;cursor:pointer}
+.ed-row output{font-size:12px;color:#8A8785;font-variant-numeric:tabular-nums;min-width:44px;text-align:right}
+
+/* lista de secciones ordenable */
+.ed-sec-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:5px}
+.ed-sec-list li{
+  display:flex;align-items:center;gap:8px;padding:9px 10px;border-radius:8px;
+  background:#1D1D20;font-size:13px;cursor:grab;border:1px solid transparent;
+}
+.ed-sec-list li.drag{opacity:.4}
+.ed-sec-list li.over{border-color:#FF0033}
+.ed-sec-list li .grip{color:#5A5754;font-size:13px;letter-spacing:-2px}
+.ed-sec-list li span{flex:1}
+.ed-sec-list li button{color:#8A8785;font-size:14px;padding:1px 4px}
+.ed-sec-list li button:hover{color:#FF0033}
+.ed-sec-list li.off{opacity:.45}
+
+/* resaltes sobre la página */
+body.ed-on [data-ed]{outline:1px dashed rgba(255,0,51,.45);outline-offset:3px;cursor:text;transition:outline-color .15s;border-radius:2px}
+body.ed-on [data-ed]:hover{outline:2px solid #FF0033}
+body.ed-on [data-ed].editing{outline:2px solid #00c758;background:rgba(0,199,88,.06)}
+
+body.ed-on [data-sec]{position:relative}
+body.ed-on [data-sec]::after{
+  content:attr(data-sec-name);
+  position:absolute;top:6px;left:6px;z-index:60;
+  background:rgba(15,15,16,.88);color:#F8F7F6;
+  font-family:"Work Sans",sans-serif;font-size:9px;font-weight:600;
+  letter-spacing:.14em;text-transform:uppercase;padding:4px 8px;border-radius:5px;
+  pointer-events:none;
+}
+body.ed-on [data-sec].ed-hidden{display:none}
+
+/* piezas movibles / redimensionables */
+body.ed-on .grid figure,
+body.ed-on .rail .card{cursor:grab;position:relative}
+body.ed-on .grid figure.drag,
+body.ed-on .rail .card.drag{opacity:.35}
+body.ed-on .grid figure.over{outline:2px solid #FF0033;outline-offset:-2px}
+body.ed-on .grid figure::before,
+body.ed-on .rail .card .shot::before{
+  content:"";position:absolute;inset:0;z-index:5;
+  border:1px dashed rgba(255,0,51,.5);pointer-events:none;
+}
+.ed-tools{
+  position:absolute;top:6px;right:6px;z-index:12;display:flex;gap:4px;opacity:0;
+  transition:opacity .15s;
+}
+body.ed-on .grid figure:hover .ed-tools,
+body.ed-on .rail .card:hover .ed-tools{opacity:1}
+.ed-tools button{
+  width:26px;height:26px;border-radius:6px;background:rgba(15,15,16,.9);
+  color:#F8F7F6;font-size:12px;display:grid;place-items:center;cursor:pointer;
+  border:1px solid rgba(248,247,246,.2);
+}
+.ed-tools button:hover{background:#FF0033;border-color:#FF0033}
+
+/* modal de imagen con previsualización */
+.ed-modal{
+  position:fixed;inset:0;z-index:2100;background:rgba(8,8,9,.9);
+  display:none;place-items:center;padding:24px;
+  font-family:"Work Sans",system-ui,sans-serif;
+}
+.ed-modal.on{display:grid}
+.ed-box{
+  background:#141416;color:#F8F7F6;border:1px solid rgba(248,247,246,.14);
+  border-radius:14px;width:min(980px,100%);max-height:88vh;display:flex;flex-direction:column;overflow:hidden;
+}
+.ed-box header{padding:16px 20px;border-bottom:1px solid rgba(248,247,246,.12);display:flex;justify-content:space-between;align-items:center}
+.ed-box header b{font-family:"Koulen",Impact,sans-serif;font-size:20px;letter-spacing:.02em;text-transform:uppercase}
+.ed-box .body{padding:18px 20px;overflow-y:auto;flex:1}
+.ed-box footer{padding:14px 20px;border-top:1px solid rgba(248,247,246,.12);display:flex;gap:10px;justify-content:flex-end;align-items:center}
+.ed-compare{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:18px}
+.ed-compare figure{margin:0}
+.ed-compare .cap{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#8A8785;margin-bottom:6px}
+.ed-compare .cap.new{color:#00c758}
+.ed-compare .frame{aspect-ratio:4/3;background:#0C0C0D;border:1px solid rgba(248,247,246,.12);border-radius:8px;overflow:hidden;display:grid;place-items:center}
+.ed-compare img{width:100%;height:100%;object-fit:cover}
+.ed-compare .empty{color:#5A5754;font-size:12px}
+.ed-lib{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:8px}
+.ed-lib button{padding:0;border:2px solid transparent;border-radius:7px;overflow:hidden;aspect-ratio:1;background:#0C0C0D;cursor:pointer}
+.ed-lib button img{width:100%;height:100%;object-fit:cover;display:block}
+.ed-lib button.sel{border-color:#FF0033}
+.ed-tabs{display:flex;gap:6px;margin-bottom:14px}
+.ed-tabs button{
+  border:1px solid rgba(248,247,246,.2);background:transparent;color:#F8F7F6;
+  padding:7px 13px;border-radius:999px;font-size:12px;cursor:pointer;
+}
+.ed-tabs button.on{background:#FF0033;border-color:#FF0033}
+.ed-drop{
+  border:2px dashed rgba(248,247,246,.24);border-radius:10px;padding:34px;text-align:center;
+  color:#8A8785;font-size:13px;cursor:pointer;transition:.2s;
+}
+.ed-drop:hover,.ed-drop.hot{border-color:#FF0033;color:#F8F7F6;background:rgba(255,0,51,.05)}
+
+/* simulacion de dispositivo */
+body.ed-dev .ed-stage{margin:0 auto;transition:width .3s cubic-bezier(.16,1,.3,1);box-shadow:0 0 0 1px rgba(0,0,0,.15)}
+body.ed-dev-tablet .ed-stage{width:834px}
+body.ed-dev-mobile .ed-stage{width:390px}
+
+@media (max-width:900px){
+  body.ed-side-on{padding-right:0}
+  .ed-side{width:100%}
+}
+
+/* ---------- vista de dispositivo (iframe con viewport propio) ---------- */
+body.ed-preview-on{overflow:hidden}
+.ed-preview{
+  position:fixed;inset:56px 0 0 0;z-index:1980;
+  background:#0C0C0D;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;
+  padding:24px;overflow:auto;
+}
+.ed-phone{
+  background:#000;border-radius:26px;overflow:hidden;flex:none;
+  box-shadow:0 30px 80px rgba(0,0,0,.6), 0 0 0 8px #1A1A1C, 0 0 0 9px rgba(248,247,246,.14);
+  max-height:calc(100vh - 160px);
+  min-height:480px;
+}
+.ed-phone iframe{width:100%;height:100%;border:0;display:block;background:#F8F7F6}
+.ed-preview-tip{
+  color:#8A8785;font-family:"Work Sans",system-ui,sans-serif;font-size:12px;
+  letter-spacing:.06em;text-align:center;max-width:46ch;line-height:1.5;
+}
+/* el panel lateral estorba en esta vista */
+body.ed-preview-on .ed-side{transform:translateX(100%)}
+body.ed-preview-on{padding-right:0}
+@media (max-height:820px){ .ed-phone{max-height:calc(100vh - 130px)} }
+/* si el navegador reporta alto cero, el marco igual se ve */
+@supports not (height: 1svh){ .ed-phone{min-height:520px} }
+
+/* ---------- modo mover: arrastrar y estirar bloques ---------- */
+body.ed-mover [data-ed]{
+  cursor:grab;outline:1px dashed rgba(0,199,88,.55);outline-offset:4px;
+  position:relative;transition:none;
+}
+body.ed-mover [data-ed]:hover{outline:2px solid #00c758}
+body.ed-mover [data-ed].ed-dragging{cursor:grabbing;outline:2px solid #FF0033;opacity:.9;z-index:120}
+[data-ed].ed-moved{outline-color:rgba(255,0,51,.55)}
+
+.ed-grip{
+  position:absolute;right:-9px;bottom:-9px;width:18px;height:18px;z-index:130;
+  background:#00c758;border:2px solid #0F0F10;border-radius:4px;
+  cursor:nwse-resize;display:block;
+}
+.ed-grip:hover{background:#FF0033}
+body:not(.ed-mover) .ed-grip{display:none}
+
+/* aviso del modo en la barra */
+.ed-btn#edModo.on{background:#00c758;border-color:#00c758;color:#0A2E17;font-weight:600}
