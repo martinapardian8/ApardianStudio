@@ -1,0 +1,469 @@
+{
+  "hero": {
+    "cat": "gastronomia",
+    "from": "empresas",
+    "slug": "sergio",
+    "pick": 25
+  },
+  "hero_video": "00_REEL_HERO.mp4",
+  "categories": [
+    {
+      "key": "gastronomia",
+      "name": "Gastronomía",
+      "phrase": "Lo que entra por los ojos antes que por la boca.",
+      "files": [
+        "nw__IMG_7027.jpg",
+        "nw__IMG_7064.jpg",
+        "nw__IMG_7086.jpg",
+        "v__69.jpg",
+        "v__71.jpg",
+        "v__72.jpg",
+        "v__73.jpg"
+      ],
+      "sources": [
+        {
+          "slug": "sergio",
+          "from": "empresas",
+          "pick": [
+            25,
+            12,
+            14,
+            22,
+            24,
+            15,
+            21,
+            28,
+            4
+          ]
+        },
+        {
+          "slug": "lokotas",
+          "from": "empresas",
+          "pick": [
+            5
+          ]
+        },
+        {
+          "slug": "alfajor",
+          "from": "gastronomia",
+          "pick": []
+        }
+      ],
+      "files_from": "nuevas"
+    },
+    {
+      "key": "marcas",
+      "name": "Marcas",
+      "phrase": "El producto de alguien más, contado como si fuera propio.",
+      "files": [
+        "v__74.jpg",
+        "v__75.jpg",
+        "v__77.jpg",
+        "v__78.jpg",
+        "v__80.jpg",
+        "v__81.jpg",
+        "v__82.jpg",
+        "v__83.jpg",
+        "v__84.jpg",
+        "lokotas__IMG_7590.jpg",
+        "lokotas__IMG_7595.jpg",
+        "lokotas__IMG_7622.jpg",
+        "alfajor__IMG_5376.jpg",
+        "alfajor__IMG_5378.jpg",
+        "alfajor__IMG_5429.jpg"
+      ],
+      "sources": []
+    },
+    {
+      "key": "arquitectura",
+      "name": "Arquitectura",
+      "phrase": "Edificios, amenities y los espacios donde la gente termina viviendo.",
+      "files": [],
+      "drop": "FOTOS ARQUITECTURA",
+      "drop_slug": "arquitectura"
+    },
+    {
+      "key": "retratos",
+      "name": "Retratos",
+      "phrase": "Una persona, sin pose y sin apuro.",
+      "files": [
+        "nw__IMG_6420.jpg",
+        "nw__IMG_6668.jpg",
+        "nw__IMG_6981.jpg",
+        "v__114.jpg",
+        "v__115.jpg",
+        "v__116.jpg",
+        "v__117.jpg",
+        "v__118.jpg",
+        "v__119.jpg",
+        "v__120.jpg",
+        "horacio__IMG_6256.jpg",
+        "horacio__IMG_6821.jpg",
+        "horacio__IMG_6475.jpg",
+        "horacio__IMG_6614-2.jpg",
+        "juan-luz__IMG_2689.jpg",
+        "juan-luz__IMG_2712.jpg",
+        "horacio__IMG_6071.jpg",
+        "horacio__IMG_6481.jpg",
+        "horacio__IMG_6701.jpg",
+        "horacio__IMG_6904.jpg",
+        "horacio__IMG_6499.jpg",
+        "horacio__IMG_6581.jpg",
+        "horacio__IMG_6828.jpg",
+        "horacio__IMG_6804.jpg"
+      ],
+      "sources": [],
+      "files_from": "nuevas"
+    },
+    {
+      "key": "eventos",
+      "name": "Eventos & Fiestas",
+      "phrase": "El día entero, del primer nervio al último brindis.",
+      "files": [
+        "nw__IMG_9199.jpg",
+        "nw__IMG_9236.jpg",
+        "v__7.jpg",
+        "v__9.jpg",
+        "v__11.jpg",
+        "v__13.jpg",
+        "v__14.jpg",
+        "v__17.jpg",
+        "v__20.jpg",
+        "v__21.jpg",
+        "caro60__IMG_9862.jpg",
+        "15-sol__IMG_8179.jpg",
+        "15-sol__IMG_8326.jpg",
+        "nicol__IMG_5832.jpg",
+        "nicol__IMG_5857.jpg",
+        "caro60__IMG_0054.jpg",
+        "15-sol__IMG_8517.jpg"
+      ],
+      "sources": [
+        {
+          "slug": "la-condesa",
+          "from": "eventos-bodas",
+          "pick": [
+            19
+          ]
+        }
+      ],
+      "files_from": "nuevas"
+    },
+    {
+      "key": "bodas",
+      "name": "Bodas",
+      "phrase": "Dos personas y todo el resto de la vida esperando afuera.",
+      "files": [
+        "nw__IMG_9726.jpg",
+        "nw__IMG_4672.jpg",
+        "nw__IMG_4675.jpg",
+        "nw__IMG_8368.jpg",
+        "v__3.jpg",
+        "v__4.jpg",
+        "v__5.jpg",
+        "v__6.jpg",
+        "nw__IMG_4697.jpg"
+      ],
+      "sources": [
+        {
+          "slug": "portfolio",
+          "from": "retratos",
+          "pick": [
+            3,
+            4,
+            10
+          ]
+        },
+        {
+          "slug": "golf-a",
+          "from": "eventos-bodas/salon de eventos",
+          "pick": [
+            16,
+            13
+          ]
+        }
+      ]
+    },
+    {
+      "key": "naturaleza",
+      "name": "Naturaleza & Viajes",
+      "phrase": "Lo que veo cuando dejo de trabajar.",
+      "files": [
+        "nw__FullSizeRender_6.jpg",
+        "nw__IMG_1986.jpg",
+        "nw__IMG_1999.jpg",
+        "nw__IMG_2011_2.jpg",
+        "nw__IMG_3805.jpg",
+        "v__23.jpg",
+        "v__26.jpg",
+        "v__28.jpg",
+        "v__30.jpg",
+        "v__31.jpg",
+        "v__33.jpg",
+        "v__34.jpg",
+        "v__36.jpg",
+        "v__40.jpg",
+        "v__43.jpg",
+        "v__45.jpg",
+        "v__48.jpg",
+        "v__50.jpg",
+        "v__53.jpg",
+        "v__54.jpg",
+        "v__56.jpg",
+        "v__57.jpg",
+        "v__58.jpg",
+        "v__63.jpg",
+        "v__64.jpg",
+        "v__65.jpg",
+        "v__68.jpg",
+        "v__55.jpg",
+        "v__66.jpg",
+        "v__61.jpg"
+      ],
+      "sources": [],
+      "files_from": "nuevas"
+    },
+    {
+      "key": "animales",
+      "name": "Animales",
+      "phrase": "Los que nunca posan y siempre miran.",
+      "files": [
+        "nw__IMG_0653.jpg",
+        "nw__IMG_0659.jpg",
+        "v__92.jpg",
+        "v__94.jpg",
+        "v__95.jpg",
+        "v__96.jpg",
+        "v__97.jpg",
+        "v__98.jpg",
+        "v__99.jpg",
+        "v__100.jpg",
+        "v__101.jpg",
+        "v__102.jpg",
+        "v__103.jpg",
+        "v__104.jpg",
+        "v__105.jpg",
+        "v__106.jpg",
+        "v__107.jpg",
+        "v__108.jpg",
+        "v__109.jpg",
+        "v__110.jpg",
+        "v__112.jpg",
+        "v__113.jpg"
+      ],
+      "sources": [],
+      "files_from": "nuevas"
+    },
+    {
+      "key": "musica",
+      "name": "Música",
+      "phrase": "Bandas que ya suenan antes de que aprietes play.",
+      "files": [
+        "nw__IMG_7233.jpg",
+        "nw__IMG_7237.jpg",
+        "nw__IMG_7306.jpg"
+      ],
+      "sources": [
+        {
+          "slug": "la-estacion",
+          "from": "gastronomia",
+          "pick": [
+            4,
+            24,
+            1,
+            2,
+            5,
+            9,
+            27
+          ]
+        }
+      ]
+    },
+    {
+      "key": "deportes",
+      "name": "Deportes",
+      "phrase": "El instante que no se repite.",
+      "sources": [],
+      "files": [
+        "v__86.jpg",
+        "v__87.jpg",
+        "v__88.jpg",
+        "v__89.jpg",
+        "v__90.jpg",
+        "v__91.jpg",
+        "v__60.jpg"
+      ],
+      "files_from": "nuevas"
+    }
+  ],
+  "videos": {
+    "gastronomia": [
+      {
+        "file": "02_parrilla_pollo.mp4",
+        "poster": "02_parrilla_pollo.jpg",
+        "shape": "tall",
+        "at": 0
+      },
+      {
+        "file": "06_chocolate.mp4",
+        "poster": "06_chocolate.jpg",
+        "shape": "tall",
+        "at": 8
+      }
+    ],
+    "marcas": [
+      {
+        "file": "03_empanadas.mp4",
+        "poster": "03_empanadas.jpg",
+        "shape": "tall",
+        "at": 0
+      }
+    ],
+    "retratos": [
+      {
+        "file": "11_retrato_bn.mp4",
+        "poster": "11_retrato_bn.jpg",
+        "shape": "wide",
+        "at": 0
+      }
+    ],
+    "eventos": [
+      {
+        "file": "15_torta_bengala.mp4",
+        "poster": "15_torta_bengala.jpg",
+        "shape": "wide",
+        "at": 0
+      }
+    ],
+    "bodas": [
+      {
+        "file": "07_boda_rambla.mp4",
+        "poster": "07_boda_rambla.jpg",
+        "shape": "wide",
+        "at": 0
+      },
+      {
+        "file": "04_salon.mp4",
+        "poster": "04_salon.jpg",
+        "shape": "wide",
+        "at": 7
+      }
+    ],
+    "naturaleza": [
+      {
+        "file": "09_bahia.mp4",
+        "poster": "09_bahia.jpg",
+        "shape": "wide",
+        "at": 0
+      }
+    ],
+    "animales": [
+      {
+        "file": "10_caballo.mp4",
+        "poster": "10_caballo.jpg",
+        "shape": "wide",
+        "at": 0
+      }
+    ],
+    "musica": [
+      {
+        "file": "08_baterista.mp4",
+        "poster": "08_baterista.jpg",
+        "shape": "tall",
+        "at": 0
+      }
+    ],
+    "deportes": [
+      {
+        "file": "12_drift.mp4",
+        "poster": "12_drift.jpg",
+        "shape": "wide",
+        "at": 0
+      }
+    ]
+  },
+  "works": [
+    {
+      "cat": "bodas",
+      "from": "retratos",
+      "slug": "portfolio",
+      "pick": 3,
+      "title": "Rambla",
+      "meta": "Casamiento · Montevideo",
+      "chip": "Boda"
+    },
+    {
+      "cat": "bodas",
+      "from": "eventos-bodas/salon de eventos",
+      "slug": "golf-a",
+      "pick": 16,
+      "title": "Salón de golf",
+      "meta": "Ambientación · Casamiento",
+      "chip": "83 fotos"
+    },
+    {
+      "cat": "musica",
+      "from": "gastronomia",
+      "slug": "la-estacion",
+      "pick": 24,
+      "title": "La Estación",
+      "meta": "Parrilla y banda · Marca",
+      "chip": "40 fotos",
+      "chipDark": true
+    },
+    {
+      "cat": "gastronomia",
+      "from": "empresas",
+      "slug": "sergio",
+      "pick": 25,
+      "title": "Kamados Domo",
+      "meta": "Producto y fuego · Marca",
+      "chip": "385 fotos",
+      "file": "sergio__IMG_7354.jpg"
+    },
+    {
+      "cat": "retratos",
+      "from": "retratos",
+      "slug": "horacio",
+      "pick": 26,
+      "title": "Horacio",
+      "meta": "Marca personal · Sesión",
+      "chip": "388 fotos",
+      "chipDark": true,
+      "file": "horacio__IMG_6661.jpg"
+    },
+    {
+      "cat": "gastronomia",
+      "from": "empresas",
+      "slug": "lokotas",
+      "pick": 5,
+      "title": "Lokotas",
+      "meta": "Empanadas · Marca",
+      "chip": "124 fotos",
+      "chipDark": true
+    },
+    {
+      "cat": "retratos",
+      "from": "eventos-bodas",
+      "slug": "juan-luz",
+      "pick": 21,
+      "title": "Juan Luz",
+      "meta": "Retrato · Rambla",
+      "chip": "82 fotos"
+    },
+    {
+      "cat": "gastronomia",
+      "from": "gastronomia",
+      "slug": "alfajor",
+      "pick": 25,
+      "title": "La Positiva",
+      "meta": "Feria del alfajor · Marca",
+      "chip": "49 fotos",
+      "chipDark": true
+    }
+  ],
+  "section_bg": {
+    "file": "16_fondo_escritorio.mp4",
+    "poster": "16_fondo_escritorio.jpg"
+  }
+}

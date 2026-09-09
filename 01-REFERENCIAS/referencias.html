@@ -1,0 +1,690 @@
+<title>Referencias Apardian Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  :root{
+    --ink:#0C0B0A;
+    --panel:#141210;
+    --panel-2:#1B1815;
+    --rule:#2C2721;
+    --fg:#F1ECE4;
+    --dim:#9C9388;
+    --dimmer:#6E675F;
+    --safelight:#E0451F;
+    --gold:#D8A24A;
+    --maxw:1100px;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    background:var(--ink);
+    color:var(--fg);
+    font-family:"Newsreader",Georgia,"Times New Roman",serif;
+    font-size:17px;
+    line-height:1.62;
+    font-weight:300;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+  a{color:inherit}
+
+  /* ---------- header ---------- */
+  header.top{
+    border-bottom:1px solid var(--rule);
+    padding:56px 0 40px;
+    background:
+      radial-gradient(120% 90% at 78% 0%, rgba(224,69,31,.13) 0%, rgba(224,69,31,0) 62%),
+      var(--ink);
+  }
+  .eyebrow{
+    font-family:"IBM Plex Mono",ui-monospace,monospace;
+    font-size:11px;font-weight:500;letter-spacing:.17em;text-transform:uppercase;
+    color:var(--gold);
+    display:flex;flex-wrap:wrap;gap:10px 20px;align-items:baseline;
+  }
+  .eyebrow span{color:var(--dimmer)}
+  h1{
+    font-family:"Syne",system-ui,sans-serif;
+    font-weight:800;
+    font-size:clamp(38px,7vw,74px);
+    line-height:.98;
+    letter-spacing:-.025em;
+    margin:26px 0 0;
+    text-wrap:balance;
+  }
+  h1 em{font-style:normal;color:var(--safelight)}
+  .standfirst{
+    max-width:63ch;margin:22px 0 0;
+    font-size:20px;color:var(--dim);line-height:1.55;
+  }
+
+  /* ---------- generic section ---------- */
+  section{padding:54px 0;border-bottom:1px solid var(--rule)}
+  h2{
+    font-family:"Syne",system-ui,sans-serif;
+    font-weight:700;font-size:clamp(24px,3.4vw,34px);
+    letter-spacing:-.02em;margin:0;line-height:1.1;
+  }
+  .sec-head{display:flex;flex-direction:column;gap:10px;margin-bottom:34px;max-width:70ch}
+  .sec-head p{margin:0;color:var(--dim);font-size:17px}
+  .kicker{
+    font-family:"IBM Plex Mono",ui-monospace,monospace;
+    font-size:11px;letter-spacing:.17em;text-transform:uppercase;color:var(--dimmer);
+  }
+
+  /* ---------- diagnosis ---------- */
+  .diag{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule)}
+  .diag div{background:var(--panel);padding:20px 22px}
+  .diag h3{
+    font-family:"IBM Plex Mono",ui-monospace,monospace;
+    font-size:11px;letter-spacing:.15em;text-transform:uppercase;
+    color:var(--gold);margin:0 0 9px;font-weight:500;
+  }
+  .diag p{margin:0;font-size:16px;color:var(--dim);line-height:1.5}
+
+  /* ---------- reference rows ---------- */
+  .fam{margin-bottom:8px}
+  .fam-title{
+    display:flex;align-items:baseline;gap:16px;
+    padding-bottom:14px;margin-bottom:0;border-bottom:1px solid var(--rule);
+  }
+  .fam-title h3{
+    font-family:"Syne",system-ui,sans-serif;font-weight:700;font-size:21px;
+    letter-spacing:-.01em;margin:0;
+  }
+  .fam-title .count{
+    font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11px;
+    letter-spacing:.14em;color:var(--dimmer);text-transform:uppercase;
+  }
+  .fam-note{color:var(--dim);font-size:16px;margin:14px 0 26px;max-width:68ch}
+
+  .ref{
+    display:grid;grid-template-columns:250px 1fr;gap:34px;
+    padding:26px 0;border-bottom:1px solid var(--rule);
+  }
+  .ref:last-child{border-bottom:none}
+  .ref-id h4{
+    font-family:"Syne",system-ui,sans-serif;font-weight:700;font-size:20px;
+    margin:0 0 6px;letter-spacing:-.01em;line-height:1.15;
+  }
+  .ref-id a.site{
+    font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:12px;
+    color:var(--safelight);text-decoration:none;border-bottom:1px solid rgba(224,69,31,.35);
+    word-break:break-all;
+  }
+  .ref-id a.site:hover{border-bottom-color:var(--safelight)}
+  .meta{
+    margin-top:14px;display:flex;flex-direction:column;gap:5px;
+    font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11px;
+    letter-spacing:.06em;color:var(--dimmer);text-transform:uppercase;
+  }
+  .meta b{color:var(--dim);font-weight:400}
+  .ref-body p{margin:0 0 14px;max-width:66ch}
+  .steal{
+    display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:start;
+    background:var(--panel);border-left:2px solid var(--gold);
+    padding:14px 18px;margin-top:4px;
+  }
+  .steal span{
+    font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:10px;
+    letter-spacing:.15em;text-transform:uppercase;color:var(--gold);padding-top:5px;white-space:nowrap;
+  }
+  .steal p{margin:0;font-size:16px;color:var(--dim);line-height:1.5}
+
+  .pick{background:linear-gradient(90deg,rgba(224,69,31,.07),rgba(224,69,31,0) 55%)}
+  .pick .ref-id h4::after{
+    content:"MI VOTO";
+    display:inline-block;vertical-align:middle;margin-left:10px;
+    font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:9px;font-weight:500;
+    letter-spacing:.16em;color:var(--ink);background:var(--safelight);
+    padding:3px 7px;border-radius:2px;
+  }
+
+  /* ---------- workshop ---------- */
+  .steps{list-style:none;margin:0;padding:0;counter-reset:s}
+  .steps li{
+    counter-increment:s;display:grid;grid-template-columns:44px 1fr;gap:18px;
+    padding:16px 0;border-bottom:1px solid var(--rule);align-items:start;
+  }
+  .steps li:last-child{border-bottom:none}
+  .steps li::before{
+    content:counter(s,decimal-leading-zero);
+    font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:12px;
+    color:var(--gold);padding-top:5px;
+  }
+  .steps strong{
+    font-family:"Syne",system-ui,sans-serif;font-weight:600;font-size:17px;
+    display:block;margin-bottom:3px;color:var(--fg);
+  }
+  .steps p{margin:0;color:var(--dim);font-size:16px;line-height:1.5}
+
+  pre.tree{
+    background:var(--panel);border:1px solid var(--rule);
+    padding:20px 22px;overflow-x:auto;margin:0;
+    font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:13px;
+    line-height:1.75;color:var(--dim);
+  }
+  pre.tree b{color:var(--fg);font-weight:500}
+
+  .gate{
+    border:1px solid rgba(224,69,31,.4);background:rgba(224,69,31,.06);
+    padding:22px 24px;margin-top:34px;
+  }
+  .gate h3{
+    font-family:"Syne",system-ui,sans-serif;font-size:18px;font-weight:700;
+    margin:0 0 8px;color:var(--safelight);
+  }
+  .gate p{margin:0;color:var(--dim);font-size:16px;max-width:68ch}
+
+  footer{padding:40px 0 64px;color:var(--dimmer);font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+
+  @media (max-width:760px){
+    .ref{grid-template-columns:1fr;gap:16px}
+    .steal{grid-template-columns:1fr;gap:6px}
+    .steal span{padding-top:0}
+    .wrap{padding:0 20px}
+  }
+  @media (prefers-reduced-motion:no-preference){
+    a.site{transition:border-color .2s ease}
+  }
+</style>
+
+<header class="top">
+  <div class="wrap">
+    <div class="eyebrow">
+      Investigación de dirección · 5 septiembre 2026 <span>apardianstudio.com</span> <span>15 referencias</span>
+    </div>
+    <h1>Quince webs para decidir<br>cómo se ve <em>Apardian Studio</em></h1>
+    <p class="standfirst">
+      Buscadas entre premiadas de Awwwards de 2026 y portfolios de referencia de fotógrafos y
+      productoras. Están agrupadas por arquetipo, no por ranking: cada familia resuelve un problema
+      distinto. Elegí una y esa marca la dirección de todo lo que construimos hoy.
+    </p>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">Punto de partida</div>
+      <h2>Qué tenés hoy</h2>
+      <p>
+        Tu web actual funciona: una sola página con hero, quién soy, servicios, portfolio,
+        testimonios, proceso y contacto por WhatsApp. La galería ya está seccionada en siete
+        categorías. Lo que le falta no es contenido, es temperatura.
+      </p>
+    </div>
+    <div class="diag">
+      <div>
+        <h3>Sirve</h3>
+        <p>Las siete categorías de galería son una base sólida: eventos y bodas, naturaleza y viajes, gastronomía, empresas, deporte y acción, animales, retratos.</p>
+      </div>
+      <div>
+        <h3>Sirve</h3>
+        <p>Los tres servicios están claros y bien diferenciados: edición de video, fotografía y diseño web. Poca gente ofrece los tres juntos.</p>
+      </div>
+      <div>
+        <h3>Falta</h3>
+        <p>Los testimonios dicen «Próximamente». Un bloque vacío pesa más que un bloque ausente.</p>
+      </div>
+      <div>
+        <h3>Falta</h3>
+        <p>Las métricas (44+ proyectos, 1.8K vistas) están sueltas, sin contexto que las haga significar algo.</p>
+      </div>
+      <div>
+        <h3>Falta</h3>
+        <p>No hay movimiento. Sos editor de video y la web no se mueve. Es la contradicción más cara que tenés.</p>
+      </div>
+      <div>
+        <h3>Falta</h3>
+        <p>Nada obliga a bajar. El scroll es transporte, no narración. Ahí está el «wow» que buscás.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">Familia A</div>
+      <h2>Estudio de cine y foto</h2>
+      <p>El mismo posicionamiento que el tuyo: alguien que filma y fotografía, y vende servicios, no obras. Es donde está la estructura comercial que te conviene copiar.</p>
+    </div>
+
+    <div class="ref pick">
+      <div class="ref-id">
+        <h4>Palomino</h4>
+        <a class="site" href="https://palominoprod.com" target="_blank" rel="noopener">palominoprod.com</a>
+        <div class="meta">
+          <div><b>Estudio</b> Metabole Studio</div>
+          <div><b>Rubro</b> Film + fotografía deportiva</div>
+          <div><b>Idiomas</b> EN / FR</div>
+        </div>
+      </div>
+      <div class="ref-body">
+        <p>
+          Productora de cine y fotografía deportiva. Titular enorme, «Sports into stories», sobre
+          imagen a sangre. Los servicios no son una lista de bullets: son cuatro pilares narrativos
+          con una frase cada uno que suena a manifiesto. Campañas de marca, atletas y storytelling,
+          cobertura de evento en vivo, estrategia. Cada uno se despliega y termina en un botón de
+          contacto. Debajo, carrusel infinito de logos de clientes, testimonios reales con nombre y
+          agencia, y métricas cuantificadas.
+        </p>
+        <div class="steal">
+          <span>Qué robar</span>
+          <p>Convertir tus tres servicios en pilares con frase propia en vez de lista. Y la disciplina de poner un contacto al final de cada uno, no solo abajo de todo.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ref">
+      <div class="ref-id">
+        <h4>House of Yellow</h4>
+        <a class="site" href="https://www.houseofyellow.nl" target="_blank" rel="noopener">houseofyellow.nl</a>
+        <div class="meta">
+          <div><b>Estudio</b> Mees Verberne</div>
+          <div><b>Premio</b> Honorable Mention · Jul 2026</div>
+          <div><b>Rubro</b> Video, foto y animación</div>
+        </div>
+      </div>
+      <div class="ref-body">
+        <p>
+          Agencia holandesa con exactamente tus tres patas: video, fotografía y animación. Todo el
+          scroll tiene video en autoplay de fondo. El portfolio no muestra solo la pieza: muestra
+          vistas, tiempo de producción y tipo de cliente encima de cada tarjeta. Amarillo como único
+          acento sobre texto oscuro. Contadores animados de países, seguidores e impresiones.
+        </p>
+        <div class="steal">
+          <span>Qué robar</span>
+          <p>Poner un dato duro encima de cada trabajo del portfolio. Convierte una galería bonita en prueba de que el trabajo funcionó.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ref">
+      <div class="ref-id">
+        <h4>LAYR Media</h4>
+        <a class="site" href="https://layrmedia.com" target="_blank" rel="noopener">layrmedia.com</a>
+        <div class="meta">
+          <div><b>Estudio</b> Lumina</div>
+          <div><b>Rubro</b> Productora audiovisual</div>
+        </div>
+      </div>
+      <div class="ref-body">
+        <p>
+          Productora chica con web de productora grande. Es la referencia de escala: demuestra cuánto
+          se puede aparentar con poco catálogo si la puesta en página es impecable. Vale mirarla para
+          calibrar cuánto material necesitás realmente antes de que la web se sienta llena.
+        </p>
+        <div class="steal">
+          <span>Qué robar</span>
+          <p>La economía. Menos piezas, más grandes, mejor presentadas. Es la estrategia correcta cuando el archivo todavía está creciendo.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">Familia B</div>
+      <h2>Scrollytelling puro</h2>
+      <p>Acá está el «wow» literal. No son webs de fotógrafo, son experiencias donde el scroll es el guion. Sirven como lenguaje de movimiento, no como estructura.</p>
+    </div>
+
+    <div class="ref">
+      <div class="ref-id">
+        <h4>21 Hrs On The Moon</h4>
+        <a class="site" href="https://21hrs.space" target="_blank" rel="noopener">21hrs.space</a>
+        <div class="meta">
+          <div><b>Estudio</b> Studio 28K</div>
+          <div><b>Premio</b> Site of the Day · Jul 2026</div>
+          <div><b>Técnica</b> Scroll narrativo 3D</div>
+        </div>
+      </div>
+      <div class="ref-body">
+        <p>
+          Las veintiuna horas del Apollo 11 en la superficie lunar, contadas enteras con el scroll
+          como línea de tiempo. Cada rueda del mouse avanza el relato: la cámara se mueve, el texto
+          entra y sale, la escena cambia sin cortes. Es la demostración más limpia de que una web
+          puede tener ritmo de película. Miralo en desktop.
+        </p>
+        <div class="steal">
+          <span>Qué robar</span>
+          <p>La idea de que el scroll avanza un tiempo, no una página. Aplicado a una boda o a un evento tuyo, sería recorrer el día entero de la mañana a la fiesta.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ref">
+      <div class="ref-id">
+        <h4>Revelatio Studio</h4>
+        <a class="site" href="https://revelatio.studio" target="_blank" rel="noopener">revelatio.studio</a>
+        <div class="meta">
+          <div><b>Premio</b> Site of the Day + Developer · Ago 2026</div>
+          <div><b>Origen</b> Recife, Brasil</div>
+          <div><b>Idiomas</b> EN / PT</div>
+        </div>
+      </div>
+      <div class="ref-body">
+        <p>
+          Estudio brasileño, premio doble en agosto. Todo aparece por revelado progresivo mientras
+          bajás: proyectos, capacidades, testimonios, cada uno entra en secuencia. Detalles que dan
+          oficio sin costar nada: reloj en vivo con tu hora y la de Recife al mismo tiempo, carrusel
+          de más de quince testimonios, números concretos de resultados de cliente.
+        </p>
+        <div class="steal">
+          <span>Qué robar</span>
+          <p>El revelado por secciones y el reloj local. Es la referencia latinoamericana más cercana a lo que podrías construir realmente en un día.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ref">
+      <div class="ref-id">
+        <h4>Life in Vogue</h4>
+        <a class="site" href="https://lifeinvogue.vogue.it" target="_blank" rel="noopener">lifeinvogue.vogue.it</a>
+        <div class="meta">
+          <div><b>Estudio</b> Monogrid</div>
+          <div><b>Rubro</b> Editorial de moda</div>
+          <div><b>Técnica</b> Recorrido espacial</div>
+        </div>
+      </div>
+      <div class="ref-body">
+        <p>
+          El clásico de la categoría, y sigue siendo la mejor clase magistral de fotografía dentro de
+          un relato interactivo. Vogue Italia convirtió una casa en un recorrido navegable donde cada
+          ambiente esconde una editorial. Fotografía de altísimo nivel presentada como espacio, no
+          como grilla.
+        </p>
+        <div class="steal">
+          <span>Qué robar</span>
+          <p>La galería como lugar que se recorre en vez de cuadrícula que se mira. La idea más ambiciosa de toda esta lista.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ref">
+      <div class="ref-id">
+        <h4>Normal is Boring</h4>
+        <a class="site" href="https://normalisboring.es" target="_blank" rel="noopener">normalisboring.es</a>
+        <div class="meta">
+          <div><b>Estudio</b> LaNegrita</div>
+          <div><b>Premio</b> Site of the Day + Developer · Jul 2026</div>
+          <div><b>Idioma</b> Español</div>
+        </div>
+      </div>
+      <div class="ref-body">
+        <p>
+          Premio doble, hecha en España y en español. Imagen a todo ancho, paleta de tonos tierra,
+          tipografía que acompaña sin gritar. Los proyectos se numeran del 01 al 05 e incluyen a
+          propósito algunos «Próximamente», que ahí funcionan como expectativa en vez de como hueco.
+          Contramuestra útil: gana premios sin animación pirotécnica, solo con ritmo y aire.
+        </p>
+        <div class="steal">
+          <span>Qué robar</span>
+          <p>Cómo convertir tu bloque «Próximamente» de agujero en anticipación. Y la prueba de que la contención también gana.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">Familia C</div>
+      <h2>Fotógrafo de autor</h2>
+      <p>Archivos grandes, diseño mínimo, la foto manda. Es la familia que mejor resuelve tu problema concreto: qué hacer cuando tenés muchísimas imágenes y pocas ganas de esconderlas.</p>
+    </div>
+
+    <div class="ref">
+      <div class="ref-id">
+        <h4>Christie Hemm Klok</h4>
+        <a class="site" href="https://christiehemmklok.com" target="_blank" rel="noopener">christiehemmklok.com</a>
+        <div class="meta">
+          <div><b>Estudio</b> Sam Dallyn</div>
+          <div><b>Premio</b> Honorable Mention · Jul 2026</div>
+          <div><b>Rubro</b> Fotoperiodismo</div>
+        </div>
+      </div>
+      <div class="ref-body">
+        <p>
+          Fotoperiodista de San Francisco. El nombre está partido en el encabezado en tres piezas
+          clicables, Christie, Hemm, Klok, y cada una es navegación. Cinco categorías, y al lado de
+          cada una el número exacto de fotos: conservación y fauna, 81. Industria, 91. Ciencia y
+          tecnología, 76. Salud, 42. Retratos, 18. Ese número solo ya comunica archivo, oficio y años
+          de trabajo. Cero decoración, todo foto.
+        </p>
+        <div class="steal">
+          <span>Qué robar</span>
+          <p>El contador de fotos por categoría. Con la cantidad de material que vas a cargar hoy, es la forma más barata de que tu galería se sienta profunda.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ref">
+      <div class="ref-id">
+        <h4>David Spaeth</h4>
+        <a class="site" href="https://davidspaeth.com" target="_blank" rel="noopener">davidspaeth.com</a>
+        <div class="meta">
+          <div><b>Estudio</b> Tilgner-Kempf</div>
+          <div><b>Premio</b> Honorable Mention · Jul 2026</div>
+          <div><b>Rubro</b> Moda, música, evento</div>
+        </div>
+      </div>
+      <div class="ref-body">
+        <p>
+          Estructura de tres palabras: Index, Info, Shop. El índice es una lista de proyectos con la
+          cantidad de imágenes entre paréntesis, desde una sola hasta setenta. Mezcla editorial de
+          moda, festivales, retrato y documental sin pedir permiso. La versatilidad presentada como
+          rango, que es exactamente tu situación con siete categorías distintas.
+        </p>
+        <div class="steal">
+          <span>Qué robar</span>
+          <p>El índice como página principal. Y la idea de que un proyecto de una foto y uno de setenta pueden convivir en la misma lista.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ref">
+      <div class="ref-id">
+        <h4>Ross Halfin</h4>
+        <a class="site" href="https://rosshalfin.com" target="_blank" rel="noopener">rosshalfin.com</a>
+        <div class="meta">
+          <div><b>Estudio</b> OARS.DEV</div>
+          <div><b>Rubro</b> Fotografía de rock</div>
+          <div><b>Nota</b> No abre desde herramientas automáticas</div>
+        </div>
+      </div>
+      <div class="ref-body">
+        <p>
+          Cuarenta años fotografiando bandas, de Led Zeppelin a Metallica. Está en la lista por el
+          problema que resuelve: un archivo gigantesco navegable sin que el visitante se pierda. No
+          pude abrirla desde acá porque bloquea el acceso automático, así que mirala tal cual, en tu
+          navegador, y juzgala vos.
+        </p>
+        <div class="steal">
+          <span>Qué robar</span>
+          <p>Cómo se ordena un archivo de décadas. Miralo pensando en tus carpetas de eventos acumuladas.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ref">
+      <div class="ref-id">
+        <h4>Andrii Mur</h4>
+        <a class="site" href="https://andriimur.com" target="_blank" rel="noopener">andriimur.com</a>
+        <div class="meta">
+          <div><b>Rubro</b> Fotografía de autor</div>
+          <div><b>Paleta</b> Monocromo</div>
+        </div>
+      </div>
+      <div class="ref-body">
+        <p>
+          Doce colecciones, paleta monocroma, tipografía contenida. Lo distintivo son los títulos:
+          cada proyecto lleva un nombre y debajo una frase emocional en vez de una descripción
+          técnica. «Fulfilling Emptiness», y abajo, entre la dualidad del espacio y el tiempo. La foto
+          documental de la guerra en Ucrania presentada con la misma sobriedad que el resto.
+        </p>
+        <div class="steal">
+          <span>Qué robar</span>
+          <p>Titular cada sección con una frase, no con una etiqueta. «Eventos y bodas» es una carpeta. Una frase es una invitación.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">Familia D</div>
+      <h2>Bodas y eventos cinematográficos</h2>
+      <p>Tu categoría más comercial merece referencias propias. Estas cuatro son las que mejor resuelven la galería de boda sin caer en el álbum aburrido.</p>
+    </div>
+
+    <div class="ref">
+      <div class="ref-id">
+        <h4>Bottega53</h4>
+        <a class="site" href="https://www.bottega53.com" target="_blank" rel="noopener">bottega53.com</a>
+        <div class="meta">
+          <div><b>Origen</b> Italia</div>
+          <div><b>Técnica</b> Grilla de tres columnas a sangre</div>
+        </div>
+      </div>
+      <div class="ref-body">
+        <p>
+          La grilla dinámica de tres columnas a todo ancho, mezclando fotos fijas con miniaturas de
+          video que arrancan solas. El menú flota por encima sin marco. Es la solución más directa al
+          problema de mostrar foto y video en el mismo lugar sin que uno le gane al otro, que es
+          justo tu caso.
+        </p>
+        <div class="steal">
+          <span>Qué robar</span>
+          <p>Mezclar foto y video en una misma grilla. Es donde entran los videos que generemos con Higgsfield a partir de tus fotos.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ref">
+      <div class="ref-id">
+        <h4>Nordica Photography</h4>
+        <a class="site" href="https://nordicaphotography.com" target="_blank" rel="noopener">nordicaphotography.com</a>
+        <div class="meta">
+          <div><b>Técnica</b> Hero en video a pantalla completa</div>
+        </div>
+      </div>
+      <div class="ref-body">
+        <p>
+          Video a pantalla completa apenas entrás, y de ahí en más imágenes a todo el ancho con
+          páginas de proyecto pensadas una por una. Cada scroll está compuesto. Es la referencia más
+          clara de cómo se siente una web de fotografía que abre con movimiento en vez de con una
+          grilla.
+        </p>
+        <div class="steal">
+          <span>Qué robar</span>
+          <p>Abrir con emoción y no con catálogo. Una imagen enorme, una línea de texto, y recién después la galería.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ref">
+      <div class="ref-id">
+        <h4>David Bastianoni</h4>
+        <a class="site" href="https://www.davidbastianoni.com" target="_blank" rel="noopener">davidbastianoni.com</a>
+        <div class="meta">
+          <div><b>Origen</b> Italia</div>
+          <div><b>Técnica</b> Slideshow a pantalla completa</div>
+        </div>
+      </div>
+      <div class="ref-body">
+        <p>
+          Slideshow a pantalla completa sin nada encima: la navegación aparece recién cuando empezás
+          a bajar. Durante los primeros segundos no hay web, solo foto. Es el gesto más valiente de
+          esta lista y el más fácil de imitar bien.
+        </p>
+        <div class="steal">
+          <span>Qué robar</span>
+          <p>Esconder el menú hasta el primer scroll. Regala tres segundos de foto pura, que es exactamente donde se produce el «wow».</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ref">
+      <div class="ref-id">
+        <h4>Kayla Fisher</h4>
+        <a class="site" href="https://kaylafisherphotography.com" target="_blank" rel="noopener">kaylafisherphotography.com</a>
+        <div class="meta">
+          <div><b>Técnica</b> Portfolio en pantalla partida</div>
+        </div>
+      </div>
+      <div class="ref-body">
+        <p>
+          Portfolio partido en dos: la mitad izquierda queda fija con el título de la serie, la
+          derecha scrollea con las fotos. Nunca perdés el contexto de qué estás mirando. Solución
+          elegante para galerías largas, y funciona muy bien con tus siete categorías.
+        </p>
+        <div class="steal">
+          <span>Qué robar</span>
+          <p>La mitad fija. Resuelve el problema de las galerías largas donde a la foto veinte ya te olvidaste de qué sección era.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">Recomendación</div>
+      <h2>Si me preguntás a mí</h2>
+      <p>
+        Palomino, porque es el único de los quince que vende lo mismo que vos: alguien que filma y
+        fotografía, con servicios y no con obras. Su estructura te sirve entera. Después le sumaría
+        el movimiento de Revelatio, que es alcanzable en un día, la apertura a pantalla completa de
+        Bastianoni y el contador de fotos por categoría de Christie Hemm Klok. Pero elegí vos: la que
+        elijas manda, y armo todo alrededor de esa.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">El taller</div>
+      <h2>Cómo seguimos hoy</h2>
+    </div>
+    <pre class="tree"><b>WEB APARDIANSTUDIO/</b>
+├── 01-REFERENCIAS/      este documento y lo que sumemos
+├── <b>02-FOTOS-ORIGINALES/</b>  ← acá va tu carpeta de fotos
+├── 03-FOTOS-OPTIMIZADAS/  las mismas, listas para web
+├── 04-VIDEOS-IA/        lo que salga de Higgsfield
+├── 05-WEB/              el sitio
+└── 06-NOTAS/            decisiones y pendientes</pre>
+
+    <ol class="steps" style="margin-top:32px">
+      <li><strong>Elegís la referencia</strong><p>Una de las quince. Con eso queda definida la dirección visual completa.</p></li>
+      <li><strong>Tirás las fotos en 02-FOTOS-ORIGINALES</strong><p>Como estén, sin ordenar. Las reviso, las clasifico en tus siete categorías y te digo cuáles son las mejores de cada una.</p></li>
+      <li><strong>Optimizo el peso</strong><p>Sin esto, una web de fotos hermosa tarda diez segundos en cargar y nadie la ve.</p></li>
+      <li><strong>Te propongo la lista de videos</strong><p>Qué fotos merecen convertirse en video animado y con qué movimiento cada una. Vos aprobás una por una.</p></li>
+      <li><strong>Recién ahí generamos en Higgsfield</strong><p>De a una, con tu visto bueno en cada generación.</p></li>
+      <li><strong>Construyo la web</strong><p>Con la referencia elegida, las fotos clasificadas y los videos aprobados.</p></li>
+    </ol>
+
+    <div class="gate">
+      <h3>Regla de generación</h3>
+      <p>
+        No genero nada en Higgsfield sin tu aprobación explícita, una por cada generación. Te paso
+        siempre qué foto, qué movimiento y qué duración antes de tocar el botón, y espero tu sí.
+      </p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">Apardian Studio · Investigación de dirección · 5 septiembre 2026</div>
+</footer>

@@ -1,0 +1,19 @@
+# macOS
+.DS_Store
+._*
+
+# iCloud: marcadores y copias fantasma que crea al regenerar archivos
+*.icloud
+* 2.*
+* 3.*
+*\ 2/
+*\ 3/
+
+# cachés del motor: se regeneran solas, no aportan nada al repositorio
+10-MOTOR/caras.json
+10-MOTOR/hashes.json
+10-MOTOR/perfiles.json
+10-MOTOR/frames/
+10-MOTOR/segs/
+10-MOTOR/png/
+10-MOTOR/prueba/

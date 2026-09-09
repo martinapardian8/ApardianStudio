@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="es-UY">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Apardian Studio — Foto, video y páginas web en Uruguay</title>
+<meta name="description" content="Estudio de comunicación visual en Uruguay. Edición de video, fotografía de eventos, gastronomía y empresas, y diseño de páginas web que venden.">
+<meta name="theme-color" content="#F8F7F6">
+<meta property="og:title" content="Apardian Studio — Foto, video y páginas web">
+<meta property="og:description" content="Estudio de comunicación visual en Uruguay. Filmo, fotografío y construyo el lugar donde eso se muestra.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_UY">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Koulen&family=Work+Sans:wght@300;400;500;600&display=swap">
+<link rel="stylesheet" href="css/style.css?v=1788808895">
+<link rel="stylesheet" href="css/editor.css?v=1788808895">
+</head>
+<body>
+
+<!-- ============ LOADER ============ -->
+<div id="loader">
+  <div class="loader-media">
+    <img id="loaderimg" alt="" src="">
+    <video id="loadervid" muted loop playsinline preload="auto" aria-hidden="true"></video>
+  </div>
+  <div class="loader-top">
+    <span class="mono">Apardian Studio</span>
+    <span class="mono">Montevideo · Uruguay</span>
+  </div>
+  <div class="loader-mid">
+    <h1>Foto<br>Video<br><span>Web</span></h1>
+  </div>
+  <div class="loader-bot">
+    <div style="flex:1;min-width:200px">
+      <div class="bar"><i id="barfill"></i></div>
+      <span class="mono" id="loadmsg">Cargando archivo</span>
+    </div>
+    <div id="pct">0</div>
+    <button id="enter">Entrar</button>
+  </div>
+</div>
+
+<!-- ============ NAV ============ -->
+<header class="nav" id="nav">
+  <a href="#top" class="brand">Apardian<span>.</span></a>
+  <nav class="links" id="links">
+    <a href="#trabajos">Trabajos</a>
+    <a href="#galeria">Galería</a>
+    <a href="#servicios">Servicios</a>
+    <a href="#web">Páginas web</a>
+    <a href="#proceso">Proceso</a>
+  </nav>
+  <a class="cta-nav" href="https://wa.me/59891962962" target="_blank" rel="noopener">Empezar un proyecto</a>
+  <button class="burger" id="burger" aria-label="Menú" aria-expanded="false"><i></i><i></i><i></i></button>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="top">
+  <div class="hero-media">
+    <img id="heroimg" alt="" src="" fetchpriority="high">
+    <video id="herovid" muted loop playsinline preload="none" aria-hidden="true"></video>
+  </div>
+  <div class="hero-inner">
+    <h1 data-ed="hero.titulo">Foto. Video.<br><em>Web.</em></h1>
+    <div class="hero-foot">
+      <p data-ed="hero.bajada">Estudio de comunicación visual en Uruguay. Filmo, fotografío y construyo el lugar donde eso se muestra.</p>
+      <div class="scroll-hint"><span class="mono">Bajá</span><b>↓</b></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MANIFIESTO ============ -->
+<section class="manifesto" id="estudio" data-sec="estudio" data-sec-name="El estudio">
+  <div class="sec-label"><span class="mono">01 — El estudio</span></div>
+  <div class="manifesto-grid">
+    <div class="rv">
+      <p class="big" data-ed="estudio.frase">No alcanza con que se vea lindo <span class="arrow">→</span> tiene que <b>hacer que te elijan</b>.</p>
+    </div>
+    <div class="manifesto-side rv">
+      <p>Trabajo en comunicación visual desde Uruguay. Edito videos y fotos, diseño páginas web y produzco contenido audiovisual para personas y negocios que quieren comunicar mejor.</p>
+      <p>Soy uno solo, así que hablás siempre con quien hace el trabajo. Sin intermediarios, sin briefs que se pierden. Español, inglés y portugués.</p>
+    </div>
+  </div>
+  <div class="figures rv">
+    <div><b data-ed="cifra.80">80+</b><span>Proyectos entregados</span></div>
+    <div><b data-ed="cifra.1.8">1.8K</b><span>Vistas por mes</span></div>
+    <div><b data-ed="cifra.100">100%</b><span>Freelance</span></div>
+  </div>
+</section>
+
+<!-- ============ TRABAJOS ============ -->
+<section class="works" id="trabajos" data-sec="trabajos" data-sec-name="Trabajos">
+  <div class="sec-head">
+    <div>
+      <div class="sec-label"><span class="mono">02 — Trabajos</span></div>
+      <h2 class="d" data-ed="trabajos.titulo">Selección</h2>
+    </div>
+    <p class="mono" style="color:var(--grey-2)">Arrastrá →</p>
+  </div>
+  <div class="rail" id="rail"></div>
+</section>
+
+<!-- ============ GALERÍA ============ -->
+<section class="gallery" id="galeria" data-sec="galeria" data-sec-name="Galería">
+  <div class="sec-label"><span class="mono" style="color:var(--grey-2)">03 — Archivo</span></div>
+  <h2 class="sec-h2 d" data-ed="galeria.titulo">Galería</h2>
+  <div class="gal-wrap">
+    <div class="gal-nav" id="galnav"></div>
+    <div>
+      <p class="gal-phrase" id="galphrase"></p>
+      <p class="gal-count mono" id="galcount"></p>
+      <div class="grid" id="galgrid"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SERVICIOS ============ -->
+<section class="svc" id="servicios" data-sec="servicios" data-sec-name="Servicios">
+  <div class="sec-label"><span class="mono">04 — Servicios</span></div>
+  <h2 class="sec-h2 d" data-ed="servicios.titulo" style="margin-bottom:38px">Qué hago</h2>
+
+  <div class="svc-row rv">
+    <div class="svc-n">01</div>
+    <div><h3 data-ed="svc.video.titulo">Edición<br>de video</h3></div>
+    <div class="svc-body">
+      <p class="svc-claim" data-ed="svc.claim1">Hacemos que se mueva.</p>
+      <p>Reels, videos institucionales, eventos y contenido para redes. Del material crudo a la pieza publicada, con color grading incluido.</p>
+      <ul><li>Reels</li><li>Institucional</li><li>Eventos</li><li>Color grading</li></ul>
+      <a class="svc-cta" href="https://wa.me/59891962962?text=Hola%20Martin,%20quiero%20cotizar%20edici%C3%B3n%20de%20video" target="_blank" rel="noopener">Cotizar <span class="red">&rarr;</span></a>
+    </div>
+    <div class="svc-shot"><img loading="lazy" decoding="async" src="img/servicios/svc_video.jpg" alt="Cámara y monitor de color"></div>
+  </div>
+
+  <div class="svc-row rv">
+    <div class="svc-n">02</div>
+    <div><h3 data-ed="svc.foto.titulo">Foto<br>grafía</h3></div>
+    <div class="svc-body">
+      <p class="svc-claim" data-ed="svc.claim2">Capturamos el momento.</p>
+      <p>Fotos que muestran lo mejor de tu negocio, evento o historia. Cobertura completa, selección y edición en Lightroom. También hago books personales y entrego cuadros listos para colgar.</p>
+      <ul><li>Eventos y bodas</li><li>Gastronomía</li><li>Producto</li><li>Retrato</li><li>Books</li><li>Cuadros</li><li>Empresas</li></ul>
+      <a class="svc-cta" href="https://wa.me/59891962962?text=Hola%20Martin,%20quiero%20cotizar%20fotograf%C3%ADa" target="_blank" rel="noopener">Cotizar <span class="red">&rarr;</span></a>
+    </div>
+    <div class="svc-shot"><img loading="lazy" decoding="async" src="img/servicios/svc_foto.jpg" alt="Lente y tarjetas de memoria"></div>
+  </div>
+
+
+  <div class="svc-row rv">
+    <div class="svc-n">03</div>
+    <div><h3 data-ed="svc.edicion.titulo">Edición<br>en Lightroom</h3></div>
+    <div class="svc-body">
+      <p class="svc-claim" data-ed="svc.claim.edicion">Vos disparás, yo termino.</p>
+      <p>Edición en Lightroom del material que ya tenés. Para fotógrafos que no quieren pasar la noche entera frente a la pantalla, y para marcas con el archivo sin tocar.</p>
+      <ul><li>Lightroom</li><li>Color</li><li>Retoque</li><li>Por lote</li><li>Presets propios</li></ul>
+      <a class="svc-cta" href="https://wa.me/59891962962?text=Hola%20Martin,%20quiero%20que%20edites%20mis%20fotos%20en%20Lightroom" target="_blank" rel="noopener">Mandarme el material <span class="red">&rarr;</span></a>
+    </div>
+    <div class="svc-shot"><img loading="lazy" decoding="async" src="img/servicios/svc_edicion.jpg" alt="Tableta gráfica, carta de color y tarjeta de memoria"></div>
+  </div>
+
+  <div class="svc-row rv">
+    <div class="svc-n">04</div>
+    <div><h3 data-ed="svc.web.titulo">Páginas<br>web</h3></div>
+    <div class="svc-body">
+      <p class="svc-claim" data-ed="svc.claim3">Construimos tu lugar en internet.</p>
+      <p>Diseño y desarrollo de sitios a medida. Rápidos, modernos y optimizados para vender. Esta misma página es una muestra de lo que entrego.</p>
+      <ul><li>Landing</li><li>Portfolio</li><li>Catálogo</li><li>Sitio de negocio</li></ul>
+      <a class="svc-cta" href="#web">Ver planes <span class="red">&rarr;</span></a>
+    </div>
+    <div class="svc-shot"><img loading="lazy" decoding="async" src="img/servicios/svc_web.jpg" alt="Laptop y cable"></div>
+  </div>
+</section>
+
+<!-- ============ PÁGINAS WEB ============ -->
+<section class="webpitch" id="web" data-sec="web" data-sec-name="Páginas web">
+  <div class="sec-label"><span class="mono" style="color:var(--grey-2)">05 — Páginas web</span></div>
+  <h2 class="sec-h2 d">Tu negocio<br>merece más<br>que un perfil<br><span class="red">de Instagram</span></h2>
+  <p class="lead" data-ed="web.bajada">Instagram es alquilado. Tu web es tuya. Diseño el lugar donde tu cliente decide comprarte.</p>
+  <div class="pack">
+    <article>
+      <h4 data-ed="bloque.h1">Landing</h4>
+      <p>Una página, un objetivo. Contás qué hacés y el cliente te escribe. Lista en días, no en meses.</p>
+      <span class="who">Para quien recién arranca</span>
+    </article>
+    <article>
+      <h4 data-ed="bloque.h2">Sitio de negocio</h4>
+      <p>Varias páginas, servicios, galería y contacto. La cara completa de tu empresa, cargada por vos cuando quieras.</p>
+      <span class="who">Para pymes y estudios</span>
+    </article>
+    <article>
+      <h4 data-ed="bloque.h3">Portfolio</h4>
+      <p>Para fotógrafos, artistas y creativos. La obra en primer plano, el diseño callado y una galería que aguanta miles de imágenes.</p>
+      <span class="who">Para quien vive de mostrar</span>
+    </article>
+    <article>
+      <h4 data-ed="bloque.h4">Catálogo</h4>
+      <p>Tus productos ordenados, buscables y con foto propia. Con el pie puesto para sumar carrito cuando lo necesites.</p>
+      <span class="who">Para comercios y marcas</span>
+    </article>
+  </div>
+</section>
+
+<!-- ============ PROCESO ============ -->
+<section id="proceso" data-sec="proceso" data-sec-name="Proceso" class="has-bg">
+  <div class="sec-bg">
+    <img id="procesoimg" alt="" src="">
+    <video id="procesovid" muted loop playsinline preload="none" aria-hidden="true"></video>
+  </div>
+  <div class="sec-label"><span class="mono">06 — Proceso</span></div>
+  <h2 class="sec-h2 d" data-ed="proceso.titulo">Cómo trabajamos</h2>
+  <div class="steps">
+    <article class="rv"><b>01</b><h4 data-ed="bloque.h5">Me escribís</h4><p>Por WhatsApp, directo. Sin formularios ni respuestas automáticas.</p></article>
+    <article class="rv"><b>02</b><h4 data-ed="bloque.h6">Charlamos</h4><p>Entiendo qué necesitás y en 24 horas te armo una propuesta con presupuesto a medida.</p></article>
+    <article class="rv"><b>03</b><h4 data-ed="bloque.h7">Produzco</h4><p>Filmo, fotografío o construyo. Te muestro avances, no desaparezco.</p></article>
+    <article class="rv"><b>04</b><h4 data-ed="bloque.h8">Entrego</h4><p>Material final listo para publicar, en los formatos que necesites.</p></article>
+  </div>
+</section>
+
+<!-- ============ TESTIMONIOS ============ -->
+<section class="testi" id="clientes" data-sec="clientes" data-sec-name="Clientes">
+  <div class="sec-label"><span class="mono">07 — Clientes</span></div>
+  <h2 class="sec-h2 d" data-ed="clientes.titulo">Lo que dicen</h2>
+  <div class="testi-grid">
+    <blockquote class="soon rv">
+      <p>Estoy juntando las palabras de los clientes de este año antes de publicarlas. Prefiero un testimonio real dentro de un mes que uno inventado hoy.</p>
+      <cite>Próximamente · 2026</cite>
+    </blockquote>
+    <blockquote class="rv">
+      <p>Casamientos, cumpleaños de 15 y 40, aniversarios de empresa, ferias gastronómicas, torneos de golf y sesiones de producto. El archivo de esta página es el testimonio.</p>
+      <cite>44+ proyectos entregados</cite>
+    </blockquote>
+    <blockquote class="rv">
+      <p>¿Trabajamos juntos y querés dejar tu comentario acá? Escribime y lo sumo a esta sección con tu nombre y tu proyecto.</p>
+      <cite>Tu lugar, si querés</cite>
+    </blockquote>
+  </div>
+</section>
+
+<!-- ============ TIRA DE FOTOS ============ -->
+<section class="strip" data-sec="tira" data-sec-name="Tira de fotos">
+  <div class="sec-label" style="padding:0 var(--pad)"><span class="mono">08 — Más trabajo</span></div>
+  <div class="marquee" id="marquee" aria-hidden="true"></div>
+  <div class="marquee rev" id="marquee2" aria-hidden="true"></div>
+</section>
+
+<!-- ============ CONTACTO ============ -->
+<section class="contact" id="contacto" data-sec="contacto" data-sec-name="Contacto">
+  <h2 data-ed="contacto.titulo">Empecemos</h2>
+  <p class="lead" data-ed="contacto.bajada">Contame qué necesitás y en 24 horas te armo una propuesta con presupuesto a medida.</p>
+  <a class="big-cta" href="https://wa.me/59891962962?text=Hola%20Martin,%20vi%20tu%20web%20y%20quiero%20hacer%20una%20consulta" target="_blank" rel="noopener">WhatsApp <span>→</span></a>
+  <div class="contact-meta">
+    <div><span class="mono">Teléfono</span><a href="https://wa.me/59891962962" target="_blank" rel="noopener">+598 91 96 29 62</a></div>
+    <div><span class="mono">Instagram</span><a href="https://instagram.com/apardian.studio" target="_blank" rel="noopener">@apardian.studio</a></div>
+    <div><span class="mono">Base</span><span>Montevideo, Uruguay</span></div>
+    <div><span class="mono">Hora local</span><span id="clock">--:--</span></div>
+    <div><span class="mono">Idiomas</span><span>Español · English · Português</span></div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site">
+  <div class="foot-top">
+    <div class="foot-mark">Apardian<br>Studio<span class="red">.</span></div>
+    <div class="foot-nav">
+      <div>
+        <span class="mono">Sitio</span>
+        <ul>
+          <li><a href="#trabajos">Trabajos</a></li>
+          <li><a href="#galeria">Galería</a></li>
+          <li><a href="#servicios">Servicios</a></li>
+          <li><a href="#web">Páginas web</a></li>
+          <li><a href="#proceso">Proceso</a></li>
+        </ul>
+      </div>
+      <div>
+        <span class="mono">Contacto</span>
+        <ul>
+          <li><a href="https://wa.me/59891962962" target="_blank" rel="noopener">WhatsApp</a></li>
+          <li><a href="https://instagram.com/apardian.studio" target="_blank" rel="noopener">Instagram</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="foot-bot">
+    <span>© 2026 · Martin Apardian · Uruguay</span>
+    <span>Diseño y desarrollo propios</span>
+  </div>
+</footer>
+
+<!-- ============ LIGHTBOX ============ -->
+<div id="lb" role="dialog" aria-modal="true" aria-label="Visor de fotos">
+  <button class="close" id="lbclose" aria-label="Cerrar">×</button>
+  <button class="nav-b prev" id="lbprev" aria-label="Anterior">‹</button>
+  <img id="lbimg" alt="">
+  <button class="nav-b next" id="lbnext" aria-label="Siguiente">›</button>
+  <div class="cap" id="lbcap"></div>
+</div>
+
+<!-- dock de contacto: WhatsApp + agente IA -->
+<div id="dock" class="dock" aria-label="Contacto">
+  <button class="dock-btn dock-ai" id="dockAi" type="button">
+    <span class="dot"></span><span>Agente IA</span>
+  </button>
+  <a class="dock-btn dock-wa" id="dockWa" href="https://wa.me/59891962962?text=Hola%20Martin,%20vi%20tu%20web%20y%20quiero%20hacer%20una%20consulta" target="_blank" rel="noopener">
+    <span>WhatsApp</span>
+  </a>
+</div>
+
+<script src="js/data.js?v=1788808895"></script>
+<script src="js/main.js?v=1788808895"></script>
+<script src="js/agente.js?v=1788808895"></script>
+<script src="js/editor.js?v=1788808895"></script>
+</body>
+</html>
