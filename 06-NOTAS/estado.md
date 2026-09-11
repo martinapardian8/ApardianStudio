@@ -464,3 +464,12 @@ flotantes más chicos, contacto en dos columnas. "Fotografía" en una sola
 línea.
 
 Higgsfield: 67 → 65 créditos (un montaje).
+
+**Cartel del footer (11/9 noche):** el logotipo "APARDIAN." como cartel
+luminoso sobre asfalto mojado, generado en Higgsfield con Anton a partir del
+logotipo renderizado como referencia (`nano_banana_pro`, 2 variantes, 4
+créditos) y animado con `kling3_0` (5 s, 10 créditos): el cartel queda quieto y
+solo ondula el reflejo con gotas. Va a la izquierda del footer, donde estaba la
+marca, con el video cargado al acercarse y el poster como respaldo.
+Fondos de escena también en Selección (mesa con fotos) y Galería (sala de
+hormigón). Higgsfield: 65 → 51 créditos.

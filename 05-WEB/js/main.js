@@ -796,6 +796,30 @@ document.documentElement.classList.add('js');
     });
   })();
 
+  /* ---------------- CARTEL DEL FOOTER: el video entra cuando se acerca ---------------- */
+  (function cartel() {
+    var caja = $('.cartel-video'); if (!caja) return;
+    var v = caja.querySelector('video'); if (!v || !v.dataset.src) return;
+    var hecho = false;
+    function encender() {
+      if (hecho) return; hecho = true;
+      v.muted = true; v.defaultMuted = true; v.playsInline = true;
+      v.src = v.dataset.src;
+      v.addEventListener('canplay', function () {
+        var pr = v.play();
+        if (pr && pr.then) pr.then(function () { v.classList.add('on'); }).catch(function () {});
+        else v.classList.add('on');
+      }, { once: true });
+      v.load();
+    }
+    if ('IntersectionObserver' in window) {
+      var ioc = new IntersectionObserver(function (es) {
+        es.forEach(function (e) { if (e.isIntersecting) { encender(); ioc.disconnect(); } });
+      }, { rootMargin: '600px 0px' });
+      ioc.observe(caja);
+    } else { encender(); }
+  })();
+
   /* ---------------- TIRA DE FOTOS ---------------- */
   (function tira() {
     var a = $('#marquee'), b = $('#marquee2');
