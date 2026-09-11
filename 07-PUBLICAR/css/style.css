@@ -914,3 +914,11 @@ section.works.has-bg .card .shot{background:#111;box-shadow:0 20px 50px rgba(0,0
 
 /* el imán del carrusel respetaba el borde y no el margen: la primera tarjeta quedaba cortada */
 .rail{scroll-padding-left:var(--pad);scroll-padding-right:var(--pad)}
+
+
+/* ============================================================
+   GALERÍA sobre escena: sala de hormigón con luz cenital
+   ============================================================ */
+#galeria .sec-bg img{filter:blur(3px) saturate(.6) brightness(.85)}
+#galeria .sec-bg img.on{opacity:.44}
+#galeria .sec-bg::after{background:linear-gradient(to bottom, rgba(12,11,10,.82), rgba(12,11,10,.64) 40%, rgba(12,11,10,.9))}
