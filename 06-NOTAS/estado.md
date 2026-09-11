@@ -439,3 +439,28 @@ con scroll, sticky y hover simulado en Chrome headless; ver memoria
 `qa-web-chrome-headless`.
 
 Higgsfield: 77 → 67 créditos (cinco montajes a 2 créditos).
+
+---
+
+## 11 de setiembre (tarde) — publicada en apardianstudio.com
+
+**La web nueva está en línea.** Se publicó por Git desde hPanel (Avanzado →
+GIT): repositorio `martinapardian8/ApardianStudio`, rama `hostinger` (el
+contenido de `07-PUBLICAR` en la raíz), directorio `public_html`, con
+despliegue automático. Martin autorizó la conexión con GitHub desde su Chrome.
+El sitio viejo (admin/, editor.html, save.php) quedó reemplazado por completo.
+`.htaccess` fuerza HTTPS, HSTS, CSP y cabeceras; verificado con `curl -I`.
+
+**Cambios del día, segunda tanda:** la web arranca directo en el hero (sin
+pantalla "Entrar"); servicios sobre escena de marca con marco pegado y
+cortinas; escenas de Higgsfield como fotos de los cuatro servicios y como
+fondo de Páginas web y En grande (nunca fondos blancos); carrusel de trabajos
+con flechas, mouse apretado avanza a mitad de velocidad, sin barra y con fotos
+nítidas (srcset); tira y grilla abren el visor; cartel de Times Square con
+retrato de moda en blanco y negro; focos corregidos en autos, gastronomía y
+animales; miniatura del surfista recortada. Celular: cada servicio con su
+foto, etiquetas en una línea, cifras del estudio en una fila, botones
+flotantes más chicos, contacto en dos columnas. "Fotografía" en una sola
+línea.
+
+Higgsfield: 67 → 65 créditos (un montaje).
