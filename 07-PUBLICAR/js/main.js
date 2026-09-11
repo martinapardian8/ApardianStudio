@@ -729,6 +729,13 @@ document.documentElement.classList.add('js');
     function despues() { setTimeout(armar, 180); }
     if (document.readyState === 'complete') despues();
     else window.addEventListener('load', despues);
+    // al cambiar de idioma el texto es otro: se parte de nuevo
+    document.addEventListener('idioma', function () {
+      objetivos.forEach(function (el) {
+        if (!el.classList.contains('lum')) return;
+        el.classList.remove('lum', 'lum-oscuro', 'barrido'); partir(el);
+      });
+    });
   })();
 
   /* ---------------- CURSOR PROPIO ---------------- */
@@ -740,6 +747,7 @@ document.documentElement.classList.add('js');
     var dot = document.createElement('div'); dot.className = 'cur-dot';
     var ring = document.createElement('div'); ring.className = 'cur-ring';
     ring.setAttribute('data-txt', 'Ver');
+    document.addEventListener('idioma', function (e) { ring.setAttribute('data-txt', (e.detail && e.detail.gen && e.detail.gen['Ver']) || 'Ver'); });
     document.body.appendChild(dot); document.body.appendChild(ring);
 
     var x = -100, y = -100, rx = -100, ry = -100, vivo = false, tipoActual = '';
@@ -832,13 +840,11 @@ document.documentElement.classList.add('js');
     var X0 = 0.1232, X1 = 0.7680, Y0 = 0.2081; // dónde están las letras dentro del cuadro
     var AJUSTE = 0.08;                          // aire entre el borde del renglón y el tope de las mayúsculas en Anton
     function ubicar() {
-      var W = fondo.clientWidth, H = fondo.clientHeight;
-      if (!W || !H) return;
-      var s = Math.max(W / NAT_W, H / NAT_H), vw = NAT_W * s, vh = NAT_H * s;
-      var pos = (getComputedStyle(img).objectPosition || '0% 50%').split(' ');
-      var px = (parseFloat(pos[0]) || 0) / 100, py = (parseFloat(pos[1]) || 0) / 100;
-      var ox = (W - vw) * px, oy = (H - vh) * py;
-      var izq = ox + X0 * vw, arriba = oy + Y0 * vh, ancho = (X1 - X0) * vw;
+      // el cuadro del cartel ya se dibuja entero (sin recorte): las letras
+      // van en fracciones fijas de ese rectángulo, medido en pantalla
+      var r = img.getBoundingClientRect(), fr = fondo.getBoundingClientRect();
+      if (!r.width || !r.height) return;
+      var izq = r.left - fr.left + X0 * r.width, arriba = r.top - fr.top + Y0 * r.height, ancho = (X1 - X0) * r.width;
       cap.style.fontSize = '100px';
       var w100 = cap.getBoundingClientRect().width || 1;
       var fs = 100 * ancho / w100;

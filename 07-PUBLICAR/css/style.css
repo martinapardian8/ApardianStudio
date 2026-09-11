@@ -1050,3 +1050,52 @@ footer.site > .cartel-luz.foot-mark .l{transform:none}
   text-shadow:0 0 .05em rgba(255,110,135,1),0 0 .2em rgba(255,0,51,.8),0 0 .6em rgba(255,0,51,.5);
 }
 .cartel-luz.lum.barrido .l::after{animation-duration:2.2s}
+
+
+/* ============================================================
+   SELECTOR DE IDIOMA (header)
+   ============================================================ */
+.lang{position:relative;flex:none}
+.lang-btn{
+  font-family:var(--body);font-weight:600;font-size:11px;letter-spacing:.2em;
+  padding:10px 13px 9px;border:1px solid rgba(23,23,23,.32);border-radius:999px;
+  color:var(--black);background:transparent;line-height:1;
+  transition:background .25s,color .25s,border-color .25s;
+}
+.lang-btn:hover,.lang-btn[aria-expanded="true"]{background:var(--black);color:var(--white);border-color:var(--black)}
+.lang-menu{
+  position:absolute;right:0;top:calc(100% + 8px);z-index:30;min-width:160px;
+  margin:0;padding:6px;list-style:none;background:var(--white);
+  border:1px solid rgba(23,23,23,.14);box-shadow:0 18px 44px rgba(0,0,0,.18);
+}
+.lang-menu li{margin:0}
+.lang-menu button{
+  width:100%;text-align:left;padding:9px 12px;font-family:var(--body);font-size:13px;font-weight:500;
+  color:var(--black);border-radius:2px;
+}
+.lang-menu button:hover{background:rgba(23,23,23,.06)}
+.lang-menu button[aria-selected="true"]{color:var(--red)}
+@media (max-width:760px){
+  .lang{order:2;margin-left:auto}
+  .lang-btn{padding:8px 10px 7px;font-size:10px}
+  .burger{order:3}
+}
+
+
+/* ============================================================
+   FOOTER, corrección: el video conserva su proporción anclado a la
+   izquierda (alto = alto del footer), sin recorte; a la derecha queda
+   asfalto negro para los links. En celular ocupa el ancho.
+   ============================================================ */
+.foot-bg img,.foot-bg video{
+  position:absolute;left:0;top:0;height:100%;width:auto;max-width:none;object-fit:fill;object-position:0 0;
+  -webkit-mask-image:linear-gradient(to right,#000 78%,transparent 100%);mask-image:linear-gradient(to right,#000 78%,transparent 100%);
+}
+.foot-bg::after{background:linear-gradient(to right, transparent 55%, rgba(5,5,5,.55) 80%, rgba(5,5,5,.85) 100%)}
+.foot-top{min-height:clamp(300px,30vw,480px)}
+@media (max-width:760px){
+  .foot-bg{height:56.4vw}
+  .foot-bg img,.foot-bg video{width:100%;height:auto;-webkit-mask-image:none;mask-image:none}
+  .foot-bg::after{background:linear-gradient(to bottom, transparent 60%, rgba(5,5,5,.9) 100%)}
+  .foot-top{padding-top:56vw}
+}

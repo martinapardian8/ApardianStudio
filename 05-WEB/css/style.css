@@ -1080,3 +1080,22 @@ footer.site > .cartel-luz.foot-mark .l{transform:none}
   .lang-btn{padding:8px 10px 7px;font-size:10px}
   .burger{order:3}
 }
+
+
+/* ============================================================
+   FOOTER, corrección: el video conserva su proporción anclado a la
+   izquierda (alto = alto del footer), sin recorte; a la derecha queda
+   asfalto negro para los links. En celular ocupa el ancho.
+   ============================================================ */
+.foot-bg img,.foot-bg video{
+  position:absolute;left:0;top:0;height:100%;width:auto;max-width:none;object-fit:fill;object-position:0 0;
+  -webkit-mask-image:linear-gradient(to right,#000 78%,transparent 100%);mask-image:linear-gradient(to right,#000 78%,transparent 100%);
+}
+.foot-bg::after{background:linear-gradient(to right, transparent 55%, rgba(5,5,5,.55) 80%, rgba(5,5,5,.85) 100%)}
+.foot-top{min-height:clamp(300px,30vw,480px)}
+@media (max-width:760px){
+  .foot-bg{height:56.4vw}
+  .foot-bg img,.foot-bg video{width:100%;height:auto;-webkit-mask-image:none;mask-image:none}
+  .foot-bg::after{background:linear-gradient(to bottom, transparent 60%, rgba(5,5,5,.9) 100%)}
+  .foot-top{padding-top:56vw}
+}
