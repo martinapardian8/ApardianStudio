@@ -30,7 +30,7 @@
         '<div><b>Agente Apardian</b><small>Responde al toque</small></div>' +
         '<button class="ai-close" id="aiX" aria-label="Cerrar">×</button>' +
       '</div>' +
-      '<div class="ai-log" id="aiLog"></div>' +
+      '<div class="ai-log" id="aiLog" aria-live="polite"></div>' +
       '<div class="ai-chips" id="aiChips"></div>' +
       '<form class="ai-form" id="aiForm">' +
         '<input id="aiIn" placeholder="Escribí acá..." autocomplete="off">' +

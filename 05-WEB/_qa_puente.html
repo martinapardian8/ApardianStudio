@@ -1,0 +1,43 @@
+<!doctype html><meta charset="utf-8"><title>qa</title>
+<style>html,body{margin:0;overflow:hidden;background:#000}iframe{border:0;display:block}</style>
+<iframe id="f"></iframe>
+<script>
+const q=new URLSearchParams(location.search);
+const w=+q.get('w')||1440, h=+q.get('h')||900, y=q.get('y')||'0';
+const f=document.getElementById('f'); f.width=w; f.height=h;
+const espera=ms=>new Promise(r=>setTimeout(r,ms));
+f.onload=async()=>{
+  const W=f.contentWindow, D=W.document;
+  await espera(1500);
+  const st=D.createElement('style');
+  st.textContent='*{transition:none!important;animation:none!important}';
+  D.head.appendChild(st); D.documentElement.style.scrollBehavior='auto';
+  const l=D.getElementById('loader'); if(l) l.remove();
+  D.body.classList.remove('locked');
+  D.querySelectorAll('.rv').forEach(e=>e.classList.add('in'));
+  await espera(300);
+  let Y=parseFloat(y);
+  if(y.startsWith('#')){ const el=D.querySelector(y); Y=el.getBoundingClientRect().top+W.scrollY; }
+  else if(y.startsWith('grande:')){ const el=D.querySelector('.grande-scrolly'); Y=el.getBoundingClientRect().top+W.scrollY+parseFloat(y.slice(7))*h; }
+  W.scrollTo({top:Y,behavior:'instant'}); D.documentElement.scrollTop=Y; D.body.scrollTop=Y; W.dispatchEvent(new Event('scroll'));
+  await espera(900);
+  // hover simulado: mueve el puntero al centro (o a un punto relativo) de un selector
+  const hv=q.get('hover');
+  if(hv){
+    const el=D.querySelector(hv);
+    if(el){
+      const r=el.getBoundingClientRect();
+      const px=r.left+r.width*(parseFloat(q.get('hx')||'0.5')), py=r.top+r.height*(parseFloat(q.get('hy')||'0.5'));
+      for(let k=0;k<10;k++){
+        const tgt=D.elementFromPoint(px,py)||el;
+        tgt.dispatchEvent(new W.PointerEvent('pointermove',{bubbles:true,clientX:px,clientY:py,pointerType:'mouse',pointerId:1}));
+        await espera(50);
+      }
+      await espera(600);
+    }
+  }
+  document.title='listo';
+  const pre=document.createElement('pre'); pre.id='dbg'; pre.textContent=JSON.stringify({Y, scrollY:W.scrollY, bodyClass:D.body.className, docH:D.documentElement.scrollHeight, bodyOverflow:getComputedStyle(D.body).overflow, htmlOverflow:getComputedStyle(D.documentElement).overflow, loader:!!D.getElementById('loader')}); document.body.appendChild(pre);
+};
+f.src='index.html?qa=1';
+</script>

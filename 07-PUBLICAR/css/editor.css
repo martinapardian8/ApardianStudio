@@ -35,7 +35,7 @@
 }
 .ai-panel.on{display:flex}
 .ai-head{padding:15px 18px;border-bottom:1px solid rgba(248,247,246,.12);display:flex;justify-content:space-between;align-items:center;gap:10px}
-.ai-head b{font-family:"Koulen",Impact,sans-serif;font-weight:400;font-size:19px;letter-spacing:.02em;text-transform:uppercase}
+.ai-head b{font-family:var(--display);font-weight:400;font-size:19px;letter-spacing:.02em;text-transform:uppercase}
 .ai-head small{display:block;color:#9C9388;font-size:11px;letter-spacing:.08em;text-transform:uppercase;margin-top:2px}
 .ai-close{color:#9C9388;font-size:22px;line-height:1;padding:2px 6px}
 .ai-close:hover{color:#FF0033}
@@ -70,7 +70,7 @@ body.ed-on .dock{display:none}
   gap:8px;padding:0 14px;border-bottom:1px solid rgba(248,247,246,.12);
   font-family:"Work Sans",system-ui,sans-serif;
 }
-.ed-bar .brand{font-family:"Koulen",Impact,sans-serif;font-size:19px;letter-spacing:.02em;margin-right:6px;white-space:nowrap}
+.ed-bar .brand{font-family:var(--display);font-size:19px;letter-spacing:.02em;margin-right:6px;white-space:nowrap}
 .ed-bar .brand i{color:#FF0033;font-style:normal}
 .ed-sep{width:1px;height:26px;background:rgba(248,247,246,.14);margin:0 4px;flex:none}
 .ed-btn{
@@ -98,7 +98,7 @@ body.ed-on .dock{display:none}
 }
 .ed-side.on{transform:none}
 body.ed-side-on{padding-right:300px}
-.ed-side h3{font-family:"Koulen",Impact,sans-serif;font-size:17px;margin:0 0 4px;letter-spacing:.02em;text-transform:uppercase}
+.ed-side h3{font-family:var(--display);font-size:17px;margin:0 0 4px;letter-spacing:.02em;text-transform:uppercase}
 .ed-side .hint{color:#8A8785;font-size:12px;margin:0 0 16px;line-height:1.45}
 .ed-group{border-top:1px solid rgba(248,247,246,.1);padding-top:14px;margin-top:14px}
 .ed-group:first-of-type{border-top:none;margin-top:0;padding-top:0}
@@ -174,7 +174,7 @@ body.ed-on .rail .card:hover .ed-tools{opacity:1}
   border-radius:14px;width:min(980px,100%);max-height:88vh;display:flex;flex-direction:column;overflow:hidden;
 }
 .ed-box header{padding:16px 20px;border-bottom:1px solid rgba(248,247,246,.12);display:flex;justify-content:space-between;align-items:center}
-.ed-box header b{font-family:"Koulen",Impact,sans-serif;font-size:20px;letter-spacing:.02em;text-transform:uppercase}
+.ed-box header b{font-family:var(--display);font-size:20px;letter-spacing:.02em;text-transform:uppercase}
 .ed-box .body{padding:18px 20px;overflow-y:auto;flex:1}
 .ed-box footer{padding:14px 20px;border-top:1px solid rgba(248,247,246,.12);display:flex;gap:10px;justify-content:flex-end;align-items:center}
 .ed-compare{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:18px}

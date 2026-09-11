@@ -7,7 +7,8 @@ window.SITE_DATA = {
    "chip": "Boda",
    "chipDark": false,
    "web": "img/works/portfolio__IMG_8769.jpg",
-   "thumb": "img/works/t_portfolio__IMG_8769.jpg"
+   "thumb": "img/works/t_portfolio__IMG_8769.jpg",
+   "foco": "47% 50%"
   },
   {
    "title": "Salón de golf",
@@ -15,7 +16,8 @@ window.SITE_DATA = {
    "chip": "83 fotos",
    "chipDark": false,
    "web": "img/works/golf-a__IMG_4684.jpg",
-   "thumb": "img/works/t_golf-a__IMG_4684.jpg"
+   "thumb": "img/works/t_golf-a__IMG_4684.jpg",
+   "foco": "38% 50%"
   },
   {
    "title": "La Estación",
@@ -23,7 +25,8 @@ window.SITE_DATA = {
    "chip": "40 fotos",
    "chipDark": true,
    "web": "img/works/la-estacion__IMG_8084.jpg",
-   "thumb": "img/works/t_la-estacion__IMG_8084.jpg"
+   "thumb": "img/works/t_la-estacion__IMG_8084.jpg",
+   "foco": "46% 50%"
   },
   {
    "title": "Kamados Domo",
@@ -31,7 +34,8 @@ window.SITE_DATA = {
    "chip": "385 fotos",
    "chipDark": false,
    "web": "img/works/sergio__IMG_7354.jpg",
-   "thumb": "img/works/t_sergio__IMG_7354.jpg"
+   "thumb": "img/works/t_sergio__IMG_7354.jpg",
+   "foco": "50% 67%"
   },
   {
    "title": "Horacio",
@@ -39,7 +43,8 @@ window.SITE_DATA = {
    "chip": "388 fotos",
    "chipDark": true,
    "web": "img/works/horacio__IMG_6661.jpg",
-   "thumb": "img/works/t_horacio__IMG_6661.jpg"
+   "thumb": "img/works/t_horacio__IMG_6661.jpg",
+   "foco": "50% 41%"
   },
   {
    "title": "Lokotas",
@@ -47,7 +52,8 @@ window.SITE_DATA = {
    "chip": "124 fotos",
    "chipDark": true,
    "web": "img/works/lokotas__IMG_7567.jpg",
-   "thumb": "img/works/t_lokotas__IMG_7567.jpg"
+   "thumb": "img/works/t_lokotas__IMG_7567.jpg",
+   "foco": "50% 26%"
   },
   {
    "title": "Juan Luz",
@@ -55,7 +61,8 @@ window.SITE_DATA = {
    "chip": "82 fotos",
    "chipDark": false,
    "web": "img/works/juan-luz__IMG_2712.jpg",
-   "thumb": "img/works/t_juan-luz__IMG_2712.jpg"
+   "thumb": "img/works/t_juan-luz__IMG_2712.jpg",
+   "foco": "48% 50%"
   },
   {
    "title": "La Positiva",
@@ -63,7 +70,8 @@ window.SITE_DATA = {
    "chip": "49 fotos",
    "chipDark": true,
    "web": "img/works/alfajor__IMG_5429.jpg",
-   "thumb": "img/works/t_alfajor__IMG_5429.jpg"
+   "thumb": "img/works/t_alfajor__IMG_5429.jpg",
+   "foco": "50% 24%"
   }
  ],
  "categories": [
@@ -84,37 +92,44 @@ window.SITE_DATA = {
     {
      "web": "img/gastronomia/web/nw__IMG_7027.jpg",
      "thumb": "img/gastronomia/thumb/nw__IMG_7027.jpg",
-     "shape": "tall"
+     "shape": "tall",
+     "foco": "50% 53%"
     },
     {
      "web": "img/gastronomia/web/nw__IMG_7064.jpg",
      "thumb": "img/gastronomia/thumb/nw__IMG_7064.jpg",
-     "shape": "tall"
+     "shape": "tall",
+     "foco": "50% 32%"
     },
     {
      "web": "img/gastronomia/web/nw__IMG_7086.jpg",
      "thumb": "img/gastronomia/thumb/nw__IMG_7086.jpg",
-     "shape": "tall"
+     "shape": "tall",
+     "foco": "50% 36%"
     },
     {
      "web": "img/gastronomia/web/v__69.jpg",
      "thumb": "img/gastronomia/thumb/v__69.jpg",
-     "shape": ""
+     "shape": "",
+     "foco": "50% 46%"
     },
     {
      "web": "img/gastronomia/web/v__71.jpg",
      "thumb": "img/gastronomia/thumb/v__71.jpg",
-     "shape": ""
+     "shape": "",
+     "foco": "64% 50%"
     },
     {
      "web": "img/gastronomia/web/v__72.jpg",
      "thumb": "img/gastronomia/thumb/v__72.jpg",
-     "shape": "wide"
+     "shape": "wide",
+     "foco": "44% 50%"
     },
     {
      "web": "img/gastronomia/web/v__73.jpg",
      "thumb": "img/gastronomia/thumb/v__73.jpg",
-     "shape": ""
+     "shape": "",
+     "foco": "50% 50%"
     },
     {
      "web": "img/video/06_chocolate.mp4",
@@ -125,52 +140,62 @@ window.SITE_DATA = {
     {
      "web": "img/gastronomia/web/sergio__IMG_7441.jpg",
      "thumb": "img/gastronomia/thumb/sergio__IMG_7441.jpg",
-     "shape": "tall"
+     "shape": "tall",
+     "foco": "50% 60%"
     },
     {
      "web": "img/gastronomia/web/sergio__IMG_7211.jpg",
      "thumb": "img/gastronomia/thumb/sergio__IMG_7211.jpg",
-     "shape": "tall"
+     "shape": "tall",
+     "foco": "50% 44%"
     },
     {
      "web": "img/gastronomia/web/sergio__IMG_7258.jpg",
      "thumb": "img/gastronomia/thumb/sergio__IMG_7258.jpg",
-     "shape": "wide"
+     "shape": "wide",
+     "foco": "67% 50%"
     },
     {
      "web": "img/gastronomia/web/sergio__IMG_7391.jpg",
      "thumb": "img/gastronomia/thumb/sergio__IMG_7391.jpg",
-     "shape": "tall"
+     "shape": "tall",
+     "foco": "50% 73%"
     },
     {
      "web": "img/gastronomia/web/sergio__IMG_7420.jpg",
      "thumb": "img/gastronomia/thumb/sergio__IMG_7420.jpg",
-     "shape": "tall"
+     "shape": "tall",
+     "foco": "50% 42%"
     },
     {
      "web": "img/gastronomia/web/sergio__IMG_7274.jpg",
      "thumb": "img/gastronomia/thumb/sergio__IMG_7274.jpg",
-     "shape": "tall"
+     "shape": "tall",
+     "foco": "50% 74%"
     },
     {
      "web": "img/gastronomia/web/sergio__IMG_7377.jpg",
      "thumb": "img/gastronomia/thumb/sergio__IMG_7377.jpg",
-     "shape": "tall"
+     "shape": "tall",
+     "foco": "50% 78%"
     },
     {
      "web": "img/gastronomia/web/sergio__IMG_7488.jpg",
      "thumb": "img/gastronomia/thumb/sergio__IMG_7488.jpg",
-     "shape": "tall"
+     "shape": "tall",
+     "foco": "50% 78%"
     },
     {
      "web": "img/gastronomia/web/sergio__IMG_7060.jpg",
      "thumb": "img/gastronomia/thumb/sergio__IMG_7060.jpg",
-     "shape": "tall"
+     "shape": "tall",
+     "foco": "50% 63%"
     },
     {
      "web": "img/gastronomia/web/lokotas__IMG_7567.jpg",
      "thumb": "img/gastronomia/thumb/lokotas__IMG_7567.jpg",
-     "shape": "tall"
+     "shape": "tall",
+     "foco": "50% 26%"
     }
    ]
   },
@@ -191,77 +216,92 @@ window.SITE_DATA = {
     {
      "web": "img/marcas/web/v__74.jpg",
      "thumb": "img/marcas/thumb/v__74.jpg",
-     "shape": "wide"
+     "shape": "wide",
+     "foco": "51% 50%"
     },
     {
      "web": "img/marcas/web/v__75.jpg",
      "thumb": "img/marcas/thumb/v__75.jpg",
-     "shape": "wide"
+     "shape": "wide",
+     "foco": "48% 50%"
     },
     {
      "web": "img/marcas/web/v__77.jpg",
      "thumb": "img/marcas/thumb/v__77.jpg",
-     "shape": "wide"
+     "shape": "wide",
+     "foco": "54% 50%"
     },
     {
      "web": "img/marcas/web/v__78.jpg",
      "thumb": "img/marcas/thumb/v__78.jpg",
-     "shape": "wide"
+     "shape": "wide",
+     "foco": "33% 50%"
     },
     {
      "web": "img/marcas/web/v__80.jpg",
      "thumb": "img/marcas/thumb/v__80.jpg",
-     "shape": "wide"
+     "shape": "wide",
+     "foco": "33% 50%"
     },
     {
      "web": "img/marcas/web/v__81.jpg",
      "thumb": "img/marcas/thumb/v__81.jpg",
-     "shape": "wide"
+     "shape": "wide",
+     "foco": "54% 50%"
     },
     {
      "web": "img/marcas/web/v__82.jpg",
      "thumb": "img/marcas/thumb/v__82.jpg",
-     "shape": "wide"
+     "shape": "wide",
+     "foco": "68% 50%"
     },
     {
      "web": "img/marcas/web/v__83.jpg",
      "thumb": "img/marcas/thumb/v__83.jpg",
-     "shape": "wide"
+     "shape": "wide",
+     "foco": "56% 50%"
     },
     {
      "web": "img/marcas/web/v__84.jpg",
      "thumb": "img/marcas/thumb/v__84.jpg",
-     "shape": "wide"
+     "shape": "wide",
+     "foco": "50% 50%"
     },
     {
      "web": "img/marcas/web/lokotas__IMG_7590.jpg",
      "thumb": "img/marcas/thumb/lokotas__IMG_7590.jpg",
-     "shape": "tall"
+     "shape": "tall",
+     "foco": "50% 28%"
     },
     {
      "web": "img/marcas/web/lokotas__IMG_7595.jpg",
      "thumb": "img/marcas/thumb/lokotas__IMG_7595.jpg",
-     "shape": "tall"
+     "shape": "tall",
+     "foco": "50% 39%"
     },
     {
      "web": "img/marcas/web/lokotas__IMG_7622.jpg",
      "thumb": "img/marcas/thumb/lokotas__IMG_7622.jpg",
-     "shape": "tall"
+     "shape": "tall",
+     "foco": "50% 35%"
     },
     {
      "web": "img/marcas/web/alfajor__IMG_5376.jpg",
      "thumb": "img/marcas/thumb/alfajor__IMG_5376.jpg",
-     "shape": "tall"
+     "shape": "tall",
+     "foco": "50% 45%"
     },
     {
      "web": "img/marcas/web/alfajor__IMG_5378.jpg",
      "thumb": "img/marcas/thumb/alfajor__IMG_5378.jpg",
-     "shape": "tall"
+     "shape": "tall",
+     "foco": "50% 58%"
     },
     {
      "web": "img/marcas/web/alfajor__IMG_5429.jpg",
      "thumb": "img/marcas/thumb/alfajor__IMG_5429.jpg",
-     "shape": "tall"
+     "shape": "tall",
+     "foco": "50% 24%"
     }
    ]
   },
@@ -282,122 +322,146 @@ window.SITE_DATA = {
     {
      "web": "img/retratos/web/nw__IMG_6420.jpg",
      "thumb": "img/retratos/thumb/nw__IMG_6420.jpg",
-     "shape": "tall"
+     "shape": "tall",
+     "foco": "50% 34%"
     },
     {
      "web": "img/retratos/web/nw__IMG_6668.jpg",
      "thumb": "img/retratos/thumb/nw__IMG_6668.jpg",
-     "shape": "tall"
+     "shape": "tall",
+     "foco": "50% 26%"
     },
     {
      "web": "img/retratos/web/nw__IMG_6981.jpg",
      "thumb": "img/retratos/thumb/nw__IMG_6981.jpg",
-     "shape": "tall"
+     "shape": "tall",
+     "foco": "50% 30%"
     },
     {
      "web": "img/retratos/web/v__114.jpg",
      "thumb": "img/retratos/thumb/v__114.jpg",
-     "shape": "tall"
+     "shape": "tall",
+     "foco": "50% 41%"
     },
     {
      "web": "img/retratos/web/v__115.jpg",
      "thumb": "img/retratos/thumb/v__115.jpg",
-     "shape": "tall"
+     "shape": "tall",
+     "foco": "50% 56%"
     },
     {
      "web": "img/retratos/web/v__116.jpg",
      "thumb": "img/retratos/thumb/v__116.jpg",
-     "shape": "wide"
+     "shape": "wide",
+     "foco": "38% 50%"
     },
     {
      "web": "img/retratos/web/v__117.jpg",
      "thumb": "img/retratos/thumb/v__117.jpg",
-     "shape": "tall"
+     "shape": "tall",
+     "foco": "50% 36%"
     },
     {
      "web": "img/retratos/web/v__118.jpg",
      "thumb": "img/retratos/thumb/v__118.jpg",
-     "shape": "tall"
+     "shape": "tall",
+     "foco": "50% 35%"
     },
     {
      "web": "img/retratos/web/v__119.jpg",
      "thumb": "img/retratos/thumb/v__119.jpg",
-     "shape": "wide"
+     "shape": "wide",
+     "foco": "36% 50%"
     },
     {
      "web": "img/retratos/web/v__120.jpg",
      "thumb": "img/retratos/thumb/v__120.jpg",
-     "shape": "tall"
+     "shape": "tall",
+     "foco": "50% 32%"
     },
     {
      "web": "img/retratos/web/horacio__IMG_6256.jpg",
      "thumb": "img/retratos/thumb/horacio__IMG_6256.jpg",
-     "shape": "tall"
+     "shape": "tall",
+     "foco": "50% 26%"
     },
     {
      "web": "img/retratos/web/horacio__IMG_6821.jpg",
      "thumb": "img/retratos/thumb/horacio__IMG_6821.jpg",
-     "shape": "wide"
+     "shape": "wide",
+     "foco": "47% 50%"
     },
     {
      "web": "img/retratos/web/horacio__IMG_6475.jpg",
      "thumb": "img/retratos/thumb/horacio__IMG_6475.jpg",
-     "shape": "tall"
+     "shape": "tall",
+     "foco": "50% 34%"
     },
     {
      "web": "img/retratos/web/horacio__IMG_6614-2.jpg",
      "thumb": "img/retratos/thumb/horacio__IMG_6614-2.jpg",
-     "shape": "tall"
+     "shape": "tall",
+     "foco": "50% 38%"
     },
     {
      "web": "img/retratos/web/juan-luz__IMG_2689.jpg",
      "thumb": "img/retratos/thumb/juan-luz__IMG_2689.jpg",
-     "shape": "wide"
+     "shape": "wide",
+     "foco": "42% 50%"
     },
     {
      "web": "img/retratos/web/juan-luz__IMG_2712.jpg",
      "thumb": "img/retratos/thumb/juan-luz__IMG_2712.jpg",
-     "shape": "wide"
+     "shape": "wide",
+     "foco": "48% 50%"
     },
     {
      "web": "img/retratos/web/horacio__IMG_6071.jpg",
      "thumb": "img/retratos/thumb/horacio__IMG_6071.jpg",
-     "shape": "tall"
+     "shape": "tall",
+     "foco": "50% 34%"
     },
     {
      "web": "img/retratos/web/horacio__IMG_6481.jpg",
      "thumb": "img/retratos/thumb/horacio__IMG_6481.jpg",
-     "shape": "tall"
+     "shape": "tall",
+     "foco": "50% 34%"
     },
     {
      "web": "img/retratos/web/horacio__IMG_6701.jpg",
      "thumb": "img/retratos/thumb/horacio__IMG_6701.jpg",
-     "shape": "tall"
+     "shape": "tall",
+     "foco": "50% 30%"
     },
     {
      "web": "img/retratos/web/horacio__IMG_6904.jpg",
      "thumb": "img/retratos/thumb/horacio__IMG_6904.jpg",
-     "shape": "tall"
+     "shape": "tall",
+     "foco": "50% 25%"
     },
     {
      "web": "img/retratos/web/horacio__IMG_6499.jpg",
      "thumb": "img/retratos/thumb/horacio__IMG_6499.jpg",
-     "shape": "tall"
+     "shape": "tall",
+     "foco": "50% 38%"
     },
     {
      "web": "img/retratos/web/horacio__IMG_6581.jpg",
      "thumb": "img/retratos/thumb/horacio__IMG_6581.jpg",
-     "shape": "tall"
+     "shape": "tall",
+     "foco": "50% 33%"
     },
     {
      "web": "img/retratos/web/horacio__IMG_6828.jpg",
      "thumb": "img/retratos/thumb/horacio__IMG_6828.jpg",
-     "shape": "wide"
+     "shape": "wide",
+     "foco": "64% 50%"
     },
     {
      "web": "img/retratos/web/horacio__IMG_6804.jpg",
      "thumb": "img/retratos/thumb/horacio__IMG_6804.jpg",
-     "shape": "tall"
+     "shape": "tall",
+     "foco": "50% 25%"
     }
    ]
   },
@@ -418,92 +482,110 @@ window.SITE_DATA = {
     {
      "web": "img/eventos/web/nw__IMG_9199.jpg",
      "thumb": "img/eventos/thumb/nw__IMG_9199.jpg",
-     "shape": "wide"
+     "shape": "wide",
+     "foco": "34% 50%"
     },
     {
      "web": "img/eventos/web/nw__IMG_9236.jpg",
      "thumb": "img/eventos/thumb/nw__IMG_9236.jpg",
-     "shape": "tall"
+     "shape": "tall",
+     "foco": "50% 39%"
     },
     {
      "web": "img/eventos/web/v__7.jpg",
      "thumb": "img/eventos/thumb/v__7.jpg",
-     "shape": "wide"
+     "shape": "wide",
+     "foco": "46% 50%"
     },
     {
      "web": "img/eventos/web/v__9.jpg",
      "thumb": "img/eventos/thumb/v__9.jpg",
-     "shape": ""
+     "shape": "",
+     "foco": "39% 50%"
     },
     {
      "web": "img/eventos/web/v__11.jpg",
      "thumb": "img/eventos/thumb/v__11.jpg",
-     "shape": "wide"
+     "shape": "wide",
+     "foco": "53% 50%"
     },
     {
      "web": "img/eventos/web/v__13.jpg",
      "thumb": "img/eventos/thumb/v__13.jpg",
-     "shape": "wide"
+     "shape": "wide",
+     "foco": "45% 50%"
     },
     {
      "web": "img/eventos/web/v__14.jpg",
      "thumb": "img/eventos/thumb/v__14.jpg",
-     "shape": "wide"
+     "shape": "wide",
+     "foco": "54% 50%"
     },
     {
      "web": "img/eventos/web/v__17.jpg",
      "thumb": "img/eventos/thumb/v__17.jpg",
-     "shape": "wide"
+     "shape": "wide",
+     "foco": "48% 50%"
     },
     {
      "web": "img/eventos/web/v__20.jpg",
      "thumb": "img/eventos/thumb/v__20.jpg",
-     "shape": "wide"
+     "shape": "wide",
+     "foco": "64% 50%"
     },
     {
      "web": "img/eventos/web/v__21.jpg",
      "thumb": "img/eventos/thumb/v__21.jpg",
-     "shape": "wide"
+     "shape": "wide",
+     "foco": "43% 50%"
     },
     {
      "web": "img/eventos/web/caro60__IMG_9862.jpg",
      "thumb": "img/eventos/thumb/caro60__IMG_9862.jpg",
-     "shape": "wide"
+     "shape": "wide",
+     "foco": "67% 50%"
     },
     {
      "web": "img/eventos/web/15-sol__IMG_8179.jpg",
      "thumb": "img/eventos/thumb/15-sol__IMG_8179.jpg",
-     "shape": "wide"
+     "shape": "wide",
+     "foco": "46% 50%"
     },
     {
      "web": "img/eventos/web/15-sol__IMG_8326.jpg",
      "thumb": "img/eventos/thumb/15-sol__IMG_8326.jpg",
-     "shape": "wide"
+     "shape": "wide",
+     "foco": "38% 50%"
     },
     {
      "web": "img/eventos/web/nicol__IMG_5832.jpg",
      "thumb": "img/eventos/thumb/nicol__IMG_5832.jpg",
-     "shape": "wide"
+     "shape": "wide",
+     "foco": "67% 50%"
     },
     {
      "web": "img/eventos/web/nicol__IMG_5857.jpg",
      "thumb": "img/eventos/thumb/nicol__IMG_5857.jpg",
-     "shape": "wide"
+     "shape": "wide",
+     "foco": "45% 50%"
     },
     {
      "web": "img/eventos/web/caro60__IMG_0054.jpg",
      "thumb": "img/eventos/thumb/caro60__IMG_0054.jpg",
-     "shape": "wide"
+     "shape": "wide",
+     "foco": "38% 50%"
     },
     {
      "web": "img/eventos/web/15-sol__IMG_8517.jpg",
      "thumb": "img/eventos/thumb/15-sol__IMG_8517.jpg",
-     "shape": "wide"
+     "shape": "wide",
+     "foco": "42% 50%"
     },
     {
      "web": "img/eventos/web/la-condesa__IMG_3179.jpg",
      "thumb": "img/eventos/thumb/la-condesa__IMG_3179.jpg",
-     "shape": "wide"
+     "shape": "wide",
+     "foco": "36% 50%"
     }
    ]
   },
@@ -524,32 +606,38 @@ window.SITE_DATA = {
     {
      "web": "img/bodas/web/nw__IMG_9726.jpg",
      "thumb": "img/bodas/thumb/nw__IMG_9726.jpg",
-     "shape": "wide"
+     "shape": "wide",
+     "foco": "46% 50%"
     },
     {
      "web": "img/bodas/web/nw__IMG_4672.jpg",
      "thumb": "img/bodas/thumb/nw__IMG_4672.jpg",
-     "shape": "tall"
+     "shape": "tall",
+     "foco": "50% 65%"
     },
     {
      "web": "img/bodas/web/nw__IMG_4675.jpg",
      "thumb": "img/bodas/thumb/nw__IMG_4675.jpg",
-     "shape": "wide"
+     "shape": "wide",
+     "foco": "63% 50%"
     },
     {
      "web": "img/bodas/web/nw__IMG_8368.jpg",
      "thumb": "img/bodas/thumb/nw__IMG_8368.jpg",
-     "shape": "wide"
+     "shape": "wide",
+     "foco": "33% 50%"
     },
     {
      "web": "img/bodas/web/v__3.jpg",
      "thumb": "img/bodas/thumb/v__3.jpg",
-     "shape": "wide"
+     "shape": "wide",
+     "foco": "33% 50%"
     },
     {
      "web": "img/bodas/web/v__4.jpg",
      "thumb": "img/bodas/thumb/v__4.jpg",
-     "shape": "tall"
+     "shape": "tall",
+     "foco": "50% 48%"
     },
     {
      "web": "img/video/04_salon.mp4",
@@ -560,42 +648,50 @@ window.SITE_DATA = {
     {
      "web": "img/bodas/web/v__5.jpg",
      "thumb": "img/bodas/thumb/v__5.jpg",
-     "shape": "tall"
+     "shape": "tall",
+     "foco": "50% 22%"
     },
     {
      "web": "img/bodas/web/v__6.jpg",
      "thumb": "img/bodas/thumb/v__6.jpg",
-     "shape": "wide"
+     "shape": "wide",
+     "foco": "31% 50%"
     },
     {
      "web": "img/bodas/web/nw__IMG_4697.jpg",
      "thumb": "img/bodas/thumb/nw__IMG_4697.jpg",
-     "shape": "tall"
+     "shape": "tall",
+     "foco": "50% 50%"
     },
     {
      "web": "img/bodas/web/portfolio__IMG_8769.jpg",
      "thumb": "img/bodas/thumb/portfolio__IMG_8769.jpg",
-     "shape": "wide"
+     "shape": "wide",
+     "foco": "47% 50%"
     },
     {
      "web": "img/bodas/web/portfolio__IMG_8771.jpg",
      "thumb": "img/bodas/thumb/portfolio__IMG_8771.jpg",
-     "shape": "tall"
+     "shape": "tall",
+     "foco": "50% 57%"
     },
     {
      "web": "img/bodas/web/portfolio__IMG_9717.jpg",
      "thumb": "img/bodas/thumb/portfolio__IMG_9717.jpg",
-     "shape": "wide"
+     "shape": "wide",
+     "foco": "57% 50%"
     },
     {
      "web": "img/bodas/web/golf-a__IMG_4684.jpg",
      "thumb": "img/bodas/thumb/golf-a__IMG_4684.jpg",
-     "shape": "wide"
+     "shape": "wide",
+     "foco": "38% 50%"
     },
     {
      "web": "img/bodas/web/golf-a__IMG_4679.jpg",
      "thumb": "img/bodas/thumb/golf-a__IMG_4679.jpg",
-     "shape": "wide"
+     "shape": "wide",
+     "foco": "35% 50%"
     }
    ]
   },
@@ -616,152 +712,182 @@ window.SITE_DATA = {
     {
      "web": "img/naturaleza/web/nw__FullSizeRender_6.jpg",
      "thumb": "img/naturaleza/thumb/nw__FullSizeRender_6.jpg",
-     "shape": "tall"
+     "shape": "tall",
+     "foco": "50% 14%"
     },
     {
      "web": "img/naturaleza/web/nw__IMG_1986.jpg",
      "thumb": "img/naturaleza/thumb/nw__IMG_1986.jpg",
-     "shape": ""
+     "shape": "",
+     "foco": "50% 75%"
     },
     {
      "web": "img/naturaleza/web/nw__IMG_1999.jpg",
      "thumb": "img/naturaleza/thumb/nw__IMG_1999.jpg",
-     "shape": ""
+     "shape": "",
+     "foco": "50% 64%"
     },
     {
      "web": "img/naturaleza/web/nw__IMG_2011_2.jpg",
      "thumb": "img/naturaleza/thumb/nw__IMG_2011_2.jpg",
-     "shape": ""
+     "shape": "",
+     "foco": "50% 65%"
     },
     {
      "web": "img/naturaleza/web/nw__IMG_3805.jpg",
      "thumb": "img/naturaleza/thumb/nw__IMG_3805.jpg",
-     "shape": "wide"
+     "shape": "wide",
+     "foco": "33% 50%"
     },
     {
      "web": "img/naturaleza/web/v__23.jpg",
      "thumb": "img/naturaleza/thumb/v__23.jpg",
-     "shape": ""
+     "shape": "",
+     "foco": "59% 50%"
     },
     {
      "web": "img/naturaleza/web/v__26.jpg",
      "thumb": "img/naturaleza/thumb/v__26.jpg",
-     "shape": ""
+     "shape": "",
+     "foco": "24% 50%"
     },
     {
      "web": "img/naturaleza/web/v__28.jpg",
      "thumb": "img/naturaleza/thumb/v__28.jpg",
-     "shape": ""
+     "shape": "",
+     "foco": "38% 50%"
     },
     {
      "web": "img/naturaleza/web/v__30.jpg",
      "thumb": "img/naturaleza/thumb/v__30.jpg",
-     "shape": ""
+     "shape": "",
+     "foco": "50% 52%"
     },
     {
      "web": "img/naturaleza/web/v__31.jpg",
      "thumb": "img/naturaleza/thumb/v__31.jpg",
-     "shape": ""
+     "shape": "",
+     "foco": "50% 47%"
     },
     {
      "web": "img/naturaleza/web/v__33.jpg",
      "thumb": "img/naturaleza/thumb/v__33.jpg",
-     "shape": "tall"
+     "shape": "tall",
+     "foco": "50% 17%"
     },
     {
      "web": "img/naturaleza/web/v__34.jpg",
      "thumb": "img/naturaleza/thumb/v__34.jpg",
-     "shape": ""
+     "shape": "",
+     "foco": "50% 25%"
     },
     {
      "web": "img/naturaleza/web/v__36.jpg",
      "thumb": "img/naturaleza/thumb/v__36.jpg",
-     "shape": "wide"
+     "shape": "wide",
+     "foco": "33% 50%"
     },
     {
      "web": "img/naturaleza/web/v__40.jpg",
      "thumb": "img/naturaleza/thumb/v__40.jpg",
-     "shape": ""
+     "shape": "",
+     "foco": "38% 50%"
     },
     {
      "web": "img/naturaleza/web/v__43.jpg",
      "thumb": "img/naturaleza/thumb/v__43.jpg",
-     "shape": ""
+     "shape": "",
+     "foco": "50% 55%"
     },
     {
      "web": "img/naturaleza/web/v__45.jpg",
      "thumb": "img/naturaleza/thumb/v__45.jpg",
-     "shape": ""
+     "shape": "",
+     "foco": "50% 17%"
     },
     {
      "web": "img/naturaleza/web/v__48.jpg",
      "thumb": "img/naturaleza/thumb/v__48.jpg",
-     "shape": ""
+     "shape": "",
+     "foco": "38% 50%"
     },
     {
      "web": "img/naturaleza/web/v__50.jpg",
      "thumb": "img/naturaleza/thumb/v__50.jpg",
-     "shape": ""
+     "shape": "",
+     "foco": "54% 50%"
     },
     {
      "web": "img/naturaleza/web/v__53.jpg",
      "thumb": "img/naturaleza/thumb/v__53.jpg",
-     "shape": "tall"
+     "shape": "tall",
+     "foco": "50% 41%"
     },
     {
      "web": "img/naturaleza/web/v__54.jpg",
      "thumb": "img/naturaleza/thumb/v__54.jpg",
-     "shape": "tall"
+     "shape": "tall",
+     "foco": "50% 24%"
     },
     {
      "web": "img/naturaleza/web/v__56.jpg",
      "thumb": "img/naturaleza/thumb/v__56.jpg",
-     "shape": "tall"
+     "shape": "tall",
+     "foco": "50% 54%"
     },
     {
      "web": "img/naturaleza/web/v__57.jpg",
      "thumb": "img/naturaleza/thumb/v__57.jpg",
-     "shape": "tall"
+     "shape": "tall",
+     "foco": "50% 31%"
     },
     {
      "web": "img/naturaleza/web/v__58.jpg",
      "thumb": "img/naturaleza/thumb/v__58.jpg",
-     "shape": "wide"
+     "shape": "wide",
+     "foco": "33% 50%"
     },
     {
      "web": "img/naturaleza/web/v__63.jpg",
      "thumb": "img/naturaleza/thumb/v__63.jpg",
-     "shape": "wide"
+     "shape": "wide",
+     "foco": "64% 50%"
     },
     {
      "web": "img/naturaleza/web/v__64.jpg",
      "thumb": "img/naturaleza/thumb/v__64.jpg",
-     "shape": "wide"
+     "shape": "wide",
+     "foco": "71% 50%"
     },
     {
      "web": "img/naturaleza/web/v__65.jpg",
      "thumb": "img/naturaleza/thumb/v__65.jpg",
-     "shape": "wide"
+     "shape": "wide",
+     "foco": "43% 50%"
     },
     {
      "web": "img/naturaleza/web/v__68.jpg",
      "thumb": "img/naturaleza/thumb/v__68.jpg",
-     "shape": ""
+     "shape": "",
+     "foco": "47% 50%"
     },
     {
      "web": "img/naturaleza/web/v__55.jpg",
      "thumb": "img/naturaleza/thumb/v__55.jpg",
-     "shape": "tall"
+     "shape": "tall",
+     "foco": "50% 48%"
     },
     {
      "web": "img/naturaleza/web/v__66.jpg",
      "thumb": "img/naturaleza/thumb/v__66.jpg",
-     "shape": "wide"
+     "shape": "wide",
+     "foco": "58% 50%"
     },
     {
      "web": "img/naturaleza/web/v__61.jpg",
      "thumb": "img/naturaleza/thumb/v__61.jpg",
-     "shape": "wide"
+     "shape": "wide",
+     "foco": "39% 50%"
     }
    ]
   },
@@ -782,112 +908,134 @@ window.SITE_DATA = {
     {
      "web": "img/animales/web/nw__IMG_0653.jpg",
      "thumb": "img/animales/thumb/nw__IMG_0653.jpg",
-     "shape": "tall"
+     "shape": "tall",
+     "foco": "50% 37%"
     },
     {
      "web": "img/animales/web/nw__IMG_0659.jpg",
      "thumb": "img/animales/thumb/nw__IMG_0659.jpg",
-     "shape": "tall"
+     "shape": "tall",
+     "foco": "50% 22%"
     },
     {
      "web": "img/animales/web/v__92.jpg",
      "thumb": "img/animales/thumb/v__92.jpg",
-     "shape": "wide"
+     "shape": "wide",
+     "foco": "23% 50%"
     },
     {
      "web": "img/animales/web/v__94.jpg",
      "thumb": "img/animales/thumb/v__94.jpg",
-     "shape": "wide"
+     "shape": "wide",
+     "foco": "35% 50%"
     },
     {
      "web": "img/animales/web/v__95.jpg",
      "thumb": "img/animales/thumb/v__95.jpg",
-     "shape": "wide"
+     "shape": "wide",
+     "foco": "38% 50%"
     },
     {
      "web": "img/animales/web/v__96.jpg",
      "thumb": "img/animales/thumb/v__96.jpg",
-     "shape": "tall"
+     "shape": "tall",
+     "foco": "50% 27%"
     },
     {
      "web": "img/animales/web/v__97.jpg",
      "thumb": "img/animales/thumb/v__97.jpg",
-     "shape": "tall"
+     "shape": "tall",
+     "foco": "50% 56%"
     },
     {
      "web": "img/animales/web/v__98.jpg",
      "thumb": "img/animales/thumb/v__98.jpg",
-     "shape": ""
+     "shape": "",
+     "foco": "50% 75%"
     },
     {
      "web": "img/animales/web/v__99.jpg",
      "thumb": "img/animales/thumb/v__99.jpg",
-     "shape": "tall"
+     "shape": "tall",
+     "foco": "50% 25%"
     },
     {
      "web": "img/animales/web/v__100.jpg",
      "thumb": "img/animales/thumb/v__100.jpg",
-     "shape": "tall"
+     "shape": "tall",
+     "foco": "50% 22%"
     },
     {
      "web": "img/animales/web/v__101.jpg",
      "thumb": "img/animales/thumb/v__101.jpg",
-     "shape": "tall"
+     "shape": "tall",
+     "foco": "50% 22%"
     },
     {
      "web": "img/animales/web/v__102.jpg",
      "thumb": "img/animales/thumb/v__102.jpg",
-     "shape": "tall"
+     "shape": "tall",
+     "foco": "50% 45%"
     },
     {
      "web": "img/animales/web/v__103.jpg",
      "thumb": "img/animales/thumb/v__103.jpg",
-     "shape": "tall"
+     "shape": "tall",
+     "foco": "50% 35%"
     },
     {
      "web": "img/animales/web/v__104.jpg",
      "thumb": "img/animales/thumb/v__104.jpg",
-     "shape": "tall"
+     "shape": "tall",
+     "foco": "50% 38%"
     },
     {
      "web": "img/animales/web/v__105.jpg",
      "thumb": "img/animales/thumb/v__105.jpg",
-     "shape": ""
+     "shape": "",
+     "foco": "50% 38%"
     },
     {
      "web": "img/animales/web/v__106.jpg",
      "thumb": "img/animales/thumb/v__106.jpg",
-     "shape": "wide"
+     "shape": "wide",
+     "foco": "67% 50%"
     },
     {
      "web": "img/animales/web/v__107.jpg",
      "thumb": "img/animales/thumb/v__107.jpg",
-     "shape": "wide"
+     "shape": "wide",
+     "foco": "33% 50%"
     },
     {
      "web": "img/animales/web/v__108.jpg",
      "thumb": "img/animales/thumb/v__108.jpg",
-     "shape": "tall"
+     "shape": "tall",
+     "foco": "50% 78%"
     },
     {
      "web": "img/animales/web/v__109.jpg",
      "thumb": "img/animales/thumb/v__109.jpg",
-     "shape": "wide"
+     "shape": "wide",
+     "foco": "63% 50%"
     },
     {
      "web": "img/animales/web/v__110.jpg",
      "thumb": "img/animales/thumb/v__110.jpg",
-     "shape": "wide"
+     "shape": "wide",
+     "foco": "55% 50%"
     },
     {
      "web": "img/animales/web/v__112.jpg",
      "thumb": "img/animales/thumb/v__112.jpg",
-     "shape": "wide"
+     "shape": "wide",
+     "foco": "43% 50%"
     },
     {
      "web": "img/animales/web/v__113.jpg",
      "thumb": "img/animales/thumb/v__113.jpg",
-     "shape": "wide"
+     "shape": "wide",
+     "foco": "60% 50%"
     }
    ]
   },
@@ -908,52 +1056,62 @@ window.SITE_DATA = {
     {
      "web": "img/musica/web/nw__IMG_7233.jpg",
      "thumb": "img/musica/thumb/nw__IMG_7233.jpg",
-     "shape": "wide"
+     "shape": "wide",
+     "foco": "38% 50%"
     },
     {
      "web": "img/musica/web/nw__IMG_7237.jpg",
      "thumb": "img/musica/thumb/nw__IMG_7237.jpg",
-     "shape": "wide"
+     "shape": "wide",
+     "foco": "47% 50%"
     },
     {
      "web": "img/musica/web/nw__IMG_7306.jpg",
      "thumb": "img/musica/thumb/nw__IMG_7306.jpg",
-     "shape": "wide"
+     "shape": "wide",
+     "foco": "49% 50%"
     },
     {
      "web": "img/musica/web/la-estacion__IMG_8043.jpg",
      "thumb": "img/musica/thumb/la-estacion__IMG_8043.jpg",
-     "shape": ""
+     "shape": "",
+     "foco": "50% 44%"
     },
     {
      "web": "img/musica/web/la-estacion__IMG_8084.jpg",
      "thumb": "img/musica/thumb/la-estacion__IMG_8084.jpg",
-     "shape": "wide"
+     "shape": "wide",
+     "foco": "46% 50%"
     },
     {
      "web": "img/musica/web/la-estacion__IMG_8038.jpg",
      "thumb": "img/musica/thumb/la-estacion__IMG_8038.jpg",
-     "shape": "wide"
+     "shape": "wide",
+     "foco": "50% 50%"
     },
     {
      "web": "img/musica/web/la-estacion__IMG_8039.jpg",
      "thumb": "img/musica/thumb/la-estacion__IMG_8039.jpg",
-     "shape": "wide"
+     "shape": "wide",
+     "foco": "47% 50%"
     },
     {
      "web": "img/musica/web/la-estacion__IMG_8044.jpg",
      "thumb": "img/musica/thumb/la-estacion__IMG_8044.jpg",
-     "shape": "wide"
+     "shape": "wide",
+     "foco": "55% 50%"
     },
     {
      "web": "img/musica/web/la-estacion__IMG_8052.jpg",
      "thumb": "img/musica/thumb/la-estacion__IMG_8052.jpg",
-     "shape": "wide"
+     "shape": "wide",
+     "foco": "52% 50%"
     },
     {
      "web": "img/musica/web/la-estacion__IMG_8091.jpg",
      "thumb": "img/musica/thumb/la-estacion__IMG_8091.jpg",
-     "shape": "tall"
+     "shape": "tall",
+     "foco": "50% 58%"
     }
    ]
   },
@@ -974,37 +1132,44 @@ window.SITE_DATA = {
     {
      "web": "img/deportes/web/v__86.jpg",
      "thumb": "img/deportes/thumb/v__86.jpg",
-     "shape": "tall"
+     "shape": "tall",
+     "foco": "50% 74%"
     },
     {
      "web": "img/deportes/web/v__87.jpg",
      "thumb": "img/deportes/thumb/v__87.jpg",
-     "shape": "wide"
+     "shape": "wide",
+     "foco": "57% 50%"
     },
     {
      "web": "img/deportes/web/v__88.jpg",
      "thumb": "img/deportes/thumb/v__88.jpg",
-     "shape": "tall"
+     "shape": "tall",
+     "foco": "50% 24%"
     },
     {
      "web": "img/deportes/web/v__89.jpg",
      "thumb": "img/deportes/thumb/v__89.jpg",
-     "shape": "tall"
+     "shape": "tall",
+     "foco": "50% 78%"
     },
     {
      "web": "img/deportes/web/v__90.jpg",
      "thumb": "img/deportes/thumb/v__90.jpg",
-     "shape": "tall"
+     "shape": "tall",
+     "foco": "50% 78%"
     },
     {
      "web": "img/deportes/web/v__91.jpg",
      "thumb": "img/deportes/thumb/v__91.jpg",
-     "shape": "tall"
+     "shape": "tall",
+     "foco": "50% 78%"
     },
     {
      "web": "img/deportes/web/v__60.jpg",
      "thumb": "img/deportes/thumb/v__60.jpg",
-     "shape": "tall"
+     "shape": "tall",
+     "foco": "50% 56%"
     }
    ]
   }

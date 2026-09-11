@@ -383,3 +383,59 @@ falla poco y renderiza el logotipo perfecto. En prompts de escena rechaza como
 que el bueno: para ambientes conviene el pro.
 
 Fuente del generador local: `scratchpad/marca_extra.py`.
+
+---
+
+## 11 de setiembre — "En grande", Anton, cursor y auditoría
+
+**Sección nueva `#engrande`** (entre Proceso y Clientes): escena de pantalla
+completa pegada al scroll con cinco montajes de fotos reales del archivo
+(cartel en Times Square, medianera de Brooklyn, andén de subte, galería, tapa
+de revista) más una grilla con otros cinco (parada, living, doble página,
+vidriera, libro). Los montajes se generaron con `nano_banana_pro` a partir de la
+foto real (`10-MOTOR/mockups.json` guarda origen y job). El sitio aclara
+"Montaje sobre foto real del archivo".
+
+**Cambios pedidos por Martin sobre los montajes:** el cartel pasó del retrato
+de Horacio al golden (`v__106`), el mural de Juan Luz al guacamayo rojo
+(`v__101`), la vidriera del aceite a un retrato de moda (`v__115`) y la tapa de
+revista dice "APARDIAN STUDIO." en vez de "FOTO". Un jurado de tres agentes
+rankeó las candidatas; el letrero inventado por la IA en el cartel se tapó con
+un panel liso del color de la fachada.
+
+**Error real corregido en toda la web:** Koulen (Google Fonts) no tiene Ñ ni
+vocales con tilde y Chrome metía un glifo de Impact en "TAMAÑO", "EDICIÓN" y
+"ATENCIÓN". Ahora `--display` es Anton, igual que los anuncios. Anton tiene las
+mayúsculas más altas: los `line-height` de titulares subieron de .82–.9 a
+.92–1.0 para que las líneas no se pisen.
+
+**Recorte con foco:** en la tira y en la grilla las fotos verticales se
+recortaban por el centro y perdían la cara (caballo) o el auto (drift). Ahora
+`10-MOTOR/foco.py` calcula un punto de foco por foto (rostros + textura +
+mancha saturada, con overrides a mano para los autos entre humo) y `data.js`
+lo lleva como `foco`; `main.js` lo aplica como `object-position` en tira,
+grilla y tarjetas. `build_site.py` lo recalcula en cada build.
+
+**Animaciones:** marca del footer partida en letras, cada una se ilumina con
+relieve y halo según la distancia al cursor (y hace un barrido de luz al
+aparecer, único efecto en táctil); cursor propio (punto rojo + anillo que
+invierte lo que toca, se agranda en links, dice "Ver" sobre fotos, se achica
+sobre texto, desaparece en campos); frases clave con regla roja que se dibuja
+al entrar (`mark.hl`); titulares con un brillo rojo que los recorre al pasar
+el cursor.
+
+**Auditoría:** el workflow de seis lentes se cortó por el límite mensual de
+gasto de Claude (se levanta a las 17:00); solo terminó la lente HTML/a11y, sin
+verificador. Lo corregido de esa lista: cifras del manifiesto invisibles
+(blanco sobre blanco), contraste del bloque "Próximamente", galería y tarjetas
+navegables con teclado, foco visible sobre fondo rojo, gris `--grey-2` más
+oscuro, og:image/og:url/canonical/favicon, foco del visor de fotos, `<main>`,
+skip link, `aria-hidden` en videos decorativos, `role=progressbar` en el
+loader, doble `h1`. Queda pendiente repetir las otras cinco lentes cuando el
+límite se libere.
+
+**QA local:** `05-WEB/_qa_puente.html` (excluido del build) permite capturas
+con scroll, sticky y hover simulado en Chrome headless; ver memoria
+`qa-web-chrome-headless`.
+
+Higgsfield: 77 → 67 créditos (cinco montajes a 2 créditos).

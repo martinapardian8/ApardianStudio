@@ -10,13 +10,21 @@
 <meta property="og:description" content="Estudio de comunicación visual en Uruguay. Filmo, fotografío y construyo el lugar donde eso se muestra.">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="es_UY">
+<meta property="og:url" content="https://apardianstudio.com/">
+<meta property="og:image" content="https://apardianstudio.com/img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://apardianstudio.com/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%23171717'/%3E%3Crect x='36' y='36' width='18' height='18' fill='%23FF0033'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Koulen&family=Work+Sans:wght@300;400;500;600&display=swap">
-<link rel="stylesheet" href="css/style.css?v=1788808895">
-<link rel="stylesheet" href="css/editor.css?v=1788808895">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Work+Sans:wght@300;400;500;600&display=swap">
+<link rel="stylesheet" href="css/style.css?v=1789010006">
+<link rel="stylesheet" href="css/editor.css?v=1789010006">
 </head>
 <body>
+<a class="skip" href="#trabajos">Saltar al contenido</a>
 
 <!-- ============ LOADER ============ -->
 <div id="loader">
@@ -29,11 +37,11 @@
     <span class="mono">Montevideo · Uruguay</span>
   </div>
   <div class="loader-mid">
-    <h1>Foto<br>Video<br><span>Web</span></h1>
+    <p class="h1">Foto<br>Video<br><span>Web</span></p>
   </div>
   <div class="loader-bot">
     <div style="flex:1;min-width:200px">
-      <div class="bar"><i id="barfill"></i></div>
+      <div class="bar" id="barra" role="progressbar" aria-label="Cargando" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i id="barfill"></i></div>
       <span class="mono" id="loadmsg">Cargando archivo</span>
     </div>
     <div id="pct">0</div>
@@ -55,6 +63,7 @@
   <button class="burger" id="burger" aria-label="Menú" aria-expanded="false"><i></i><i></i><i></i></button>
 </header>
 
+<main id="main">
 <!-- ============ HERO ============ -->
 <section class="hero" id="top">
   <div class="hero-media">
@@ -71,11 +80,15 @@
 </section>
 
 <!-- ============ MANIFIESTO ============ -->
-<section class="manifesto" id="estudio" data-sec="estudio" data-sec-name="El estudio">
+<section class="manifesto has-bg" id="estudio" data-sec="estudio" data-sec-name="El estudio">
+  <div class="sec-bg">
+    <img alt="" aria-hidden="true" data-src="img/video/11_retrato_bn_poster.jpg">
+    <video muted loop playsinline preload="none" aria-hidden="true" data-src="img/video/11_retrato_bn.mp4"></video>
+  </div>
   <div class="sec-label"><span class="mono">01 — El estudio</span></div>
   <div class="manifesto-grid">
     <div class="rv">
-      <p class="big" data-ed="estudio.frase">No alcanza con que se vea lindo <span class="arrow">→</span> tiene que <b>hacer que te elijan</b>.</p>
+      <p class="big" data-ed="estudio.frase">No alcanza con que se vea lindo <span class="arrow" aria-hidden="true">→</span> tiene que <b class="hl">hacer que te elijan</b>.</p>
     </div>
     <div class="manifesto-side rv">
       <p>Trabajo en comunicación visual desde Uruguay. Edito videos y fotos, diseño páginas web y produzco contenido audiovisual para personas y negocios que quieren comunicar mejor.</p>
@@ -120,7 +133,34 @@
   <div class="sec-label"><span class="mono">04 — Servicios</span></div>
   <h2 class="sec-h2 d" data-ed="servicios.titulo" style="margin-bottom:38px">Qué hago</h2>
 
-  <div class="svc-row rv">
+  <div class="svc-scrolly">
+  <div class="svc-visual">
+    <div class="svc-marco">
+    <figure class="svc-media" data-media="0">
+      <video muted loop playsinline preload="none" poster="img/servicios/svc_video.jpg"
+             data-src="img/video/08_baterista.mp4"></video>
+      <img src="img/servicios/svc_video.jpg" alt="">
+    </figure>
+    <figure class="svc-media" data-media="1">
+      <video muted loop playsinline preload="none" poster="img/servicios/svc_foto.jpg"
+             data-src="img/video/07_boda_rambla.mp4"></video>
+      <img src="img/servicios/svc_foto.jpg" alt="">
+    </figure>
+    <figure class="svc-media" data-media="2">
+      <video muted loop playsinline preload="none" poster="img/servicios/svc_edicion.jpg"
+             data-src="img/video/11_retrato_bn.mp4"></video>
+      <img src="img/servicios/svc_edicion.jpg" alt="">
+    </figure>
+    <figure class="svc-media" data-media="3">
+      <video muted loop playsinline preload="none" poster="img/servicios/svc_web.jpg"
+             data-src="img/video/16_fondo_escritorio.mp4"></video>
+      <img src="img/servicios/svc_web.jpg" alt="">
+    </figure>
+      <span class="svc-cuenta"><b>01</b> / 04</span>
+    </div>
+  </div>
+  <div class="svc-lista">
+  <article class="svc-paso rv" data-paso="0">
     <div class="svc-n">01</div>
     <div><h3 data-ed="svc.video.titulo">Edición<br>de video</h3></div>
     <div class="svc-body">
@@ -129,10 +169,9 @@
       <ul><li>Reels</li><li>Institucional</li><li>Eventos</li><li>Color grading</li></ul>
       <a class="svc-cta" href="https://wa.me/59891962962?text=Hola%20Martin,%20quiero%20cotizar%20edici%C3%B3n%20de%20video" target="_blank" rel="noopener">Cotizar <span class="red">&rarr;</span></a>
     </div>
-    <div class="svc-shot"><img loading="lazy" decoding="async" src="img/servicios/svc_video.jpg" alt="Cámara y monitor de color"></div>
-  </div>
-
-  <div class="svc-row rv">
+    
+  </article>
+  <article class="svc-paso rv" data-paso="1">
     <div class="svc-n">02</div>
     <div><h3 data-ed="svc.foto.titulo">Foto<br>grafía</h3></div>
     <div class="svc-body">
@@ -141,11 +180,9 @@
       <ul><li>Eventos y bodas</li><li>Gastronomía</li><li>Producto</li><li>Retrato</li><li>Books</li><li>Cuadros</li><li>Empresas</li></ul>
       <a class="svc-cta" href="https://wa.me/59891962962?text=Hola%20Martin,%20quiero%20cotizar%20fotograf%C3%ADa" target="_blank" rel="noopener">Cotizar <span class="red">&rarr;</span></a>
     </div>
-    <div class="svc-shot"><img loading="lazy" decoding="async" src="img/servicios/svc_foto.jpg" alt="Lente y tarjetas de memoria"></div>
-  </div>
-
-
-  <div class="svc-row rv">
+    
+  </article>
+  <article class="svc-paso rv" data-paso="2">
     <div class="svc-n">03</div>
     <div><h3 data-ed="svc.edicion.titulo">Edición<br>en Lightroom</h3></div>
     <div class="svc-body">
@@ -154,10 +191,9 @@
       <ul><li>Lightroom</li><li>Color</li><li>Retoque</li><li>Por lote</li><li>Presets propios</li></ul>
       <a class="svc-cta" href="https://wa.me/59891962962?text=Hola%20Martin,%20quiero%20que%20edites%20mis%20fotos%20en%20Lightroom" target="_blank" rel="noopener">Mandarme el material <span class="red">&rarr;</span></a>
     </div>
-    <div class="svc-shot"><img loading="lazy" decoding="async" src="img/servicios/svc_edicion.jpg" alt="Tableta gráfica, carta de color y tarjeta de memoria"></div>
-  </div>
-
-  <div class="svc-row rv">
+    
+  </article>
+  <article class="svc-paso rv" data-paso="3">
     <div class="svc-n">04</div>
     <div><h3 data-ed="svc.web.titulo">Páginas<br>web</h3></div>
     <div class="svc-body">
@@ -166,15 +202,21 @@
       <ul><li>Landing</li><li>Portfolio</li><li>Catálogo</li><li>Sitio de negocio</li></ul>
       <a class="svc-cta" href="#web">Ver planes <span class="red">&rarr;</span></a>
     </div>
-    <div class="svc-shot"><img loading="lazy" decoding="async" src="img/servicios/svc_web.jpg" alt="Laptop y cable"></div>
+    
+  </article>
   </div>
+</div>
 </section>
 
 <!-- ============ PÁGINAS WEB ============ -->
-<section class="webpitch" id="web" data-sec="web" data-sec-name="Páginas web">
+<section class="webpitch has-bg" id="web" data-sec="web" data-sec-name="Páginas web">
+  <div class="sec-bg">
+    <img alt="" aria-hidden="true" data-src="img/video/16_fondo_escritorio_poster.jpg">
+    <video muted loop playsinline preload="none" aria-hidden="true" data-src="img/video/16_fondo_escritorio.mp4"></video>
+  </div>
   <div class="sec-label"><span class="mono" style="color:var(--grey-2)">05 — Páginas web</span></div>
   <h2 class="sec-h2 d">Tu negocio<br>merece más<br>que un perfil<br><span class="red">de Instagram</span></h2>
-  <p class="lead" data-ed="web.bajada">Instagram es alquilado. Tu web es tuya. Diseño el lugar donde tu cliente decide comprarte.</p>
+  <p class="lead rv" data-ed="web.bajada">Instagram es alquilado. <mark class="hl">Tu web es tuya.</mark> Diseño el lugar donde tu cliente decide comprarte.</p>
   <div class="pack">
     <article>
       <h4 data-ed="bloque.h1">Landing</h4>
@@ -215,9 +257,82 @@
   </div>
 </section>
 
+<!-- ============ EN GRANDE ============ -->
+<section class="grande" id="engrande" data-sec="engrande" data-sec-name="En grande">
+  <div class="grande-intro">
+    <div class="sec-label"><span class="mono">07 — En grande</span></div>
+    <h2 class="sec-h2 d" data-ed="engrande.titulo">Una foto que aguanta cualquier tamaño</h2>
+    <p class="lead" data-ed="engrande.bajada">Las mismas fotos de esta página, puestas donde se miran de verdad. Del feed al cartel, sin perder nada en el camino.</p>
+  </div>
+
+  <div class="grande-scrolly">
+    <div class="grande-escena">
+      <figure class="grande-media on" data-media="0" aria-hidden="true"><img src="img/mockups/m01_cartel.jpg" alt="" loading="lazy" decoding="async" style="object-position:48% 30%"></figure>
+      <figure class="grande-media" data-media="1" aria-hidden="true"><img src="img/mockups/m09_mural.jpg" alt="" loading="lazy" decoding="async" style="object-position:50% 42%"></figure>
+      <figure class="grande-media" data-media="2" aria-hidden="true"><img src="img/mockups/m07_subte.jpg" alt="" loading="lazy" decoding="async" style="object-position:28% 45%"></figure>
+      <figure class="grande-media" data-media="3" aria-hidden="true"><img src="img/mockups/m03_galeria.jpg" alt="" loading="lazy" decoding="async" style="object-position:50% 40%"></figure>
+      <figure class="grande-media" data-media="4" aria-hidden="true"><img src="img/mockups/m02_revista.jpg" alt="" loading="lazy" decoding="async" style="object-position:50% 34%"></figure>
+      <div class="grande-pie">
+        <span class="grande-cuenta"><b>01</b> / 05</span>
+        <span class="mono grande-nota">Montaje sobre foto real del archivo</span>
+      </div>
+    </div>
+    <div class="grande-pasos">
+      <article class="grande-paso" data-paso="0">
+        <div class="grande-card">
+          <span class="mono">Times Square · Nueva York</span>
+          <h3>Un retrato de veinte metros</h3>
+          <p>La misma sesión que entra en tu celular aguanta la pantalla más mirada del mundo. La luz se decide en el momento de la foto. El tamaño, después.</p>
+        </div>
+      </article>
+      <article class="grande-paso" data-paso="1">
+        <div class="grande-card">
+          <span class="mono">Medianera · Brooklyn</span>
+          <h3>La pared entera</h3>
+          <p>Una foto bien hecha no se rompe cuando crece. Se lee desde la vereda de enfrente igual que desde la palma de la mano.</p>
+        </div>
+      </article>
+      <article class="grande-paso" data-paso="2">
+        <div class="grande-card">
+          <span class="mono">Andén · Subte</span>
+          <h3>Tres segundos de atención</h3>
+          <p>En un andén nadie se detiene. La foto tiene que contarlo todo antes de que llegue el tren.</p>
+        </div>
+      </article>
+      <article class="grande-paso" data-paso="3">
+        <div class="grande-card">
+          <span class="mono">Sala · Galería</span>
+          <h3>A la altura de los ojos</h3>
+          <p>Impresa a un metro y medio, sobre pared blanca y con luz de museo. Ahí se nota si la foto estaba bien tomada.</p>
+        </div>
+      </article>
+      <article class="grande-paso" data-paso="4">
+        <div class="grande-card">
+          <span class="mono">Tapa · Revista</span>
+          <h3>Tapa, no relleno</h3>
+          <p>Una tapa se elige entre cientos de fotos. Trabajo para que la tuya sea la que queda.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+
+  <div class="grande-grilla">
+    <figure class="rv g-a"><img src="img/mockups/m04_parada.jpg" alt="Foto de plato de restaurante en una parada de ómnibus" loading="lazy" decoding="async"><figcaption class="mono">Parada · Gastronomía</figcaption></figure>
+    <figure class="rv g-b"><img src="img/mockups/m05_depto.jpg" alt="Foto de paisaje impresa como cuadro en un living" loading="lazy" decoding="async"><figcaption class="mono">Living · Cuadro de 160 cm</figcaption></figure>
+    <figure class="rv g-c"><img src="img/mockups/m06_doblepagina.jpg" alt="Foto de boda impresa a doble página en un libro" loading="lazy" decoding="async"><figcaption class="mono">Doble página · Boda</figcaption></figure>
+    <figure class="rv g-d"><img src="img/mockups/m08_vidriera.jpg" alt="Retrato de moda como afiche en la vidriera de una tienda" loading="lazy" decoding="async"><figcaption class="mono">Vidriera · Moda</figcaption></figure>
+    <figure class="rv g-e"><img src="img/mockups/m10_libro.jpg" alt="Foto de cascada en la tapa de un libro de tapa dura" loading="lazy" decoding="async"><figcaption class="mono">Libro · Tapa dura</figcaption></figure>
+  </div>
+  <div class="grande-cierre rv"><p data-ed="engrande.cierre">Entrego cada foto en <mark class="hl">resolución completa</mark>. Sirve para el feed hoy y para el cartel el día que lo necesites.</p></div>
+</section>
+
 <!-- ============ TESTIMONIOS ============ -->
-<section class="testi" id="clientes" data-sec="clientes" data-sec-name="Clientes">
-  <div class="sec-label"><span class="mono">07 — Clientes</span></div>
+<section class="testi has-bg" id="clientes" data-sec="clientes" data-sec-name="Clientes">
+  <div class="sec-bg">
+    <img alt="" aria-hidden="true" data-src="img/video/15_torta_bengala_poster.jpg">
+    <video muted loop playsinline preload="none" aria-hidden="true" data-src="img/video/15_torta_bengala.mp4"></video>
+  </div>
+  <div class="sec-label"><span class="mono">08 — Clientes</span></div>
   <h2 class="sec-h2 d" data-ed="clientes.titulo">Lo que dicen</h2>
   <div class="testi-grid">
     <blockquote class="soon rv">
@@ -236,8 +351,8 @@
 </section>
 
 <!-- ============ TIRA DE FOTOS ============ -->
-<section class="strip" data-sec="tira" data-sec-name="Tira de fotos">
-  <div class="sec-label" style="padding:0 var(--pad)"><span class="mono">08 — Más trabajo</span></div>
+<section class="strip" id="tira" data-sec="tira" data-sec-name="Tira de fotos">
+  <div class="sec-label" style="padding:0 var(--pad)"><span class="mono">09 — Más trabajo</span></div>
   <div class="marquee" id="marquee" aria-hidden="true"></div>
   <div class="marquee rev" id="marquee2" aria-hidden="true"></div>
 </section>
@@ -245,8 +360,8 @@
 <!-- ============ CONTACTO ============ -->
 <section class="contact" id="contacto" data-sec="contacto" data-sec-name="Contacto">
   <h2 data-ed="contacto.titulo">Empecemos</h2>
-  <p class="lead" data-ed="contacto.bajada">Contame qué necesitás y en 24 horas te armo una propuesta con presupuesto a medida.</p>
-  <a class="big-cta" href="https://wa.me/59891962962?text=Hola%20Martin,%20vi%20tu%20web%20y%20quiero%20hacer%20una%20consulta" target="_blank" rel="noopener">WhatsApp <span>→</span></a>
+  <p class="lead rv" data-ed="contacto.bajada">Contame qué necesitás y <mark class="hl">en 24 horas</mark> te armo una propuesta con presupuesto a medida.</p>
+  <a class="big-cta" href="https://wa.me/59891962962?text=Hola%20Martin,%20vi%20tu%20web%20y%20quiero%20hacer%20una%20consulta" target="_blank" rel="noopener">WhatsApp <span aria-hidden="true">→</span></a>
   <div class="contact-meta">
     <div><span class="mono">Teléfono</span><a href="https://wa.me/59891962962" target="_blank" rel="noopener">+598 91 96 29 62</a></div>
     <div><span class="mono">Instagram</span><a href="https://instagram.com/apardian.studio" target="_blank" rel="noopener">@apardian.studio</a></div>
@@ -255,6 +370,8 @@
     <div><span class="mono">Idiomas</span><span>Español · English · Português</span></div>
   </div>
 </section>
+
+</main>
 
 <!-- ============ FOOTER ============ -->
 <footer class="site">
@@ -305,9 +422,9 @@
   </a>
 </div>
 
-<script src="js/data.js?v=1788808895"></script>
-<script src="js/main.js?v=1788808895"></script>
-<script src="js/agente.js?v=1788808895"></script>
-<script src="js/editor.js?v=1788808895"></script>
+<script src="js/data.js?v=1789010006"></script>
+<script src="js/main.js?v=1789010006"></script>
+<script src="js/agente.js?v=1789010006"></script>
+<script src="js/editor.js?v=1789010006"></script>
 </body>
 </html>

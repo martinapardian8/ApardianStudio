@@ -1,0 +1,27 @@
+{
+ "fuentes": {
+  "m01_cartel": "animales/web/v__106.jpg (recorte 2:1)",
+  "m02_revista": "retratos/web/v__114.jpg (masthead APARDIAN STUDIO)",
+  "m03_galeria": "naturaleza/web/v__33.jpg",
+  "m04_parada": "gastronomia/web/sergio__IMG_7234.jpg",
+  "m05_depto": "naturaleza/web/v__36.jpg",
+  "m06_doblepagina": "bodas/web/portfolio__IMG_8769.jpg",
+  "m07_subte": "deportes/web/v__91.jpg",
+  "m08_vidriera": "retratos/web/v__115.jpg",
+  "m09_mural": "animales/web/v__101.jpg (recorte 3:4)",
+  "m10_libro": "naturaleza/web/v__31.jpg"
+ },
+ "ids": {
+  "m01_cartel": "2b431331-e6c7-4285-8e74-4b4463c45ee2",
+  "m02_revista": "1dc34f25-6a72-4edb-9934-38780e040a8c",
+  "m03_galeria": "1417df8d-9048-489c-b93b-7e9f2072db92",
+  "m04_parada": "da8f6ef8-77ef-4818-bc91-f4e00525dcef",
+  "m05_depto": "21f9579f-0958-43bf-9366-e47322e96183",
+  "m06_doblepagina": "dd7fb2c5-51f1-4f1a-a93a-38c38ae9cc05",
+  "m07_subte": "c5f87bce-3c4a-44e6-b193-ae83e8754ce3",
+  "m08_vidriera": "03215c84-0f1e-4f43-a77b-e0d1539e3ae8",
+  "m09_mural": "100350d7-b3b9-4f42-992b-814433f424a1",
+  "m10_libro": "98ba1699-cd6e-47a5-bcc4-f598cbf35773",
+  "m02_revista_alt": "e9592457-7ca8-454a-bc23-b0cf80208855"
+ }
+}

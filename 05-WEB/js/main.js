@@ -27,6 +27,7 @@ document.documentElement.classList.add('js');
 
   function paint(p) {
     barfill.style.width = p + '%';
+    var barra = $('#barra'); if (barra) barra.setAttribute('aria-valuenow', Math.round(p));
     pct.textContent = Math.round(p);
   }
   function tick() {
@@ -170,11 +171,16 @@ document.documentElement.classList.add('js');
     a.innerHTML =
       '<div class="shot">' +
         '<span class="chip' + (w.chipDark ? ' dark' : '') + '">' + w.chip + '</span>' +
-        '<img loading="lazy" decoding="async" src="' + w.thumb + '" data-full="' + w.web + '" alt="' + w.title + '">' +
+        '<img loading="lazy" decoding="async" src="' + w.thumb + '" data-full="' + w.web + '" alt="' + w.title + '"' + (w.foco ? ' style="object-position:' + w.foco + '"' : '') + '>' +
       '</div>' +
       '<h3>' + w.title + '</h3>' +
       '<p>' + w.meta + '</p>';
-    a.querySelector('.shot').addEventListener('click', function () { openLB([{ web: w.web, cap: w.title }], 0); });
+    var shot = a.querySelector('.shot');
+    shot.tabIndex = 0; shot.setAttribute('role', 'button'); shot.setAttribute('aria-label', 'Ver ' + w.title);
+    shot.addEventListener('click', function () { openLB([{ web: w.web, cap: w.title }], 0); });
+    shot.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLB([{ web: w.web, cap: w.title }], 0); }
+    });
     rail.appendChild(a);
   });
 
@@ -251,9 +257,16 @@ document.documentElement.classList.add('js');
         var im = document.createElement('img');
         im.loading = 'lazy'; im.decoding = 'async';
         im.src = p.thumb; im.alt = c.name + ' — Apardian Studio';
+        if (p.foco) im.style.objectPosition = p.foco;   // el sujeto queda a la vista en el recorte
         f.appendChild(im);
       }
       f.addEventListener('click', function () { openLB(c.photos, i, c.name); });
+      // la galería también se recorre con teclado
+      f.tabIndex = 0; f.setAttribute('role', 'button');
+      f.setAttribute('aria-label', 'Ver foto ' + (i + 1) + ' de ' + c.name);
+      f.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLB(c.photos, i, c.name); }
+      });
       galgrid.appendChild(f);
     });
   }
@@ -261,11 +274,13 @@ document.documentElement.classList.add('js');
 
   /* ---------------- LIGHTBOX ---------------- */
   var lb = $('#lb'), lbimg = $('#lbimg'), lbcap = $('#lbcap');
-  var set = [], at = 0, setName = '';
+  var set = [], at = 0, setName = '', lbOpener = null;
 
   function openLB(arr, i, name) {
     set = arr; at = i; setName = name || '';
+    lbOpener = document.activeElement;
     lb.classList.add('on');
+    setTimeout(function () { var cx = $('#lbclose'); if (cx) cx.focus(); }, 40);
     // fondo del loader: la foto entra enseguida, el reel cuando puede
   (function loaderBg() {
     var li = $('#loaderimg'), lv = $('#loadervid');
@@ -320,6 +335,8 @@ document.documentElement.classList.add('js');
   }
   function closeLB() {
     lb.classList.remove('on');
+    if (lbOpener && lbOpener.focus) { try { lbOpener.focus(); } catch (e) {} }
+    lbOpener = null;
     document.body.classList.remove('locked');
     lbimg.src = '';
     var lv = document.getElementById('lbvid');
@@ -385,6 +402,280 @@ document.documentElement.classList.add('js');
     setTimeout(armar, 3000);
   })();
 
+  /* ---------------- FONDOS DE SECCION ---------------- */
+  // Cada seccion con .sec-bg y data-src enciende su fondo cuando se acerca.
+  // El video se baja recien ahi, para no cargar cuatro videos al abrir la pagina.
+  (function fondos() {
+    var cajas = $$('section.has-bg .sec-bg');
+    if (!cajas.length) return;
+
+    function encender(caja) {
+      if (caja.dataset.on) return;
+      caja.dataset.on = '1';
+      var img = caja.querySelector('img'), vid = caja.querySelector('video');
+      if (img && img.dataset.src && !img.src) {
+        img.src = img.dataset.src;
+        img.onload = function () { img.classList.add('on'); };
+      }
+      if (vid && vid.dataset.src && !vid.src) {
+        vid.muted = true; vid.defaultMuted = true; vid.playsInline = true;
+        vid.setAttribute('muted', ''); vid.setAttribute('playsinline', '');
+        vid.src = vid.dataset.src;
+        vid.addEventListener('canplay', function () {
+          var pr = vid.play();
+          if (pr && pr.then) pr.then(function () { vid.classList.add('on'); }).catch(function () {});
+          else vid.classList.add('on');
+        }, { once: true });
+        vid.load();
+      }
+    }
+
+    function revisar() {
+      var vh = window.innerHeight || document.documentElement.clientHeight || 800;
+      cajas.forEach(function (c) {
+        var s = c.closest('section');
+        if (!s) return;
+        var r = s.getBoundingClientRect();
+        if (r.top < vh + 500 && r.bottom > -500) encender(c);
+      });
+    }
+    revisar();
+    window.addEventListener('scroll', revisar, { passive: true });
+    // si el navegador no manda scroll, igual se encienden a los tres segundos
+    setTimeout(function () { cajas.forEach(encender); }, 3000);
+  })();
+
+  /* ---------------- SERVICIOS: scrollytelling ---------------- */
+  (function servicios() {
+    var pasos  = $$('.svc-paso');
+    var medios = $$('.svc-media');
+    var cuenta = $('.svc-cuenta');
+    if (!pasos.length || !medios.length) return;
+
+    var actual = -1;
+    function activar(i) {
+      if (i === actual) return;
+      actual = i;
+      pasos.forEach(function (p, k) { p.classList.toggle('activo', k === i); });
+      medios.forEach(function (m, k) { m.classList.toggle('on', k === i); });
+      if (cuenta) cuenta.innerHTML = '<b>' + ('0' + (i + 1)).slice(-2) + '</b> / 0' + pasos.length;
+
+      // el video del servicio activo se carga recién cuando le toca:
+      // así la página no arranca bajando cuatro videos de golpe
+      var v = medios[i] && medios[i].querySelector('video');
+      if (v && !v.src && v.dataset.src) {
+        v.muted = true; v.defaultMuted = true; v.playsInline = true;
+        v.src = v.dataset.src;
+        v.addEventListener('canplay', function () {
+          v.classList.add('listo');
+          var pr = v.play(); if (pr && pr.then) pr.catch(function () {});
+        }, { once: true });
+        v.load();
+      } else if (v && v.paused) {
+        var pr2 = v.play(); if (pr2 && pr2.then) pr2.catch(function () {});
+      }
+      medios.forEach(function (m, k) {
+        if (k === i) return;
+        var o = m.querySelector('video');
+        if (o && !o.paused) o.pause();
+      });
+    }
+
+    activar(0);
+
+    // Se sigue la posición con el reloj de animación del navegador en vez de
+    // escuchar el scroll: hay navegadores y vistas embebidas donde el evento
+    // de scroll no llega, y ahí el panel se quedaba clavado en el primero.
+    var seccion = $('#servicios');
+    var ultimo = -1;
+    function mirar() {
+      var rs = seccion.getBoundingClientRect();
+      var vh = window.innerHeight || document.documentElement.clientHeight || 800;
+      // solo trabaja mientras la sección está a la vista
+      if (rs.bottom > -200 && rs.top < vh + 200) {
+        var linea = vh * 0.46, mejor = 0, min = Infinity;
+        for (var k = 0; k < pasos.length; k++) {
+          var r = pasos[k].getBoundingClientRect();
+          var d = Math.abs((r.top + r.bottom) / 2 - linea);
+          // el último gana desde que su borde superior cruza la línea
+          if (k === pasos.length - 1 && r.top < linea) d = -1;
+          if (d < min) { min = d; mejor = k; }
+        }
+        if (mejor !== ultimo) { ultimo = mejor; activar(mejor); }
+      }
+      requestAnimationFrame(mirar);
+    }
+    requestAnimationFrame(mirar);
+
+    // Tres caminos por si alguno no dispara: el reloj de animación de arriba,
+    // el evento de scroll y el observador. El primero que llegue manda.
+    window.addEventListener('scroll', function () {
+      var vh = window.innerHeight || 800, linea = vh * 0.46, mejor = 0, min = Infinity;
+      for (var k = 0; k < pasos.length; k++) {
+        var r = pasos[k].getBoundingClientRect();
+        var d = Math.abs((r.top + r.bottom) / 2 - linea);
+        if (k === pasos.length - 1 && r.top < linea) d = -1;
+        if (d < min) { min = d; mejor = k; }
+      }
+      if (mejor !== ultimo) { ultimo = mejor; activar(mejor); }
+    }, { passive: true });
+
+    if ('IntersectionObserver' in window) {
+      var ioS = new IntersectionObserver(function (es) {
+        var g = null;
+        es.forEach(function (e) {
+          if (e.isIntersecting && (!g || e.intersectionRatio > g.intersectionRatio)) g = e;
+        });
+        if (g) {
+          var k = pasos.indexOf(g.target);
+          if (k !== ultimo) { ultimo = k; activar(k); }
+        }
+      }, { rootMargin: '-40% 0px -40% 0px', threshold: [0, .3, .6, 1] });
+      pasos.forEach(function (p) { ioS.observe(p); });
+    }
+  })();
+
+  /* ---------------- EN GRANDE ---------------- */
+  (function grande() {
+    var pasos   = $$('.grande-paso');
+    var medios  = $$('.grande-media');
+    var cuenta  = $('.grande-cuenta');
+    var seccion = $('.grande-scrolly');
+    if (!pasos.length || !medios.length || !seccion) return;
+
+    var actual = -1, ultimo = -1;
+    function activar(i) {
+      if (i === actual) return;
+      actual = i;
+      pasos.forEach(function (p, k) { p.classList.toggle('activo', k === i); });
+      medios.forEach(function (m, k) { m.classList.toggle('on', k === i); });
+      if (cuenta) cuenta.innerHTML = '<b>' + ('0' + (i + 1)).slice(-2) + '</b> / 0' + pasos.length;
+    }
+
+    // Cada paso mide una pantalla y lleva la tarjeta abajo. Gana el último
+    // paso cuyo borde superior ya cruzó el 22% de la pantalla: en ese momento
+    // su tarjeta asoma por abajo y el montaje cambia con ella.
+    function elegir() {
+      var vh = window.innerHeight || document.documentElement.clientHeight || 800;
+      var linea = vh * 0.22, mejor = 0;
+      for (var k = 0; k < pasos.length; k++) {
+        if (pasos[k].getBoundingClientRect().top <= linea) mejor = k;
+      }
+      return mejor;
+    }
+    function revisar() {
+      var rs = seccion.getBoundingClientRect();
+      var vh = window.innerHeight || document.documentElement.clientHeight || 800;
+      if (rs.bottom < -200 || rs.top > vh + 200) return;
+      var m = elegir();
+      if (m !== ultimo) { ultimo = m; activar(m); }
+    }
+
+    activar(0);
+    (function mirar() { revisar(); requestAnimationFrame(mirar); })();
+    window.addEventListener('scroll', revisar, { passive: true });
+    window.addEventListener('resize', revisar);
+    if ('IntersectionObserver' in window) {
+      var ioG = new IntersectionObserver(function () { revisar(); },
+        { rootMargin: '-22% 0px -70% 0px', threshold: [0, .05, .2, .5, 1] });
+      pasos.forEach(function (p) { ioG.observe(p); });
+    }
+  })();
+
+  /* ---------------- MARCA DEL FOOTER: luz y relieve ---------------- */
+  (function marca() {
+    var m = $('.foot-mark');
+    if (!m) return;
+    // se parte en letras conservando el <br> y el punto rojo
+    var n = 0;
+    Array.prototype.slice.call(m.childNodes).forEach(function (nd) {
+      if (nd.nodeType !== 3) return;
+      var frag = document.createDocumentFragment();
+      nd.textContent.split('').forEach(function (ch) {
+        if (!ch.trim()) { frag.appendChild(document.createTextNode(ch)); return; }
+        var s = document.createElement('span');
+        s.className = 'l'; s.textContent = ch; s.setAttribute('data-l', ch);
+        s.style.setProperty('--i', n++);
+        frag.appendChild(s);
+      });
+      m.replaceChild(frag, nd);
+    });
+    var letras = $$('.foot-mark .l');
+    if (!letras.length) return;
+
+    if (window.matchMedia('(hover:hover) and (pointer:fine)').matches) {
+      // cada letra se enciende según lo cerca que pase el cursor
+      m.addEventListener('pointermove', function (e) {
+        for (var k = 0; k < letras.length; k++) {
+          var r = letras[k].getBoundingClientRect();
+          var cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+          var d = Math.hypot(e.clientX - cx, e.clientY - cy);
+          var v = Math.max(0, 1 - d / (Math.max(r.width, r.height) * 1.5));
+          v = v * v * (3 - 2 * v);
+          letras[k].style.setProperty('--lit', v.toFixed(3));
+        }
+      });
+      m.addEventListener('pointerleave', function () {
+        letras.forEach(function (l) { l.style.setProperty('--lit', 0); });
+      });
+    }
+    // un barrido de luz cuando la marca entra en pantalla (en táctil es lo único que se ve)
+    if ('IntersectionObserver' in window) {
+      var iom = new IntersectionObserver(function (es) {
+        es.forEach(function (e) { if (e.isIntersecting) { m.classList.add('barrido'); iom.disconnect(); } });
+      }, { threshold: .35 });
+      iom.observe(m);
+    }
+  })();
+
+  /* ---------------- CURSOR PROPIO ---------------- */
+  (function cursor() {
+    if (!window.matchMedia('(hover:hover) and (pointer:fine)').matches) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (/[?&]edit=1/.test(location.search)) return;
+    var root = document.documentElement;
+    var dot = document.createElement('div'); dot.className = 'cur-dot';
+    var ring = document.createElement('div'); ring.className = 'cur-ring';
+    ring.setAttribute('data-txt', 'Ver');
+    document.body.appendChild(dot); document.body.appendChild(ring);
+
+    var x = -100, y = -100, rx = -100, ry = -100, vivo = false, tipoActual = '';
+    function tipo(el) {
+      if (!el || !el.closest) return '';
+      if (el.closest('input, textarea, select, [contenteditable="true"]')) return 'campo';
+      if (el.closest('.grid figure, .shot, .grande-grilla figure')) return 'ver';
+      if (el.closest('a, button, [role="button"], label, summary')) return 'link';
+      if (el.closest('h1, h2, h3, h4, p, blockquote, li, .mono, .foot-mark')) return 'text';
+      return '';
+    }
+    function marcar(t) {
+      if (t === tipoActual) return;
+      tipoActual = t;
+      root.classList.toggle('cur-campo', t === 'campo');
+      root.classList.toggle('cur-ver', t === 'ver');
+      root.classList.toggle('cur-link', t === 'link');
+      root.classList.toggle('cur-text', t === 'text');
+    }
+    document.addEventListener('pointermove', function (e) {
+      if (e.pointerType && e.pointerType !== 'mouse') return;
+      x = e.clientX; y = e.clientY;
+      if (!vivo) { vivo = true; rx = x; ry = y; root.classList.add('cur'); }
+      root.classList.remove('cur-out');
+      marcar(tipo(e.target));
+    }, { passive: true });
+    document.addEventListener('pointerdown', function () { root.classList.add('cur-down'); });
+    document.addEventListener('pointerup', function () { root.classList.remove('cur-down'); });
+    root.addEventListener('mouseleave', function () { root.classList.add('cur-out'); });
+    window.addEventListener('blur', function () { root.classList.add('cur-out'); });
+
+    (function seguir() {
+      rx += (x - rx) * .18; ry += (y - ry) * .18;
+      dot.style.setProperty('--x', x + 'px'); dot.style.setProperty('--y', y + 'px');
+      ring.style.setProperty('--rx', rx.toFixed(1) + 'px'); ring.style.setProperty('--ry', ry.toFixed(1) + 'px');
+      requestAnimationFrame(seguir);
+    })();
+  })();
+
   /* ---------------- TIRA DE FOTOS ---------------- */
   (function tira() {
     var a = $('#marquee'), b = $('#marquee2');
@@ -407,6 +698,7 @@ document.documentElement.classList.add('js');
           var i = document.createElement('img');
           i.loading = 'lazy'; i.decoding = 'async';
           i.src = p.thumb; i.alt = '';
+          if (p.foco) i.style.objectPosition = p.foco;
           f.appendChild(i); frag.appendChild(f);
         });
       }

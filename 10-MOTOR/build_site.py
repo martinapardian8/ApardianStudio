@@ -82,6 +82,8 @@ def shape_of(path):
     if r <= 0.72: return "tall"
     return ""
 
+import foco
+
 def main():
     cfg = json.load(open(PICKS))
     os.makedirs(IMG, exist_ok=True)
@@ -108,7 +110,7 @@ def main():
             if not (os.path.exists(sw) and os.path.exists(st)):
                 print("  falta:", fn); continue
             shutil.copy2(sw, os.path.join(out_w, fn)); shutil.copy2(st, os.path.join(out_t, fn))
-            photos.append({"web": f"img/{key}/web/{fn}", "thumb": f"img/{key}/thumb/{fn}", "shape": shape_of(sw)})
+            photos.append({"web": f"img/{key}/web/{fn}", "thumb": f"img/{key}/thumb/{fn}", "shape": shape_of(sw), "foco": foco.foco_de(sw)})
             arch += 1
 
         for src in cat.get("sources", []):
@@ -126,6 +128,7 @@ def main():
                     "web":   f"img/{key}/web/{fn}",
                     "thumb": f"img/{key}/thumb/{fn}",
                     "shape": shape_of(sw),
+                    "foco": foco.foco_de(sw),
                 })
         if not photos and not cat.get("soon"):
             print("  seccion sin fotos, no se publica:", key); continue
@@ -156,6 +159,7 @@ def main():
             "title": w["title"], "meta": w["meta"], "chip": w["chip"],
             "chipDark": w.get("chipDark", False),
             "web": f"img/works/{fn}", "thumb": f"img/works/t_{fn}",
+            "foco": foco.foco_de(sw),
         })
 
     # --- videos IA ---
@@ -216,6 +220,7 @@ def main():
             shutil.copy2(os.path.join(OPT, hf, "web", fn), os.path.join(IMG, "hero.jpg"))
             data["hero"] = "img/hero.jpg"
 
+    foco.guardar()
     with open(os.path.join(WEB, "js", "data.js"), "w") as f:
         f.write("window.SITE_DATA = " + json.dumps(data, ensure_ascii=False, indent=1) + ";\n")
 
