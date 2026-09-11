@@ -140,7 +140,10 @@ window.APARDIAN_I18N = {
   "ed:contacto.bajada": "Tell me what you need and <mark class=\"hl\">within 24 hours</mark> I'll put together a proposal with a tailored quote.",
   "webh2": "Your business<br>deserves more<br>than an<br><span class=\"red\">Instagram profile</span>",
   "manif1": "I work in visual communication from Uruguay. I edit video and photos, design websites and produce audiovisual content for people and businesses that want to communicate better.",
-  "manif2": "It's just me, so you always talk to the person doing the work. No middlemen, no briefs getting lost. Spanish, English and Portuguese."
+  "manif2": "It's just me, so you always talk to the person doing the work. No middlemen, no briefs getting lost. Spanish, English and Portuguese.",
+  "fig1": "Projects delivered",
+  "fig2": "Views per month",
+  "fig3": "Freelance"
  },
  "pt": {
   "nav001": "Trabalhos",
@@ -282,7 +285,10 @@ window.APARDIAN_I18N = {
   "ed:contacto.bajada": "Me conta o que você precisa e <mark class=\"hl\">em 24 horas</mark> monto uma proposta com orçamento sob medida.",
   "webh2": "Seu negócio<br>merece mais<br>que um perfil<br><span class=\"red\">de Instagram</span>",
   "manif1": "Trabalho com comunicação visual desde o Uruguai. Edito vídeos e fotos, crio sites e produzo conteúdo audiovisual para pessoas e negócios que querem se comunicar melhor.",
-  "manif2": "Sou só eu, então você sempre fala com quem faz o trabalho. Sem intermediários, sem briefings que se perdem. Espanhol, inglês e português."
+  "manif2": "Sou só eu, então você sempre fala com quem faz o trabalho. Sem intermediários, sem briefings que se perdem. Espanhol, inglês e português.",
+  "fig1": "Projetos entregues",
+  "fig2": "Visualizações por mês",
+  "fig3": "Freelance"
  }
 };
 window.APARDIAN_I18N_GEN = {
