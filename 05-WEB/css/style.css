@@ -919,6 +919,69 @@ section.works.has-bg .card .shot{background:#111;box-shadow:0 20px 50px rgba(0,0
 /* ============================================================
    GALERÍA sobre escena: sala de hormigón con luz cenital
    ============================================================ */
-#galeria .sec-bg img{filter:blur(3px) saturate(.6) brightness(.85)}
-#galeria .sec-bg img.on{opacity:.44}
-#galeria .sec-bg::after{background:linear-gradient(to bottom, rgba(12,11,10,.82), rgba(12,11,10,.64) 40%, rgba(12,11,10,.9))}
+#galeria .sec-bg img{filter:blur(2px) saturate(.7) brightness(.95)}
+#galeria .sec-bg img.on{opacity:.62}
+#galeria .sec-bg::after{background:linear-gradient(to bottom, rgba(12,11,10,.7), rgba(12,11,10,.5) 40%, rgba(12,11,10,.82))}
+
+
+/* ============================================================
+   FOOTER — cartel luminoso sobre asfalto mojado
+   "APARDIAN." como letras de luz, las últimas en rojo, con su
+   reflejo ondulando abajo (filtro SVG animado) y un respiro
+   suave de la luz. El asfalto es un degradé con grano.
+   ============================================================ */
+footer.site{
+  background:
+    radial-gradient(55% 45% at 68% 78%, rgba(255,0,51,.16), transparent 70%),
+    radial-gradient(40% 35% at 24% 60%, rgba(255,255,255,.07), transparent 70%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .055 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E"),
+    #0a0a0a;
+  overflow:hidden;
+}
+.cartel-luz{position:relative;padding:8px 0 0}
+.cartel-sobre{display:block;color:rgba(248,247,246,.5);margin-bottom:18px}
+.cartel{
+  position:relative;display:inline-block;
+  font-family:var(--display);font-size:clamp(48px,10.5vw,170px);line-height:1;
+  text-transform:uppercase;letter-spacing:-.015em;
+  margin-bottom:.62em;                 /* lugar para el reflejo */
+}
+.cartel-texto.foot-mark{
+  position:relative;z-index:2;font-size:inherit;line-height:inherit;letter-spacing:inherit;
+  color:#fff;
+  text-shadow:0 0 .04em rgba(255,255,255,.95),0 0 .16em rgba(255,255,255,.5),0 0 .45em rgba(255,255,255,.22);
+  animation:cartel-respira 6s ease-in-out infinite;
+}
+.cartel-texto .l-r{
+  color:#ff2f4f;
+  text-shadow:0 0 .04em rgba(255,90,115,1),0 0 .18em rgba(255,0,51,.75),0 0 .55em rgba(255,0,51,.45);
+}
+.cartel-texto .l-r .red{color:#ff2f4f}
+/* el reflejo: la misma palabra dada vuelta, más tenue, ondulando */
+.cartel-reflejo{
+  position:absolute;left:0;top:100%;white-space:nowrap;pointer-events:none;
+  transform:scaleY(-1) translateY(-.04em) skewX(-6deg);transform-origin:top left;
+  color:rgba(255,255,255,.72);
+  -webkit-mask-image:linear-gradient(to top, rgba(0,0,0,.9) 0%, rgba(0,0,0,.35) 45%, transparent 80%);
+  mask-image:linear-gradient(to top, rgba(0,0,0,.9) 0%, rgba(0,0,0,.35) 45%, transparent 80%);
+  filter:url(#ondas) blur(1.2px);
+  animation:reflejo-ondula 7s ease-in-out infinite;
+}
+.cartel-reflejo .l-r{color:rgba(255,47,79,.85)}
+.cartel-filtro{position:absolute;width:0;height:0;overflow:hidden}
+@keyframes cartel-respira{
+  0%,100%{filter:brightness(1)} 42%{filter:brightness(1.07)} 61%{filter:brightness(.96)} 64%{filter:brightness(1.05)}
+}
+@keyframes reflejo-ondula{
+  0%,100%{opacity:.85;transform:scaleY(-1) translateY(-.04em) skewX(-6deg)}
+  50%{opacity:1;transform:scaleY(-1) translateY(-.035em) skewX(-4deg)}
+}
+/* con la luz por letra: la copia iluminada respeta el rojo de las últimas letras */
+.lum .l-r .l::after{color:#ff8fa3}
+@media (max-width:760px){
+  .cartel{font-size:clamp(46px,14vw,80px)}
+}
+@media (prefers-reduced-motion:reduce){
+  .cartel-texto.foot-mark,.cartel-reflejo{animation:none}
+  .cartel-reflejo{filter:blur(1.2px)}
+}
