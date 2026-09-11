@@ -582,50 +582,107 @@ document.documentElement.classList.add('js');
     }
   })();
 
-  /* ---------------- MARCA DEL FOOTER: luz y relieve ---------------- */
-  (function marca() {
-    var m = $('.foot-mark');
-    if (!m) return;
-    // se parte en letras conservando el <br> y el punto rojo
-    var n = 0;
-    Array.prototype.slice.call(m.childNodes).forEach(function (nd) {
-      if (nd.nodeType !== 3) return;
-      var frag = document.createDocumentFragment();
-      nd.textContent.split('').forEach(function (ch) {
-        if (!ch.trim()) { frag.appendChild(document.createTextNode(ch)); return; }
-        var s = document.createElement('span');
-        s.className = 'l'; s.textContent = ch; s.setAttribute('data-l', ch);
-        s.style.setProperty('--i', n++);
-        frag.appendChild(s);
-      });
-      m.replaceChild(frag, nd);
-    });
-    var letras = $$('.foot-mark .l');
-    if (!letras.length) return;
+  /* ---------------- TITULARES CON LUZ ---------------- */
+  // El efecto de la marca del footer, en el hero y en todos los títulos:
+  // cada letra se enciende con relieve según lo cerca que pase el cursor.
+  (function luces() {
+    if (/[?&]edit=1/.test(location.search)) return;   // el editor necesita el texto entero
+    var objetivos = $$('.hero h1, .sec-h2, .works h2, .contact h2, .grande-card h3, .svc-paso h3, .foot-mark');
+    if (!objetivos.length) return;
 
-    if (window.matchMedia('(hover:hover) and (pointer:fine)').matches) {
-      // cada letra se enciende según lo cerca que pase el cursor
-      m.addEventListener('pointermove', function (e) {
-        for (var k = 0; k < letras.length; k++) {
-          var r = letras[k].getBoundingClientRect();
-          var cx = r.left + r.width / 2, cy = r.top + r.height / 2;
-          var d = Math.hypot(e.clientX - cx, e.clientY - cy);
-          var v = Math.max(0, 1 - d / (Math.max(r.width, r.height) * 1.5));
-          v = v * v * (3 - 2 * v);
-          letras[k].style.setProperty('--lit', v.toFixed(3));
-        }
-      });
-      m.addEventListener('pointerleave', function () {
-        letras.forEach(function (l) { l.style.setProperty('--lit', 0); });
-      });
+    function partir(el) {
+      if (el.classList.contains('lum')) return;
+      var n = 0;
+      function recorrer(nodo) {
+        Array.prototype.slice.call(nodo.childNodes).forEach(function (nd) {
+          if (nd.nodeType === 1) {
+            if (nd.tagName !== 'BR' && !nd.classList.contains('l')) recorrer(nd);
+            return;
+          }
+          if (nd.nodeType !== 3 || !nd.textContent.trim()) return;
+          var frag = document.createDocumentFragment(), palabra = null;
+          nd.textContent.split('').forEach(function (ch) {
+            if (!ch.trim()) { palabra = null; frag.appendChild(document.createTextNode(ch)); return; }
+            // las letras de una palabra van juntas para que no se parta en dos líneas
+            if (!palabra) { palabra = document.createElement('span'); palabra.className = 'w'; frag.appendChild(palabra); }
+            var s = document.createElement('span');
+            s.className = 'l'; s.textContent = ch; s.setAttribute('data-l', ch);
+            s.style.setProperty('--i', n++);
+            palabra.appendChild(s);
+          });
+          nodo.replaceChild(frag, nd);
+        });
+      }
+      recorrer(el);
+      el.classList.add('lum');
+      // texto oscuro sobre fondo claro → variante con copia negra y relieve claro
+      var col = (getComputedStyle(el).color.match(/\d+/g) || [255, 255, 255]).map(Number);
+      var lum = (0.2126 * col[0] + 0.7152 * col[1] + 0.0722 * col[2]) / 255;
+      if (lum < 0.5) el.classList.add('lum-oscuro');
+      el._letras = Array.prototype.slice.call(el.querySelectorAll('.l'));
     }
-    // un barrido de luz cuando la marca entra en pantalla (en táctil es lo único que se ve)
-    if ('IntersectionObserver' in window) {
-      var iom = new IntersectionObserver(function (es) {
-        es.forEach(function (e) { if (e.isIntersecting) { m.classList.add('barrido'); iom.disconnect(); } });
-      }, { threshold: .35 });
-      iom.observe(m);
+
+    function apagar(el) {
+      el._letras.forEach(function (l) { l.style.setProperty('--lit', 0); });
+      el._prendido = false;
     }
+
+    function armar() {
+      objetivos.forEach(partir);
+
+      // barrido de luz cuando el título entra en pantalla (y el loader ya se fue)
+      if ('IntersectionObserver' in window) {
+        var iol = new IntersectionObserver(function (es) {
+          es.forEach(function (e) {
+            if (!e.isIntersecting) return;
+            var el = e.target; iol.unobserve(el);
+            (function cuando() {
+              if (document.body.classList.contains('locked')) { setTimeout(cuando, 250); return; }
+              el.classList.add('barrido');
+            })();
+          });
+        }, { threshold: .2 });
+        objetivos.forEach(function (el) { iol.observe(el); });
+      }
+
+      if (!window.matchMedia('(hover:hover) and (pointer:fine)').matches) return;
+      var px = -1e4, py = -1e4, pendiente = false;
+      var vh = window.innerHeight || 800;
+      function pintar() {
+        pendiente = false;
+        objetivos.forEach(function (el) {
+          var r = el.getBoundingClientRect();
+          if (r.bottom < 0 || r.top > vh) { if (el._prendido) apagar(el); return; }
+          var margen = 90;
+          var cerca = px > r.left - margen && px < r.right + margen && py > r.top - margen && py < r.bottom + margen;
+          if (!cerca) { if (el._prendido) apagar(el); return; }
+          el._prendido = true;
+          var letras = el._letras;
+          for (var k = 0; k < letras.length; k++) {
+            var b = letras[k].getBoundingClientRect();
+            var cx = b.left + b.width / 2, cy = b.top + b.height / 2;
+            var d = Math.hypot(px - cx, py - cy);
+            var v = Math.max(0, 1 - d / (Math.max(b.width, b.height) * 1.5));
+            v = v * v * (3 - 2 * v);
+            letras[k].style.setProperty('--lit', v.toFixed(3));
+          }
+        });
+      }
+      document.addEventListener('pointermove', function (e) {
+        if (e.pointerType && e.pointerType !== 'mouse') return;
+        px = e.clientX; py = e.clientY;
+        if (!pendiente) { pendiente = true; requestAnimationFrame(pintar); }
+      }, { passive: true });
+      document.documentElement.addEventListener('mouseleave', function () {
+        px = py = -1e4; objetivos.forEach(function (el) { if (el._prendido) apagar(el); });
+      });
+      window.addEventListener('resize', function () { vh = window.innerHeight || 800; });
+    }
+
+    // después de load: el editor visual (editor.js) guarda el HTML base de cada
+    // texto en DOMContentLoaded y tiene que verlo entero, sin las letras partidas
+    if (document.readyState === 'complete') armar();
+    else window.addEventListener('load', armar);
   })();
 
   /* ---------------- CURSOR PROPIO ---------------- */
