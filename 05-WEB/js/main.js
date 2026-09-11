@@ -663,11 +663,12 @@ document.documentElement.classList.add('js');
       var col = (getComputedStyle(el).color.match(/\d+/g) || [255, 255, 255]).map(Number);
       var lum = (0.2126 * col[0] + 0.7152 * col[1] + 0.0722 * col[2]) / 255;
       if (lum < 0.5) el.classList.add('lum-oscuro');
-      el._letras = Array.prototype.slice.call(el.querySelectorAll('.l'));
     }
+    // siempre se leen del DOM: si otro script reescribe el título, las letras nuevas siguen respondiendo
+    function letrasDe(el) { return Array.prototype.slice.call(el.querySelectorAll('.l')); }
 
     function apagar(el) {
-      el._letras.forEach(function (l) { l.style.setProperty('--lit', 0); });
+      letrasDe(el).forEach(function (l) { l.style.setProperty('--lit', 0); });
       el._prendido = false;
     }
 
@@ -701,7 +702,7 @@ document.documentElement.classList.add('js');
           var cerca = px > r.left - margen && px < r.right + margen && py > r.top - margen && py < r.bottom + margen;
           if (!cerca) { if (el._prendido) apagar(el); return; }
           el._prendido = true;
-          var letras = el._letras;
+          var letras = letrasDe(el);
           for (var k = 0; k < letras.length; k++) {
             var b = letras[k].getBoundingClientRect();
             var cx = b.left + b.width / 2, cy = b.top + b.height / 2;
@@ -725,8 +726,9 @@ document.documentElement.classList.add('js');
 
     // después de load: el editor visual (editor.js) guarda el HTML base de cada
     // texto en DOMContentLoaded y tiene que verlo entero, sin las letras partidas
-    if (document.readyState === 'complete') armar();
-    else window.addEventListener('load', armar);
+    function despues() { setTimeout(armar, 180); }
+    if (document.readyState === 'complete') despues();
+    else window.addEventListener('load', despues);
   })();
 
   /* ---------------- CURSOR PROPIO ---------------- */
