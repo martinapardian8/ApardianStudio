@@ -36,6 +36,8 @@ f.onload=async()=>{
       await espera(600);
     }
   }
+  const ck=q.get('click');
+  if(ck){ const el=D.querySelector(ck); if(el){ el.click(); await espera(400); } }
   const dq=q.get('dbg');
   if(dq){ const el=D.querySelector(dq); const fb=D.querySelector('.foot-bg'); const fi=fb&&fb.querySelector('img');
     const r=el?el.getBoundingClientRect():null;
@@ -46,5 +48,5 @@ f.onload=async()=>{
   document.title='listo';
   const pre=document.createElement('pre'); pre.id='dbg'; pre.textContent=JSON.stringify({Y, scrollY:W.scrollY, bodyClass:D.body.className, docH:D.documentElement.scrollHeight, bodyOverflow:getComputedStyle(D.body).overflow, htmlOverflow:getComputedStyle(D.documentElement).overflow, loader:!!D.getElementById('loader')}); document.body.appendChild(pre);
 };
-f.src='index.html?qa=1';
+f.src='index.html?qa=1'+(q.get('lang')?'&lang='+q.get('lang'):'');
 </script>

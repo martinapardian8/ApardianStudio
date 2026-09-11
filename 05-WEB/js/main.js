@@ -729,6 +729,13 @@ document.documentElement.classList.add('js');
     function despues() { setTimeout(armar, 180); }
     if (document.readyState === 'complete') despues();
     else window.addEventListener('load', despues);
+    // al cambiar de idioma el texto es otro: se parte de nuevo
+    document.addEventListener('idioma', function () {
+      objetivos.forEach(function (el) {
+        if (!el.classList.contains('lum')) return;
+        el.classList.remove('lum', 'lum-oscuro', 'barrido'); partir(el);
+      });
+    });
   })();
 
   /* ---------------- CURSOR PROPIO ---------------- */
@@ -740,6 +747,7 @@ document.documentElement.classList.add('js');
     var dot = document.createElement('div'); dot.className = 'cur-dot';
     var ring = document.createElement('div'); ring.className = 'cur-ring';
     ring.setAttribute('data-txt', 'Ver');
+    document.addEventListener('idioma', function (e) { ring.setAttribute('data-txt', (e.detail && e.detail.gen && e.detail.gen['Ver']) || 'Ver'); });
     document.body.appendChild(dot); document.body.appendChild(ring);
 
     var x = -100, y = -100, rx = -100, ry = -100, vivo = false, tipoActual = '';
