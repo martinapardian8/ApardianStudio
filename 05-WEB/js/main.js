@@ -798,7 +798,7 @@ document.documentElement.classList.add('js');
 
   /* ---------------- CARTEL DEL FOOTER: el video entra cuando se acerca ---------------- */
   (function cartel() {
-    var caja = $('.cartel-video'); if (!caja) return;
+    var caja = $('.foot-bg'); if (!caja) return;
     var v = caja.querySelector('video'); if (!v || !v.dataset.src) return;
     var hecho = false;
     function encender() {
@@ -818,6 +818,38 @@ document.documentElement.classList.add('js');
       }, { rootMargin: '600px 0px' });
       ioc.observe(caja);
     } else { encender(); }
+  })();
+
+  /* ---------------- LETRAS DE LUZ SOBRE EL CARTEL DEL FOOTER ---------------- */
+  // El cartel es un video: encima van las mismas letras en Anton, transparentes,
+  // calzadas por medición sobre el cuadro del video, para que la luz por letra
+  // (luces()) responda igual que en el resto de los títulos.
+  (function cartelLuz() {
+    var cap = $('.cartel-luz'), fondo = $('.foot-bg');
+    var img = fondo && fondo.querySelector('img');
+    if (!cap || !fondo || !img) return;
+    var NAT_W = 1800, NAT_H = 1014;            // medidas del cuadro del cartel
+    var X0 = 0.1232, X1 = 0.7680, Y0 = 0.2081; // dónde están las letras dentro del cuadro
+    var AJUSTE = 0.08;                          // aire entre el borde del renglón y el tope de las mayúsculas en Anton
+    function ubicar() {
+      var W = fondo.clientWidth, H = fondo.clientHeight;
+      if (!W || !H) return;
+      var s = Math.max(W / NAT_W, H / NAT_H), vw = NAT_W * s, vh = NAT_H * s;
+      var pos = (getComputedStyle(img).objectPosition || '0% 50%').split(' ');
+      var px = (parseFloat(pos[0]) || 0) / 100, py = (parseFloat(pos[1]) || 0) / 100;
+      var ox = (W - vw) * px, oy = (H - vh) * py;
+      var izq = ox + X0 * vw, arriba = oy + Y0 * vh, ancho = (X1 - X0) * vw;
+      cap.style.fontSize = '100px';
+      var w100 = cap.getBoundingClientRect().width || 1;
+      var fs = 100 * ancho / w100;
+      cap.style.fontSize = fs.toFixed(2) + 'px';
+      cap.style.left = (fondo.offsetLeft + izq).toFixed(1) + 'px';
+      cap.style.top = (fondo.offsetTop + arriba - fs * AJUSTE).toFixed(1) + 'px';
+    }
+    function cuando() { ubicar(); setTimeout(ubicar, 400); setTimeout(ubicar, 1500); }
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(cuando); else cuando();
+    window.addEventListener('load', cuando);
+    window.addEventListener('resize', ubicar);
   })();
 
   /* ---------------- TIRA DE FOTOS ---------------- */

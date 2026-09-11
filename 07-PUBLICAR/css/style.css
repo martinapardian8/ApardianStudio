@@ -1005,3 +1005,48 @@ footer.site{background:#050505}
 @media (max-width:760px){
   .cartel-video{flex-basis:100%;max-width:none}
 }
+
+
+/* ============================================================
+   FOOTER — el cartel en video ocupa todo el fondo, a la izquierda;
+   los links quedan a la derecha sobre el asfalto oscurecido
+   ============================================================ */
+footer.site{position:relative;overflow:hidden;background:#050505}
+.foot-bg{position:absolute;inset:0;z-index:0}
+.foot-bg img,.foot-bg video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:left center;display:block}
+.foot-bg video{opacity:0;transition:opacity 1.2s var(--ease)}
+.foot-bg video.on{opacity:1}
+.foot-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(to right, transparent 48%, rgba(5,5,5,.72) 74%, rgba(5,5,5,.9) 100%)}
+footer.site > *:not(.foot-bg){position:relative;z-index:1}
+footer.site .cartel-sobre{position:absolute;left:var(--pad);top:26px;color:rgba(248,247,246,.55);margin:0}
+.foot-top{min-height:clamp(280px,34vw,520px);align-items:center;justify-content:flex-end}
+.cartel-caja,.cartel-video{display:none}
+/* letras invisibles calzadas sobre el cartel del video: solo se ve su copia de luz al pasar el cursor */
+footer.site > .cartel-luz.foot-mark{ /* especificidad mayor que la regla genérica del footer, que la volvía relative */
+  position:absolute;left:0;top:0;z-index:1;pointer-events:none;user-select:none;-webkit-user-select:none;
+  font-family:var(--display);text-transform:uppercase;line-height:1;letter-spacing:-.015em;white-space:nowrap;
+  color:transparent;font-size:100px;
+}
+footer.site > .cartel-luz .red{color:transparent}
+.cartel-luz.lum .l-r .l::after{color:#ff8fa3}
+@media (max-width:760px){
+  .foot-bg{bottom:auto;height:58vw}
+  .foot-bg img,.foot-bg video{object-position:center}
+  .foot-bg::after{background:linear-gradient(to bottom, transparent 55%, rgba(5,5,5,.9) 100%)}
+  .foot-top{min-height:0;padding-top:58vw;justify-content:flex-start}
+  footer.site .cartel-sobre{top:16px}
+}
+
+
+/* sobre el cartel de video: solo halo de luz, sin relieve ni desplazamiento,
+   para que la copia calce exacta sobre las letras filmadas */
+footer.site > .cartel-luz.foot-mark .l{transform:none}
+.cartel-luz.lum .l::after{
+  color:#fff;
+  text-shadow:0 0 .05em rgba(255,255,255,.95),0 0 .18em rgba(255,255,255,.7),0 0 .5em rgba(255,255,255,.35);
+}
+.cartel-luz.lum .l-r .l::after{
+  color:#ff6b84;
+  text-shadow:0 0 .05em rgba(255,110,135,1),0 0 .2em rgba(255,0,51,.8),0 0 .6em rgba(255,0,51,.5);
+}
+.cartel-luz.lum.barrido .l::after{animation-duration:2.2s}
