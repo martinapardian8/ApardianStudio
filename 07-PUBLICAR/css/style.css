@@ -200,8 +200,8 @@ section{padding:clamp(64px,9vw,140px) var(--pad);position:relative}
   scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;
   scrollbar-width:thin;scrollbar-color:var(--grey) transparent;
 }
-.rail::-webkit-scrollbar{height:5px}
-.rail::-webkit-scrollbar-thumb{background:var(--grey)}
+.rail::-webkit-scrollbar{display:none}
+.rail{scrollbar-width:none}
 .card{flex:0 0 clamp(280px,42vw,620px);scroll-snap-align:start;position:relative}
 .card .shot{position:relative;overflow:hidden;background:var(--grey);aspect-ratio:4/3}
 .card .shot img{width:100%;height:100%;object-fit:cover;transition:transform 1s var(--ease)}
@@ -755,3 +755,100 @@ mark.hl,b.hl{
   .lum.barrido .l::after{animation:none}
   mark.hl,b.hl{transition:none}
 }
+
+
+/* ============================================================
+   SERVICIOS sobre escena (fondo oscuro) + escenas con movimiento
+   ============================================================ */
+#servicios .sec-bg img{filter:blur(3px) saturate(.7) brightness(.85)}
+#servicios .sec-bg img.on{opacity:.38}
+#servicios .sec-bg::after{background:linear-gradient(to bottom, rgba(12,11,10,.86), rgba(12,11,10,.62) 40%, rgba(12,11,10,.9))}
+section.has-bg.svc{border-top:1px solid rgba(248,247,246,.12)}
+section.has-bg .svc-paso{border-bottom-color:rgba(248,247,246,.14)}
+section.has-bg .svc-body p{color:rgba(248,247,246,.78)}
+section.has-bg .svc-body li{border-color:rgba(248,247,246,.28);color:rgba(248,247,246,.82)}
+section.has-bg .svc-cta{color:var(--white)}
+section.has-bg .svc-cta:hover{color:var(--red)}
+section.has-bg .svc-marco{box-shadow:0 30px 80px rgba(0,0,0,.55), inset 0 0 0 1px rgba(248,247,246,.12)}
+/* las escenas respiran: un empuje lentísimo mientras están a la vista */
+@keyframes escena-respira{from{transform:scale(1) translate(0,0)}to{transform:scale(1.09) translate(-1.6%,1.2%)}}
+.svc-media.on img{animation:escena-respira 26s ease-in-out infinite alternate}
+@media (prefers-reduced-motion:reduce){ .svc-media.on img{animation:none} }
+
+/* carrusel de trabajos: flechas y modo "mouse apretado" */
+.rail-nav{display:flex;gap:8px;align-self:flex-end}
+.rail-btn{
+  width:48px;height:48px;border:1px solid rgba(23,23,23,.28);border-radius:50%;
+  font-family:var(--display);font-size:20px;line-height:1;color:var(--black);
+  display:grid;place-items:center;transition:background .3s,color .3s,border-color .3s,transform .3s var(--ease);
+}
+.rail-btn:hover{background:var(--black);color:var(--white);border-color:var(--black);transform:scale(1.06)}
+.rail.corriendo{scroll-snap-type:none;scroll-behavior:auto}
+.rail{scroll-behavior:smooth}
+.marquee figure{cursor:zoom-in}
+.marquee figure:focus-visible{outline:3px solid var(--red);outline-offset:-3px}
+
+
+/* ============================================================
+   SCROLLYTELLING MÁS INMERSIVO
+   Las imágenes entran en cortina desde abajo (la anterior queda
+   debajo hasta que termina), el marco de servicios se mueve en
+   paralaje contra el scroll y En grande lleva una barra roja de
+   avance y una deriva lenta de la escena.
+   ============================================================ */
+.svc-marco .svc-media{
+  opacity:0;transform:none;clip-path:inset(100% 0 0 0);z-index:0;
+  transition:clip-path .9s var(--ease),opacity 0s linear .9s;
+}
+.svc-marco .svc-media.was{opacity:1;clip-path:inset(0);z-index:1;transition:none}
+.svc-marco .svc-media.on{opacity:1;clip-path:inset(0);z-index:2;transition:clip-path .9s var(--ease),opacity 0s}
+.svc-marco{transform:translateY(calc(var(--par,0) * -28px));transition:transform .2s linear}
+.svc-cuenta{z-index:3}
+
+.grande-escena .grande-media{
+  opacity:0;transform:none;clip-path:inset(100% 0 0 0);z-index:0;
+  transition:clip-path 1s var(--ease),opacity 0s linear 1s;
+}
+.grande-escena .grande-media.was{opacity:1;clip-path:inset(0);z-index:1;transition:none}
+.grande-escena .grande-media.on{opacity:1;clip-path:inset(0);z-index:2;transition:clip-path 1s var(--ease),opacity 0s}
+.grande-media img{transform:translateY(calc(var(--par,0) * -5%)) scale(1.12);transition:transform .15s linear}
+.grande-escena::after{z-index:2}
+.grande-progreso{
+  position:absolute;left:0;top:0;height:3px;z-index:4;background:var(--red);
+  width:calc(var(--prog,0) * 100%);transition:width .15s linear;
+}
+.grande-pie{z-index:4}
+.grande-card{transform:translateY(34px) scale(.98)}
+.grande-paso.activo .grande-card{transform:none}
+@media (prefers-reduced-motion:reduce){
+  .svc-marco .svc-media,.grande-escena .grande-media{transition:opacity .01s;clip-path:none}
+  .svc-marco .svc-media.on,.grande-escena .grande-media.on{clip-path:none}
+  .svc-marco,.grande-media img{transform:none}
+}
+
+
+/* el sticky del marco necesita que la sección NO sea contenedor de scroll:
+   el recorte del fondo lo hace la propia caja .sec-bg */
+section.svc.has-bg{overflow:visible}
+#servicios .sec-bg{overflow:hidden}
+/* En grande: deriva mínima de la escena, sin zoom que corte cabezas */
+.grande-media img{transform:scale(1.03) translateY(calc((var(--par,0) - .5) * -3%))}
+.grande-grilla figure{cursor:zoom-in}
+.grande-grilla figure:focus-visible{outline:3px solid var(--red);outline-offset:-3px}
+
+
+/* ============================================================
+   FONDOS DE ESCENA: Páginas web y En grande (nunca blanco)
+   ============================================================ */
+#web .sec-bg img{filter:blur(3px) saturate(.75) brightness(.8)}
+#web .sec-bg img.on{opacity:.4}
+#web .sec-bg::after{background:linear-gradient(to bottom, rgba(12,11,10,.84), rgba(12,11,10,.6) 45%, rgba(12,11,10,.9))}
+section.grande.has-bg{overflow:visible;background:var(--ink-2);color:var(--white)}
+#engrande .sec-bg{overflow:hidden}
+#engrande .sec-bg img{filter:blur(2px) saturate(.6) brightness(.75)}
+#engrande .sec-bg img.on{opacity:.34}
+#engrande .sec-bg::after{background:linear-gradient(to bottom, rgba(12,11,10,.8), rgba(12,11,10,.66) 40%, rgba(12,11,10,.9))}
+.grande.has-bg .lead{color:rgba(248,247,246,.78)}
+.grande.has-bg .grande-cierre p{color:var(--white)}
+.grande.has-bg .grande-grilla figure{background:#111;box-shadow:0 20px 50px rgba(0,0,0,.45)}
+.grande.has-bg .sec-label .mono{color:rgba(248,247,246,.66)}

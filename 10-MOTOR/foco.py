@@ -16,6 +16,13 @@ CACHE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "focos.json")
 # ni los rostros ni la textura ni la saturacion lo encuentran, asi que va a mano.
 MANUAL = {
     "v__86.jpg": "50% 74%", "v__89.jpg": "50% 78%", "v__90.jpg": "50% 78%", "v__91.jpg": "50% 78%",
+    # gastronomía vertical: la tabla de madera saturada tiraba el foco hacia abajo y cortaba el plato
+    "sergio__IMG_7391.jpg": "50% 42%", "sergio__IMG_7377.jpg": "50% 40%", "sergio__IMG_7488.jpg": "50% 45%",
+    "sergio__IMG_7274.jpg": "50% 48%", "sergio__IMG_7060.jpg": "50% 52%",
+    # animales: caras arriba del todo
+    "nw__IMG_0659.jpg": "50% 10%", "v__108.jpg": "50% 30%", "v__99.jpg": "50% 15%", "v__101.jpg": "50% 12%",
+    # surfista: la miniatura ya está recortada a su alrededor
+    "v__87.jpg": "50% 50%",
 }
 _c = None
 

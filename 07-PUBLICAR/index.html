@@ -6,6 +6,7 @@
 <title>Apardian Studio — Foto, video y páginas web en Uruguay</title>
 <meta name="description" content="Estudio de comunicación visual en Uruguay. Edición de video, fotografía de eventos, gastronomía y empresas, y diseño de páginas web que venden.">
 <meta name="theme-color" content="#F8F7F6">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob:; media-src 'self' blob:; connect-src 'self'; base-uri 'self'; form-action 'self'; object-src 'none'">
 <meta property="og:title" content="Apardian Studio — Foto, video y páginas web">
 <meta property="og:description" content="Estudio de comunicación visual en Uruguay. Filmo, fotografío y construyo el lugar donde eso se muestra.">
 <meta property="og:type" content="website">
@@ -20,34 +21,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Work+Sans:wght@300;400;500;600&display=swap">
-<link rel="stylesheet" href="css/style.css?v=1789010007">
-<link rel="stylesheet" href="css/editor.css?v=1789010007">
+<link rel="stylesheet" href="css/style.css?v=1789010012">
+<link rel="stylesheet" href="css/editor.css?v=1789010012">
 </head>
 <body>
 <a class="skip" href="#trabajos">Saltar al contenido</a>
-
-<!-- ============ LOADER ============ -->
-<div id="loader">
-  <div class="loader-media">
-    <img id="loaderimg" alt="" src="">
-    <video id="loadervid" muted loop playsinline preload="auto" aria-hidden="true"></video>
-  </div>
-  <div class="loader-top">
-    <span class="mono">Apardian Studio</span>
-    <span class="mono">Montevideo · Uruguay</span>
-  </div>
-  <div class="loader-mid">
-    <p class="h1">Foto<br>Video<br><span>Web</span></p>
-  </div>
-  <div class="loader-bot">
-    <div style="flex:1;min-width:200px">
-      <div class="bar" id="barra" role="progressbar" aria-label="Cargando" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i id="barfill"></i></div>
-      <span class="mono" id="loadmsg">Cargando archivo</span>
-    </div>
-    <div id="pct">0</div>
-    <button id="enter">Entrar</button>
-  </div>
-</div>
 
 <!-- ============ NAV ============ -->
 <header class="nav" id="nav">
@@ -109,7 +87,7 @@
       <div class="sec-label"><span class="mono">02 — Trabajos</span></div>
       <h2 class="d" data-ed="trabajos.titulo">Selección</h2>
     </div>
-    <p class="mono" style="color:var(--grey-2)">Arrastrá →</p>
+    <div class="rail-nav"><button class="rail-btn" id="railPrev" type="button" aria-label="Trabajo anterior">←</button><button class="rail-btn" id="railNext" type="button" aria-label="Trabajo siguiente">→</button></div>
   </div>
   <div class="rail" id="rail"></div>
 </section>
@@ -129,7 +107,8 @@
 </section>
 
 <!-- ============ SERVICIOS ============ -->
-<section class="svc" id="servicios" data-sec="servicios" data-sec-name="Servicios">
+<section class="svc has-bg" id="servicios" data-sec="servicios" data-sec-name="Servicios">
+  <div class="sec-bg"><img alt="" aria-hidden="true" data-src="img/servicios/fondo_servicios.jpg"></div>
   <div class="sec-label"><span class="mono">04 — Servicios</span></div>
   <h2 class="sec-h2 d" data-ed="servicios.titulo" style="margin-bottom:38px">Qué hago</h2>
 
@@ -137,24 +116,16 @@
   <div class="svc-visual">
     <div class="svc-marco">
     <figure class="svc-media" data-media="0">
-      <video muted loop playsinline preload="none" poster="img/servicios/svc_video.jpg"
-             data-src="img/video/08_baterista.mp4"></video>
-      <img src="img/servicios/svc_video.jpg" alt="">
+      <img src="img/servicios/esc_video.jpg" alt="Sala de edición de video" loading="lazy" decoding="async">
     </figure>
     <figure class="svc-media" data-media="1">
-      <video muted loop playsinline preload="none" poster="img/servicios/svc_foto.jpg"
-             data-src="img/video/07_boda_rambla.mp4"></video>
-      <img src="img/servicios/svc_foto.jpg" alt="">
+      <img src="img/servicios/esc_foto.jpg" alt="Fotógrafo disparando en una fiesta de casamiento" loading="lazy" decoding="async">
     </figure>
     <figure class="svc-media" data-media="2">
-      <video muted loop playsinline preload="none" poster="img/servicios/svc_edicion.jpg"
-             data-src="img/video/11_retrato_bn.mp4"></video>
-      <img src="img/servicios/svc_edicion.jpg" alt="">
+      <img src="img/servicios/esc_lightroom.jpg" alt="Monitor con la selección de fotos" loading="lazy" decoding="async">
     </figure>
     <figure class="svc-media" data-media="3">
-      <video muted loop playsinline preload="none" poster="img/servicios/svc_web.jpg"
-             data-src="img/video/16_fondo_escritorio.mp4"></video>
-      <img src="img/servicios/svc_web.jpg" alt="">
+      <img src="img/servicios/esc_web.jpg" alt="Monitor con el esquema de una página web" loading="lazy" decoding="async">
     </figure>
       <span class="svc-cuenta"><b>01</b> / 04</span>
     </div>
@@ -210,10 +181,7 @@
 
 <!-- ============ PÁGINAS WEB ============ -->
 <section class="webpitch has-bg" id="web" data-sec="web" data-sec-name="Páginas web">
-  <div class="sec-bg">
-    <img alt="" aria-hidden="true" data-src="img/video/16_fondo_escritorio_poster.jpg">
-    <video muted loop playsinline preload="none" aria-hidden="true" data-src="img/video/16_fondo_escritorio.mp4"></video>
-  </div>
+  <div class="sec-bg"><img alt="" aria-hidden="true" data-src="img/fondos/fondo_web.jpg"></div>
   <div class="sec-label"><span class="mono" style="color:var(--grey-2)">05 — Páginas web</span></div>
   <h2 class="sec-h2 d">Tu negocio<br>merece más<br>que un perfil<br><span class="red">de Instagram</span></h2>
   <p class="lead rv" data-ed="web.bajada">Instagram es alquilado. <mark class="hl">Tu web es tuya.</mark> Diseño el lugar donde tu cliente decide comprarte.</p>
@@ -258,7 +226,8 @@
 </section>
 
 <!-- ============ EN GRANDE ============ -->
-<section class="grande" id="engrande" data-sec="engrande" data-sec-name="En grande">
+<section class="grande has-bg" id="engrande" data-sec="engrande" data-sec-name="En grande">
+  <div class="sec-bg"><img alt="" aria-hidden="true" data-src="img/fondos/fondo_engrande.jpg"></div>
   <div class="grande-intro">
     <div class="sec-label"><span class="mono">07 — En grande</span></div>
     <h2 class="sec-h2 d" data-ed="engrande.titulo">Una foto que aguanta cualquier tamaño</h2>
@@ -267,11 +236,12 @@
 
   <div class="grande-scrolly">
     <div class="grande-escena">
-      <figure class="grande-media on" data-media="0" aria-hidden="true"><img src="img/mockups/m01_cartel.jpg" alt="" loading="lazy" decoding="async" style="object-position:48% 30%"></figure>
+      <figure class="grande-media on" data-media="0" aria-hidden="true"><img src="img/mockups/m01_cartel.jpg" alt="" loading="lazy" decoding="async" style="object-position:50% 32%"></figure>
       <figure class="grande-media" data-media="1" aria-hidden="true"><img src="img/mockups/m09_mural.jpg" alt="" loading="lazy" decoding="async" style="object-position:50% 42%"></figure>
       <figure class="grande-media" data-media="2" aria-hidden="true"><img src="img/mockups/m07_subte.jpg" alt="" loading="lazy" decoding="async" style="object-position:28% 45%"></figure>
       <figure class="grande-media" data-media="3" aria-hidden="true"><img src="img/mockups/m03_galeria.jpg" alt="" loading="lazy" decoding="async" style="object-position:50% 40%"></figure>
       <figure class="grande-media" data-media="4" aria-hidden="true"><img src="img/mockups/m02_revista.jpg" alt="" loading="lazy" decoding="async" style="object-position:50% 34%"></figure>
+      <i class="grande-progreso" aria-hidden="true"></i>
       <div class="grande-pie">
         <span class="grande-cuenta"><b>01</b> / 05</span>
         <span class="mono grande-nota">Montaje sobre foto real del archivo</span>
@@ -422,9 +392,9 @@
   </a>
 </div>
 
-<script src="js/data.js?v=1789010007"></script>
-<script src="js/main.js?v=1789010007"></script>
-<script src="js/agente.js?v=1789010007"></script>
-<script src="js/editor.js?v=1789010007"></script>
+<script src="js/data.js?v=1789010012"></script>
+<script src="js/main.js?v=1789010012"></script>
+<script src="js/agente.js?v=1789010012"></script>
+<script src="js/editor.js?v=1789010012"></script>
 </body>
 </html>

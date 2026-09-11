@@ -159,7 +159,7 @@ window.SITE_DATA = {
      "web": "img/gastronomia/web/sergio__IMG_7391.jpg",
      "thumb": "img/gastronomia/thumb/sergio__IMG_7391.jpg",
      "shape": "tall",
-     "foco": "50% 73%"
+     "foco": "50% 42%"
     },
     {
      "web": "img/gastronomia/web/sergio__IMG_7420.jpg",
@@ -171,25 +171,25 @@ window.SITE_DATA = {
      "web": "img/gastronomia/web/sergio__IMG_7274.jpg",
      "thumb": "img/gastronomia/thumb/sergio__IMG_7274.jpg",
      "shape": "tall",
-     "foco": "50% 74%"
+     "foco": "50% 48%"
     },
     {
      "web": "img/gastronomia/web/sergio__IMG_7377.jpg",
      "thumb": "img/gastronomia/thumb/sergio__IMG_7377.jpg",
      "shape": "tall",
-     "foco": "50% 78%"
+     "foco": "50% 40%"
     },
     {
      "web": "img/gastronomia/web/sergio__IMG_7488.jpg",
      "thumb": "img/gastronomia/thumb/sergio__IMG_7488.jpg",
      "shape": "tall",
-     "foco": "50% 78%"
+     "foco": "50% 45%"
     },
     {
      "web": "img/gastronomia/web/sergio__IMG_7060.jpg",
      "thumb": "img/gastronomia/thumb/sergio__IMG_7060.jpg",
      "shape": "tall",
-     "foco": "50% 63%"
+     "foco": "50% 52%"
     },
     {
      "web": "img/gastronomia/web/lokotas__IMG_7567.jpg",
@@ -915,7 +915,7 @@ window.SITE_DATA = {
      "web": "img/animales/web/nw__IMG_0659.jpg",
      "thumb": "img/animales/thumb/nw__IMG_0659.jpg",
      "shape": "tall",
-     "foco": "50% 22%"
+     "foco": "50% 10%"
     },
     {
      "web": "img/animales/web/v__92.jpg",
@@ -957,7 +957,7 @@ window.SITE_DATA = {
      "web": "img/animales/web/v__99.jpg",
      "thumb": "img/animales/thumb/v__99.jpg",
      "shape": "tall",
-     "foco": "50% 25%"
+     "foco": "50% 15%"
     },
     {
      "web": "img/animales/web/v__100.jpg",
@@ -969,7 +969,7 @@ window.SITE_DATA = {
      "web": "img/animales/web/v__101.jpg",
      "thumb": "img/animales/thumb/v__101.jpg",
      "shape": "tall",
-     "foco": "50% 22%"
+     "foco": "50% 12%"
     },
     {
      "web": "img/animales/web/v__102.jpg",
@@ -1011,7 +1011,7 @@ window.SITE_DATA = {
      "web": "img/animales/web/v__108.jpg",
      "thumb": "img/animales/thumb/v__108.jpg",
      "shape": "tall",
-     "foco": "50% 78%"
+     "foco": "50% 30%"
     },
     {
      "web": "img/animales/web/v__109.jpg",
@@ -1139,7 +1139,7 @@ window.SITE_DATA = {
      "web": "img/deportes/web/v__87.jpg",
      "thumb": "img/deportes/thumb/v__87.jpg",
      "shape": "wide",
-     "foco": "57% 50%"
+     "foco": "50% 50%"
     },
     {
      "web": "img/deportes/web/v__88.jpg",

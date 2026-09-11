@@ -26,9 +26,9 @@ document.documentElement.classList.add('js');
   var loaded = 0, total = preload.length, shown = 0;
 
   function paint(p) {
-    barfill.style.width = p + '%';
+    if (barfill) barfill.style.width = p + '%';
     var barra = $('#barra'); if (barra) barra.setAttribute('aria-valuenow', Math.round(p));
-    pct.textContent = Math.round(p);
+    if (pct) pct.textContent = Math.round(p);
   }
   function tick() {
     loaded++;
@@ -40,9 +40,8 @@ document.documentElement.classList.add('js');
   function ready() {
     if (readyDone) return; readyDone = true;
     paint(100);
-    loadmsg.textContent = 'Archivo listo';
-    enterBtn.classList.add('on');
-    enterBtn.focus({ preventScroll: true });
+    if (loadmsg) loadmsg.textContent = 'Archivo listo';
+    if (enterBtn) { enterBtn.classList.add('on'); enterBtn.focus({ preventScroll: true }); }
   }
 
   preload.forEach(function (src) {
@@ -80,9 +79,9 @@ document.documentElement.classList.add('js');
     }
   })();
 
-  document.body.classList.add('locked');
+  // La web arranca directo en el hero: no hay pantalla previa ni botón "Entrar".
   function openSite() {
-    loader.classList.add('gone');
+    if (loader) loader.classList.add('gone');
     document.body.classList.remove('locked');
     if (heroImg && heroSrc) { heroImg.src = heroSrc; heroImg.classList.add('on'); }
     var hv = $('#herovid');
@@ -117,13 +116,10 @@ document.documentElement.classList.add('js');
       });
       tryPlay();
     }
-    setTimeout(function () { if (loader.parentNode) loader.parentNode.removeChild(loader); }, 900);
+    setTimeout(function () { if (loader && loader.parentNode) loader.parentNode.removeChild(loader); }, 900);
   }
-  enterBtn.addEventListener('click', openSite);
-  document.addEventListener('keydown', function (e) {
-    if (!readyDone) return;
-    if (loader.parentNode && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); openSite(); }
-  });
+  if (enterBtn) enterBtn.addEventListener('click', openSite);
+  else openSite();
 
   /* ---------------- NAV (aparece al primer scroll) ---------------- */
   var lastY = 0;
@@ -171,7 +167,7 @@ document.documentElement.classList.add('js');
     a.innerHTML =
       '<div class="shot">' +
         '<span class="chip' + (w.chipDark ? ' dark' : '') + '">' + w.chip + '</span>' +
-        '<img loading="lazy" decoding="async" src="' + w.thumb + '" data-full="' + w.web + '" alt="' + w.title + '"' + (w.foco ? ' style="object-position:' + w.foco + '"' : '') + '>' +
+        '<img loading="lazy" decoding="async" src="' + w.thumb + '" srcset="' + w.thumb + ' 420w, ' + w.web + ' 1800w" sizes="(max-width:760px) 88vw, 42vw" data-full="' + w.web + '" alt="' + w.title + '"' + (w.foco ? ' style="object-position:' + w.foco + '"' : '') + '>' +
       '</div>' +
       '<h3>' + w.title + '</h3>' +
       '<p>' + w.meta + '</p>';
@@ -184,20 +180,54 @@ document.documentElement.classList.add('js');
     rail.appendChild(a);
   });
 
-  // Arrastre con el mouse en el carrusel
-  var down = false, startX = 0, startL = 0, moved = false;
+  // Carrusel: flechas, y si dejás el mouse apretado las fotos van pasando solas.
+  // Un clic corto en una foto la abre en grande; arrastrar sigue funcionando.
+  var down = false, startX = 0, startL = 0, moved = false, sosten = null, corriendo = false;
+  function anchoCard() {
+    var c = rail.querySelector('.card');
+    return c ? c.getBoundingClientRect().width + 18 : 400;
+  }
+  function paso(n) {
+    var max = rail.scrollWidth - rail.clientWidth;
+    var dest = rail.scrollLeft + n * anchoCard();
+    if (dest > max + 4) dest = 0;                 // al final vuelve al principio
+    if (dest < -4) dest = max;
+    rail.scrollTo({ left: dest, behavior: 'smooth' });
+  }
+  var bPrev = $('#railPrev'), bNext = $('#railNext');
+  if (bPrev) bPrev.addEventListener('click', function () { paso(-1); });
+  if (bNext) bNext.addEventListener('click', function () { paso(1); });
+
+  function correr() {
+    if (!corriendo) return;
+    var max = rail.scrollWidth - rail.clientWidth;
+    rail.scrollLeft = rail.scrollLeft >= max - 1 ? 0 : rail.scrollLeft + 2.4;   // la mitad: que dé tiempo a mirar
+    requestAnimationFrame(correr);
+  }
   rail.addEventListener('pointerdown', function (e) {
+    if (e.pointerType === 'touch') return;
     down = true; moved = false; startX = e.clientX; startL = rail.scrollLeft;
     rail.style.cursor = 'grabbing';
+    clearTimeout(sosten);
+    sosten = setTimeout(function () {
+      if (down && !moved) { moved = true; corriendo = true; rail.classList.add('corriendo'); correr(); }
+    }, 320);
   });
-  window.addEventListener('pointerup', function () { down = false; rail.style.cursor = ''; });
+  window.addEventListener('pointerup', function () {
+    down = false; rail.style.cursor = ''; clearTimeout(sosten);
+    if (corriendo) { corriendo = false; rail.classList.remove('corriendo'); }
+  });
   rail.addEventListener('pointermove', function (e) {
-    if (!down) return;
+    if (!down || corriendo) return;
     var dx = e.clientX - startX;
     if (Math.abs(dx) > 4) moved = true;
     rail.scrollLeft = startL - dx;
   });
   rail.addEventListener('click', function (e) { if (moved) { e.preventDefault(); e.stopPropagation(); } }, true);
+  rail.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight') { e.preventDefault(); paso(1); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); paso(-1); }
+  });
 
   /* ---------------- GALERÍA ---------------- */
   var galnav = $('#galnav'), galgrid = $('#galgrid'), galphrase = $('#galphrase');
@@ -457,7 +487,11 @@ document.documentElement.classList.add('js');
       if (i === actual) return;
       actual = i;
       pasos.forEach(function (p, k) { p.classList.toggle('activo', k === i); });
-      medios.forEach(function (m, k) { m.classList.toggle('on', k === i); });
+      // la imagen anterior queda debajo ("was") mientras la nueva entra en cortina
+      medios.forEach(function (m, k) {
+        m.classList.toggle('was', m.classList.contains('on') && k !== i);
+        m.classList.toggle('on', k === i);
+      });
       if (cuenta) cuenta.innerHTML = '<b>' + ('0' + (i + 1)).slice(-2) + '</b> / 0' + pasos.length;
 
       // el video del servicio activo se carga recién cuando le toca:
@@ -493,6 +527,9 @@ document.documentElement.classList.add('js');
       var vh = window.innerHeight || document.documentElement.clientHeight || 800;
       // solo trabaja mientras la sección está a la vista
       if (rs.bottom > -200 && rs.top < vh + 200) {
+        // paralaje: el marco pegado se mueve apenas contra el scroll
+        var marco = seccion.querySelector('.svc-marco');
+        if (marco) marco.style.setProperty('--par', Math.max(-1, Math.min(1, (vh * 0.5 - (rs.top + rs.height * 0.5)) / rs.height * 2)).toFixed(3));
         var linea = vh * 0.46, mejor = 0, min = Infinity;
         for (var k = 0; k < pasos.length; k++) {
           var r = pasos[k].getBoundingClientRect();
@@ -548,7 +585,10 @@ document.documentElement.classList.add('js');
       if (i === actual) return;
       actual = i;
       pasos.forEach(function (p, k) { p.classList.toggle('activo', k === i); });
-      medios.forEach(function (m, k) { m.classList.toggle('on', k === i); });
+      medios.forEach(function (m, k) {
+        m.classList.toggle('was', m.classList.contains('on') && k !== i);
+        m.classList.toggle('on', k === i);
+      });
       if (cuenta) cuenta.innerHTML = '<b>' + ('0' + (i + 1)).slice(-2) + '</b> / 0' + pasos.length;
     }
 
@@ -567,6 +607,10 @@ document.documentElement.classList.add('js');
       var rs = seccion.getBoundingClientRect();
       var vh = window.innerHeight || document.documentElement.clientHeight || 800;
       if (rs.bottom < -200 || rs.top > vh + 200) return;
+      // avance 0..1 dentro del recorrido: mueve la barra roja y el paralaje de la escena
+      var t = Math.max(0, Math.min(1, -rs.top / Math.max(1, rs.height - vh)));
+      var escena = seccion.querySelector('.grande-escena');
+      if (escena) { escena.style.setProperty('--par', t.toFixed(3)); escena.style.setProperty('--prog', t.toFixed(3)); }
       var m = elegir();
       if (m !== ultimo) { ultimo = m; activar(m); }
     }
@@ -700,7 +744,7 @@ document.documentElement.classList.add('js');
     function tipo(el) {
       if (!el || !el.closest) return '';
       if (el.closest('input, textarea, select, [contenteditable="true"]')) return 'campo';
-      if (el.closest('.grid figure, .shot, .grande-grilla figure')) return 'ver';
+      if (el.closest('.grid figure, .shot, .grande-grilla figure, .marquee figure')) return 'ver';
       if (el.closest('a, button, [role="button"], label, summary')) return 'link';
       if (el.closest('h1, h2, h3, h4, p, blockquote, li, .mono, .foot-mark')) return 'text';
       return '';
@@ -733,6 +777,23 @@ document.documentElement.classList.add('js');
     })();
   })();
 
+  /* ---------------- GRILLA DE EN GRANDE: se abre en grande ---------------- */
+  (function grillaGrande() {
+    var figs = $$('.grande-grilla figure');
+    if (!figs.length) return;
+    var set = figs.map(function (f) {
+      var im = f.querySelector('img'), cap = f.querySelector('figcaption');
+      return { web: im ? im.getAttribute('src') : '', cap: cap ? cap.textContent : 'En grande' };
+    });
+    figs.forEach(function (f, k) {
+      f.tabIndex = 0; f.setAttribute('role', 'button'); f.setAttribute('aria-label', 'Ver ' + set[k].cap);
+      f.addEventListener('click', function () { openLB(set, k, 'En grande'); });
+      f.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLB(set, k, 'En grande'); }
+      });
+    });
+  })();
+
   /* ---------------- TIRA DE FOTOS ---------------- */
   (function tira() {
     var a = $('#marquee'), b = $('#marquee2');
@@ -749,14 +810,21 @@ document.documentElement.classList.add('js');
     function llenar(cont, lista) {
       var frag = document.createDocumentFragment();
       // dos vueltas: el bucle del carrusel necesita el contenido duplicado
+      var set = lista.map(function (p) { return { web: p.web, cap: 'Más trabajo' }; });
       for (var vuelta = 0; vuelta < 2; vuelta++) {
-        lista.forEach(function (p) {
+        lista.forEach(function (p, k) {
           var f = document.createElement('figure');
           var i = document.createElement('img');
           i.loading = 'lazy'; i.decoding = 'async';
           i.src = p.thumb; i.alt = '';
           if (p.foco) i.style.objectPosition = p.foco;
           f.appendChild(i); frag.appendChild(f);
+          // "Ver": se abre en grande como en la galería
+          f.tabIndex = 0; f.setAttribute('role', 'button'); f.setAttribute('aria-label', 'Ver foto');
+          f.addEventListener('click', function () { openLB(set, k, 'Más trabajo'); });
+          f.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLB(set, k, 'Más trabajo'); }
+          });
         });
       }
       cont.appendChild(frag);
