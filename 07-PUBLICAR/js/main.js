@@ -829,61 +829,6 @@ document.documentElement.classList.add('js');
     } else { encender(); }
   })();
 
-  /* ---------------- LETRAS DE LUZ SOBRE EL CARTEL DEL FOOTER ---------------- */
-  // El cartel es un video: encima van las mismas letras en Anton, transparentes,
-  // calzadas por medición sobre el cuadro del video, para que la luz por letra
-  // (luces()) responda igual que en el resto de los títulos.
-  (function cartelLuz() {
-    var cap = $('.cartel-luz'), fondo = $('.foot-bg');
-    var img = fondo && fondo.querySelector('img');
-    if (!cap || !fondo || !img) return;
-    // Cajas de cada letra dentro del cuadro del cartel (fracciones del ancho/alto
-    // del poster entero), medidas sobre la imagen: A P A R D I A N .
-    var LX = [[0.1228,0.2017],[0.2083,0.2817],[0.2867,0.3656],[0.3750,0.4478],[0.4578,0.5328],[0.5411,0.5733],[0.5811,0.6600],[0.6689,0.7483],[0.7572,0.7861]];
-    var CAP_TOP = 0.208, BASE = 0.503;      // tope de las mayúsculas y línea de base
-    var CAPH_EM = 0.86, A0 = 0.0635;        // Anton: mayúscula de .86em; con line-height 1 el tope queda .0635em bajo el renglón
-    function ubicar() {
-      var r = img.getBoundingClientRect(), fr = fondo.getBoundingClientRect();
-      if (!r.width || !r.height) return;
-      var pc = window.matchMedia('(min-width:761px)').matches;
-      var yT = pc ? (CAP_TOP - 0.14) / 0.86 : CAP_TOP, yB = pc ? (BASE - 0.14) / 0.86 : BASE;   // en PC el cuadro va sin el 14% de arriba
-      cap.style.left = (fondo.offsetLeft + r.left - fr.left).toFixed(1) + 'px';
-      cap.style.top = (fondo.offsetTop + r.top - fr.top).toFixed(1) + 'px';
-      cap.style.width = r.width.toFixed(1) + 'px'; cap.style.height = r.height.toFixed(1) + 'px';
-      var letras = Array.prototype.slice.call(cap.querySelectorAll('.l'));
-      if (letras.length !== LX.length) return;
-      // un solo tamaño para toda la palabra (como en la versión que mejor calzó),
-      // y cada letra centrada sobre su caja filmada para absorber el tracking del cartel
-      letras.forEach(function (l) { l.style.position = 'static'; l.style.fontSize = ''; l.style.left = ''; l.style.top = ''; });
-      cap.style.fontSize = '100px';
-      var w100 = cap.getBoundingClientRect().width || 1;
-      var fs = 100 * (LX[LX.length - 1][1] - LX[0][0]) * r.width / w100;
-      cap.style.fontSize = fs.toFixed(2) + 'px';
-      var anchos = letras.map(function (l) { return l.getBoundingClientRect().width; });
-      var yDot = pc ? (0.422 - 0.14) / 0.86 : 0.422;
-      letras.forEach(function (l, k) {
-        var caja0 = LX[k][0] * r.width, cajaW = (LX[k][1] - LX[k][0]) * r.width;
-        var capTop = (k === letras.length - 1) ? yDot * r.height - (CAPH_EM - 0.16) * fs : yT * r.height;
-        l.style.position = 'absolute';
-        l.style.left = (caja0 + (cajaW - anchos[k]) / 2).toFixed(1) + 'px';
-        l.style.top = (capTop - fs * A0).toFixed(1) + 'px';
-      });
-    }
-    function cuando() { ubicar(); setTimeout(ubicar, 400); setTimeout(ubicar, 1500); }
-    if (document.fonts && document.fonts.ready) document.fonts.ready.then(cuando); else cuando();
-    window.addEventListener('load', cuando);
-    window.addEventListener('resize', ubicar);
-    // la imagen del cartel puede llegar después: se vuelve a medir cuando carga,
-    // cuando cambia de tamaño y cuando el footer entra en pantalla
-    img.addEventListener('load', cuando);
-    if (img.complete && img.naturalWidth) cuando();
-    if ('ResizeObserver' in window) { new ResizeObserver(function () { ubicar(); }).observe(img); }
-    if ('IntersectionObserver' in window) {
-      new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) cuando(); }); }, { rootMargin: '300px 0px' }).observe(fondo);
-    }
-    document.addEventListener('idioma', function () { setTimeout(ubicar, 60); });
-  })();
-
   /* ---------------- TIRA DE FOTOS ---------------- */
   (function tira() {
     var a = $('#marquee'), b = $('#marquee2');
