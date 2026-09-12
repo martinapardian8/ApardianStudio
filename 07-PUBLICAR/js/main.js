@@ -812,7 +812,8 @@ document.documentElement.classList.add('js');
     function encender() {
       if (hecho) return; hecho = true;
       v.muted = true; v.defaultMuted = true; v.playsInline = true;
-      v.src = v.dataset.src;
+      var pc = window.matchMedia('(min-width:761px)').matches;
+      v.src = (pc && v.dataset.srcPc) ? v.dataset.srcPc : v.dataset.src;
       v.addEventListener('canplay', function () {
         var pr = v.play();
         if (pr && pr.then) pr.then(function () { v.classList.add('on'); }).catch(function () {});
@@ -837,14 +838,15 @@ document.documentElement.classList.add('js');
     var img = fondo && fondo.querySelector('img');
     if (!cap || !fondo || !img) return;
     var NAT_W = 1800, NAT_H = 1014;            // medidas del cuadro del cartel
-    var X0 = 0.1232, X1 = 0.7680, Y0 = 0.2081; // dónde están las letras dentro del cuadro
+    var X0 = 0.1232, X1 = 0.7680;
+    function Y0f() { return window.matchMedia('(min-width:761px)').matches ? 0.0792 : 0.2081; } // dónde están las letras dentro del cuadro
     var AJUSTE = 0.08;                          // aire entre el borde del renglón y el tope de las mayúsculas en Anton
     function ubicar() {
       // el cuadro del cartel ya se dibuja entero (sin recorte): las letras
       // van en fracciones fijas de ese rectángulo, medido en pantalla
       var r = img.getBoundingClientRect(), fr = fondo.getBoundingClientRect();
       if (!r.width || !r.height) return;
-      var izq = r.left - fr.left + X0 * r.width, arriba = r.top - fr.top + Y0 * r.height, ancho = (X1 - X0) * r.width;
+      var izq = r.left - fr.left + X0 * r.width, arriba = r.top - fr.top + Y0f() * r.height, ancho = (X1 - X0) * r.width;
       cap.style.fontSize = '100px';
       var w100 = cap.getBoundingClientRect().width || 1;
       var fs = 100 * ancho / w100;

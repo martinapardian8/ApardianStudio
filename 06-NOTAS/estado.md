@@ -473,3 +473,24 @@ solo ondula el reflejo con gotas. Va a la izquierda del footer, donde estaba la
 marca, con el video cargado al acercarse y el poster como respaldo.
 Fondos de escena también en Selección (mesa con fotos) y Galería (sala de
 hormigón). Higgsfield: 65 → 51 créditos.
+
+---
+
+## 12 de setiembre — idiomas y footer con cartel
+
+**Selector de idiomas ES / EN / PT** en el header (botón redondo con menú).
+El HTML queda en español; cada texto lleva `data-i18n` (o el `data-ed` del
+editor) y `js/i18n_dict.js` trae inglés y portugués de Brasil. Traducciones
+hechas por dos agentes y revisadas por otros dos (tono comercial); fuente en
+`10-MOTOR/i18n_es.json` y `10-MOTOR/i18n_traducciones.json`, se arma con
+`10-MOTOR/armar_i18n.py`. Se traducen también galería, tarjetas, visor,
+cursor "Ver", título de pestaña, metas y los mensajes prellenados de WhatsApp.
+Recuerda el idioma en el navegador, acepta `?lang=en|pt` y arranca en el
+idioma del navegador la primera vez. La conversación del Agente IA sigue en
+español. `luces()` vuelve a partir las letras al cambiar de idioma.
+
+**Footer:** el cartel "APARDIAN." en video ocupa el fondo anclado a la
+izquierda con su proporción real; en PC va sin la franja negra de arriba
+(`cartel_apardian_pc.*`), en celular el cuadro entero. Encima, letras
+transparentes en Anton calzadas por medición para que el hover de luz
+funcione sobre el video.
