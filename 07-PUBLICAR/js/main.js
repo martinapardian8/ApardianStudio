@@ -837,27 +837,38 @@ document.documentElement.classList.add('js');
     var cap = $('.cartel-luz'), fondo = $('.foot-bg');
     var img = fondo && fondo.querySelector('img');
     if (!cap || !fondo || !img) return;
-    var NAT_W = 1800, NAT_H = 1014;            // medidas del cuadro del cartel
-    var X0 = 0.1232, X1 = 0.7680;
-    function Y0f() { return window.matchMedia('(min-width:761px)').matches ? 0.0792 : 0.2081; } // dónde están las letras dentro del cuadro
-    var AJUSTE = 0.08;                          // aire entre el borde del renglón y el tope de las mayúsculas en Anton
+    // Cajas de cada letra dentro del cuadro del cartel (fracciones del ancho/alto
+    // del poster entero), medidas sobre la imagen: A P A R D I A N .
+    var LX = [[0.1228,0.2017],[0.2083,0.2817],[0.2867,0.3656],[0.3750,0.4478],[0.4578,0.5328],[0.5411,0.5733],[0.5811,0.6600],[0.6689,0.7483],[0.7572,0.7861]];
+    var CAP_TOP = 0.208, BASE = 0.503;      // tope de las mayúsculas y línea de base
+    var CAPH_EM = 0.86, A0 = 0.0635;        // Anton: mayúscula de .86em; con line-height 1 el tope queda .0635em bajo el renglón
     function ubicar() {
-      // el cuadro del cartel ya se dibuja entero (sin recorte): las letras
-      // van en fracciones fijas de ese rectángulo, medido en pantalla
       var r = img.getBoundingClientRect(), fr = fondo.getBoundingClientRect();
       if (!r.width || !r.height) return;
-      var izq = r.left - fr.left + X0 * r.width, arriba = r.top - fr.top + Y0f() * r.height, ancho = (X1 - X0) * r.width;
+      var pc = window.matchMedia('(min-width:761px)').matches;
+      var yT = pc ? (CAP_TOP - 0.14) / 0.86 : CAP_TOP, yB = pc ? (BASE - 0.14) / 0.86 : BASE;   // en PC el cuadro va sin el 14% de arriba
+      cap.style.left = (fondo.offsetLeft + r.left - fr.left).toFixed(1) + 'px';
+      cap.style.top = (fondo.offsetTop + r.top - fr.top).toFixed(1) + 'px';
+      cap.style.width = r.width.toFixed(1) + 'px'; cap.style.height = r.height.toFixed(1) + 'px';
+      var letras = Array.prototype.slice.call(cap.querySelectorAll('.l'));
+      if (letras.length !== LX.length) return;
       cap.style.fontSize = '100px';
-      var w100 = cap.getBoundingClientRect().width || 1;
-      var fs = 100 * ancho / w100;
-      cap.style.fontSize = fs.toFixed(2) + 'px';
-      cap.style.left = (fondo.offsetLeft + izq).toFixed(1) + 'px';
-      cap.style.top = (fondo.offsetTop + arriba - fs * AJUSTE).toFixed(1) + 'px';
+      letras.forEach(function (l) { l.style.position = 'static'; l.style.fontSize = ''; });
+      var w100 = letras.map(function (l) { return l.getBoundingClientRect().width || 1; });
+      letras.forEach(function (l, k) {
+        var x0 = LX[k][0] * r.width, w = (LX[k][1] - LX[k][0]) * r.width, fs = 100 * w / w100[k];
+        // el punto: su tinta empieza en 0.16em sobre la base; se alinea por el tope real del punto filmado
+        var yDot = pc ? (0.422 - 0.14) / 0.86 : 0.422;
+        var capTop = (k === letras.length - 1) ? yDot * r.height - (CAPH_EM - 0.16) * fs : yT * r.height;
+        l.style.position = 'absolute'; l.style.left = x0.toFixed(1) + 'px';
+        l.style.top = (capTop - fs * A0).toFixed(1) + 'px'; l.style.fontSize = fs.toFixed(2) + 'px';
+      });
     }
     function cuando() { ubicar(); setTimeout(ubicar, 400); setTimeout(ubicar, 1500); }
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(cuando); else cuando();
     window.addEventListener('load', cuando);
     window.addEventListener('resize', ubicar);
+    document.addEventListener('idioma', function () { setTimeout(ubicar, 60); });
   })();
 
   /* ---------------- TIRA DE FOTOS ---------------- */

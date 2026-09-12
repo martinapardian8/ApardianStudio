@@ -1099,3 +1099,7 @@ footer.site > .cartel-luz.foot-mark .l{transform:none}
   .foot-bg::after{background:linear-gradient(to bottom, transparent 60%, rgba(5,5,5,.9) 100%)}
   .foot-top{padding-top:56vw}
 }
+
+/* letras del cartel: cada una va en su caja medida, sin envoltorio de palabra */
+footer.site > .cartel-luz.foot-mark .w{display:contents}
+footer.site > .cartel-luz.foot-mark .l{line-height:1}

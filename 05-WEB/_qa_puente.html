@@ -38,6 +38,7 @@ f.onload=async()=>{
   }
   const ck=q.get('click');
   if(ck){ const el=D.querySelector(ck); if(el){ el.click(); await espera(400); } }
+  if(q.get('lit')){ D.querySelectorAll('.cartel-luz .l').forEach(l=>l.style.setProperty('--lit', q.get('lit'))); await espera(200); }
   const dq=q.get('dbg');
   if(dq){ const el=D.querySelector(dq); const fb=D.querySelector('.foot-bg'); const fi=fb&&fb.querySelector('img');
     const r=el?el.getBoundingClientRect():null;
