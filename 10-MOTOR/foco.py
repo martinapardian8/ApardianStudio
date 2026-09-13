@@ -23,6 +23,8 @@ MANUAL = {
     "nw__IMG_0659.jpg": "50% 10%", "v__108.jpg": "50% 30%", "v__99.jpg": "50% 15%", "v__101.jpg": "50% 12%",
     # surfista: la miniatura ya está recortada a su alrededor
     "v__87.jpg": "50% 50%",
+    # tarjetas de Trabajos: el sujeto no esta donde lo pone el detector
+    "alfajor__IMG_5429.jpg": "50% 52%", "horacio__IMG_6701.jpg": "50% 22%",
 }
 _c = None
 

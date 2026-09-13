@@ -38,13 +38,13 @@ window.SITE_DATA = {
    "foco": "50% 67%"
   },
   {
-   "title": "Horacio",
+   "title": "Horacio Irañeta",
    "meta": "Marca personal · Sesión",
    "chip": "388 fotos",
    "chipDark": true,
-   "web": "img/works/horacio__IMG_6661.jpg",
-   "thumb": "img/works/t_horacio__IMG_6661.jpg",
-   "foco": "50% 41%"
+   "web": "img/works/horacio__IMG_6701.jpg",
+   "thumb": "img/works/t_horacio__IMG_6701.jpg",
+   "foco": "50% 22%"
   },
   {
    "title": "Lokotas",
@@ -71,7 +71,7 @@ window.SITE_DATA = {
    "chipDark": true,
    "web": "img/works/alfajor__IMG_5429.jpg",
    "thumb": "img/works/t_alfajor__IMG_5429.jpg",
-   "foco": "50% 24%"
+   "foco": "50% 52%"
   }
  ],
  "categories": [

@@ -31,9 +31,8 @@ SAFE_STORY_TOP, SAFE_STORY_BOT = 260, 340
 # ---------------------------------------------------------------- tipografia
 _cache = {}
 def koulen(px):
-    k = ("k", px)
-    if k not in _cache: _cache[k] = ImageFont.truetype(KOULEN, px)
-    return _cache[k]
+    """Se mantiene por compatibilidad: desde el 13/9/2026 todo va en Anton, como la web."""
+    return display(px)
 
 def display(px):
     """Titulares. Koulen no tiene mayusculas acentuadas (ÁÉÍÓÚÑÜ salen como
@@ -215,7 +214,7 @@ def bn(im):
 def firma(d, x, y, escala=1.0, claro=True, anchor_x="l"):
     """El logotipo: APARDIAN + punto rojo."""
     px = int(30 * escala)
-    f = koulen(px)
+    f = display(px)   # el logotipo tambien en Anton, igual que en la web
     col = HUESO if claro else NEGRO
     txt = "APARDIAN"
     tr = px * 0.04
