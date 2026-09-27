@@ -1,0 +1,150 @@
+{
+  "_comentario": "Carta de The Lobster Roll. Precios en euros. Los nombres de los platos se dejan en el idioma original del restaurante; las descripciones se traducen. 'destacado: true' marca la especialidad.",
+  "moneda": "EUR",
+  "categorias": [
+    {
+      "id": "rolls",
+      "nombre": { "es": "Rolls", "ca": "Rolls", "en": "Rolls" },
+      "items": [
+        {
+          "id": "lobster",
+          "nombre": "Lobster Roll 80gr",
+          "precio": 20,
+          "destacado": true,
+          "descripcion": {
+            "es": "Bogavante canadiense en pan brioche.",
+            "ca": "Llamàntol canadenc en pa brioix.",
+            "en": "Canadian lobster on a brioche bun."
+          }
+        },
+        {
+          "id": "lobster-xl",
+          "nombre": "Lobster Roll XL 120gr",
+          "precio": 24,
+          "descripcion": {
+            "es": "Mismo pan brioche, más carne.",
+            "ca": "El mateix pa brioix, més carn.",
+            "en": "Same brioche bun, more meat."
+          }
+        },
+        {
+          "id": "crab",
+          "nombre": "Crab / Soft shell crab",
+          "precio": 16.5,
+          "descripcion": {
+            "es": "100% carne de buey de mar o cangrejo de cáscara blanda.",
+            "ca": "100% carn de cranc reial o cranc de closca tova.",
+            "en": "100% brown crab meat or soft shell crab."
+          }
+        },
+        {
+          "id": "shrimp",
+          "nombre": "Shrimp Roll",
+          "precio": 12.9,
+          "descripcion": { "es": "Gambas.", "ca": "Gambes.", "en": "Shrimp." }
+        },
+        {
+          "id": "pulled-pork",
+          "nombre": "Pulled Pork",
+          "precio": 13.9,
+          "descripcion": {
+            "es": "Carne mechada de cerdo.",
+            "ca": "Carn de porc desfilada.",
+            "en": "Slow-cooked pulled pork."
+          }
+        },
+        {
+          "id": "pulled-beef",
+          "nombre": "Pulled Beef",
+          "precio": 15.9,
+          "descripcion": {
+            "es": "Carne mechada de ternera.",
+            "ca": "Carn de vedella desfilada.",
+            "en": "Slow-cooked pulled beef."
+          }
+        },
+        {
+          "id": "calamar",
+          "nombre": "Calamar Roll",
+          "precio": 10,
+          "descripcion": {
+            "es": "Anillos de calamar rebozados.",
+            "ca": "Anelles de calamars arrebossades.",
+            "en": "Battered squid rings."
+          }
+        },
+        {
+          "id": "salmon",
+          "nombre": "Salmón ahumado",
+          "precio": 14.9,
+          "descripcion": {
+            "es": "Con Philadelphia, guacamole casero y caviar.",
+            "ca": "Amb Philadelphia, guacamole casolà i caviar.",
+            "en": "With Philadelphia, homemade guacamole and caviar."
+          }
+        },
+        {
+          "id": "atun",
+          "nombre": "Atún Roll",
+          "precio": 8.5,
+          "descripcion": {
+            "es": "Atún en pan brioche.",
+            "ca": "Tonyina en pa brioix.",
+            "en": "Tuna on a brioche bun."
+          }
+        },
+        {
+          "id": "ostra",
+          "nombre": "Shot de ostra",
+          "precio": 4,
+          "provisional": true,
+          "descripcion": {
+            "es": "Una ostra, para empezar.",
+            "ca": "Una ostra, per començar.",
+            "en": "One oyster, to start."
+          }
+        },
+        {
+          "id": "grilled-cheese",
+          "nombre": "Grilled Cheese",
+          "precio": 7,
+          "descripcion": {
+            "es": "Pan brioche con queso fundido.",
+            "ca": "Pa brioix amb formatge fos.",
+            "en": "Brioche bun with melted cheese."
+          }
+        },
+        {
+          "id": "nutella",
+          "nombre": "Nutella Roll",
+          "precio": 7,
+          "provisional": true,
+          "descripcion": {
+            "es": "Brioche con Nutella, para terminar.",
+            "ca": "Brioix amb Nutella, per acabar.",
+            "en": "Brioche with Nutella, to finish."
+          }
+        }
+      ]
+    },
+    {
+      "id": "combos",
+      "nombre": { "es": "Combos", "ca": "Combos", "en": "Combos" },
+      "nota": {
+        "es": "Cada combo: 1 roll + 1 refresco, cerveza o vino + 1 mochi.",
+        "ca": "Cada combo: 1 roll + 1 refresc, cervesa o vi + 1 mochi.",
+        "en": "Every combo: 1 roll + 1 soft drink, beer or wine + 1 mochi."
+      },
+      "items": [
+        { "id": "combo-lobster", "nombre": "Combo Lobster", "precio": 26, "roll": "lobster" },
+        { "id": "combo-lobster-xl", "nombre": "Combo Lobster XL", "precio": 30, "roll": "lobster-xl" },
+        { "id": "combo-crab", "nombre": "Combo Crab", "precio": 22.5, "roll": "crab" },
+        { "id": "combo-beef", "nombre": "Combo Beef", "precio": 21.9, "roll": "pulled-beef" },
+        { "id": "combo-salmon", "nombre": "Combo Salmón", "precio": 20.9, "roll": "salmon" },
+        { "id": "combo-pork", "nombre": "Combo Pork", "precio": 19.9, "roll": "pulled-pork" },
+        { "id": "combo-shrimp", "nombre": "Combo Shrimp", "precio": 18.9, "roll": "shrimp" },
+        { "id": "combo-calamar", "nombre": "Combo Calamar", "precio": 16, "roll": "calamar" }
+      ]
+    }
+  ]
+}

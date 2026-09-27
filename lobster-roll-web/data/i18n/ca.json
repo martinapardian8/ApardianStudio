@@ -1,0 +1,167 @@
+{
+  "meta": {
+    "titulo": "The Lobster Roll Barcelona · Llamàntol canadenc en pa brioix, a Muntaner 22",
+    "descripcion": "The Lobster Roll, a L'Esquerra de l'Eixample, a dos minuts del metro Universitat. Lobster rolls de llamàntol canadenc, crab rolls, combos i terrassa. Reserva en línia.",
+    "og_titulo": "The Lobster Roll · Barcelona",
+    "og_descripcion": "Llamàntol canadenc en pa brioix. L'únic restaurant de Barcelona amb menjar de la costa dels Estats Units."
+  },
+  "nav": {
+    "restaurante": "El restaurant",
+    "carta": "Carta",
+    "fotos": "Fotos",
+    "localizacion": "Localització",
+    "reservar": "Reservar",
+    "menu_abrir": "Obrir menú",
+    "menu_cerrar": "Tancar menú",
+    "idioma": "Idioma",
+    "saltar": "Salta al contingut"
+  },
+  "hero": {
+    "titulo_1": "Lobster",
+    "titulo_2": "Roll",
+    "titulo_3": "Barcelona",
+    "bajada": "Llamàntol canadenc en pa brioix. L'únic restaurant de Barcelona amb menjar de la costa dels Estats Units.",
+    "cta_reservar": "Reservar taula",
+    "cta_carta": "Veure la carta",
+    "sticker_1": "80 g de llamàntol",
+    "sticker_2": "20 €",
+    "scroll": "Baixa per veure'n més"
+  },
+  "estado": {
+    "abierto": "Obert ara",
+    "cerrado": "Tancat ara",
+    "cierra": "Tanca a les {hora}",
+    "abre_hoy": "Obre a les {hora}",
+    "abre_dia": "Obre {dia} a les {hora}"
+  },
+  "cinta": [
+    "Lobster Roll",
+    "Crab Roll",
+    "Shrimp Roll",
+    "Pulled Pork",
+    "Pulled Beef",
+    "A pocs metres del metro Universitat",
+    "Terrassa",
+    "Salmón ahumado",
+    "Calamar Roll"
+  ],
+  "restaurante": {
+    "etiqueta": "El restaurant",
+    "titulo": "Costa est, a Muntaner.",
+    "cita": "La nostra especialitat són els Lobster Roll, fets només amb llamàntols canadencs.",
+    "p1": "Som a L'Esquerra de l'Eixample, a pocs metres del metro Universitat. En entrar et trobes una sala molt gran i allargada, de decoració moderna.",
+    "p2": "Tota la sala és plena de plantes. Del sostre pengen làmpades d'estils diferents, que donen una llum molt bona. I tenim terrassa, amb diverses taules.",
+    "p3": "Som l'únic restaurant de Barcelona amb menjar de la costa dels Estats Units. A més dels lobster rolls, fem crab rolls amb cranc reial o gambes, i rolls de porc o vedella rostida.",
+    "dato_1_num": "100%",
+    "dato_1_txt": "llamàntol canadenc",
+    "dato_2_num": "Brioix",
+    "dato_2_txt": "el pa de tots els rolls",
+    "dato_3_num": "2 min",
+    "dato_3_txt": "del metro Universitat"
+  },
+  "bloque": {
+    "vertical": "Lobster",
+    "etiqueta": "Tria la mida",
+    "titulo": "80 g o XL 120 g.",
+    "texto": "El mateix pa brioix. Més llamàntol.",
+    "a_nombre": "Lobster Roll",
+    "a_peso": "80 g",
+    "a_desc": "Llamàntol canadenc.",
+    "b_nombre": "Lobster Roll XL",
+    "b_peso": "120 g",
+    "b_desc": "El mateix pa brioix amb més carn.",
+    "mas": "+40 g"
+  },
+  "carta": {
+    "etiqueta": "La carta",
+    "titulo": "Carta",
+    "intro": "Frases curtes, rolls grans. Els noms, tal com els tenen ells.",
+    "tab_rolls": "Rolls",
+    "tab_combos": "Combos",
+    "especialidad": "L'especialitat",
+    "descargar": "Descarregar carta",
+    "ver_combos": "Veure els combos"
+  },
+  "combos": {
+    "etiqueta": "Combos",
+    "titulo": "Tria'n tres. Paga'n un.",
+    "texto": "Cada combo porta un roll, una beguda i un mochi.",
+    "paso_1_titulo": "1 roll",
+    "paso_1_txt": "El que més t'agradi.",
+    "paso_2_titulo": "1 beguda",
+    "paso_2_txt": "Refresc, cervesa o vi.",
+    "paso_3_titulo": "1 mochi",
+    "paso_3_txt": "Per acabar.",
+    "lista_titulo": "Els combos"
+  },
+  "fotos": {
+    "etiqueta": "Fotos",
+    "titulo": "Plantes, làmpades i llamàntol.",
+    "texto": "Una sala allargada, plena de plantes, i una terrassa a Muntaner.",
+    "abrir": "Ampliar foto",
+    "cerrar": "Tancar",
+    "anterior": "Foto anterior",
+    "siguiente": "Foto següent"
+  },
+  "localizacion": {
+    "etiqueta": "Localització",
+    "titulo": "Muntaner 22.",
+    "barrio": "L'Esquerra de l'Eixample, Barcelona",
+    "metro": "Metro",
+    "parking": "Pàrquing",
+    "telefono": "Telèfon",
+    "horario": "Horari",
+    "hoy": "avui",
+    "cerrado": "Tancat",
+    "servicios": "Dos serveis: 11:30–18:00 i 18:00–23:00",
+    "reservar": "Reservar en línia",
+    "como_llegar": "Com arribar-hi",
+    "mapa_alt": "Mapa esquemàtic: Carrer de Muntaner 22, entre Gran Via i Diputació, a prop del metro Universitat",
+    "mapa_aqui": "Aquí",
+    "dias": [
+      "Diumenge",
+      "Dilluns",
+      "Dimarts",
+      "Dimecres",
+      "Dijous",
+      "Divendres",
+      "Dissabte"
+    ],
+    "dias_corto": [
+      "Dg",
+      "Dl",
+      "Dt",
+      "Dc",
+      "Dj",
+      "Dv",
+      "Ds"
+    ]
+  },
+  "cta": {
+    "titulo": "Reserva la teva taula",
+    "texto": "De dimarts a diumenge, d'11:30 a 23:00.",
+    "boton": "Reservar en línia",
+    "o_llama": "o truca al"
+  },
+  "footer": {
+    "redes": "Xarxes",
+    "legal": "Legal",
+    "aviso": "Avís legal",
+    "privacidad": "Privacitat",
+    "cookies": "Cookies",
+    "diseno": "Disseny:",
+    "arriba": "Tornar amunt",
+    "instagram_pendiente": "Instagram (pendent)",
+    "facebook_pendiente": "Facebook (pendent)"
+  },
+  "cookies": {
+    "titulo": "Cookies",
+    "texto": "Fem servir cookies pròpies per recordar el teu idioma. Les de tercers (estadístiques) només s'activen si acceptes.",
+    "aceptar": "Acceptar-les totes",
+    "rechazar": "Rebutjar",
+    "mas": "Política de cookies"
+  },
+  "precio": {
+    "locale": "ca-ES"
+  }
+}

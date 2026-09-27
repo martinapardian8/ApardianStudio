@@ -1,0 +1,43 @@
+{
+  "_comentario": "Datos del negocio. Todo lo que aparece en la web sobre dirección, teléfono, horarios y reservas sale de acá. Las redes sociales están vacías a propósito: completar con las URLs reales.",
+  "nombre": "The Lobster Roll",
+  "ciudad": "Barcelona",
+  "web": "https://www.thelobsterrollbcn.com",
+  "direccion": {
+    "calle": "Carrer de Muntaner, 22",
+    "cp": "08011",
+    "ciudad": "Barcelona",
+    "barrio": "L'Esquerra de l'Eixample",
+    "pais": "ES"
+  },
+  "metro": "Universitat (L1, L2)",
+  "parking": {
+    "nombre": "Parking Baldisa",
+    "direccion": "Carrer de la Diputació, 244"
+  },
+  "telefono": "+34 935 104 516",
+  "telefono_tel": "+34935104516",
+  "reservas": "https://reservation.dish.co/widget/hydra-4f96c8f5-27ab-4e7e-8c4c-c98300c5b443",
+  "mapa": "https://www.google.com/maps/search/?api=1&query=The+Lobster+Roll+Carrer+de+Muntaner+22+08011+Barcelona",
+  "horario": {
+    "zona": "Europe/Madrid",
+    "_comentario": "Días 0=domingo … 6=sábado. Cada día tiene una lista de tramos [apertura, cierre] en formato HH:MM. Lista vacía = cerrado.",
+    "dias": {
+      "0": [["11:30", "23:00"]],
+      "1": [],
+      "2": [["11:30", "23:00"]],
+      "3": [["11:30", "23:00"]],
+      "4": [["11:30", "23:00"]],
+      "5": [["11:30", "23:00"]],
+      "6": [["11:30", "23:00"]]
+    },
+    "servicios": [["11:30", "18:00"], ["18:00", "23:00"]]
+  },
+  "redes": {
+    "instagram": "",
+    "facebook": "",
+    "tripadvisor": ""
+  },
+  "cocina": ["American", "Seafood"],
+  "rango_precio": "€€"
+}

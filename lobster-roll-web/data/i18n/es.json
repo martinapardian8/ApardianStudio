@@ -1,0 +1,167 @@
+{
+  "meta": {
+    "titulo": "The Lobster Roll Barcelona · Bogavante canadiense en pan brioche, en Muntaner 22",
+    "descripcion": "The Lobster Roll, en L'Esquerra de l'Eixample, a dos minutos del metro Universitat. Lobster rolls de bogavante canadiense, crab rolls, combos y terraza. Reserva online.",
+    "og_titulo": "The Lobster Roll · Barcelona",
+    "og_descripcion": "Bogavante canadiense en pan brioche. El único restaurante de Barcelona con comida de la costa estadounidense."
+  },
+  "nav": {
+    "restaurante": "El restaurante",
+    "carta": "Carta",
+    "fotos": "Fotos",
+    "localizacion": "Localización",
+    "reservar": "Reservar",
+    "menu_abrir": "Abrir menú",
+    "menu_cerrar": "Cerrar menú",
+    "idioma": "Idioma",
+    "saltar": "Saltar al contenido"
+  },
+  "hero": {
+    "titulo_1": "Lobster",
+    "titulo_2": "Roll",
+    "titulo_3": "Barcelona",
+    "bajada": "Bogavante canadiense en pan brioche. El único restaurante de Barcelona con comida de la costa estadounidense.",
+    "cta_reservar": "Reservar mesa",
+    "cta_carta": "Ver la carta",
+    "sticker_1": "80 gr de bogavante",
+    "sticker_2": "20 €",
+    "scroll": "Bajá para ver más"
+  },
+  "estado": {
+    "abierto": "Abierto ahora",
+    "cerrado": "Cerrado ahora",
+    "cierra": "Cierra a las {hora}",
+    "abre_hoy": "Abre a las {hora}",
+    "abre_dia": "Abre el {dia} a las {hora}"
+  },
+  "cinta": [
+    "Lobster Roll",
+    "Crab Roll",
+    "Shrimp Roll",
+    "Pulled Pork",
+    "Pulled Beef",
+    "A metros de metro Universitat",
+    "Terraza",
+    "Salmón ahumado",
+    "Calamar Roll"
+  ],
+  "restaurante": {
+    "etiqueta": "El restaurante",
+    "titulo": "Costa este, en Muntaner.",
+    "cita": "Nuestra especialidad son los Lobster Roll, hechos solo con bogavantes canadienses.",
+    "p1": "Estamos en L'Esquerra de l'Eixample, a escasos metros del metro Universitat. Al entrar te encontrás con un salón muy grande y alargado, de decoración moderna.",
+    "p2": "Todo el salón está lleno de plantas. Del techo cuelgan lámparas de estilos distintos, que dan una luz muy buena. Y tenemos terraza, con varias mesas.",
+    "p3": "Somos el único restaurante de Barcelona con comida de la costa estadounidense. Además de los lobster rolls, hacemos crab rolls con buey de mar o gambas, y rolls de cerdo o ternera asada.",
+    "dato_1_num": "100%",
+    "dato_1_txt": "bogavante canadiense",
+    "dato_2_num": "Brioche",
+    "dato_2_txt": "pan de todos los rolls",
+    "dato_3_num": "2 min",
+    "dato_3_txt": "del metro Universitat"
+  },
+  "bloque": {
+    "vertical": "Lobster",
+    "etiqueta": "Elegí tu tamaño",
+    "titulo": "80 gr o XL 120 gr.",
+    "texto": "Mismo pan brioche. Más bogavante.",
+    "a_nombre": "Lobster Roll",
+    "a_peso": "80 gr",
+    "a_desc": "Bogavante canadiense.",
+    "b_nombre": "Lobster Roll XL",
+    "b_peso": "120 gr",
+    "b_desc": "Mismo pan brioche con más carne.",
+    "mas": "+40 gr"
+  },
+  "carta": {
+    "etiqueta": "La carta",
+    "titulo": "Carta",
+    "intro": "Frases cortas, rolls grandes. Los nombres, como los tienen ellos.",
+    "tab_rolls": "Rolls",
+    "tab_combos": "Combos",
+    "especialidad": "La especialidad",
+    "descargar": "Descargar carta",
+    "ver_combos": "Ver los combos"
+  },
+  "combos": {
+    "etiqueta": "Combos",
+    "titulo": "Elegí tres. Pagá uno.",
+    "texto": "Cada combo lleva un roll, una bebida y un mochi.",
+    "paso_1_titulo": "1 roll",
+    "paso_1_txt": "El que más te guste.",
+    "paso_2_titulo": "1 bebida",
+    "paso_2_txt": "Refresco, cerveza o vino.",
+    "paso_3_titulo": "1 mochi",
+    "paso_3_txt": "Para cerrar.",
+    "lista_titulo": "Los combos"
+  },
+  "fotos": {
+    "etiqueta": "Fotos",
+    "titulo": "Plantas, lámparas y bogavante.",
+    "texto": "Un salón alargado, lleno de plantas, y una terraza en Muntaner.",
+    "abrir": "Ampliar foto",
+    "cerrar": "Cerrar",
+    "anterior": "Foto anterior",
+    "siguiente": "Foto siguiente"
+  },
+  "localizacion": {
+    "etiqueta": "Localización",
+    "titulo": "Muntaner 22.",
+    "barrio": "L'Esquerra de l'Eixample, Barcelona",
+    "metro": "Metro",
+    "parking": "Parking",
+    "telefono": "Teléfono",
+    "horario": "Horario",
+    "hoy": "hoy",
+    "cerrado": "Cerrado",
+    "servicios": "Dos servicios: 11:30–18:00 y 18:00–23:00",
+    "reservar": "Reservar online",
+    "como_llegar": "Cómo llegar",
+    "mapa_alt": "Mapa esquemático: Carrer de Muntaner 22, entre Gran Via y Diputació, cerca del metro Universitat",
+    "mapa_aqui": "Aquí",
+    "dias": [
+      "Domingo",
+      "Lunes",
+      "Martes",
+      "Miércoles",
+      "Jueves",
+      "Viernes",
+      "Sábado"
+    ],
+    "dias_corto": [
+      "Dom",
+      "Lun",
+      "Mar",
+      "Mié",
+      "Jue",
+      "Vie",
+      "Sáb"
+    ]
+  },
+  "cta": {
+    "titulo": "Reserva tu mesa",
+    "texto": "Martes a domingo, de 11:30 a 23:00.",
+    "boton": "Reservar online",
+    "o_llama": "o llamá al"
+  },
+  "footer": {
+    "redes": "Redes",
+    "legal": "Legal",
+    "aviso": "Aviso legal",
+    "privacidad": "Privacidad",
+    "cookies": "Cookies",
+    "diseno": "Diseño:",
+    "arriba": "Volver arriba",
+    "instagram_pendiente": "Instagram (pendiente)",
+    "facebook_pendiente": "Facebook (pendiente)"
+  },
+  "cookies": {
+    "titulo": "Cookies",
+    "texto": "Usamos cookies propias para recordar tu idioma. Las de terceros (estadísticas) solo se activan si aceptás.",
+    "aceptar": "Aceptar todas",
+    "rechazar": "Rechazar",
+    "mas": "Política de cookies"
+  },
+  "precio": {
+    "locale": "es-ES"
+  }
+}

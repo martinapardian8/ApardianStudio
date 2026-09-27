@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 780" width="1200" height="780">
+  <defs>
+    <linearGradient id="bun" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f1c862"/><stop offset="1" stop-color="#c48a28"/></linearGradient>
+    <linearGradient id="bunTop" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f6d77f"/><stop offset="1" stop-color="#d59a33"/></linearGradient>
+    <linearGradient id="meat" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fbeee8"/><stop offset="1" stop-color="#f3cfc3"/></linearGradient>
+    <linearGradient id="meat2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e8674f"/><stop offset="1" stop-color="#c9412b"/></linearGradient>
+    <radialGradient id="shadow" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#000" stop-opacity=".38"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient>
+  </defs>
+  <ellipse cx="600" cy="700" rx="470" ry="52" fill="url(#shadow)"/>
+  <!-- barquita de papel -->
+  <path d="M150,545 L1050,545 L1000,700 L200,700 Z" fill="#e6d9c2"/>
+  <path d="M168,580 L1032,580 L992,700 L208,700 Z" fill="#f6efe2"/>
+  <path d="M150,545 L1050,545 L1032,580 L168,580 Z" fill="#dccbaf"/>
+  <!-- pan inferior -->
+  <path d="M225,500 C222,450 300,430 600,430 C900,430 978,450 975,500 L965,585 C962,630 900,660 600,660 C300,660 238,630 235,585 Z" fill="url(#bun)"/>
+  <path d="M250,590 C260,625 330,645 600,645 C870,645 940,625 950,590" fill="none" stroke="#a86f1c" stroke-width="7" opacity=".45"/>
+  <!-- trozos de bogavante: interiores claros, bordes rojos -->
+  <g stroke="#c9412b" stroke-width="7" stroke-linejoin="round" fill="url(#meat)">
+    <path d="M300,455 C285,405 360,375 400,415 C430,395 480,410 478,450 C500,470 470,505 430,495 C390,520 320,505 300,455Z"/>
+    <path d="M455,420 C470,360 560,350 590,400 C640,385 690,420 670,465 C700,490 660,530 615,515 C570,540 480,525 455,470 Z"/>
+    <path d="M660,405 C700,355 790,365 800,420 C850,415 890,455 860,495 C880,525 830,545 790,525 C740,545 670,520 660,470 Z"/>
+    <path d="M820,440 C860,400 930,410 940,455 C965,470 950,510 915,505 C895,530 850,525 830,500 Z"/>
+    <path d="M370,480 C400,450 470,455 480,495 C500,515 470,545 440,535 C400,552 360,530 370,480Z"/>
+    <path d="M540,470 C570,440 640,445 655,485 C680,500 660,540 625,532 C590,552 545,535 540,470Z"/>
+    <path d="M700,470 C740,445 810,455 815,495 C840,515 810,545 775,538 C735,552 700,530 700,470Z"/>
+  </g>
+  <!-- vetas rojas del bogavante -->
+  <g fill="none" stroke="url(#meat2)" stroke-width="9" stroke-linecap="round" opacity=".85">
+    <path d="M320,440 C340,410 380,405 405,428"/>
+    <path d="M490,400 C520,372 575,372 600,402"/>
+    <path d="M700,395 C740,368 790,380 805,420"/>
+    <path d="M845,432 C875,412 920,418 935,455"/>
+    <path d="M395,485 C420,465 455,468 470,492"/>
+    <path d="M565,470 C595,450 630,455 645,482"/>
+    <path d="M725,472 C760,452 795,460 808,492"/>
+  </g>
+  <!-- cebollino -->
+  <g fill="#3f7a52"><ellipse cx="440" cy="455" rx="11" ry="5" transform="rotate(-25 440 455)"/><ellipse cx="620" cy="440" rx="12" ry="5" transform="rotate(15 620 440)"/><ellipse cx="760" cy="445" rx="11" ry="5" transform="rotate(-35 760 445)"/><ellipse cx="520" cy="520" rx="9" ry="4"/><ellipse cx="860" cy="490" rx="9" ry="4" transform="rotate(20 860 490)"/><ellipse cx="350" cy="500" rx="9" ry="4" transform="rotate(30 350 500)"/></g>
+  <!-- tapas del pan partido arriba: bajas, dejan ver el relleno -->
+  <path d="M212,510 C205,440 260,395 380,392 C430,392 462,410 480,440 C485,470 470,510 450,510 Z" fill="url(#bunTop)"/>
+  <path d="M988,510 C995,440 940,395 820,392 C770,392 738,410 720,440 C715,470 730,510 750,510 Z" fill="url(#bunTop)"/>
+  <path d="M235,470 C260,425 320,408 385,406" fill="none" stroke="#fff3c9" stroke-width="9" stroke-linecap="round" opacity=".6"/>
+  <path d="M965,470 C940,425 880,408 815,406" fill="none" stroke="#fff3c9" stroke-width="9" stroke-linecap="round" opacity=".6"/>
+  <path d="M212,510 C205,440 260,395 380,392 C430,392 462,410 480,440" fill="none" stroke="#a86f1c" stroke-width="5" opacity=".45"/>
+  <path d="M988,510 C995,440 940,395 820,392 C770,392 738,410 720,440" fill="none" stroke="#a86f1c" stroke-width="5" opacity=".45"/>
+  <!-- limón -->
+  <g transform="translate(1010,585) rotate(-14)">
+    <path d="M0,0 L118,0 A118,118 0 0,0 0,-118 Z" fill="#f2d15a"/>
+    <path d="M0,0 L102,0 A102,102 0 0,0 0,-102 Z" fill="#fbe98e"/>
+    <path d="M0,0 L94,0 M0,0 L66,-66 M0,0 L0,-94" stroke="#f2d15a" stroke-width="4"/>
+    <path d="M0,0 L118,0 A118,118 0 0,0 0,-118 Z" fill="none" stroke="#c9a52d" stroke-width="4"/>
+  </g>
+</svg>

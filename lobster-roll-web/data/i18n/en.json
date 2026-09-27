@@ -1,0 +1,167 @@
+{
+  "meta": {
+    "titulo": "The Lobster Roll Barcelona · Canadian lobster on a brioche bun, at Muntaner 22",
+    "descripcion": "The Lobster Roll, in L'Esquerra de l'Eixample, two minutes from Universitat metro. Canadian lobster rolls, crab rolls, combos and a terrace. Book online.",
+    "og_titulo": "The Lobster Roll · Barcelona",
+    "og_descripcion": "Canadian lobster on a brioche bun. The only restaurant in Barcelona serving East Coast American food."
+  },
+  "nav": {
+    "restaurante": "The restaurant",
+    "carta": "Menu",
+    "fotos": "Photos",
+    "localizacion": "Find us",
+    "reservar": "Book",
+    "menu_abrir": "Open menu",
+    "menu_cerrar": "Close menu",
+    "idioma": "Language",
+    "saltar": "Skip to content"
+  },
+  "hero": {
+    "titulo_1": "Lobster",
+    "titulo_2": "Roll",
+    "titulo_3": "Barcelona",
+    "bajada": "Canadian lobster on a brioche bun. The only restaurant in Barcelona serving East Coast American food.",
+    "cta_reservar": "Book a table",
+    "cta_carta": "See the menu",
+    "sticker_1": "80 g of lobster",
+    "sticker_2": "€20",
+    "scroll": "Scroll for more"
+  },
+  "estado": {
+    "abierto": "Open now",
+    "cerrado": "Closed now",
+    "cierra": "Closes at {hora}",
+    "abre_hoy": "Opens at {hora}",
+    "abre_dia": "Opens {dia} at {hora}"
+  },
+  "cinta": [
+    "Lobster Roll",
+    "Crab Roll",
+    "Shrimp Roll",
+    "Pulled Pork",
+    "Pulled Beef",
+    "Steps from Universitat metro",
+    "Terrace",
+    "Salmón ahumado",
+    "Calamar Roll"
+  ],
+  "restaurante": {
+    "etiqueta": "The restaurant",
+    "titulo": "East Coast, on Muntaner.",
+    "cita": "Our speciality is the Lobster Roll, made only with Canadian lobster.",
+    "p1": "We're in L'Esquerra de l'Eixample, steps from Universitat metro. Walk in and you'll find a very large, long dining room with a modern look.",
+    "p2": "The whole room is full of plants. Lamps of every style hang from the ceiling and give a great light. And we have a terrace, with several tables.",
+    "p3": "We're the only restaurant in Barcelona serving East Coast American food. Beyond lobster rolls, we make crab rolls with brown crab or shrimp, and pulled pork or beef rolls.",
+    "dato_1_num": "100%",
+    "dato_1_txt": "Canadian lobster",
+    "dato_2_num": "Brioche",
+    "dato_2_txt": "the bun on every roll",
+    "dato_3_num": "2 min",
+    "dato_3_txt": "from Universitat metro"
+  },
+  "bloque": {
+    "vertical": "Lobster",
+    "etiqueta": "Pick your size",
+    "titulo": "80 g or XL 120 g.",
+    "texto": "Same brioche bun. More lobster.",
+    "a_nombre": "Lobster Roll",
+    "a_peso": "80 g",
+    "a_desc": "Canadian lobster.",
+    "b_nombre": "Lobster Roll XL",
+    "b_peso": "120 g",
+    "b_desc": "Same brioche bun with more meat.",
+    "mas": "+40 g"
+  },
+  "carta": {
+    "etiqueta": "The menu",
+    "titulo": "Menu",
+    "intro": "Short lines, big rolls. Names kept just as the house calls them.",
+    "tab_rolls": "Rolls",
+    "tab_combos": "Combos",
+    "especialidad": "The speciality",
+    "descargar": "Download menu",
+    "ver_combos": "See the combos"
+  },
+  "combos": {
+    "etiqueta": "Combos",
+    "titulo": "Pick three. Pay for one.",
+    "texto": "Every combo comes with a roll, a drink and a mochi.",
+    "paso_1_titulo": "1 roll",
+    "paso_1_txt": "Whichever you like best.",
+    "paso_2_titulo": "1 drink",
+    "paso_2_txt": "Soft drink, beer or wine.",
+    "paso_3_titulo": "1 mochi",
+    "paso_3_txt": "To finish.",
+    "lista_titulo": "The combos"
+  },
+  "fotos": {
+    "etiqueta": "Photos",
+    "titulo": "Plants, lamps and lobster.",
+    "texto": "A long dining room full of plants, and a terrace on Muntaner.",
+    "abrir": "Enlarge photo",
+    "cerrar": "Close",
+    "anterior": "Previous photo",
+    "siguiente": "Next photo"
+  },
+  "localizacion": {
+    "etiqueta": "Find us",
+    "titulo": "Muntaner 22.",
+    "barrio": "L'Esquerra de l'Eixample, Barcelona",
+    "metro": "Metro",
+    "parking": "Parking",
+    "telefono": "Phone",
+    "horario": "Opening hours",
+    "hoy": "today",
+    "cerrado": "Closed",
+    "servicios": "Two sittings: 11:30–18:00 and 18:00–23:00",
+    "reservar": "Book online",
+    "como_llegar": "Get directions",
+    "mapa_alt": "Schematic map: Carrer de Muntaner 22, between Gran Via and Diputació, near Universitat metro",
+    "mapa_aqui": "Here",
+    "dias": [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday"
+    ],
+    "dias_corto": [
+      "Sun",
+      "Mon",
+      "Tue",
+      "Wed",
+      "Thu",
+      "Fri",
+      "Sat"
+    ]
+  },
+  "cta": {
+    "titulo": "Book your table",
+    "texto": "Tuesday to Sunday, 11:30 to 23:00.",
+    "boton": "Book online",
+    "o_llama": "or call"
+  },
+  "footer": {
+    "redes": "Social",
+    "legal": "Legal",
+    "aviso": "Legal notice",
+    "privacidad": "Privacy",
+    "cookies": "Cookies",
+    "diseno": "Design:",
+    "arriba": "Back to top",
+    "instagram_pendiente": "Instagram (pending)",
+    "facebook_pendiente": "Facebook (pending)"
+  },
+  "cookies": {
+    "titulo": "Cookies",
+    "texto": "We use our own cookies to remember your language. Third-party (analytics) cookies only run if you accept.",
+    "aceptar": "Accept all",
+    "rechazar": "Reject",
+    "mas": "Cookie policy"
+  },
+  "precio": {
+    "locale": "en-IE"
+  }
+}

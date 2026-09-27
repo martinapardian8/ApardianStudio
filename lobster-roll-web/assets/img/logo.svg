@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200" role="img" aria-label="The Lobster Roll · Barcelona">
+  <defs><path id="arco" d="M100,100 m-70,0 a70,70 0 1,1 140,0 a70,70 0 1,1 -140,0"/></defs>
+  <circle cx="100" cy="100" r="98" fill="#c9412b"/>
+  <circle cx="100" cy="100" r="88" fill="#f3ecdf"/>
+  <circle cx="100" cy="100" r="84" fill="none" stroke="#c9412b" stroke-width="1.5"/>
+  <circle cx="100" cy="100" r="56" fill="none" stroke="#c9412b" stroke-width="1.5"/>
+  <text font-family="Oswald, 'Arial Narrow', Arial, sans-serif" font-weight="600" font-size="15.5" letter-spacing="2.6" fill="#123524">
+    <textPath href="#arco" startOffset="50%" text-anchor="middle">THE LOBSTER ROLL · BARCELONA ·</textPath>
+  </text>
+  <!-- bogavante, vista superior -->
+  <g fill="#c9412b" stroke="#c9412b" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M100,62 C96,54 90,44 84,36" fill="none" stroke-width="2"/>
+    <path d="M100,62 C104,54 110,44 116,36" fill="none" stroke-width="2"/>
+    <ellipse cx="100" cy="88" rx="11" ry="18"/>
+    <path d="M89,100 h22 l-1,8 h-20z M90,108 h20 l-1,8 h-18z M91,116 h18 l-1,8 h-16z" stroke="#f3ecdf" stroke-width="1"/>
+    <path d="M92,124 l-6,10 h8z M100,124 l-4,12 h8z M108,124 l6,10 h-8z"/>
+    <path d="M90,76 C82,70 74,66 70,58 C66,52 70,46 76,48 C80,50 82,56 80,60 C84,62 88,68 90,76z"/>
+    <path d="M110,76 C118,70 126,66 130,58 C134,52 130,46 124,48 C120,50 118,56 120,60 C116,62 112,68 110,76z"/>
+    <path d="M76,48 l-6,-6 M124,48 l6,-6" fill="none" stroke-width="2.5"/>
+    <path d="M89,92 l-10,4 M89,98 l-10,6 M89,104 l-9,8 M111,92 l10,4 M111,98 l10,6 M111,104 l9,8" fill="none" stroke-width="2"/>
+    <circle cx="95" cy="72" r="1.6" fill="#f3ecdf" stroke="none"/><circle cx="105" cy="72" r="1.6" fill="#f3ecdf" stroke="none"/>
+  </g>
+</svg>

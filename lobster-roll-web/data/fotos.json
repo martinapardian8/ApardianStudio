@@ -1,0 +1,42 @@
+{
+  "_comentario": "ÚNICO archivo que decide qué foto va en cada lugar. Las rutas son relativas a la raíz del sitio. Para cambiar una foto: reemplazá 'src' (y opcionalmente 'srcset' con variantes de ancho). Los alt se traducen por idioma. Todas las fotos actuales son PLACEHOLDERS: reemplazar tras la sesión de octubre.",
+  "roll_recortado": {
+    "_comentario": "PNG sin fondo del lobster roll, para el hero y el titular de la carta. Ahora es una ilustración SVG provisoria.",
+    "src": "assets/img/roll-ilustrado.svg",
+    "ancho": 1200,
+    "alto": 780,
+    "alt": { "es": "Lobster roll: bogavante canadiense en pan brioche", "ca": "Lobster roll: llamàntol canadenc en pa brioix", "en": "Lobster roll: Canadian lobster on a brioche bun" }
+  },
+  "historia": {
+    "src": "assets/fotos/placeholder-salon-vertical.webp",
+    "ancho": 900,
+    "alto": 1200,
+    "alt": { "es": "El salón de The Lobster Roll, con plantas y lámparas colgantes", "ca": "La sala de The Lobster Roll, amb plantes i làmpades penjants", "en": "The Lobster Roll dining room, with plants and hanging lamps" }
+  },
+  "historia_detalle": {
+    "src": "assets/fotos/placeholder-detalle-cuadrado.webp",
+    "ancho": 800,
+    "alto": 800,
+    "alt": { "es": "Detalle de la terraza", "ca": "Detall de la terrassa", "en": "Terrace detail" }
+  },
+  "bloque_lobster": {
+    "src": "assets/fotos/placeholder-roll-vertical.webp",
+    "ancho": 900,
+    "alto": 1200,
+    "alt": { "es": "Lobster Roll recién hecho", "ca": "Lobster Roll acabat de fer", "en": "Freshly made Lobster Roll" }
+  },
+  "og": {
+    "_comentario": "Imagen para Open Graph (1200x630). Poner la URL absoluta en index.html cuando el dominio esté definido.",
+    "src": "assets/fotos/placeholder-og.webp"
+  },
+  "galeria": [
+    { "src": "assets/fotos/placeholder-galeria-01.webp", "ancho": 900, "alto": 1200, "alt": { "es": "Salón con plantas", "ca": "Sala amb plantes", "en": "Dining room with plants" } },
+    { "src": "assets/fotos/placeholder-galeria-02.webp", "ancho": 1200, "alto": 900, "alt": { "es": "Lámparas colgantes", "ca": "Làmpades penjants", "en": "Hanging lamps" } },
+    { "src": "assets/fotos/placeholder-galeria-03.webp", "ancho": 900, "alto": 900, "alt": { "es": "Lobster Roll XL", "ca": "Lobster Roll XL", "en": "Lobster Roll XL" } },
+    { "src": "assets/fotos/placeholder-galeria-04.webp", "ancho": 900, "alto": 1200, "alt": { "es": "Terraza en Muntaner", "ca": "Terrassa a Muntaner", "en": "Terrace on Muntaner" } },
+    { "src": "assets/fotos/placeholder-galeria-05.webp", "ancho": 1200, "alto": 900, "alt": { "es": "Crab Roll", "ca": "Crab Roll", "en": "Crab Roll" } },
+    { "src": "assets/fotos/placeholder-galeria-06.webp", "ancho": 900, "alto": 1200, "alt": { "es": "Barra y cocina", "ca": "Barra i cuina", "en": "Bar and kitchen" } },
+    { "src": "assets/fotos/placeholder-galeria-07.webp", "ancho": 900, "alto": 900, "alt": { "es": "Combo con mochi", "ca": "Combo amb mochi", "en": "Combo with mochi" } },
+    { "src": "assets/fotos/placeholder-galeria-08.webp", "ancho": 1200, "alto": 900, "alt": { "es": "Fachada en Carrer de Muntaner", "ca": "Façana al Carrer de Muntaner", "en": "Storefront on Carrer de Muntaner" } }
+  ]
+}
