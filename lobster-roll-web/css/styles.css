@@ -360,6 +360,69 @@ body.menu-abierto { overflow: hidden; }
 .legal ul { list-style: disc; padding-left: 1.2rem; display: grid; gap: .3rem; }
 .legal .placeholder { background: rgba(242,193,78,.3); border-left: 3px solid var(--mantequilla); padding: .8rem 1rem; font-size: .95rem; }
 
+/* ---------- Cursor langosta ---------- */
+html.cursor-langosta, html.cursor-langosta a, html.cursor-langosta button, html.cursor-langosta [role="tab"], html.cursor-langosta label { cursor: none; }
+.cursor { position: fixed; left: 0; top: 0; z-index: 9999; pointer-events: none; display: none; width: 38px; height: 56px; transform: translate(-45%, -22%); transition: width .25s var(--ease), height .25s var(--ease), opacity .2s; filter: drop-shadow(0 4px 8px rgba(0,0,0,.35)); will-change: transform; }
+.cursor.is-on { display: block; }
+.cursor.is-oculto { opacity: 0; }
+.cursor svg { width: 100%; height: 100%; overflow: visible; transition: transform .25s var(--ease); }
+.cursor.is-hover { width: 54px; height: 80px; }
+.cursor.is-hover svg { transform: rotate(-14deg); }
+.cursor.is-click svg { transform: rotate(-14deg) scale(.85); }
+.cursor__pinza { transform-box: fill-box; transform-origin: 50% 90%; }
+.cursor.is-hover .cursor__pinza--i { animation: pinzaI .5s ease-in-out infinite alternate; }
+.cursor.is-hover .cursor__pinza--d { animation: pinzaD .5s ease-in-out infinite alternate; }
+.cursor__antena { transform-box: fill-box; transform-origin: 100% 100%; animation: antena 2.4s ease-in-out infinite alternate; }
+.cursor__antena--d { transform-origin: 0% 100%; animation-delay: -1.2s; }
+@keyframes pinzaI { from { transform: rotate(0); } to { transform: rotate(-22deg); } }
+@keyframes pinzaD { from { transform: rotate(0); } to { transform: rotate(22deg); } }
+@keyframes antena { from { transform: rotate(-6deg); } to { transform: rotate(8deg); } }
+
+/* ---------- Hover en títulos y piezas ---------- */
+.letra { display: inline-block; white-space: pre; }
+[data-letras]:hover .letra, [data-letras].is-ola .letra { animation: ola .6s var(--ease) both; animation-delay: calc(var(--i, 0) * 32ms); }
+@keyframes ola { 0% { transform: none; } 35% { transform: translateY(-.14em) rotate(-3deg); } 70% { transform: translateY(.05em); } 100% { transform: none; } }
+.sec--crema .h-display, .sec--blanco .h-display, .partido__der .h-display, .loc__dir { transition: color .3s; }
+.sec--crema .h-display:hover, .sec--blanco .h-display:hover, .partido__der .h-display:hover, .loc__dir:hover { color: var(--rojo); }
+.sec--negro .h-display:hover { color: var(--mantequilla); }
+.hero__titulo .l3 { transition: color .35s var(--ease); }
+.hero__titulo:hover .l3 { color: var(--rojo); }
+.carta__titulo { transition: color .3s, letter-spacing .4s var(--ease); }
+.carta__titulo:hover { color: var(--negro); letter-spacing: .04em; }
+.marca__logo { transition: transform .4s var(--ease); }
+.marca:hover .marca__logo { transform: rotate(-12deg) scale(1.08); }
+.sticker { transition: transform .35s var(--ease); }
+.sticker:hover { transform: rotate(-6deg) scale(1.1); }
+.item { transition: padding-left .3s var(--ease); }
+.item::before { content: ""; position: absolute; left: 0; top: 50%; width: 0; height: 3px; background: var(--rojo); transition: width .3s var(--ease); }
+.item:not(.item--destacado):hover { padding-left: 1.2rem; }
+.item:not(.item--destacado):hover::before { width: .7rem; }
+.item__nombre, .item__precio { transition: color .3s, transform .3s var(--ease); }
+.item:hover .item__nombre { color: var(--rojo-txt); }
+.item:hover .item__precio { transform: scale(1.12); }
+.item--destacado:hover .item__nombre { color: var(--mantequilla); }
+.datos b { display: inline-block; transition: transform .35s var(--ease), color .3s; }
+.datos li:hover b { transform: translateY(-8px) rotate(-2deg); color: var(--negro); }
+.masonry button { transition: transform .45s var(--ease), box-shadow .45s var(--ease); }
+.masonry button:hover { transform: rotate(0) scale(1.03); box-shadow: 10px 10px 0 var(--rojo); z-index: 2; }
+.rest__foto, .rest__foto-2 { transition: transform .5s var(--ease), box-shadow .5s var(--ease); }
+.rest__fotos:hover .rest__foto { transform: translate(-6px, -6px); box-shadow: 16px 16px 0 var(--rojo); }
+.rest__fotos:hover .rest__foto-2 { transform: rotate(2deg) translate(6px, -4px); }
+.carta__roll img { transition: transform .5s var(--ease); }
+.carta__cab:hover .carta__roll img { transform: rotate(-8deg) scale(1.04); }
+.compara__card { transition: transform .3s var(--ease), box-shadow .3s var(--ease); }
+.compara__card:hover { transform: translate(-4px, -4px); box-shadow: 10px 10px 0 var(--rojo); }
+.paso__num { transition: transform .3s var(--ease); }
+.paso:hover .paso__num { transform: scale(1.15) rotate(-8deg); }
+.etiqueta::before { animation: latido 2.2s ease-in-out infinite; }
+@keyframes latido { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.35); } }
+.horario tr { transition: background .25s; }
+.horario tr:not(.is-hoy):hover td { background: rgba(217,40,28,.08); }
+.pie a, .barra__links a { transition: color .25s, transform .25s var(--ease); display: inline-block; }
+.pie a:hover { transform: translateX(4px); }
+.cta h2 { transition: transform .4s var(--ease); }
+.cta h2:hover { transform: skewX(-4deg); }
+
 /* ---------- Animaciones ---------- */
 .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s var(--ease), transform .7s var(--ease); }
 .reveal.is-in { opacity: 1; transform: none; }
@@ -377,4 +440,6 @@ body.menu-abierto { overflow: hidden; }
   .cinta__track { animation: none !important; width: 100%; }
   .cinta ul { flex-wrap: wrap; justify-content: center; row-gap: .4rem; }
   .cinta__track ul:nth-child(2) { display: none; }
+  .cursor { display: none !important; }
+  html.cursor-langosta, html.cursor-langosta a, html.cursor-langosta button { cursor: auto; }
 }

@@ -66,12 +66,54 @@
     try { localStorage.setItem('lr-lang', lang); } catch (e) { /* sin storage */ }
     const url = new URL(location.href); url.searchParams.set('lang', lang); history.replaceState(null, '', url);
     aplicarI18n();
+    envolverLetras();
     pintarCarta();
     pintarCombos();
     pintarGaleria();
     pintarHorario();
     pintarEstado();
     pintarFotos();
+  }
+
+  /* ---------- Letras sueltas en los títulos (efecto ola al pasar el mouse) ---------- */
+  function envolverLetras() {
+    $$('[data-letras]').forEach((el) => {
+      const clon = el.cloneNode(true); clon.querySelectorAll('.sticker').forEach((x) => x.remove());
+      el.setAttribute('aria-label', clon.textContent.replace(/\s+/g, ' ').trim());
+      let i = 0;
+      const recorrer = (nodo) => {
+        Array.from(nodo.childNodes).forEach((n) => {
+          if (n.nodeType === 3) {
+            if (!n.textContent.trim()) return;
+            const frag = document.createDocumentFragment();
+            for (const ch of n.textContent) {
+              const sp = document.createElement('span'); sp.className = 'letra'; sp.textContent = ch; sp.setAttribute('aria-hidden', 'true'); sp.style.setProperty('--i', String(i++)); frag.appendChild(sp);
+            }
+            n.replaceWith(frag);
+          } else if (n.nodeType === 1 && !n.classList.contains('letra') && !n.classList.contains('sticker')) recorrer(n);
+        });
+      };
+      recorrer(el);
+    });
+  }
+
+  /* ---------- Cursor langosta ---------- */
+  function initCursor() {
+    const cur = $('#cursor'); if (!cur) return;
+    if (reduceMotion || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+    document.documentElement.classList.add('cursor-langosta');
+    let x = -100, y = -100, cx = -100, cy = -100, visto = false;
+    const mover = () => { cx += (x - cx) * .22; cy += (y - cy) * .22; cur.style.transform = `translate(${cx - cur.offsetWidth * .45}px, ${cy - cur.offsetHeight * .22}px)`; requestAnimationFrame(mover); };
+    document.addEventListener('mousemove', (e) => {
+      x = e.clientX; y = e.clientY;
+      if (!visto) { visto = true; cx = x; cy = y; cur.classList.add('is-on'); }
+      cur.classList.toggle('is-hover', !!e.target.closest('a, button, [role="tab"], [data-letras], .item, .sticker, .compara__card, .combo, .masonry button, summary'));
+    }, { passive: true });
+    document.addEventListener('mousedown', () => cur.classList.add('is-click'));
+    document.addEventListener('mouseup', () => cur.classList.remove('is-click'));
+    document.documentElement.addEventListener('mouseleave', () => cur.classList.add('is-oculto'));
+    document.documentElement.addEventListener('mouseenter', () => cur.classList.remove('is-oculto'));
+    requestAnimationFrame(mover);
   }
 
   /* ---------- Datos del restaurante ---------- */
@@ -300,6 +342,10 @@
       entries.forEach((en) => { if (en.isIntersecting) { en.target.classList.add('is-in'); io.unobserve(en.target); } });
     }, { rootMargin: '0px 0px -10% 0px', threshold: .12 });
     reveals.forEach((r) => io.observe(r));
+    const ioT = new IntersectionObserver((entries) => {
+      entries.forEach((en) => { if (en.isIntersecting) { en.target.classList.add('is-ola'); setTimeout(() => en.target.classList.remove('is-ola'), 2500); ioT.unobserve(en.target); } });
+    }, { threshold: .5 });
+    $$('[data-letras]').forEach((t) => ioT.observe(t));
 
     const capas = $$('[data-parallax]');
     if (!capas.length) return;
@@ -356,11 +402,12 @@
     } catch (err) {
       console.error(err);
       // Si falla la carga (p. ej. abriendo el HTML desde file://), la página queda con el contenido en español ya escrito en el HTML.
-      initNav(); initTabs(); initMovimiento(); initCookies();
+      envolverLetras(); initNav(); initTabs(); initMovimiento(); initCookies(); initCursor();
       return;
     }
     aplicarDatos();
     aplicarI18n();
+    envolverLetras();
     pintarFotos();
     initHeroVideo();
     pintarCarta();
@@ -374,6 +421,7 @@
     initLightbox();
     initMovimiento();
     initCookies();
+    initCursor();
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
