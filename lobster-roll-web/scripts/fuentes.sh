@@ -4,7 +4,7 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36"
-URL="https://fonts.googleapis.com/css2?family=Gloock&family=Oswald:wght@400..700&family=Figtree:ital,wght@0,300..800;1,400&display=swap"
+URL="https://fonts.googleapis.com/css2?family=Gloock&family=Anton&family=Oswald:wght@400..700&family=Figtree:ital,wght@0,300..800;1,400&display=swap"
 mkdir -p assets/fonts
 curl -sS -A "$UA" "$URL" -o /tmp/google-fonts.css
 python3 - <<'PY'

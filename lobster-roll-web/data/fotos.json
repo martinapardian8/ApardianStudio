@@ -1,25 +1,39 @@
 {
-  "_comentario": "ÚNICO archivo que decide qué foto va en cada lugar. Hoy las fotos están alojadas en el CDN de Higgsfield (fotos reales del restaurante, pasadas a WebP; las 5 principales mejoradas a 2K). Para traerlas al repo: python3 scripts/localizar_medios.py. Los alt se traducen por idioma.",
-  "roll_recortado": {
-    "_comentario": "PNG sin fondo del lobster roll (hero y titular de la carta). Generado con IA y recortado; reemplazar por la foto real tras la sesión de octubre.",
-    "src": "https://d2ol7oe51mr4n9.cloudfront.net/user_3CVTKHXGGh4BrFHiP6f98Bqa8GI/8aa24493-9c6a-42d5-9d90-a6faa5706f33.png",
-    "ancho": 883,
-    "alto": 514,
+  "_comentario": "ÚNICO archivo que decide qué foto va en cada lugar. Fotos reales del restaurante (de la web actual) en WebP con dos tamaños. Para reemplazarlas tras la sesión de octubre: cambiá src/srcset y alt. Los slots 'roll_recortado' y 'hero_video' pueden quedar vacíos (src: \"\").",
+  "hero": {
+    "src": "assets/fotos/neon.webp",
+    "srcset": "assets/fotos/neon-800.webp 800w, assets/fotos/neon.webp 1400w",
+    "sizes": "(min-width: 768px) 45vw, 100vw",
+    "ancho": 1400,
+    "alto": 935,
     "alt": {
-      "es": "Lobster roll: bogavante canadiense en pan brioche",
-      "ca": "Lobster roll: llamàntol canadenc en pa brioix",
-      "en": "Lobster roll: Canadian lobster on a brioche bun"
+      "es": "El neón de The Lobster Roll Barcelona sobre la pared de ladrillo",
+      "ca": "El neó de The Lobster Roll Barcelona sobre la paret de maó",
+      "en": "The Lobster Roll Barcelona neon sign on the brick wall"
+    }
+  },
+  "roll_recortado": {
+    "_comentario": "PNG sin fondo del lobster roll. Vacío por ahora: el hero usa la foto del neón. Si se completa, el JS lo muestra.",
+    "src": "",
+    "ancho": 0,
+    "alto": 0,
+    "alt": {
+      "es": "Lobster roll",
+      "ca": "Lobster roll",
+      "en": "Lobster roll"
     }
   },
   "hero_video": {
-    "_comentario": "Video de fondo del hero (mp4, 5 s, en bucle, sin audio). Generado con IA. 'poster' es el fotograma fijo que se muestra mientras carga o si el usuario prefiere menos movimiento.",
-    "mp4": "https://d8j0ntlcm91z4.cloudfront.net/user_3CVTKHXGGh4BrFHiP6f98Bqa8GI/hf_20261016_153017_8444f04b-db88-404c-90ab-261c704a4c5c.mp4",
-    "poster": "https://d2ol7oe51mr4n9.cloudfront.net/user_3CVTKHXGGh4BrFHiP6f98Bqa8GI/2ba14913-ae02-4624-8f07-3cf389cc49f5.jpg"
+    "_comentario": "Video de fondo opcional (mp4 en bucle sin audio) + poster. Vacío por ahora.",
+    "mp4": "",
+    "poster": ""
   },
   "historia": {
-    "src": "https://d2ol7oe51mr4n9.cloudfront.net/user_3CVTKHXGGh4BrFHiP6f98Bqa8GI/e0a42f25-e01c-421c-94b6-6a714171fe02.webp",
-    "ancho": 1600,
-    "alto": 1069,
+    "src": "assets/fotos/salon.webp",
+    "srcset": "assets/fotos/salon-800.webp 800w, assets/fotos/salon.webp 1400w",
+    "sizes": "(min-width: 768px) 45vw, 100vw",
+    "ancho": 1400,
+    "alto": 935,
     "alt": {
       "es": "El salón de The Lobster Roll: mesas de madera, pared de ladrillo y lámparas colgantes",
       "ca": "La sala de The Lobster Roll: taules de fusta, paret de maó i làmpades penjants",
@@ -27,84 +41,52 @@
     }
   },
   "historia_detalle": {
-    "src": "https://d2ol7oe51mr4n9.cloudfront.net/user_3CVTKHXGGh4BrFHiP6f98Bqa8GI/e07c4583-68c9-4e78-896d-eedea5e39bad.webp",
-    "ancho": 1600,
-    "alto": 1069,
+    "src": "assets/fotos/roll-en-mano.webp",
+    "srcset": "assets/fotos/roll-en-mano-800.webp 800w, assets/fotos/roll-en-mano.webp 1400w",
+    "sizes": "(min-width: 768px) 45vw, 100vw",
+    "ancho": 1400,
+    "alto": 933,
     "alt": {
-      "es": "El neón de The Lobster Roll Barcelona sobre la pared de ladrillo",
-      "ca": "El neó de The Lobster Roll Barcelona sobre la paret de maó",
-      "en": "The Lobster Roll Barcelona neon sign on the brick wall"
+      "es": "Un roll en la mano, listo para comer",
+      "ca": "Un roll a la mà, a punt per menjar",
+      "en": "A roll in hand, ready to eat"
     }
   },
   "bloque_lobster": {
-    "src": "https://d2ol7oe51mr4n9.cloudfront.net/user_3CVTKHXGGh4BrFHiP6f98Bqa8GI/fcded7e3-60c6-44a3-96bf-f44435d44cfb.webp",
-    "ancho": 1600,
-    "alto": 1069,
+    "src": "assets/fotos/roll-patatas.webp",
+    "srcset": "assets/fotos/roll-patatas-800.webp 800w, assets/fotos/roll-patatas.webp 1400w",
+    "sizes": "(min-width: 768px) 45vw, 100vw",
+    "ancho": 1400,
+    "alto": 935,
     "alt": {
       "es": "Lobster Roll con patatas en su caja",
       "ca": "Lobster Roll amb patates a la seva caixa",
       "en": "Lobster Roll with chips in its box"
     }
   },
+  "carta_foto": {
+    "src": "assets/fotos/cajas-rolls.webp",
+    "srcset": "assets/fotos/cajas-rolls-800.webp 800w, assets/fotos/cajas-rolls.webp 1400w",
+    "sizes": "(min-width: 768px) 45vw, 100vw",
+    "ancho": 1400,
+    "alto": 933,
+    "alt": {
+      "es": "Dos rolls con patatas en cajas de The Lobster Roll",
+      "ca": "Dos rolls amb patates en caixes de The Lobster Roll",
+      "en": "Two rolls with chips in The Lobster Roll boxes"
+    }
+  },
   "og": {
     "_comentario": "Imagen para Open Graph (1200x630).",
-    "src": "https://d2ol7oe51mr4n9.cloudfront.net/user_3CVTKHXGGh4BrFHiP6f98Bqa8GI/c59b3a75-9a82-41ef-a252-76556ca02043.jpg"
+    "src": "assets/fotos/og.jpg"
   },
   "galeria": [
     {
-      "src": "https://d2ol7oe51mr4n9.cloudfront.net/user_3CVTKHXGGh4BrFHiP6f98Bqa8GI/5ad567e0-8183-4035-a930-a64ff9b57c1d.webp",
-      "ancho": 1600,
-      "alto": 1069,
-      "alt": {
-        "es": "Bogavante fresco en bandeja, con el neón de fondo",
-        "ca": "Llamàntol fresc en safata, amb el neó de fons",
-        "en": "Fresh lobster on a tray, neon sign behind"
-      }
-    },
-    {
-      "src": "https://d2ol7oe51mr4n9.cloudfront.net/user_3CVTKHXGGh4BrFHiP6f98Bqa8GI/abb77c58-496e-442e-948c-49f66b6acdd9.webp",
-      "ancho": 1600,
-      "alto": 1066,
-      "alt": {
-        "es": "Dos rolls con patatas en cajas de The Lobster Roll",
-        "ca": "Dos rolls amb patates en caixes de The Lobster Roll",
-        "en": "Two rolls with chips in The Lobster Roll boxes"
-      }
-    },
-    {
-      "src": "https://d2ol7oe51mr4n9.cloudfront.net/user_3CVTKHXGGh4BrFHiP6f98Bqa8GI/e14e9262-ba9e-4ba6-95a7-b7722cf90fba.webp",
-      "ancho": 1600,
-      "alto": 1069,
-      "alt": {
-        "es": "El salón, con vistas a la terraza y a Carrer de Muntaner",
-        "ca": "La sala, amb vistes a la terrassa i al Carrer de Muntaner",
-        "en": "The dining room, looking out to the terrace and Carrer de Muntaner"
-      }
-    },
-    {
-      "src": "https://d2ol7oe51mr4n9.cloudfront.net/user_3CVTKHXGGh4BrFHiP6f98Bqa8GI/194f62eb-afa2-4842-b97e-7b19b6f0b450.webp",
-      "ancho": 1600,
-      "alto": 1066,
-      "alt": {
-        "es": "Cuatro rolls en fila sobre la pared de ladrillo",
-        "ca": "Quatre rolls en fila sobre la paret de maó",
-        "en": "Four rolls in a row against the brick wall"
-      }
-    },
-    {
-      "src": "https://d2ol7oe51mr4n9.cloudfront.net/user_3CVTKHXGGh4BrFHiP6f98Bqa8GI/5def23db-0ef6-40b2-9536-d29405e4bd57.webp",
-      "ancho": 1600,
-      "alto": 1066,
-      "alt": {
-        "es": "Rolls para compartir en la mesa",
-        "ca": "Rolls per compartir a la taula",
-        "en": "Rolls to share at the table"
-      }
-    },
-    {
-      "src": "https://d2ol7oe51mr4n9.cloudfront.net/user_3CVTKHXGGh4BrFHiP6f98Bqa8GI/1e42e3c4-14d0-4cc9-9619-fc326ae57bbb.webp",
-      "ancho": 1600,
-      "alto": 1066,
+      "src": "assets/fotos/bogavantes.webp",
+      "srcset": "assets/fotos/bogavantes-800.webp 800w, assets/fotos/bogavantes.webp 1400w",
+      "sizes": "(min-width: 768px) 45vw, 100vw",
+      "ancho": 1400,
+      "alto": 933,
       "alt": {
         "es": "Dos bogavantes canadienses recién cocidos",
         "ca": "Dos llamàntols canadencs acabats de coure",
@@ -112,34 +94,88 @@
       }
     },
     {
-      "src": "https://d2ol7oe51mr4n9.cloudfront.net/user_3CVTKHXGGh4BrFHiP6f98Bqa8GI/5d76ce70-afcf-4683-8021-e3216866e97c.webp",
-      "ancho": 1600,
-      "alto": 1066,
+      "src": "assets/fotos/cajas-rolls.webp",
+      "srcset": "assets/fotos/cajas-rolls-800.webp 800w, assets/fotos/cajas-rolls.webp 1400w",
+      "sizes": "(min-width: 768px) 45vw, 100vw",
+      "ancho": 1400,
+      "alto": 933,
       "alt": {
-        "es": "Un roll en la mano, listo para comer",
-        "ca": "Un roll a la mà, a punt per menjar",
-        "en": "A roll in hand, ready to eat"
+        "es": "Dos rolls con patatas en cajas de The Lobster Roll",
+        "ca": "Dos rolls amb patates en caixes de The Lobster Roll",
+        "en": "Two rolls with chips in The Lobster Roll boxes"
       }
     },
     {
-      "src": "https://d2ol7oe51mr4n9.cloudfront.net/user_3CVTKHXGGh4BrFHiP6f98Bqa8GI/e962abaf-3c46-4236-9f98-6c6e8c179634.webp",
-      "ancho": 1600,
-      "alto": 1066,
+      "src": "assets/fotos/salon.webp",
+      "srcset": "assets/fotos/salon-800.webp 800w, assets/fotos/salon.webp 1400w",
+      "sizes": "(min-width: 768px) 45vw, 100vw",
+      "ancho": 1400,
+      "alto": 935,
       "alt": {
-        "es": "Nutella Roll en su caja",
-        "ca": "Nutella Roll a la seva caixa",
-        "en": "Nutella Roll in its box"
+        "es": "El salón, con la pared de ladrillo y las lámparas",
+        "ca": "La sala, amb la paret de maó i les làmpades",
+        "en": "The dining room, brick wall and lamps"
+      }
+    },
+    {
+      "src": "assets/fotos/compartir.webp",
+      "srcset": "assets/fotos/compartir-800.webp 800w, assets/fotos/compartir.webp 1400w",
+      "sizes": "(min-width: 768px) 45vw, 100vw",
+      "ancho": 1400,
+      "alto": 933,
+      "alt": {
+        "es": "Rolls para compartir en la mesa",
+        "ca": "Rolls per compartir a la taula",
+        "en": "Rolls to share at the table"
+      }
+    },
+    {
+      "src": "assets/fotos/neon.webp",
+      "srcset": "assets/fotos/neon-800.webp 800w, assets/fotos/neon.webp 1400w",
+      "sizes": "(min-width: 768px) 45vw, 100vw",
+      "ancho": 1400,
+      "alto": 935,
+      "alt": {
+        "es": "El neón de The Lobster Roll Barcelona",
+        "ca": "El neó de The Lobster Roll Barcelona",
+        "en": "The Lobster Roll Barcelona neon sign"
+      }
+    },
+    {
+      "src": "assets/fotos/shrimp-roll.webp",
+      "srcset": "assets/fotos/shrimp-roll-800.webp 800w, assets/fotos/shrimp-roll.webp 1400w",
+      "sizes": "(min-width: 768px) 45vw, 100vw",
+      "ancho": 1400,
+      "alto": 933,
+      "alt": {
+        "es": "Shrimp Roll con patatas",
+        "ca": "Shrimp Roll amb patates",
+        "en": "Shrimp Roll with chips"
+      }
+    },
+    {
+      "src": "assets/fotos/roll-en-mano.webp",
+      "srcset": "assets/fotos/roll-en-mano-800.webp 800w, assets/fotos/roll-en-mano.webp 1400w",
+      "sizes": "(min-width: 768px) 45vw, 100vw",
+      "ancho": 1400,
+      "alto": 933,
+      "alt": {
+        "es": "Un roll en la mano",
+        "ca": "Un roll a la mà",
+        "en": "A roll in hand"
+      }
+    },
+    {
+      "src": "assets/fotos/roll-patatas.webp",
+      "srcset": "assets/fotos/roll-patatas-800.webp 800w, assets/fotos/roll-patatas.webp 1400w",
+      "sizes": "(min-width: 768px) 45vw, 100vw",
+      "ancho": 1400,
+      "alto": 935,
+      "alt": {
+        "es": "Lobster Roll con patatas en su caja",
+        "ca": "Lobster Roll amb patates a la seva caixa",
+        "en": "Lobster Roll with chips in its box"
       }
     }
-  ],
-  "sin_usar": {
-    "_comentario": "Fotos convertidas pero no colocadas; podés usarlas en la galería.",
-    "lista": [
-      "https://d2ol7oe51mr4n9.cloudfront.net/user_3CVTKHXGGh4BrFHiP6f98Bqa8GI/a0c8e501-e5e5-4fc9-b276-189201147438.webp",
-      "https://d2ol7oe51mr4n9.cloudfront.net/user_3CVTKHXGGh4BrFHiP6f98Bqa8GI/76b6e48b-65aa-45fd-b58a-549db523a773.webp",
-      "https://d2ol7oe51mr4n9.cloudfront.net/user_3CVTKHXGGh4BrFHiP6f98Bqa8GI/533a6253-5367-4c79-a86b-2d7ed0c19e81.webp",
-      "https://d2ol7oe51mr4n9.cloudfront.net/user_3CVTKHXGGh4BrFHiP6f98Bqa8GI/070fd910-0fc5-4a98-84ef-c05088a61e8f.webp",
-      "https://d2ol7oe51mr4n9.cloudfront.net/user_3CVTKHXGGh4BrFHiP6f98Bqa8GI/615fc145-633f-43f1-924a-83f7dabc3686.webp"
-    ]
-  }
+  ]
 }

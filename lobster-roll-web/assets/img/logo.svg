@@ -1,14 +1,14 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200" role="img" aria-label="The Lobster Roll · Barcelona">
   <defs><path id="arco" d="M100,100 m-70,0 a70,70 0 1,1 140,0 a70,70 0 1,1 -140,0"/></defs>
-  <circle cx="100" cy="100" r="98" fill="#c9412b"/>
+  <circle cx="100" cy="100" r="98" fill="#d9281c"/>
   <circle cx="100" cy="100" r="88" fill="#f3ecdf"/>
-  <circle cx="100" cy="100" r="84" fill="none" stroke="#c9412b" stroke-width="1.5"/>
-  <circle cx="100" cy="100" r="56" fill="none" stroke="#c9412b" stroke-width="1.5"/>
-  <text font-family="Oswald, 'Arial Narrow', Arial, sans-serif" font-weight="600" font-size="15.5" letter-spacing="2.6" fill="#123524">
+  <circle cx="100" cy="100" r="84" fill="none" stroke="#d9281c" stroke-width="1.5"/>
+  <circle cx="100" cy="100" r="56" fill="none" stroke="#d9281c" stroke-width="1.5"/>
+  <text font-family="Oswald, 'Arial Narrow', Arial, sans-serif" font-weight="600" font-size="15.5" letter-spacing="2.6" fill="#141210">
     <textPath href="#arco" startOffset="50%" text-anchor="middle">THE LOBSTER ROLL · BARCELONA ·</textPath>
   </text>
   <!-- bogavante, vista superior -->
-  <g fill="#c9412b" stroke="#c9412b" stroke-linecap="round" stroke-linejoin="round">
+  <g fill="#d9281c" stroke="#d9281c" stroke-linecap="round" stroke-linejoin="round">
     <path d="M100,62 C96,54 90,44 84,36" fill="none" stroke-width="2"/>
     <path d="M100,62 C104,54 110,44 116,36" fill="none" stroke-width="2"/>
     <ellipse cx="100" cy="88" rx="11" ry="18"/>

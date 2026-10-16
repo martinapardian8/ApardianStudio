@@ -97,6 +97,8 @@
     $$('[data-foto]').forEach((img) => {
       const cfg = f[img.dataset.foto];
       if (!cfg) return;
+      if (!cfg.src) { const slot = img.closest('[data-slot]'); if (slot) slot.hidden = true; return; }
+      const slot = img.closest('[data-slot]'); if (slot) slot.hidden = false;
       if (img.getAttribute('src') !== cfg.src) img.src = cfg.src;
       if (cfg.srcset) img.srcset = cfg.srcset;
       if (cfg.sizes) img.sizes = cfg.sizes;
@@ -108,7 +110,7 @@
 
   /* ---------- Video del hero (data/fotos.json → hero_video) ---------- */
   function initHeroVideo() {
-    const cfg = estado.fotos?.hero_video; const v = $('#hero-video'); if (!cfg || !v) return;
+    const cfg = estado.fotos?.hero_video; const v = $('#hero-video'); if (!cfg || !v || !cfg.mp4) return;
     if (cfg.poster) v.poster = cfg.poster;
     const cont = v.parentElement;
     cont.classList.add('is-ready'); // el poster se ve enseguida; el video aparece encima cuando puede reproducirse
