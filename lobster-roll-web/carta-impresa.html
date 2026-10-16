@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Carta para imprimir · The Lobster Roll Barcelona</title>
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="assets/img/logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/fonts.css">
+  <link rel="stylesheet" href="css/impresion.css">
+</head>
+<body>
+<!-- Carta impresa A4. Se arma con js/impresion.js a partir de data/*.json.
+     ?lang=es | ca | en  → una página en ese idioma.   ?lang=todos → las tres páginas seguidas.
+     Imprimir: Ctrl/Cmd+P, tamaño A4, sin márgenes, "gráficos de fondo" activado. O usar los PDF de impresion/. -->
+<div id="paginas"></div>
+
+<template id="tpl-pagina">
+  <section class="pagina">
+    <header class="cab">
+      <div class="cab__rayas"></div>
+      <div class="cab__int">
+        <img class="cab__logo" src="assets/img/logo.svg" alt="" width="120" height="120">
+        <div class="cab__marca">
+          <span class="cab__nombre" data-dato="nombre">The Lobster Roll</span>
+          <span class="cab__sub" data-i18n="hero.bajada"></span>
+        </div>
+        <h1 class="cab__titulo" data-i18n="carta.titulo">Carta</h1>
+      </div>
+    </header>
+
+    <div class="foto-banda">
+      <img data-foto="cajas-rolls" src="assets/fotos/cajas-rolls.webp" alt="">
+      <div class="foto-banda__sticker"><small data-i18n="hero.sticker_1"></small><b data-i18n="hero.sticker_2"></b></div>
+      <p class="foto-banda__cita" data-i18n="restaurante.cita"></p>
+    </div>
+
+    <main class="cuerpo">
+      <div class="col col--rolls">
+        <h2 class="col__titulo" data-i18n="carta.tab_rolls">Rolls</h2>
+        <ul class="items" data-categoria="rolls"></ul>
+      </div>
+      <div class="col col--combos">
+        <div class="tamanos">
+          <div class="tamanos__card"><span data-i18n="bloque.a_nombre"></span><b data-i18n="bloque.a_peso"></b><em data-precio-de="lobster"></em></div>
+          <div class="tamanos__card tamanos__card--xl"><span data-i18n="bloque.b_nombre"></span><b data-i18n="bloque.b_peso"></b><em data-precio-de="lobster-xl"></em><i class="tamanos__mas" data-i18n="bloque.mas"></i></div>
+        </div>
+        <h2 class="col__titulo" data-i18n="carta.tab_combos">Combos</h2>
+        <ol class="pasos">
+          <li><span>1</span><b data-i18n="combos.paso_1_titulo"></b><small data-i18n="combos.paso_1_txt"></small></li>
+          <li><span>2</span><b data-i18n="combos.paso_2_titulo"></b><small data-i18n="combos.paso_2_txt"></small></li>
+          <li><span>3</span><b data-i18n="combos.paso_3_titulo"></b><small data-i18n="combos.paso_3_txt"></small></li>
+        </ol>
+        <ul class="items items--combos" data-categoria="combos"></ul>
+        <figure class="col__foto"><img data-foto="roll-patatas" src="assets/fotos/roll-patatas.webp" alt=""></figure>
+      </div>
+    </main>
+
+    <footer class="pie">
+      <div class="pie__qr"><img src="assets/img/qr-carta.svg" alt="" width="70" height="70"><span data-i18n="carta_digital.qr"></span></div>
+      <div class="pie__datos">
+        <b><span data-dato="direccion.calle"></span> · <span data-dato="direccion.cp"></span> <span data-dato="direccion.ciudad"></span></b>
+        <span><span data-dato="telefono"></span> · <span data-dato="web_corta"></span></span>
+        <span class="pie__horario"></span>
+      </div>
+      <p class="pie__nota" data-i18n="carta_digital.nota"></p>
+      <div class="pie__rayas"></div>
+    </footer>
+  </section>
+</template>
+
+<script src="js/impresion.js" defer></script>
+</body>
+</html>

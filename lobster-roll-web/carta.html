@@ -58,6 +58,10 @@
 </header>
 
 <main class="cd__main" id="cd-carta">
+  <div class="cd__foto">
+    <img src="assets/fotos/cajas-rolls.webp" srcset="assets/fotos/cajas-rolls-800.webp 800w, assets/fotos/cajas-rolls.webp 1400w" sizes="(min-width: 720px) 720px, 100vw" alt="Dos rolls con patatas en cajas de The Lobster Roll" width="1400" height="933" fetchpriority="high">
+    <div class="cd__sticker"><small data-i18n="hero.sticker_1">80 gr de bogavante</small><b data-i18n="hero.sticker_2">20 €</b></div>
+  </div>
   <div class="cd__titulo-bloque">
     <p class="estado" id="estado" aria-live="polite"><span class="estado__punto" aria-hidden="true"></span><span class="estado__txt">…</span><span class="estado__detalle"></span></p>
     <h1 class="cd__titulo" data-i18n="carta.titulo">Carta</h1>
@@ -70,6 +74,11 @@
   </div>
   <div class="panel" role="tabpanel" id="panel-rolls" aria-labelledby="tab-rolls" tabindex="0">
     <ul class="items cd__items" data-categoria="rolls"></ul>
+    <div class="cd__tira" aria-hidden="true">
+      <img src="assets/fotos/bogavantes-800.webp" alt="" width="800" height="533" loading="lazy">
+      <img src="assets/fotos/roll-patatas-800.webp" alt="" width="800" height="534" loading="lazy">
+      <img src="assets/fotos/neon-800.webp" alt="" width="800" height="534" loading="lazy">
+    </div>
   </div>
   <div class="panel" role="tabpanel" id="panel-combos" aria-labelledby="tab-combos" tabindex="0" hidden>
     <ol class="cd__pasos" aria-label="Qué lleva cada combo">
@@ -78,6 +87,7 @@
       <li><span class="cd__paso-num">3</span><b data-i18n="combos.paso_3_titulo">1 mochi</b><span data-i18n="combos.paso_3_txt">Para cerrar.</span></li>
     </ol>
     <ul class="items cd__items" data-categoria="combos"></ul>
+    <figure class="cd__foto-pie"><img src="assets/fotos/compartir-800.webp" alt="Rolls para compartir en la mesa" width="800" height="533" loading="lazy"></figure>
   </div>
 
   <p class="cd__nota" data-i18n="carta_digital.nota">Precios en euros, IVA incluido. Preguntá por alérgenos.</p>

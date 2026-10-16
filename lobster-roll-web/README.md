@@ -36,6 +36,18 @@ pestañas Rolls / Combos, estado abierto/cerrado, botón de reserva y teléfono.
 `carta.html` (o `carta.html?lang=en`). Tiene estilo de impresión por si hace falta en papel.
 Para otro restaurante: cambiar los tres JSON y el logo; el HTML no se toca.
 
+## Carta para imprimir (`carta-impresa.html` → `impresion/*.pdf`)
+
+Una página A4 por idioma, con foto, la especialidad destacada, tamaños 80/120 g, combos y un
+QR a la carta digital (`assets/img/qr-carta.svg`, apunta a `https://www.thelobsterrollbcn.com/carta.html`;
+regenerarlo si cambia el dominio). Se arma sola desde los JSON: `carta-impresa.html?lang=es|ca|en|todos`.
+Los PDF listos están en `impresion/`. Para regenerarlos tras cambiar la carta:
+
+```bash
+python3 -m http.server 8899 &
+node scripts/pdf.js impresion      # requiere playwright-core y Chromium
+```
+
 ## Ver el sitio en local
 
 Los datos se cargan con `fetch`, así que hace falta un servidor (con `file://` la página
