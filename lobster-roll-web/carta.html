@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title data-i18n="carta_digital.titulo">Carta · The Lobster Roll Barcelona</title>
+  <meta name="description" data-i18n-attr="content:carta_digital.descripcion" content="Carta de The Lobster Roll Barcelona: lobster rolls de bogavante canadiense, crab rolls, combos y más. Carrer de Muntaner 22.">
+  <meta name="theme-color" content="#d9281c">
+  <meta name="robots" content="index, follow">
+  <link rel="icon" href="assets/img/logo.svg" type="image/svg+xml">
+  <link rel="preload" href="assets/fonts/anton-normal-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/gloock-normal-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/fonts.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/carta.css">
+</head>
+<body class="cd">
+<a class="saltar" href="#cd-carta" data-i18n="nav.saltar">Saltar al contenido</a>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-logo" viewBox="0 0 200 200">
+      <path id="arco" d="M100,100 m-70,0 a70,70 0 1,1 140,0 a70,70 0 1,1 -140,0" fill="none"/>
+      <circle cx="100" cy="100" r="98" fill="#d9281c"/><circle cx="100" cy="100" r="88" fill="#f3ecdf"/>
+      <circle cx="100" cy="100" r="84" fill="none" stroke="#d9281c" stroke-width="1.5"/><circle cx="100" cy="100" r="56" fill="none" stroke="#d9281c" stroke-width="1.5"/>
+      <text font-family="Oswald, 'Arial Narrow', Arial, sans-serif" font-weight="600" font-size="15.5" letter-spacing="2.6" fill="#141210"><textPath href="#arco" startOffset="50%" text-anchor="middle">THE LOBSTER ROLL · BARCELONA ·</textPath></text>
+      <g fill="#d9281c" stroke="#d9281c" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M100,62 C96,54 90,44 84,36" fill="none" stroke-width="2"/><path d="M100,62 C104,54 110,44 116,36" fill="none" stroke-width="2"/>
+        <ellipse cx="100" cy="88" rx="11" ry="18"/>
+        <path d="M89,100 h22 l-1,8 h-20z M90,108 h20 l-1,8 h-18z M91,116 h18 l-1,8 h-16z" stroke="#f3ecdf" stroke-width="1"/>
+        <path d="M92,124 l-6,10 h8z M100,124 l-4,12 h8z M108,124 l6,10 h-8z"/>
+        <path d="M90,76 C82,70 74,66 70,58 C66,52 70,46 76,48 C80,50 82,56 80,60 C84,62 88,68 90,76z"/>
+        <path d="M110,76 C118,70 126,66 130,58 C134,52 130,46 124,48 C120,50 118,56 120,60 C116,62 112,68 110,76z"/>
+        <path d="M76,48 l-6,-6 M124,48 l6,-6" fill="none" stroke-width="2.5"/>
+        <path d="M89,92 l-10,4 M89,98 l-10,6 M89,104 l-9,8 M111,92 l10,4 M111,98 l10,6 M111,104 l9,8" fill="none" stroke-width="2"/>
+        <circle cx="95" cy="72" r="1.6" fill="#f3ecdf" stroke="none"/><circle cx="105" cy="72" r="1.6" fill="#f3ecdf" stroke="none"/>
+      </g>
+    </symbol>
+    <symbol id="i-flecha" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-tel" viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+  </defs>
+</svg>
+
+<header class="cd__cab">
+  <div class="cd__cab-int">
+    <svg class="cd__logo" aria-hidden="true"><use href="#i-logo"/></svg>
+    <div class="cd__marca">
+      <span class="cd__nombre" data-dato="nombre">The Lobster Roll</span>
+      <span class="cd__ciudad"><span data-dato="direccion.calle">Carrer de Muntaner, 22</span> · <span data-dato="direccion.ciudad">Barcelona</span></span>
+    </div>
+    <div class="idiomas cd__idiomas" role="group" data-i18n-attr="aria-label:nav.idioma" aria-label="Idioma">
+      <button type="button" data-lang="es" aria-pressed="true" lang="es">ES</button>
+      <button type="button" data-lang="ca" aria-pressed="false" lang="ca">CA</button>
+      <button type="button" data-lang="en" aria-pressed="false" lang="en">EN</button>
+    </div>
+  </div>
+  <div class="rayas rayas--fina" aria-hidden="true"></div>
+</header>
+
+<main class="cd__main" id="cd-carta">
+  <div class="cd__titulo-bloque">
+    <p class="estado" id="estado" aria-live="polite"><span class="estado__punto" aria-hidden="true"></span><span class="estado__txt">…</span><span class="estado__detalle"></span></p>
+    <h1 class="cd__titulo" data-i18n="carta.titulo">Carta</h1>
+    <p class="cd__sub" data-i18n="carta_digital.sub">Bogavante canadiense en pan brioche. Todo recién hecho.</p>
+  </div>
+
+  <div class="tabs cd__tabs" role="tablist" aria-label="Carta">
+    <button class="tab" role="tab" id="tab-rolls" aria-selected="true" aria-controls="panel-rolls" data-i18n="carta.tab_rolls">Rolls</button>
+    <button class="tab" role="tab" id="tab-combos" aria-selected="false" aria-controls="panel-combos" tabindex="-1" data-i18n="carta.tab_combos">Combos</button>
+  </div>
+  <div class="panel" role="tabpanel" id="panel-rolls" aria-labelledby="tab-rolls" tabindex="0">
+    <ul class="items cd__items" data-categoria="rolls"></ul>
+  </div>
+  <div class="panel" role="tabpanel" id="panel-combos" aria-labelledby="tab-combos" tabindex="0" hidden>
+    <ol class="cd__pasos" aria-label="Qué lleva cada combo">
+      <li><span class="cd__paso-num">1</span><b data-i18n="combos.paso_1_titulo">1 roll</b><span data-i18n="combos.paso_1_txt">El que más te guste.</span></li>
+      <li><span class="cd__paso-num">2</span><b data-i18n="combos.paso_2_titulo">1 bebida</b><span data-i18n="combos.paso_2_txt">Refresco, cerveza o vino.</span></li>
+      <li><span class="cd__paso-num">3</span><b data-i18n="combos.paso_3_titulo">1 mochi</b><span data-i18n="combos.paso_3_txt">Para cerrar.</span></li>
+    </ol>
+    <ul class="items cd__items" data-categoria="combos"></ul>
+  </div>
+
+  <p class="cd__nota" data-i18n="carta_digital.nota">Precios en euros, IVA incluido. Preguntá por alérgenos.</p>
+</main>
+
+<footer class="cd__pie">
+  <a class="btn btn--rojo" data-reservas href="https://reservation.dish.co/widget/hydra-4f96c8f5-27ab-4e7e-8c4c-c98300c5b443" target="_blank" rel="noopener"><span data-i18n="hero.cta_reservar">Reservar mesa</span><svg aria-hidden="true"><use href="#i-flecha"/></svg></a>
+  <a class="cd__tel" data-tel href="tel:+34935104516"><svg width="18" height="18" aria-hidden="true"><use href="#i-tel"/></svg><span data-dato="telefono">+34 935 104 516</span></a>
+  <p class="cd__horario"><span data-i18n="localizacion.horario">Horario</span>: <span id="cd-horario"></span></p>
+  <p class="cd__web"><a href="index.html" data-i18n="carta_digital.volver">Ver la web completa</a> · <span data-i18n="footer.diseno">Diseño:</span> <a href="https://apardianstudio.com" target="_blank" rel="noopener">Apardian Studio</a></p>
+</footer>
+
+<script src="js/carta.js" defer></script>
+</body>
+</html>

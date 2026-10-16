@@ -28,6 +28,14 @@ lobster-roll-web/
 └── capturas/               ← capturas del resultado
 ```
 
+## Carta digital aparte (`carta.html`)
+
+Página independiente para poner en un QR en las mesas o vender sola: lee los mismos
+`data/carta.json`, `data/restaurante.json` y `data/i18n/*.json`, con selector ES / CA / EN,
+pestañas Rolls / Combos, estado abierto/cerrado, botón de reserva y teléfono. Se abre con
+`carta.html` (o `carta.html?lang=en`). Tiene estilo de impresión por si hace falta en papel.
+Para otro restaurante: cambiar los tres JSON y el logo; el HTML no se toca.
+
 ## Ver el sitio en local
 
 Los datos se cargan con `fetch`, así que hace falta un servidor (con `file://` la página

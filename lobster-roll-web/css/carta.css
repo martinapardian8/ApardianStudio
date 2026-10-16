@@ -1,0 +1,39 @@
+/* Carta digital (carta.html): página aparte para QR en mesa. Reusa los tokens de styles.css. */
+body.cd { background: var(--crema); padding-bottom: 2rem; }
+.cd__cab { background: var(--negro); color: var(--crema); position: sticky; top: 0; z-index: 20; }
+.cd__cab-int { width: min(100% - 2 * var(--gutter), 720px); margin-inline: auto; display: flex; align-items: center; gap: .8rem; padding: .7rem 0; }
+.cd__logo { width: 46px; height: 46px; flex: none; }
+.cd__marca { display: grid; line-height: 1.15; min-width: 0; }
+.cd__nombre { font-family: var(--f-label); font-weight: 600; text-transform: uppercase; letter-spacing: .12em; font-size: .9rem; }
+.cd__ciudad { font-size: .78rem; color: var(--crema-sobre-negro); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cd__idiomas { display: flex; margin-left: auto; }
+.cd__idiomas button { padding: .45rem .5rem; font-size: .85rem; min-height: 40px; }
+.cd__main { width: min(100% - 2 * var(--gutter), 720px); margin-inline: auto; padding-top: 1.6rem; }
+.cd__titulo-bloque { display: grid; gap: .6rem; margin-bottom: 1rem; }
+.cd__titulo-bloque .estado { border-color: rgba(20,18,16,.3); background: var(--blanco); color: var(--negro); }
+.cd__titulo { font-family: var(--f-display); text-transform: uppercase; font-size: clamp(4.5rem, 26vw, 8rem); line-height: .85; color: var(--rojo); margin-top: .2rem; }
+.cd__sub { color: var(--gris); font-size: 1.05rem; max-width: 30rem; }
+.cd__tabs { position: sticky; top: calc(46px + 1.4rem + 8px); background: var(--crema); z-index: 10; margin: 1.2rem 0 1.4rem; }
+.cd__items .item { grid-template-columns: 1fr auto; }
+.cd__items .item__nombre { font-size: clamp(1.3rem, 5.5vw, 1.7rem); }
+.cd__items .item__precio { font-size: 1.45rem; }
+.cd__items .item--destacado { margin-inline: 0; padding: 1.3rem 1.1rem; margin-bottom: .6rem; }
+.cd__pasos { display: grid; gap: .5rem; margin-bottom: 1.4rem; background: var(--blanco); border: 2px solid var(--negro); padding: 1rem; box-shadow: 6px 6px 0 var(--rojo); }
+.cd__pasos li { display: grid; grid-template-columns: auto auto 1fr; align-items: baseline; gap: .6rem; }
+.cd__pasos b { font-family: var(--f-display); text-transform: uppercase; font-size: 1.3rem; }
+.cd__pasos span:last-child { color: var(--gris); font-size: .92rem; }
+.cd__paso-num { width: 26px; height: 26px; border-radius: 50%; background: var(--rojo); color: #fff; display: inline-grid; place-items: center; font-family: var(--f-label); font-weight: 600; font-size: .85rem; align-self: center; }
+.cd__nota { margin-top: 1.4rem; color: var(--gris); font-size: .85rem; }
+.cd__pie { width: min(100% - 2 * var(--gutter), 720px); margin: 2.2rem auto 0; display: grid; gap: .9rem; justify-items: start; border-top: 3px solid var(--negro); padding-top: 1.6rem; }
+.cd__pie .btn { width: 100%; }
+.cd__tel { font-family: var(--f-display); font-size: 1.5rem; letter-spacing: .03em; text-decoration: none; display: inline-flex; gap: .6rem; align-items: center; color: var(--negro); }
+.cd__horario, .cd__web { font-size: .9rem; color: var(--gris); }
+.cd__web a { color: var(--negro); }
+@media (min-width: 600px) { .cd__pie { grid-template-columns: auto 1fr; align-items: center; } .cd__pie .btn { width: auto; } .cd__horario, .cd__web { grid-column: 1 / -1; } }
+@media print {
+  .cd__cab, .cd__tabs, .cd__pie .btn, .estado, .saltar { display: none !important; }
+  .panel[hidden] { display: block !important; }
+  body.cd { background: #fff; }
+  .cd__items .item--destacado { background: none; color: #000; box-shadow: none; border: 2px solid #000; }
+  .cd__items .item--destacado .item__nombre, .cd__items .item--destacado .item__precio, .cd__items .item--destacado .item__desc { color: #000; }
+}

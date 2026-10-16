@@ -163,5 +163,12 @@
   },
   "precio": {
     "locale": "ca-ES"
+  },
+  "carta_digital": {
+    "titulo": "Carta · The Lobster Roll Barcelona",
+    "descripcion": "Carta de The Lobster Roll Barcelona: lobster rolls de llamàntol canadenc, crab rolls, combos i més. Carrer de Muntaner 22.",
+    "sub": "Llamàntol canadenc en pa brioix. Tot acabat de fer.",
+    "nota": "Preus en euros, IVA inclòs. Pregunta pels al·lèrgens.",
+    "volver": "Veure el web complet"
   }
 }
