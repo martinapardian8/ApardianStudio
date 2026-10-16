@@ -119,12 +119,25 @@ python3 -m http.server 8080 &
 node scripts/capturas.js http://localhost:8080/ capturas && python3 scripts/coser.py capturas
 ```
 
+## Medios alojados fuera del repo (Higgsfield)
+
+Las fotos reales del restaurante, el roll recortado, el poster y el video del hero están hoy en el
+CDN de Higgsfield (`*.cloudfront.net`), referenciados desde `data/fotos.json` e `index.html`.
+Para traerlos al repositorio y publicar sin dependencias externas:
+
+```bash
+python3 scripts/localizar_medios.py   # baja todo a assets/fotos/ y reescribe fotos.json
+grep -n cloudfront index.html          # reemplazar a mano og:image, poster y src del hero
+```
+
+El video del hero (`hero_video` en `fotos.json`) se reproduce en bucle, sin audio, con un fotograma
+fijo (`poster`) de respaldo; con `prefers-reduced-motion` solo se muestra el fotograma.
+
 ## Qué quedó provisorio
 
-- **Logo:** recreación en SVG (sello circular con bogavante). No es el logo real; hay que pedir el original.
-- **Fotos:** todas son placeholders. La web actual bloqueó la descarga desde el entorno de trabajo; el
-  script `scripts/descargar_fotos.py` queda listo para correrlo en local.
-- **Roll recortado:** ilustración SVG en lugar del PNG sin fondo (slot `roll_recortado` en `fotos.json`).
+- **Logo:** recreación en SVG (sello circular con bogavante). Coincide en concepto con el neón del local, pero hay que pedir el original.
+- **Fotos del local:** son las 16 de la web actual, pasadas a WebP (las 5 principales mejoradas a 2K con IA). Se reemplazan por las de la sesión de octubre editando `data/fotos.json`.
+- **Roll recortado y video del hero:** generados con IA (no son fotos del producto real). Reemplazar por material propio cuando exista.
 - **Descripciones inventadas:** "Shot de ostra" y "Nutella Roll" (marcadas con `"provisional": true` en `carta.json`).
   "Atún Roll" se suavizó a "Atún en pan brioche".
 - **Metro:** líneas "L1, L2" de Universitat puestas por conocimiento general; confirmar.

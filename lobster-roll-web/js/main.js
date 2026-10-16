@@ -106,6 +106,18 @@
     });
   }
 
+  /* ---------- Video del hero (data/fotos.json → hero_video) ---------- */
+  function initHeroVideo() {
+    const cfg = estado.fotos?.hero_video; const v = $('#hero-video'); if (!cfg || !v) return;
+    if (cfg.poster) v.poster = cfg.poster;
+    const cont = v.parentElement;
+    cont.classList.add('is-ready'); // el poster se ve enseguida; el video aparece encima cuando puede reproducirse
+    if (reduceMotion || !cfg.mp4) return; // sin movimiento: queda el fotograma fijo
+    const src = document.createElement('source'); src.src = cfg.mp4; src.type = 'video/mp4'; v.appendChild(src);
+    v.preload = 'auto'; v.autoplay = true;
+    v.load(); const p = v.play(); if (p && p.catch) p.catch(() => {});
+  }
+
   /* ---------- Carta ---------- */
   function itemHTML(it, destacadoTxt) {
     const desc = txt(it.descripcion);
@@ -348,6 +360,7 @@
     aplicarDatos();
     aplicarI18n();
     pintarFotos();
+    initHeroVideo();
     pintarCarta();
     pintarCombos();
     pintarGaleria();
