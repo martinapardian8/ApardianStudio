@@ -196,6 +196,24 @@
     });
   }
 
+  /* ---------- Tríptico del hero (data/fotos.json → hero.paneles) ---------- */
+  function initHeroTriptico() {
+    const cfg = estado.fotos?.hero; const cont = $('#hero-tri'); if (!cont || !cfg?.paneles) return;
+    const movil = window.matchMedia('(max-width: 767px)');
+    cont.innerHTML = cfg.paneles.map((p, i) => `<div class="hero__panel hero__panel--${['izq', 'centro', 'der'][i] || i}${!movil.matches || i === 1 ? ' is-visible' : ''}">${p.fotos.map((f, k) => `<img class="${k === 0 ? 'is-on' : ''}" src="${f.src}" ${f.srcset ? `srcset="${f.srcset}"` : ''} sizes="(min-width: 768px) 45vw, 100vw" alt="" width="1400" height="935" ${k === 0 && i < 2 ? 'fetchpriority="high"' : 'loading="lazy"'}>`).join('')}</div>`).join('');
+    if (reduceMotion) return;
+    const paneles = $$('.hero__panel', cont); const ms = (cfg.intervalo || 6) * 1000;
+    // cada panel alterna sus fotos, desfasado para que no cambien todas a la vez
+    paneles.forEach((p, i) => {
+      const imgs = $$('img', p); if (imgs.length < 2) return; let k = 0;
+      setTimeout(() => setInterval(() => { imgs[k].classList.remove('is-on'); k = (k + 1) % imgs.length; imgs[k].classList.add('is-on'); }, ms), (i * ms) / paneles.length);
+    });
+    // en móvil, los paneles se turnan a pantalla completa
+    let v = 1;
+    setInterval(() => { if (!movil.matches) return; paneles[v].classList.remove('is-visible'); v = (v + 1) % paneles.length; paneles[v].classList.add('is-visible'); }, ms * .8);
+    movil.addEventListener('change', (e) => { paneles.forEach((p, i) => p.classList.toggle('is-visible', !e.matches || i === v)); });
+  }
+
   /* ---------- Video del hero (data/fotos.json → hero_video) ---------- */
   function initHeroVideo() {
     const cfg = estado.fotos?.hero_video; const v = $('#hero-video'); if (!cfg || !v || !cfg.mp4) return;
@@ -455,6 +473,7 @@
     aplicarI18n();
     envolverLetras();
     pintarFotos();
+    initHeroTriptico();
     initHeroVideo();
     pintarCarta();
     pintarCombos();

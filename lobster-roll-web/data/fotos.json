@@ -1,16 +1,57 @@
 {
   "_comentario": "ÚNICO archivo que decide qué foto va en cada lugar. Fotos reales del restaurante (de la web actual) en WebP con dos tamaños. Para reemplazarlas tras la sesión de octubre: cambiá src/srcset y alt. Los slots 'roll_recortado' y 'hero_video' pueden quedar vacíos (src: \"\").",
   "hero": {
-    "src": "assets/fotos/neon.webp",
-    "srcset": "assets/fotos/neon-800.webp 800w, assets/fotos/neon.webp 1400w",
-    "sizes": "(min-width: 768px) 45vw, 100vw",
-    "ancho": 1400,
-    "alto": 935,
-    "alt": {
-      "es": "El neón de The Lobster Roll Barcelona sobre la pared de ladrillo",
-      "ca": "El neó de The Lobster Roll Barcelona sobre la paret de maó",
-      "en": "The Lobster Roll Barcelona neon sign on the brick wall"
-    }
+    "_comentario": "Tríptico del hero: tres paneles (izquierda, centro, derecha). Cada panel puede tener varias fotos: se van alternando con un fundido. En móvil los tres paneles se alternan a pantalla completa. 'intervalo' en segundos.",
+    "intervalo": 6,
+    "paneles": [
+      {
+        "fotos": [
+          {
+            "src": "assets/fotos/roll-patatas.webp",
+            "srcset": "assets/fotos/roll-patatas-800.webp 800w, assets/fotos/roll-patatas.webp 1400w"
+          },
+          {
+            "src": "assets/fotos/cajas-rolls.webp",
+            "srcset": "assets/fotos/cajas-rolls-800.webp 800w, assets/fotos/cajas-rolls.webp 1400w"
+          }
+        ],
+        "alt": {
+          "es": "Lobster Roll con patatas en su caja",
+          "ca": "Lobster Roll amb patates a la seva caixa",
+          "en": "Lobster Roll with chips in its box"
+        }
+      },
+      {
+        "fotos": [
+          {
+            "src": "assets/fotos/neon.webp",
+            "srcset": "assets/fotos/neon-800.webp 800w, assets/fotos/neon.webp 1400w"
+          }
+        ],
+        "alt": {
+          "es": "El neón de The Lobster Roll Barcelona",
+          "ca": "El neó de The Lobster Roll Barcelona",
+          "en": "The Lobster Roll Barcelona neon sign"
+        }
+      },
+      {
+        "fotos": [
+          {
+            "src": "assets/fotos/roll-en-mano.webp",
+            "srcset": "assets/fotos/roll-en-mano-800.webp 800w, assets/fotos/roll-en-mano.webp 1400w"
+          },
+          {
+            "src": "assets/fotos/compartir.webp",
+            "srcset": "assets/fotos/compartir-800.webp 800w, assets/fotos/compartir.webp 1400w"
+          }
+        ],
+        "alt": {
+          "es": "Un roll en la mano, listo para comer",
+          "ca": "Un roll a la mà, a punt per menjar",
+          "en": "A roll in hand, ready to eat"
+        }
+      }
+    ]
   },
   "roll_recortado": {
     "_comentario": "PNG sin fondo del lobster roll. Vacío por ahora: el hero usa la foto del neón. Si se completa, el JS lo muestra.",
