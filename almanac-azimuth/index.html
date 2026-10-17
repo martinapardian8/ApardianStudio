@@ -1,0 +1,704 @@
+<!doctype html>
+<html lang="es-UY">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Almanac Azimuth</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Rooftop de cocktails en el séptimo piso. La terraza abre una hora antes del atardecer.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&family=Hanken+Grotesk:wght@300;400;500&display=swap">
+<style>
+/* Layout: one scroll is one evening, from golden hour to last call. A fixed sky, sun, moon and Parisian roofline are driven by scroll; content sits left-weighted in a 1320px measure above it. */
+:root{
+  --loden:#2E3B2F;
+  --tinta:#1D261F;
+  --marmol:#ECEAE4;
+  --campari:#B3122E;
+  --campari-hondo:#8E0E24;
+  --bronce:#9C7A4A;
+  --bronce-claro:#D2B07A;
+  --noche:#0E1524;
+  --veil:rgb(8 10 18 / .32);
+  --serif:"Bodoni Moda","Bodoni 72","Didot",Georgia,serif;
+  --sans:"Hanken Grotesk","Helvetica Neue",Arial,sans-serif;
+  --gutter:clamp(16px,4.5vw,64px);
+  --s1:#A7B8CB; --s2:#EECBA2; --s3:#F7E4C6;
+  --fg:var(--tinta);
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--s3);color:var(--tinta);font-family:var(--sans);font-weight:300;font-size:1.0625rem;line-height:1.62;overflow-x:clip;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+::selection{background:var(--campari);color:var(--marmol)}
+:focus-visible{outline:2px solid var(--bronce-claro);outline-offset:3px}
+
+/* ---------- the sky ---------- */
+.scene{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+#sky{position:absolute;inset:0;background:linear-gradient(180deg,var(--s1) 0%,var(--s2) 58%,var(--s3) 100%)}
+#scene{position:absolute;inset:0;width:100%;height:100%;display:block}
+.grain{position:absolute;inset:-120px;opacity:.10;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation:grain 1.1s steps(5) infinite}
+@keyframes grain{0%{transform:translate(0,0)}20%{transform:translate(-40px,24px)}40%{transform:translate(30px,-44px)}60%{transform:translate(-18px,50px)}80%{transform:translate(44px,12px)}100%{transform:translate(0,0)}}
+.vignette{position:absolute;inset:0;background:radial-gradient(130% 95% at 50% 38%,transparent 58%,var(--veil) 100%)}
+
+/* ---------- nav ---------- */
+.nav{position:fixed;inset:0 0 auto;z-index:20;display:flex;align-items:center;gap:clamp(.75rem,3vw,2.5rem);
+  padding-top:calc(env(safe-area-inset-top,0px) + 14px);padding-bottom:30px;
+  padding-left:max(var(--gutter),env(safe-area-inset-left,0px));padding-right:max(var(--gutter),env(safe-area-inset-right,0px));
+  color:var(--fg);transition:color .9s ease;
+  background:linear-gradient(180deg,var(--s1) 0%,color-mix(in srgb,var(--s1) 72%,transparent) 50%,transparent 100%)}
+.brand{font-family:var(--serif);font-style:italic;font-size:1.4rem;line-height:1;color:inherit;text-decoration:none;white-space:nowrap;letter-spacing:.005em}
+.dial{display:flex;align-items:center;gap:.7rem;margin-inline:auto}
+.dial svg{width:62px;height:38px;overflow:visible}
+.dial-text{display:grid;line-height:1.1}
+.dial-time{font-family:var(--serif);font-size:1.3rem;font-variant-numeric:tabular-nums lining-nums}
+.dial-phase{font-size:.8125rem;opacity:.78;white-space:nowrap}
+.links{display:flex;align-items:center;gap:clamp(1rem,2vw,1.75rem)}
+.links a:not(.btn){color:inherit;text-decoration:none;font-size:.95rem;background:linear-gradient(currentColor,currentColor) 0 100%/0 1px no-repeat;transition:background-size .5s cubic-bezier(.2,.7,.1,1)}
+.links a:not(.btn):hover{background-size:100% 1px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;padding:.85em 1.5em;background:var(--campari);color:var(--marmol);border:0;border-radius:2px;
+  font:500 .95rem/1 var(--sans);letter-spacing:.02em;text-decoration:none;cursor:pointer;transition:background .4s ease,transform .4s ease}
+.btn:hover{background:var(--campari-hondo)}
+.btn:active{transform:translateY(1px)}
+.btn-sm{padding:.7em 1.15em;font-size:.9rem}
+.text-link{color:inherit;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.3em}
+
+/* ---------- content ---------- */
+main,footer{position:relative;z-index:2}
+.wrap{max-width:1320px;margin-inline:auto;padding-left:max(var(--gutter),env(safe-area-inset-left,0px));padding-right:max(var(--gutter),env(safe-area-inset-right,0px))}
+.chapter{padding-block:clamp(6rem,17vh,11rem)}
+.tone-light{color:var(--tinta)}
+.tone-dark{color:var(--marmol)}
+.tone-dark h2,.tone-dark .copy{text-shadow:0 0 28px var(--noche)}
+h1,h2{font-family:var(--serif);font-weight:400;margin:0;text-wrap:balance}
+h1{font-size:clamp(3rem,7.2vw,7.2rem);line-height:.93;letter-spacing:-.024em}
+h2{font-size:clamp(2.4rem,5.2vw,4.6rem);line-height:1.02;letter-spacing:-.016em;max-width:15ch}
+p{margin:0}
+.copy{max-width:52ch;margin-top:1.5rem}
+.small{font-size:.9rem;opacity:.78}
+
+/* hero */
+.hero{min-height:94svh;display:flex;align-items:flex-start;padding-top:clamp(7.5rem,17vh,10.5rem);padding-bottom:calc(var(--cityH,300px) * .95)}
+.hero .wrap{width:100%}
+.line{display:block;overflow:hidden;padding-bottom:.07em;margin-bottom:-.07em}
+.line>span{display:block;animation:rise 1.4s cubic-bezier(.2,.75,.1,1) both;animation-delay:calc(var(--i) * 130ms + 200ms)}
+@keyframes rise{from{transform:translateY(110%)}}
+.hero-foot{display:flex;flex-wrap:wrap;align-items:flex-end;gap:2rem 3.5rem;margin-top:clamp(2rem,5vh,3.25rem);animation:appear 1.2s ease .85s both}
+@keyframes appear{from{opacity:0}}
+.lede{max-width:44ch;font-size:clamp(1.0625rem,1.35vw,1.25rem)}
+.lede time{font-family:var(--serif);font-size:1.2em;font-variant-numeric:lining-nums}
+.actions{display:flex;flex-wrap:wrap;align-items:center;gap:1.5rem}
+
+/* terrace */
+#terraza{padding-top:0}
+.awning{height:66px;margin-bottom:clamp(4.5rem,11vh,8rem);
+  background:repeating-linear-gradient(90deg,var(--loden) 0 38px,var(--marmol) 38px 76px);
+  -webkit-mask:linear-gradient(#000,#000) top/100% 46px no-repeat,radial-gradient(circle 19px at 19px 46px,#000 97%,transparent 100%) 0 0/38px 66px repeat-x;
+  mask:linear-gradient(#000,#000) top/100% 46px no-repeat,radial-gradient(circle 19px at 19px 46px,#000 97%,transparent 100%) 0 0/38px 66px repeat-x;
+  filter:drop-shadow(0 12px 14px var(--veil))}
+.split{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(2.5rem,6vw,6rem);align-items:end}
+.facts{margin:0;display:grid}
+.facts div{display:grid;grid-template-columns:7.5rem minmax(0,1fr);gap:1rem;padding-block:1rem;border-top:1px solid color-mix(in srgb,var(--bronce) 60%,transparent)}
+.facts div:last-child{border-bottom:1px solid color-mix(in srgb,var(--bronce) 60%,transparent)}
+.facts dt{font-family:var(--serif);font-style:italic;font-size:1.125rem;line-height:1.4}
+.facts dd{margin:0}
+
+/* menu */
+.menu{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(2.5rem,6vw,6rem);align-items:start;margin-top:clamp(3rem,7vh,4.5rem)}
+.glass-col{position:sticky;top:22vh;display:grid;justify-items:center;gap:1.25rem;text-align:center}
+.glass{width:min(100%,320px);height:auto;display:block;overflow:visible}
+.glass .outline{fill:none;stroke:var(--bronce-claro);stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:0}
+.glass.pour .outline{animation:draw 1.3s cubic-bezier(.3,.6,.2,1) both}
+@keyframes draw{from{stroke-dashoffset:1}}
+#liquid{transition:transform 1.5s cubic-bezier(.3,.7,.15,1),fill .8s ease}
+.glass .garnish{fill:none;stroke:var(--marmol);stroke-width:1.1;opacity:.75}
+.glass .shine{fill:none;stroke:var(--marmol);stroke-width:2.2;stroke-linecap:round;opacity:.28}
+.glass-name{font-family:var(--serif);font-style:italic;font-size:1.5rem;line-height:1.2}
+.glass-cap{font-size:.9rem;opacity:.75}
+.drinks{list-style:none;margin:0;padding:0;border-top:1px solid color-mix(in srgb,var(--bronce-claro) 45%,transparent)}
+.drink{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.3rem 1.5rem;width:100%;padding:1.2rem 0;text-align:left;
+  background:none;border:0;border-bottom:1px solid color-mix(in srgb,var(--bronce-claro) 45%,transparent);color:inherit;font:inherit;cursor:pointer;transition:padding .6s cubic-bezier(.2,.7,.1,1)}
+.drink[aria-pressed="true"]{padding-left:.9rem}
+.d-name{font-family:var(--serif);font-style:italic;font-size:clamp(1.6rem,2.6vw,2.15rem);line-height:1.1;transition:color .5s ease}
+.drink[aria-pressed="true"] .d-name{color:var(--bronce-claro)}
+.d-price{font-family:var(--serif);font-size:1.25rem;font-variant-numeric:tabular-nums lining-nums;align-self:start;padding-top:.3rem}
+.d-ing{grid-column:1/-1;font-size:.95rem;opacity:.78}
+.menu-note{margin-top:1.25rem}
+
+/* nights */
+.program{list-style:none;margin:0;padding:0;border-top:1px solid color-mix(in srgb,var(--bronce-claro) 45%,transparent)}
+.program li{display:grid;grid-template-columns:8.5rem minmax(0,1fr) auto;gap:.35rem 2rem;align-items:baseline;padding-block:1.25rem;border-bottom:1px solid color-mix(in srgb,var(--bronce-claro) 45%,transparent)}
+.p-day{font-family:var(--serif);font-style:italic;font-size:1.6rem;line-height:1.2}
+.p-time{font-variant-numeric:tabular-nums;opacity:.8;white-space:nowrap}
+
+/* booking */
+#reservar{color-scheme:dark}
+.booking{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(2.5rem,6vw,6rem);align-items:start}
+form{display:grid;gap:2rem}
+fieldset{border:0;padding:0;margin:0;min-width:0}
+legend,.field-label{font-family:var(--serif);font-style:italic;font-size:1.2rem;padding:0;margin-bottom:.7rem;display:block}
+.chips{display:grid;grid-template-columns:repeat(auto-fill,minmax(8.25rem,1fr));gap:.55rem}
+.chip{position:relative;display:grid;gap:.1rem;padding:.75rem .9rem;border:1px solid color-mix(in srgb,var(--bronce-claro) 50%,transparent);cursor:pointer;transition:background .45s ease,color .45s ease,border-color .45s ease}
+.chip:hover{border-color:var(--bronce-claro)}
+.chip input{position:absolute;inset:0;opacity:0;margin:0;cursor:pointer}
+.chip:has(input:checked){background:var(--marmol);color:var(--noche);border-color:var(--marmol)}
+.chip:has(input:focus-visible){outline:2px solid var(--bronce-claro);outline-offset:3px}
+.chip-main{font-weight:500}
+.chip-sub{font-size:.85rem;opacity:.75;font-variant-numeric:tabular-nums}
+.fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.75rem 1.5rem}
+.field{display:grid;gap:.15rem;min-width:0}
+.field .field-label{margin-bottom:.2rem}
+input[type=text],input[type=tel],select{width:100%;font:inherit;font-weight:400;color:inherit;background:transparent;border:0;border-bottom:1px solid color-mix(in srgb,var(--bronce-claro) 65%,transparent);border-radius:0;padding:.55rem 0;transition:border-color .4s ease}
+input[type=text]:focus-visible,input[type=tel]:focus-visible,select:focus-visible{outline:none;border-bottom-color:var(--bronce-claro);box-shadow:0 1px 0 var(--bronce-claro)}
+select option{background:var(--noche);color:var(--marmol)}
+.form-end{display:flex;flex-wrap:wrap;align-items:center;gap:1rem 1.5rem}
+.form-error{color:var(--bronce-claro);font-size:.95rem}
+.confirm{padding:1.25rem 1.5rem;border:1px solid var(--bronce-claro)}
+.confirm strong{font-family:var(--serif);font-style:italic;font-weight:400;font-size:1.3rem;display:block;margin-bottom:.35rem}
+
+/* footer */
+footer{color:var(--marmol);padding-block:clamp(4rem,10vh,7rem) clamp(2rem,5vh,3rem)}
+.foot-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:2rem;padding-top:2rem;border-top:1px solid color-mix(in srgb,var(--bronce-claro) 45%,transparent);font-size:.95rem}
+.foot-grid h3{font-family:var(--serif);font-style:italic;font-weight:400;font-size:1.15rem;margin:0 0 .4rem}
+.signoff{font-family:var(--serif);font-style:italic;font-size:clamp(3rem,12.5vw,11.5rem);line-height:.9;letter-spacing:-.03em;margin-top:clamp(3rem,8vh,5rem);white-space:nowrap;opacity:.92}
+
+@media (max-width:900px){
+  .links a:not(.btn){display:none}
+  .split,.menu,.booking{grid-template-columns:minmax(0,1fr)}
+  .glass-col{position:static}
+  .glass{width:min(62vw,230px)}
+  .foot-grid{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:560px){
+  .dial-phase{display:none}
+  .dial svg{width:46px;height:30px}
+  .dial-time{font-size:1.05rem}
+  .brand{font-size:1.1rem}
+  .fields{grid-template-columns:minmax(0,1fr)}
+  .program li{grid-template-columns:minmax(0,1fr) auto}
+  .p-desc{grid-column:1/-1;grid-row:2}
+  .facts div{grid-template-columns:minmax(0,1fr);gap:.2rem}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .grain,.line>span,.hero-foot,.glass.pour .outline{animation:none}
+  #liquid,.drink,.chip,.nav{transition:none}
+}
+</style>
+
+</head>
+<body>
+<div class="scene" aria-hidden="true">
+  <div id="sky"></div>
+  <canvas id="scene"></canvas>
+  <div class="grain"></div>
+  <div class="vignette"></div>
+</div>
+
+<header class="nav" id="nav">
+  <a class="brand" href="#inicio">Almanac Azimuth</a>
+  <div class="dial" aria-hidden="true">
+    <svg viewBox="0 0 120 72">
+      <path d="M14 52 A46 46 0 0 1 106 52" fill="none" stroke="currentColor" stroke-width="1.2" opacity=".55"/>
+      <path d="M106 52 A46 46 0 0 1 14 52" fill="none" stroke="currentColor" stroke-width="1.2" stroke-dasharray="2 4" opacity=".3"/>
+      <line x1="2" y1="52" x2="118" y2="52" stroke="currentColor" stroke-width="1.2"/>
+      <circle id="dial-sun" cx="100" cy="30" r="5.5" fill="var(--bronce)"/>
+      <circle id="dial-moon" cx="20" cy="62" r="5" fill="none" stroke="currentColor" stroke-width="1.4" opacity="0"/>
+    </svg>
+    <span class="dial-text"><span class="dial-time" id="dial-time">18:20</span><span class="dial-phase" id="dial-phase">Hora dorada</span></span>
+  </div>
+  <nav class="links" aria-label="Secciones">
+    <a href="#terraza">La terraza</a>
+    <a href="#carta">La carta</a>
+    <a href="#noches">Las noches</a>
+    <a class="btn btn-sm" href="#reservar">Reservar</a>
+  </nav>
+</header>
+
+<main>
+  <section class="hero chapter tone-light" id="inicio">
+    <div class="wrap">
+      <h1>
+        <span class="line"><span style="--i:0">Arriba de la ciudad,</span></span>
+        <span class="line"><span style="--i:1">mientras el sol</span></span>
+        <span class="line"><span style="--i:2">se va.</span></span>
+      </h1>
+      <div class="hero-foot">
+        <p class="lede">Hoy en <span data-city>Montevideo</span> el sol se pone a las <time data-sunset>19:00</time>. Llegá un rato antes y miralo bajar desde el séptimo piso, con el primer vermut en la mano.</p>
+        <div class="actions">
+          <a class="btn" href="#reservar">Reservar mesa</a>
+          <a class="text-link" href="#carta">Ver la carta</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="chapter tone-light" id="terraza">
+    <div class="awning" aria-hidden="true"></div>
+    <div class="wrap split">
+      <div>
+        <h2>Siete pisos arriba de Ciudad Vieja.</h2>
+        <p class="copy">Una terraza de 1928 con su baranda de hierro original, toldos a rayas y una barra de mármol que mira al oeste. Desde acá se ven la bahía, las cúpulas del centro y el sol bajando sobre el río.</p>
+      </div>
+      <dl class="facts">
+        <div><dt>Abrimos</dt><dd>Miércoles a domingo, una hora antes del atardecer.</dd></div>
+        <div><dt>Cerramos</dt><dd>A la 1:00. Los sábados, a las 2:00.</dd></div>
+        <div><dt>Lugares</dt><dd>64 en la terraza y 22 en el salón de invierno, para las noches de viento.</dd></div>
+        <div><dt>Vestimenta</dt><dd>Elegante. El saco es opcional, las ojotas no.</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="chapter tone-dark" id="carta">
+    <div class="wrap">
+      <h2>Una carta para la hora azul.</h2>
+      <p class="copy">Seis tragos pensados para el momento de la noche en que se toman. Elegí uno para verlo servido.</p>
+      <div class="menu">
+        <div class="glass-col">
+          <svg class="glass" id="glass" viewBox="0 0 200 260" role="img" aria-labelledby="glass-name">
+            <defs><clipPath id="glass-clip"><path id="glass-bowl" d=""/></clipPath></defs>
+            <g clip-path="url(#glass-clip)"><rect id="liquid" x="0" y="0" width="200" height="260" fill="#E8DDB0" style="transform:translateY(260px)"/></g>
+            <path class="garnish" id="glass-garnish" d=""/>
+            <path class="shine" id="glass-shine" d=""/>
+            <path class="outline" id="glass-outline" pathLength="1" d=""/>
+          </svg>
+          <div>
+            <div class="glass-name" id="glass-name">Azimut</div>
+            <div class="glass-cap" id="glass-cap">Servido en copa coupé</div>
+          </div>
+        </div>
+        <div>
+          <ul class="drinks" id="drinks"></ul>
+          <p class="menu-note small">Precios en pesos uruguayos. La barra prepara cualquiera de la carta sin alcohol.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="chapter tone-dark" id="noches">
+    <div class="wrap split">
+      <div>
+        <h2>Cuando se pone el sol, sube la música.</h2>
+        <p class="copy">Cada noche tiene su programa. La terraza queda abierta mientras el tiempo acompañe; si llueve, seguimos en el salón de invierno.</p>
+      </div>
+      <ul class="program">
+        <li><span class="p-day">Miércoles</span><span class="p-desc">Piano y voz</span><span class="p-time">desde 21:30</span></li>
+        <li><span class="p-day">Jueves</span><span class="p-desc">Cuarteto de jazz, dos sets</span><span class="p-time">21:30 y 23:00</span></li>
+        <li><span class="p-day">Viernes</span><span class="p-desc">Vinilos de bossa y soul</span><span class="p-time">22:00 al cierre</span></li>
+        <li><span class="p-day">Sábado</span><span class="p-desc">DJ invitado</span><span class="p-time">hasta las 2:00</span></li>
+        <li><span class="p-day">Domingo</span><span class="p-desc">Atardecer en silencio: sin música hasta que se pone el sol</span><span class="p-time">desde 18:30</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="chapter tone-dark" id="reservar">
+    <div class="wrap booking">
+      <div>
+        <h2>Pedí tu mesa.</h2>
+        <p class="copy">Las mesas del borde se llenan primero en los días despejados. Cada día muestra a qué hora se pone el sol, para que llegues a tiempo.</p>
+      </div>
+      <form id="booking" novalidate>
+        <fieldset>
+          <legend>Día</legend>
+          <div class="chips" id="days"></div>
+        </fieldset>
+        <fieldset>
+          <legend>Hora</legend>
+          <div class="chips" id="times"></div>
+        </fieldset>
+        <div class="fields">
+          <div class="field">
+            <label class="field-label" for="personas">Personas</label>
+            <select id="personas" name="personas">
+              <option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option>
+            </select>
+          </div>
+          <div class="field">
+            <label class="field-label" for="lugar">Dónde</label>
+            <select id="lugar" name="lugar">
+              <option value="en el borde de la terraza">Borde de la terraza</option>
+              <option value="en la terraza">Terraza</option>
+              <option value="en la barra">Barra</option>
+              <option value="en el salón de invierno">Salón de invierno</option>
+            </select>
+          </div>
+          <div class="field">
+            <label class="field-label" for="nombre">Nombre</label>
+            <input type="text" id="nombre" name="nombre" autocomplete="name" placeholder="Como figura en la reserva">
+          </div>
+          <div class="field">
+            <label class="field-label" for="telefono">WhatsApp</label>
+            <input type="tel" id="telefono" name="telefono" autocomplete="tel" placeholder="099 123 456">
+          </div>
+        </div>
+        <div class="form-end">
+          <button class="btn" type="submit">Pedir la mesa</button>
+          <span class="form-error" id="form-error" role="alert"></span>
+        </div>
+        <div class="confirm" id="confirm" role="status" hidden></div>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div><h3>Dónde</h3><p>Séptimo piso, Ciudad Vieja, Montevideo.<br>34°54′ S, 56°12′ O.</p></div>
+      <div><h3>Cuándo</h3><p>Miércoles a domingo, desde una hora antes del atardecer hasta la 1:00.</p></div>
+      <div><h3>Hoy</h3><p>El sol se pone a las <time data-sunset>19:00</time>, con azimut <span data-azimuth>259°</span>. La barra mira justo hacia ahí.</p></div>
+    </div>
+    <div class="signoff" aria-hidden="true">Almanac Azimuth</div>
+  </div>
+</footer>
+
+<script>
+(() => {
+  // Venue: change these to move the sunset, the dial and the booking days.
+  const VENUE = { city: "Montevideo", lat: -34.9058, lon: -56.2011, tz: "America/Montevideo", openDays: [3, 4, 5, 6, 0] };
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const R = Math.PI / 180;
+
+  /* ---------- almanac ---------- */
+  function sunset(y, m, d) {
+    const jd = Date.UTC(y, m - 1, d, 12) / 864e5 + 2440587.5;
+    const n = Math.round(jd - 2451545 + 0.0008);
+    const js = n - VENUE.lon / 360;
+    const M = ((357.5291 + 0.98560028 * js) % 360 + 360) % 360;
+    const C = 1.9148 * Math.sin(M * R) + 0.02 * Math.sin(2 * M * R) + 0.0003 * Math.sin(3 * M * R);
+    const L = (M + C + 180 + 102.9372) % 360;
+    const jt = 2451545 + js + 0.0053 * Math.sin(M * R) - 0.0069 * Math.sin(2 * L * R);
+    const dec = Math.asin(Math.sin(L * R) * Math.sin(23.4397 * R));
+    const cw = (Math.sin(-0.833 * R) - Math.sin(VENUE.lat * R) * Math.sin(dec)) / (Math.cos(VENUE.lat * R) * Math.cos(dec));
+    const w = Math.acos(Math.max(-1, Math.min(1, cw))) / R;
+    const az = 360 - Math.acos(Math.max(-1, Math.min(1, Math.sin(dec) / Math.cos(VENUE.lat * R)))) / R;
+    return { time: new Date((jt + w / 360 - 2440587.5) * 864e5), az };
+  }
+  const parts = (date, opts) => Object.fromEntries(new Intl.DateTimeFormat("en-US", { timeZone: VENUE.tz, ...opts }).formatToParts(date).map(p => [p.type, p.value]));
+  const minutesOf = date => { const p = parts(date, { hour: "2-digit", minute: "2-digit", hourCycle: "h23" }); return +p.hour * 60 + +p.minute; };
+  const hhmm = mins => { const m = ((Math.round(mins) % 1440) + 1440) % 1440; return String(Math.floor(m / 60)).padStart(2, "0") + ":" + String(m % 60).padStart(2, "0"); };
+
+  const now = parts(new Date(), { year: "numeric", month: "2-digit", day: "2-digit" });
+  const Y = +now.year, MO = +now.month, D = +now.day;
+  const today = sunset(Y, MO, D);
+  const sunMin = minutesOf(today.time);
+  document.querySelectorAll("[data-sunset]").forEach(el => { el.textContent = hhmm(sunMin); el.dateTime = today.time.toISOString(); });
+  document.querySelectorAll("[data-azimuth]").forEach(el => { el.textContent = Math.round(today.az) + "°"; });
+  document.querySelectorAll("[data-city]").forEach(el => { el.textContent = VENUE.city; });
+
+  // The evening, chapter by chapter: minutes on the clock and the name of the light.
+  const CLOCK = [sunMin - 40, sunMin, sunMin + 55, 23 * 60, 25 * 60];
+  const PHASES = ["Hora dorada", "Puesta del sol", "Hora azul", "Noche cerrada", "Última ronda"];
+
+  /* ---------- colour helpers ---------- */
+  const hex = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16));
+  const smooth = t => t * t * (3 - 2 * t);
+  const clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
+  function span(len, f) { const x = clamp(f, 0, len - 1); const a = Math.floor(x); const b = Math.min(len - 1, a + 1); return [a, b, x - a]; }
+  function mix(list, f) { const [a, b, t] = span(list.length, f); const A = list[a], B = list[b], e = smooth(t); return [0, 1, 2].map(k => Math.round(A[k] + (B[k] - A[k]) * e)); }
+  function num(list, f) { const [a, b, t] = span(list.length, f); return list[a] + (list[b] - list[a]) * smooth(t); }
+  const rgb = (c, a = 1) => `rgb(${c[0]} ${c[1]} ${c[2]} / ${a})`;
+  const pal = arr => arr.map(hex);
+
+  const SKY_TOP = pal(["#A7B8CB", "#8393B0", "#1E2A44", "#0B1120", "#070B14"]);
+  const SKY_MID = pal(["#EECBA2", "#DB9C86", "#34486A", "#151F33", "#0E1524"]);
+  const SKY_LOW = pal(["#F7E4C6", "#F1BB8E", "#4C5C80", "#24304A", "#18223A"]);
+  const FAR = pal(["#B9A4A0", "#9A8796", "#2A3550", "#141C2C", "#111827"]);
+  const NEAR = pal(["#5B4B45", "#43363B", "#161D2C", "#0B111C", "#090E18"]);
+  const RAIL = pal(["#2E2622", "#241D20", "#0A0F18", "#060A12", "#05080F"]);
+  const SUN_CORE = pal(["#FFF2D2", "#FFC48C", "#F27A4E", "#F27A4E", "#F27A4E"]);
+  const SUN_GLOW = pal(["#FFDBA3", "#F89C6C", "#D9544A", "#D9544A", "#D9544A"]);
+  const SINK = [0, .74, .93, .22, .5];
+
+  /* ---------- the scene ---------- */
+  const sky = document.getElementById("sky");
+  const nav = document.getElementById("nav");
+  const cv = document.getElementById("scene");
+  const ctx = cv.getContext("2d");
+  let W = 0, H = 0, cityH = 0, farPath, nearPath, railPath, windows = [], stars = [], moonImg;
+
+  function rng(seed) { return () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+
+  function build() {
+    const dpr = Math.min(2, devicePixelRatio || 1);
+    W = innerWidth; H = innerHeight;
+    cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    cityH = W < 640 ? Math.round(clamp(H * .27, 150, 250)) : Math.round(clamp(H * .3, 200, 330));
+    document.documentElement.style.setProperty("--cityH", cityH + "px");
+    const r = rng(1928);
+
+    // far roofline: blocks, a dome, a spire and a clock tower
+    farPath = new Path2D();
+    for (let x = -20; x < W + 20;) {
+      const w = 36 + r() * 70, h = cityH * (.26 + r() * .24);
+      farPath.rect(x, -h, w + 1, h);
+      if (r() < .35) { farPath.moveTo(x, -h); farPath.lineTo(x + w / 2, -h - w * .28); farPath.lineTo(x + w, -h); farPath.closePath(); }
+      x += w;
+    }
+    const dx = W * (W < 640 ? .22 : .27), dr = Math.max(26, cityH * .15), dh = cityH * .5;
+    farPath.rect(dx - dr * 1.15, -dh, dr * 2.3, dh);
+    farPath.moveTo(dx - dr, -dh); farPath.arc(dx, -dh, dr, Math.PI, 0); farPath.closePath();
+    farPath.rect(dx - dr * .16, -dh - dr * 1.45, dr * .32, dr * .5);
+    farPath.moveTo(dx - dr * .2, -dh - dr * 1.45); farPath.lineTo(dx, -dh - dr * 1.85); farPath.lineTo(dx + dr * .2, -dh - dr * 1.45); farPath.closePath();
+    const sx = W * .64, sw = cityH * .07;
+    farPath.rect(sx - sw / 2, -cityH * .6, sw, cityH * .6);
+    farPath.moveTo(sx - sw / 2, -cityH * .6); farPath.lineTo(sx, -cityH * .98); farPath.lineTo(sx + sw / 2, -cityH * .6); farPath.closePath();
+    const tx = W * .9, tw = cityH * .1;
+    farPath.rect(tx - tw / 2, -cityH * .7, tw, cityH * .7);
+    farPath.moveTo(tx - tw * .6, -cityH * .7); farPath.lineTo(tx, -cityH * .82); farPath.lineTo(tx + tw * .6, -cityH * .7); farPath.closePath();
+
+    // near roofline: mansard roofs, dormers, chimney pots, lit windows
+    nearPath = new Path2D(); windows = [];
+    for (let x = -10; x < W + 10;) {
+      const w = 90 + r() * 110, h = cityH * (.4 + r() * .3), mh = Math.min(h * .2, 38);
+      nearPath.rect(x, -h + mh, w + 1, h - mh);
+      nearPath.moveTo(x, -h + mh); nearPath.lineTo(x + 10, -h); nearPath.lineTo(x + w - 10, -h); nearPath.lineTo(x + w, -h + mh); nearPath.closePath();
+      for (let k = 0, n = Math.floor((w - 30) / 34); k < n; k++) {
+        const ox = x + 20 + k * 34, oy = -h + mh * .3;
+        nearPath.rect(ox, oy, 12, mh * .6);
+        nearPath.moveTo(ox - 2, oy); nearPath.lineTo(ox + 6, oy - 8); nearPath.lineTo(ox + 14, oy); nearPath.closePath();
+        windows.push({ x: ox + 3, y: oy + 2, w: 6, h: mh * .6 - 5, t: 1.7 + r() * 1.6 });
+      }
+      const chimneys = 1 + (r() < .5 ? 1 : 0);
+      for (let c = 0; c < chimneys; c++) {
+        const cx = x + 15 + r() * (w - 40);
+        nearPath.rect(cx, -h - 18, 15, 20); nearPath.rect(cx + 2, -h - 25, 4, 7); nearPath.rect(cx + 9, -h - 23, 4, 5);
+      }
+      for (let wx = x + 14; wx < x + w - 18; wx += 24) {
+        for (let wy = -h + mh + 16; wy < -26; wy += 30) windows.push({ x: wx, y: wy, w: 8, h: 14, t: 1.55 + r() * 2.7 });
+      }
+      x += w;
+    }
+
+    // the terrace balustrade, with a coupe left on the rail
+    railPath = new Path2D();
+    const bh = Math.min(74, cityH * .21);
+    railPath.rect(0, -bh * .18, W, bh * .18);
+    railPath.rect(0, -bh, W, bh * .16);
+    for (let x = 12, i = 0; x < W; x += 22, i++) {
+      if (i % 9 === 0) { railPath.rect(x - 9, -bh, 18, bh); continue; }
+      railPath.ellipse(x, -bh * .42, 6.5, bh * .2, 0, 0, Math.PI * 2);
+      railPath.rect(x - 2.6, -bh * .86, 5.2, bh * .7);
+      railPath.ellipse(x, -bh * .78, 4.5, 3, 0, 0, Math.PI * 2);
+    }
+    if (W > 520) {
+      const gx = W * .82, gy = -bh;
+      railPath.moveTo(gx - 22, gy - 34); railPath.ellipse(gx, gy - 34, 22, 13, 0, 0, Math.PI); railPath.closePath();
+      railPath.rect(gx - 1.3, gy - 23, 2.6, 21);
+      railPath.ellipse(gx, gy - 2.5, 10, 2.5, 0, 0, Math.PI * 2);
+    }
+
+    stars = Array.from({ length: W < 640 ? 110 : 220 }, () => ({ x: r() * W, y: r() * H * .72, s: r() < .08 ? 1.5 : .5 + r() * .6, p: r() * 6.28, v: .6 + r() * 1.6 }));
+
+    const mr = Math.max(14, Math.min(W, H) * .032);
+    moonImg = document.createElement("canvas");
+    moonImg.width = moonImg.height = Math.ceil(mr * 2 + 4);
+    const m = moonImg.getContext("2d");
+    m.fillStyle = "#EEECE4"; m.beginPath(); m.arc(mr + 2, mr + 2, mr, 0, Math.PI * 2); m.fill();
+    m.globalCompositeOperation = "destination-out";
+    m.beginPath(); m.arc(mr + 2 + mr * .55, mr + 2 - mr * .2, mr * .92, 0, Math.PI * 2); m.fill();
+    moonImg.r = mr;
+  }
+
+  function draw(f, t) {
+    ctx.clearRect(0, 0, W, H);
+    const min = Math.min(W, H);
+
+    // stars
+    const starA = clamp((f - 1.55) / 1.1);
+    if (starA > 0) {
+      for (const s of stars) {
+        const tw = reduce ? .8 : .55 + .45 * Math.sin(t * .001 * s.v + s.p);
+        ctx.fillStyle = `rgb(240 238 228 / ${starA * tw})`;
+        ctx.fillRect(s.x, s.y, s.s, s.s);
+      }
+    }
+
+    // moon
+    const moonA = clamp((f - 2.2) / .6);
+    if (moonA > 0) {
+      const mx = W * (W < 900 ? .84 : .44), my = H * (.92 - clamp((f - 2.2) / 1.8) * .76), mr = moonImg.r;
+      const g = ctx.createRadialGradient(mx, my, 0, mx, my, mr * 5);
+      g.addColorStop(0, `rgb(220 226 240 / ${.18 * moonA})`); g.addColorStop(1, "rgb(220 226 240 / 0)");
+      ctx.fillStyle = g; ctx.fillRect(mx - mr * 5, my - mr * 5, mr * 10, mr * 10);
+      ctx.globalAlpha = moonA * .9; ctx.drawImage(moonImg, mx - mr - 2, my - mr - 2); ctx.globalAlpha = 1;
+    }
+
+    // sun, setting on a fixed horizon behind the roofs
+    const alt = num(W < 640 ? [.15, .02, -.35, -.5, -.5] : [.3, .03, -.35, -.5, -.5], f);
+    const sx = W * (W < 640 ? .78 : .73) + f * W * .025, sy = H * .8 - alt * H, sr = min * .055;
+    if (f < 1.9 && sy - sr * 9 < H) {
+      const core = mix(SUN_CORE, f), glow = mix(SUN_GLOW, f);
+      const g = ctx.createRadialGradient(sx, sy, 0, sx, sy, sr * 9);
+      const fade = clamp((1.9 - f) / .5);
+      g.addColorStop(0, rgb(glow, .55 * fade)); g.addColorStop(.22, rgb(glow, .22 * fade)); g.addColorStop(1, rgb(glow, 0));
+      ctx.fillStyle = g; ctx.fillRect(sx - sr * 9, sy - sr * 9, sr * 18, sr * 18);
+      const d = ctx.createRadialGradient(sx, sy, sr * .8, sx, sy, sr);
+      d.addColorStop(0, rgb(core)); d.addColorStop(1, rgb(core, 0));
+      ctx.fillStyle = d; ctx.beginPath(); ctx.arc(sx, sy, sr, 0, Math.PI * 2); ctx.fill();
+    }
+
+    // the city sinks while you read and comes back lit at night
+    const sink = num(SINK, f);
+    ctx.save(); ctx.translate(0, H - cityH * .14 + sink * cityH * .86);
+    ctx.fillStyle = rgb(mix(FAR, f)); ctx.fill(farPath); ctx.restore();
+
+    ctx.save(); ctx.translate(0, H + sink * cityH * 1.06);
+    ctx.fillStyle = rgb(mix(NEAR, f)); ctx.fill(nearPath);
+    for (const w of windows) {
+      const a = clamp((f - w.t) / .25);
+      if (a > 0) { ctx.fillStyle = `rgb(255 201 119 / ${a * .85})`; ctx.fillRect(w.x, w.y, w.w, w.h); }
+    }
+    ctx.restore();
+
+    ctx.save(); ctx.translate(0, H + sink * cityH * 1.32);
+    ctx.fillStyle = rgb(mix(RAIL, f)); ctx.fill(railPath); ctx.restore();
+  }
+
+  /* ---------- the clock in the nav ---------- */
+  const dialSun = document.getElementById("dial-sun"), dialMoon = document.getElementById("dial-moon");
+  const dialTime = document.getElementById("dial-time"), dialPhase = document.getElementById("dial-phase");
+  const onArc = a => [60 + 46 * Math.cos(a * R), 52 - 46 * Math.sin(a * R)];
+  let lastTone = "", lastPhase = "";
+  function ui(f) {
+    const top = rgb(mix(SKY_TOP, f)), mid = rgb(mix(SKY_MID, f)), low = rgb(mix(SKY_LOW, f));
+    sky.style.setProperty("--s1", top); sky.style.setProperty("--s2", mid); sky.style.setProperty("--s3", low);
+    nav.style.setProperty("--s1", top);
+    const tone = f > 1.45 ? "dark" : "light";
+    if (tone !== lastTone) { nav.style.setProperty("--fg", tone === "dark" ? "var(--marmol)" : "var(--tinta)"); lastTone = tone; }
+
+    const [x, y] = onArc(num([40, 0, -28, -40, -40], f));
+    dialSun.setAttribute("cx", x.toFixed(1)); dialSun.setAttribute("cy", y.toFixed(1));
+    dialSun.setAttribute("opacity", clamp(2.2 - f).toFixed(2));
+    const [mx, my] = onArc(num([200, 200, 200, 160, 118], f));
+    dialMoon.setAttribute("cx", mx.toFixed(1)); dialMoon.setAttribute("cy", my.toFixed(1));
+    dialMoon.setAttribute("opacity", clamp((f - 2) / .6).toFixed(2));
+    dialTime.textContent = hhmm(num(CLOCK, f));
+    const ph = PHASES[Math.round(clamp(f, 0, 4))];
+    if (ph !== lastPhase) { dialPhase.textContent = ph; lastPhase = ph; }
+  }
+
+  /* ---------- scroll → evening ---------- */
+  const chapters = [...document.querySelectorAll("main > section")];
+  let centers = [];
+  function measure() {
+    centers = chapters.map(s => { const b = s.getBoundingClientRect(); return b.top + scrollY + b.height / 2; });
+    const maxC = document.documentElement.scrollHeight - innerHeight / 2;
+    centers = centers.map(c => Math.min(c, maxC));
+    centers[0] = Math.min(centers[0], innerHeight / 2);
+  }
+  function target() {
+    const c = scrollY + innerHeight / 2;
+    if (c <= centers[0]) return 0;
+    for (let i = 0; i < centers.length - 1; i++) if (c < centers[i + 1]) return i + (c - centers[i]) / Math.max(1, centers[i + 1] - centers[i]);
+    return centers.length - 1;
+  }
+
+  let f = 0, drawn = -1;
+  function frame(t) {
+    const goal = target();
+    f = reduce ? goal : f + (goal - f) * .07;
+    if (Math.abs(goal - f) < .0005) f = goal;
+    const twinkle = f > 1.55 && !reduce;
+    if (Math.abs(f - drawn) > .0003 || twinkle) { draw(f, t); if (Math.abs(f - drawn) > .0003) ui(f); drawn = f; }
+    requestAnimationFrame(frame);
+  }
+
+  function resize() { build(); measure(); drawn = -1; }
+  addEventListener("resize", resize);
+  addEventListener("load", measure);
+  if (document.fonts) document.fonts.ready.then(measure);
+  resize();
+  f = target();
+  ui(f); draw(f, 0); drawn = f;
+  requestAnimationFrame(frame);
+
+  /* ---------- the menu ---------- */
+  const GLASSES = {
+    coupe: { name: "copa coupé", bowl: "M38 70 C38 130 162 130 162 70 Z", out: "M38 70 C38 130 162 130 162 70 Z M100 115 L100 212 M64 217 Q100 207 136 217", level: 80, shine: "M52 80 C56 98 66 108 78 112" },
+    nora: { name: "copa Nick & Nora", bowl: "M58 50 C56 120 76 140 100 140 C124 140 144 120 142 50 Z", out: "M58 50 C56 120 76 140 100 140 C124 140 144 120 142 50 Z M100 140 L100 214 M70 219 Q100 209 130 219", level: 64, shine: "M68 64 C68 98 76 118 88 128" },
+    flute: { name: "copa flauta", bowl: "M80 28 C78 110 86 150 100 152 C114 150 122 110 120 28 Z", out: "M80 28 C78 110 86 150 100 152 C114 150 122 110 120 28 Z M100 152 L100 216 M72 221 Q100 211 128 221", level: 48, shine: "M87 44 C86 90 89 120 95 138" },
+    rocks: { name: "vaso old fashioned", bowl: "M48 100 L54 222 L146 222 L152 100 Z", out: "M48 100 L54 222 L146 222 L152 100 Z M55 205 L145 205", level: 136, shine: "M60 112 L64 196" },
+    highball: { name: "vaso highball", bowl: "M66 34 L71 226 L129 226 L134 34 Z", out: "M66 34 L71 226 L129 226 L134 34 Z M70 211 L130 211", level: 60, shine: "M76 48 L80 200" }
+  };
+  const DRINKS = [
+    { name: "Azimut", ing: "Gin, vermut bianco, bergamota y una gota de aceite de oliva.", price: 590, glass: "coupe", color: "#E8DDB0", garnish: "M146 66 c6 -10 20 -10 22 0 c2 8 -10 12 -14 4" },
+    { name: "Hora azul", ing: "Vodka, licor de violeta, limón y clara de huevo.", price: 560, glass: "nora", color: "#8E95CB", garnish: "M120 48 l14 -22 M128 36 a5 5 0 1 0 0.1 0" },
+    { name: "Último rayo", ing: "Bitter rojo, naranja sanguina y prosecco.", price: 520, glass: "flute", color: "#D9472B", garnish: "M114 30 c8 -12 22 -10 24 2" },
+    { name: "Almanaque", ing: "Whisky de centeno, higo y bitter de cacao.", price: 640, glass: "rocks", color: "#9A5A2A", garnish: "M74 142 h52 v52 h-52 Z" },
+    { name: "Meridiano", ing: "Mezcal, pomelo rosado, sal de romero y soda.", price: 560, glass: "highball", color: "#E7A396", garnish: "M80 120 h22 v22 h-22 Z M98 160 h22 v22 h-22 Z M116 10 L104 150" },
+    { name: "Terraza", ing: "Té verde frío, pepino, flor de saúco y tónica. Sin alcohol.", price: 340, glass: "highball", color: "#CFE0B4", garnish: "M84 110 h22 v22 h-22 Z M96 150 h22 v22 h-22 Z M140 40 a12 12 0 1 0 0.1 0" }
+  ];
+  const list = document.getElementById("drinks");
+  const glass = document.getElementById("glass"), bowl = document.getElementById("glass-bowl"), outline = document.getElementById("glass-outline");
+  const liquid = document.getElementById("liquid"), garnish = document.getElementById("glass-garnish"), shine = document.getElementById("glass-shine");
+  const gName = document.getElementById("glass-name"), gCap = document.getElementById("glass-cap");
+  let current = -1;
+  DRINKS.forEach((d, i) => {
+    const li = document.createElement("li");
+    li.innerHTML = `<button class="drink" type="button" aria-pressed="false"><span class="d-name">${d.name}</span><span class="d-price">${d.price}</span><span class="d-ing">${d.ing}</span></button>`;
+    const b = li.firstChild;
+    b.addEventListener("click", () => pour(i));
+    b.addEventListener("mouseenter", () => { if (matchMedia("(hover: hover)").matches) pour(i); });
+    b.addEventListener("focus", () => pour(i));
+    list.appendChild(li);
+  });
+  function pour(i) {
+    if (i === current) return;
+    current = i;
+    const d = DRINKS[i], g = GLASSES[d.glass];
+    list.querySelectorAll(".drink").forEach((b, k) => b.setAttribute("aria-pressed", String(k === i)));
+    bowl.setAttribute("d", g.bowl); outline.setAttribute("d", g.out); garnish.setAttribute("d", d.garnish); shine.setAttribute("d", g.shine);
+    gName.textContent = d.name; gCap.textContent = "Servido en " + g.name;
+    liquid.style.fill = d.color;
+    if (reduce) { liquid.style.transform = `translateY(${g.level}px)`; return; }
+    liquid.style.transition = "none"; liquid.style.transform = "translateY(260px)";
+    glass.classList.remove("pour"); void glass.getBoundingClientRect(); glass.classList.add("pour");
+    liquid.style.transition = ""; requestAnimationFrame(() => { liquid.style.transform = `translateY(${g.level}px)`; });
+  }
+  pour(0);
+
+  /* ---------- booking ---------- */
+  const NAMES = ["domingo", "lunes", "martes", "miércoles", "jueves", "viernes", "sábado"];
+  const days = [];
+  for (let i = 0; days.length < 6 && i < 14; i++) {
+    const dt = new Date(Date.UTC(Y, MO - 1, D + i));
+    const wd = dt.getUTCDay();
+    if (!VENUE.openDays.includes(wd)) continue;
+    const s = sunset(dt.getUTCFullYear(), dt.getUTCMonth() + 1, dt.getUTCDate());
+    const label = i === 0 ? "Hoy" : i === 1 ? "Mañana" : NAMES[wd] + " " + dt.getUTCDate();
+    days.push({ label, full: i === 0 ? "hoy" : i === 1 ? "mañana" : "el " + NAMES[wd] + " " + dt.getUTCDate(), sun: minutesOf(s.time) });
+  }
+  const daysEl = document.getElementById("days"), timesEl = document.getElementById("times");
+  daysEl.innerHTML = days.map((d, i) => `<label class="chip"><input type="radio" name="dia" id="dia-${i}" value="${i}"${i === 0 ? " checked" : ""}><span class="chip-main">${d.label}</span><span class="chip-sub">sol ${hhmm(d.sun)}</span></label>`).join("");
+  function renderTimes() {
+    const d = days[+document.querySelector("input[name=dia]:checked").value];
+    const sunsetSlot = Math.round((d.sun - 30) / 5) * 5;
+    const prev = document.querySelector("input[name=hora]:checked");
+    const keep = prev ? prev.id : "hora-0";
+    const slots = [{ main: "Al atardecer", sub: hhmm(sunsetSlot), v: hhmm(sunsetSlot) }, { main: "20:30", sub: "Hora azul", v: "20:30" }, { main: "22:00", sub: "Con música", v: "22:00" }, { main: "23:30", sub: "Última tanda", v: "23:30" }];
+    timesEl.innerHTML = slots.map((s, i) => `<label class="chip"><input type="radio" name="hora" id="hora-${i}" value="${s.v}"${"hora-" + i === keep ? " checked" : ""}><span class="chip-main">${s.main}</span><span class="chip-sub">${s.sub}</span></label>`).join("");
+  }
+  renderTimes();
+  daysEl.addEventListener("change", renderTimes);
+
+  const form = document.getElementById("booking"), err = document.getElementById("form-error"), confirmEl = document.getElementById("confirm");
+  form.addEventListener("submit", e => {
+    e.preventDefault();
+    const name = form.nombre.value.trim(), phone = form.telefono.value.trim();
+    if (!name) { err.textContent = "Escribí el nombre para la reserva."; form.nombre.focus(); return; }
+    if (phone.replace(/\D/g, "").length < 8) { err.textContent = "Escribí un WhatsApp con al menos 8 números."; form.telefono.focus(); return; }
+    err.textContent = "";
+    const d = days[+form.dia.value], hora = form.hora.value, n = +form.personas.value;
+    confirmEl.hidden = false;
+    const esc = s => s.replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
+    confirmEl.innerHTML = `<strong>Mesa pedida, ${esc(name.split(" ")[0])}.</strong>Para ${n} ${n === 1 ? "persona" : "personas"}, ${d.full} a las ${hora}, ${form.lugar.value}. Esta página es una maqueta: el pedido todavía no se envía a ningún lado.`;
+  });
+})();
+</script>
+</body>
+</html>
