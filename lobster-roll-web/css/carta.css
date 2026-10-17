@@ -15,6 +15,8 @@ body.cd { background: var(--crema); padding-bottom: 2rem; }
 .cd__sticker { position: absolute; right: 14px; bottom: 14px; z-index: 2; width: 92px; aspect-ratio: 1; border-radius: 50%; background: var(--mantequilla); color: var(--negro); display: grid; place-content: center; text-align: center; padding: .5rem; font-family: var(--f-label); text-transform: uppercase; letter-spacing: .05em; font-weight: 600; line-height: 1.05; transform: rotate(8deg); outline: 2px dashed rgba(20,18,16,.4); outline-offset: -6px; box-shadow: 0 10px 20px -10px rgba(0,0,0,.6); }
 .cd__sticker small { font-size: .55rem; } .cd__sticker b { display: block; font-family: var(--f-display); font-weight: 400; font-size: 1.5rem; }
 .cd__tira { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 1.4rem; }
+.cd__tira img { transition: transform .4s var(--ease); }
+.cd__tira img:hover { transform: rotate(0) scale(1.06) !important; }
 .cd__tira img { width: 100%; aspect-ratio: 1; object-fit: cover; border: 4px solid var(--blanco); box-shadow: 0 8px 16px -10px rgba(0,0,0,.5); }
 .cd__tira img:nth-child(1) { transform: rotate(-2deg); } .cd__tira img:nth-child(3) { transform: rotate(2deg); }
 .cd__foto-pie { margin: 1.4rem 0 0; border: 5px solid var(--blanco); box-shadow: 8px 8px 0 var(--rojo); transform: rotate(-1deg); }
@@ -23,6 +25,8 @@ body.cd { background: var(--crema); padding-bottom: 2rem; }
 @media (prefers-reduced-motion: reduce) { .cd__foto img { animation: none; } }
 .cd__titulo-bloque { display: grid; gap: .6rem; margin-bottom: 1rem; }
 .cd__titulo-bloque .estado { border-color: rgba(20,18,16,.3); background: var(--blanco); color: var(--negro); }
+.cd__titulo { transition: color .3s; }
+.cd__titulo:hover { color: var(--negro); }
 .cd__titulo { font-family: var(--f-display); text-transform: uppercase; font-size: clamp(4.5rem, 26vw, 8rem); line-height: .85; color: var(--rojo); margin-top: .2rem; }
 .cd__sub { color: var(--gris); font-size: 1.05rem; max-width: 30rem; }
 .cd__tabs { position: sticky; top: calc(46px + 1.4rem + 8px); background: var(--crema); z-index: 10; margin: 1.2rem 0 1.4rem; }

@@ -12,6 +12,53 @@
   const precio = (n) => new Intl.NumberFormat(get(estado.t, 'precio.locale') || 'es-ES', { style: 'currency', currency: estado.carta?.moneda || 'EUR', minimumFractionDigits: Number.isInteger(n) ? 0 : 2, maximumFractionDigits: 2 }).format(n);
   const cargar = async (r) => { const x = await fetch(r, { cache: 'no-cache' }); if (!x.ok) throw new Error(r); return x.json(); };
 
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  /* ---------- Letras sueltas en los títulos (efecto ola al pasar el mouse) ---------- */
+  function envolverLetras() {
+    $$('[data-letras]').forEach((el) => {
+      const clon = el.cloneNode(true); clon.querySelectorAll('.sticker').forEach((x) => x.remove());
+      el.setAttribute('aria-label', clon.textContent.replace(/\s+/g, ' ').trim());
+      let i = 0;
+      const recorrer = (nodo) => {
+        Array.from(nodo.childNodes).forEach((n) => {
+          if (n.nodeType === 3) {
+            if (!n.textContent.trim()) return;
+            const frag = document.createDocumentFragment();
+            // cada palabra en un span que no se parte; cada letra adentro, con su retardo
+            n.textContent.split(/(\s+)/).forEach((trozo) => {
+              if (!trozo) return;
+              if (/^\s+$/.test(trozo)) { frag.appendChild(document.createTextNode(' ')); return; }
+              const pal = document.createElement('span'); pal.className = 'palabra'; pal.setAttribute('aria-hidden', 'true');
+              for (const ch of trozo) { const sp = document.createElement('span'); sp.className = 'letra'; sp.textContent = ch; sp.style.setProperty('--i', String(i++)); pal.appendChild(sp); }
+              frag.appendChild(pal);
+            });
+            n.replaceWith(frag);
+          } else if (n.nodeType === 1 && !n.classList.contains('letra') && !n.classList.contains('palabra') && !n.classList.contains('sticker')) recorrer(n);
+        });
+      };
+      recorrer(el);
+    });
+  }
+
+  /* ---------- Cursor langosta ---------- */
+  function initCursor() {
+    const cur = $('#cursor'); if (!cur) return;
+    if (reduceMotion || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+    document.documentElement.classList.add('cursor-langosta');
+    let x = -100, y = -100, cx = -100, cy = -100, visto = false;
+    const mover = () => { cx += (x - cx) * .22; cy += (y - cy) * .22; cur.style.transform = `translate(${cx - cur.offsetWidth * .45}px, ${cy - cur.offsetHeight * .22}px)`; requestAnimationFrame(mover); };
+    document.addEventListener('mousemove', (e) => {
+      x = e.clientX; y = e.clientY;
+      if (!visto) { visto = true; cx = x; cy = y; cur.classList.add('is-on'); }
+      cur.classList.toggle('is-hover', !!e.target.closest('a, button, [role="tab"], [data-letras], .item, .sticker, .compara__card, .combo, .masonry button, summary'));
+    }, { passive: true });
+    document.addEventListener('mousedown', () => cur.classList.add('is-click'));
+    document.addEventListener('mouseup', () => cur.classList.remove('is-click'));
+    document.documentElement.addEventListener('mouseleave', () => cur.classList.add('is-oculto'));
+    document.documentElement.addEventListener('mouseenter', () => cur.classList.remove('is-oculto'));
+    requestAnimationFrame(mover);
+  }
+
   function detectarIdioma() {
     const q = new URLSearchParams(location.search).get('lang'); if (IDIOMAS.includes(q)) return q;
     try { const g = localStorage.getItem('lr-lang'); if (IDIOMAS.includes(g)) return g; } catch (e) { /* sin storage */ }
@@ -79,13 +126,15 @@
     if (!IDIOMAS.includes(lang)) return; estado.lang = lang; estado.t = await cargar(`data/i18n/${lang}.json`);
     try { localStorage.setItem('lr-lang', lang); } catch (e) { /* sin storage */ }
     const u = new URL(location.href); u.searchParams.set('lang', lang); history.replaceState(null, '', u);
-    aplicarI18n(); pintarCarta(); pintarEstado();
+    aplicarI18n(); envolverLetras(); pintarCarta(); pintarEstado();
   }
   async function init() {
     estado.lang = detectarIdioma();
     const [t, carta, rest] = await Promise.all([cargar(`data/i18n/${estado.lang}.json`), cargar('data/carta.json'), cargar('data/restaurante.json')]);
     Object.assign(estado, { t, carta, rest });
-    aplicarDatos(); aplicarI18n(); pintarCarta(); pintarEstado(); setInterval(pintarEstado, 60000); initTabs();
+    aplicarDatos(); aplicarI18n(); envolverLetras(); pintarCarta(); pintarEstado(); setInterval(pintarEstado, 60000); initTabs(); initCursor();
+    const ioT = new IntersectionObserver((entries) => { entries.forEach((en) => { if (en.isIntersecting) { en.target.classList.add('is-ola'); setTimeout(() => en.target.classList.remove('is-ola'), 2500); ioT.unobserve(en.target); } }); }, { threshold: .5 });
+    $$('[data-letras]').forEach((t) => ioT.observe(t));
     $$('.idiomas button').forEach((b) => b.addEventListener('click', () => cambiarIdioma(b.dataset.lang)));
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();

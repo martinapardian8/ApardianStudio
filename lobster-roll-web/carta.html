@@ -64,7 +64,7 @@
   </div>
   <div class="cd__titulo-bloque">
     <p class="estado" id="estado" aria-live="polite"><span class="estado__punto" aria-hidden="true"></span><span class="estado__txt">…</span><span class="estado__detalle"></span></p>
-    <h1 class="cd__titulo" data-i18n="carta.titulo">Carta</h1>
+    <h1 class="cd__titulo" data-i18n="carta.titulo" data-letras>Carta</h1>
     <p class="cd__sub" data-i18n="carta_digital.sub">Bogavante canadiense en pan brioche. Todo recién hecho.</p>
   </div>
 
@@ -99,6 +99,22 @@
   <p class="cd__horario"><span data-i18n="localizacion.horario">Horario</span>: <span id="cd-horario"></span></p>
   <p class="cd__web"><a href="index.html" data-i18n="carta_digital.volver">Ver la web completa</a> · <span data-i18n="footer.diseno">Diseño:</span> <a href="https://apardianstudio.com" target="_blank" rel="noopener">Apardian Studio</a></p>
 </footer>
+
+<!-- Cursor langosta (solo escritorio con mouse; lo activa el JS) -->
+<div class="cursor" id="cursor" aria-hidden="true">
+  <svg viewBox="62 28 76 112" width="38" height="56">
+    <g fill="#d9281c" stroke="#fffaf2" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" paint-order="stroke">
+      <path class="cursor__antena" d="M100,62 C96,54 90,44 84,36" fill="none"/><path class="cursor__antena cursor__antena--d" d="M100,62 C104,54 110,44 116,36" fill="none"/>
+      <ellipse cx="100" cy="88" rx="11" ry="18"/>
+      <path d="M89,100 h22 l-1,8 h-20z M90,108 h20 l-1,8 h-18z M91,116 h18 l-1,8 h-16z"/>
+      <path d="M92,124 l-6,10 h8z M100,124 l-4,12 h8z M108,124 l6,10 h-8z"/>
+      <path d="M89,92 l-10,4 M89,98 l-10,6 M89,104 l-9,8 M111,92 l10,4 M111,98 l10,6 M111,104 l9,8" fill="none" stroke-width="3"/>
+      <g class="cursor__pinza cursor__pinza--i"><path d="M90,76 C82,70 74,66 70,58 C66,52 70,46 76,48 C80,50 82,56 80,60 C84,62 88,68 90,76z"/><path d="M76,48 l-6,-6" fill="none" stroke-width="3"/></g>
+      <g class="cursor__pinza cursor__pinza--d"><path d="M110,76 C118,70 126,66 130,58 C134,52 130,46 124,48 C120,50 118,56 120,60 C116,62 112,68 110,76z"/><path d="M124,48 l6,-6" fill="none" stroke-width="3"/></g>
+      <circle cx="95" cy="72" r="1.8" fill="#fffaf2" stroke="none"/><circle cx="105" cy="72" r="1.8" fill="#fffaf2" stroke="none"/>
+    </g>
+  </svg>
+</div>
 
 <script src="js/carta.js" defer></script>
 </body>

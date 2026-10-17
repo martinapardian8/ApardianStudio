@@ -86,11 +86,16 @@
           if (n.nodeType === 3) {
             if (!n.textContent.trim()) return;
             const frag = document.createDocumentFragment();
-            for (const ch of n.textContent) {
-              const sp = document.createElement('span'); sp.className = 'letra'; sp.textContent = ch; sp.setAttribute('aria-hidden', 'true'); sp.style.setProperty('--i', String(i++)); frag.appendChild(sp);
-            }
+            // cada palabra en un span que no se parte; cada letra adentro, con su retardo
+            n.textContent.split(/(\s+)/).forEach((trozo) => {
+              if (!trozo) return;
+              if (/^\s+$/.test(trozo)) { frag.appendChild(document.createTextNode(' ')); return; }
+              const pal = document.createElement('span'); pal.className = 'palabra'; pal.setAttribute('aria-hidden', 'true');
+              for (const ch of trozo) { const sp = document.createElement('span'); sp.className = 'letra'; sp.textContent = ch; sp.style.setProperty('--i', String(i++)); pal.appendChild(sp); }
+              frag.appendChild(pal);
+            });
             n.replaceWith(frag);
-          } else if (n.nodeType === 1 && !n.classList.contains('letra') && !n.classList.contains('sticker')) recorrer(n);
+          } else if (n.nodeType === 1 && !n.classList.contains('letra') && !n.classList.contains('palabra') && !n.classList.contains('sticker')) recorrer(n);
         });
       };
       recorrer(el);
