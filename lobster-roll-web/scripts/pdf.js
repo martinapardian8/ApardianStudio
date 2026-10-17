@@ -3,7 +3,7 @@ const fs = require('fs');
 (async () => {
   const browser = await chromium.launch({ executablePath: process.env.PLAYWRIGHT_CHROMIUM || undefined, args:['--no-sandbox'] });
   const out = process.argv[2] || '.';
-  for (const lang of ['es','ca','en','todos']) {
+  for (const lang of ['es','ca','en','fr','it','pt','ru','todos']) {
     const page = await browser.newPage({ viewport: { width: 900, height: 1300 } });
     const errs=[]; page.on('pageerror', e => errs.push(e.message));
     await page.goto(`http://127.0.0.1:8899/carta-impresa.html?lang=${lang}`, { waitUntil: 'networkidle' });

@@ -1,0 +1,175 @@
+{
+  "meta": {
+    "titulo": "The Lobster Roll Barcelona · Lavagante canadiano em pão brioche, em Muntaner 22",
+    "descripcion": "The Lobster Roll, na Esquerra de l'Eixample, a dois minutos do metro Universitat. Lobster rolls de lavagante canadiano, crab rolls, combos e esplanada. Reserva online.",
+    "og_titulo": "The Lobster Roll · Barcelona",
+    "og_descripcion": "Lavagante canadiano em pão brioche. O único restaurante de Barcelona com comida da costa leste americana."
+  },
+  "nav": {
+    "restaurante": "O restaurante",
+    "carta": "Menu",
+    "fotos": "Fotos",
+    "localizacion": "Onde estamos",
+    "reservar": "Reservar",
+    "menu_abrir": "Abrir menu",
+    "menu_cerrar": "Fechar menu",
+    "idioma": "Idioma",
+    "saltar": "Ir para o conteúdo"
+  },
+  "hero": {
+    "titulo_1": "Lobster",
+    "titulo_2": "Roll",
+    "titulo_3": "Barcelona",
+    "bajada": "Lavagante canadiano em pão brioche. O único restaurante de Barcelona com comida da costa leste americana.",
+    "cta_reservar": "Reservar mesa",
+    "cta_carta": "Ver o menu",
+    "sticker_1": "80 g de lavagante",
+    "sticker_2": "20 €",
+    "scroll": "Desliza para ver mais"
+  },
+  "estado": {
+    "abierto": "Aberto agora",
+    "cerrado": "Fechado agora",
+    "cierra": "Fecha às {hora}",
+    "abre_hoy": "Abre às {hora}",
+    "abre_dia": "Abre {dia} às {hora}"
+  },
+  "cinta": [
+    "Lobster Roll",
+    "Crab Roll",
+    "Shrimp Roll",
+    "Pulled Pork",
+    "Pulled Beef",
+    "A metros do metro Universitat",
+    "Esplanada",
+    "Salmón ahumado",
+    "Calamar Roll"
+  ],
+  "restaurante": {
+    "etiqueta": "O restaurante",
+    "titulo": "Costa leste, em Muntaner.",
+    "cita": "A nossa especialidade são os Lobster Roll, feitos só com lavagante canadiano.",
+    "p1": "Estamos na Esquerra de l'Eixample, a poucos metros do metro Universitat. Ao entrar encontras uma sala muito grande e comprida, de decoração moderna.",
+    "p2": "Toda a sala está cheia de plantas. Do teto pendem candeeiros de estilos diferentes, que dão uma luz muito boa. E temos esplanada, com várias mesas.",
+    "p3": "Somos o único restaurante de Barcelona com comida da costa leste americana. Além dos lobster rolls, fazemos crab rolls com sapateira ou camarão, e rolls de porco ou vitela assada.",
+    "dato_1_num": "100%",
+    "dato_1_txt": "lavagante canadiano",
+    "dato_2_num": "Brioche",
+    "dato_2_txt": "o pão de todos os rolls",
+    "dato_3_num": "2 min",
+    "dato_3_txt": "do metro Universitat"
+  },
+  "bloque": {
+    "vertical": "Lobster",
+    "etiqueta": "Escolhe o tamanho",
+    "titulo": "80 g ou XL 120 g.",
+    "texto": "O mesmo pão brioche. Mais lavagante.",
+    "a_nombre": "Lobster Roll",
+    "a_peso": "80 g",
+    "a_desc": "Lavagante canadiano.",
+    "b_nombre": "Lobster Roll XL",
+    "b_peso": "120 g",
+    "b_desc": "O mesmo pão brioche com mais carne.",
+    "mas": "+40 g"
+  },
+  "carta": {
+    "etiqueta": "O menu",
+    "titulo": "Menu",
+    "intro": "Frases curtas, rolls grandes. Os nomes, como eles lhes chamam.",
+    "tab_rolls": "Rolls",
+    "tab_combos": "Combos",
+    "especialidad": "A especialidade",
+    "descargar": "Descarregar o menu",
+    "ver_combos": "Ver os combos"
+  },
+  "combos": {
+    "etiqueta": "Combos",
+    "titulo": "Escolhe três. Pagas um.",
+    "texto": "Cada combo traz um roll, uma bebida e um mochi.",
+    "paso_1_titulo": "1 roll",
+    "paso_1_txt": "O que mais gostares.",
+    "paso_2_titulo": "1 bebida",
+    "paso_2_txt": "Refrigerante, cerveja ou vinho.",
+    "paso_3_titulo": "1 mochi",
+    "paso_3_txt": "Para terminar.",
+    "lista_titulo": "Os combos"
+  },
+  "fotos": {
+    "etiqueta": "Fotos",
+    "titulo": "Plantas, candeeiros e lavagante.",
+    "texto": "Uma sala comprida, cheia de plantas, e uma esplanada em Muntaner.",
+    "abrir": "Ampliar a foto",
+    "cerrar": "Fechar",
+    "anterior": "Foto anterior",
+    "siguiente": "Foto seguinte"
+  },
+  "localizacion": {
+    "etiqueta": "Onde estamos",
+    "titulo": "Muntaner 22.",
+    "barrio": "Esquerra de l'Eixample, Barcelona",
+    "metro": "Metro",
+    "parking": "Estacionamento",
+    "telefono": "Telefone",
+    "horario": "Horário",
+    "hoy": "hoje",
+    "cerrado": "Fechado",
+    "servicios": "Dois serviços: 11:30–18:00 e 18:00–23:00",
+    "reservar": "Reservar online",
+    "como_llegar": "Como chegar",
+    "mapa_alt": "Mapa esquemático: Carrer de Muntaner 22, entre a Gran Via e Diputació, perto do metro Universitat",
+    "mapa_aqui": "Aqui",
+    "dias": [
+      "Domingo",
+      "Segunda",
+      "Terça",
+      "Quarta",
+      "Quinta",
+      "Sexta",
+      "Sábado"
+    ],
+    "dias_corto": [
+      "Dom",
+      "Seg",
+      "Ter",
+      "Qua",
+      "Qui",
+      "Sex",
+      "Sáb"
+    ]
+  },
+  "cta": {
+    "titulo": "Reserva a tua mesa",
+    "texto": "De terça a domingo, das 11:30 às 23:00.",
+    "boton": "Reservar online",
+    "o_llama": "ou liga para o"
+  },
+  "footer": {
+    "redes": "Redes",
+    "legal": "Legal",
+    "aviso": "Aviso legal",
+    "privacidad": "Privacidade",
+    "cookies": "Cookies",
+    "diseno": "Design:",
+    "arriba": "Voltar ao topo",
+    "instagram_pendiente": "Instagram (em breve)",
+    "facebook_pendiente": "Facebook (em breve)"
+  },
+  "cookies": {
+    "titulo": "Cookies",
+    "texto": "Usamos cookies próprios para lembrar o teu idioma. Os de terceiros (estatísticas) só se ativam se aceitares.",
+    "aceptar": "Aceitar todos",
+    "rechazar": "Rejeitar",
+    "mas": "Política de cookies"
+  },
+  "precio": {
+    "locale": "pt-PT"
+  },
+  "carta_digital": {
+    "titulo": "Menu · The Lobster Roll Barcelona",
+    "descripcion": "Menu de The Lobster Roll Barcelona: lobster rolls de lavagante canadiano, crab rolls, combos e mais. Carrer de Muntaner 22.",
+    "sub": "Lavagante canadiano em pão brioche. Tudo acabado de fazer.",
+    "nota": "Preços em euros, IVA incluído. Pergunta-nos pelos alergénios.",
+    "volver": "Ver o site completo",
+    "qr": "Lê o código para ver o menu no telemóvel"
+  }
+}

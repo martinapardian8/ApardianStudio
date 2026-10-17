@@ -4,7 +4,15 @@
   "categorias": [
     {
       "id": "rolls",
-      "nombre": { "es": "Rolls", "ca": "Rolls", "en": "Rolls" },
+      "nombre": {
+        "es": "Rolls",
+        "ca": "Rolls",
+        "en": "Rolls",
+        "it": "Rolls",
+        "pt": "Rolls",
+        "fr": "Rolls",
+        "ru": "Роллы"
+      },
       "items": [
         {
           "id": "lobster",
@@ -14,7 +22,11 @@
           "descripcion": {
             "es": "Bogavante canadiense en pan brioche.",
             "ca": "Llamàntol canadenc en pa brioix.",
-            "en": "Canadian lobster on a brioche bun."
+            "en": "Canadian lobster on a brioche bun.",
+            "it": "Astice canadese in pane brioche.",
+            "pt": "Lavagante canadiano em pão brioche.",
+            "fr": "Homard canadien dans un pain brioché.",
+            "ru": "Канадский омар в булочке бриошь."
           }
         },
         {
@@ -24,7 +36,11 @@
           "descripcion": {
             "es": "Mismo pan brioche, más carne.",
             "ca": "El mateix pa brioix, més carn.",
-            "en": "Same brioche bun, more meat."
+            "en": "Same brioche bun, more meat.",
+            "it": "Stesso pane brioche, più carne.",
+            "pt": "O mesmo pão brioche, mais carne.",
+            "fr": "Même pain brioché, plus de chair.",
+            "ru": "Та же бриошь, больше мяса."
           }
         },
         {
@@ -34,14 +50,26 @@
           "descripcion": {
             "es": "100% carne de buey de mar o cangrejo de cáscara blanda.",
             "ca": "100% carn de cranc reial o cranc de closca tova.",
-            "en": "100% brown crab meat or soft shell crab."
+            "en": "100% brown crab meat or soft shell crab.",
+            "it": "100% polpa di granciporro o granchio dal guscio morbido.",
+            "pt": "100% carne de sapateira ou caranguejo de casca mole.",
+            "fr": "100 % chair de tourteau ou crabe à carapace molle.",
+            "ru": "100% мясо краба или мягкопанцирный краб."
           }
         },
         {
           "id": "shrimp",
           "nombre": "Shrimp Roll",
           "precio": 12.9,
-          "descripcion": { "es": "Gambas.", "ca": "Gambes.", "en": "Shrimp." }
+          "descripcion": {
+            "es": "Gambas.",
+            "ca": "Gambes.",
+            "en": "Shrimp.",
+            "it": "Gamberi.",
+            "pt": "Camarão.",
+            "fr": "Crevettes.",
+            "ru": "Креветки."
+          }
         },
         {
           "id": "pulled-pork",
@@ -50,7 +78,11 @@
           "descripcion": {
             "es": "Carne mechada de cerdo.",
             "ca": "Carn de porc desfilada.",
-            "en": "Slow-cooked pulled pork."
+            "en": "Slow-cooked pulled pork.",
+            "it": "Maiale sfilacciato.",
+            "pt": "Carne de porco desfiada.",
+            "fr": "Porc effiloché.",
+            "ru": "Рваная свинина."
           }
         },
         {
@@ -60,7 +92,11 @@
           "descripcion": {
             "es": "Carne mechada de ternera.",
             "ca": "Carn de vedella desfilada.",
-            "en": "Slow-cooked pulled beef."
+            "en": "Slow-cooked pulled beef.",
+            "it": "Manzo sfilacciato.",
+            "pt": "Carne de vitela desfiada.",
+            "fr": "Bœuf effiloché.",
+            "ru": "Рваная говядина."
           }
         },
         {
@@ -70,7 +106,11 @@
           "descripcion": {
             "es": "Anillos de calamar rebozados.",
             "ca": "Anelles de calamars arrebossades.",
-            "en": "Battered squid rings."
+            "en": "Battered squid rings.",
+            "it": "Anelli di calamaro fritti.",
+            "pt": "Anéis de lula panados.",
+            "fr": "Anneaux de calamar panés.",
+            "ru": "Кольца кальмара в кляре."
           }
         },
         {
@@ -80,7 +120,11 @@
           "descripcion": {
             "es": "Con Philadelphia, guacamole casero y caviar.",
             "ca": "Amb Philadelphia, guacamole casolà i caviar.",
-            "en": "With Philadelphia, homemade guacamole and caviar."
+            "en": "With Philadelphia, homemade guacamole and caviar.",
+            "it": "Con Philadelphia, guacamole fatto in casa e caviale.",
+            "pt": "Com Philadelphia, guacamole caseiro e caviar.",
+            "fr": "Avec Philadelphia, guacamole maison et caviar.",
+            "ru": "С сыром Philadelphia, домашним гуакамоле и икрой."
           }
         },
         {
@@ -90,7 +134,11 @@
           "descripcion": {
             "es": "Atún en pan brioche.",
             "ca": "Tonyina en pa brioix.",
-            "en": "Tuna on a brioche bun."
+            "en": "Tuna on a brioche bun.",
+            "it": "Tonno in pane brioche.",
+            "pt": "Atum em pão brioche.",
+            "fr": "Thon dans un pain brioché.",
+            "ru": "Тунец в булочке бриошь."
           }
         },
         {
@@ -101,7 +149,11 @@
           "descripcion": {
             "es": "Una ostra, para empezar.",
             "ca": "Una ostra, per començar.",
-            "en": "One oyster, to start."
+            "en": "One oyster, to start.",
+            "it": "Un'ostrica, per cominciare.",
+            "pt": "Uma ostra, para começar.",
+            "fr": "Une huître, pour commencer.",
+            "ru": "Одна устрица, для начала."
           }
         },
         {
@@ -111,7 +163,11 @@
           "descripcion": {
             "es": "Pan brioche con queso fundido.",
             "ca": "Pa brioix amb formatge fos.",
-            "en": "Brioche bun with melted cheese."
+            "en": "Brioche bun with melted cheese.",
+            "it": "Pane brioche con formaggio fuso.",
+            "pt": "Pão brioche com queijo derretido.",
+            "fr": "Pain brioché au fromage fondu.",
+            "ru": "Бриошь с расплавленным сыром."
           }
         },
         {
@@ -122,28 +178,84 @@
           "descripcion": {
             "es": "Brioche con Nutella, para terminar.",
             "ca": "Brioix amb Nutella, per acabar.",
-            "en": "Brioche with Nutella, to finish."
+            "en": "Brioche with Nutella, to finish.",
+            "it": "Brioche con Nutella, per finire.",
+            "pt": "Brioche com Nutella, para terminar.",
+            "fr": "Brioche à la Nutella, pour finir.",
+            "ru": "Бриошь с Nutella, на десерт."
           }
         }
       ]
     },
     {
       "id": "combos",
-      "nombre": { "es": "Combos", "ca": "Combos", "en": "Combos" },
+      "nombre": {
+        "es": "Combos",
+        "ca": "Combos",
+        "en": "Combos",
+        "it": "Combo",
+        "pt": "Combos",
+        "fr": "Combos",
+        "ru": "Комбо"
+      },
       "nota": {
         "es": "Cada combo: 1 roll + 1 refresco, cerveza o vino + 1 mochi.",
         "ca": "Cada combo: 1 roll + 1 refresc, cervesa o vi + 1 mochi.",
-        "en": "Every combo: 1 roll + 1 soft drink, beer or wine + 1 mochi."
+        "en": "Every combo: 1 roll + 1 soft drink, beer or wine + 1 mochi.",
+        "it": "Ogni combo: 1 roll + 1 bibita, birra o vino + 1 mochi.",
+        "pt": "Cada combo: 1 roll + 1 refrigerante, cerveja ou vinho + 1 mochi.",
+        "fr": "Chaque combo : 1 roll + 1 soda, bière ou vin + 1 mochi.",
+        "ru": "Каждое комбо: 1 ролл + 1 лимонад, пиво или вино + 1 моти."
       },
       "items": [
-        { "id": "combo-lobster", "nombre": "Combo Lobster", "precio": 26, "roll": "lobster" },
-        { "id": "combo-lobster-xl", "nombre": "Combo Lobster XL", "precio": 30, "roll": "lobster-xl" },
-        { "id": "combo-crab", "nombre": "Combo Crab", "precio": 22.5, "roll": "crab" },
-        { "id": "combo-beef", "nombre": "Combo Beef", "precio": 21.9, "roll": "pulled-beef" },
-        { "id": "combo-salmon", "nombre": "Combo Salmón", "precio": 20.9, "roll": "salmon" },
-        { "id": "combo-pork", "nombre": "Combo Pork", "precio": 19.9, "roll": "pulled-pork" },
-        { "id": "combo-shrimp", "nombre": "Combo Shrimp", "precio": 18.9, "roll": "shrimp" },
-        { "id": "combo-calamar", "nombre": "Combo Calamar", "precio": 16, "roll": "calamar" }
+        {
+          "id": "combo-lobster",
+          "nombre": "Combo Lobster",
+          "precio": 26,
+          "roll": "lobster"
+        },
+        {
+          "id": "combo-lobster-xl",
+          "nombre": "Combo Lobster XL",
+          "precio": 30,
+          "roll": "lobster-xl"
+        },
+        {
+          "id": "combo-crab",
+          "nombre": "Combo Crab",
+          "precio": 22.5,
+          "roll": "crab"
+        },
+        {
+          "id": "combo-beef",
+          "nombre": "Combo Beef",
+          "precio": 21.9,
+          "roll": "pulled-beef"
+        },
+        {
+          "id": "combo-salmon",
+          "nombre": "Combo Salmón",
+          "precio": 20.9,
+          "roll": "salmon"
+        },
+        {
+          "id": "combo-pork",
+          "nombre": "Combo Pork",
+          "precio": 19.9,
+          "roll": "pulled-pork"
+        },
+        {
+          "id": "combo-shrimp",
+          "nombre": "Combo Shrimp",
+          "precio": 18.9,
+          "roll": "shrimp"
+        },
+        {
+          "id": "combo-calamar",
+          "nombre": "Combo Calamar",
+          "precio": 16,
+          "roll": "calamar"
+        }
       ]
     }
   ]

@@ -12,7 +12,7 @@ import re, urllib.request, os
 css = open('/tmp/google-fonts.css').read()
 out = []
 for subset, body in re.findall(r'/\* (\w[\w-]*) \*/\s*@font-face \{(.*?)\}', css, re.S):
-    if subset not in ('latin', 'latin-ext'): continue
+    if subset not in ('latin', 'latin-ext') and not (fam == 'Oswald' and subset.startswith('cyrillic')): continue
     fam = re.search(r"font-family: '([^']+)'", body).group(1)
     style = re.search(r"font-style: (\w+)", body).group(1)
     weight = re.search(r"font-weight: ([\d ]+)", body).group(1)

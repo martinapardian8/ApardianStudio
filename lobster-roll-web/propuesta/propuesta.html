@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Propuesta · Nueva web para The Lobster Roll</title>
+<link rel="stylesheet" href="../css/fonts.css">
+<style>
+  :root { --rojo:#d9281c; --crema:#f6efe3; --blanco:#fffaf2; --negro:#141210; --gris:#5a544c; --mantequilla:#f2c14e; }
+  * { box-sizing: border-box; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  html, body { margin: 0; background: #777; font-family: 'Figtree', system-ui, sans-serif; color: var(--negro); font-size: 10.5pt; line-height: 1.45; }
+  h1, h2, h3, p, ul, ol, figure { margin: 0; } ul, ol { padding: 0; list-style: none; } img { display: block; max-width: 100%; }
+  .pag { width: 210mm; height: 297mm; margin: 8mm auto; background: var(--crema); position: relative; overflow: hidden; page-break-after: always; break-after: page; box-shadow: 0 10px 40px rgba(0,0,0,.4); display: grid; grid-template-rows: auto 1fr auto; }
+  .pag:last-child { page-break-after: auto; }
+  .cab { background: var(--negro); color: var(--crema); padding: 7mm 14mm 6mm; display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 6mm; border-top: 4mm solid; border-image: repeating-linear-gradient(90deg, var(--rojo) 0 5mm, var(--blanco) 5mm 10mm) 1; }
+  .cab .eti { font-family: 'Oswald', sans-serif; text-transform: uppercase; letter-spacing: .2em; font-size: 8pt; color: var(--mantequilla); font-weight: 600; }
+  .cab h1 { font-family: 'Anton', Impact, sans-serif; text-transform: uppercase; font-size: 30pt; line-height: .95; font-weight: 400; margin-top: 2mm; }
+  .cab h1 span { color: var(--rojo); }
+  .cab .de { text-align: right; font-size: 8.5pt; color: rgba(246,239,227,.75); line-height: 1.4; }
+  .cab .de b { color: var(--crema); font-family: 'Oswald', sans-serif; text-transform: uppercase; letter-spacing: .12em; font-size: 9pt; display: block; }
+  .cuerpo { padding: 7mm 14mm 5mm; display: grid; gap: 5mm; align-content: start; min-height: 0; overflow: hidden; }
+  .fila { display: grid; grid-template-columns: 1fr 1fr; gap: 7mm; }
+  h2 { font-family: 'Anton', Impact, sans-serif; text-transform: uppercase; font-size: 15pt; line-height: 1; font-weight: 400; display: flex; align-items: center; gap: 2.5mm; margin-bottom: 2.5mm; }
+  h2::before { content: ""; width: 2.5mm; height: 2.5mm; border-radius: 50%; background: var(--rojo); }
+  p, li { color: var(--gris); }
+  .lista li { position: relative; padding-left: 5mm; margin-bottom: 1.4mm; }
+  .lista li::before { content: "★"; position: absolute; left: 0; top: 0; color: var(--rojo); font-size: 8pt; }
+  .lista b { color: var(--negro); }
+  .capturas { display: grid; grid-template-columns: 1.55fr .55fr; gap: 4mm; align-items: start; }
+  .capturas img { border: 1.2mm solid var(--blanco); box-shadow: 1.5mm 1.5mm 0 var(--rojo); }
+  .cita { font-family: 'Gloock', serif; font-size: 13pt; line-height: 1.2; border-left: 1.5mm solid var(--rojo); padding-left: 4mm; color: var(--negro); }
+  .caja { background: var(--blanco); border: .5mm solid var(--negro); padding: 4mm 5mm; }
+  .caja--negra { background: var(--negro); color: var(--crema); border-color: var(--negro); box-shadow: 2mm 2mm 0 var(--rojo); }
+  .caja--negra p, .caja--negra li { color: rgba(246,239,227,.8); } .caja--negra h2 { color: var(--crema); }
+  .precio { display: grid; grid-template-columns: 1fr auto; align-items: baseline; gap: 3mm; padding: 2mm 0; border-bottom: .3mm dotted rgba(20,18,16,.4); }
+  .precio b { font-family: 'Gloock', serif; font-weight: 400; font-size: 11.5pt; color: var(--negro); } .precio small { display: block; font-size: 8pt; color: var(--gris); }
+  .precio em { font-style: normal; font-family: 'Anton', Impact, sans-serif; font-size: 14pt; color: var(--rojo); }
+  .precio--total { border-bottom: 0; border-top: .6mm solid var(--negro); margin-top: 1mm; padding-top: 3mm; } .precio--total em { font-size: 20pt; }
+  .regalo { display: inline-block; background: var(--mantequilla); font-family: 'Oswald', sans-serif; font-weight: 600; text-transform: uppercase; letter-spacing: .1em; font-size: 7pt; padding: .5mm 2mm; margin-left: 2mm; vertical-align: middle; }
+  .pasos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4mm; }
+  .pasos li { background: var(--blanco); border: .5mm solid var(--negro); padding: 3mm; color: var(--gris); font-size: 9pt; }
+  .pasos span { display: inline-grid; place-items: center; width: 7mm; height: 7mm; border-radius: 50%; background: var(--rojo); color: #fff; font-family: 'Anton', Impact, sans-serif; margin-bottom: 1.5mm; }
+  .pasos b { display: block; font-family: 'Oswald', sans-serif; text-transform: uppercase; letter-spacing: .08em; font-size: 9pt; color: var(--negro); margin-bottom: 1mm; }
+  .pie { padding: 4mm 14mm 6mm; display: flex; justify-content: space-between; align-items: center; font-size: 8pt; color: var(--gris); border-top: .5mm solid var(--negro); }
+  .pie b { font-family: 'Oswald', sans-serif; text-transform: uppercase; letter-spacing: .12em; color: var(--negro); }
+  .pie::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 4mm; background: repeating-linear-gradient(90deg, var(--rojo) 0 5mm, var(--blanco) 5mm 10mm); }
+  .idiomas { display: flex; flex-wrap: wrap; gap: 1.5mm; margin-top: 2mm; }
+  .idiomas span { font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 7.5pt; letter-spacing: .08em; border: .3mm solid var(--negro); padding: .4mm 2mm; background: var(--blanco); }
+  @page { size: A4; margin: 0; }
+  @media print { html, body { background: #fff; } .pag { margin: 0; box-shadow: none; height: 296.5mm; } }
+</style>
+</head>
+<body>
+
+<section class="pag">
+  <header class="cab">
+    <div><div class="eti">Propuesta · Octubre 2026</div><h1>Una web nueva para<br><span>The Lobster Roll</span></h1></div>
+    <div class="de"><b>Apardian Studio</b>Martín Apardian<br>Fotografía · Vídeo · Web<br>apardianstudio.com</div>
+  </header>
+  <main class="cuerpo">
+    <p class="cita">Hola Xiao. Estuve comiendo en Muntaner 22 y te dije que te pasaría una propuesta. Aquí va: una web que esté a la altura del local y del producto, pensada para el móvil, que es donde la va a ver casi todo el mundo.</p>
+    <div class="capturas">
+      <img src="../capturas/escritorio-1440-hero.png" alt="Portada de la web en ordenador">
+      <img src="../capturas/movil-375-hero.png" alt="Portada de la web en móvil">
+    </div>
+    <div class="fila">
+      <div>
+        <h2>Qué pasa con la web actual</h2>
+        <ul class="lista">
+          <li>Es una plantilla de directorio: el mismo título repetido cinco veces en el carrusel, textos en tercera persona y fotos sin orden.</li>
+          <li>No habla con vuestra identidad: el neón, las cajas rojas y blancas, el ladrillo. Nada de eso está.</li>
+          <li>En el móvil cuesta encontrar lo importante: carta, horario, reserva y cómo llegar.</li>
+        </ul>
+      </div>
+      <div>
+        <h2>Qué propongo</h2>
+        <ul class="lista">
+          <li><b>Diseño propio</b> con vuestra marca: rojo bogavante, crema y negro, tipografía grande y vuestras fotos de protagonistas.</li>
+          <li><b>Móvil primero.</b> Todo a un toque: reservar, llamar, ver la carta, llegar.</li>
+          <li><b>Carta y combos con precios</b>, editables sin tocar código, en 7 idiomas.</li>
+          <li><b>Reserva online</b> con vuestro sistema actual y estado "abierto / cerrado" en tiempo real.</li>
+          <li><b>Preparada para Google</b>: ficha de restaurante, búsquedas locales, redes sociales con imagen correcta.</li>
+        </ul>
+      </div>
+    </div>
+  </main>
+  <footer class="pie"><span><b>The Lobster Roll</b> · Carrer de Muntaner, 22 · Barcelona</span><span>Página 1 de 2</span></footer>
+</section>
+
+<section class="pag">
+  <header class="cab">
+    <div><div class="eti">Qué incluye y cuánto cuesta</div><h1>Web, carta digital<br>y <span>carta impresa</span></h1></div>
+    <div class="de"><b>Apardian Studio</b>Martín Apardian<br>apardianstudio.com</div>
+  </header>
+  <main class="cuerpo">
+    <div class="capturas" style="grid-template-columns: .55fr 1.55fr">
+      <img src="../capturas/carta-digital-375.png" alt="Carta digital en el móvil" style="max-height: 60mm; object-fit: cover; object-position: top; width: 100%">
+      <img src="../capturas/carta-impresa-A4-es.png" alt="Carta impresa A4" style="max-height: 60mm; object-fit: cover; object-position: top; width: 100%">
+    </div>
+    <div class="fila">
+      <div>
+        <h2>Qué incluye</h2>
+        <ul class="lista">
+          <li><b>Web completa</b>: portada, el restaurante, carta, combos, fotos, localización con horario y mapa, reserva.</li>
+          <li><b>Carta digital con QR</b> para las mesas: la misma carta en el móvil, con idiomas y estado abierto / cerrado.</li>
+          <li><b>Carta impresa A4</b> lista para imprenta, una por idioma, con el QR.</li>
+          <li><b>7 idiomas</b> con selector de banderas:</li>
+        </ul>
+        <div class="idiomas"><span>ES</span><span>CA</span><span>EN</span><span>FR</span><span>IT</span><span>PT</span><span>RU</span></div>
+        <ul class="lista" style="margin-top: 3mm">
+          <li><b>Puesta en marcha</b> en vuestro dominio actual, aviso de cookies y páginas legales.</li>
+          <li><b>Fácil de mantener</b>: cambiar un precio o un plato es editar una línea; os dejo una guía.</li>
+        </ul>
+      </div>
+      <div class="caja">
+        <h2>Precio</h2>
+        <div class="precio"><div><b>Web completa</b><small>Diseño, desarrollo, textos en 7 idiomas y publicación</small></div><em>250 €</em></div>
+        <div class="precio"><div><b>Carta digital con QR</b><span class="regalo">Incluida</span><small>Lista para las mesas</small></div><em>0 €</em></div>
+        <div class="precio"><div><b>Carta impresa A4</b><span class="regalo">Incluida</span><small>PDF por idioma, listo para imprenta</small></div><em>0 €</em></div>
+        <div class="precio precio--total"><div><b>Total</b><small>Pago único. Sin cuotas mensuales por la web.</small></div><em>250 €</em></div>
+        <p style="margin-top: 3mm; font-size: 8.5pt">Extras opcionales, a presupuestar aparte: sesión de fotos del local y de los rolls, vídeo corto para la portada e Instagram, y mantenimiento mensual (cambios de carta, fotos nuevas).</p>
+      </div>
+    </div>
+    <div class="caja caja--negra">
+      <h2>Cómo seguimos</h2>
+      <ol class="pasos">
+        <li><span>1</span><b>Te la enseño</b>Paso por el local un día que te venga bien y la vemos en 10 minutos en tu móvil.</li>
+        <li><span>2</span><b>Fotos nuevas</b>Si quieres, hacemos la sesión de fotos y la web queda con material propio.</li>
+        <li><span>3</span><b>Publicamos</b>La subimos a thelobsterrollbcn.com, imprimís los QR y la carta, y listo.</li>
+      </ol>
+    </div>
+  </main>
+  <footer class="pie"><span><b>Apardian Studio</b> · apardianstudio.com</span><span>Página 2 de 2</span></footer>
+</section>
+</body>
+</html>

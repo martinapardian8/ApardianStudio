@@ -1,0 +1,175 @@
+{
+  "meta": {
+    "titulo": "The Lobster Roll Barcelona · Homard canadien dans un pain brioché, à Muntaner 22",
+    "descripcion": "The Lobster Roll, dans l'Esquerra de l'Eixample, à deux minutes du métro Universitat. Lobster rolls au homard canadien, crab rolls, combos et terrasse. Réservation en ligne.",
+    "og_titulo": "The Lobster Roll · Barcelona",
+    "og_descripcion": "Homard canadien dans un pain brioché. Le seul restaurant de Barcelone avec la cuisine de la côte Est américaine."
+  },
+  "nav": {
+    "restaurante": "Le restaurant",
+    "carta": "Carte",
+    "fotos": "Photos",
+    "localizacion": "Nous trouver",
+    "reservar": "Réserver",
+    "menu_abrir": "Ouvrir le menu",
+    "menu_cerrar": "Fermer le menu",
+    "idioma": "Langue",
+    "saltar": "Aller au contenu"
+  },
+  "hero": {
+    "titulo_1": "Lobster",
+    "titulo_2": "Roll",
+    "titulo_3": "Barcelona",
+    "bajada": "Homard canadien dans un pain brioché. Le seul restaurant de Barcelone avec la cuisine de la côte Est américaine.",
+    "cta_reservar": "Réserver une table",
+    "cta_carta": "Voir la carte",
+    "sticker_1": "80 g de homard",
+    "sticker_2": "20 €",
+    "scroll": "Faites défiler"
+  },
+  "estado": {
+    "abierto": "Ouvert",
+    "cerrado": "Fermé",
+    "cierra": "Ferme à {hora}",
+    "abre_hoy": "Ouvre à {hora}",
+    "abre_dia": "Ouvre {dia} à {hora}"
+  },
+  "cinta": [
+    "Lobster Roll",
+    "Crab Roll",
+    "Shrimp Roll",
+    "Pulled Pork",
+    "Pulled Beef",
+    "À deux pas du métro Universitat",
+    "Terrasse",
+    "Salmón ahumado",
+    "Calamar Roll"
+  ],
+  "restaurante": {
+    "etiqueta": "Le restaurant",
+    "titulo": "Côte Est, rue Muntaner.",
+    "cita": "Notre spécialité, ce sont les Lobster Roll, faits uniquement avec du homard canadien.",
+    "p1": "Nous sommes dans l'Esquerra de l'Eixample, à quelques mètres du métro Universitat. En entrant, vous trouvez une très grande salle tout en longueur, à la décoration moderne.",
+    "p2": "Toute la salle est remplie de plantes. Du plafond pendent des lampes de tous styles, qui donnent une très belle lumière. Et nous avons une terrasse, avec plusieurs tables.",
+    "p3": "Nous sommes le seul restaurant de Barcelone avec la cuisine de la côte Est américaine. En plus des lobster rolls, nous faisons des crab rolls au tourteau ou aux crevettes, et des rolls au porc ou au bœuf rôti.",
+    "dato_1_num": "100%",
+    "dato_1_txt": "homard canadien",
+    "dato_2_num": "Brioche",
+    "dato_2_txt": "le pain de tous les rolls",
+    "dato_3_num": "2 min",
+    "dato_3_txt": "du métro Universitat"
+  },
+  "bloque": {
+    "vertical": "Lobster",
+    "etiqueta": "Choisissez la taille",
+    "titulo": "80 g ou XL 120 g.",
+    "texto": "Même pain brioché. Plus de homard.",
+    "a_nombre": "Lobster Roll",
+    "a_peso": "80 g",
+    "a_desc": "Homard canadien.",
+    "b_nombre": "Lobster Roll XL",
+    "b_peso": "120 g",
+    "b_desc": "Même pain brioché avec plus de chair.",
+    "mas": "+40 g"
+  },
+  "carta": {
+    "etiqueta": "La carte",
+    "titulo": "Carte",
+    "intro": "Des phrases courtes, des rolls généreux. Les noms, tels qu'ils les appellent.",
+    "tab_rolls": "Rolls",
+    "tab_combos": "Combos",
+    "especialidad": "La spécialité",
+    "descargar": "Télécharger la carte",
+    "ver_combos": "Voir les combos"
+  },
+  "combos": {
+    "etiqueta": "Combos",
+    "titulo": "Choisissez-en trois. Payez-en un.",
+    "texto": "Chaque combo comprend un roll, une boisson et un mochi.",
+    "paso_1_titulo": "1 roll",
+    "paso_1_txt": "Celui que vous préférez.",
+    "paso_2_titulo": "1 boisson",
+    "paso_2_txt": "Soda, bière ou vin.",
+    "paso_3_titulo": "1 mochi",
+    "paso_3_txt": "Pour finir.",
+    "lista_titulo": "Les combos"
+  },
+  "fotos": {
+    "etiqueta": "Photos",
+    "titulo": "Plantes, lampes et homard.",
+    "texto": "Une salle tout en longueur, pleine de plantes, et une terrasse rue Muntaner.",
+    "abrir": "Agrandir la photo",
+    "cerrar": "Fermer",
+    "anterior": "Photo précédente",
+    "siguiente": "Photo suivante"
+  },
+  "localizacion": {
+    "etiqueta": "Nous trouver",
+    "titulo": "Muntaner 22.",
+    "barrio": "L'Esquerra de l'Eixample, Barcelone",
+    "metro": "Métro",
+    "parking": "Parking",
+    "telefono": "Téléphone",
+    "horario": "Horaires",
+    "hoy": "aujourd'hui",
+    "cerrado": "Fermé",
+    "servicios": "Deux services : 11h30–18h00 et 18h00–23h00",
+    "reservar": "Réserver en ligne",
+    "como_llegar": "Itinéraire",
+    "mapa_alt": "Plan schématique : Carrer de Muntaner 22, entre Gran Via et Diputació, près du métro Universitat",
+    "mapa_aqui": "Ici",
+    "dias": [
+      "Dimanche",
+      "Lundi",
+      "Mardi",
+      "Mercredi",
+      "Jeudi",
+      "Vendredi",
+      "Samedi"
+    ],
+    "dias_corto": [
+      "Dim",
+      "Lun",
+      "Mar",
+      "Mer",
+      "Jeu",
+      "Ven",
+      "Sam"
+    ]
+  },
+  "cta": {
+    "titulo": "Réservez votre table",
+    "texto": "Du mardi au dimanche, de 11h30 à 23h00.",
+    "boton": "Réserver en ligne",
+    "o_llama": "ou appelez le"
+  },
+  "footer": {
+    "redes": "Réseaux",
+    "legal": "Mentions",
+    "aviso": "Mentions légales",
+    "privacidad": "Confidentialité",
+    "cookies": "Cookies",
+    "diseno": "Design :",
+    "arriba": "Retour en haut",
+    "instagram_pendiente": "Instagram (bientôt)",
+    "facebook_pendiente": "Facebook (bientôt)"
+  },
+  "cookies": {
+    "titulo": "Cookies",
+    "texto": "Nous utilisons nos propres cookies pour mémoriser votre langue. Ceux des tiers (statistiques) ne s'activent que si vous acceptez.",
+    "aceptar": "Tout accepter",
+    "rechazar": "Refuser",
+    "mas": "Politique de cookies"
+  },
+  "precio": {
+    "locale": "fr-FR"
+  },
+  "carta_digital": {
+    "titulo": "Carte · The Lobster Roll Barcelona",
+    "descripcion": "La carte de The Lobster Roll Barcelona : lobster rolls au homard canadien, crab rolls, combos et plus. Carrer de Muntaner 22.",
+    "sub": "Homard canadien dans un pain brioché. Tout est fait minute.",
+    "nota": "Prix en euros, TVA incluse. Demandez-nous pour les allergènes.",
+    "volver": "Voir le site complet",
+    "qr": "Scannez pour voir la carte sur votre téléphone"
+  }
+}

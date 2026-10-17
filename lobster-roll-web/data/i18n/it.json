@@ -1,0 +1,175 @@
+{
+  "meta": {
+    "titulo": "The Lobster Roll Barcelona · Astice canadese in pane brioche, in Muntaner 22",
+    "descripcion": "The Lobster Roll, nell'Esquerra de l'Eixample, a due minuti dalla metro Universitat. Lobster roll di astice canadese, crab roll, combo e terrazza. Prenota online.",
+    "og_titulo": "The Lobster Roll · Barcelona",
+    "og_descripcion": "Astice canadese in pane brioche. L'unico ristorante di Barcellona con cucina della costa est americana."
+  },
+  "nav": {
+    "restaurante": "Il ristorante",
+    "carta": "Menù",
+    "fotos": "Foto",
+    "localizacion": "Dove siamo",
+    "reservar": "Prenota",
+    "menu_abrir": "Apri il menu",
+    "menu_cerrar": "Chiudi il menu",
+    "idioma": "Lingua",
+    "saltar": "Vai al contenuto"
+  },
+  "hero": {
+    "titulo_1": "Lobster",
+    "titulo_2": "Roll",
+    "titulo_3": "Barcelona",
+    "bajada": "Astice canadese in pane brioche. L'unico ristorante di Barcellona con cucina della costa est americana.",
+    "cta_reservar": "Prenota un tavolo",
+    "cta_carta": "Vedi il menù",
+    "sticker_1": "80 g di astice",
+    "sticker_2": "20 €",
+    "scroll": "Scorri per vedere di più"
+  },
+  "estado": {
+    "abierto": "Aperto ora",
+    "cerrado": "Chiuso ora",
+    "cierra": "Chiude alle {hora}",
+    "abre_hoy": "Apre alle {hora}",
+    "abre_dia": "Apre {dia} alle {hora}"
+  },
+  "cinta": [
+    "Lobster Roll",
+    "Crab Roll",
+    "Shrimp Roll",
+    "Pulled Pork",
+    "Pulled Beef",
+    "A pochi metri dalla metro Universitat",
+    "Terrazza",
+    "Salmón ahumado",
+    "Calamar Roll"
+  ],
+  "restaurante": {
+    "etiqueta": "Il ristorante",
+    "titulo": "Costa est, in Muntaner.",
+    "cita": "La nostra specialità sono i Lobster Roll, fatti solo con astice canadese.",
+    "p1": "Siamo nell'Esquerra de l'Eixample, a pochi metri dalla metro Universitat. Entrando trovi una sala molto grande e allungata, dall'arredo moderno.",
+    "p2": "Tutta la sala è piena di piante. Dal soffitto pendono lampade di stili diversi, che danno una luce molto bella. E abbiamo una terrazza, con diversi tavoli.",
+    "p3": "Siamo l'unico ristorante di Barcellona con cucina della costa est americana. Oltre ai lobster roll, facciamo crab roll con granciporro o gamberi, e roll di maiale o manzo arrosto.",
+    "dato_1_num": "100%",
+    "dato_1_txt": "astice canadese",
+    "dato_2_num": "Brioche",
+    "dato_2_txt": "il pane di tutti i roll",
+    "dato_3_num": "2 min",
+    "dato_3_txt": "dalla metro Universitat"
+  },
+  "bloque": {
+    "vertical": "Lobster",
+    "etiqueta": "Scegli la misura",
+    "titulo": "80 g o XL 120 g.",
+    "texto": "Stesso pane brioche. Più astice.",
+    "a_nombre": "Lobster Roll",
+    "a_peso": "80 g",
+    "a_desc": "Astice canadese.",
+    "b_nombre": "Lobster Roll XL",
+    "b_peso": "120 g",
+    "b_desc": "Stesso pane brioche con più carne.",
+    "mas": "+40 g"
+  },
+  "carta": {
+    "etiqueta": "Il menù",
+    "titulo": "Menù",
+    "intro": "Frasi corte, roll grandi. I nomi, come li chiamano loro.",
+    "tab_rolls": "Rolls",
+    "tab_combos": "Combo",
+    "especialidad": "La specialità",
+    "descargar": "Scarica il menù",
+    "ver_combos": "Vedi i combo"
+  },
+  "combos": {
+    "etiqueta": "Combo",
+    "titulo": "Scegli tre. Paghi uno.",
+    "texto": "Ogni combo include un roll, una bevanda e un mochi.",
+    "paso_1_titulo": "1 roll",
+    "paso_1_txt": "Quello che preferisci.",
+    "paso_2_titulo": "1 bevanda",
+    "paso_2_txt": "Bibita, birra o vino.",
+    "paso_3_titulo": "1 mochi",
+    "paso_3_txt": "Per chiudere.",
+    "lista_titulo": "I combo"
+  },
+  "fotos": {
+    "etiqueta": "Foto",
+    "titulo": "Piante, lampade e astice.",
+    "texto": "Una sala allungata, piena di piante, e una terrazza in Muntaner.",
+    "abrir": "Ingrandisci la foto",
+    "cerrar": "Chiudi",
+    "anterior": "Foto precedente",
+    "siguiente": "Foto successiva"
+  },
+  "localizacion": {
+    "etiqueta": "Dove siamo",
+    "titulo": "Muntaner 22.",
+    "barrio": "L'Esquerra de l'Eixample, Barcellona",
+    "metro": "Metro",
+    "parking": "Parcheggio",
+    "telefono": "Telefono",
+    "horario": "Orari",
+    "hoy": "oggi",
+    "cerrado": "Chiuso",
+    "servicios": "Due servizi: 11:30–18:00 e 18:00–23:00",
+    "reservar": "Prenota online",
+    "como_llegar": "Come arrivare",
+    "mapa_alt": "Mappa schematica: Carrer de Muntaner 22, tra Gran Via e Diputació, vicino alla metro Universitat",
+    "mapa_aqui": "Qui",
+    "dias": [
+      "Domenica",
+      "Lunedì",
+      "Martedì",
+      "Mercoledì",
+      "Giovedì",
+      "Venerdì",
+      "Sabato"
+    ],
+    "dias_corto": [
+      "Dom",
+      "Lun",
+      "Mar",
+      "Mer",
+      "Gio",
+      "Ven",
+      "Sab"
+    ]
+  },
+  "cta": {
+    "titulo": "Prenota il tuo tavolo",
+    "texto": "Da martedì a domenica, dalle 11:30 alle 23:00.",
+    "boton": "Prenota online",
+    "o_llama": "o chiama il"
+  },
+  "footer": {
+    "redes": "Social",
+    "legal": "Legale",
+    "aviso": "Note legali",
+    "privacidad": "Privacy",
+    "cookies": "Cookie",
+    "diseno": "Design:",
+    "arriba": "Torna su",
+    "instagram_pendiente": "Instagram (in arrivo)",
+    "facebook_pendiente": "Facebook (in arrivo)"
+  },
+  "cookies": {
+    "titulo": "Cookie",
+    "texto": "Usiamo cookie propri per ricordare la tua lingua. Quelli di terze parti (statistiche) si attivano solo se accetti.",
+    "aceptar": "Accetta tutti",
+    "rechazar": "Rifiuta",
+    "mas": "Politica dei cookie"
+  },
+  "precio": {
+    "locale": "it-IT"
+  },
+  "carta_digital": {
+    "titulo": "Menù · The Lobster Roll Barcelona",
+    "descripcion": "Menù di The Lobster Roll Barcelona: lobster roll di astice canadese, crab roll, combo e altro. Carrer de Muntaner 22.",
+    "sub": "Astice canadese in pane brioche. Tutto appena fatto.",
+    "nota": "Prezzi in euro, IVA inclusa. Chiedici degli allergeni.",
+    "volver": "Vedi il sito completo",
+    "qr": "Scansiona per vedere il menù sul telefono"
+  }
+}

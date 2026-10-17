@@ -1,7 +1,7 @@
 /* Carta impresa: arma una página A4 por idioma a partir de data/*.json. */
 (() => {
   'use strict';
-  const IDIOMAS = ['es', 'ca', 'en'];
+  const IDIOMAS = ['es', 'ca', 'en', 'fr', 'it', 'pt', 'ru'];
   const get = (o, r) => r.split('.').reduce((a, k) => (a == null ? undefined : a[k]), o);
   const cargar = async (r) => { const x = await fetch(r, { cache: 'no-cache' }); if (!x.ok) throw new Error(r); return x.json(); };
   const txt = (o, lang) => (typeof o === 'string' ? o : (o?.[lang] ?? o?.es ?? ''));
