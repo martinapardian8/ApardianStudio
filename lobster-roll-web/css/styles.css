@@ -101,9 +101,11 @@ ul, ol { padding: 0; list-style: none; }
 .barra__links a { text-decoration: none; font-family: var(--f-label); text-transform: uppercase; letter-spacing: .1em; font-size: .85rem; opacity: .9; position: relative; padding: .3rem 0; }
 .barra__links a::after { content: ""; position: absolute; left: 0; right: 100%; bottom: 0; height: 2px; background: var(--rojo); transition: right .3s var(--ease); }
 .barra__links a:hover::after, .barra__links a.is-active::after { right: 0; }
-.barra .lang { display: none; }
+.barra .lang { display: block; margin-left: auto; }
+.barra .lang .lang__btn { min-height: 40px; padding: .3rem .55rem .3rem .5rem; }
+@media (max-width: 430px) { .marca__txt { font-size: .68rem; letter-spacing: .06em; } .barra .cont { gap: .6rem; } }
 .barra__cta { display: none; }
-.hamb { margin-left: auto; width: 46px; height: 46px; border: 0; background: rgba(255,255,255,.1); display: grid; place-items: center; border-radius: 4px; }
+.hamb { margin-left: 0; width: 46px; height: 46px; border: 0; background: rgba(255,255,255,.1); display: grid; place-items: center; border-radius: 4px; }
 .hamb span { display: block; width: 20px; height: 2px; background: var(--crema); position: relative; transition: transform .3s; }
 .hamb span::before, .hamb span::after { content: ""; position: absolute; left: 0; width: 20px; height: 2px; background: var(--crema); transition: transform .3s, top .3s; }
 .hamb span::before { top: -6px; } .hamb span::after { top: 6px; }
@@ -147,7 +149,7 @@ html[lang="ru"] .h-display, html[lang="ru"] .carta__titulo, html[lang="ru"] .loc
 .lang__menu button[aria-selected="true"]::after { content: "✓"; margin-left: auto; }
 .menu-movil .lang__btn { border-color: rgba(255,255,255,.6); min-height: 46px; font-size: .9rem; }
 .menu-movil .lang__menu { right: auto; left: 0; bottom: calc(100% + 8px); top: auto; }
-@media (min-width: 1024px) { .barra .lang { display: block; } }
+@media (min-width: 1024px) { .barra .lang { margin-left: 0; } }
 
 /* ---------- Hero ---------- */
 .hero { background: var(--negro); color: var(--crema); min-height: 100svh; display: grid; align-items: end; padding: 0; overflow: hidden; }
