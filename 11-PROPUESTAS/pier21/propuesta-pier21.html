@@ -136,8 +136,8 @@ tr.grp td{padding-top:30px;font-size:11px;font-weight:500;letter-spacing:.22em;t
 .fine{margin-top:12px;font-size:13.5px;color:var(--mute)}
 
 /* planes mensuales */
-.plans{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:24px}
-@media (max-width:760px){.plans{grid-template-columns:1fr}}
+.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}
+@media (max-width:900px){.plans{grid-template-columns:1fr}}
 .plan{border:1px solid var(--line);border-radius:4px;padding:26px;display:flex;flex-direction:column;gap:12px;min-width:0;background:var(--panel)}
 .plan.rec{border-color:var(--terra)}
 .plan .top2{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
@@ -285,7 +285,7 @@ tr.grp td{padding-top:30px;font-size:11px;font-weight:500;letter-spacing:.22em;t
       <div class="drow h"><span class="hd"></span><span class="hd">Hoy</span><span class="hd">Con la propuesta</span></div>
       <div class="drow"><span class="k">Web</span><p class="now">No existe. No hay un sitio propio al que mandar a la gente.</p><p>Web propia con dominio de Pier 21, rápida en el celular y preparada para aparecer en Google.</p></div>
       <div class="drow"><span class="k">Carta</span><p class="now">Todavía no está cerrada y va a ir cambiando en las primeras semanas.</p><p>Carta digital con QR en las mesas. Cada cambio de plato o precio se publica en minutos, en los tres idiomas, sin reimprimir nada.</p></div>
-      <div class="drow"><span class="k">Fotos</span><p class="now">No hay fotos propias del lugar abierto, de los platos ni del equipo.</p><p>Sesión profesional del mediodía a la noche y video con drone de la caja negra sobre las rocas, al atardecer.</p></div>
+      <div class="drow"><span class="k">Fotos</span><p class="now">No hay fotos propias del lugar abierto, de los platos ni del equipo.</p><p>Sesión de fotos profesional, de día y de noche, sin límite de fotos, y video con drone de la caja negra sobre las rocas, al atardecer.</p></div>
       <div class="drow"><span class="k">Turistas</span><p class="now">Llega la temporada de verano y de cruceros. Brasileños, argentinos y extranjeros buscan dónde comer en la rambla.</p><p>Web y carta en español, inglés y portugués. La web detecta el idioma del teléfono.</p></div>
       <div class="drow"><span class="k">Reservas</span><p class="now">Sin un canal claro. Las consultas se pierden entre llamadas y mensajes.</p><p>Botón de WhatsApp directo y formulario de reservas y eventos privados que llega ordenado al encargado.</p></div>
     </div>
@@ -406,11 +406,10 @@ tr.grp td{padding-top:30px;font-size:11px;font-weight:500;letter-spacing:.22em;t
           <tr><td class="svc"><b>Logo en vectorial</b><small>Solo si no tienen los archivos</small></td><td>Redibujo del logo PIER 21 y de su versión con olas en archivos de alta calidad, para web, imprenta y cartelería.</td><td class="wk">3 días</td><td class="pr num">USD 120</td></tr>
 
           <tr class="grp"><td colspan="4">Foto y video</td></tr>
-          <tr><td class="svc"><b>Sesión de fotos · media jornada</b></td><td>4 horas en el local. 35 fotos editadas en Lightroom: platos, tragos, barra, salón y terraza.</td><td class="wk">Entrega en 5 días</td><td class="pr num">USD 450</td></tr>
-          <tr><td class="svc"><b>Sesión de fotos · jornada completa</b></td><td>8 horas, del mediodía a la noche. 80 fotos editadas: platos, tragos, barra y horno, salón, terraza, fachada, equipo y atardecer.</td><td class="wk">Entrega en 7 días</td><td class="pr num">USD 800</td></tr>
+          <tr><td class="svc"><b>Sesión de fotos</b><small>Sin límite de fotos</small></td><td>Sesión en el local, de día y de noche: platos, tragos, barra y horno, salón, terraza, fachada, equipo y atardecer. Se entregan todas las fotos buenas, editadas en Lightroom, sin un número tope.</td><td class="wk">Entrega en 7 días</td><td class="pr num">USD 800</td></tr>
           <tr><td class="svc"><b>Video con drone</b></td><td>Un vuelo al atardecer sobre el edificio, la terraza y la rambla. Video editado de 30 a 60 segundos y 10 clips cortos, en vertical y horizontal. Si el clima no acompaña, se reprograma sin costo.</td><td class="wk">Entrega en 5 días</td><td class="pr num">USD 250</td></tr>
           <tr><td class="svc"><b>Reel de apertura</b></td><td>Video editado de hasta 1 minuto para presentar Pier 21, en vertical y horizontal. Se graba el mismo día de la sesión de fotos.</td><td class="wk">Entrega en 7 días</td><td class="pr num">USD 300</td></tr>
-          <tr><td class="svc"><b>Fotos de platos nuevos</b></td><td>Cuando cambie la carta: foto editada de cada plato nuevo, en el local. Mínimo 8 platos por visita.</td><td class="wk">Entrega en 3 días</td><td class="pr num">USD 25<small>por plato</small></td></tr>
+          <tr><td class="svc"><b>Visita de carta nueva</b></td><td>Cuando cambie la carta: una visita al local para fotografiar todos los platos nuevos, sin límite de fotos.</td><td class="wk">Entrega en 3 días</td><td class="pr num">USD 200<small>por visita</small></td></tr>
 
           <tr class="grp"><td colspan="4">Redes y contenido</td></tr>
           <tr><td class="svc"><b>Kit de lanzamiento</b></td><td>Instagram a punto: biografía, portadas de destacadas, 9 posteos y 10 historias diseñados con sus textos, y 3 plantillas para que el equipo publique novedades.</td><td class="wk">1 semana</td><td class="pr num">USD 450</td></tr>
@@ -430,28 +429,22 @@ tr.grp td{padding-top:30px;font-size:11px;font-weight:500;letter-spacing:.22em;t
     <p class="lead">Como la carta se va a ir ajustando, la web necesita a alguien que la mantenga al día. El contenido para redes se produce en visitas programadas, no a diario.</p>
 
     <div class="plans">
-      <div class="plan">
-        <span class="pill dk">Web</span>
-        <div class="top2"><h3>Mantenimiento</h3><span class="p num">USD 60 <small>al mes</small></span></div>
-        <ul><li>Alojamiento, certificado de seguridad y copias diarias</li><li>Actualizaciones técnicas y control de que la web esté en línea</li><li>1 cambio pequeño al mes</li></ul>
-        <p>Para cuando la carta ya esté estable.</p>
-      </div>
       <div class="plan rec">
-        <span class="pill">Recomendado</span>
+        <span class="pill">Web · Incluido desde el mes 2</span>
         <div class="top2"><h3>Gestión web y carta</h3><span class="p num">USD 120 <small>al mes</small></span></div>
-        <ul><li>Todo lo del plan Mantenimiento</li><li>Hasta 6 cambios al mes: platos, precios, fotos, horarios y eventos</li><li>Cada cambio, traducido a los 3 idiomas</li><li>Aviso de temporada o evento en la portada</li><li>Respuesta en 48 horas hábiles e informe mensual de visitas</li></ul>
+        <ul><li>Alojamiento, certificado de seguridad y copias diarias</li><li>Actualizaciones técnicas y control de que la web esté en línea</li><li>Hasta 6 cambios al mes: platos, precios, fotos, horarios y eventos</li><li>Cada cambio, traducido a los 3 idiomas</li><li>Aviso de temporada o evento en la portada</li><li>Respuesta en 48 horas hábiles e informe mensual de visitas</li></ul>
         <p>Los cambios que excedan el plan se cobran a USD 30 la hora.</p>
       </div>
       <div class="plan">
         <span class="pill dk">Contenido</span>
         <div class="top2"><h3>Plan Bajamar</h3><span class="p num">USD 550 <small>al mes</small></span></div>
-        <ul><li>2 visitas al mes, de 2 a 3 horas cada una</li><li>25 fotos editadas</li><li>4 reels de hasta 1 minuto</li><li>8 historias</li></ul>
+        <ul><li>2 visitas al mes</li><li>Fotos editadas sin límite</li><li>4 reels de hasta 1 minuto</li><li>8 historias</li></ul>
         <p>Material para publicar 2 o 3 veces por semana.</p>
       </div>
       <div class="plan">
         <span class="pill dk">Contenido</span>
         <div class="top2"><h3>Plan Pleamar</h3><span class="p num">USD 950 <small>al mes</small></span></div>
-        <ul><li>4 visitas al mes, una por semana</li><li>50 fotos editadas</li><li>8 reels de hasta 1 minuto</li><li>16 historias y 8 posteos diseñados con textos</li><li>Calendario mensual de publicaciones</li></ul>
+        <ul><li>4 visitas al mes, una por semana</li><li>Fotos editadas sin límite</li><li>8 reels de hasta 1 minuto</li><li>16 historias y 8 posteos diseñados con textos</li><li>Calendario mensual de publicaciones</li></ul>
         <p>Material para publicar todos los días hábiles.</p>
       </div>
     </div>
@@ -470,10 +463,10 @@ tr.grp td{padding-top:30px;font-size:11px;font-weight:500;letter-spacing:.22em;t
         <ul>
           <li><span>Web Pier 21</span><span>1.900</span></li>
           <li><span>Carta digital</span><span>650</span></li>
-          <li><span>Sesión de fotos · media jornada</span><span>450</span></li>
+          <li><span>Sesión de fotos sin límite de fotos</span><span>800</span></li>
           <li><span>Video con drone</span><span>250</span></li>
         </ul>
-        <div class="price"><b class="num">USD 2.790</b><s class="num">USD 3.250</s><em>Ahorro USD 460</em></div>
+        <div class="price"><b class="num">USD 3.090</b><s class="num">USD 3.600</s><em>Ahorro USD 510</em></div>
       </article>
       <article class="pack rec">
         <span class="tag">Recomendado</span>
@@ -485,7 +478,7 @@ tr.grp td{padding-top:30px;font-size:11px;font-weight:500;letter-spacing:.22em;t
           <li><span>Carta impresa</span><span>450</span></li>
           <li><span>QR para las mesas</span><span>80</span></li>
           <li><span>Ficha de Google</span><span>150</span></li>
-          <li><span>Sesión de fotos · jornada completa</span><span>800</span></li>
+          <li><span>Sesión de fotos sin límite de fotos</span><span>800</span></li>
           <li><span>Video con drone</span><span>250</span></li>
           <li><span>Reel de apertura</span><span>300</span></li>
           <li><span>Kit de lanzamiento</span><span>450</span></li>
@@ -514,7 +507,7 @@ tr.grp td{padding-top:30px;font-size:11px;font-weight:500;letter-spacing:.22em;t
         <div class="step"><span class="n">Pago 3 · Antes de publicar</span><span class="amt">USD 1.197</span><span class="pc">30 %</span><p>Con la web terminada y revisada. <b>La web se publica en el dominio al recibir este pago.</b></p></div>
       </div>
     </div>
-    <p class="fine">Paquete Amarre (USD 2.790), con los mismos 3 pasos: USD 1.116 al firmar, USD 837 con fotos y diseño, USD 837 antes de publicar.</p>
+    <p class="fine">Paquete Amarre (USD 3.090), con los mismos 3 pasos: USD 1.236 al firmar, USD 927 con fotos y diseño, USD 927 antes de publicar.</p>
 
     <div class="rules">
       <div><b>Servicios sueltos</b><p>Hasta USD 500: se paga el 100 % al encargarlo. Más de USD 500: 50 % al encargarlo y 50 % antes de entregar los archivos finales.</p></div>
@@ -563,7 +556,7 @@ tr.grp td{padding-top:30px;font-size:11px;font-weight:500;letter-spacing:.22em;t
     <div class="two">
       <ul class="cond">
         <li><span><b>Dominio</b>: entre USD 20 y 45 por año, según sea .com o .com.uy. Queda a nombre de Pier 21.</span></li>
-        <li><span><b>Alojamiento desde el segundo mes</b>, que va dentro de cualquiera de los planes de gestión web.</span></li>
+        <li><span><b>Alojamiento desde el segundo mes</b>, que va dentro del plan Gestión web y carta.</span></li>
         <li><span><b>Correo con el dominio</b> (por ejemplo reservas@pier21), si lo quieren: unos USD 7 por usuario al mes.</span></li>
       </ul>
       <ul class="cond">
@@ -578,7 +571,7 @@ tr.grp td{padding-top:30px;font-size:11px;font-weight:500;letter-spacing:.22em;t
   <section>
     <div class="sec-t"><span class="lbl">Calendario</span><span class="lbl">Paquete completo en 4 semanas desde el pago 1</span></div>
     <div class="cal">
-      <div><span class="lbl">Semana 1</span><span class="disp">Sesión y drone</span><p>Jornada de fotos, reel de apertura y vuelo al atardecer. Textos de la web.</p></div>
+      <div><span class="lbl">Semana 1</span><span class="disp">Sesión y drone</span><p>Sesión de fotos, reel de apertura y vuelo al atardecer. Textos de la web.</p></div>
       <div><span class="lbl">Semana 2</span><span class="disp">Carta online</span><p>Carta digital publicada con QR en las mesas. Ficha de Google lista. Diseño de la web para aprobar.</p></div>
       <div><span class="lbl">Semana 3</span><span class="disp">Desarrollo</span><p>Web en los tres idiomas, carta impresa y kit de redes.</p></div>
       <div><span class="lbl">Semana 4</span><span class="disp">Publicación</span><p>Revisión final, web en línea y lanzamiento en redes.</p></div>
