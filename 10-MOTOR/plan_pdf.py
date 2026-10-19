@@ -40,7 +40,7 @@ h1,h2,h3{{font-family:Anton,sans-serif;font-weight:400;text-transform:uppercase;
 h1{{font-size:54pt}} h2{{font-size:26pt;margin:0 0 10pt}} h3{{font-size:14pt;margin:14pt 0 6pt}}
 .eti{{font-size:7.5pt;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--r)}}
 .sec{{page-break-before:always}}
-.portada{{height:255mm;background:var(--n);color:var(--h);margin:-16mm -15mm 0;padding:26mm 18mm;display:flex;flex-direction:column;justify-content:space-between}}
+.portada{{box-sizing:border-box;height:262mm;background:var(--n);color:var(--h);margin:-16mm -15mm 0;padding:26mm 18mm;display:flex;flex-direction:column;justify-content:space-between}}
 .portada h1{{font-size:68pt}} .portada .logo{{font-family:Anton;font-size:30pt}} .portada .logo i{{color:var(--r);font-style:normal}}
 .portada p{{font-size:13pt;max-width:120mm;color:#D9D6D2}}
 p{{margin:0 0 7pt}} .m{{color:var(--m)}}
@@ -48,7 +48,7 @@ table{{width:100%;border-collapse:collapse;font-size:8.6pt;margin:6pt 0 10pt}}
 th{{text-align:left;font-size:7pt;letter-spacing:.14em;text-transform:uppercase;color:var(--m);border-bottom:1.5pt solid var(--n);padding:4pt 5pt}}
 td{{border-bottom:.5pt solid var(--l);padding:5pt;vertical-align:top}}
 td.n{{font-family:Anton;font-size:12pt;color:var(--r);width:12mm}}
-img.w{{width:100%;display:block;margin:6pt 0 4pt}}
+img.w{{max-width:100%;max-height:222mm;display:block;margin:6pt auto 4pt}}
 ul{{margin:0 0 8pt;padding-left:14pt}} li{{margin:0 0 3pt}}
 .caja{{border-left:3pt solid var(--r);padding:6pt 10pt;background:#F1EFEC;margin:8pt 0}}
 .dos{{display:grid;grid-template-columns:1fr 1fr;gap:10mm}}
@@ -70,7 +70,7 @@ ul{{margin:0 0 8pt;padding-left:14pt}} li{{margin:0 0 3pt}}
 <tr><td><b>App Centro</b></td><td>Calendario con tildes, carruseles con sus textos para copiar, clientes y guiones de venta. Se usa desde el celular.</td><td>claude.ai (página privada)</td></tr>
 <tr><td><b>Ventas</b></td><td>Community manager de ventas: embudo, rutina de 30 minutos, guiones, objeciones y KPIs.</td><td>09-ESTUDIO/CM_VENTAS.md</td></tr>
 <tr><td><b>Prospección</b></td><td>6 flujos de n8n: buscar negocios, auditar su web, redactar el mail, aprobar, seguir y clasificar respuestas.</td><td>11-AUTOMATIZACION</td></tr>
-<tr><td><b>Instagram</b></td><td>Calendario de aprobación: aprobás por Telegram y un agente publica a la hora pactada.</td><td>11-AUTOMATIZACION (en armado)</td></tr>
+<tr><td><b>Instagram</b></td><td>Calendario de aprobación: aprobás por Telegram y un agente publica a la hora pactada.</td><td>11-AUTOMATIZACION/INSTAGRAM_APROBACION.md</td></tr>
 <tr><td><b>Web</b></td><td>Servicios rediseñado, sección nueva de Música con el EP FUGAZ y seguridad endurecida. Sin publicar.</td><td>05-WEB y 06-NOTAS/vista-previa</td></tr>
 </table>
 <div class="caja"><b>Regla de la casa, reforzada hoy:</b> solo fotos tuyas. La IA pone escenas, materiales y movimiento, nunca reemplaza una foto ni inventa un "antes". Todo lo que simulaba un antes/después quedó en <i>_NO-PUBLICAR-antes-simulado</i>.</div>
