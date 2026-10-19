@@ -1,0 +1,11 @@
+/* Tipografías servidas desde el propio sitio (antes venían de Google Fonts).
+   Menos dependencias de terceros, nada de la IP del visitante viaja a Google
+   y la CSP queda en 'self'. Subconjunto latino: español, portugués e inglés. */
+@font-face{
+  font-family:"Anton";font-style:normal;font-weight:400;font-display:swap;
+  src:url("../fonts/anton-latin.woff2") format("woff2");
+}
+@font-face{
+  font-family:"Work Sans";font-style:normal;font-weight:300 600;font-display:swap;
+  src:url("../fonts/worksans-latin-var.woff2") format("woff2");
+}

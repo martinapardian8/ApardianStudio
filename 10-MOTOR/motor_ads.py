@@ -10,8 +10,10 @@ No usa IA: la foto es de el, el diseno lo pone este archivo.
 import os, glob, random, hashlib
 from PIL import Image, ImageDraw, ImageFont, ImageFilter, ImageEnhance, ImageOps
 
-S     = "/private/tmp/claude-501/-Users-martinapardian-Desktop/6cbae816-aae6-425b-87d6-b223b386128b/scratchpad"
-IMG   = "/Users/martinapardian/Desktop/WEB APARDIANSTUDIO/05-WEB/img"
+# rutas relativas al repositorio: funciona igual en la Mac y en cualquier copia
+RAIZ  = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+S     = os.path.join(RAIZ, "10-MOTOR")
+IMG   = os.path.join(RAIZ, "05-WEB", "img")
 KOULEN  = os.path.join(S, "fuentes", "Koulen-Regular.ttf")   # solo el logotipo
 DISPLAY = os.path.join(S, "fuentes", "Anton-Regular.ttf")    # titulares
 WORK   = os.path.join(S, "fuentes", "WorkSans.ttf")

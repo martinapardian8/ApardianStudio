@@ -1,0 +1,1305 @@
+{
+  "name": "APARDIAN 03 · Redactor y envío",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "days",
+              "triggerAtHour": 10
+            }
+          ]
+        }
+      },
+      "id": "515ad418-ea57-5c47-9d4f-fa44b9fe85dc",
+      "name": "Programado",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        -100
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "5c08cf32-dead-5347-b862-e43a6a301365",
+      "name": "Probar a mano",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        100
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "cbfc7254-8255-563b-9ec7-3a4bb1f4b4f3",
+              "name": "SHEET_ID",
+              "value": "PEGAR_ID_DE_LA_PLANILLA",
+              "type": "string"
+            },
+            {
+              "id": "9202a2e5-03db-5e0f-b419-2c6a5205f6d6",
+              "name": "TELEGRAM_CHAT_ID",
+              "value": "PEGAR_CHAT_ID",
+              "type": "string"
+            },
+            {
+              "id": "d34c5c51-e7d6-5575-aca6-514b41182b47",
+              "name": "MI_EMAIL",
+              "value": "Martin Apardian <martin@TU-DOMINIO-DE-ENVIO>",
+              "type": "string"
+            },
+            {
+              "id": "b568e270-85c5-5abc-af77-c00b0c32b573",
+              "name": "SCORE_MINIMO",
+              "value": 60,
+              "type": "number"
+            },
+            {
+              "id": "f8faef3d-4811-5c80-b367-4cedb08cf2ff",
+              "name": "MAX_POR_DIA",
+              "value": 20,
+              "type": "number"
+            },
+            {
+              "id": "a63ee8ad-41b2-502b-ae1f-3faafe220dfc",
+              "name": "AUTO_ENVIO",
+              "value": false,
+              "type": "boolean"
+            },
+            {
+              "id": "c84ab600-7145-593f-8a1d-3c2690df14d9",
+              "name": "SCORE_AUTO",
+              "value": 80,
+              "type": "number"
+            },
+            {
+              "id": "76323dfb-3147-5359-b87b-fc4725edf103",
+              "name": "URL_APROBAR",
+              "value": "https://TU-INSTANCIA.app.n8n.cloud/webhook/apardian-aprobar",
+              "type": "string"
+            },
+            {
+              "id": "45407d1f-270f-560e-92fc-85a3b637be9e",
+              "name": "TOKEN",
+              "value": "CAMBIAR-POR-UNA-CLAVE-LARGA",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "36943455-d892-597a-920c-d25305b5850a",
+      "name": "Config",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        240,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "read",
+        "documentId": {
+          "__rl": true,
+          "value": "={{ $('Config').first().json.SHEET_ID }}",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Leads",
+          "mode": "name"
+        },
+        "options": {}
+      },
+      "id": "ea87debd-969a-5b8f-8767-6d891bc34507",
+      "name": "Leer Leads",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        480,
+        0
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "REEMPLAZAR",
+          "name": "Google Sheets"
+        }
+      },
+      "executeOnce": true,
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "operation": "read",
+        "documentId": {
+          "__rl": true,
+          "value": "={{ $('Config').first().json.SHEET_ID }}",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Bajas",
+          "mode": "name"
+        },
+        "options": {}
+      },
+      "id": "04fac9c0-737f-5c4b-a32b-099b4428f643",
+      "name": "Leer Bajas",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        720,
+        0
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "REEMPLAZAR",
+          "name": "Google Sheets"
+        }
+      },
+      "executeOnce": true,
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "jsCode": "const c = $('Config').first().json;\nconst bm = new Set(), bd = new Set();\nfor (const r of $('Leer Bajas').all()) {\n  if (r.json.email) bm.add(String(r.json.email).toLowerCase());\n  if (r.json.dominio) bd.add(String(r.json.dominio).toLowerCase());\n}\n// Corre una vez por día: MAX_POR_DIA es el tope de mails nuevos por día.\nconst todos = $('Leer Leads').all().map(r => r.json);\nconst cupo = c.MAX_POR_DIA || 20;\nreturn todos\n  .filter(l => l.estado === 'auditado' && Number(l.score) >= (c.SCORE_MINIMO || 60) && l.email)\n  .filter(l => { const e = String(l.email).toLowerCase(); return !bm.has(e) && !bd.has(e.split('@')[1]); })\n  .sort((x, y) => Number(y.score) - Number(x.score))\n  .slice(0, cupo)\n  .map(l => ({ json: l }));\n"
+      },
+      "id": "ee735046-3422-553b-beb0-0ff6b2a5517b",
+      "name": "Elegir auditados",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        960,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "function cuerpoClaude(system, user, maxTokens, effort) {\n  return {\n    model: 'claude-opus-5-5',\n    max_tokens: maxTokens,\n    system: system,\n    messages: [{ role: 'user', content: user }],\n    output_config: { effort: effort },\n    fallbacks: 'default',\n  };\n}\n\nconst SYSTEM = \"Sos Martin Apardian, comunicador visual freelance de Uruguay (APARDIAN STUDIO:\\nfotografía, video, páginas web y edición en Lightroom). Escribís un primer mail\\na un negocio que no te conoce, a partir de una auditoría de su web.\\n\\nCómo escribe Martin: directo, rioplatense, voseo, frases cortas, sin adornos.\\nEntra con clase pero con estilo: seguro, específico, cero desesperación.\\nMuestra trabajo antes que hablar de sí mismo.\\n\\nEstructura del mail (en este orden, sin títulos):\\n1. Una línea que abre con algo concreto y verdadero que viste en su web o su\\n   ficha (usá el gancho personal de la auditoría). Nada de \\\"espero que estés\\n   bien\\\", nada de presentarte primero.\\n2. El problema, con su evidencia, dicho como colega y no como vendedor.\\n3. Cómo lo resolverías vos, en una o dos frases, con el servicio que corresponde.\\n4. Una prueba: apardianstudio.com y, si aplica, una pieza o rubro relevante de\\n   tu trabajo (gastronomía, marcas, salones, retratos, etc.). No inventes\\n   clientes ni resultados.\\n5. Un llamado a la acción suave, fácil de contestar con un sí. Ejemplos:\\n   \\\"¿Te mando 3 ideas para tu carta en un video de 2 minutos?\\\",\\n   \\\"¿Te paso un boceto de cómo se vería la portada de tu web?\\\".\\n6. Firma:\\n   Martin Apardian\\n   APARDIAN STUDIO · apardianstudio.com · WhatsApp +598 91 962 962\\n7. Última línea, pequeña: \\\"Si no te interesa, respondé 'no' y no te escribo más.\\\"\\n\\nReglas:\\n- Máximo 120 palabras en el cuerpo, sin contar la firma ni la línea de baja.\\n- Asunto corto (máximo 6 palabras), en minúscula salvo nombres propios, sin\\n  clickbait, sin signos de exclamación, sin \\\"propuesta\\\", \\\"oferta\\\" ni \\\"gratis\\\".\\n  Buen asunto: \\\"la foto del menú de {negocio}\\\", \\\"tu web en el celular\\\".\\n- Prohibido: \\\"estimado/a\\\", \\\"¡Hola! 👋\\\", emojis, mayúsculas para gritar,\\n  promesas exageradas (\\\"triplicá tus ventas\\\"), números que no estén en los datos.\\n- Tuteo con voseo (vos, mirá, contame). Si el idioma es \\\"en\\\" o \\\"pt\\\", escribí en\\n  ese idioma con el mismo tono y la misma estructura.\\n- Si la auditoría no tiene evidencia suficiente, devolvé \\\"omitir\\\": true.\\n\\nDatos del negocio y auditoría: los recibís en el mensaje del usuario.\\n\\nRespondé SOLO con un objeto JSON válido, sin texto antes ni después:\\n{\\n  \\\"omitir\\\": false,\\n  \\\"asunto\\\": \\\"\\\",\\n  \\\"cuerpo\\\": \\\"\\\"\\n}\\n\\\"cuerpo\\\" incluye la firma y la línea de baja, con saltos de línea \\\\n.\";\nlet audit = {};\ntry { audit = JSON.parse($json.notas || '{}').auditoria || {}; } catch (e) {}\nconst usuario = 'Negocio: ' + $json.nombre + '\\nRubro: ' + $json.rubro + '\\nCiudad: ' + $json.ciudad +\n  '\\nWeb: ' + $json.web + ($json.instagram ? '\\nInstagram: ' + $json.instagram : '') +\n  '\\n\\nAuditoría:\\n' + JSON.stringify(audit, null, 2);\nreturn { json: { lead: $json, claude_body: cuerpoClaude(SYSTEM, usuario, 6000, 'medium') } };\n",
+        "mode": "runOnceForEachItem"
+      },
+      "id": "1529a0ee-6c25-5ac6-a927-58e131c995f0",
+      "name": "Prompt redactor",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1200,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.anthropic.com/v1/messages",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "anthropic-version",
+              "value": "2023-06-01"
+            },
+            {
+              "name": "anthropic-beta",
+              "value": "server-side-fallback-2026-07-01"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify($json.claude_body) }}",
+        "options": {
+          "timeout": 180000
+        }
+      },
+      "id": "4a7ad066-c19b-5ad2-8f55-9b4f55bdbb96",
+      "name": "Claude · redactor",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1440,
+        0
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "REEMPLAZAR",
+          "name": "Anthropic API"
+        }
+      },
+      "onError": "continueRegularOutput",
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 5000
+    },
+    {
+      "parameters": {
+        "jsCode": "// Lee la respuesta de Claude. Antes de tocar content mira stop_reason:\n// un rechazo o un corte por max_tokens no se trata como respuesta valida.\nfunction leerClaude(r) {\n  if (!r || r.error) return { ok: false, motivo: 'error_http: ' + JSON.stringify(r && r.error || '').slice(0, 300) };\n  if (r.stop_reason === 'refusal') return { ok: false, motivo: 'refusal' };\n  if (r.stop_reason === 'max_tokens') return { ok: false, motivo: 'max_tokens' };\n  const texto = (r.content || []).filter(b => b.type === 'text').map(b => b.text).join('\\n').trim();\n  const limpio = texto.replace(/^```(?:json)?\\s*/i, '').replace(/```\\s*$/, '');\n  const i = limpio.indexOf('{'), j = limpio.lastIndexOf('}');\n  if (i < 0 || j <= i) return { ok: false, motivo: 'sin_json' };\n  try { return { ok: true, data: JSON.parse(limpio.slice(i, j + 1)) }; }\n  catch (e) { return { ok: false, motivo: 'json_invalido' }; }\n}\n\n// Mail en texto plano, UTF-8, listo para la API de Gmail (base64url).\nfunction mime({ de, para, asunto, cuerpo, enRespuestaA }) {\n  const b64 = s => Buffer.from(s, 'utf8').toString('base64');\n  const h = [\n    'From: ' + de,\n    'To: ' + para,\n    'Subject: =?UTF-8?B?' + b64(asunto) + '?=',\n    'MIME-Version: 1.0',\n    'Content-Type: text/plain; charset=\"UTF-8\"',\n    'Content-Transfer-Encoding: base64',\n  ];\n  if (enRespuestaA) h.push('In-Reply-To: ' + enRespuestaA, 'References: ' + enRespuestaA);\n  const raw = h.join('\\r\\n') + '\\r\\n\\r\\n' + b64(cuerpo).replace(/(.{76})/g, '$1\\r\\n');\n  return Buffer.from(raw, 'utf8').toString('base64').replace(/\\+/g, '-').replace(/\\//g, '_').replace(/=+$/, '');\n}\n\nconst c = $('Config').first().json;\nconst lead = $('Prompt redactor').item.json.lead;\nconst r = leerClaude($json);\nif (!r.ok || r.data.omitir) {\n  return { json: { omitir: true, fila: { id: lead.id, estado: r.ok ? 'descartado' : 'error_redaccion',\n    notas: lead.notas } } };\n}\nconst m = r.data;\nconst raw = mime({ de: c.MI_EMAIL, para: lead.email, asunto: m.asunto, cuerpo: m.cuerpo });\nreturn { json: { omitir: false, lead, asunto: m.asunto, cuerpo: m.cuerpo,\n  gmail_body: { message: { raw } },\n  auto: !!c.AUTO_ENVIO && Number(lead.score) >= (c.SCORE_AUTO || 80) } };\n",
+        "mode": "runOnceForEachItem"
+      },
+      "id": "e00fd8c7-b6c5-5adc-af12-d3369605f085",
+      "name": "Leer mail",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1680,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose"
+          },
+          "conditions": [
+            {
+              "id": "5dd2ffb5-0d95-5bc4-a109-90e0d465a307",
+              "leftValue": "={{ !$json.omitir }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "56227e24-7ef8-5676-bebe-0c665966b873",
+      "name": "¿Hay mail?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        1920,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "return { json: $json.fila };\n",
+        "mode": "runOnceForEachItem"
+      },
+      "id": "d851962d-f8f8-5975-9781-db93b1cd327f",
+      "name": "Fila descartada",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2160,
+        220
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "={{ $('Config').first().json.SHEET_ID }}",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Leads",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": []
+        },
+        "options": {}
+      },
+      "id": "4b1ecef3-9590-57f8-b97b-61481d93754b",
+      "name": "Marcar descartado",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        2400,
+        220
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "REEMPLAZAR",
+          "name": "Google Sheets"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://gmail.googleapis.com/gmail/v1/users/me/drafts",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "gmailOAuth2",
+        "options": {},
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify($json.gmail_body) }}"
+      },
+      "id": "94553fc9-aa43-58a6-9d2b-8fe24e0b3c27",
+      "name": "Crear borrador Gmail",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2160,
+        0
+      ],
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "REEMPLAZAR",
+          "name": "Gmail Apardian"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "jsCode": "const esc = s => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');\n\nconst c = $('Config').first().json;\nconst x = $('Leer mail').item.json;\nconst draft = $json.id || '';\nconst link = acc => c.URL_APROBAR + '?id=' + encodeURIComponent(x.lead.id) + '&k=inicial&a=' + acc + '&t=' + encodeURIComponent(c.TOKEN);\nreturn { json: {\n  fila: { id: x.lead.id, estado: draft ? 'borrador' : 'error_borrador', asunto: x.asunto,\n          borrador: x.cuerpo, draft_id: draft },\n  draft_id: draft, auto: x.auto,\n  telegram_text: '<b>Mail listo para ' + esc(x.lead.nombre) + '</b> (' + esc(x.lead.rubro) + ', score ' + esc(x.lead.score) + ')\\n' +\n    esc(x.lead.web) + '\\n\\n<b>' + esc(x.asunto) + '</b>\\n' + esc(x.cuerpo) +\n    '\\n\\nPodés editarlo en Gmail (Borradores) antes de aprobar.\\n' +\n    '<a href=\"' + esc(link('enviar')) + '\">✅ Enviar</a>   <a href=\"' + esc(link('descartar')) + '\">✖️ Descartar</a>',\n} };\n",
+        "mode": "runOnceForEachItem"
+      },
+      "id": "caa9ceb0-bb12-585f-b318-60aa3b09a7f8",
+      "name": "Datos del borrador",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2400,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "return { json: $json.fila };\n",
+        "mode": "runOnceForEachItem"
+      },
+      "id": "fa2e6317-101b-50bc-bcfd-b2d0b82436b6",
+      "name": "Fila borrador",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2640,
+        220
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "={{ $('Config').first().json.SHEET_ID }}",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Leads",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": []
+        },
+        "options": {}
+      },
+      "id": "ba80eeb6-4a03-50ea-9f88-f2c3c5987df9",
+      "name": "Guardar borrador",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        2880,
+        220
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "REEMPLAZAR",
+          "name": "Google Sheets"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose"
+          },
+          "conditions": [
+            {
+              "id": "2c45c03b-72a3-5236-b7b9-70469d0b997b",
+              "leftValue": "={{ $('Datos del borrador').item.json.auto && !!$('Datos del borrador').item.json.draft_id }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "aed92461-67e3-5176-81ae-f54d61dd2aa4",
+      "name": "¿Auto-envío?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        2640,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://gmail.googleapis.com/gmail/v1/users/me/drafts/send",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "gmailOAuth2",
+        "options": {},
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ id: $('Datos del borrador').item.json.draft_id }) }}"
+      },
+      "id": "af150512-be63-52d8-a923-55c088021744",
+      "name": "Enviar (auto)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2880,
+        0
+      ],
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "REEMPLAZAR",
+          "name": "Gmail Apardian"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "jsCode": "const hoy = () => new Date().toISOString().slice(0, 10);\nconst diasDesde = f => f ? Math.floor((Date.now() - new Date(f + 'T12:00:00').getTime()) / 86400000) : -1;\n\nconst x = $('Datos del borrador').item.json;\nreturn { json: { id: x.fila.id, estado: $json.id ? 'enviado' : 'error_envio', fecha_envio: hoy(),\n  thread_id: $json.threadId || '', mensaje_id: $json.id || '', seguimientos: 0 } };\n",
+        "mode": "runOnceForEachItem"
+      },
+      "id": "a88a6360-4c30-5de2-bc95-a484c6fc3633",
+      "name": "Fila enviada (auto)",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3120,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "={{ $('Config').first().json.SHEET_ID }}",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Leads",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": []
+        },
+        "options": {}
+      },
+      "id": "01f83eef-643f-5552-b7aa-c9b3767bff3f",
+      "name": "Guardar envío (auto)",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        3360,
+        0
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "REEMPLAZAR",
+          "name": "Google Sheets"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Config').first().json.TELEGRAM_CHAT_ID }}",
+        "text": "={{ $('Datos del borrador').item.json.telegram_text }}",
+        "additionalFields": {
+          "appendAttribution": false,
+          "parse_mode": "HTML",
+          "disable_web_page_preview": true
+        }
+      },
+      "id": "9a36aeea-b96b-5c47-b971-dd863ab0df08",
+      "name": "Pedir aprobación",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        2880,
+        440
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "REEMPLAZAR",
+          "name": "Telegram Apardian"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "httpMethod": "GET",
+        "path": "apardian-aprobar",
+        "responseMode": "onReceived",
+        "options": {}
+      },
+      "id": "f1c38fb8-147f-5326-b2ec-0ee1e7f475b2",
+      "name": "Aprobación (link de Telegram)",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        0,
+        800
+      ],
+      "webhookId": "430395cb-9a06-5234-9123-b13477ebbaed"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "d082a425-2652-56a7-bba7-923c1c711548",
+              "name": "SHEET_ID",
+              "value": "PEGAR_ID_DE_LA_PLANILLA",
+              "type": "string"
+            },
+            {
+              "id": "e1fb9339-ad71-5fc8-8616-f9eb7769a8f8",
+              "name": "TELEGRAM_CHAT_ID",
+              "value": "PEGAR_CHAT_ID",
+              "type": "string"
+            },
+            {
+              "id": "41f4729d-b069-5d8e-be05-9115582d9bd1",
+              "name": "TOKEN",
+              "value": "CAMBIAR-POR-UNA-CLAVE-LARGA",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "8b069d27-9099-58b8-b06c-15d8283a564b",
+      "name": "Config aprobación",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        240,
+        800
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "read",
+        "documentId": {
+          "__rl": true,
+          "value": "={{ $('Config aprobación').first().json.SHEET_ID }}",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Leads",
+          "mode": "name"
+        },
+        "options": {}
+      },
+      "id": "1aa33636-2ccb-582c-a45e-8c75941f8bfb",
+      "name": "Leer Leads (aprobación)",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        480,
+        800
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "REEMPLAZAR",
+          "name": "Google Sheets"
+        }
+      },
+      "executeOnce": true,
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "jsCode": "const c = $('Config aprobación').first().json;\nconst q = $('Aprobación (link de Telegram)').first().json.query || {};\nif (!q.t || q.t !== c.TOKEN) throw new Error('Token inválido');\nconst l = $input.all().map(r => r.json).find(r => String(r.id) === String(q.id));\nif (!l) throw new Error('Lead no encontrado: ' + q.id);\n// Solo se manda lo que todavía es borrador: si respondió entretanto, no se envía.\nif (!/^borrador/.test(l.estado || '')) throw new Error('El lead ya no está en borrador: ' + l.estado);\nreturn [{ json: { lead: l, k: q.k || 'inicial', enviar: q.a === 'enviar' } }];\n"
+      },
+      "id": "5cae1021-7ebc-5ff1-bb68-2c79c897a651",
+      "name": "Buscar lead",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        720,
+        800
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose"
+          },
+          "conditions": [
+            {
+              "id": "dd6d734e-6902-549f-b06f-2053bf62a871",
+              "leftValue": "={{ $json.enviar }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "ae059cc5-9385-5b01-8ee7-2170fb0f3d6b",
+      "name": "¿Enviar?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        960,
+        800
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://gmail.googleapis.com/gmail/v1/users/me/drafts/send",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "gmailOAuth2",
+        "options": {},
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ id: $json.lead.draft_id }) }}"
+      },
+      "id": "aa066575-bc40-5eb8-8b48-ae23d90dd177",
+      "name": "Enviar borrador",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1200,
+        700
+      ],
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "REEMPLAZAR",
+          "name": "Gmail Apardian"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "jsCode": "const hoy = () => new Date().toISOString().slice(0, 10);\nconst diasDesde = f => f ? Math.floor((Date.now() - new Date(f + 'T12:00:00').getTime()) / 86400000) : -1;\n\nconst esc = s => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');\n\nconst x = $('Buscar lead').first().json;\nconst l = x.lead, ok = !!$json.id;\nconst f = { id: l.id };\nif (!ok) f.estado = 'error_envio';\nelse if (x.k === 'seg1') { f.estado = 'seguimiento_1'; f.seguimientos = 1; }\nelse if (x.k === 'seg2') { f.estado = 'seguimiento_2'; f.seguimientos = 2; }\nelse { f.estado = 'enviado'; f.fecha_envio = hoy(); f.thread_id = $json.threadId || ''; f.mensaje_id = $json.id || ''; f.seguimientos = 0; }\nreturn [{ json: { fila: f, telegram_text: (ok ? '✅ Enviado a ' : '⚠️ No se pudo enviar a ') + esc(l.nombre) } }];\n"
+      },
+      "id": "eb3f42f6-96cf-5161-990c-7cebf671d820",
+      "name": "Estado enviado",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1440,
+        700
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "return [{ json: $input.first().json.fila }];\n"
+      },
+      "id": "d812a018-567f-5898-8172-a41401b06319",
+      "name": "Fila enviado",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1680,
+        700
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "={{ $('Config aprobación').first().json.SHEET_ID }}",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Leads",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": []
+        },
+        "options": {}
+      },
+      "id": "1e92cf84-1c0d-5f13-a220-ee3db4ee5345",
+      "name": "Guardar enviado",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        1920,
+        700
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "REEMPLAZAR",
+          "name": "Google Sheets"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Config aprobación').first().json.TELEGRAM_CHAT_ID }}",
+        "text": "={{ $('Estado enviado').first().json.telegram_text }}",
+        "additionalFields": {
+          "appendAttribution": false,
+          "parse_mode": "HTML",
+          "disable_web_page_preview": true
+        }
+      },
+      "id": "628065e0-5af5-5860-9a66-b40e4d88a1c6",
+      "name": "Confirmar envío",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        2160,
+        700
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "REEMPLAZAR",
+          "name": "Telegram Apardian"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "DELETE",
+        "url": "=https://gmail.googleapis.com/gmail/v1/users/me/drafts/{{ $json.lead.draft_id }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "gmailOAuth2",
+        "options": {}
+      },
+      "id": "689a259d-9197-578c-969c-548282419f0b",
+      "name": "Borrar borrador",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1200,
+        900
+      ],
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "REEMPLAZAR",
+          "name": "Gmail Apardian"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "jsCode": "const esc = s => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');\n\nconst x = $('Buscar lead').first().json;\n// Un seguimiento descartado vuelve al estado anterior; un primer mail, se descarta.\nconst estado = x.k === 'seg1' ? 'enviado' : x.k === 'seg2' ? 'seguimiento_1' : 'descartado';\nreturn [{ json: { fila: { id: x.lead.id, estado, draft_id: '' }, telegram_text: '✖️ Descartado: ' + esc(x.lead.nombre) } }];\n"
+      },
+      "id": "d9447366-bcc8-5f63-8258-2a316b483b2b",
+      "name": "Estado descartado",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1440,
+        900
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "return [{ json: $input.first().json.fila }];\n"
+      },
+      "id": "4f50cbdf-0f65-5a42-b810-21ff67cb164b",
+      "name": "Fila descarte",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1680,
+        900
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "={{ $('Config aprobación').first().json.SHEET_ID }}",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Leads",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": []
+        },
+        "options": {}
+      },
+      "id": "94dec366-3e9f-501b-b267-4d6d249cf18b",
+      "name": "Guardar descarte",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        1920,
+        900
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "REEMPLAZAR",
+          "name": "Google Sheets"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Config aprobación').first().json.TELEGRAM_CHAT_ID }}",
+        "text": "={{ $('Estado descartado').first().json.telegram_text }}",
+        "additionalFields": {
+          "appendAttribution": false,
+          "parse_mode": "HTML",
+          "disable_web_page_preview": true
+        }
+      },
+      "id": "63e53606-a333-521d-9e39-086ab3b6304f",
+      "name": "Confirmar descarte",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        2160,
+        900
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "REEMPLAZAR",
+          "name": "Telegram Apardian"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Programado": {
+      "main": [
+        [
+          {
+            "node": "Config",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Probar a mano": {
+      "main": [
+        [
+          {
+            "node": "Config",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Config": {
+      "main": [
+        [
+          {
+            "node": "Leer Leads",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Leer Leads": {
+      "main": [
+        [
+          {
+            "node": "Leer Bajas",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Leer Bajas": {
+      "main": [
+        [
+          {
+            "node": "Elegir auditados",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Elegir auditados": {
+      "main": [
+        [
+          {
+            "node": "Prompt redactor",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prompt redactor": {
+      "main": [
+        [
+          {
+            "node": "Claude · redactor",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Claude · redactor": {
+      "main": [
+        [
+          {
+            "node": "Leer mail",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Leer mail": {
+      "main": [
+        [
+          {
+            "node": "¿Hay mail?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "¿Hay mail?": {
+      "main": [
+        [
+          {
+            "node": "Crear borrador Gmail",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Fila descartada",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fila descartada": {
+      "main": [
+        [
+          {
+            "node": "Marcar descartado",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Crear borrador Gmail": {
+      "main": [
+        [
+          {
+            "node": "Datos del borrador",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Datos del borrador": {
+      "main": [
+        [
+          {
+            "node": "Fila borrador",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fila borrador": {
+      "main": [
+        [
+          {
+            "node": "Guardar borrador",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Guardar borrador": {
+      "main": [
+        [
+          {
+            "node": "¿Auto-envío?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "¿Auto-envío?": {
+      "main": [
+        [
+          {
+            "node": "Enviar (auto)",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Pedir aprobación",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Enviar (auto)": {
+      "main": [
+        [
+          {
+            "node": "Fila enviada (auto)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fila enviada (auto)": {
+      "main": [
+        [
+          {
+            "node": "Guardar envío (auto)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aprobación (link de Telegram)": {
+      "main": [
+        [
+          {
+            "node": "Config aprobación",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Config aprobación": {
+      "main": [
+        [
+          {
+            "node": "Leer Leads (aprobación)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Leer Leads (aprobación)": {
+      "main": [
+        [
+          {
+            "node": "Buscar lead",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Buscar lead": {
+      "main": [
+        [
+          {
+            "node": "¿Enviar?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "¿Enviar?": {
+      "main": [
+        [
+          {
+            "node": "Enviar borrador",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Borrar borrador",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Enviar borrador": {
+      "main": [
+        [
+          {
+            "node": "Estado enviado",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Estado enviado": {
+      "main": [
+        [
+          {
+            "node": "Fila enviado",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fila enviado": {
+      "main": [
+        [
+          {
+            "node": "Guardar enviado",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Guardar enviado": {
+      "main": [
+        [
+          {
+            "node": "Confirmar envío",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Borrar borrador": {
+      "main": [
+        [
+          {
+            "node": "Estado descartado",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Estado descartado": {
+      "main": [
+        [
+          {
+            "node": "Fila descarte",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fila descarte": {
+      "main": [
+        [
+          {
+            "node": "Guardar descarte",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Guardar descarte": {
+      "main": [
+        [
+          {
+            "node": "Confirmar descarte",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "America/Montevideo"
+  },
+  "meta": {
+    "templateCredsSetupCompleted": false
+  },
+  "tags": []
+}

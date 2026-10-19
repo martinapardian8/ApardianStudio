@@ -121,7 +121,7 @@
     b.textContent = 'Enviar por WhatsApp →';
     b.style.cssText = 'background:#25D366;border-color:#25D366;color:#0A2E17;font-weight:600';
     b.addEventListener('click', function () {
-      window.open('https://wa.me/' + WA + '?text=' + encodeURIComponent(resumen), '_blank', 'noopener');
+      window.open('https://wa.me/' + WA + '?text=' + encodeURIComponent(resumen), '_blank', 'noopener,noreferrer');
     });
     chips.appendChild(b);
 

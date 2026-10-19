@@ -1,0 +1,208 @@
+{
+  "name": "APARDIAN 06 · Bienvenida de consultas",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "apardian-consulta",
+        "responseMode": "onReceived",
+        "options": {}
+      },
+      "id": "067a6dc8-00a3-52bc-8e33-6b5ec5358b12",
+      "name": "Consulta entrante",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        0,
+        0
+      ],
+      "webhookId": "54aec83d-9651-57a5-b93f-8481f82571a4"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "ba2248a8-bcca-5753-bcbe-b8a4da49939b",
+              "name": "TELEGRAM_CHAT_ID",
+              "value": "PEGAR_CHAT_ID",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "e28c65a6-0a85-5c99-9954-aa50ee09d2e6",
+      "name": "Config",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        240,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "function cuerpoClaude(system, user, maxTokens, effort) {\n  return {\n    model: 'claude-opus-5-5',\n    max_tokens: maxTokens,\n    system: system,\n    messages: [{ role: 'user', content: user }],\n    output_config: { effort: effort },\n    fallbacks: 'default',\n  };\n}\n\n// Espera un POST con { nombre, canal, telefono, mensaje }.\n// Puede venir de WhatsApp Cloud API, de un formulario de la web o de ManyChat.\nconst SYSTEM = \"Sos el asistente de ventas de APARDIAN STUDIO (Martin Apardian, Uruguay):\\nfotografía (bodas, eventos, gastronomía, retratos, marcas, producto), video\\n(reels, contenido para redes, video de marca), páginas web (diseño propio, con\\nbotón de WhatsApp y editor para el cliente) y edición en Lightroom para otros\\nfotógrafos.\\n\\nRecibís una consulta que entró por WhatsApp, Instagram o la web. NO le\\nrespondés al cliente: le preparás a Martin una respuesta para que él la revise\\ny la mande.\\n\\nPlazos que se pueden mencionar (son reales):\\n- Bodas, eventos, retratos, empresas: entrega en 10 días como máximo.\\n- Gastronomía: 7 días. Producto: 5 días. Edición en Lightroom: lote en 72 horas.\\n- Sin tope de cantidad de fotos.\\nNo hay lista de precios: nunca des un precio. Para cotizar se necesitan datos.\\n\\nLa respuesta sugerida:\\n- Voseo, directa, frases cortas, sin emojis, sin \\\"¡Hola! 👋 Espero que estés\\n  muy bien\\\". Puede arrancar con el nombre si lo hay.\\n- Agradece en media línea, responde lo que preguntó si se puede, y hace como\\n  máximo 3 preguntas para calificar (según el servicio: fecha y lugar; cantidad\\n  de platos o productos; para qué usa la web hoy; volumen de fotos por lote).\\n- Cierra proponiendo el próximo paso concreto (una llamada de 10 minutos o\\n  pasar presupuesto en 24 horas cuando tenga los datos).\\n- Máximo 80 palabras.\\n\\nRespondé SOLO con un objeto JSON válido:\\n{\\n  \\\"servicio\\\": \\\"bodas | eventos | gastronomia | producto | retratos | empresas | video | pagina_web | edicion_lightroom | otro\\\",\\n  \\\"urgencia\\\": \\\"alta | media | baja\\\",\\n  \\\"resumen\\\": \\\"\\\",\\n  \\\"respuesta_sugerida\\\": \\\"\\\"\\n}\\n\\\"urgencia\\\" es alta si menciona una fecha cercana (menos de 30 días) o pide\\nprecio para cerrar ya.\";\nconst c = $('Consulta entrante').first().json.body || {};\nconst usuario = 'Canal: ' + (c.canal || 'whatsapp') + '\\nNombre: ' + (c.nombre || '') +\n  '\\nTeléfono: ' + (c.telefono || '') + '\\n\\nConsulta:\\n' + String(c.mensaje || '').slice(0, 3000);\nreturn [{ json: { consulta: c, claude_body: cuerpoClaude(SYSTEM, usuario, 3000, 'low') } }];\n"
+      },
+      "id": "2f8988c4-3ca4-592b-bbff-00d46bc8bddf",
+      "name": "Prompt bienvenida",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        480,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.anthropic.com/v1/messages",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "anthropic-version",
+              "value": "2023-06-01"
+            },
+            {
+              "name": "anthropic-beta",
+              "value": "server-side-fallback-2026-07-01"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify($json.claude_body) }}",
+        "options": {
+          "timeout": 180000
+        }
+      },
+      "id": "66bf4b0b-8f2b-5500-b69f-2ae5b56224f2",
+      "name": "Claude · bienvenida",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        720,
+        0
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "REEMPLAZAR",
+          "name": "Anthropic API"
+        }
+      },
+      "onError": "continueRegularOutput",
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 5000
+    },
+    {
+      "parameters": {
+        "jsCode": "// Lee la respuesta de Claude. Antes de tocar content mira stop_reason:\n// un rechazo o un corte por max_tokens no se trata como respuesta valida.\nfunction leerClaude(r) {\n  if (!r || r.error) return { ok: false, motivo: 'error_http: ' + JSON.stringify(r && r.error || '').slice(0, 300) };\n  if (r.stop_reason === 'refusal') return { ok: false, motivo: 'refusal' };\n  if (r.stop_reason === 'max_tokens') return { ok: false, motivo: 'max_tokens' };\n  const texto = (r.content || []).filter(b => b.type === 'text').map(b => b.text).join('\\n').trim();\n  const limpio = texto.replace(/^```(?:json)?\\s*/i, '').replace(/```\\s*$/, '');\n  const i = limpio.indexOf('{'), j = limpio.lastIndexOf('}');\n  if (i < 0 || j <= i) return { ok: false, motivo: 'sin_json' };\n  try { return { ok: true, data: JSON.parse(limpio.slice(i, j + 1)) }; }\n  catch (e) { return { ok: false, motivo: 'json_invalido' }; }\n}\n\nconst esc = s => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');\n\nconst c = $('Prompt bienvenida').first().json.consulta;\nconst r = leerClaude($input.first().json);\nconst d = r.ok ? r.data : { servicio: 'otro', urgencia: 'media', resumen: 'sin clasificar: ' + r.motivo, respuesta_sugerida: '' };\nconst tel = String(c.telefono || '').replace(/\\D/g, '');\nconst wa = tel ? 'https://wa.me/' + tel + '?text=' + encodeURIComponent(d.respuesta_sugerida || '') : '';\nreturn [{ json: { telegram_text:\n  (d.urgencia === 'alta' ? '🔴 ' : '') + '<b>Consulta nueva · ' + esc(d.servicio) + '</b> (' + esc(c.canal || 'whatsapp') + ')\\n' +\n  esc(c.nombre || '') + ' ' + esc(c.telefono || '') + '\\n\\n' + esc(c.mensaje || '') +\n  '\\n\\n<i>Resumen:</i> ' + esc(d.resumen) +\n  '\\n\\n<i>Respuesta sugerida (revisala):</i>\\n' + esc(d.respuesta_sugerida) +\n  (wa ? '\\n\\n<a href=\"' + esc(wa) + '\">Abrir WhatsApp con la respuesta</a>' : '') } }];\n"
+      },
+      "id": "f30765bb-b241-54ea-8666-5c07f5bd0a4a",
+      "name": "Armar aviso",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        960,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Config').first().json.TELEGRAM_CHAT_ID }}",
+        "text": "={{ $json.telegram_text }}",
+        "additionalFields": {
+          "appendAttribution": false,
+          "parse_mode": "HTML",
+          "disable_web_page_preview": true
+        }
+      },
+      "id": "1ff29925-88a4-54ed-b4fc-293820082b70",
+      "name": "Aviso a Martin",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1200,
+        0
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "REEMPLAZAR",
+          "name": "Telegram Apardian"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Consulta entrante": {
+      "main": [
+        [
+          {
+            "node": "Config",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Config": {
+      "main": [
+        [
+          {
+            "node": "Prompt bienvenida",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prompt bienvenida": {
+      "main": [
+        [
+          {
+            "node": "Claude · bienvenida",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Claude · bienvenida": {
+      "main": [
+        [
+          {
+            "node": "Armar aviso",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Armar aviso": {
+      "main": [
+        [
+          {
+            "node": "Aviso a Martin",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "America/Montevideo"
+  },
+  "meta": {
+    "templateCredsSetupCompleted": false
+  },
+  "tags": []
+}

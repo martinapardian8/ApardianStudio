@@ -6,7 +6,8 @@
 <title>Apardian Studio — Foto, video y páginas web en Uruguay</title>
 <meta name="description" content="Estudio de comunicación visual en Uruguay. Edición de video, fotografía de eventos, gastronomía y empresas, y diseño de páginas web que venden.">
 <meta name="theme-color" content="#F8F7F6">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob:; media-src 'self' blob:; connect-src 'self'; base-uri 'self'; form-action 'self'; object-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob:; media-src 'self' blob:; frame-src https://open.spotify.com https://www.youtube-nocookie.com; connect-src 'self'; base-uri 'self'; form-action 'self'; object-src 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <meta property="og:title" content="Apardian Studio — Foto, video y páginas web">
 <meta property="og:description" content="Estudio de comunicación visual en Uruguay. Filmo, fotografío y construyo el lugar donde eso se muestra.">
 <meta property="og:type" content="website">
@@ -18,9 +19,9 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://apardianstudio.com/">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%23171717'/%3E%3Crect x='36' y='36' width='18' height='18' fill='%23FF0033'/%3E%3C/svg%3E">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Work+Sans:wght@300;400;500;600&display=swap">
+<link rel="preload" href="fonts/anton-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/worksans-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/fonts.css?v=1789010043">
 <link rel="stylesheet" href="css/style.css?v=1789010043">
 <link rel="stylesheet" href="css/editor.css?v=1789010043">
 </head>
@@ -45,7 +46,7 @@
       <li><button type="button" role="option" data-lang="pt" aria-selected="false">Português</button></li>
     </ul>
   </div>
-  <a data-i18n="cta011" class="cta-nav" href="https://wa.me/59891962962" target="_blank" rel="noopener">Empezar un proyecto</a>
+  <a data-i18n="cta011" class="cta-nav" href="https://wa.me/59891962962" target="_blank" rel="noopener noreferrer">Empezar un proyecto</a>
   <button class="burger" id="burger" aria-label="Menú" aria-expanded="false"><i></i><i></i><i></i></button>
 </header>
 
@@ -149,7 +150,7 @@
       <p class="svc-claim" data-ed="svc.claim1">Hacemos que se mueva.</p>
       <p data-i18n="svcp023">Reels, videos institucionales, eventos y contenido para redes. Del material crudo a la pieza publicada, con color grading incluido.</p>
       <ul><li data-i18n="li027">Reels</li><li data-i18n="li028">Institucional</li><li data-i18n="li029">Eventos</li><li data-i18n="li030">Color grading</li></ul>
-      <a data-i18n="svccta047" class="svc-cta" href="https://wa.me/59891962962?text=Hola%20Martin,%20quiero%20cotizar%20edici%C3%B3n%20de%20video" target="_blank" rel="noopener">Cotizar <span class="red">&rarr;</span></a>
+      <a data-i18n="svccta047" class="svc-cta" href="https://wa.me/59891962962?text=Hola%20Martin,%20quiero%20cotizar%20edici%C3%B3n%20de%20video" target="_blank" rel="noopener noreferrer">Cotizar <span class="red">&rarr;</span></a>
     </div>
     
   </article>
@@ -161,7 +162,7 @@
       <p class="svc-claim" data-ed="svc.claim2">Capturamos el momento.</p>
       <p data-i18n="svcp024">Fotos que muestran lo mejor de tu negocio, evento o historia. Cobertura completa, selección y edición en Lightroom. También hago books personales y entrego cuadros listos para colgar.</p>
       <ul><li data-i18n="li031">Eventos y bodas</li><li data-i18n="li032">Gastronomía</li><li data-i18n="li033">Producto</li><li data-i18n="li034">Retrato</li><li data-i18n="li035">Books</li><li data-i18n="li036">Cuadros</li><li data-i18n="li037">Empresas</li></ul>
-      <a data-i18n="svccta048" class="svc-cta" href="https://wa.me/59891962962?text=Hola%20Martin,%20quiero%20cotizar%20fotograf%C3%ADa" target="_blank" rel="noopener">Cotizar <span class="red">&rarr;</span></a>
+      <a data-i18n="svccta048" class="svc-cta" href="https://wa.me/59891962962?text=Hola%20Martin,%20quiero%20cotizar%20fotograf%C3%ADa" target="_blank" rel="noopener noreferrer">Cotizar <span class="red">&rarr;</span></a>
     </div>
     
   </article>
@@ -173,7 +174,7 @@
       <p class="svc-claim" data-ed="svc.claim.edicion">Vos disparás, yo termino.</p>
       <p data-i18n="svcp025">Edición en Lightroom del material que ya tenés. Para fotógrafos que no quieren pasar la noche entera frente a la pantalla, y para marcas con el archivo sin tocar.</p>
       <ul><li data-i18n="li038">Lightroom</li><li data-i18n="li039">Color</li><li data-i18n="li040">Retoque</li><li data-i18n="li041">Por lote</li><li data-i18n="li042">Presets propios</li></ul>
-      <a data-i18n="svccta049" class="svc-cta" href="https://wa.me/59891962962?text=Hola%20Martin,%20quiero%20que%20edites%20mis%20fotos%20en%20Lightroom" target="_blank" rel="noopener">Mandarme el material <span class="red">&rarr;</span></a>
+      <a data-i18n="svccta049" class="svc-cta" href="https://wa.me/59891962962?text=Hola%20Martin,%20quiero%20que%20edites%20mis%20fotos%20en%20Lightroom" target="_blank" rel="noopener noreferrer">Mandarme el material <span class="red">&rarr;</span></a>
     </div>
     
   </article>
@@ -345,10 +346,10 @@
 <section class="contact" id="contacto" data-sec="contacto" data-sec-name="Contacto">
   <h2 data-ed="contacto.titulo">Empecemos</h2>
   <p class="lead rv" data-ed="contacto.bajada">Contame qué necesitás y <mark class="hl">en 24 horas</mark> te armo una propuesta con presupuesto a medida.</p>
-  <a class="big-cta" href="https://wa.me/59891962962?text=Hola%20Martin,%20vi%20tu%20web%20y%20quiero%20hacer%20una%20consulta" target="_blank" rel="noopener">WhatsApp <span aria-hidden="true">→</span></a>
+  <a class="big-cta" href="https://wa.me/59891962962?text=Hola%20Martin,%20vi%20tu%20web%20y%20quiero%20hacer%20una%20consulta" target="_blank" rel="noopener noreferrer">WhatsApp <span aria-hidden="true">→</span></a>
   <div class="contact-meta">
-    <div><span data-i18n="meta090" class="mono">Teléfono</span><a href="https://wa.me/59891962962" target="_blank" rel="noopener">+598 91 96 29 62</a></div>
-    <div><span data-i18n="meta091" class="mono">Instagram</span><a href="https://instagram.com/apardian.studio" target="_blank" rel="noopener">@apardian.studio</a></div>
+    <div><span data-i18n="meta090" class="mono">Teléfono</span><a href="https://wa.me/59891962962" target="_blank" rel="noopener noreferrer">+598 91 96 29 62</a></div>
+    <div><span data-i18n="meta091" class="mono">Instagram</span><a href="https://instagram.com/apardian.studio" target="_blank" rel="noopener noreferrer">@apardian.studio</a></div>
     <div><span data-i18n="meta092" class="mono">Base</span><span>Montevideo, Uruguay</span></div>
     <div><span data-i18n="meta093" class="mono">Hora local</span><span id="clock">--:--</span></div>
     <div><span data-i18n="meta094" class="mono">Idiomas</span><span>Español · English · Português</span></div>
@@ -382,8 +383,8 @@
       <div>
         <span data-i18n="meta096" class="mono">Contacto</span>
         <ul>
-          <li><a href="https://wa.me/59891962962" target="_blank" rel="noopener">WhatsApp</a></li>
-          <li><a href="https://instagram.com/apardian.studio" target="_blank" rel="noopener">Instagram</a></li>
+          <li><a href="https://wa.me/59891962962" target="_blank" rel="noopener noreferrer">WhatsApp</a></li>
+          <li><a href="https://instagram.com/apardian.studio" target="_blank" rel="noopener noreferrer">Instagram</a></li>
         </ul>
       </div>
     </div>
@@ -408,7 +409,7 @@
   <button class="dock-btn dock-ai" id="dockAi" type="button">
     <span class="dot"></span><span data-i18n="dock099">Agente IA</span>
   </button>
-  <a class="dock-btn dock-wa" id="dockWa" href="https://wa.me/59891962962?text=Hola%20Martin,%20vi%20tu%20web%20y%20quiero%20hacer%20una%20consulta" target="_blank" rel="noopener">
+  <a class="dock-btn dock-wa" id="dockWa" href="https://wa.me/59891962962?text=Hola%20Martin,%20vi%20tu%20web%20y%20quiero%20hacer%20una%20consulta" target="_blank" rel="noopener noreferrer">
     <span>WhatsApp</span>
   </a>
 </div>

@@ -17,3 +17,6 @@
 10-MOTOR/segs/
 10-MOTOR/png/
 10-MOTOR/prueba/
+
+# python
+__pycache__/

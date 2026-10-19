@@ -1,0 +1,595 @@
+{
+  "name": "APARDIAN 05 · Respuestas",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours",
+              "hoursInterval": 2
+            }
+          ]
+        }
+      },
+      "id": "e6f87ea5-a66d-5554-a83e-88c7e63e0f75",
+      "name": "Programado",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        -100
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "aa6c292c-8cd1-51ed-97e0-803aa5c98fa1",
+      "name": "Probar a mano",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        100
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "5f8340b9-2142-57ea-b3c4-0b33c29e22ea",
+              "name": "SHEET_ID",
+              "value": "PEGAR_ID_DE_LA_PLANILLA",
+              "type": "string"
+            },
+            {
+              "id": "db16268c-04c2-5654-ad58-485c90273aa8",
+              "name": "TELEGRAM_CHAT_ID",
+              "value": "PEGAR_CHAT_ID",
+              "type": "string"
+            },
+            {
+              "id": "26f57200-831f-51b3-852e-935f90755425",
+              "name": "MI_DIRECCION",
+              "value": "martin@TU-DOMINIO-DE-ENVIO",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "ba8824bb-77db-5f2a-8f86-47cdd50596cd",
+      "name": "Config",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        240,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "read",
+        "documentId": {
+          "__rl": true,
+          "value": "={{ $('Config').first().json.SHEET_ID }}",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Leads",
+          "mode": "name"
+        },
+        "options": {}
+      },
+      "id": "e4a373a6-aecf-5636-9293-ce124015eafd",
+      "name": "Leer Leads",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        480,
+        0
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "REEMPLAZAR",
+          "name": "Google Sheets"
+        }
+      },
+      "executeOnce": true,
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "jsCode": "const abiertos = ['enviado', 'seguimiento_1', 'seguimiento_2', 'borrador_seg1', 'borrador_seg2'];\nreturn $input.all().filter(r => r.json.thread_id && abiertos.includes(r.json.estado))\n  .map(r => ({ json: r.json }));\n"
+      },
+      "id": "1a590549-6e73-5148-914d-065f42a880f2",
+      "name": "Con hilo abierto",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        720,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "=https://gmail.googleapis.com/gmail/v1/users/me/threads/{{ $json.thread_id }}?format=full",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "gmailOAuth2",
+        "options": {}
+      },
+      "id": "1fec5e1e-3ca0-5205-858a-c27517c2468c",
+      "name": "Leer hilo",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        960,
+        0
+      ],
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "REEMPLAZAR",
+          "name": "Gmail Apardian"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Busca el último mensaje del hilo que NO mandamos nosotros.\nconst yo = String($('Config').first().json.MI_DIRECCION || '').toLowerCase();\nconst leads = $('Con hilo abierto').all();\nconst dec = d => Buffer.from(String(d || '').replace(/-/g, '+').replace(/_/g, '/'), 'base64').toString('utf8');\nconst textoPlano = p => {\n  if (!p) return '';\n  if (p.mimeType === 'text/plain' && p.body && p.body.data) return dec(p.body.data);\n  for (const q of (p.parts || [])) { const t = textoPlano(q); if (t) return t; }\n  return '';\n};\nconst sinCita = t => t.split(/\\r?\\n(?:El .{5,120} escribió:|On .{5,120} wrote:|Em .{5,120} escreveu:)/)[0]\n  .split('\\n').filter(l => !l.startsWith('>')).join('\\n').trim();\nconst out = [];\n$input.all().forEach((it, i) => {\n  const lead = leads[i] ? leads[i].json : null;\n  if (!lead || it.json.error) return;\n  const ajenos = (it.json.messages || []).filter(m => {\n    const from = ((m.payload || {}).headers || []).find(h => /^from$/i.test(h.name));\n    return from && !String(from.value).toLowerCase().includes(yo);\n  });\n  if (!ajenos.length) return;\n  const m = ajenos[ajenos.length - 1];\n  const h = n => (((m.payload || {}).headers || []).find(x => x.name.toLowerCase() === n) || {}).value || '';\n  out.push({ json: { lead, de: h('from'), asunto: h('subject'),\n    texto: (sinCita(textoPlano(m.payload)) || m.snippet || '').slice(0, 4000) } });\n});\nreturn out;\n"
+      },
+      "id": "f5baf791-709f-5493-b551-58cae729cd05",
+      "name": "¿Respondió?",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1200,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "function cuerpoClaude(system, user, maxTokens, effort) {\n  return {\n    model: 'claude-opus-5-5',\n    max_tokens: maxTokens,\n    system: system,\n    messages: [{ role: 'user', content: user }],\n    output_config: { effort: effort },\n    fallbacks: 'default',\n  };\n}\n\nconst SYSTEM = \"Clasificás respuestas a mails de prospección de APARDIAN STUDIO (fotografía,\\nvideo, páginas web y edición en Lightroom, Uruguay).\\n\\nRecibís el asunto y el texto de una respuesta. Elegí UNA categoría:\\n- \\\"interesado\\\": quiere saber más, acepta la idea, pide una llamada o ejemplos.\\n- \\\"pide_precio\\\": pregunta cuánto sale, pide presupuesto o tarifas.\\n- \\\"no_ahora\\\": no por ahora, más adelante, ya tiene algo pero no cierra la puerta.\\n- \\\"baja\\\": no le interesa, pide que no le escriban, se molesta. Ante la duda\\n  entre \\\"no_ahora\\\" y \\\"baja\\\", elegí \\\"baja\\\".\\n- \\\"rebote\\\": respuesta automática, fuera de oficina, error de entrega,\\n  dirección inexistente.\\n- \\\"otro\\\": cualquier otra cosa.\\n\\nAdemás escribí un resumen de una línea para Martin y, si es \\\"interesado\\\" o\\n\\\"pide_precio\\\", una sugerencia de respuesta corta en el tono de Martin (voseo,\\ndirecto, sin emojis), que él va a revisar antes de mandar. No inventes precios:\\nsi piden precio, la sugerencia propone una charla corta o pide 2 datos para\\ncotizar.\\n\\nRespondé SOLO con un objeto JSON válido:\\n{\\n  \\\"categoria\\\": \\\"interesado\\\",\\n  \\\"resumen\\\": \\\"\\\",\\n  \\\"sugerencia_respuesta\\\": \\\"\\\"\\n}\";\nconst usuario = 'De: ' + $json.de + '\\nAsunto: ' + $json.asunto + '\\n\\nRespuesta:\\n' + $json.texto;\nreturn { json: { ...$json, claude_body: cuerpoClaude(SYSTEM, usuario, 2000, 'low') } };\n",
+        "mode": "runOnceForEachItem"
+      },
+      "id": "4d9a892e-2830-5601-9e78-26a66136ae11",
+      "name": "Prompt clasificador",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1440,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.anthropic.com/v1/messages",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "anthropic-version",
+              "value": "2023-06-01"
+            },
+            {
+              "name": "anthropic-beta",
+              "value": "server-side-fallback-2026-07-01"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify($json.claude_body) }}",
+        "options": {
+          "timeout": 180000
+        }
+      },
+      "id": "499374d7-b44d-5c51-98e7-effbbee1ba85",
+      "name": "Claude · clasificador",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1680,
+        0
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "REEMPLAZAR",
+          "name": "Anthropic API"
+        }
+      },
+      "onError": "continueRegularOutput",
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 5000
+    },
+    {
+      "parameters": {
+        "jsCode": "// Lee la respuesta de Claude. Antes de tocar content mira stop_reason:\n// un rechazo o un corte por max_tokens no se trata como respuesta valida.\nfunction leerClaude(r) {\n  if (!r || r.error) return { ok: false, motivo: 'error_http: ' + JSON.stringify(r && r.error || '').slice(0, 300) };\n  if (r.stop_reason === 'refusal') return { ok: false, motivo: 'refusal' };\n  if (r.stop_reason === 'max_tokens') return { ok: false, motivo: 'max_tokens' };\n  const texto = (r.content || []).filter(b => b.type === 'text').map(b => b.text).join('\\n').trim();\n  const limpio = texto.replace(/^```(?:json)?\\s*/i, '').replace(/```\\s*$/, '');\n  const i = limpio.indexOf('{'), j = limpio.lastIndexOf('}');\n  if (i < 0 || j <= i) return { ok: false, motivo: 'sin_json' };\n  try { return { ok: true, data: JSON.parse(limpio.slice(i, j + 1)) }; }\n  catch (e) { return { ok: false, motivo: 'json_invalido' }; }\n}\n\nconst esc = s => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');\n\nconst hoy = () => new Date().toISOString().slice(0, 10);\nconst diasDesde = f => f ? Math.floor((Date.now() - new Date(f + 'T12:00:00').getTime()) / 86400000) : -1;\n\nconst x = $('Prompt clasificador').item.json;\nconst r = leerClaude($json);\nconst cat = r.ok ? (r.data.categoria || 'otro') : 'otro';\nconst resumen = r.ok ? (r.data.resumen || '') : ('sin clasificar: ' + r.motivo);\nconst sug = r.ok ? (r.data.sugerencia_respuesta || '') : '';\nconst mail = String(x.lead.email || '').toLowerCase();\nreturn { json: {\n  fila: { id: x.lead.id, estado: cat === 'otro' ? 'respondio' : cat,\n          respuesta: cat + ' · ' + hoy() + ' · ' + resumen },\n  baja: cat === 'baja' ? { email: mail, dominio: mail.split('@')[1] || '', fecha: hoy(), motivo: resumen } : null,\n  alerta: ['interesado', 'pide_precio', 'otro'].includes(cat),\n  telegram_text: '<b>' + (cat === 'pide_precio' ? '💰 Pide precio' : cat === 'interesado' ? '🔥 Interesado' : '📩 Respondió') +\n    ': ' + esc(x.lead.nombre) + '</b>\\n' + esc(x.lead.web) + '\\n\\n' + esc(resumen) +\n    '\\n\\n<i>Respondió:</i>\\n' + esc(x.texto.slice(0, 700)) +\n    (sug ? '\\n\\n<i>Sugerencia (revisala antes de mandar):</i>\\n' + esc(sug) : ''),\n} };\n",
+        "mode": "runOnceForEachItem"
+      },
+      "id": "fff81e30-7244-53f2-b07e-10a36ae45f7e",
+      "name": "Leer clasificación",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1920,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "return { json: $json.fila };\n",
+        "mode": "runOnceForEachItem"
+      },
+      "id": "0536b56e-650e-5470-be73-0891ac14dc31",
+      "name": "Fila respuesta",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2160,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "={{ $('Config').first().json.SHEET_ID }}",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Leads",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": []
+        },
+        "options": {}
+      },
+      "id": "62b8c205-2d86-5a07-8ec7-756cacaa5e57",
+      "name": "Guardar respuesta",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        2400,
+        0
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "REEMPLAZAR",
+          "name": "Google Sheets"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose"
+          },
+          "conditions": [
+            {
+              "id": "daae32d2-96fa-5a94-afe6-a13f1df210f4",
+              "leftValue": "={{ !!$json.baja }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "d8235b5b-3109-566a-9ef2-2aec0a7e6443",
+      "name": "¿Es baja?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        2160,
+        220
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "return { json: $json.baja };\n",
+        "mode": "runOnceForEachItem"
+      },
+      "id": "dd59c368-7251-5700-a23b-04fd78ca40a5",
+      "name": "Fila baja",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2400,
+        220
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "={{ $('Config').first().json.SHEET_ID }}",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Bajas",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [],
+          "schema": []
+        },
+        "options": {}
+      },
+      "id": "27481653-fd42-5f71-ba40-139cd40ed719",
+      "name": "Agregar a Bajas",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        2640,
+        220
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "REEMPLAZAR",
+          "name": "Google Sheets"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose"
+          },
+          "conditions": [
+            {
+              "id": "8d0fd092-008a-559a-97bd-43ab52fc693e",
+              "leftValue": "={{ $json.alerta }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "d39c7e82-d033-5b05-bc3b-591cbd02c0f0",
+      "name": "¿Avisar a Martin?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        2160,
+        440
+      ]
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Config').first().json.TELEGRAM_CHAT_ID }}",
+        "text": "={{ $json.telegram_text }}",
+        "additionalFields": {
+          "appendAttribution": false,
+          "parse_mode": "HTML",
+          "disable_web_page_preview": true
+        }
+      },
+      "id": "0cbf07ba-a98d-5e31-9a2c-93893ad24cd5",
+      "name": "Aviso a Martin",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        2400,
+        440
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "REEMPLAZAR",
+          "name": "Telegram Apardian"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Programado": {
+      "main": [
+        [
+          {
+            "node": "Config",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Probar a mano": {
+      "main": [
+        [
+          {
+            "node": "Config",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Config": {
+      "main": [
+        [
+          {
+            "node": "Leer Leads",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Leer Leads": {
+      "main": [
+        [
+          {
+            "node": "Con hilo abierto",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Con hilo abierto": {
+      "main": [
+        [
+          {
+            "node": "Leer hilo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Leer hilo": {
+      "main": [
+        [
+          {
+            "node": "¿Respondió?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "¿Respondió?": {
+      "main": [
+        [
+          {
+            "node": "Prompt clasificador",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prompt clasificador": {
+      "main": [
+        [
+          {
+            "node": "Claude · clasificador",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Claude · clasificador": {
+      "main": [
+        [
+          {
+            "node": "Leer clasificación",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Leer clasificación": {
+      "main": [
+        [
+          {
+            "node": "Fila respuesta",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "¿Es baja?",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "¿Avisar a Martin?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fila respuesta": {
+      "main": [
+        [
+          {
+            "node": "Guardar respuesta",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "¿Es baja?": {
+      "main": [
+        [
+          {
+            "node": "Fila baja",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fila baja": {
+      "main": [
+        [
+          {
+            "node": "Agregar a Bajas",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "¿Avisar a Martin?": {
+      "main": [
+        [
+          {
+            "node": "Aviso a Martin",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "America/Montevideo"
+  },
+  "meta": {
+    "templateCredsSetupCompleted": false
+  },
+  "tags": []
+}
