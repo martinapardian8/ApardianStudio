@@ -1,0 +1,12 @@
+#!/bin/bash
+# Centro APARDIAN: abre la app (una pagina privada de tu cuenta de Claude).
+# Con Chrome, Brave o Edge se abre en su propia ventana, sin pestañas ni barra,
+# como una app. Si no hay ninguno, se abre en el navegador de siempre.
+URL="https://claude.ai/artifact/7rZCs1Sf3iuHJwueEd9QYf"
+for nav in "Google Chrome" "Brave Browser" "Microsoft Edge"; do
+  if [ -d "/Applications/$nav.app" ] || [ -d "$HOME/Applications/$nav.app" ]; then
+    open -na "$nav" --args --app="$URL" --window-size=1280,860
+    exit 0
+  fi
+done
+open "$URL"
