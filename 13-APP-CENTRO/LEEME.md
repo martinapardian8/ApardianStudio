@@ -8,14 +8,17 @@ lo ves igual en la compu y en el celular.
 
 ## Instalar (una vez)
 
-1. Traé el repo actualizado (`git pull`) en `~/Desktop/WEB APARDIANSTUDIO`.
-2. Abrí la carpeta `13-APP-CENTRO` y hacé doble clic en `instalar.command`.
+1. Bajá `Centro-APARDIAN-Mac.zip` (100 KB, no hace falta el repo entero) y
+   hacé doble clic para descomprimirlo. O, si tenés el repo, `git pull`.
+2. Abrí la carpeta y hacé doble clic en `instalar.command`.
    Deja la app en Aplicaciones, un acceso en el escritorio y la abre.
 3. Para tenerla en el Dock: con la app abierta, clic derecho en su ícono del
    Dock → Opciones → Mantener en el Dock.
 
 Si macOS dice que no puede abrir `instalar.command` "porque es de un
-desarrollador no identificado": clic derecho → Abrir → Abrir. Es una sola vez.
+desarrollador no identificado": Configuración del Sistema → Privacidad y
+seguridad → al final, **Abrir igualmente** (en macOS anteriores a Sequoia,
+clic derecho → Abrir → Abrir). Es una sola vez.
 
 La primera vez que se abre, si Chrome no tiene tu sesión de claude.ai, te
 pide entrar. Después queda.
