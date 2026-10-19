@@ -1,0 +1,4 @@
+Anton (Vernon Adams) y Work Sans (Wei Huang) se distribuyen bajo la
+SIL Open Font License 1.1: https://openfontlicense.org
+Los archivos .woff2 de esta carpeta son subconjuntos latinos de las
+fuentes originales que están en 10-MOTOR/fuentes.

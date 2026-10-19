@@ -1,39 +1,63 @@
 # apardianstudio.com — seguridad y caché (Apache / LiteSpeed en Hostinger)
+# Fuente: 05-WEB/.htaccess. publicar.sh lo copia tal cual a 07-PUBLICAR.
 
-# 1) Siempre HTTPS
+Options -Indexes -MultiViews
+
 <IfModule mod_rewrite.c>
   RewriteEngine On
+
+  # 1) Siempre HTTPS
   RewriteCond %{HTTPS} off
   RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+  # 2) Nada que empiece con punto (.git, .env, .htaccess...) se sirve,
+  #    salvo /.well-known/ (security.txt y validaciones de certificado).
+  #    Si Hostinger clona el repo dentro de public_html, esto tapa /.git/.
+  RewriteRule (^|/)\.(?!well-known/) - [F,L]
 </IfModule>
 
-# 2) Cabeceras de seguridad
+# 3) Cabeceras de seguridad
 <IfModule mod_headers.c>
   Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
   Header always set X-Content-Type-Options "nosniff"
-  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set X-Frame-Options "DENY"
   Header always set Referrer-Policy "strict-origin-when-cross-origin"
-  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=()"
-  Header always set Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob:; media-src 'self' blob:; connect-src 'self'; frame-ancestors 'self'; base-uri 'self'; form-action 'self'; object-src 'none'; upgrade-insecure-requests"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()"
+  Header always set Cross-Origin-Opener-Policy "same-origin"
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob:; media-src 'self' blob:; frame-src https://open.spotify.com https://www.youtube-nocookie.com; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self' https://wa.me https://api.whatsapp.com; frame-ancestors 'none'; upgrade-insecure-requests"
+  Header always unset X-Powered-By
   Header unset X-Powered-By
 </IfModule>
 
-# 3) Sin listado de carpetas ni archivos ocultos
-Options -Indexes
+# 4) Archivos que nunca tienen que ser públicos
 <FilesMatch "^\.">
   Require all denied
 </FilesMatch>
-<FilesMatch "\.(json|log|md|sh|py)$">
+<FilesMatch "\.(json|log|md|sh|py|bak|old|orig|swp|tmp|env|ini|conf|cfg|yml|yaml|toml|lock|sql|zip|tar|gz|7z|psd|lrcat|xmp)$">
+  Require all denied
+</FilesMatch>
+<FilesMatch "^(_qa_.*|.*~)$">
   Require all denied
 </FilesMatch>
 
-# 4) Caché: fotos y videos un mes, html sin caché (los ?v= ya versionan css y js)
+# 5) Tipos correctos para las fuentes y el security.txt
+<IfModule mod_mime.c>
+  AddType font/woff2 .woff2
+  AddType video/webm .webm
+  AddType text/plain .txt
+</IfModule>
+
+# 6) Caché: fotos, videos y fuentes un mes; css y js una semana (los ?v= ya
+#    versionan); html sin caché para que cada cambio se vea al publicar
 <IfModule mod_expires.c>
   ExpiresActive On
   ExpiresByType image/jpeg "access plus 30 days"
   ExpiresByType image/png "access plus 30 days"
+  ExpiresByType image/webp "access plus 30 days"
   ExpiresByType image/svg+xml "access plus 30 days"
   ExpiresByType video/mp4 "access plus 30 days"
+  ExpiresByType video/webm "access plus 30 days"
+  ExpiresByType font/woff2 "access plus 30 days"
   ExpiresByType text/css "access plus 7 days"
   ExpiresByType application/javascript "access plus 7 days"
   ExpiresByType text/html "access plus 0 seconds"
