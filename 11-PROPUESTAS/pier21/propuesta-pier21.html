@@ -1,0 +1,637 @@
+<title>Propuesta Pier 21</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Marcellus&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* Hoja de presupuesto Apardian en beige formal. Los acentos salen de los materiales del local:
+   terracota de las lámparas, mármol verde de la barra, madera, cal y la caja negra de la fachada.
+   Tipografía: Marcellus (capitales clásicas) para titulares, Jost (geométrica, como el logo PIER 21) para texto. */
+:root{
+  --bg:#EFE7DA; --panel:#F7F1E7; --line:#D9CCB8; --fg:#2A231D; --ink:#4B4036; --mute:#857464;
+  --terra:#A9513A; --terra-ink:#FBF4EC; --marble:#3E5A4C; --wood:#9A6B43; --lime:#E9E2D6; --night:#16130F;
+  --display:'Marcellus','Cormorant Garamond',Georgia,'Times New Roman',serif;
+  --body:'Jost','Futura','Century Gothic',system-ui,sans-serif;
+  --brand:'Anton','Impact','Arial Narrow',sans-serif;
+  color-scheme:light;
+}
+html{background:var(--bg)}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-weight:400;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--terra);outline-offset:3px}
+.sheet{max-width:1080px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px));padding-block:56px 0}
+.lbl{font-size:11px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--mute)}
+.lbl b{color:var(--fg);font-weight:500}
+.disp{font-family:var(--display);font-weight:400;line-height:1.02;letter-spacing:.01em}
+h1,h2,h3{text-wrap:balance}
+.terra{color:var(--terra)}
+.num{font-variant-numeric:tabular-nums}
+
+/* cabecera */
+.top{display:flex;justify-content:space-between;align-items:flex-start;gap:20px}
+.logo{font-family:var(--brand);font-size:30px;letter-spacing:.01em;line-height:1}
+.logo i{font-style:normal;color:#FF0033}
+.top .lbl{text-align:right}
+.for{margin-top:64px}
+h1{margin:18px 0 0;font-size:clamp(58px,11vw,128px);text-transform:uppercase;letter-spacing:.06em}
+h1 span{display:block}
+h1 .sub{font-size:clamp(28px,4.6vw,52px);letter-spacing:.01em;text-transform:none;margin-top:14px}
+.rule{height:1px;background:var(--line);margin:34px 0}
+.intro{display:grid;grid-template-columns:1fr auto;gap:30px;align-items:end}
+.intro p{margin:0;max-width:620px;font-size:18px;line-height:1.65;color:var(--ink);font-weight:300}
+.intro p b{font-weight:500;color:var(--fg)}
+@media (max-width:720px){.intro{grid-template-columns:1fr}}
+
+.meta{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-top:34px}
+.meta>div{padding:22px 22px 22px 0;min-width:0}
+.meta>div+div{padding-left:22px;border-left:1px solid var(--line)}
+.meta .disp{display:block;margin-top:12px;font-size:26px}
+.meta small{display:block;margin-top:6px;color:var(--mute);font-size:14px}
+@media (max-width:760px){.meta{grid-template-columns:1fr}.meta>div+div{padding-left:0;border-left:0;border-top:1px solid var(--line)}}
+
+section{margin-top:80px}
+.sec-t{display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-bottom:16px;border-bottom:1px solid var(--fg)}
+h2{margin:24px 0 12px;font-size:clamp(30px,4.4vw,46px)}
+.lead{margin:0;max-width:660px;color:var(--ink);font-size:17px;font-weight:300}
+
+/* olas del logo como separador */
+.waves{display:block;width:64px;height:22px;color:var(--terra)}
+
+/* diagnóstico */
+.drow{display:grid;grid-template-columns:190px 1fr 1fr;gap:22px;padding:18px 0;border-bottom:1px solid var(--line)}
+.drow .k{font-family:var(--display);font-size:21px;line-height:1.15}
+.drow p{margin:0;font-size:15px;color:var(--ink)}
+.drow p.now{color:var(--mute)}
+.drow .hd{font-size:11px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--mute)}
+.diag{margin-top:22px}
+@media (max-width:760px){.drow{grid-template-columns:1fr;gap:6px}.drow.h{display:none}}
+
+/* maqueta de la web */
+.mock{margin-top:28px;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--night)}
+.mock .bar{display:flex;align-items:center;gap:7px;padding:10px 14px;background:#E3D9C9;border-bottom:1px solid var(--line)}
+.mock .bar i{width:9px;height:9px;border-radius:50%;background:#C9BBA6}
+.mock .bar span{margin-left:12px;font-size:12px;color:var(--mute);letter-spacing:.04em}
+.hero{position:relative;aspect-ratio:2/1;max-width:100%;color:#FBF4EC}
+.hero svg{position:absolute;inset:0;width:100%;height:100%;display:block}
+.hero .nav{position:absolute;top:0;left:0;right:0;display:flex;justify-content:space-between;align-items:center;padding:3.2% 4%;font-size:clamp(8px,1.1vw,12px);letter-spacing:.24em;text-transform:uppercase}
+.hero .nav .pl{font-weight:500;letter-spacing:.32em;font-size:clamp(10px,1.5vw,16px)}
+.hero .nav .links{display:flex;gap:2.4vw;opacity:.9}
+.hero .copy{position:absolute;left:4%;bottom:9%;max-width:58%}
+.hero .copy .k{font-size:clamp(7px,1vw,11px);letter-spacing:.3em;text-transform:uppercase;opacity:.85}
+.hero .copy .t{font-family:var(--display);font-size:clamp(20px,4.4vw,50px);line-height:1.02;margin-top:.4em}
+.hero .copy .cta{display:inline-block;margin-top:1.1em;padding:.75em 1.4em;border:1px solid rgba(251,244,236,.7);font-size:clamp(7px,.95vw,11px);letter-spacing:.24em;text-transform:uppercase}
+.hero .sun{position:absolute;right:4%;bottom:9%;text-align:right;font-size:clamp(7px,1vw,11px);letter-spacing:.2em;text-transform:uppercase;opacity:.9}
+.hero .sun b{display:block;font-family:var(--display);font-weight:400;font-size:clamp(16px,2.8vw,32px);letter-spacing:.02em;margin-top:.2em}
+@media (max-width:560px){.hero .nav .links{display:none}.hero .copy{max-width:70%}}
+.cap{margin-top:10px;font-size:13.5px;color:var(--mute)}
+
+/* fila de abajo: carta en el móvil + materiales + tipografía */
+.trio{display:grid;grid-template-columns:240px 1fr;gap:18px;margin-top:18px}
+@media (max-width:760px){.trio{grid-template-columns:1fr}}
+.phone{justify-self:center;width:230px;max-width:100%;border:8px solid var(--night);border-radius:30px;background:var(--lime);overflow:hidden;font-size:12px}
+.phone .ph-top{display:flex;justify-content:space-between;align-items:center;padding:14px 14px 10px;border-bottom:1px solid var(--line)}
+.phone .ph-top b{font-weight:500;letter-spacing:.3em;font-size:11px}
+.phone .langs{display:flex;gap:4px}
+.phone .langs span{padding:2px 6px;border:1px solid var(--line);border-radius:99px;font-size:9px;letter-spacing:.1em;color:var(--mute)}
+.phone .langs span.on{background:var(--fg);color:var(--lime);border-color:var(--fg)}
+.phone .tabs{display:flex;gap:12px;padding:10px 14px 4px;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--mute)}
+.phone .tabs .on{color:var(--terra);border-bottom:1px solid var(--terra)}
+.phone ul{list-style:none;margin:0;padding:4px 14px 16px}
+.phone li{display:grid;grid-template-columns:1fr auto;gap:2px 8px;padding:9px 0;border-bottom:1px solid var(--line)}
+.phone li b{font-family:var(--display);font-weight:400;font-size:14px}
+.phone li span{color:var(--mute);font-size:10.5px;line-height:1.35;grid-column:1}
+.phone li em{font-style:normal;grid-row:1;grid-column:2;font-variant-numeric:tabular-nums;color:var(--fg)}
+.phone .ex{padding:0 14px 12px;font-size:9.5px;color:var(--mute);letter-spacing:.06em}
+.side{display:grid;gap:18px;min-width:0}
+.box{border:1px solid var(--line);background:var(--panel);border-radius:4px;padding:22px;min-width:0}
+.mats{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin-top:14px}
+@media (max-width:560px){.mats{grid-template-columns:repeat(3,1fr)}}
+.mat .sw{aspect-ratio:1;max-width:100%;border-radius:2px;border:1px solid rgba(0,0,0,.08)}
+.mat small{display:block;margin-top:6px;font-size:11.5px;color:var(--ink);line-height:1.3}
+.type{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:14px}
+@media (max-width:560px){.type{grid-template-columns:1fr}}
+.type .a{font-family:var(--display);font-size:40px;line-height:1}
+.type .b{font-family:var(--body);font-size:22px;font-weight:400;letter-spacing:.32em;text-transform:uppercase;line-height:1.3}
+.type p{margin:8px 0 0;font-size:13.5px;color:var(--mute)}
+
+.inc{display:grid;grid-template-columns:1fr 1fr;column-gap:40px;margin:22px 0 0;padding:0}
+.inc li{list-style:none;display:grid;grid-template-columns:26px 1fr;gap:6px;padding:13px 0;border-bottom:1px solid var(--line);font-size:15px;color:var(--ink)}
+.inc li::before{content:"—";color:var(--terra)}
+.inc li b{color:var(--fg);font-weight:500}
+@media (max-width:760px){.inc{grid-template-columns:1fr}}
+
+/* precios */
+.ptable{margin-top:24px;overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:640px}
+th{text-align:left;font-size:11px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--mute);padding:0 12px 12px 0;border-bottom:1px solid var(--fg)}
+td{padding:15px 12px 15px 0;border-bottom:1px solid var(--line);vertical-align:top;font-size:14.5px;color:var(--ink)}
+td.svc{width:30%}
+td.svc b{display:block;font-family:var(--display);font-weight:400;font-size:19px;line-height:1.15;color:var(--fg)}
+td.svc small{display:block;margin-top:4px;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--terra)}
+td.pr{text-align:right;white-space:nowrap;font-family:var(--display);font-size:22px;color:var(--fg);font-variant-numeric:tabular-nums}
+td.pr small{display:block;font-family:var(--body);font-size:12px;color:var(--mute);letter-spacing:.04em}
+td.wk{white-space:nowrap;color:var(--mute)}
+tr.grp td{padding-top:30px;font-size:11px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--marble);border-bottom:0}
+.fine{margin-top:12px;font-size:13.5px;color:var(--mute)}
+
+/* planes mensuales */
+.plans{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:24px}
+@media (max-width:760px){.plans{grid-template-columns:1fr}}
+.plan{border:1px solid var(--line);border-radius:4px;padding:26px;display:flex;flex-direction:column;gap:12px;min-width:0;background:var(--panel)}
+.plan.rec{border-color:var(--terra)}
+.plan .top2{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.plan h3{margin:0;font-family:var(--display);font-weight:400;font-size:28px;line-height:1.05}
+.plan .p{font-family:var(--display);font-size:30px;white-space:nowrap;font-variant-numeric:tabular-nums}
+.plan .p small{font-family:var(--body);font-size:13px;color:var(--mute)}
+.plan ul{margin:0;padding:0;list-style:none;display:grid;gap:6px;font-size:14.5px;color:var(--ink)}
+.plan li::before{content:"— ";color:var(--terra)}
+.plan p{margin:0;font-size:14px;color:var(--mute)}
+.pill{align-self:flex-start;padding:3px 10px;font-size:10.5px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;background:var(--terra);color:var(--terra-ink)}
+.pill.dk{background:var(--marble)}
+
+/* paquetes */
+.packs{display:grid;grid-template-columns:1fr 1.25fr;gap:16px;margin-top:24px;align-items:start}
+@media (max-width:820px){.packs{grid-template-columns:1fr}}
+.pack{position:relative;padding:30px 28px 26px;border:1px solid var(--line);border-radius:4px;background:var(--panel);display:flex;flex-direction:column;gap:12px;min-width:0}
+.pack.rec{border-color:var(--terra);background:#FAF5EC}
+.pack .tag{position:absolute;top:-11px;left:24px;padding:3px 10px;background:var(--terra);color:var(--terra-ink);font-size:10.5px;font-weight:500;letter-spacing:.18em;text-transform:uppercase}
+.pack .tag.dk{background:var(--fg);color:var(--bg)}
+.pack h3{margin:0;font-family:var(--display);font-weight:400;font-size:36px;line-height:1}
+.pack ul{margin:0;padding:0;list-style:none;display:grid;gap:0;font-size:14.5px;color:var(--ink)}
+.pack li{display:flex;justify-content:space-between;gap:12px;padding:7px 0;border-bottom:1px dotted var(--line)}
+.pack li span:last-child{color:var(--mute);white-space:nowrap;font-variant-numeric:tabular-nums}
+.pack .price{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-top:6px;padding-top:14px;border-top:1px solid var(--line)}
+.pack .price b{font-family:var(--display);font-weight:400;font-size:46px;line-height:1;font-variant-numeric:tabular-nums}
+.pack .price s{color:var(--mute);font-size:16px}
+.pack .price em{font-style:normal;color:var(--terra);font-size:12.5px;font-weight:500;letter-spacing:.1em;text-transform:uppercase}
+.pack .gift{margin:0;padding:10px 12px;background:var(--lime);font-size:14px;color:var(--fg)}
+.combo{margin-top:16px;display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media (max-width:760px){.combo{grid-template-columns:1fr}}
+.combo>div{padding:18px 20px;border:1px solid var(--line);border-radius:4px;display:flex;justify-content:space-between;gap:14px;align-items:baseline;flex-wrap:wrap}
+.combo b{font-family:var(--display);font-weight:400;font-size:20px}
+.combo span{color:var(--mute);font-size:13.5px}
+.combo .p{font-family:var(--display);font-size:24px;white-space:nowrap;font-variant-numeric:tabular-nums}
+.combo .p s{font-family:var(--body);font-size:13px;color:var(--mute);margin-right:6px}
+
+/* forma de pago */
+.paybox{margin-top:24px;border:1px solid var(--fg);border-radius:4px;overflow:hidden}
+.paybox .hd{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:baseline;padding:18px 22px;background:var(--fg);color:var(--bg)}
+.paybox .hd b{font-family:var(--display);font-weight:400;font-size:22px}
+.paybox .hd span{font-size:13px;letter-spacing:.06em;opacity:.85}
+.steps{display:grid;grid-template-columns:repeat(3,1fr)}
+@media (max-width:760px){.steps{grid-template-columns:1fr}}
+.step{padding:22px;border-right:1px solid var(--line);min-width:0;background:var(--panel)}
+.step:last-child{border-right:0}
+@media (max-width:760px){.step{border-right:0;border-bottom:1px solid var(--line)}.step:last-child{border-bottom:0}}
+.step .n{font-size:11px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--terra)}
+.step .amt{display:block;font-family:var(--display);font-size:38px;line-height:1;margin:10px 0 4px;font-variant-numeric:tabular-nums}
+.step .pc{font-size:13px;color:var(--mute)}
+.step p{margin:10px 0 0;font-size:14.5px;color:var(--ink)}
+.step p b{font-weight:500;color:var(--fg)}
+.rules{display:grid;grid-template-columns:1fr 1fr;gap:0 40px;margin-top:26px}
+@media (max-width:760px){.rules{grid-template-columns:1fr}}
+.rules div{padding:15px 0;border-bottom:1px solid var(--line);min-width:0}
+.rules b{display:block;font-family:var(--display);font-weight:400;font-size:18px;color:var(--fg)}
+.rules p{margin:4px 0 0;font-size:14.5px;color:var(--ink)}
+
+.cond{margin:22px 0 0;padding:0;list-style:none;display:grid;gap:10px}
+.cond li{display:grid;grid-template-columns:24px 1fr;font-size:15px;color:var(--ink)}
+.cond li::before{content:"—";color:var(--terra)}
+.cond li b{font-weight:500;color:var(--fg)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+@media (max-width:760px){.two{grid-template-columns:1fr;gap:10px}}
+.two h3{margin:26px 0 0;font-family:var(--display);font-weight:400;font-size:22px}
+
+.cal{display:grid;grid-template-columns:repeat(4,1fr);margin-top:24px;border-top:1px solid var(--line)}
+.cal>div{padding:18px 16px 18px 0;border-right:1px solid var(--line);min-width:0}
+.cal>div+div{padding-left:16px}
+.cal>div:last-child{border-right:0}
+.cal .disp{display:block;font-size:22px;margin:8px 0 6px}
+.cal p{margin:0;font-size:14px;color:var(--ink)}
+@media (max-width:760px){.cal{grid-template-columns:1fr}.cal>div{border-right:0;border-bottom:1px solid var(--line);padding-left:0!important}}
+
+.why{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:24px}
+.why div{padding-top:14px;border-top:2px solid var(--terra)}
+.why b{display:block;font-family:var(--display);font-weight:400;font-size:22px;line-height:1.1}
+.why p{margin:8px 0 0;font-size:14.5px;color:var(--ink)}
+@media (max-width:760px){.why{grid-template-columns:1fr}}
+
+/* franja final */
+.total{margin-top:96px;background:var(--fg);color:var(--bg)}
+.total .in{max-width:1080px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px));padding-block:40px 26px}
+.total .row{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap}
+.total .lbl{color:#C9BBA6}
+.total .what{margin-top:12px;font-family:var(--display);font-size:clamp(26px,3.6vw,38px);line-height:1.1}
+.total .amt{font-family:var(--display);font-size:clamp(60px,11vw,112px);line-height:.9;font-variant-numeric:tabular-nums}
+.total .amt small{font-size:.32em;letter-spacing:.1em;margin-right:.3em;vertical-align:.9em}
+.total .alt{margin-top:18px;font-size:15px;color:#E3D9C9;max-width:760px}
+.total .alt b{color:#F1B9A4;font-weight:500}
+.total .foot{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:30px;padding-top:16px;border-top:1px solid rgba(239,231,218,.25);font-size:11px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:#C9BBA6}
+.total .foot span{user-select:all}
+
+@media (prefers-reduced-motion:no-preference){
+  .hero .glow{animation:breathe 6s ease-in-out infinite}
+  @keyframes breathe{50%{opacity:.75}}
+}
+@page{size:A4;margin:0}
+@media print{
+  html,body{background:var(--bg)!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .sheet{padding:12mm 14mm 0;max-width:none}
+  section{margin-top:40px}
+  .drow,tr,.pack,.plan,.step,.rules div,.cal>div,.why>div,.inc li,.meta,.cond li,.mock,.trio{break-inside:avoid}
+  h2,.sec-t{break-after:avoid}
+  .total{margin-top:40px;break-inside:avoid}
+  .total .in{padding:12mm 14mm 8mm;max-width:none}
+}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="w" viewBox="0 0 64 22"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M2 5c5-4 10-4 15 0s10 4 15 0 10-4 15 0 10 4 15 0"/><path d="M2 12c5-4 10-4 15 0s10 4 15 0 10-4 15 0 10 4 15 0"/><path d="M2 19c5-4 10-4 15 0s10 4 15 0 10-4 15 0 10 4 15 0"/></g></symbol>
+    <pattern id="tile" width="28" height="28" patternUnits="userSpaceOnUse"><rect width="28" height="28" fill="#DCD3C4"/><g fill="none" stroke="#8F8676" stroke-width="1.4"><circle cx="0" cy="0" r="14"/><circle cx="28" cy="0" r="14"/><circle cx="0" cy="28" r="14"/><circle cx="28" cy="28" r="14"/><circle cx="14" cy="14" r="14"/></g></pattern>
+    <pattern id="wood" width="40" height="40" patternUnits="userSpaceOnUse"><rect width="40" height="40" fill="#9A6B43"/><g fill="none" stroke="#7C5332" stroke-width="1" opacity=".7"><path d="M0 6c12 2 26-2 40 1"/><path d="M0 17c14-3 24 3 40 0"/><path d="M0 29c10 2 28-2 40 1"/></g></pattern>
+    <pattern id="marble" width="60" height="60" patternUnits="userSpaceOnUse"><rect width="60" height="60" fill="#3E5A4C"/><g fill="none" stroke="#8FA898" stroke-width=".9" opacity=".7"><path d="M-4 40c14-10 18 4 30-8s22-6 38-20"/><path d="M0 12c10 6 22-6 34 2s20 2 30 10"/></g></pattern>
+  </defs>
+</svg>
+
+<div class="sheet">
+  <header class="top">
+    <div class="logo">APARDIAN<i>.</i></div>
+    <div class="lbl">Presupuesto <b>P21-001</b><br>Fecha <b>19.10.2026</b><br>Válido hasta <b>03.11.2026</b></div>
+  </header>
+
+  <div class="for lbl">Propuesta para Pier 21 · Rambla de Montevideo</div>
+  <h1 class="disp"><span>Pier 21</span><span class="sub terra">Que lo encuentren antes de llegar.</span></h1>
+
+  <div class="rule"></div>
+  <div class="intro">
+    <p>Pier 21 abrió con una obra de primer nivel frente al mar y hoy no tiene web, carta online ni fotos propias. Proponemos resolver todo eso <b>en cuatro semanas</b>: una web a la altura del lugar, una carta digital en tres idiomas que se cambia en minutos, una sesión de fotos y un video con drone para tener material desde el primer día. Ustedes no tienen que preparar nada: nosotros escribimos, fotografiamos, traducimos y publicamos.</p>
+    <svg class="waves" aria-hidden="true"><use href="#w"/></svg>
+  </div>
+
+  <div class="meta">
+    <div><span class="lbl">Cliente</span><span class="disp">Pier 21</span><small>Restaurante y bar sobre la rambla, en el lugar del Che Montevideo</small></div>
+    <div><span class="lbl">Alcance</span><span class="disp">Web, carta y contenido</span><small>Proyecto cerrado más planes mensuales opcionales</small></div>
+    <div><span class="lbl">Idiomas</span><span class="disp">Español · English · Português</span><small>Se pueden sumar más idiomas por separado</small></div>
+  </div>
+
+  <!-- DIAGNÓSTICO -->
+  <section>
+    <div class="sec-t"><span class="lbl">Dónde están hoy</span><span class="lbl">Revisado el 19.10.2026</span></div>
+    <h2 class="disp">Un lugar de esta inversión no puede depender de una nota de prensa.</h2>
+    <p class="lead">Quien busca Pier 21 hoy encuentra la cobertura de la apertura y renders de obra. No encuentra la carta, el horario, cómo reservar ni una foto real del lugar terminado.</p>
+    <div class="diag">
+      <div class="drow h"><span class="hd"></span><span class="hd">Hoy</span><span class="hd">Con la propuesta</span></div>
+      <div class="drow"><span class="k">Web</span><p class="now">No existe. No hay un sitio propio al que mandar a la gente.</p><p>Web propia con dominio de Pier 21, rápida en el celular y preparada para aparecer en Google.</p></div>
+      <div class="drow"><span class="k">Carta</span><p class="now">Todavía no está cerrada y va a ir cambiando en las primeras semanas.</p><p>Carta digital con QR en las mesas. Cada cambio de plato o precio se publica en minutos, en los tres idiomas, sin reimprimir nada.</p></div>
+      <div class="drow"><span class="k">Fotos</span><p class="now">No hay fotos propias del lugar abierto, de los platos ni del equipo.</p><p>Sesión profesional del mediodía a la noche y video con drone de la caja negra sobre las rocas, al atardecer.</p></div>
+      <div class="drow"><span class="k">Turistas</span><p class="now">Llega la temporada de verano y de cruceros. Brasileños, argentinos y extranjeros buscan dónde comer en la rambla.</p><p>Web y carta en español, inglés y portugués. La web detecta el idioma del teléfono.</p></div>
+      <div class="drow"><span class="k">Reservas</span><p class="now">Sin un canal claro. Las consultas se pierden entre llamadas y mensajes.</p><p>Botón de WhatsApp directo y formulario de reservas y eventos privados que llega ordenado al encargado.</p></div>
+    </div>
+  </section>
+
+  <!-- LA WEB -->
+  <section>
+    <div class="sec-t"><span class="lbl">La web</span><span class="lbl">Lo principal de esta propuesta</span></div>
+    <h2 class="disp">La caja negra sobre la rambla, abierta.</h2>
+    <p class="lead">La web se recorre como se llega al lugar. Arranca afuera, con el video del drone y el mar al atardecer, entra por el vidrio al salón y termina en la barra, la carta y la reserva. Afuera es negro y mar. Adentro es madera, cal, terracota y mármol verde, los mismos materiales del local. El nivel de terminación que buscamos es el de las webs de restaurantes premiadas internacionalmente.</p>
+
+    <figure class="mock" style="margin-inline:0">
+      <div class="bar"><i></i><i></i><i></i><span>pier21.com.uy</span></div>
+      <div class="hero" role="img" aria-label="Maqueta de la portada: el edificio negro de Pier 21 sobre las rocas de la rambla, con el mar al atardecer">
+        <svg viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <defs>
+            <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2B2A3A"/><stop offset=".45" stop-color="#8A5A4A"/><stop offset=".72" stop-color="#D9895A"/><stop offset="1" stop-color="#F0C18A"/></linearGradient>
+            <linearGradient id="sea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7C5A55"/><stop offset="1" stop-color="#1E1C22"/></linearGradient>
+            <linearGradient id="fade" x1="0" y1="0" x2="0" y2="1"><stop offset=".45" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".55"/></linearGradient>
+            <radialGradient id="sunG"><stop offset="0" stop-color="#FFE3B0"/><stop offset=".5" stop-color="#F7B377" stop-opacity=".7"/><stop offset="1" stop-color="#F7B377" stop-opacity="0"/></radialGradient>
+          </defs>
+          <rect width="1200" height="360" fill="url(#sky)"/>
+          <circle cx="905" cy="352" r="120" fill="url(#sunG)"/>
+          <circle cx="905" cy="352" r="26" fill="#FFE6BC"/>
+          <rect y="352" width="1200" height="248" fill="url(#sea)"/>
+          <g stroke="#F3C79A" stroke-linecap="round" opacity=".55"><path d="M860 372h90M842 392h126M872 414h66M830 440h150" stroke-width="2"/></g>
+          <g stroke="#E9B98E" opacity=".18" stroke-width="1.5"><path d="M60 400h240M420 384h200M1000 404h160M120 470h300M700 460h120"/></g>
+          <!-- rocas -->
+          <path d="M0 520c60-28 120-40 190-30s110-10 170 0 60 30 60 30V600H0z" fill="#2A2420"/>
+          <path d="M760 540c50-22 120-20 170-6s110-8 170-4 100 10 100 10V600H760z" fill="#241F1C"/>
+          <!-- terraza y edificio -->
+          <path d="M250 500h640l-20 26H270z" fill="#3B332C"/>
+          <g stroke="#CDBFAE" stroke-width="1.4" opacity=".75"><path d="M262 486h616"/><path d="M262 486v14M340 486v14M420 486v14M500 486v14M580 486v14M660 486v14M740 486v14M820 486v14M878 486v14"/></g>
+          <rect x="330" y="364" width="480" height="136" fill="#121011"/>
+          <rect x="330" y="364" width="480" height="18" fill="#1D1A1A"/>
+          <rect class="glow" x="342" y="430" width="456" height="62" fill="#E7A764" opacity=".9"/>
+          <g fill="#121011"><rect x="402" y="430" width="5" height="62"/><rect x="472" y="430" width="5" height="62"/><rect x="542" y="430" width="5" height="62"/><rect x="612" y="430" width="5" height="62"/><rect x="682" y="430" width="5" height="62"/><rect x="752" y="430" width="5" height="62"/></g>
+          <g fill="#F2E9DC" opacity=".92"><path d="M560 414h44l8 16h-60z"/><path d="M612 414h44l8 16h-60z"/><path d="M664 414h44l8 16h-60z"/><path d="M716 414h44l8 16h-60z"/></g>
+          <g fill="#A9513A"><circle cx="380" cy="446" r="4"/><circle cx="450" cy="446" r="4"/><circle cx="520" cy="446" r="4"/></g>
+          <!-- palmeras -->
+          <g stroke="#17130F" fill="none" stroke-linecap="round">
+            <path d="M1010 520c-6-80-2-150 8-210" stroke-width="7"/>
+            <path d="M1018 312c-30-6-56 6-74 24M1018 312c-24-22-52-26-76-18M1018 312c4-30 22-48 44-56M1018 312c30-10 58-2 76 16M1018 312c24 6 42 24 50 46M1018 312c-12 18-18 40-16 62" stroke-width="5"/>
+            <path d="M176 506c4-70 0-120-10-168" stroke-width="6"/>
+            <path d="M166 340c-26-4-48 6-62 22M166 340c-20-18-44-22-64-14M166 340c4-26 20-40 38-46M166 340c26-8 48 0 62 14M166 340c18 6 34 22 40 40" stroke-width="4.5"/>
+          </g>
+          <rect width="1200" height="600" fill="url(#fade)"/>
+        </svg>
+        <div class="nav"><span class="pl">Pier 21</span><span class="links"><span>La casa</span><span>Carta</span><span>Eventos</span><span>Reservas</span><span>ES · EN · PT</span></span></div>
+        <div class="copy"><div class="k">Rambla de Montevideo · Abierto hoy hasta las 00:30</div><div class="t">Frente al mar,<br>del mediodía a la última copa.</div><span class="cta">Reservar una mesa</span></div>
+        <div class="sun">Puesta de sol hoy<b id="sunset">—</b></div>
+      </div>
+    </figure>
+    <p class="cap">Maqueta de la portada. En la web real el fondo es el video del drone y la hora de la puesta de sol se calcula cada día para Montevideo. El horario mostrado es de ejemplo.</p>
+
+    <div class="trio">
+      <div class="phone" role="img" aria-label="Maqueta de la carta digital en el celular">
+        <div class="ph-top"><b>PIER 21</b><span class="langs"><span class="on">ES</span><span>EN</span><span>PT</span></span></div>
+        <div class="tabs"><span class="on">Horno</span><span>Del mar</span><span>Barra</span></div>
+        <ul>
+          <li><b>Pizza de masa madre</b><span>Horno a leña, tomate y albahaca</span><em>—</em></li>
+          <li><b>Pesca del día</b><span>A la parrilla, verdes de estación</span><em>—</em></li>
+          <li><b>Rabas</b><span>Alioli de limón</span><em>—</em></li>
+          <li><b>Spritz de la casa</b><span>Para el atardecer</span><em>—</em></li>
+        </ul>
+        <div class="ex">Platos de ejemplo. Se carga su carta real.</div>
+      </div>
+      <div class="side">
+        <div class="box">
+          <span class="lbl">Paleta, tomada del local</span>
+          <div class="mats">
+            <div class="mat"><div class="sw" style="background:#16130F"></div><small>Fachada negra</small></div>
+            <div class="mat"><div class="sw" style="background:#E9E2D6"></div><small>Cal de las paredes</small></div>
+            <div class="mat"><svg class="sw" viewBox="0 0 60 60" style="display:block;width:100%"><rect width="60" height="60" fill="url(#wood)"/></svg><small>Madera</small></div>
+            <div class="mat"><div class="sw" style="background:#A9513A"></div><small>Lámparas de terracota</small></div>
+            <div class="mat"><svg class="sw" viewBox="0 0 60 60" style="display:block;width:100%"><rect width="60" height="60" fill="url(#marble)"/></svg><small>Mármol verde de la barra</small></div>
+            <div class="mat"><svg class="sw" viewBox="0 0 56 56" style="display:block;width:100%"><rect width="56" height="56" fill="url(#tile)"/></svg><small>Piso hidráulico</small></div>
+          </div>
+        </div>
+        <div class="box">
+          <span class="lbl">Tipografía de la web</span>
+          <div class="type">
+            <div><div class="a">Frente al mar</div><p>Marcellus, para los titulares. Capitales clásicas, como las de una placa de muelle.</p></div>
+            <div><div class="b">Pier 21</div><p>Jost, para textos y menús. Geométrica y espaciada, la misma familia visual del logo de ustedes.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <ul class="inc">
+      <li><span><b>Tres idiomas</b> con detección automática y botón para cambiar</span></li>
+      <li><span><b>Carta digital</b> conectada a la web, con QR para las mesas</span></li>
+      <li><span><b>Reservas por WhatsApp</b> y formulario para eventos privados</span></li>
+      <li><span><b>Abierto o cerrado</b> en vivo, con el horario del día</span></li>
+      <li><span><b>Puesta de sol</b> calculada cada día, para invitar al atardecer</span></li>
+      <li><span><b>Cómo llegar</b> con mapa, estacionamiento y accesos</span></li>
+      <li><span><b>Todos los textos</b> escritos por nosotros, en su tono</span></li>
+      <li><span><b>Rápida en el celular</b> y preparada para Google</span></li>
+    </ul>
+  </section>
+
+  <!-- SERVICIOS SUELTOS -->
+  <section>
+    <div class="sec-t"><span class="lbl">Servicios por separado</span><span class="lbl">Precios en dólares, sin impuestos</span></div>
+    <h2 class="disp">Cada pieza, con su precio.</h2>
+    <p class="lead">Se puede contratar cualquier servicio por separado. Los paquetes de más abajo agrupan los mismos servicios con descuento.</p>
+    <div class="ptable">
+      <table>
+        <thead><tr><th>Servicio</th><th>Qué incluye</th><th>Plazo</th><th style="text-align:right">Precio</th></tr></thead>
+        <tbody>
+          <tr class="grp"><td colspan="4">Web y carta</td></tr>
+          <tr><td class="svc"><b>Web Pier 21</b><small>Lo principal</small></td><td>Diseño y desarrollo a medida, hasta 6 secciones (inicio, la casa, carta, eventos, reservas, contacto), español, inglés y portugués, reservas por WhatsApp y formulario, mapa, horario en vivo, Google y analítica. Incluye la redacción de todos los textos, las traducciones, la conexión del dominio y el primer mes de alojamiento.</td><td class="wk">4 semanas</td><td class="pr num">USD 1.900</td></tr>
+          <tr><td class="svc"><b>Carta digital</b></td><td>Carta de comida y bebidas en 3 idiomas, conectada a la web, con categorías, alérgenos y opciones vegetarianas. Carga inicial de hasta 80 platos y bebidas. Alcanza con una foto de la carta en papel.</td><td class="wk">10 días</td><td class="pr num">USD 650</td></tr>
+          <tr><td class="svc"><b>Idioma adicional</b></td><td>Francés, italiano, alemán u otro, en la web y la carta.</td><td class="wk">3 días</td><td class="pr num">USD 90<small>por idioma</small></td></tr>
+          <tr><td class="svc"><b>Carta impresa</b></td><td>Diseño de la carta de comida y de bebidas con la identidad de Pier 21. Archivos listos para imprenta. La impresión se paga aparte.</td><td class="wk">1 semana</td><td class="pr num">USD 450</td></tr>
+          <tr><td class="svc"><b>QR para las mesas</b></td><td>Diseño del porta-QR o sticker de mesa que abre la carta digital. La impresión se paga aparte.</td><td class="wk">2 días</td><td class="pr num">USD 80</td></tr>
+          <tr><td class="svc"><b>Ficha de Google</b></td><td>Alta y puesta a punto del perfil de Google Maps: fotos, horario, carta, enlace a reservas y categorías. La verificación la confirma el local con el código que manda Google.</td><td class="wk">1 semana</td><td class="pr num">USD 150</td></tr>
+          <tr><td class="svc"><b>Logo en vectorial</b><small>Solo si no tienen los archivos</small></td><td>Redibujo del logo PIER 21 y de su versión con olas en archivos de alta calidad, para web, imprenta y cartelería.</td><td class="wk">3 días</td><td class="pr num">USD 120</td></tr>
+
+          <tr class="grp"><td colspan="4">Foto y video</td></tr>
+          <tr><td class="svc"><b>Sesión de fotos · media jornada</b></td><td>4 horas en el local. 35 fotos editadas en Lightroom: platos, tragos, barra, salón y terraza.</td><td class="wk">Entrega en 5 días</td><td class="pr num">USD 450</td></tr>
+          <tr><td class="svc"><b>Sesión de fotos · jornada completa</b></td><td>8 horas, del mediodía a la noche. 80 fotos editadas: platos, tragos, barra y horno, salón, terraza, fachada, equipo y atardecer.</td><td class="wk">Entrega en 7 días</td><td class="pr num">USD 800</td></tr>
+          <tr><td class="svc"><b>Video con drone</b></td><td>Un vuelo al atardecer sobre el edificio, la terraza y la rambla. Video editado de 30 a 60 segundos y 10 clips cortos, en vertical y horizontal. Si el clima no acompaña, se reprograma sin costo.</td><td class="wk">Entrega en 5 días</td><td class="pr num">USD 250</td></tr>
+          <tr><td class="svc"><b>Reel de apertura</b></td><td>Video editado de hasta 1 minuto para presentar Pier 21, en vertical y horizontal. Se graba el mismo día de la sesión de fotos.</td><td class="wk">Entrega en 7 días</td><td class="pr num">USD 300</td></tr>
+          <tr><td class="svc"><b>Fotos de platos nuevos</b></td><td>Cuando cambie la carta: foto editada de cada plato nuevo, en el local. Mínimo 8 platos por visita.</td><td class="wk">Entrega en 3 días</td><td class="pr num">USD 25<small>por plato</small></td></tr>
+
+          <tr class="grp"><td colspan="4">Redes y contenido</td></tr>
+          <tr><td class="svc"><b>Kit de lanzamiento</b></td><td>Instagram a punto: biografía, portadas de destacadas, 9 posteos y 10 historias diseñados con sus textos, y 3 plantillas para que el equipo publique novedades.</td><td class="wk">1 semana</td><td class="pr num">USD 450</td></tr>
+          <tr><td class="svc"><b>Pack de piezas con IA</b></td><td>8 piezas animadas a partir de las fotos de la sesión: el horno encendido, el mar en movimiento, campañas de temporada.</td><td class="wk">1 semana</td><td class="pr num">USD 250</td></tr>
+          <tr><td class="svc"><b>Flyer de evento</b></td><td>Pieza para feed e historias de un evento, una fecha especial o una promoción.</td><td class="wk">48 horas</td><td class="pr num">USD 45<small>cada uno</small></td></tr>
+          <tr><td class="svc"><b>Edición de fotos propias</b></td><td>Edición en Lightroom de fotos que saque el equipo. Mínimo 20 fotos.</td><td class="wk">72 horas</td><td class="pr num">USD 3<small>por foto</small></td></tr>
+          <tr><td class="svc"><b>Publicidad en Instagram y Facebook</b></td><td>Armado, segmentación y seguimiento de campañas pagas, con informe mensual. La inversión en publicidad la paga el local directamente a Meta.</td><td class="wk">Mensual</td><td class="pr num">USD 200<small>al mes</small></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- PLANES MENSUALES -->
+  <section>
+    <div class="sec-t"><span class="lbl">Planes mensuales</span><span class="lbl">Mínimo 3 meses</span></div>
+    <h2 class="disp">La carta va a cambiar. La web cambia con ella.</h2>
+    <p class="lead">Como la carta se va a ir ajustando, la web necesita a alguien que la mantenga al día. El contenido para redes se produce en visitas programadas, no a diario.</p>
+
+    <div class="plans">
+      <div class="plan">
+        <span class="pill dk">Web</span>
+        <div class="top2"><h3>Mantenimiento</h3><span class="p num">USD 60 <small>al mes</small></span></div>
+        <ul><li>Alojamiento, certificado de seguridad y copias diarias</li><li>Actualizaciones técnicas y control de que la web esté en línea</li><li>1 cambio pequeño al mes</li></ul>
+        <p>Para cuando la carta ya esté estable.</p>
+      </div>
+      <div class="plan rec">
+        <span class="pill">Recomendado</span>
+        <div class="top2"><h3>Gestión web y carta</h3><span class="p num">USD 120 <small>al mes</small></span></div>
+        <ul><li>Todo lo del plan Mantenimiento</li><li>Hasta 6 cambios al mes: platos, precios, fotos, horarios y eventos</li><li>Cada cambio, traducido a los 3 idiomas</li><li>Aviso de temporada o evento en la portada</li><li>Respuesta en 48 horas hábiles e informe mensual de visitas</li></ul>
+        <p>Los cambios que excedan el plan se cobran a USD 30 la hora.</p>
+      </div>
+      <div class="plan">
+        <span class="pill dk">Contenido</span>
+        <div class="top2"><h3>Plan Bajamar</h3><span class="p num">USD 550 <small>al mes</small></span></div>
+        <ul><li>2 visitas al mes, de 2 a 3 horas cada una</li><li>25 fotos editadas</li><li>4 reels de hasta 1 minuto</li><li>8 historias</li></ul>
+        <p>Material para publicar 2 o 3 veces por semana.</p>
+      </div>
+      <div class="plan">
+        <span class="pill dk">Contenido</span>
+        <div class="top2"><h3>Plan Pleamar</h3><span class="p num">USD 950 <small>al mes</small></span></div>
+        <ul><li>4 visitas al mes, una por semana</li><li>50 fotos editadas</li><li>8 reels de hasta 1 minuto</li><li>16 historias y 8 posteos diseñados con textos</li><li>Calendario mensual de publicaciones</li></ul>
+        <p>Material para publicar todos los días hábiles.</p>
+      </div>
+    </div>
+    <p class="fine">A cualquiera de los planes de contenido se le puede sumar la publicación y programación en Instagram por USD 150 al mes. No incluyen responder mensajes ni comentarios.</p>
+  </section>
+
+  <!-- PAQUETES -->
+  <section>
+    <div class="sec-t"><span class="lbl">Paquetes</span><span class="lbl">Ahorro frente a los precios sueltos</span></div>
+    <h2 class="disp">Todo Pier 21, en un solo paquete.</h2>
+    <div class="packs">
+      <article class="pack">
+        <span class="tag dk">Para empezar</span>
+        <span class="lbl">Web, carta y material propio</span>
+        <h3>Amarre</h3>
+        <ul>
+          <li><span>Web Pier 21</span><span>1.900</span></li>
+          <li><span>Carta digital</span><span>650</span></li>
+          <li><span>Sesión de fotos · media jornada</span><span>450</span></li>
+          <li><span>Video con drone</span><span>250</span></li>
+        </ul>
+        <div class="price"><b class="num">USD 2.790</b><s class="num">USD 3.250</s><em>Ahorro USD 460</em></div>
+      </article>
+      <article class="pack rec">
+        <span class="tag">Recomendado</span>
+        <span class="lbl">Pier 21 listo para la temporada</span>
+        <h3>Pier 21 completo</h3>
+        <ul>
+          <li><span>Web Pier 21</span><span>1.900</span></li>
+          <li><span>Carta digital</span><span>650</span></li>
+          <li><span>Carta impresa</span><span>450</span></li>
+          <li><span>QR para las mesas</span><span>80</span></li>
+          <li><span>Ficha de Google</span><span>150</span></li>
+          <li><span>Sesión de fotos · jornada completa</span><span>800</span></li>
+          <li><span>Video con drone</span><span>250</span></li>
+          <li><span>Reel de apertura</span><span>300</span></li>
+          <li><span>Kit de lanzamiento</span><span>450</span></li>
+        </ul>
+        <div class="price"><b class="num">USD 3.990</b><s class="num">USD 5.030</s><em>Ahorro USD 1.040</em></div>
+        <p class="gift">Además, el primer mes de <b>Gestión web y carta</b> va de regalo (USD 120).</p>
+      </article>
+    </div>
+    <div class="combo">
+      <div><span><b>Gestión web y carta + Bajamar</b><br><span>Mensual combinado</span></span><span class="p num"><s>670</s>USD 590</span></div>
+      <div><span><b>Gestión web y carta + Pleamar</b><br><span>Mensual combinado</span></span><span class="p num"><s>1.070</s>USD 940</span></div>
+    </div>
+    <p class="fine">Los combinados mensuales tienen un mínimo de 3 meses. Si el logo no está en vectorial, se suma el redibujo (USD 120) a cualquier paquete.</p>
+  </section>
+
+  <!-- FORMA DE PAGO -->
+  <section>
+    <div class="sec-t"><span class="lbl">Forma de pago</span><span class="lbl">Sin letra chica</span></div>
+    <h2 class="disp">Cuánto se paga, cuándo y por qué.</h2>
+
+    <div class="paybox">
+      <div class="hd"><b>Paquete Pier 21 completo · USD 3.990</b><span>3 pagos atados a entregas concretas</span></div>
+      <div class="steps">
+        <div class="step"><span class="n">Pago 1 · Al firmar</span><span class="amt">USD 1.596</span><span class="pc">40 %</span><p>Reserva las fechas de la sesión y del drone y arranca el diseño. <b>Sin este pago no se agenda nada.</b></p></div>
+        <div class="step"><span class="n">Pago 2 · Fotos y diseño</span><span class="amt">USD 1.197</span><span class="pc">30 %</span><p>Cuando se entregan las fotos editadas, el video del drone y el diseño de la web para aprobar.</p></div>
+        <div class="step"><span class="n">Pago 3 · Antes de publicar</span><span class="amt">USD 1.197</span><span class="pc">30 %</span><p>Con la web terminada y revisada. <b>La web se publica en el dominio al recibir este pago.</b></p></div>
+      </div>
+    </div>
+    <p class="fine">Paquete Amarre (USD 2.790), con los mismos 3 pasos: USD 1.116 al firmar, USD 837 con fotos y diseño, USD 837 antes de publicar.</p>
+
+    <div class="rules">
+      <div><b>Servicios sueltos</b><p>Hasta USD 500: se paga el 100 % al encargarlo. Más de USD 500: 50 % al encargarlo y 50 % antes de entregar los archivos finales.</p></div>
+      <div><b>Planes mensuales</b><p>Se pagan por mes adelantado, del 1 al 5 de cada mes. El primer mes se paga al firmar. Mínimo 3 meses. Después, mes a mes, con 30 días de aviso para darlo de baja. Un mensaje de WhatsApp alcanza.</p></div>
+      <div><b>Cómo se paga</b><p>Transferencia bancaria en dólares, o en pesos al tipo de cambio BROU del día del pago. Se emite factura por cada pago.</p></div>
+      <div><b>Impuestos</b><p>Todos los precios están en dólares estadounidenses y no incluyen impuestos.</p></div>
+      <div><b>Si un pago se atrasa</b><p>Con más de 7 días de atraso, el trabajo se pausa y los plazos se corren. La web no se publica y no se entregan los archivos en alta resolución hasta completar el pago.</p></div>
+      <div><b>Plan mensual impago</b><p>Con más de 15 días de atraso, se suspenden los cambios en la web y la producción de contenido hasta regularizar.</p></div>
+      <div><b>Si el proyecto se frena</b><p>Si por falta de respuesta del local el proyecto queda parado más de 30 días, se factura la etapa en curso y se retoma cuando el local lo pida.</p></div>
+      <div><b>Cancelación</b><p>El pago al firmar no se devuelve una vez que el trabajo empezó. Lo ya entregado queda para el local.</p></div>
+    </div>
+  </section>
+
+  <!-- CÓMO TRABAJAMOS -->
+  <section>
+    <div class="sec-t"><span class="lbl">Cómo trabajamos</span><span class="lbl">Sin quitarle tiempo al dueño</span></div>
+    <h2 class="disp">Ustedes atienden el restaurante. Del resto nos ocupamos nosotros.</h2>
+    <div class="two">
+      <div>
+        <h3>Lo único que necesitamos</h3>
+        <ul class="cond">
+          <li><span><b>Un contacto</b>: el encargado del local, por WhatsApp, para coordinar y aprobar.</span></li>
+          <li><span><b>Acceso al local</b> en el día y horario de la sesión, con los platos y tragos que se van a fotografiar listos.</span></li>
+          <li><span><b>La carta</b> en el estado en que esté. Una foto del papel alcanza.</span></li>
+          <li><span><b>Horario, teléfono y dirección</b> de reservas.</span></li>
+          <li><span><b>El logo</b> en el archivo que tengan. Si no hay versión de calidad, lo redibujamos.</span></li>
+          <li><span><b>El dominio</b> a nombre de Pier 21. Si no existe, lo registramos nosotros a su nombre.</span></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Reglas para que el proyecto no se frene</h3>
+        <ul class="cond">
+          <li><span><b>2 rondas de cambios</b> por entrega están incluidas. Las siguientes se cobran a USD 30 la hora.</span></li>
+          <li><span><b>Aprobación por silencio</b>: si una entrega no tiene respuesta en 5 días hábiles, se da por aprobada y seguimos.</span></li>
+          <li><span><b>Si la carta no está cerrada</b>, la web sale igual con la carta tal como esté, y los cambios entran con el plan mensual.</span></li>
+          <li><span><b>Sesiones</b>: se reprograman sin costo avisando con 48 horas. Con menos de 24 horas se cobra el 30 % de la sesión.</span></li>
+          <li><span><b>Drone</b>: si hay lluvia o viento fuerte, se reprograma sin costo. El vuelo se hace según la normativa vigente.</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- NO INCLUYE -->
+  <section>
+    <div class="sec-t"><span class="lbl">Qué no está incluido</span><span class="lbl">Costos de terceros, se pagan directo</span></div>
+    <div class="two">
+      <ul class="cond">
+        <li><span><b>Dominio</b>: entre USD 20 y 45 por año, según sea .com o .com.uy. Queda a nombre de Pier 21.</span></li>
+        <li><span><b>Alojamiento desde el segundo mes</b>, que va dentro de cualquiera de los planes de gestión web.</span></li>
+        <li><span><b>Correo con el dominio</b> (por ejemplo reservas@pier21), si lo quieren: unos USD 7 por usuario al mes.</span></li>
+      </ul>
+      <ul class="cond">
+        <li><span><b>Impresión</b> de cartas, QR, flyers y cartelería.</span></li>
+        <li><span><b>Inversión en publicidad</b> en Instagram y Facebook.</span></li>
+        <li><span><b>Comida y bebida</b> para las fotos, que pone el local. Modelos o personal extra, si se necesitan.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- CALENDARIO -->
+  <section>
+    <div class="sec-t"><span class="lbl">Calendario</span><span class="lbl">Paquete completo en 4 semanas desde el pago 1</span></div>
+    <div class="cal">
+      <div><span class="lbl">Semana 1</span><span class="disp">Sesión y drone</span><p>Jornada de fotos, reel de apertura y vuelo al atardecer. Textos de la web.</p></div>
+      <div><span class="lbl">Semana 2</span><span class="disp">Carta online</span><p>Carta digital publicada con QR en las mesas. Ficha de Google lista. Diseño de la web para aprobar.</p></div>
+      <div><span class="lbl">Semana 3</span><span class="disp">Desarrollo</span><p>Web en los tres idiomas, carta impresa y kit de redes.</p></div>
+      <div><span class="lbl">Semana 4</span><span class="disp">Publicación</span><p>Revisión final, web en línea y lanzamiento en redes.</p></div>
+    </div>
+  </section>
+
+  <!-- POR QUÉ -->
+  <section>
+    <div class="sec-t"><span class="lbl">Por qué Apardian</span></div>
+    <div class="why">
+      <div><b>Una sola persona</b><p>Hablan siempre con quien fotografía, filma, diseña y programa. Sin intermediarios ni agencias.</p></div>
+      <div><b>En Montevideo</b><p>Cuando cambia la carta, voy al local, saco las fotos y lo subo a la web.</p></div>
+      <div><b>Más de 80 proyectos</b><p>Gastronomía, marcas y eventos. El trabajo está en apardianstudio.com.</p></div>
+    </div>
+  </section>
+</div>
+
+<footer class="total">
+  <div class="in">
+    <div class="row">
+      <div>
+        <div class="lbl">Total · Paquete recomendado</div>
+        <div class="what">Pier 21 completo: web, carta,<br>fotos, drone y lanzamiento</div>
+      </div>
+      <div class="amt num"><small>USD</small>3.990</div>
+    </div>
+    <div class="alt">En 3 pagos: <b>USD 1.596</b> al firmar, <b>USD 1.197</b> con las fotos y el diseño, <b>USD 1.197</b> antes de publicar. Desde el segundo mes, Gestión web y carta a USD 120 por mes, el primero de regalo.</div>
+    <div class="foot"><span>Martín Apardian · Apardian Studio</span><span>apardianstudio.com · martinapardian8@gmail.com · WA +598 91 962 962</span></div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  // Puesta de sol en Montevideo (34.9 S, 56.16 O, UTC-3) con el algoritmo del Almanaque Náutico
+  function sunset(d) {
+    var lat = -34.9011, lng = -56.1645, tz = -3, zen = 90.833, rad = Math.PI / 180;
+    var start = new Date(d.getFullYear(), 0, 0), N = Math.floor((d - start) / 864e5);
+    var lngH = lng / 15, t = N + ((18 - lngH) / 24);
+    var M = 0.9856 * t - 3.289;
+    var L = (M + 1.916 * Math.sin(M * rad) + 0.020 * Math.sin(2 * M * rad) + 282.634 + 360) % 360;
+    var RA = (Math.atan(0.91764 * Math.tan(L * rad)) / rad + 360) % 360;
+    RA = (RA + (Math.floor(L / 90) * 90 - Math.floor(RA / 90) * 90)) / 15;
+    var sinDec = 0.39782 * Math.sin(L * rad), cosDec = Math.cos(Math.asin(sinDec));
+    var cosH = (Math.cos(zen * rad) - sinDec * Math.sin(lat * rad)) / (cosDec * Math.cos(lat * rad));
+    if (cosH > 1 || cosH < -1) return null;
+    var H = Math.acos(cosH) / rad / 15;
+    var T = H + RA - 0.06571 * t - 6.622;
+    var UT = ((T - lngH) % 24 + 24) % 24, local = (UT + tz + 24) % 24;
+    var h = Math.floor(local), m = Math.round((local - h) * 60);
+    if (m === 60) { h += 1; m = 0; }
+    return (h < 10 ? '0' : '') + h + ':' + (m < 10 ? '0' : '') + m;
+  }
+  var s = sunset(new Date());
+  if (s) document.getElementById('sunset').textContent = s;
+})();
+</script>
