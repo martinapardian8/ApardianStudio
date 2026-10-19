@@ -1,0 +1,400 @@
+<meta charset="utf-8">
+<title>Centro APARDIAN</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Work+Sans:wght@400;500;600&display=swap">
+<style>
+/* Mesa de trabajo: una barra fija con la marca y cinco pestañas; abajo, una
+   columna de hasta 1120 px donde cada pestaña es una herramienta. */
+:root{
+  --bg:#F8F7F6; --ink:#171717; --red:#FF0033; --muted:#6E6863; --line:rgba(23,23,23,.13);
+  --card:#FFFFFF; --soft:#EFEDEA; --ok:#1F7A4D; --okbg:#E3F2EA; --warn:#9A5B00; --warnbg:#FBEFD9;
+  --display:"Anton","Impact","Arial Narrow",sans-serif;
+  --text:"Work Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#131211; --ink:#F3F1EE; --red:#FF2D55; --muted:#A7A09A; --line:rgba(243,241,238,.14);
+  --card:#1C1A19; --soft:#252321; --ok:#6FD3A0; --okbg:#173326; --warn:#F2B55C; --warnbg:#3A2A12; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#131211; --ink:#F3F1EE; --red:#FF2D55; --muted:#A7A09A; --line:rgba(243,241,238,.14);
+  --card:#1C1A19; --soft:#252321; --ok:#6FD3A0; --okbg:#173326; --warn:#F2B55C; --warnbg:#3A2A12; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--text);font-size:15px;line-height:1.5;margin:0}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+header.barra{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
+.barra .wrap{display:flex;align-items:center;gap:18px;flex-wrap:wrap;padding-block:12px}
+.logo{font-family:var(--display);font-size:24px;letter-spacing:.01em;text-transform:uppercase;line-height:1}
+.logo i{color:var(--red);font-style:normal}
+nav.tabs{display:flex;gap:4px;flex-wrap:wrap;margin-left:auto}
+nav.tabs a{font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);text-decoration:none;padding:8px 10px;border-radius:2px}
+nav.tabs a[aria-current="page"]{color:var(--ink);box-shadow:inset 0 -3px 0 var(--red)}
+nav.tabs a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+main{padding-block:28px 64px}
+h1,h2,h3{font-family:var(--display);font-weight:400;text-transform:uppercase;line-height:.95;letter-spacing:.005em;text-wrap:balance;margin:0}
+h1{font-size:clamp(38px,6vw,64px)}
+h2{font-size:clamp(26px,3.4vw,36px)}
+h3{font-size:21px}
+.eti{font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--red)}
+.sub{color:var(--muted);max-width:62ch}
+.pila{display:grid;gap:18px}
+.fila{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.aviso{font-size:13px;color:var(--warn);background:var(--warnbg);padding:8px 12px;border-radius:2px}
+section[hidden]{display:none}
+
+/* hoy */
+.hoy-cab{display:grid;gap:10px;margin-bottom:26px}
+.semana{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin:22px 0 30px}
+.semana>div{background:var(--card);padding:16px 18px;display:grid;gap:6px;min-width:0}
+.semana b{font-family:var(--display);font-weight:400;font-size:20px;text-transform:uppercase;line-height:1}
+.barra-prog{height:6px;background:var(--soft);border-radius:3px;overflow:hidden}
+.barra-prog i{display:block;height:100%;background:var(--red);width:0;transition:width .4s}
+
+/* tareas */
+.lista{display:grid;border-top:1px solid var(--line)}
+.tarea{display:grid;grid-template-columns:28px 64px 1fr;gap:12px;align-items:start;padding:12px 2px;border-bottom:1px solid var(--line)}
+.tarea input{width:20px;height:20px;accent-color:var(--red);margin:2px 0 0}
+.tarea .hora{font-variant-numeric:tabular-nums;color:var(--muted);font-size:13px;padding-top:2px}
+.tarea .que{min-width:0}
+.tarea .tipo{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.tarea .tipo.c{color:var(--red)}
+.tarea .tit{font-weight:500}
+.tarea .pz{font-size:12px;color:var(--muted);word-break:break-all}
+.tarea .nota{font-size:13px;color:var(--muted)}
+.tarea.ok .tit{text-decoration:line-through;color:var(--muted)}
+.dia-cab{display:flex;justify-content:space-between;gap:12px;align-items:baseline;margin:22px 0 4px}
+.dia-cab h3{font-size:19px}
+.dia-cab span{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0 4px}
+.chip{font:600 11px/1 var(--text);letter-spacing:.1em;text-transform:uppercase;padding:8px 10px;border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:20px;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.sem-tit{display:grid;gap:4px;margin-top:38px;padding-top:18px;border-top:3px solid var(--ink)}
+
+/* carruseles */
+.car{display:grid;gap:14px;padding:22px 0;border-bottom:1px solid var(--line)}
+.car-cab{display:flex;gap:16px;justify-content:space-between;align-items:flex-end;flex-wrap:wrap}
+.tira{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;background:var(--soft);border-radius:2px;max-width:100%}
+.tira img{width:clamp(150px,16vw,180px);height:auto;aspect-ratio:4/5;object-fit:cover;flex:none;scroll-snap-align:start;display:block}
+.estado{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:5px 9px;border-radius:2px;background:var(--soft);color:var(--muted)}
+.estado.si{background:var(--okbg);color:var(--ok)}
+pre.pie{white-space:pre-wrap;font:14px/1.5 var(--text);background:var(--card);border:1px solid var(--line);padding:14px 16px;margin:0;max-width:72ch}
+button.b{font:600 12px/1 var(--text);letter-spacing:.1em;text-transform:uppercase;padding:11px 14px;border:1px solid var(--ink);background:var(--ink);color:var(--bg);cursor:pointer;border-radius:2px}
+button.b.l{background:transparent;color:var(--ink)}
+button.b.r{background:var(--red);border-color:var(--red);color:#fff}
+button.b:disabled{opacity:.45;cursor:default}
+
+/* ventas */
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin:18px 0 26px}
+.kpis div{background:var(--card);padding:14px 16px}
+.kpis b{display:block;font-family:var(--display);font-weight:400;font-size:34px;line-height:1;font-variant-numeric:tabular-nums}
+.kpis span{font-size:12px;color:var(--muted)}
+form.alta{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;background:var(--card);border:1px solid var(--line);padding:16px;margin-bottom:22px}
+form.alta label{display:grid;gap:5px;font-size:12px;font-weight:600;letter-spacing:.06em;color:var(--muted);min-width:0}
+input,select,textarea{font:15px var(--text);color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:2px;padding:9px 10px;width:100%}
+form.alta .ancho{grid-column:1/-1}
+.cli{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr) 170px auto;gap:12px;align-items:center;padding:12px 4px;border-bottom:1px solid var(--line)}
+.cli .n{font-weight:600}
+.cli .m{font-size:13px;color:var(--muted)}
+.cli .tarde{color:var(--red);font-weight:600}
+.grupo-est{margin-top:20px}
+.grupo-est h3{font-size:18px;display:flex;gap:10px;align-items:baseline}
+.grupo-est h3 small{font:600 12px var(--text);color:var(--muted)}
+.vacio{border:1px dashed var(--line);padding:22px;color:var(--muted);text-align:left}
+
+/* guiones */
+.guion{display:grid;gap:8px;padding:16px 0;border-bottom:1px solid var(--line)}
+.guion p{margin:0;max-width:70ch}
+.guion .nota{font-size:13px;color:var(--muted)}
+@media (max-width:640px){
+  .cli{grid-template-columns:1fr;gap:6px}
+  .tarea{grid-template-columns:26px 1fr}
+  .tarea .hora{grid-column:2;padding:0}
+  .tarea .que{grid-column:2}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<header class="barra"><div class="wrap">
+  <div class="logo">Apardian<i>.</i> <span style="font-family:var(--text);font-size:12px;letter-spacing:.14em;color:var(--muted)">CENTRO</span></div>
+  <nav class="tabs" aria-label="Secciones">
+    <a href="#hoy" data-tab="hoy">Hoy</a>
+    <a href="#calendario" data-tab="calendario">Calendario</a>
+    <a href="#carruseles" data-tab="carruseles">Carruseles</a>
+    <a href="#ventas" data-tab="ventas">Clientes</a>
+    <a href="#guiones" data-tab="guiones">Guiones</a>
+  </nav>
+</div></header>
+
+<main class="wrap">
+  <p class="aviso" id="sin-db" hidden>Sin conexión a la base del Centro: lo que marques queda solo en este navegador.</p>
+
+  <section id="s-hoy" data-sec="hoy">
+    <div class="hoy-cab">
+      <span class="eti" id="hoy-fecha">Hoy</span>
+      <h1 id="hoy-tit">Lo de hoy</h1>
+      <p class="sub" id="hoy-sub"></p>
+    </div>
+    <div class="semana" id="hoy-semana"></div>
+    <div class="lista" id="hoy-lista"></div>
+    <div id="hoy-prox"></div>
+  </section>
+
+  <section id="s-calendario" data-sec="calendario" hidden>
+    <span class="eti">19/10 al 20/12 · 2026</span>
+    <h1>Calendario</h1>
+    <p class="sub">Lunes carrusel collage, miércoles y viernes las publicaciones ya armadas, historias de lunes a viernes. Martes foco de venta, jueves una automatización, viernes seguimiento.</p>
+    <div class="chips" id="filtros" role="group" aria-label="Filtrar por tipo"></div>
+    <div id="cal"></div>
+  </section>
+
+  <section id="s-carruseles" data-sec="carruseles" hidden>
+    <span class="eti">Nueve carruseles · 6 láminas · 4:5</span>
+    <h1>Carruseles collage</h1>
+    <p class="sub">Cada carrusel es una sola imagen larga cortada en seis: deslizá la tira para ver cómo pasan las fotos y el hilo de una lámina a la otra. Se suben del 01 al 06, sin recortar. Los archivos en tamaño real están en <code>08-CONTENIDO-INSTAGRAM/06-carruseles-collage</code>.</p>
+    <div id="cars"></div>
+  </section>
+
+  <section id="s-ventas" data-sec="ventas" hidden>
+    <span class="eti">Pipeline</span>
+    <h1>Clientes</h1>
+    <p class="sub">Cada consulta, presupuesto y cierre. El CM de ventas lo revisa todos los viernes: lo que tiene fecha vencida aparece en rojo.</p>
+    <div class="kpis" id="kpis"></div>
+    <form class="alta" id="alta" autocomplete="off">
+      <label>Nombre o negocio<input id="f-nombre" required maxlength="80"></label>
+      <label>Servicio<select id="f-servicio"></select></label>
+      <label>Canal<select id="f-canal"></select></label>
+      <label>Estado<select id="f-estado"></select></label>
+      <label>Próximo paso<input id="f-paso" maxlength="120" placeholder="Mandar presupuesto"></label>
+      <label>Para cuándo<input id="f-fecha" type="date"></label>
+      <label class="ancho">Notas<textarea id="f-notas" rows="2" maxlength="500"></textarea></label>
+      <div class="fila ancho"><button class="b r" type="submit" id="f-ok">Agregar cliente</button><span class="sub" id="f-msj" role="status"></span></div>
+    </form>
+    <div id="clientes"></div>
+  </section>
+
+  <section id="s-guiones" data-sec="guiones" hidden>
+    <span class="eti">Del playbook del CM de ventas</span>
+    <h1>Guiones</h1>
+    <p class="sub">Cambiá lo que está entre llaves y citá algo real del perfil o de la consulta. Antes de mandarle algo a un cliente real, leelo una vez en voz alta.</p>
+    <div id="guiones"></div>
+  </section>
+</main>
+
+<script>
+const D = /*__DATOS__*/null;
+const SERVICIOS = ["Bodas","Eventos","Gastronomía","Producto / marcas","Retrato / marca personal","Empresas","Páginas web","Edición Lightroom","Producción musical","Video","Cuadros"];
+const CANALES = ["Instagram","WhatsApp","Mail en frío","Recomendación","Web","Otro"];
+const ESTADOS = ["prospecto","contactado","conversando","presupuesto enviado","cerrado","perdido"];
+const $ = s => document.querySelector(s);
+const el = (tag, attrs = {}, ...kids) => { const e = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs)) { if (k === "class") e.className = v; else if (k === "text") e.textContent = v; else e.setAttribute(k, v); }
+  for (const k of kids) if (k != null) e.append(k); return e; };
+
+// ids estables de cada tarea del calendario
+D.calendario.dias.forEach(d => d.items.forEach((it, i) => it.id = d.fecha + "-" + i));
+const TODAS = D.calendario.dias.flatMap(d => d.items.map(it => ({...it, fecha: d.fecha, dia: d.dia, semana: d.semana})));
+
+let hecho = {}, clientes = [], db = null, puedeEscribir = true;
+
+function hoyISO(){ const t = new Date(); return new Date(t.getTime() - t.getTimezoneOffset()*60000).toISOString().slice(0,10); }
+function fechaLinda(iso){ const [y,m,d] = iso.split("-"); return d + "/" + m; }
+
+// ---------------------------------------------------------------- guardado
+const LS = "centro-apardian-hecho";
+function leerLocal(){ try { return JSON.parse(localStorage.getItem(LS) || "{}"); } catch(e){ return {}; } }
+function guardarLocal(){ try { localStorage.setItem(LS, JSON.stringify(hecho)); } catch(e){} }
+
+async function marcar(id, valor){
+  hecho[id] = valor; if (!valor) delete hecho[id];
+  render();
+  if (db && puedeEscribir){
+    try { valor ? await db.doc("hecho/" + id).set({hecho:true, en:new Date().toISOString()}) : await db.doc("hecho/" + id).delete(); }
+    catch(e){ if (e && e.code === "invalid_argument") { puedeEscribir = false; } guardarLocal(); }
+  } else guardarLocal();
+}
+
+// ---------------------------------------------------------------- tareas
+function tarea(it, conFecha){
+  const id = "t-" + it.id;
+  const chk = el("input", {type:"checkbox", id, "aria-label":"Hecho: " + it.titulo});
+  chk.checked = !!hecho[it.id];
+  chk.addEventListener("change", () => marcar(it.id, chk.checked));
+  const tipo = el("div", {class:"tipo" + (it.tipo.startsWith("Carrusel collage") ? " c" : ""), text: it.tipo});
+  const que = el("label", {class:"que", for:id}, tipo, el("div", {class:"tit", text: it.titulo}));
+  if (it.nota) que.append(el("div", {class:"nota", text: it.nota}));
+  if (it.pieza) que.append(el("div", {class:"pz", text: it.pieza}));
+  return el("div", {class:"tarea" + (hecho[it.id] ? " ok" : "")}, chk,
+            el("div", {class:"hora", text: (conFecha ? fechaLinda(it.fecha) + " · " : "") + it.hora}), que);
+}
+
+function semanaDe(iso){
+  const s = D.calendario.semanas.slice().reverse().find(s => s.lunes <= iso);
+  return s || D.calendario.semanas[0];
+}
+
+function renderHoy(){
+  const hoy = hoyISO();
+  const dia = D.calendario.dias.find(d => d.fecha === hoy);
+  const sem = semanaDe(hoy);
+  const fuera = hoy < D.calendario.desde || hoy > D.calendario.hasta;
+  $("#hoy-fecha").textContent = new Date(hoy + "T12:00").toLocaleDateString("es-UY", {weekday:"long", day:"numeric", month:"long"});
+  $("#hoy-tit").textContent = fuera ? (hoy < D.calendario.desde ? "Arranca el 19/10" : "Calendario cumplido") : "Semana " + sem.n + " · " + sem.vertical;
+  $("#hoy-sub").textContent = fuera ? "" : sem.porque;
+  const deSem = TODAS.filter(t => t.semana === sem.n);
+  const hechas = deSem.filter(t => hecho[t.id]).length;
+  const s = $("#hoy-semana"); s.replaceChildren(
+    el("div", {}, el("span", {class:"eti", text:"Carrusel de la semana"}), el("b", {text: sem.carrusel}), el("span", {class:"sub", text:"Lunes " + fechaLinda(sem.lunes) + " · 19:30"})),
+    el("div", {}, el("span", {class:"eti", text:"Foco de venta"}), el("span", {text: sem.venta})),
+    el("div", {}, el("span", {class:"eti", text:"Automatización"}), el("span", {text: sem.automatizacion})),
+    el("div", {}, el("span", {class:"eti", text:"Avance de la semana"}), el("b", {text: hechas + " de " + deSem.length}),
+       (() => { const b = el("div", {class:"barra-prog"}), i = el("i"); i.style.width = (deSem.length ? 100*hechas/deSem.length : 0) + "%"; b.append(i); return b; })())
+  );
+  const l = $("#hoy-lista"); l.replaceChildren();
+  if (dia) dia.items.forEach(it => l.append(tarea({...it, fecha: dia.fecha})));
+  else l.append(el("p", {class:"vacio", text:"Hoy no hay nada en el calendario. Buen día para la rutina de 30 minutos del CM: responder, interactuar y 5 mensajes de prospección."}));
+  // lo que viene
+  const prox = TODAS.filter(t => t.fecha > hoy && !hecho[t.id]).slice(0, 4);
+  const p = $("#hoy-prox"); p.replaceChildren();
+  if (prox.length){ p.append(el("div", {class:"dia-cab"}, el("h3", {text:"Lo que viene"}))); const pl = el("div", {class:"lista"}); prox.forEach(t => pl.append(tarea(t, true))); p.append(pl); }
+  // lo atrasado
+  const atr = TODAS.filter(t => t.fecha < hoy && !hecho[t.id]);
+  if (atr.length && !fuera){ p.append(el("div", {class:"dia-cab"}, el("h3", {text:"Quedó pendiente"}), el("span", {text: atr.length + " tareas"}))); const al = el("div", {class:"lista"}); atr.slice(-6).forEach(t => al.append(tarea(t, true))); p.append(al); }
+}
+
+let filtro = "Todo";
+function renderCal(){
+  const tipos = ["Todo","Carrusel collage","Historia","Venta","Automatización","Publicaciones armadas"];
+  const f = $("#filtros"); f.replaceChildren(...tipos.map(t => { const b = el("button", {class:"chip", type:"button", "aria-pressed": String(t === filtro), text:t}); b.addEventListener("click", () => { filtro = t; renderCal(); }); return b; }));
+  const pasa = it => filtro === "Todo" || it.tipo === filtro ||
+    (filtro === "Publicaciones armadas" && (it.pieza || "").startsWith("00-SUBIR") || filtro === "Publicaciones armadas" && (it.pieza || "").startsWith("05-videos"));
+  const c = $("#cal"); c.replaceChildren();
+  const hoy = hoyISO();
+  for (const s of D.calendario.semanas){
+    const tot = TODAS.filter(t => t.semana === s.n), ok = tot.filter(t => hecho[t.id]).length;
+    c.append(el("div", {class:"sem-tit"}, el("span", {class:"eti", text:"Semana " + s.n + " · desde el " + fechaLinda(s.lunes) + " · " + ok + "/" + tot.length + " hechas"}), el("h2", {text: s.vertical}), el("p", {class:"sub", text: s.porque})));
+    for (const d of D.calendario.dias.filter(d => d.semana === s.n)){
+      const its = d.items.filter(pasa); if (!its.length) continue;
+      c.append(el("div", {class:"dia-cab"}, el("h3", {text: d.dia + " " + fechaLinda(d.fecha)}), el("span", {text: d.fecha === hoy ? "Hoy" : ""})));
+      const l = el("div", {class:"lista"}); its.forEach(it => l.append(tarea({...it, fecha: d.fecha}))); c.append(l);
+    }
+  }
+}
+
+// ---------------------------------------------------------------- copiar
+async function copiar(texto, boton, nodo){
+  const antes = boton.textContent;
+  try { await navigator.clipboard.writeText(texto); boton.textContent = "Copiado"; }
+  catch(e){ if (nodo){ const r = document.createRange(); r.selectNodeContents(nodo); const s = getSelection(); s.removeAllRanges(); s.addRange(r); } boton.textContent = "Seleccionado: copialo"; }
+  setTimeout(() => boton.textContent = antes, 1800);
+}
+
+function renderCars(){
+  const c = $("#cars"); c.replaceChildren();
+  for (const car of D.carruseles){
+    const it = TODAS.find(t => (t.pieza || "") === "06-carruseles-collage/" + car.slug);
+    const pub = it && hecho[it.id];
+    const tira = el("div", {class:"tira", tabindex:"0", "aria-label":"Láminas de " + car.titulo});
+    for (let k = 1; k <= car.laminas; k++){ const n = String(k).padStart(2, "0");
+      tira.append(el("img", {src:"car/" + car.slug + "/" + n + ".jpg", alt:"Lámina " + n + " de " + car.laminas, loading:"lazy", width:"432", height:"540"})); }
+    const pie = el("pre", {class:"pie", text: car.pie});
+    const bPie = el("button", {class:"b", type:"button", text:"Copiar pie de foto"}); bPie.addEventListener("click", () => copiar(car.pie, bPie, pie));
+    const acc = el("div", {class:"fila"}, bPie);
+    if (car.comentario){ const bc = el("button", {class:"b l", type:"button", text:"Copiar primer comentario"}); bc.addEventListener("click", () => copiar(car.comentario, bc)); acc.append(bc); }
+    if (it){ const bm = el("button", {class:"b l", type:"button", text: pub ? "Marcar sin publicar" : "Marcar publicado"}); bm.addEventListener("click", () => marcar(it.id, !pub)); acc.append(bm); }
+    c.append(el("article", {class:"car"},
+      el("div", {class:"car-cab"},
+        el("div", {class:"pila", style:"gap:6px"}, el("span", {class:"eti", text: car.slug.slice(0,2) + " · " + car.vertical}), el("h2", {text: car.titulo}), el("span", {class:"sub", text: "Para: " + car.para})),
+        el("span", {class:"estado" + (pub ? " si" : ""), text: pub ? "Publicado" : (it ? "Va el " + fechaLinda(it.fecha) : "Sin fecha")})),
+      tira, pie, car.nota ? el("p", {class:"sub", text: car.nota}) : null, acc));
+  }
+}
+
+// ---------------------------------------------------------------- clientes
+function opciones(sel, lista){ sel.replaceChildren(...lista.map(v => el("option", {value:v, text:v}))); }
+function renderVentas(){
+  const hoy = hoyISO();
+  const n = e => clientes.filter(c => c.estado === e).length;
+  const cerr = n("cerrado"), perd = n("perdido");
+  $("#kpis").replaceChildren(
+    ...[["Activos", clientes.filter(c => !["cerrado","perdido"].includes(c.estado)).length],
+        ["Conversando", n("conversando")], ["Presupuestos abiertos", n("presupuesto enviado")], ["Cerrados", cerr],
+        ["Tasa de cierre", (cerr + perd) ? Math.round(100*cerr/(cerr+perd)) + "%" : "—"],
+        ["Con fecha vencida", clientes.filter(c => c.fecha && c.fecha < hoy && !["cerrado","perdido"].includes(c.estado)).length]]
+      .map(([t, v]) => el("div", {}, el("b", {text: String(v)}), el("span", {text: t}))));
+  const cont = $("#clientes"); cont.replaceChildren();
+  if (!clientes.length){ cont.append(el("p", {class:"vacio", text:"Todavía no cargaste clientes. Cada consulta que entre por Instagram, WhatsApp o los mails de n8n se anota acá con su próximo paso: así nada se enfría."})); return; }
+  for (const est of ESTADOS){
+    const lista = clientes.filter(c => c.estado === est); if (!lista.length) continue;
+    const g = el("div", {class:"grupo-est"}, el("h3", {}, est, el("small", {text: String(lista.length)})));
+    for (const c of lista.sort((a, b) => (a.fecha || "9") < (b.fecha || "9") ? -1 : 1)){
+      const sel = el("select", {"aria-label":"Estado de " + c.nombre}); opciones(sel, ESTADOS); sel.value = c.estado;
+      sel.addEventListener("change", () => guardarCliente(c.id, {estado: sel.value}));
+      const tarde = c.fecha && c.fecha < hoy && !["cerrado","perdido"].includes(c.estado);
+      const borrar = el("button", {class:"b l", type:"button", text:"Borrar"});
+      borrar.addEventListener("click", () => { if (borrar.dataset.seguro){ borrarCliente(c.id); } else { borrar.dataset.seguro = "1"; borrar.textContent = "¿Seguro? Tocá de nuevo"; setTimeout(() => { delete borrar.dataset.seguro; borrar.textContent = "Borrar"; }, 3000); } });
+      g.append(el("div", {class:"cli"},
+        el("div", {}, el("div", {class:"n", text: c.nombre}), el("div", {class:"m", text: [c.servicio, c.canal].filter(Boolean).join(" · ")}), c.notas ? el("div", {class:"m", text: c.notas}) : null),
+        el("div", {}, el("div", {text: c.paso || "Sin próximo paso"}), el("div", {class:"m" + (tarde ? " tarde" : ""), text: c.fecha ? (tarde ? "Vencido: " : "Para el ") + fechaLinda(c.fecha) : ""})),
+        sel, borrar));
+    }
+    cont.append(g);
+  }
+}
+async function guardarCliente(id, cambios){
+  const i = clientes.findIndex(c => c.id === id); if (i >= 0) clientes[i] = {...clientes[i], ...cambios}; renderVentas();
+  if (db && puedeEscribir){ try { await db.doc("clientes/" + id).update({...cambios, actualizado: new Date().toISOString()}); } catch(e){ $("#f-msj").textContent = "No se pudo guardar el cambio. Revisá la conexión."; } }
+}
+async function borrarCliente(id){
+  clientes = clientes.filter(c => c.id !== id); renderVentas();
+  if (db && puedeEscribir){ try { await db.doc("clientes/" + id).delete(); } catch(e){} }
+}
+$("#alta").addEventListener("submit", async ev => {
+  ev.preventDefault();
+  const c = {nombre: $("#f-nombre").value.trim(), servicio: $("#f-servicio").value, canal: $("#f-canal").value,
+             estado: $("#f-estado").value, paso: $("#f-paso").value.trim(), fecha: $("#f-fecha").value, notas: $("#f-notas").value.trim(),
+             creado: new Date().toISOString()};
+  if (!c.nombre) return;
+  if (!db || !puedeEscribir){ $("#f-msj").textContent = "Sin conexión a la base: no se puede guardar ahora."; return; }
+  try { await db.collection("clientes").add(c); ev.target.reset(); $("#f-estado").value = "prospecto"; $("#f-msj").textContent = "Agregado: " + c.nombre; }
+  catch(e){ $("#f-msj").textContent = e && e.code === "invalid_argument" ? "Tu acceso a esta página es de solo lectura." : "No se pudo guardar. Probá de nuevo."; }
+});
+
+// ---------------------------------------------------------------- guiones
+function renderGuiones(){
+  const c = $("#guiones"); c.replaceChildren();
+  for (const g of D.guiones){
+    c.append(el("h2", {text: g.grupo, style:"margin-top:34px"}));
+    for (const it of g.items){
+      const p = el("p", {text: it.texto});
+      const b = el("button", {class:"b l", type:"button", text:"Copiar"}); b.addEventListener("click", () => copiar(it.texto, b, p));
+      c.append(el("div", {class:"guion"}, it.nombre ? el("span", {class:"eti", text: it.nombre}) : null, p, it.nota ? el("p", {class:"nota", text: it.nota}) : null, el("div", {class:"fila"}, b)));
+    }
+  }
+}
+
+// ---------------------------------------------------------------- pestañas
+function mostrar(tab){
+  document.querySelectorAll("section[data-sec]").forEach(s => s.hidden = s.dataset.sec !== tab);
+  document.querySelectorAll("nav.tabs a").forEach(a => a.dataset.tab === tab ? a.setAttribute("aria-current", "page") : a.removeAttribute("aria-current"));
+}
+function tabActual(){ const h = location.hash.slice(1); return ["hoy","calendario","carruseles","ventas","guiones"].includes(h) ? h : "hoy"; }
+addEventListener("hashchange", () => { mostrar(tabActual()); scrollTo(0, 0); });
+
+function render(){ renderHoy(); renderCal(); renderCars(); renderVentas(); }
+
+opciones($("#f-servicio"), SERVICIOS); opciones($("#f-canal"), CANALES); opciones($("#f-estado"), ESTADOS);
+hecho = leerLocal();
+renderGuiones(); render(); mostrar(tabActual());
+
+(async () => {
+  db = window.claude ? await window.claude.use("db") : null;
+  if (!db){ $("#sin-db").hidden = false; return; }
+  try { const user = await window.claude.use("user"); if (user && (await user.can("data.write")) === false) puedeEscribir = false; } catch(e){}
+  if (!puedeEscribir){ $("#f-ok").disabled = true; $("#f-msj").textContent = "Acceso de solo lectura."; }
+  db.collection("hecho").onSnapshot(s => { hecho = {}; s.docs.forEach(d => hecho[d.id] = true); render(); },
+    () => { $("#sin-db").hidden = false; });
+  db.collection("clientes").onSnapshot(s => { clientes = s.docs.map(d => ({id: d.id, ...d.data()})); renderVentas(); },
+    () => { $("#sin-db").hidden = false; });
+})();
+</script>

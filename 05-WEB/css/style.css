@@ -1103,3 +1103,146 @@ footer.site > .cartel-luz.foot-mark .l{transform:none}
 /* letras del cartel: cada una va en su caja medida, sin envoltorio de palabra */
 footer.site > .cartel-luz.foot-mark .w{display:contents}
 footer.site > .cartel-luz.foot-mark .l{line-height:1}
+
+/* =========================================================
+   SERVICIOS · ÍNDICE  (19/10/2026)
+   Cinco filas grandes. En PC, la fila activa muestra trabajo real en
+   el visor fijo de la derecha; en celular cada fila se abre como acordeón.
+   ========================================================= */
+.svc-indice .sec-h2{margin-bottom:12px}
+.idx-ayuda{color:rgba(248,247,246,.58);margin:0 0 clamp(30px,4vw,60px)}
+.idx{display:grid;grid-template-columns:minmax(0,1.12fr) minmax(0,1fr);gap:clamp(28px,4.5vw,80px);align-items:start}
+.idx-lista{list-style:none;margin:0;padding:0;border-top:1px solid rgba(248,247,246,.16)}
+.idx-fila{border-bottom:1px solid rgba(248,247,246,.16)}
+.idx-cab{
+  width:100%;display:grid;grid-template-columns:52px minmax(0,1fr) 22px;
+  grid-template-areas:"n nombre mas" "n claim mas";column-gap:16px;
+  align-items:baseline;text-align:left;padding:clamp(18px,2.1vw,30px) 0;color:var(--white);
+}
+.idx-n{grid-area:n;font-family:var(--display);font-size:15px;color:var(--red);align-self:start;padding-top:.9em}
+.idx-nombre{
+  grid-area:nombre;font-size:clamp(44px,6.2vw,108px);line-height:.92;letter-spacing:-.02em;
+  color:rgba(248,247,246,.34);transition:color .45s var(--ease),transform .6s var(--ease);
+}
+.idx-claim{grid-area:claim;margin-top:10px;font-weight:300;font-size:clamp(15px,1.35vw,19px);color:rgba(248,247,246,.55);transition:color .45s var(--ease)}
+.idx-mas{grid-area:mas;align-self:center;width:22px;height:22px;position:relative;color:var(--white)}
+.idx-mas::before,.idx-mas::after{content:"";position:absolute;left:0;right:0;top:50%;height:1.5px;background:currentColor;transition:transform .45s var(--ease)}
+.idx-mas::after{transform:rotate(90deg)}
+.idx-cab[aria-expanded="true"] .idx-mas::after{transform:rotate(0)}
+.idx-fila.activa .idx-nombre{color:var(--white);transform:translateX(12px)}
+.idx-fila.activa .idx-claim{color:rgba(248,247,246,.92)}
+.idx-cab:focus-visible{outline:2px solid var(--red);outline-offset:4px}
+.idx-cab:hover .idx-nombre{color:rgba(248,247,246,.8)}
+
+/* el panel: la muestra de trabajo y el detalle */
+.idx-panel{padding:0 0 28px 68px}
+.idx-media{position:relative;margin:0;overflow:hidden;background:#0c0b0a;aspect-ratio:16/10}
+.idx-media > img,.idx-media > video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.idx-texto{padding-top:22px}
+.idx-texto p{margin:0 0 16px;color:rgba(248,247,246,.78);max-width:48ch}
+.idx-texto ul{margin:0 0 20px;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:7px}
+.idx-texto li{font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;border:1px solid rgba(248,247,246,.28);padding:5px 10px;color:rgba(248,247,246,.82)}
+
+/* fotografía: tres copias pegadas, como en los carruseles */
+.idx-media-copias{background:transparent;overflow:visible}
+.idx-media-copias img{position:absolute;object-fit:cover;border:9px solid #FCFBF8;box-shadow:7px 10px 0 rgba(0,0,0,.42);transition:transform .7s var(--ease)}
+.idx-media-copias img:nth-child(1){left:2%;top:10%;width:58%;aspect-ratio:3/2;transform:rotate(-4deg)}
+.idx-media-copias img:nth-child(2){right:3%;top:0;width:36%;aspect-ratio:4/5;transform:rotate(3.5deg)}
+.idx-media-copias img:nth-child(3){left:38%;bottom:-2%;width:34%;aspect-ratio:4/5;transform:rotate(-1.5deg)}
+.on .idx-media-copias img:nth-child(1),.idx-fila.activa .idx-media-copias img:nth-child(1){transform:rotate(-2.5deg) translateY(-4px)}
+
+/* Lightroom: antes y después que se arrastra */
+.idx-media-ba .ba-antes{filter:saturate(.42) contrast(.64) brightness(1.07);clip-path:inset(0 calc(100% - var(--x)) 0 0)}
+.ba-linea{position:absolute;top:0;bottom:0;left:var(--x);width:2px;margin-left:-1px;background:var(--red);pointer-events:none}
+.ba-linea::after{content:"";position:absolute;top:50%;left:50%;width:34px;height:34px;margin:-17px 0 0 -17px;border-radius:50%;background:var(--red);box-shadow:0 0 0 4px rgba(255,0,51,.25)}
+.ba-tag{position:absolute;bottom:14px;padding:6px 10px;font-size:10px;color:var(--white);pointer-events:none}
+.ba-tag-a{left:14px;background:#0c0b0a}
+.ba-tag-b{right:14px;background:var(--red)}
+.ba-rango{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:ew-resize;-webkit-appearance:none;appearance:none}
+.ba-rango:focus-visible + *,.idx-media-ba:focus-within{outline:2px solid var(--red);outline-offset:3px}
+
+/* páginas web: la portada del sitio en una ventana */
+.idx-media-web{background:#22211f;border-radius:10px;padding-top:34px}
+.idx-media-web > img{top:34px;height:calc(100% - 34px);object-position:top}
+.web-barra{position:absolute;top:0;left:0;right:0;height:34px;display:flex;align-items:center;gap:7px;padding:0 14px}
+.web-barra i{width:10px;height:10px;border-radius:50%;background:rgba(248,247,246,.28)}
+.web-barra i:first-child{background:var(--red)}
+.web-barra b{margin-left:auto;margin-right:auto;font-weight:500;font-size:11px;letter-spacing:.06em;color:rgba(248,247,246,.6)}
+
+/* música: el fondo de la sección y el EP */
+.mus-mini{position:absolute;left:18px;bottom:18px;background:#0c0b0a;padding:16px 18px 14px;display:flex;flex-direction:column;gap:4px;border-left:3px solid var(--red)}
+.mus-mini .mono{color:rgba(248,247,246,.6)}
+.mus-mini b{font-size:44px;line-height:.9}
+.mus-mini span:last-child{font-size:13px;color:rgba(248,247,246,.78)}
+.mus-mini:hover b{color:var(--red)}
+
+/* visor fijo (PC): las muestras viven acá y se cruzan en cortina */
+.idx-visor{position:sticky;top:110px;height:min(72vh,680px);display:none}
+.idx-visor .idx-panel{position:absolute;inset:0;padding:0;display:flex;flex-direction:column;opacity:0;visibility:hidden;clip-path:inset(0 0 100% 0);transition:clip-path .8s var(--ease),opacity .01s .8s,visibility 0s .8s}
+.idx-visor .idx-panel.on{opacity:1;visibility:visible;clip-path:inset(0);transition:clip-path .8s var(--ease),opacity 0s,visibility 0s;z-index:2}
+.idx-visor .idx-media{flex:1;aspect-ratio:auto;min-height:0}
+.idx-visor .idx-media-copias{margin:8px 10px 0}
+.idx-cuenta{position:absolute;right:0;bottom:-30px;font-size:12px;letter-spacing:.14em;color:rgba(248,247,246,.5);font-weight:500}
+.idx-cuenta b{color:var(--white);font-weight:500}
+
+@media (min-width:901px){
+  .js .idx-visor{display:block}
+  .js .idx-lista .idx-panel{display:none}
+  .js .idx-mas{visibility:hidden}
+}
+@media (max-width:900px){
+  .idx{grid-template-columns:1fr}
+  .idx-panel{padding:0 0 26px}
+  .js .idx-panel[hidden]{display:none}
+  .idx-media-copias{aspect-ratio:4/3;margin:10px 6px 0}
+  .idx-fila.activa .idx-nombre{transform:none}
+}
+@media (prefers-reduced-motion:reduce){
+  .idx-nombre,.idx-visor .idx-panel,.idx-visor .idx-panel.on,.idx-media-copias img{transition:none}
+}
+
+/* =========================================================
+   MÚSICA  (19/10/2026)
+   Fondo: macro del interior de un piano, generado en Higgsfield y animado.
+   Es ambiente, no portfolio: el portfolio es el EP de Spotify.
+   ========================================================= */
+.musica{background:#0c0b0a;color:var(--white);overflow:hidden;min-height:min(100vh,940px)}
+.mus-fondo{position:absolute;inset:0;z-index:0;background:#0c0b0a url(../img/produccion/fondo_musica.jpg) 70% 50%/cover no-repeat}
+.mus-fondo video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:70% 50%;opacity:0;transition:opacity 1.2s var(--ease)}
+.mus-fondo video.on{opacity:1}
+/* velo funcional: oscurece solo donde va el texto */
+.mus-fondo::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(12,11,10,.95) 0%,rgba(12,11,10,.84) 36%,rgba(12,11,10,.30) 72%,rgba(12,11,10,.50) 100%)}
+.musica > *:not(.mus-fondo){position:relative;z-index:2}
+.musica .sec-label .mono{color:rgba(248,247,246,.66)}
+.mus-grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(32px,5vw,96px);align-items:end}
+.musica .sec-h2{color:var(--white);font-size:clamp(52px,8.4vw,150px)}
+.musica .lead{max-width:40ch;font-weight:300;font-size:clamp(18px,1.6vw,23px);line-height:1.38;color:rgba(248,247,246,.84);margin:24px 0 32px}
+.mus-pasos{list-style:none;padding:0;margin:0 0 38px;counter-reset:p;display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(248,247,246,.14);max-width:660px}
+.mus-pasos li{background:rgba(12,11,10,.78);padding:18px 18px 20px;counter-increment:p}
+.mus-pasos li::before{content:"0" counter(p);font-family:var(--display);color:var(--red);font-size:14px;display:block;margin-bottom:8px}
+.mus-pasos b{display:block;font-size:22px;letter-spacing:.01em;margin-bottom:6px;color:var(--white)}
+.mus-pasos span{display:block;font-size:14px;color:rgba(248,247,246,.7);line-height:1.45}
+.cta-red{display:inline-flex;align-items:center;gap:12px;background:var(--red);color:var(--white);font-family:var(--display);text-transform:uppercase;font-size:clamp(20px,1.9vw,28px);padding:16px 26px 15px;transition:background .3s var(--ease),color .3s var(--ease)}
+.cta-red:hover{background:var(--white);color:var(--black)}
+.cta-red:focus-visible,.sp-poster:focus-visible,.sp-link:focus-visible,.mus-mini:focus-visible{outline:2px solid var(--white);outline-offset:4px}
+.mus-player > .mono{color:rgba(248,247,246,.62);display:block;margin-bottom:12px}
+.sp-caja{background:#121110;border:1px solid rgba(248,247,246,.16);border-radius:14px;overflow:hidden;height:352px;display:flex}
+.sp-caja iframe{width:100%;height:352px;border:0;display:block}
+.sp-poster{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:flex-start;gap:16px;padding:28px;text-align:left;color:var(--white);position:relative;background:#0c0b0a url(../img/produccion/fondo_musica_960.jpg) 72% 50%/cover no-repeat}
+.sp-poster::before{content:"";position:absolute;inset:0;background:rgba(12,11,10,.5)}
+.sp-poster > *{position:relative}
+.sp-play{width:66px;height:66px;border-radius:50%;background:var(--red);display:grid;place-items:center;transition:transform .35s var(--ease)}
+.sp-play::after{content:"";border-left:19px solid var(--white);border-top:12px solid transparent;border-bottom:12px solid transparent;margin-left:6px}
+.sp-poster:hover .sp-play{transform:scale(1.07)}
+.sp-datos b{display:block;font-size:clamp(48px,5.4vw,80px);line-height:.88}
+.sp-datos > span{display:block;margin-top:8px;color:rgba(248,247,246,.78);font-size:14px}
+.sp-nota{color:rgba(248,247,246,.62)}
+.sp-link{display:inline-flex;gap:6px;margin-top:16px;font-size:14px;color:rgba(248,247,246,.85);border-bottom:1px solid rgba(248,247,246,.3);padding-bottom:3px}
+.sp-link:hover{color:var(--white);border-color:var(--red)}
+@media (max-width:900px){
+  .mus-grid{grid-template-columns:1fr;align-items:start}
+  .mus-fondo{background-position:78% 50%}
+  .mus-fondo::after{background:linear-gradient(180deg,rgba(12,11,10,.62) 0%,rgba(12,11,10,.86) 45%,rgba(12,11,10,.94) 100%)}
+}
+@media (max-width:560px){ .mus-pasos{grid-template-columns:1fr} }
+@media (prefers-reduced-motion:reduce){ .mus-fondo video{display:none} .sp-play{transition:none} }

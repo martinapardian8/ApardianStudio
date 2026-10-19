@@ -22,7 +22,7 @@
 <link rel="preload" href="fonts/anton-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/worksans-latin-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="css/fonts.css?v=1789010043">
-<link rel="stylesheet" href="css/style.css?v=1789010043">
+<link rel="stylesheet" href="css/style.css?v=1789060000">
 <link rel="stylesheet" href="css/editor.css?v=1789010043">
 </head>
 <body>
@@ -35,6 +35,7 @@
     <a data-i18n="nav001" href="#trabajos">Trabajos</a>
     <a data-i18n="nav002" href="#galeria">Galería</a>
     <a data-i18n="nav003" href="#servicios">Servicios</a>
+    <a data-i18n="nav101" href="#musica">Música</a>
     <a data-i18n="nav004" href="#web">Páginas web</a>
     <a data-i18n="nav005" href="#proceso">Proceso</a>
   </nav>
@@ -118,86 +119,154 @@
 </section>
 
 <!-- ============ SERVICIOS ============ -->
-<section class="svc has-bg" id="servicios" data-sec="servicios" data-sec-name="Servicios">
+<section class="svc svc-indice has-bg" id="servicios" data-sec="servicios" data-sec-name="Servicios">
   <div class="sec-bg"><img alt="" aria-hidden="true" data-src="img/servicios/fondo_servicios.jpg"></div>
   <div class="sec-label"><span data-i18n="lbl015" class="mono">04 — Servicios</span></div>
-  <h2 class="sec-h2 d" data-ed="servicios.titulo" style="margin-bottom:38px">Qué hago</h2>
+  <h2 class="sec-h2 d" data-ed="servicios.titulo">Qué hago</h2>
+  <p class="idx-ayuda mono" data-i18n="idx100">Pasá por cada servicio y mirá trabajo real</p>
 
-  <div class="svc-scrolly">
-  <div class="svc-visual">
-    <div class="svc-marco">
-    <figure class="svc-media" data-media="0">
-      <img src="img/servicios/esc_video.jpg" alt="Sala de edición de video" loading="lazy" decoding="async">
-    </figure>
-    <figure class="svc-media" data-media="1">
-      <img src="img/servicios/esc_foto.jpg" alt="Fotógrafo disparando en una fiesta de casamiento" loading="lazy" decoding="async">
-    </figure>
-    <figure class="svc-media" data-media="2">
-      <img src="img/servicios/esc_lightroom.jpg" alt="Monitor con la selección de fotos" loading="lazy" decoding="async">
-    </figure>
-    <figure class="svc-media" data-media="3">
-      <img src="img/servicios/esc_web.jpg" alt="Monitor con el esquema de una página web" loading="lazy" decoding="async">
-    </figure>
-      <span class="svc-cuenta"><b>01</b> / 04</span>
+  <div class="idx">
+    <ol class="idx-lista">
+      <li class="idx-fila" data-fila="0">
+        <button type="button" class="idx-cab" aria-expanded="true" aria-controls="idx-p0" id="idx-c0">
+          <span class="idx-n">01</span>
+          <span class="idx-nombre d" data-i18n="idx101">Video</span>
+          <span class="idx-claim" data-ed="svc.claim1">Hacemos que se mueva.</span>
+          <span class="idx-mas" aria-hidden="true"></span>
+        </button>
+        <div class="idx-panel" id="idx-p0" role="region" aria-labelledby="idx-c0">
+          <figure class="idx-media idx-media-video">
+            <video muted loop playsinline preload="none" poster="img/video/07_boda_rambla_poster.jpg" data-src="img/video/07_boda_rambla.mp4" aria-label="Fragmento de un video de casamiento en la rambla"></video>
+          </figure>
+          <div class="idx-texto">
+            <p data-i18n="svcp023">Reels, videos institucionales, eventos y contenido para redes. Del material crudo a la pieza publicada, con color grading incluido.</p>
+            <ul><li data-i18n="li027">Reels</li><li data-i18n="li028">Institucional</li><li data-i18n="li029">Eventos</li><li data-i18n="li030">Color grading</li></ul>
+            <a data-i18n="svccta047" class="svc-cta" href="https://wa.me/59891962962?text=Hola%20Martin,%20quiero%20cotizar%20edici%C3%B3n%20de%20video" target="_blank" rel="noopener noreferrer">Cotizar <span class="red">&rarr;</span></a>
+          </div>
+        </div>
+      </li>
+      <li class="idx-fila" data-fila="1">
+        <button type="button" class="idx-cab" aria-expanded="false" aria-controls="idx-p1" id="idx-c1">
+          <span class="idx-n">02</span>
+          <span class="idx-nombre d" data-i18n="idx102">Fotografía</span>
+          <span class="idx-claim" data-ed="svc.claim2">Capturamos el momento.</span>
+          <span class="idx-mas" aria-hidden="true"></span>
+        </button>
+        <div class="idx-panel" id="idx-p1" role="region" aria-labelledby="idx-c1">
+          <figure class="idx-media idx-media-copias">
+            <img src="img/bodas/web/nw__IMG_9717.jpg" alt="Casamiento en una iglesia" loading="lazy" decoding="async">
+            <img src="img/gastronomia/web/sergio__IMG_7391.jpg" alt="Pizza recién salida del horno" loading="lazy" decoding="async">
+            <img src="img/retratos/web/horacio__IMG_6701.jpg" alt="Retrato en una biblioteca" loading="lazy" decoding="async">
+          </figure>
+          <div class="idx-texto">
+            <p data-i18n="svcp024">Fotos que muestran lo mejor de tu negocio, evento o historia. Cobertura completa, selección y edición en Lightroom. También hago books personales y entrego cuadros listos para colgar.</p>
+            <ul><li data-i18n="li031">Eventos y bodas</li><li data-i18n="li032">Gastronomía</li><li data-i18n="li033">Producto</li><li data-i18n="li034">Retrato</li><li data-i18n="li035">Books</li><li data-i18n="li036">Cuadros</li><li data-i18n="li037">Empresas</li></ul>
+            <a data-i18n="svccta048" class="svc-cta" href="https://wa.me/59891962962?text=Hola%20Martin,%20quiero%20cotizar%20fotograf%C3%ADa" target="_blank" rel="noopener noreferrer">Cotizar <span class="red">&rarr;</span></a>
+          </div>
+        </div>
+      </li>
+      <li class="idx-fila" data-fila="2">
+        <button type="button" class="idx-cab" aria-expanded="false" aria-controls="idx-p2" id="idx-c2">
+          <span class="idx-n">03</span>
+          <span class="idx-nombre d" data-i18n="idx103">Lightroom</span>
+          <span class="idx-claim" data-ed="svc.claim.edicion">Vos disparás, yo termino.</span>
+          <span class="idx-mas" aria-hidden="true"></span>
+        </button>
+        <div class="idx-panel" id="idx-p2" role="region" aria-labelledby="idx-c2">
+          <figure class="idx-media idx-media-ba" style="--x:50%">
+            <img src="img/naturaleza/web/v__26.jpg" alt="Atardecer sobre la ciudad, editado" loading="lazy" decoding="async">
+            <img class="ba-antes" src="img/naturaleza/web/v__26.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async">
+            <span class="ba-linea" aria-hidden="true"></span>
+            <span class="ba-tag ba-tag-a mono" data-i18n="idx110">Sin editar</span>
+            <span class="ba-tag ba-tag-b mono" data-i18n="idx111">Editada</span>
+            <input class="ba-rango" type="range" min="0" max="100" value="50" aria-label="Comparar sin editar y editada" data-i18n-aria="idx112">
+          </figure>
+          <div class="idx-texto">
+            <p data-i18n="svcp025">Edición en Lightroom del material que ya tenés. Para fotógrafos que no quieren pasar la noche entera frente a la pantalla, y para marcas con el archivo sin tocar.</p>
+            <ul><li data-i18n="li038">Lightroom</li><li data-i18n="li039">Color</li><li data-i18n="li040">Retoque</li><li data-i18n="li041">Por lote</li><li data-i18n="li042">Presets propios</li></ul>
+            <a data-i18n="svccta049" class="svc-cta" href="https://wa.me/59891962962?text=Hola%20Martin,%20quiero%20que%20edites%20mis%20fotos%20en%20Lightroom" target="_blank" rel="noopener noreferrer">Mandarme el material <span class="red">&rarr;</span></a>
+          </div>
+        </div>
+      </li>
+      <li class="idx-fila" data-fila="3">
+        <button type="button" class="idx-cab" aria-expanded="false" aria-controls="idx-p3" id="idx-c3">
+          <span class="idx-n">04</span>
+          <span class="idx-nombre d" data-i18n="idx104">Páginas web</span>
+          <span class="idx-claim" data-ed="svc.claim3">Construimos tu lugar en internet.</span>
+          <span class="idx-mas" aria-hidden="true"></span>
+        </button>
+        <div class="idx-panel" id="idx-p3" role="region" aria-labelledby="idx-c3">
+          <figure class="idx-media idx-media-web">
+            <span class="web-barra" aria-hidden="true"><i></i><i></i><i></i><b>apardianstudio.com</b></span>
+            <img src="img/servicios/web_captura.jpg" alt="Portada de apardianstudio.com" loading="lazy" decoding="async">
+          </figure>
+          <div class="idx-texto">
+            <p data-i18n="svcp026">Diseño y desarrollo de sitios a medida. Rápidos, modernos y optimizados para vender. Esta misma página es una muestra de lo que entrego.</p>
+            <ul><li data-i18n="li043">Landing</li><li data-i18n="li044">Portfolio</li><li data-i18n="li045">Catálogo</li><li data-i18n="li046">Sitio de negocio</li></ul>
+            <a data-i18n="svccta050" class="svc-cta" href="#web">Ver planes <span class="red">&rarr;</span></a>
+          </div>
+        </div>
+      </li>
+      <li class="idx-fila" data-fila="4">
+        <button type="button" class="idx-cab" aria-expanded="false" aria-controls="idx-p4" id="idx-c4">
+          <span class="idx-n">05</span>
+          <span class="idx-nombre d" data-i18n="idx105">Música</span>
+          <span class="idx-claim" data-i18n="idx106">De la idea al master.</span>
+          <span class="idx-mas" aria-hidden="true"></span>
+        </button>
+        <div class="idx-panel" id="idx-p4" role="region" aria-labelledby="idx-c4">
+          <figure class="idx-media idx-media-musica">
+            <img src="img/produccion/fondo_musica_960.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async">
+            <a class="mus-mini" href="#musica"><span class="mono" data-i18n="idx107">Último EP</span><b class="d">Fugaz</b><span data-i18n="idx108">Escuchalo acá abajo &darr;</span></a>
+          </figure>
+          <div class="idx-texto">
+            <p data-i18n="idx109">Soy pianista y productor. Compongo, grabo, mezclo y masterizo en Ableton. Y si el tema necesita videoclip, también lo filmo.</p>
+            <ul><li data-i18n="idx113">Composición</li><li data-i18n="idx114">Grabación</li><li>Mix</li><li>Mastering</li><li data-i18n="idx115">Videoclips</li><li>Ableton</li></ul>
+            <a data-i18n="idx116" class="svc-cta" href="https://wa.me/59891962962?text=Hola%20Martin,%20quiero%20producir%20un%20tema" target="_blank" rel="noopener noreferrer">Producir un tema <span class="red">&rarr;</span></a>
+          </div>
+        </div>
+      </li>
+    </ol>
+    <div class="idx-visor" aria-hidden="true"><span class="idx-cuenta"><b>01</b> / 05</span></div>
+  </div>
+</section>
+
+<!-- ============ MÚSICA ============ -->
+<section class="musica" id="musica" data-sec="musica" data-sec-name="Música">
+  <div class="mus-fondo" aria-hidden="true">
+    <video muted loop playsinline preload="none" poster="img/produccion/fondo_musica.jpg" data-src="img/produccion/fondo_musica.mp4"></video>
+  </div>
+  <div class="sec-label"><span data-i18n="lbl120" class="mono">05 — Música</span></div>
+  <div class="mus-grid">
+    <div class="mus-texto">
+      <h2 class="sec-h2 d" data-i18n="mush2">De la idea<br>al <span class="red">master.</span></h2>
+      <p class="lead" data-i18n="mus121">Soy pianista y productor. Compongo, grabo, mezclo y masterizo en Ableton. Y si el tema pide video, también lo filmo.</p>
+      <ol class="mus-pasos">
+        <li><b class="d" data-i18n="mus122">Composición</b><span data-i18n="mus123">La idea, la armonía y el arreglo.</span></li>
+        <li><b class="d" data-i18n="mus124">Grabación</b><span data-i18n="mus125">Piano, voces e instrumentos, con el sonido que buscás.</span></li>
+        <li><b class="d" data-i18n="mus126">Mix y mastering</b><span data-i18n="mus127">Que suene igual de bien en el auto, en el celular y en Spotify.</span></li>
+        <li><b class="d" data-i18n="mus128">Videoclip</b><span data-i18n="mus129">El tema filmado y editado, listo para lanzarlo.</span></li>
+      </ol>
+      <a data-i18n="mus130" class="cta-red" href="https://wa.me/59891962962?text=Hola%20Martin,%20quiero%20producir%20un%20tema" target="_blank" rel="noopener noreferrer">Producir un tema <span>&rarr;</span></a>
+    </div>
+    <div class="mus-player">
+      <span class="mono" data-i18n="mus131">Mi último EP</span>
+      <div class="sp-caja" data-spotify="https://open.spotify.com/embed/album/4qWfyAeczl1prSnfuDe3qr?utm_source=generator&amp;theme=0">
+        <button type="button" class="sp-poster" aria-label="Cargar el reproductor de Spotify" data-i18n-aria="mus135">
+          <span class="sp-play" aria-hidden="true"></span>
+          <span class="sp-datos"><b class="d">Fugaz</b><span>Marto Apardian · EP · 2024 · 6 <span data-i18n="mus132">temas</span></span></span>
+          <span class="sp-nota mono" data-i18n="mus133">Tocá para escucharlo acá</span>
+        </button>
+      </div>
+      <a class="sp-link" href="https://open.spotify.com/artist/2ESsVnaqEMVv5f5LYkTK6O" target="_blank" rel="noopener noreferrer"><span data-i18n="mus134">Toda mi música en Spotify</span> <span class="red">&#8599;</span></a>
     </div>
   </div>
-  <div class="svc-lista">
-  <article class="svc-paso rv" data-paso="0">
-    <figure class="svc-foto"><img src="img/servicios/esc_video.jpg" alt="Sala de edición de video" loading="lazy" decoding="async"></figure>
-    <div class="svc-n">01</div>
-    <div><h3 data-ed="svc.video.titulo">Edición<br>de video</h3></div>
-    <div class="svc-body">
-      <p class="svc-claim" data-ed="svc.claim1">Hacemos que se mueva.</p>
-      <p data-i18n="svcp023">Reels, videos institucionales, eventos y contenido para redes. Del material crudo a la pieza publicada, con color grading incluido.</p>
-      <ul><li data-i18n="li027">Reels</li><li data-i18n="li028">Institucional</li><li data-i18n="li029">Eventos</li><li data-i18n="li030">Color grading</li></ul>
-      <a data-i18n="svccta047" class="svc-cta" href="https://wa.me/59891962962?text=Hola%20Martin,%20quiero%20cotizar%20edici%C3%B3n%20de%20video" target="_blank" rel="noopener noreferrer">Cotizar <span class="red">&rarr;</span></a>
-    </div>
-    
-  </article>
-  <article class="svc-paso rv" data-paso="1">
-    <figure class="svc-foto"><img src="img/servicios/esc_foto.jpg" alt="Fotógrafo disparando en una fiesta de casamiento" loading="lazy" decoding="async"></figure>
-    <div class="svc-n">02</div>
-    <div><h3 data-ed="svc.foto.titulo">Fotografía</h3></div>
-    <div class="svc-body">
-      <p class="svc-claim" data-ed="svc.claim2">Capturamos el momento.</p>
-      <p data-i18n="svcp024">Fotos que muestran lo mejor de tu negocio, evento o historia. Cobertura completa, selección y edición en Lightroom. También hago books personales y entrego cuadros listos para colgar.</p>
-      <ul><li data-i18n="li031">Eventos y bodas</li><li data-i18n="li032">Gastronomía</li><li data-i18n="li033">Producto</li><li data-i18n="li034">Retrato</li><li data-i18n="li035">Books</li><li data-i18n="li036">Cuadros</li><li data-i18n="li037">Empresas</li></ul>
-      <a data-i18n="svccta048" class="svc-cta" href="https://wa.me/59891962962?text=Hola%20Martin,%20quiero%20cotizar%20fotograf%C3%ADa" target="_blank" rel="noopener noreferrer">Cotizar <span class="red">&rarr;</span></a>
-    </div>
-    
-  </article>
-  <article class="svc-paso rv" data-paso="2">
-    <figure class="svc-foto"><img src="img/servicios/esc_lightroom.jpg" alt="Monitor con la selección de fotos" loading="lazy" decoding="async"></figure>
-    <div class="svc-n">03</div>
-    <div><h3 data-ed="svc.edicion.titulo">Edición<br>en Lightroom</h3></div>
-    <div class="svc-body">
-      <p class="svc-claim" data-ed="svc.claim.edicion">Vos disparás, yo termino.</p>
-      <p data-i18n="svcp025">Edición en Lightroom del material que ya tenés. Para fotógrafos que no quieren pasar la noche entera frente a la pantalla, y para marcas con el archivo sin tocar.</p>
-      <ul><li data-i18n="li038">Lightroom</li><li data-i18n="li039">Color</li><li data-i18n="li040">Retoque</li><li data-i18n="li041">Por lote</li><li data-i18n="li042">Presets propios</li></ul>
-      <a data-i18n="svccta049" class="svc-cta" href="https://wa.me/59891962962?text=Hola%20Martin,%20quiero%20que%20edites%20mis%20fotos%20en%20Lightroom" target="_blank" rel="noopener noreferrer">Mandarme el material <span class="red">&rarr;</span></a>
-    </div>
-    
-  </article>
-  <article class="svc-paso rv" data-paso="3">
-    <figure class="svc-foto"><img src="img/servicios/esc_web.jpg" alt="Monitor con el esquema de una página web" loading="lazy" decoding="async"></figure>
-    <div class="svc-n">04</div>
-    <div><h3 data-ed="svc.web.titulo">Páginas<br>web</h3></div>
-    <div class="svc-body">
-      <p class="svc-claim" data-ed="svc.claim3">Construimos tu lugar en internet.</p>
-      <p data-i18n="svcp026">Diseño y desarrollo de sitios a medida. Rápidos, modernos y optimizados para vender. Esta misma página es una muestra de lo que entrego.</p>
-      <ul><li data-i18n="li043">Landing</li><li data-i18n="li044">Portfolio</li><li data-i18n="li045">Catálogo</li><li data-i18n="li046">Sitio de negocio</li></ul>
-      <a data-i18n="svccta050" class="svc-cta" href="#web">Ver planes <span class="red">&rarr;</span></a>
-    </div>
-    
-  </article>
-  </div>
-</div>
 </section>
 
 <!-- ============ PÁGINAS WEB ============ -->
 <section class="webpitch has-bg" id="web" data-sec="web" data-sec-name="Páginas web">
   <div class="sec-bg"><img alt="" aria-hidden="true" data-src="img/fondos/fondo_web.jpg"></div>
-  <div class="sec-label"><span data-i18n="lbl016" class="mono" style="color:var(--grey-2)">05 — Páginas web</span></div>
+  <div class="sec-label"><span data-i18n="lbl016" class="mono" style="color:var(--grey-2)">06 — Páginas web</span></div>
   <h2 class="sec-h2 d" data-i18n="webh2">Tu negocio<br>merece más<br>que un perfil<br><span class="red">de Instagram</span></h2>
   <p class="lead rv" data-ed="web.bajada">Instagram es alquilado. <mark class="hl">Tu web es tuya.</mark> Diseño el lugar donde tu cliente decide comprarte.</p>
   <div class="pack">
@@ -230,7 +299,7 @@
     <img id="procesoimg" alt="" src="">
     <video id="procesovid" muted loop playsinline preload="none" aria-hidden="true"></video>
   </div>
-  <div class="sec-label"><span data-i18n="lbl017" class="mono">06 — Proceso</span></div>
+  <div class="sec-label"><span data-i18n="lbl017" class="mono">07 — Proceso</span></div>
   <h2 class="sec-h2 d" data-ed="proceso.titulo">Cómo trabajamos</h2>
   <div class="steps">
     <article class="rv"><b>01</b><h4 data-ed="bloque.h5">Me escribís</h4><p data-i18n="step080">Por WhatsApp, directo. Sin formularios ni respuestas automáticas.</p></article>
@@ -244,7 +313,7 @@
 <section class="grande has-bg" id="engrande" data-sec="engrande" data-sec-name="En grande">
   <div class="sec-bg"><img alt="" aria-hidden="true" data-src="img/fondos/fondo_engrande.jpg"></div>
   <div class="grande-intro">
-    <div class="sec-label"><span data-i18n="lbl018" class="mono">07 — En grande</span></div>
+    <div class="sec-label"><span data-i18n="lbl018" class="mono">08 — En grande</span></div>
     <h2 class="sec-h2 d" data-ed="engrande.titulo">Una foto que aguanta cualquier tamaño</h2>
     <p class="lead" data-ed="engrande.bajada">Las mismas fotos de esta página, puestas donde se miran de verdad. Del feed al cartel, sin perder nada en el camino.</p>
   </div>
@@ -317,7 +386,7 @@
     <img alt="" aria-hidden="true" data-src="img/video/15_torta_bengala_poster.jpg">
     <video muted loop playsinline preload="none" aria-hidden="true" data-src="img/video/15_torta_bengala.mp4"></video>
   </div>
-  <div class="sec-label"><span data-i18n="lbl019" class="mono">08 — Clientes</span></div>
+  <div class="sec-label"><span data-i18n="lbl019" class="mono">09 — Clientes</span></div>
   <h2 class="sec-h2 d" data-ed="clientes.titulo">Lo que dicen</h2>
   <div class="testi-grid">
     <blockquote class="soon rv">
@@ -337,7 +406,7 @@
 
 <!-- ============ TIRA DE FOTOS ============ -->
 <section class="strip" id="tira" data-sec="tira" data-sec-name="Tira de fotos">
-  <div class="sec-label" style="padding:0 var(--pad)"><span data-i18n="lbl020" class="mono">09 — Más trabajo</span></div>
+  <div class="sec-label" style="padding:0 var(--pad)"><span data-i18n="lbl020" class="mono">10 — Más trabajo</span></div>
   <div class="marquee" id="marquee" aria-hidden="true"></div>
   <div class="marquee rev" id="marquee2" aria-hidden="true"></div>
 </section>
@@ -376,6 +445,7 @@
           <li><a data-i18n="nav006" href="#trabajos">Trabajos</a></li>
           <li><a data-i18n="nav007" href="#galeria">Galería</a></li>
           <li><a data-i18n="nav008" href="#servicios">Servicios</a></li>
+          <li><a data-i18n="nav102" href="#musica">Música</a></li>
           <li><a data-i18n="nav009" href="#web">Páginas web</a></li>
           <li><a data-i18n="nav010" href="#proceso">Proceso</a></li>
         </ul>
@@ -416,7 +486,8 @@
 
 <script src="js/data.js?v=1789010043"></script>
 <script src="js/main.js?v=1789010043"></script>
-<script src="js/i18n_dict.js?v=1789010043"></script>
+<script src="js/indice.js?v=1789060000"></script>
+<script src="js/i18n_dict.js?v=1789060000"></script>
 <script src="js/i18n.js?v=1789010043"></script>
 <script src="js/agente.js?v=1789010043"></script>
 <script src="js/editor.js?v=1789010043"></script>

@@ -56,7 +56,7 @@ def bodas():
         L.numero(n, x5, y, 64)
         L.texto(t, x5 + 110, y + 14, 700, 36, NEGRO, "Medium")
         y += 120
-    h = L.foto(F("bodas", "nw__IMG_9726.jpg"), X(5, .02), 1060, 640, 427, rot=2.5)
+    h = L.foto(F("bodas", "nw__IMG_9726.jpg"), X(5, .02), 1110, 640, 427, rot=2.5)
     L.cinta_en(h, .5, 0, 180, rot=4, k=2)
 
     # 6 · el pedido
@@ -71,11 +71,9 @@ def bodas():
 
     # el hilo: de la copia en la mano hasta el pedido
     pts = [p0, a.punto(.08, .06), a.punto(.93, .05), b.punto(.92, .08), c.punto(.5, .04),
-           e.punto(.9, .06), f.punto(.1, .08), f.punto(.95, .92), (X(4, .12), 1110),
+           e.punto(.9, .06), f.punto(.1, .08),
            h.punto(.92, .06), (x6 + 278, 588)]
-    L.hilo(pts)
-    for k, p in enumerate(pts):
-        L.chinche(*p, k=k + 1)
+    chinchar(L, pts)
     return L.guardar("01-bodas-un-si")
 
 
@@ -97,9 +95,11 @@ def cierre(L, i, kicker_t, titulo_t, texto_t, px=120, y_tel=None):
 
 
 def chinchar(L, pts, desde=1):
-    L.hilo(pts)
-    for k, p in enumerate(pts):
-        L.chinche(*p, k=k + desde)
+    """Antes eran chinches unidas por un hilo rojo; Martin prefirio sacarlos.
+    Ahora cada foto queda sostenida con un trozo de cinta de papel en su
+    esquina, y el ultimo punto (el pedido) no lleva nada."""
+    for k, (x, y) in enumerate(pts[:-1]):
+        L.cinta(x, y, 150, (-28 if k % 2 else 26), k=k + desde)
 
 
 # =================================================================== 02 gastronomia
@@ -129,7 +129,7 @@ def gastronomia():
     fin = cierre(L, 5, "Una jornada en tu local", "Toda tu carta en un día.",
                  "No hace falta que cierres. Plato, proceso, lugar y gente. Entrega en 7 días.",
                  px=110)
-    chinchar(L, [(X(0, .86), 300), a.punto(.9, .05), b.punto(.1, .05), c.punto(.9, .05),
+    chinchar(L, [a.punto(.9, .05), b.punto(.1, .05), c.punto(.9, .05),
                  e.punto(.1, .06), e.punto(.92, .06), g.punto(.5, .04), fin])
     return L.guardar("02-gastronomia-cuatro-fotos")
 
@@ -172,7 +172,7 @@ def marca_personal():
                  "Una mañana de fotos y tenés material para la web, las redes y la prensa.",
                  px=130)
     chinchar(L, [a.punto(.9, .04), b.punto(.1, .04), c.punto(.9, .05), d.punto(.5, .03),
-                 e.punto(.1, .04), f.punto(.92, .05), f.punto(.95, .92), (X(4, .10), 1010),
+                 e.punto(.1, .04), f.punto(.92, .05),
                  g.punto(.08, .07), g.punto(.92, .07), fin])
     return L.guardar("03-marca-personal-cinco-usos")
 
@@ -205,7 +205,7 @@ def fin_de_anio():
     fin = cierre(L, 5, "Empresas · cumpleaños · fin de año", "Diciembre se llena rápido.",
                  "Toda la fiesta, sin tope de fotos y galería para los invitados. Entrega en 10 días.",
                  px=104)
-    chinchar(L, [(X(0, .93), 520), a.punto(.92, .05), b.punto(.9, .06), c.punto(.1, .06),
+    chinchar(L, [a.punto(.92, .05), b.punto(.9, .06), c.punto(.1, .06),
                  e.punto(.9, .05), f.punto(.1, .06), g.punto(.92, .06), fin])
     return L.guardar("04-fin-de-anio")
 
@@ -240,28 +240,71 @@ def producto():
 
 
 # =================================================================== 06 edicion
+LOTE = [("eventos", "nicol__IMG_5630.jpg"), ("eventos", "nicol__IMG_5804.jpg"),
+        ("eventos", "nicol__IMG_5825.jpg"), ("eventos", "nicol__IMG_5832.jpg"),
+        ("eventos", "nicol__IMG_5834.jpg"), ("eventos", "nicol__IMG_5857.jpg"),
+        ("eventos", "nicol__IMG_5936.jpg"), ("gastronomia", "nicol__IMG_5880.jpg"),
+        ("gastronomia", "nicol__IMG_5895.jpg")]
+
+
+def marca_elegida(L, x, y, r=26):
+    """Un punto rojo con tilde: la foto que paso el culling."""
+    d = L.d
+    d.ellipse([x - r, y - r, x + r, y + r], fill=ROJO)
+    d.line([(x - 11, y + 1), (x - 3, y + 10), (x + 12, y - 9)], fill=HUESO, width=5, joint="curve")
+
+
 def edicion():
+    """Todo lo que se ve es un lote real de Martin (un mismo evento), ya editado.
+    No hay 'antes': no tenemos el RAW, y simularlo seria mentir."""
     L = Lienzo(6, "carbon")
     L.etiqueta("Para fotógrafos · edición en Lightroom", M, 90)
     L.titulo("Vos disparás. Yo edito.", M, 130, 900, 150, max_lineas=2)
-    L.texto("Deslizá despacio: cada foto se arregla al pasar de una lámina a la otra.",
-            M, 470, 460, 40, HUESO, "Medium")
-    # cada copia esta rasgada justo en el corte de lamina
-    a = L.antes_despues(F("naturaleza", "v__26.jpg"), X(1), 930, 900, 600, rot=0, k=3)
-    b = L.antes_despues(F("salones", "golf-a__IMG_4658.jpg"), X(2), 430, 900, 600, rot=0, k=5)
-    c = L.antes_despues(F("naturaleza", "v__63.jpg"), X(3), 930, 900, 600, rot=0, k=9)
-    d = L.antes_despues(F("gastronomia", "sergio__IMG_7258.jpg"), X(4), 430, 900, 600, rot=0, k=11)
-    L.papel(X(1, .28), 330, 420, 220, -3, "Culling", k=1, px=60, sub="elijo las que valen")
-    L.papel(X(2, .28), 1050, 420, 220, 3, "Revelado", k=2, px=60, sub="con tu estilo")
-    L.papel(X(3, .24), 330, 440, 220, -2, "Consistencia", k=3, px=50, sub="todo el lote igual")
-    L.papel(X(4, .45), 1050, 420, 220, 2, "Exportado", k=1, px=56, sub="listo para entregar")
+    L.texto("Te devuelvo el lote revelado, parejo y listo para entregar.", M, 470, 520, 40, HUESO, "Medium")
+    a = L.foto(F(*LOTE[3]), X(1, .02), 980, 640, 427, rot=-2.5)
+    L.deslizar(0, y=ALTO - 96)
+
+    # 01 culling: la hoja de contacto del evento, con las elegidas marcadas
+    L.papel(X(1, .66), 230, 440, 220, 3, "01 · Culling", k=1, px=56, sub="me quedo con las que valen")
+    cw, ch = 250, 167
+    for k, (cat, n) in enumerate(LOTE):
+        cx = X(1, .10) + (k % 3) * (cw + 26) + 120
+        cy = 470 + (k // 3) * (ch + 26) + 20
+        if cy + ch // 2 > 840 and cx - cw // 2 < X(1, .02) + 330:
+            continue
+        L.foto(F(cat, n), cx, cy, cw, ch, rot=0, borde=8, sombra=False)
+        if k in (0, 2, 4, 5, 8):
+            marca_elegida(L, cx + cw // 2 - 14, cy - ch // 2 + 14)
+
+    # 02 revelado: tres fotos del mismo lote, con la misma mirada
+    # dos por lamina: ningun corte de lamina cae sobre una cara
+    fila = [LOTE[1], LOTE[5], LOTE[6], LOTE[0]]
+    pz = []
+    for k, (cat, n) in enumerate(fila):
+        cx = (X(2, .27), X(2, .73), X(3, .27), X(3, .73))[k]
+        pz.append(L.foto(F(cat, n), cx, 560 + (k % 2) * 60, 470, 313, rot=(-2, 1.5, -1, 2)[k]))
+    L.papel(X(2, .30), 1060, 460, 230, -3, "02 · Revelado parejo", k=2, px=46,
+            sub="todo el lote con la misma mirada")
+    L.papel(X(3, .62), 1060, 460, 230, 2, "Con tu estilo", k=3, px=56, sub="no con el mío")
+
+    # 03 entrega
+    x4 = X(4) + M
+    L.etiqueta("03 · Entrega", x4, 150)
+    L.titulo("Catálogo listo para exportar.", x4, 192, 880, 108, max_lineas=3)
+    y = 560
+    for n, t in (("72 h", "Tu lote revelado, del culling al último ajuste."),
+                 ("100 %", "Las fotos que elegimos, todas editadas una por una."),
+                 ("0", "Noches tuyas frente a la pantalla.")):
+        L.numero(n, x4, y, 60)
+        L.texto(t, x4 + 190, y + 14, 640, 36, HUESO, "Medium")
+        y += 130
+    g = L.foto(F(*LOTE[7]), X(4, .55), 1080, 480, 320, rot=2)
 
     fin = cierre(L, 5, "Desde cualquier país", "Tu lote en 72 horas.",
                  "Culling, revelado con tu preset y catálogo listo para exportar. Me decís cuántas fotos son y te paso precio en el día.",
                  px=118)
-    chinchar(L, [(X(0, .62), 700), a.punto(.05, .03), a.punto(.95, .03), b.punto(.05, .04),
-                 b.punto(.95, .04), c.punto(.05, .03), c.punto(.95, .03), d.punto(.05, .04),
-                 d.punto(.95, .04), fin])
+    chinchar(L, [a.punto(.92, .05), pz[0].punto(.08, .05), pz[1].punto(.92, .05), pz[2].punto(.08, .05),
+                 pz[3].punto(.92, .05), g.punto(.92, .07), fin])
     return L.guardar("06-edicion-vos-disparas")
 
 
@@ -299,7 +342,7 @@ def web():
                  "Escribime y en 24 horas te armo una propuesta con precio.",
                  px=104, y_tel=900)
     chinchar(L, [(qw[1][0] - 20, qw[1][1] + 30), a.punto(.06, .02), b.punto(.5, .02), c.punto(.95, .03), e.punto(.5, .02),
-                 f.punto(.95, .03), (X(4, .20), 1000), g.punto(.5, .02), fin])
+                 f.punto(.95, .03), g.punto(.5, .02), fin])
     return L.guardar("07-web-tu-instagram-no-es-tu-web")
 
 
@@ -315,8 +358,7 @@ def cuadros():
     # pisar el titulo y sube en el resto para que los cuadros respiren
     cuerda = [(-20, 790), (X(1, .15), 400), (X(2, .5), 430), (X(3, .5), 400),
               (X(4, .5), 430), (X(5, .3), 560)]
-    L.hilo(cuerda, grosor=4, caida=0.03)
-    L.chinche(*cuerda[-1], k=2)
+    L.hilo(cuerda, grosor=3, caida=0.03, color=NEGRO)
 
     def altura(x):
         for (x0, y0), (x1, y1) in zip(cuerda, cuerda[1:]):

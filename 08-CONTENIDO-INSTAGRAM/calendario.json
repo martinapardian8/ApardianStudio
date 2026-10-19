@@ -1,0 +1,1214 @@
+{
+ "desde": "2026-10-19",
+ "hasta": "2026-12-20",
+ "semanas": [
+  {
+   "n": 1,
+   "lunes": "2026-10-19",
+   "carrusel": "Un sí dura un segundo",
+   "pieza": "06-carruseles-collage/01-bodas-un-si",
+   "porque": "Las parejas del verano 26/27 están cerrando fotógrafo ahora.",
+   "vertical": "Bodas",
+   "venta": "Contactar 10 salones y wedding planners para alianzas; responder toda consulta de fecha en menos de 1 h.",
+   "automatizacion": "P1 respuesta rápida + P2 seguimiento de presupuestos (WhatsApp Business)"
+  },
+  {
+   "n": 2,
+   "lunes": "2026-10-26",
+   "carrusel": "La gente come con los ojos",
+   "pieza": "06-carruseles-collage/02-gastronomia-cuatro-fotos",
+   "porque": "Restaurantes y paradores arman la carta de verano en noviembre.",
+   "vertical": "Gastronomía",
+   "venta": "Correr el prospector con 'restaurantes' en Pocitos, Punta Carretas, Punta del Este y La Barra; 5 DMs a locales sin fotos propias.",
+   "automatizacion": "P3 prospección B2B: armar flujos 01–03, calentar el dominio de envío"
+  },
+  {
+   "n": 3,
+   "lunes": "2026-11-02",
+   "carrusel": "Vos disparás. Yo edito.",
+   "pieza": "06-carruseles-collage/06-edicion-vos-disparas",
+   "porque": "Plena temporada de bodas: los fotógrafos están tapados de edición.",
+   "vertical": "Edición Lightroom",
+   "venta": "Escribir a 15 fotógrafos de bodas (UY, AR, ES, MX) con la plantilla en su idioma; ofrecer prueba con un lote chico pago.",
+   "automatizacion": "P5 pedido de reseñas a los últimos 10 clientes"
+  },
+  {
+   "n": 4,
+   "lunes": "2026-11-09",
+   "carrusel": "La fiesta de fin de año pasa una vez",
+   "pieza": "06-carruseles-collage/04-fin-de-anio",
+   "porque": "Las empresas reservan la fiesta de diciembre a principios de noviembre.",
+   "vertical": "Eventos y empresas",
+   "venta": "Mail a 20 áreas de RR. HH. y comunicación (flujo 03, rubro empresas); reactivar clientes de eventos 2025.",
+   "automatizacion": "P6 reactivación de clientes viejos (fin de año)"
+  },
+  {
+   "n": 5,
+   "lunes": "2026-11-16",
+   "carrusel": "Tu marca personal no entra en una selfie",
+   "pieza": "06-carruseles-collage/03-marca-personal-cinco-usos",
+   "porque": "Cierre de año: profesionales actualizan web y LinkedIn para enero.",
+   "vertical": "Retrato / marca personal",
+   "venta": "10 DMs a profesionales con fotos viejas en LinkedIn; proponer sesión de una mañana.",
+   "automatizacion": "P7 publicación programada (Meta Business Suite)"
+  },
+  {
+   "n": 6,
+   "lunes": "2026-11-23",
+   "carrusel": "Tu Instagram no es tu página web",
+   "pieza": "06-carruseles-collage/07-web-tu-instagram-no-es-tu-web",
+   "porque": "Black Friday (27/11): los negocios que venden por Instagram sienten el límite.",
+   "vertical": "Páginas web",
+   "venta": "Auditor n8n sobre negocios con solo Instagram o web vieja; 10 mails con la mejora concreta.",
+   "automatizacion": "P3 en marcha: revisar puntajes y respuestas de la semana"
+  },
+  {
+   "n": 7,
+   "lunes": "2026-11-30",
+   "carrusel": "Regalá un lugar",
+   "pieza": "06-carruseles-collage/08-cuadros-regala-un-lugar",
+   "porque": "Compras de Navidad: el cuadro es regalo y deco a la vez.",
+   "vertical": "Cuadros",
+   "venta": "Historias con precios y tamaños reales (los pone Martin); fijar fecha límite de pedidos para llegar al 24.",
+   "automatizacion": "P4 prospección de fotógrafos en EN/PT"
+  },
+  {
+   "n": 8,
+   "lunes": "2026-12-07",
+   "carrusel": "La música también la hago",
+   "pieza": "06-carruseles-collage/09-musica-de-la-idea-al-master",
+   "porque": "Se lanza la sección de producción musical en la web.",
+   "vertical": "Producción musical",
+   "venta": "Compartir el EP; escribir a 10 bandas/solistas que tocaron en vivo este año; ofrecer videoclip + mix.",
+   "automatizacion": "P8 reporte semanal de métricas (lunes 9:00)"
+  },
+  {
+   "n": 9,
+   "lunes": "2026-12-14",
+   "carrusel": "Un producto tiene una historia entera",
+   "pieza": "06-carruseles-collage/05-producto-del-olivo-a-la-mesa",
+   "porque": "Las marcas planifican el contenido de verano y la tienda online de enero.",
+   "vertical": "Producto / marcas",
+   "venta": "Prospector con 'marcas uruguayas', 'tiendas online', 'productores'; proponer sesión de origen + packshot.",
+   "automatizacion": "Revisar todo el sistema: qué canal trajo más consultas (APRENDIZAJES.md)"
+  }
+ ],
+ "dias": [
+  {
+   "fecha": "2026-10-19",
+   "dia": "Lunes",
+   "semana": 1,
+   "vertical": "Bodas",
+   "items": [
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "Todavía tengo arroz en la cámara",
+     "pieza": "04-historias-organicas/001_foto_todavia-tengo-arroz-en-la-camara.jpg",
+     "nota": ""
+    },
+    {
+     "tipo": "Carrusel collage",
+     "hora": "19:30",
+     "titulo": "Un sí dura un segundo",
+     "pieza": "06-carruseles-collage/01-bodas-un-si",
+     "nota": "Las parejas del verano 26/27 están cerrando fotógrafo ahora."
+    },
+    {
+     "tipo": "Historia",
+     "hora": "20:00",
+     "titulo": "Nuevo carrusel: compartilo en historias",
+     "pieza": "06-carruseles-collage/01-bodas-un-si/01.jpg",
+     "nota": "Con sticker de enlace a WhatsApp."
+    }
+   ]
+  },
+  {
+   "fecha": "2026-10-20",
+   "dia": "Martes",
+   "semana": 1,
+   "vertical": "Bodas",
+   "items": [
+    {
+     "tipo": "Venta",
+     "hora": "10:00",
+     "titulo": "Foco de la semana: Bodas",
+     "pieza": "",
+     "nota": "Contactar 10 salones y wedding planners para alianzas; responder toda consulta de fecha en menos de 1 h."
+    },
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "Esta la saqué desde el piso",
+     "pieza": "04-historias-organicas/002_foto_esta-la-saque-desde-el-piso.jpg",
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "fecha": "2026-10-21",
+   "dia": "Miércoles",
+   "semana": 1,
+   "vertical": "Bodas",
+   "items": [
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "Ocho horas para veinte platos",
+     "pieza": "04-historias-organicas/003_foto_ocho-horas-para-veinte-platos.jpg",
+     "nota": ""
+    },
+    {
+     "tipo": "Carrusel de 8 fotos",
+     "hora": "19:30",
+     "titulo": "Nadie posó",
+     "pieza": "00-SUBIR-EN-ORDEN/01",
+     "nota": "Publicación ya armada (si ya la subiste, saltala)."
+    }
+   ]
+  },
+  {
+   "fecha": "2026-10-22",
+   "dia": "Jueves",
+   "semana": 1,
+   "vertical": "Bodas",
+   "items": [
+    {
+     "tipo": "Automatización",
+     "hora": "10:00",
+     "titulo": "P1 respuesta rápida + P2 seguimiento de presupuestos (WhatsApp Business)",
+     "pieza": "11-AUTOMATIZACION/README.md",
+     "nota": ""
+    },
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "La fiesta recién empieza a las dos",
+     "pieza": "04-historias-organicas/004_foto_la-fiesta-recien-empieza-a-las-dos.jpg",
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "fecha": "2026-10-23",
+   "dia": "Viernes",
+   "semana": 1,
+   "vertical": "Bodas",
+   "items": [
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "Le dije dos cosas y me callé",
+     "pieza": "04-historias-organicas/005_foto_le-dije-dos-cosas-y-me-calle.jpg",
+     "nota": ""
+    },
+    {
+     "tipo": "Venta",
+     "hora": "17:00",
+     "titulo": "Seguimiento de presupuestos y leads",
+     "pieza": "09-ESTUDIO/clientes.md",
+     "nota": "Todo presupuesto sin respuesta hace 2+ días recibe un mensaje."
+    },
+    {
+     "tipo": "Posteo de una foto",
+     "hora": "19:30",
+     "titulo": "La gente pide con los ojos",
+     "pieza": "00-SUBIR-EN-ORDEN/02",
+     "nota": "Publicación ya armada (si ya la subiste, saltala)."
+    }
+   ]
+  },
+  {
+   "fecha": "2026-10-26",
+   "dia": "Lunes",
+   "semana": 2,
+   "vertical": "Gastronomía",
+   "items": [
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "Cuarenta tomas para elegir una",
+     "pieza": "04-historias-organicas/006_foto_cuarenta-tomas-para-elegir-una.jpg",
+     "nota": ""
+    },
+    {
+     "tipo": "Carrusel collage",
+     "hora": "19:30",
+     "titulo": "La gente come con los ojos",
+     "pieza": "06-carruseles-collage/02-gastronomia-cuatro-fotos",
+     "nota": "Restaurantes y paradores arman la carta de verano en noviembre."
+    },
+    {
+     "tipo": "Historia",
+     "hora": "20:00",
+     "titulo": "Nuevo carrusel: compartilo en historias",
+     "pieza": "06-carruseles-collage/02-gastronomia-cuatro-fotos/01.jpg",
+     "nota": "Con sticker de enlace a WhatsApp."
+    }
+   ]
+  },
+  {
+   "fecha": "2026-10-27",
+   "dia": "Martes",
+   "semana": 2,
+   "vertical": "Gastronomía",
+   "items": [
+    {
+     "tipo": "Venta",
+     "hora": "10:00",
+     "titulo": "Foco de la semana: Gastronomía",
+     "pieza": "",
+     "nota": "Correr el prospector con 'restaurantes' en Pocitos, Punta Carretas, Punta del Este y La Barra; 5 DMs a locales sin fotos propias."
+    },
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "Poca luz y una sola pasada",
+     "pieza": "04-historias-organicas/007_foto_poca-luz-y-una-sola-pasada.jpg",
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "fecha": "2026-10-28",
+   "dia": "Miércoles",
+   "semana": 2,
+   "vertical": "Gastronomía",
+   "items": [
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "Este no entendió nada y salió mejor que yo",
+     "pieza": "04-historias-organicas/008_foto_este-no-entendio-nada-y-salio-mejor-que-yo.jpg",
+     "nota": ""
+    },
+    {
+     "tipo": "Carrusel de 8 fotos",
+     "hora": "19:30",
+     "titulo": "Casamientos",
+     "pieza": "00-SUBIR-EN-ORDEN/04",
+     "nota": "Publicación ya armada (si ya la subiste, saltala)."
+    }
+   ]
+  },
+  {
+   "fecha": "2026-10-29",
+   "dia": "Jueves",
+   "semana": 2,
+   "vertical": "Gastronomía",
+   "items": [
+    {
+     "tipo": "Automatización",
+     "hora": "10:00",
+     "titulo": "P3 prospección B2B: armar flujos 01–03, calentar el dominio de envío",
+     "pieza": "11-AUTOMATIZACION/README.md",
+     "nota": ""
+    },
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "Salí a caminar y volví con esto",
+     "pieza": "04-historias-organicas/009_foto_sali-a-caminar-y-volvi-con-esto.jpg",
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "fecha": "2026-10-30",
+   "dia": "Viernes",
+   "semana": 2,
+   "vertical": "Gastronomía",
+   "items": [
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "Vacío a las cinco, lleno a las nueve",
+     "pieza": "04-historias-organicas/010_foto_vacio-a-las-cinco-lleno-a-las-nueve.jpg",
+     "nota": ""
+    },
+    {
+     "tipo": "Venta",
+     "hora": "17:00",
+     "titulo": "Seguimiento de presupuestos y leads",
+     "pieza": "09-ESTUDIO/clientes.md",
+     "nota": "Todo presupuesto sin respuesta hace 2+ días recibe un mensaje."
+    },
+    {
+     "tipo": "Posteo de una foto",
+     "hora": "19:30",
+     "titulo": "Tu Instagram no es tu página web",
+     "pieza": "00-SUBIR-EN-ORDEN/05",
+     "nota": "Publicación ya armada (si ya la subiste, saltala)."
+    }
+   ]
+  },
+  {
+   "fecha": "2026-11-02",
+   "dia": "Lunes",
+   "semana": 3,
+   "vertical": "Edición Lightroom",
+   "items": [
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "Ochenta y sigo contando",
+     "pieza": "04-historias-organicas/011_dato_ochenta-y-sigo-contando.jpg",
+     "nota": ""
+    },
+    {
+     "tipo": "Carrusel collage",
+     "hora": "19:30",
+     "titulo": "Vos disparás. Yo edito.",
+     "pieza": "06-carruseles-collage/06-edicion-vos-disparas",
+     "nota": "Plena temporada de bodas: los fotógrafos están tapados de edición."
+    },
+    {
+     "tipo": "Historia",
+     "hora": "20:00",
+     "titulo": "Nuevo carrusel: compartilo en historias",
+     "pieza": "06-carruseles-collage/06-edicion-vos-disparas/01.jpg",
+     "nota": "Con sticker de enlace a WhatsApp."
+    }
+   ]
+  },
+  {
+   "fecha": "2026-11-03",
+   "dia": "Martes",
+   "semana": 3,
+   "vertical": "Edición Lightroom",
+   "items": [
+    {
+     "tipo": "Venta",
+     "hora": "10:00",
+     "titulo": "Foco de la semana: Edición Lightroom",
+     "pieza": "",
+     "nota": "Escribir a 15 fotógrafos de bodas (UY, AR, ES, MX) con la plantilla en su idioma; ofrecer prueba con un lote chico pago."
+    },
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "Ese es mi plazo de entrega",
+     "pieza": "04-historias-organicas/012_dato_ese-es-mi-plazo-de-entrega.jpg",
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "fecha": "2026-11-04",
+   "dia": "Miércoles",
+   "semana": 3,
+   "vertical": "Edición Lightroom",
+   "items": [
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "Foto, video, web y edición",
+     "pieza": "04-historias-organicas/013_dato_foto-video-web-y-edicion.jpg",
+     "nota": ""
+    },
+    {
+     "tipo": "Carrusel de 8 fotos",
+     "hora": "19:30",
+     "titulo": "Platos que se venden solos",
+     "pieza": "00-SUBIR-EN-ORDEN/07",
+     "nota": "Publicación ya armada (si ya la subiste, saltala)."
+    }
+   ]
+  },
+  {
+   "fecha": "2026-11-05",
+   "dia": "Jueves",
+   "semana": 3,
+   "vertical": "Edición Lightroom",
+   "items": [
+    {
+     "tipo": "Automatización",
+     "hora": "10:00",
+     "titulo": "P5 pedido de reseñas a los últimos 10 clientes",
+     "pieza": "11-AUTOMATIZACION/README.md",
+     "nota": ""
+    },
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "El 70% te va a mirar desde el celular",
+     "pieza": "04-historias-organicas/014_dato_el-70-te-va-a-mirar-desde-el-celular.jpg",
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "fecha": "2026-11-06",
+   "dia": "Viernes",
+   "semana": 3,
+   "vertical": "Edición Lightroom",
+   "items": [
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "Lo que tardo en editar un lote",
+     "pieza": "04-historias-organicas/015_dato_lo-que-tardo-en-editar-un-lote.jpg",
+     "nota": ""
+    },
+    {
+     "tipo": "Venta",
+     "hora": "17:00",
+     "titulo": "Seguimiento de presupuestos y leads",
+     "pieza": "09-ESTUDIO/clientes.md",
+     "nota": "Todo presupuesto sin respuesta hace 2+ días recibe un mensaje."
+    },
+    {
+     "tipo": "Posteo de una foto",
+     "hora": "19:30",
+     "titulo": "No es mi primera boda",
+     "pieza": "00-SUBIR-EN-ORDEN/08",
+     "nota": "Publicación ya armada (si ya la subiste, saltala)."
+    }
+   ]
+  },
+  {
+   "fecha": "2026-11-09",
+   "dia": "Lunes",
+   "semana": 4,
+   "vertical": "Eventos y empresas",
+   "items": [
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "¿Ceremonia de día o de noche?",
+     "pieza": "04-historias-organicas/021_pregunta_ceremonia-de-dia-o-de-noche.jpg",
+     "nota": ""
+    },
+    {
+     "tipo": "Carrusel collage",
+     "hora": "19:30",
+     "titulo": "La fiesta de fin de año pasa una vez",
+     "pieza": "06-carruseles-collage/04-fin-de-anio",
+     "nota": "Las empresas reservan la fiesta de diciembre a principios de noviembre."
+    },
+    {
+     "tipo": "Historia",
+     "hora": "20:00",
+     "titulo": "Nuevo carrusel: compartilo en historias",
+     "pieza": "06-carruseles-collage/04-fin-de-anio/01.jpg",
+     "nota": "Con sticker de enlace a WhatsApp."
+    }
+   ]
+  },
+  {
+   "fecha": "2026-11-10",
+   "dia": "Martes",
+   "semana": 4,
+   "vertical": "Eventos y empresas",
+   "items": [
+    {
+     "tipo": "Venta",
+     "hora": "10:00",
+     "titulo": "Foco de la semana: Eventos y empresas",
+     "pieza": "",
+     "nota": "Mail a 20 áreas de RR. HH. y comunicación (flujo 03, rubro empresas); reactivar clientes de eventos 2025."
+    },
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "¿Qué foto te da más hambre?",
+     "pieza": "04-historias-organicas/022_pregunta_que-foto-te-da-mas-hambre.jpg",
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "fecha": "2026-11-11",
+   "dia": "Miércoles",
+   "semana": 4,
+   "vertical": "Eventos y empresas",
+   "items": [
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "¿Color o blanco y negro?",
+     "pieza": "04-historias-organicas/023_pregunta_color-o-blanco-y-negro.jpg",
+     "nota": ""
+    },
+    {
+     "tipo": "Carrusel de 8 fotos",
+     "hora": "19:30",
+     "titulo": "Marcas uruguayas que fotografié",
+     "pieza": "00-SUBIR-EN-ORDEN/09",
+     "nota": "Publicación ya armada (si ya la subiste, saltala)."
+    }
+   ]
+  },
+  {
+   "fecha": "2026-11-12",
+   "dia": "Jueves",
+   "semana": 4,
+   "vertical": "Eventos y empresas",
+   "items": [
+    {
+     "tipo": "Automatización",
+     "hora": "10:00",
+     "titulo": "P6 reactivación de clientes viejos (fin de año)",
+     "pieza": "11-AUTOMATIZACION/README.md",
+     "nota": ""
+    },
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "¿Posás o te da vergüenza?",
+     "pieza": "04-historias-organicas/024_pregunta_posas-o-te-da-verguenza.jpg",
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "fecha": "2026-11-13",
+   "dia": "Viernes",
+   "semana": 4,
+   "vertical": "Eventos y empresas",
+   "items": [
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "¿Foto o video en tu fiesta?",
+     "pieza": "04-historias-organicas/025_pregunta_foto-o-video-en-tu-fiesta.jpg",
+     "nota": ""
+    },
+    {
+     "tipo": "Venta",
+     "hora": "17:00",
+     "titulo": "Seguimiento de presupuestos y leads",
+     "pieza": "09-ESTUDIO/clientes.md",
+     "nota": "Todo presupuesto sin respuesta hace 2+ días recibe un mensaje."
+    },
+    {
+     "tipo": "Carrusel de 8 fotos",
+     "hora": "19:30",
+     "titulo": "Lo que pasa cuando se apagan las luces",
+     "pieza": "00-SUBIR-EN-ORDEN/10",
+     "nota": "Publicación ya armada (si ya la subiste, saltala)."
+    }
+   ]
+  },
+  {
+   "fecha": "2026-11-16",
+   "dia": "Lunes",
+   "semana": 5,
+   "vertical": "Retrato / marca personal",
+   "items": [
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "Dos cámaras y ningún plan B",
+     "pieza": "04-historias-organicas/026_detras_dos-camaras-y-ningun-plan-b.jpg",
+     "nota": ""
+    },
+    {
+     "tipo": "Carrusel collage",
+     "hora": "19:30",
+     "titulo": "Tu marca personal no entra en una selfie",
+     "pieza": "06-carruseles-collage/03-marca-personal-cinco-usos",
+     "nota": "Cierre de año: profesionales actualizan web y LinkedIn para enero."
+    },
+    {
+     "tipo": "Historia",
+     "hora": "20:00",
+     "titulo": "Nuevo carrusel: compartilo en historias",
+     "pieza": "06-carruseles-collage/03-marca-personal-cinco-usos/01.jpg",
+     "nota": "Con sticker de enlace a WhatsApp."
+    }
+   ]
+  },
+  {
+   "fecha": "2026-11-17",
+   "dia": "Martes",
+   "semana": 5,
+   "vertical": "Retrato / marca personal",
+   "items": [
+    {
+     "tipo": "Venta",
+     "hora": "10:00",
+     "titulo": "Foco de la semana: Retrato / marca personal",
+     "pieza": "",
+     "nota": "10 DMs a profesionales con fotos viejas en LinkedIn; proponer sesión de una mañana."
+    },
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "El plato se enfría en tres minutos",
+     "pieza": "04-historias-organicas/027_detras_el-plato-se-enfria-en-tres-minutos.jpg",
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "fecha": "2026-11-18",
+   "dia": "Miércoles",
+   "semana": 5,
+   "vertical": "Retrato / marca personal",
+   "items": [
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "El fondo blanco no es una pared blanca",
+     "pieza": "04-historias-organicas/028_detras_el-fondo-blanco-no-es-una-pared-blanca.jpg",
+     "nota": ""
+    },
+    {
+     "tipo": "Video de 6 segundos",
+     "hora": "19:30",
+     "titulo": "Una foto tuya que no te da vergüenza mandar",
+     "pieza": "00-SUBIR-EN-ORDEN/11",
+     "nota": "Publicación ya armada (si ya la subiste, saltala)."
+    }
+   ]
+  },
+  {
+   "fecha": "2026-11-19",
+   "dia": "Jueves",
+   "semana": 5,
+   "vertical": "Retrato / marca personal",
+   "items": [
+    {
+     "tipo": "Automatización",
+     "hora": "10:00",
+     "titulo": "P7 publicación programada (Meta Business Suite)",
+     "pieza": "11-AUTOMATIZACION/README.md",
+     "nota": ""
+    },
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "Trabajo casi siempre con luz de ventana",
+     "pieza": "04-historias-organicas/029_detras_trabajo-casi-siempre-con-luz-de-ventana.jpg",
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "fecha": "2026-11-20",
+   "dia": "Viernes",
+   "semana": 5,
+   "vertical": "Retrato / marca personal",
+   "items": [
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "Me muevo rápido y en silencio",
+     "pieza": "04-historias-organicas/030_detras_me-muevo-rapido-y-en-silencio.jpg",
+     "nota": ""
+    },
+    {
+     "tipo": "Venta",
+     "hora": "17:00",
+     "titulo": "Seguimiento de presupuestos y leads",
+     "pieza": "09-ESTUDIO/clientes.md",
+     "nota": "Todo presupuesto sin respuesta hace 2+ días recibe un mensaje."
+    },
+    {
+     "tipo": "Carrusel de 8 fotos",
+     "hora": "19:30",
+     "titulo": "Cómo trabajo",
+     "pieza": "00-SUBIR-EN-ORDEN/12",
+     "nota": "Publicación ya armada (si ya la subiste, saltala)."
+    }
+   ]
+  },
+  {
+   "fecha": "2026-11-23",
+   "dia": "Lunes",
+   "semana": 6,
+   "vertical": "Páginas web",
+   "items": [
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "El instante que no se repite",
+     "pieza": "04-historias-organicas/031_dato_el-instante-que-no-se-repite.jpg",
+     "nota": ""
+    },
+    {
+     "tipo": "Carrusel collage",
+     "hora": "19:30",
+     "titulo": "Tu Instagram no es tu página web",
+     "pieza": "06-carruseles-collage/07-web-tu-instagram-no-es-tu-web",
+     "nota": "Black Friday (27/11): los negocios que venden por Instagram sienten el límite."
+    },
+    {
+     "tipo": "Historia",
+     "hora": "20:00",
+     "titulo": "Nuevo carrusel: compartilo en historias",
+     "pieza": "06-carruseles-collage/07-web-tu-instagram-no-es-tu-web/01.jpg",
+     "nota": "Con sticker de enlace a WhatsApp."
+    }
+   ]
+  },
+  {
+   "fecha": "2026-11-24",
+   "dia": "Martes",
+   "semana": 6,
+   "vertical": "Páginas web",
+   "items": [
+    {
+     "tipo": "Venta",
+     "hora": "10:00",
+     "titulo": "Foco de la semana: Páginas web",
+     "pieza": "",
+     "nota": "Auditor n8n sobre negocios con solo Instagram o web vieja; 10 mails con la mejora concreta."
+    },
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "Lo que entra por los ojos antes que por la boca",
+     "pieza": "04-historias-organicas/032_dato_lo-que-entra-por-los-ojos-antes-que-por-la-b.jpg",
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "fecha": "2026-11-25",
+   "dia": "Miércoles",
+   "semana": 6,
+   "vertical": "Páginas web",
+   "items": [
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "Una persona, sin pose y sin apuro",
+     "pieza": "04-historias-organicas/033_dato_una-persona-sin-pose-y-sin-apuro.jpg",
+     "nota": ""
+    },
+    {
+     "tipo": "Reel de 6 segundos",
+     "hora": "19:30",
+     "titulo": "Tu casamiento pasa una sola vez",
+     "pieza": "05-videos/001_bodas_tu-casamiento-pasa-una-sola-vez_feed.mp4",
+     "nota": "Video animado de un aviso."
+    }
+   ]
+  },
+  {
+   "fecha": "2026-11-26",
+   "dia": "Jueves",
+   "semana": 6,
+   "vertical": "Páginas web",
+   "items": [
+    {
+     "tipo": "Automatización",
+     "hora": "10:00",
+     "titulo": "P3 en marcha: revisar puntajes y respuestas de la semana",
+     "pieza": "11-AUTOMATIZACION/README.md",
+     "nota": ""
+    },
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "Los que nunca posan y siempre miran",
+     "pieza": "04-historias-organicas/034_dato_los-que-nunca-posan-y-siempre-miran.jpg",
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "fecha": "2026-11-27",
+   "dia": "Viernes",
+   "semana": 6,
+   "vertical": "Páginas web",
+   "items": [
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "Dos personas y todo el resto de la vida esperando",
+     "pieza": "04-historias-organicas/035_dato_dos-personas-y-todo-el-resto-de-la-vida-espe.jpg",
+     "nota": ""
+    },
+    {
+     "tipo": "Venta",
+     "hora": "17:00",
+     "titulo": "Seguimiento de presupuestos y leads",
+     "pieza": "09-ESTUDIO/clientes.md",
+     "nota": "Todo presupuesto sin respuesta hace 2+ días recibe un mensaje."
+    },
+    {
+     "tipo": "Reel de 6 segundos",
+     "hora": "19:30",
+     "titulo": "La gente pide con los ojos",
+     "pieza": "05-videos/009_gastronomia_la-gente-pide-con-los-ojos_feed.mp4",
+     "nota": "Video animado de un aviso."
+    }
+   ]
+  },
+  {
+   "fecha": "2026-11-30",
+   "dia": "Lunes",
+   "semana": 7,
+   "vertical": "Cuadros",
+   "items": [
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "Uruguay también es esto",
+     "pieza": "04-historias-organicas/036_foto_uruguay-tambien-es-esto.jpg",
+     "nota": ""
+    },
+    {
+     "tipo": "Carrusel collage",
+     "hora": "19:30",
+     "titulo": "Regalá un lugar",
+     "pieza": "06-carruseles-collage/08-cuadros-regala-un-lugar",
+     "nota": "Compras de Navidad: el cuadro es regalo y deco a la vez."
+    },
+    {
+     "tipo": "Historia",
+     "hora": "20:00",
+     "titulo": "Nuevo carrusel: compartilo en historias",
+     "pieza": "06-carruseles-collage/08-cuadros-regala-un-lugar/01.jpg",
+     "nota": "Con sticker de enlace a WhatsApp."
+    }
+   ]
+  },
+  {
+   "fecha": "2026-12-01",
+   "dia": "Martes",
+   "semana": 7,
+   "vertical": "Cuadros",
+   "items": [
+    {
+     "tipo": "Venta",
+     "hora": "10:00",
+     "titulo": "Foco de la semana: Cuadros",
+     "pieza": "",
+     "nota": "Historias con precios y tamaños reales (los pone Martin); fijar fecha límite de pedidos para llegar al 24."
+    },
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "Nadie en kilómetros",
+     "pieza": "04-historias-organicas/037_foto_nadie-en-kilometros.jpg",
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "fecha": "2026-12-02",
+   "dia": "Miércoles",
+   "semana": 7,
+   "vertical": "Cuadros",
+   "items": [
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "Me miró y se fue",
+     "pieza": "04-historias-organicas/038_foto_me-miro-y-se-fue.jpg",
+     "nota": ""
+    },
+    {
+     "tipo": "Reel de 6 segundos",
+     "hora": "19:30",
+     "titulo": "Sacas 800 fotos y las editas de a una",
+     "pieza": "05-videos/018_edicion_sacas-800-fotos-y-las-editas-de-a-una_feed.mp4",
+     "nota": "Video animado de un aviso."
+    }
+   ]
+  },
+  {
+   "fecha": "2026-12-03",
+   "dia": "Jueves",
+   "semana": 7,
+   "vertical": "Cuadros",
+   "items": [
+    {
+     "tipo": "Automatización",
+     "hora": "10:00",
+     "titulo": "P4 prospección de fotógrafos en EN/PT",
+     "pieza": "11-AUTOMATIZACION/README.md",
+     "nota": ""
+    },
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "No se movió en veinte minutos",
+     "pieza": "04-historias-organicas/039_foto_no-se-movio-en-veinte-minutos.jpg",
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "fecha": "2026-12-04",
+   "dia": "Viernes",
+   "semana": 7,
+   "vertical": "Cuadros",
+   "items": [
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "Esto salió del horno hace un minuto",
+     "pieza": "04-historias-organicas/040_foto_esto-salio-del-horno-hace-un-minuto.jpg",
+     "nota": ""
+    },
+    {
+     "tipo": "Venta",
+     "hora": "17:00",
+     "titulo": "Seguimiento de presupuestos y leads",
+     "pieza": "09-ESTUDIO/clientes.md",
+     "nota": "Todo presupuesto sin respuesta hace 2+ días recibe un mensaje."
+    },
+    {
+     "tipo": "Reel de 6 segundos",
+     "hora": "19:30",
+     "titulo": "Tu producto merece una foto que lo venda",
+     "pieza": "05-videos/024_marcas_tu-producto-merece-una-foto-que-lo-venda_feed.mp4",
+     "nota": "Video animado de un aviso."
+    }
+   ]
+  },
+  {
+   "fecha": "2026-12-07",
+   "dia": "Lunes",
+   "semana": 8,
+   "vertical": "Producción musical",
+   "items": [
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "Producto uruguayo, foto uruguaya",
+     "pieza": "04-historias-organicas/041_foto_producto-uruguayo-foto-uruguaya.jpg",
+     "nota": ""
+    },
+    {
+     "tipo": "Carrusel collage",
+     "hora": "19:30",
+     "titulo": "La música también la hago",
+     "pieza": "06-carruseles-collage/09-musica-de-la-idea-al-master",
+     "nota": "Se lanza la sección de producción musical en la web."
+    },
+    {
+     "tipo": "Historia",
+     "hora": "20:00",
+     "titulo": "Nuevo carrusel: compartilo en historias",
+     "pieza": "06-carruseles-collage/09-musica-de-la-idea-al-master/01.jpg",
+     "nota": "Con sticker de enlace a WhatsApp."
+    }
+   ]
+  },
+  {
+   "fecha": "2026-12-08",
+   "dia": "Martes",
+   "semana": 8,
+   "vertical": "Producción musical",
+   "items": [
+    {
+     "tipo": "Venta",
+     "hora": "10:00",
+     "titulo": "Foco de la semana: Producción musical",
+     "pieza": "",
+     "nota": "Compartir el EP; escribir a 10 bandas/solistas que tocaron en vivo este año; ofrecer videoclip + mix."
+    },
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "Se casaron con viento a favor",
+     "pieza": "04-historias-organicas/042_foto_se-casaron-con-viento-a-favor.jpg",
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "fecha": "2026-12-09",
+   "dia": "Miércoles",
+   "semana": 8,
+   "vertical": "Producción musical",
+   "items": [
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "Quince años, cero poses",
+     "pieza": "04-historias-organicas/043_foto_quince-anos-cero-poses.jpg",
+     "nota": ""
+    },
+    {
+     "tipo": "Reel de 6 segundos",
+     "hora": "19:30",
+     "titulo": "Tu instagram no es tu pagina web",
+     "pieza": "05-videos/030_web_tu-instagram-no-es-tu-pagina-web_feed.mp4",
+     "nota": "Video animado de un aviso."
+    }
+   ]
+  },
+  {
+   "fecha": "2026-12-10",
+   "dia": "Jueves",
+   "semana": 8,
+   "vertical": "Producción musical",
+   "items": [
+    {
+     "tipo": "Automatización",
+     "hora": "10:00",
+     "titulo": "P8 reporte semanal de métricas (lunes 9:00)",
+     "pieza": "11-AUTOMATIZACION/README.md",
+     "nota": ""
+    },
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "Tres canciones y se acabó la luz",
+     "pieza": "04-historias-organicas/044_foto_tres-canciones-y-se-acabo-la-luz.jpg",
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "fecha": "2026-12-11",
+   "dia": "Viernes",
+   "semana": 8,
+   "vertical": "Producción musical",
+   "items": [
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "Mañana esto va a estar lleno",
+     "pieza": "04-historias-organicas/045_foto_manana-esto-va-a-estar-lleno.jpg",
+     "nota": ""
+    },
+    {
+     "tipo": "Venta",
+     "hora": "17:00",
+     "titulo": "Seguimiento de presupuestos y leads",
+     "pieza": "09-ESTUDIO/clientes.md",
+     "nota": "Todo presupuesto sin respuesta hace 2+ días recibe un mensaje."
+    },
+    {
+     "tipo": "Reel de 6 segundos",
+     "hora": "19:30",
+     "titulo": "Una foto tuya que no te da verguenza man",
+     "pieza": "05-videos/037_retratos_una-foto-tuya-que-no-te-da-verguenza-man_feed.mp4",
+     "nota": "Video animado de un aviso."
+    }
+   ]
+  },
+  {
+   "fecha": "2026-12-14",
+   "dia": "Lunes",
+   "semana": 9,
+   "vertical": "Producto / marcas",
+   "items": [
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "No hay segunda toma",
+     "pieza": "04-historias-organicas/046_foto_no-hay-segunda-toma.jpg",
+     "nota": ""
+    },
+    {
+     "tipo": "Carrusel collage",
+     "hora": "19:30",
+     "titulo": "Un producto tiene una historia entera",
+     "pieza": "06-carruseles-collage/05-producto-del-olivo-a-la-mesa",
+     "nota": "Las marcas planifican el contenido de verano y la tienda online de enero."
+    },
+    {
+     "tipo": "Historia",
+     "hora": "20:00",
+     "titulo": "Nuevo carrusel: compartilo en historias",
+     "pieza": "06-carruseles-collage/05-producto-del-olivo-a-la-mesa/01.jpg",
+     "nota": "Con sticker de enlace a WhatsApp."
+    }
+   ]
+  },
+  {
+   "fecha": "2026-12-15",
+   "dia": "Martes",
+   "semana": 9,
+   "vertical": "Producto / marcas",
+   "items": [
+    {
+     "tipo": "Venta",
+     "hora": "10:00",
+     "titulo": "Foco de la semana: Producto / marcas",
+     "pieza": "",
+     "nota": "Prospector con 'marcas uruguayas', 'tiendas online', 'productores'; proponer sesión de origen + packshot."
+    },
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "Una foto que sí se puede mandar",
+     "pieza": "04-historias-organicas/047_foto_una-foto-que-si-se-puede-mandar.jpg",
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "fecha": "2026-12-16",
+   "dia": "Miércoles",
+   "semana": 9,
+   "vertical": "Producto / marcas",
+   "items": [
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "Fotos de equipo que no dan vergüenza",
+     "pieza": "04-historias-organicas/048_foto_fotos-de-equipo-que-no-dan-verguenza.jpg",
+     "nota": ""
+    },
+    {
+     "tipo": "Reel de 6 segundos",
+     "hora": "19:30",
+     "titulo": "La fiesta dura una noche",
+     "pieza": "05-videos/041_eventos_la-fiesta-dura-una-noche_feed.mp4",
+     "nota": "Video animado de un aviso."
+    }
+   ]
+  },
+  {
+   "fecha": "2026-12-17",
+   "dia": "Jueves",
+   "semana": 9,
+   "vertical": "Producto / marcas",
+   "items": [
+    {
+     "tipo": "Automatización",
+     "hora": "10:00",
+     "titulo": "Revisar todo el sistema: qué canal trajo más consultas (APRENDIZAJES.md)",
+     "pieza": "11-AUTOMATIZACION/README.md",
+     "nota": ""
+    },
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "Quedan fechas para diciembre",
+     "pieza": "04-historias-organicas/049_dato_quedan-fechas-para-diciembre.jpg",
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "fecha": "2026-12-18",
+   "dia": "Viernes",
+   "semana": 9,
+   "vertical": "Producto / marcas",
+   "items": [
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "Tengo lugar para editar dos lotes esta semana",
+     "pieza": "04-historias-organicas/050_dato_tengo-lugar-para-editar-dos-lotes-esta-seman.jpg",
+     "nota": ""
+    },
+    {
+     "tipo": "Venta",
+     "hora": "17:00",
+     "titulo": "Seguimiento de presupuestos y leads",
+     "pieza": "09-ESTUDIO/clientes.md",
+     "nota": "Todo presupuesto sin respuesta hace 2+ días recibe un mensaje."
+    },
+    {
+     "tipo": "Reel de 6 segundos",
+     "hora": "19:30",
+     "titulo": "Una foto en el telefono no decora nada",
+     "pieza": "05-videos/047_cuadros_una-foto-en-el-telefono-no-decora-nada_feed.mp4",
+     "nota": "Video animado de un aviso."
+    }
+   ]
+  }
+ ]
+}
