@@ -64,6 +64,9 @@ def main():
     titulos = {h["archivo"]: h["titular"] for h in
                json.load(open(os.path.join(IG, "indice_historias.json")))}
     videos = sorted(f for f in os.listdir(os.path.join(IG, "05-videos")) if f.endswith("_feed.mp4"))
+    mundo = json.load(open(os.path.join(IG, "08-tus-fotos-en-el-mundo", "indice.json")))
+    # orden de la serie segun el foco de cada semana
+    orden_mundo = [2, 6, 4, 10, 1, 12, 11, 3, 8]
     dias, k_hist, k_orden, k_video = [], 0, 0, 0
     for s, (slug, tit, porque, vertical, venta, auto) in enumerate(SEMANAS):
         lunes = INICIO + dt.timedelta(weeks=s)
@@ -99,6 +102,15 @@ def main():
                 items.append({"tipo": "Venta", "hora": "10:00", "titulo": f"Foco de la semana: {vertical}",
                               "pieza": "", "nota": venta})
             if d == 3:
+                items.append({"tipo": "Reel", "hora": "19:30", "titulo": "Reel del carrusel: " + tit,
+                              "pieza": f"07-reels-collage/{slug}.mp4",
+                              "nota": "Ponele un tema tuyo de fondo."})
+            if d == 5 and s < len(orden_mundo):
+                m = next(x for x in mundo if x["n"] == orden_mundo[s])
+                items.append({"tipo": "Tus fotos en el mundo", "hora": "11:00", "titulo": m["frase"],
+                              "pieza": f"08-tus-fotos-en-el-mundo/{m['archivo']}",
+                              "nota": m["lugar"] + ". Es un montaje: decilo en el pie."})
+            if d == 3:
                 items.append({"tipo": "Automatización", "hora": "10:00", "titulo": auto,
                               "pieza": "11-AUTOMATIZACION/README.md", "nota": ""})
             if d == 4:
@@ -120,7 +132,7 @@ def main():
     md = ["# Calendario de contenido y ventas",
           f"Del {INICIO.strftime('%d/%m')} al {data['hasta'][8:10]}/{data['hasta'][5:7]} de 2026. "
           "Generado por `10-MOTOR/calendario.py` (no se edita a mano).", "",
-          "Ritmo: **lunes** carrusel collage · **miércoles y viernes** publicaciones ya armadas · "
+          "Ritmo: **lunes** carrusel collage · **jueves** su reel · **sábado** Tus fotos en el mundo · **miércoles y viernes** publicaciones ya armadas · "
           "**historias** de lunes a viernes · **martes** foco de venta · **jueves** una automatización · "
           "**viernes** seguimiento de presupuestos.", ""]
     for sem in data["semanas"]:

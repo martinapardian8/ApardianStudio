@@ -143,7 +143,7 @@ form.alta .ancho{grid-column:1/-1}
   <section id="s-calendario" data-sec="calendario" hidden>
     <span class="eti">19/10 al 20/12 · 2026</span>
     <h1>Calendario</h1>
-    <p class="sub">Lunes carrusel collage, miércoles y viernes las publicaciones ya armadas, historias de lunes a viernes. Martes foco de venta, jueves una automatización, viernes seguimiento.</p>
+    <p class="sub">Lunes carrusel collage, jueves su reel, sábado una de "Tus fotos en el mundo". Miércoles y viernes las publicaciones ya armadas, historias de lunes a viernes. Martes foco de venta, jueves una automatización, viernes seguimiento.</p>
     <div class="chips" id="filtros" role="group" aria-label="Filtrar por tipo"></div>
     <div id="cal"></div>
   </section>
@@ -264,7 +264,7 @@ function renderHoy(){
 
 let filtro = "Todo";
 function renderCal(){
-  const tipos = ["Todo","Carrusel collage","Historia","Venta","Automatización","Publicaciones armadas"];
+  const tipos = ["Todo","Carrusel collage","Reel","Tus fotos en el mundo","Historia","Venta","Automatización","Publicaciones armadas"];
   const f = $("#filtros"); f.replaceChildren(...tipos.map(t => { const b = el("button", {class:"chip", type:"button", "aria-pressed": String(t === filtro), text:t}); b.addEventListener("click", () => { filtro = t; renderCal(); }); return b; }));
   const pasa = it => filtro === "Todo" || it.tipo === filtro ||
     (filtro === "Publicaciones armadas" && (it.pieza || "").startsWith("00-SUBIR") || filtro === "Publicaciones armadas" && (it.pieza || "").startsWith("05-videos"));

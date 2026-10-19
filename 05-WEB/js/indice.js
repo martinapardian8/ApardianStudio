@@ -14,7 +14,9 @@
     if (!v || quieto) return;
     if (!v.src && v.dataset.src) {
       v.muted = true; v.defaultMuted = true; v.playsInline = true;
-      v.src = v.dataset.src;
+      // WebM (VP9) donde se pueda: pesa lo mismo y anda en todos los Chromium
+      var webm = v.dataset.srcWebm;
+      v.src = (webm && v.canPlayType && v.canPlayType('video/webm; codecs="vp9"')) ? webm : v.dataset.src;
       v.addEventListener('canplay', function () {
         var p = v.play(); if (p && p.then) p.then(function () { v.classList.add('on'); }).catch(function () {});
       }, { once: true });

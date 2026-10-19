@@ -1,0 +1,98 @@
+[
+ {
+  "n": 1,
+  "archivo": "01_manhattan_edificio.jpg",
+  "escena": "manhattan_edificio.jpg",
+  "foto": "retratos/juan-luz__IMG_2696.jpg",
+  "lugar": "Nueva York",
+  "frase": "Un retrato que se ve desde la esquina."
+ },
+ {
+  "n": 2,
+  "archivo": "02_estacion_central.jpg",
+  "escena": "estacion_central.jpg",
+  "foto": "bodas/portfolio__IMG_8771.jpg",
+  "lugar": "Nueva York · Grand Central",
+  "frase": "Un sí, entre miles que pasan."
+ },
+ {
+  "n": 3,
+  "archivo": "03_tokio_pantalla.jpg",
+  "escena": "tokio_pantalla.jpg",
+  "foto": "musica/nw__IMG_7237.jpg",
+  "lugar": "Tokio · Shibuya",
+  "frase": "La banda que fotografié, en la pantalla más grande."
+ },
+ {
+  "n": 4,
+  "archivo": "04_londres_subte.jpg",
+  "escena": "londres_subte.jpg",
+  "foto": "retratos/v__114.jpg",
+  "lugar": "Londres · Underground",
+  "frase": "La luz que te frena en la escalera."
+ },
+ {
+  "n": 5,
+  "archivo": "05_aeropuerto.jpg",
+  "escena": "aeropuerto.jpg",
+  "foto": "naturaleza/v__23.jpg",
+  "lugar": "Aeropuerto · llegadas",
+  "frase": "Lo primero que ves al llegar."
+ },
+ {
+  "n": 6,
+  "archivo": "06_parada_rambla.jpg",
+  "escena": "parada_rambla.jpg",
+  "foto": "gastronomia/nw__IMG_7064.jpg",
+  "lugar": "Montevideo · Rambla",
+  "frase": "Un plato que se ve desde el ómnibus."
+ },
+ {
+  "n": 7,
+  "archivo": "07_paris_columna.jpg",
+  "escena": "paris_columna.jpg",
+  "foto": "retratos/v__117.jpg",
+  "lugar": "París",
+  "frase": "Blanco y negro, como tiene que ser."
+ },
+ {
+  "n": 8,
+  "archivo": "08_los_angeles_cartel.jpg",
+  "escena": "los_angeles_cartel.jpg",
+  "foto": "marcas/v__77.jpg",
+  "lugar": "Los Ángeles",
+  "frase": "Un producto uruguayo, a la altura de cualquier ruta."
+ },
+ {
+  "n": 9,
+  "archivo": "09_revista.jpg",
+  "escena": "revista.jpg",
+  "foto": "bodas/nw__IMG_9717.jpg",
+  "lugar": "Doble página",
+  "frase": "Una boda que pide papel."
+ },
+ {
+  "n": 10,
+  "archivo": "10_afiche_montevideo.jpg",
+  "escena": "afiche_montevideo.jpg",
+  "foto": "eventos/nw__IMG_9236.jpg",
+  "lugar": "Montevideo · Ciudad Vieja",
+  "frase": "Un cumpleaños que merece afiche."
+ },
+ {
+  "n": 11,
+  "archivo": "11_cuadro_living.jpg",
+  "escena": "cuadro_living.jpg",
+  "foto": "naturaleza/nw__IMG_1996.jpg",
+  "lugar": "En tu casa",
+  "frase": "El mar, colgado en el living."
+ },
+ {
+  "n": 12,
+  "archivo": "12_notebook.jpg",
+  "escena": "notebook.jpg",
+  "foto": "captura/d_hero.png",
+  "lugar": "Tu web",
+  "frase": "Tu trabajo, en tu propia página."
+ }
+]

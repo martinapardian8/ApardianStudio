@@ -186,6 +186,13 @@
      "titulo": "La fiesta recién empieza a las dos",
      "pieza": "04-historias-organicas/004_foto_la-fiesta-recien-empieza-a-las-dos.jpg",
      "nota": ""
+    },
+    {
+     "tipo": "Reel",
+     "hora": "19:30",
+     "titulo": "Reel del carrusel: Un sí dura un segundo",
+     "pieza": "07-reels-collage/01-bodas-un-si.mp4",
+     "nota": "Ponele un tema tuyo de fondo."
     }
    ]
   },
@@ -215,6 +222,21 @@
      "titulo": "La gente pide con los ojos",
      "pieza": "00-SUBIR-EN-ORDEN/02",
      "nota": "Publicación ya armada (si ya la subiste, saltala)."
+    }
+   ]
+  },
+  {
+   "fecha": "2026-10-24",
+   "dia": "Sábado",
+   "semana": 1,
+   "vertical": "Bodas",
+   "items": [
+    {
+     "tipo": "Tus fotos en el mundo",
+     "hora": "11:00",
+     "titulo": "Un sí, entre miles que pasan.",
+     "pieza": "08-tus-fotos-en-el-mundo/02_estacion_central.jpg",
+     "nota": "Nueva York · Grand Central. Es un montaje: decilo en el pie."
     }
    ]
   },
@@ -310,6 +332,13 @@
      "titulo": "Salí a caminar y volví con esto",
      "pieza": "04-historias-organicas/009_foto_sali-a-caminar-y-volvi-con-esto.jpg",
      "nota": ""
+    },
+    {
+     "tipo": "Reel",
+     "hora": "19:30",
+     "titulo": "Reel del carrusel: La gente come con los ojos",
+     "pieza": "07-reels-collage/02-gastronomia-cuatro-fotos.mp4",
+     "nota": "Ponele un tema tuyo de fondo."
     }
    ]
   },
@@ -339,6 +368,21 @@
      "titulo": "Tu Instagram no es tu página web",
      "pieza": "00-SUBIR-EN-ORDEN/05",
      "nota": "Publicación ya armada (si ya la subiste, saltala)."
+    }
+   ]
+  },
+  {
+   "fecha": "2026-10-31",
+   "dia": "Sábado",
+   "semana": 2,
+   "vertical": "Gastronomía",
+   "items": [
+    {
+     "tipo": "Tus fotos en el mundo",
+     "hora": "11:00",
+     "titulo": "Un plato que se ve desde el ómnibus.",
+     "pieza": "08-tus-fotos-en-el-mundo/06_parada_rambla.jpg",
+     "nota": "Montevideo · Rambla. Es un montaje: decilo en el pie."
     }
    ]
   },
@@ -434,6 +478,13 @@
      "titulo": "El 70% te va a mirar desde el celular",
      "pieza": "04-historias-organicas/014_dato_el-70-te-va-a-mirar-desde-el-celular.jpg",
      "nota": ""
+    },
+    {
+     "tipo": "Reel",
+     "hora": "19:30",
+     "titulo": "Reel del carrusel: Vos disparás. Yo edito.",
+     "pieza": "07-reels-collage/06-edicion-vos-disparas.mp4",
+     "nota": "Ponele un tema tuyo de fondo."
     }
    ]
   },
@@ -463,6 +514,21 @@
      "titulo": "No es mi primera boda",
      "pieza": "00-SUBIR-EN-ORDEN/08",
      "nota": "Publicación ya armada (si ya la subiste, saltala)."
+    }
+   ]
+  },
+  {
+   "fecha": "2026-11-07",
+   "dia": "Sábado",
+   "semana": 3,
+   "vertical": "Edición Lightroom",
+   "items": [
+    {
+     "tipo": "Tus fotos en el mundo",
+     "hora": "11:00",
+     "titulo": "La luz que te frena en la escalera.",
+     "pieza": "08-tus-fotos-en-el-mundo/04_londres_subte.jpg",
+     "nota": "Londres · Underground. Es un montaje: decilo en el pie."
     }
    ]
   },
@@ -558,6 +624,13 @@
      "titulo": "¿Posás o te da vergüenza?",
      "pieza": "04-historias-organicas/024_pregunta_posas-o-te-da-verguenza.jpg",
      "nota": ""
+    },
+    {
+     "tipo": "Reel",
+     "hora": "19:30",
+     "titulo": "Reel del carrusel: La fiesta de fin de año pasa una vez",
+     "pieza": "07-reels-collage/04-fin-de-anio.mp4",
+     "nota": "Ponele un tema tuyo de fondo."
     }
    ]
   },
@@ -587,6 +660,21 @@
      "titulo": "Lo que pasa cuando se apagan las luces",
      "pieza": "00-SUBIR-EN-ORDEN/10",
      "nota": "Publicación ya armada (si ya la subiste, saltala)."
+    }
+   ]
+  },
+  {
+   "fecha": "2026-11-14",
+   "dia": "Sábado",
+   "semana": 4,
+   "vertical": "Eventos y empresas",
+   "items": [
+    {
+     "tipo": "Tus fotos en el mundo",
+     "hora": "11:00",
+     "titulo": "Un cumpleaños que merece afiche.",
+     "pieza": "08-tus-fotos-en-el-mundo/10_afiche_montevideo.jpg",
+     "nota": "Montevideo · Ciudad Vieja. Es un montaje: decilo en el pie."
     }
    ]
   },
@@ -682,6 +770,13 @@
      "titulo": "Trabajo casi siempre con luz de ventana",
      "pieza": "04-historias-organicas/029_detras_trabajo-casi-siempre-con-luz-de-ventana.jpg",
      "nota": ""
+    },
+    {
+     "tipo": "Reel",
+     "hora": "19:30",
+     "titulo": "Reel del carrusel: Tu marca personal no entra en una selfie",
+     "pieza": "07-reels-collage/03-marca-personal-cinco-usos.mp4",
+     "nota": "Ponele un tema tuyo de fondo."
     }
    ]
   },
@@ -711,6 +806,21 @@
      "titulo": "Cómo trabajo",
      "pieza": "00-SUBIR-EN-ORDEN/12",
      "nota": "Publicación ya armada (si ya la subiste, saltala)."
+    }
+   ]
+  },
+  {
+   "fecha": "2026-11-21",
+   "dia": "Sábado",
+   "semana": 5,
+   "vertical": "Retrato / marca personal",
+   "items": [
+    {
+     "tipo": "Tus fotos en el mundo",
+     "hora": "11:00",
+     "titulo": "Un retrato que se ve desde la esquina.",
+     "pieza": "08-tus-fotos-en-el-mundo/01_manhattan_edificio.jpg",
+     "nota": "Nueva York. Es un montaje: decilo en el pie."
     }
    ]
   },
@@ -806,6 +916,13 @@
      "titulo": "Los que nunca posan y siempre miran",
      "pieza": "04-historias-organicas/034_dato_los-que-nunca-posan-y-siempre-miran.jpg",
      "nota": ""
+    },
+    {
+     "tipo": "Reel",
+     "hora": "19:30",
+     "titulo": "Reel del carrusel: Tu Instagram no es tu página web",
+     "pieza": "07-reels-collage/07-web-tu-instagram-no-es-tu-web.mp4",
+     "nota": "Ponele un tema tuyo de fondo."
     }
    ]
   },
@@ -835,6 +952,21 @@
      "titulo": "La gente pide con los ojos",
      "pieza": "05-videos/009_gastronomia_la-gente-pide-con-los-ojos_feed.mp4",
      "nota": "Video animado de un aviso."
+    }
+   ]
+  },
+  {
+   "fecha": "2026-11-28",
+   "dia": "Sábado",
+   "semana": 6,
+   "vertical": "Páginas web",
+   "items": [
+    {
+     "tipo": "Tus fotos en el mundo",
+     "hora": "11:00",
+     "titulo": "Tu trabajo, en tu propia página.",
+     "pieza": "08-tus-fotos-en-el-mundo/12_notebook.jpg",
+     "nota": "Tu web. Es un montaje: decilo en el pie."
     }
    ]
   },
@@ -930,6 +1062,13 @@
      "titulo": "No se movió en veinte minutos",
      "pieza": "04-historias-organicas/039_foto_no-se-movio-en-veinte-minutos.jpg",
      "nota": ""
+    },
+    {
+     "tipo": "Reel",
+     "hora": "19:30",
+     "titulo": "Reel del carrusel: Regalá un lugar",
+     "pieza": "07-reels-collage/08-cuadros-regala-un-lugar.mp4",
+     "nota": "Ponele un tema tuyo de fondo."
     }
    ]
   },
@@ -959,6 +1098,21 @@
      "titulo": "Tu producto merece una foto que lo venda",
      "pieza": "05-videos/024_marcas_tu-producto-merece-una-foto-que-lo-venda_feed.mp4",
      "nota": "Video animado de un aviso."
+    }
+   ]
+  },
+  {
+   "fecha": "2026-12-05",
+   "dia": "Sábado",
+   "semana": 7,
+   "vertical": "Cuadros",
+   "items": [
+    {
+     "tipo": "Tus fotos en el mundo",
+     "hora": "11:00",
+     "titulo": "El mar, colgado en el living.",
+     "pieza": "08-tus-fotos-en-el-mundo/11_cuadro_living.jpg",
+     "nota": "En tu casa. Es un montaje: decilo en el pie."
     }
    ]
   },
@@ -1054,6 +1208,13 @@
      "titulo": "Tres canciones y se acabó la luz",
      "pieza": "04-historias-organicas/044_foto_tres-canciones-y-se-acabo-la-luz.jpg",
      "nota": ""
+    },
+    {
+     "tipo": "Reel",
+     "hora": "19:30",
+     "titulo": "Reel del carrusel: La música también la hago",
+     "pieza": "07-reels-collage/09-musica-de-la-idea-al-master.mp4",
+     "nota": "Ponele un tema tuyo de fondo."
     }
    ]
   },
@@ -1083,6 +1244,21 @@
      "titulo": "Una foto tuya que no te da verguenza man",
      "pieza": "05-videos/037_retratos_una-foto-tuya-que-no-te-da-verguenza-man_feed.mp4",
      "nota": "Video animado de un aviso."
+    }
+   ]
+  },
+  {
+   "fecha": "2026-12-12",
+   "dia": "Sábado",
+   "semana": 8,
+   "vertical": "Producción musical",
+   "items": [
+    {
+     "tipo": "Tus fotos en el mundo",
+     "hora": "11:00",
+     "titulo": "La banda que fotografié, en la pantalla más grande.",
+     "pieza": "08-tus-fotos-en-el-mundo/03_tokio_pantalla.jpg",
+     "nota": "Tokio · Shibuya. Es un montaje: decilo en el pie."
     }
    ]
   },
@@ -1178,6 +1354,13 @@
      "titulo": "Quedan fechas para diciembre",
      "pieza": "04-historias-organicas/049_dato_quedan-fechas-para-diciembre.jpg",
      "nota": ""
+    },
+    {
+     "tipo": "Reel",
+     "hora": "19:30",
+     "titulo": "Reel del carrusel: Un producto tiene una historia entera",
+     "pieza": "07-reels-collage/05-producto-del-olivo-a-la-mesa.mp4",
+     "nota": "Ponele un tema tuyo de fondo."
     }
    ]
   },
@@ -1207,6 +1390,21 @@
      "titulo": "Una foto en el telefono no decora nada",
      "pieza": "05-videos/047_cuadros_una-foto-en-el-telefono-no-decora-nada_feed.mp4",
      "nota": "Video animado de un aviso."
+    }
+   ]
+  },
+  {
+   "fecha": "2026-12-19",
+   "dia": "Sábado",
+   "semana": 9,
+   "vertical": "Producto / marcas",
+   "items": [
+    {
+     "tipo": "Tus fotos en el mundo",
+     "hora": "11:00",
+     "titulo": "Un producto uruguayo, a la altura de cualquier ruta.",
+     "pieza": "08-tus-fotos-en-el-mundo/08_los_angeles_cartel.jpg",
+     "nota": "Los Ángeles. Es un montaje: decilo en el pie."
     }
    ]
   }

@@ -35,3 +35,27 @@ clip, broche, cinta y papel con transparencia.
   estiran a lo ancho de seis láminas.
 - Las copias en blanco y la mano dejan meter cualquier foto tuya después,
   sin volver a generar.
+
+## mundo/ — escenas con carteles en blanco para "Tus fotos en el mundo"
+
+Doce escenas (nano_banana_pro 2k, 2 créditos cada una, 24 en total) donde se
+monta cualquier foto de Martin con `10-MOTOR/mundo.py`: fachada en Manhattan,
+Grand Central, Shibuya, subte de Londres, aeropuerto, parada en la Rambla,
+columna en París, cartel en Los Ángeles, revista abierta, afiche en Ciudad
+Vieja, cuadro en un living y notebook. Son plantillas: se reutilizan sin
+volver a generar.
+
+## Animaciones de fotos de Martin (kling3_0, 5 s, sin sonido, 7,5 créditos c/u)
+
+Fotos importadas desde apardianstudio.com y animadas con movimiento sutil,
+cámara fija. Están en la biblioteca de Higgsfield (no se pueden bajar a esta
+sesión por la red); se descargan desde la app de Higgsfield.
+
+| Video | Foto original | Uso sugerido |
+|---|---|---|
+| Fuego (16:9) | gastronomia/nicol__IMG_5766 | Reel de gastronomía, fondo de historias |
+| Bolas de espejos (16:9) | salones/la-condesa__IMG_3179 | Reel de fin de año |
+| Velero (9:16) | naturaleza/v__54 | Historia de cuadros para Navidad |
+| Velas (9:16) | salones/golf-b__IMG_0339 | Historia de bodas y salones |
+
+**Saldo al cierre de la tanda:** 197,75 créditos (empezó el día en 298,75).

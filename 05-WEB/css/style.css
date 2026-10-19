@@ -1145,7 +1145,7 @@ footer.site > .cartel-luz.foot-mark .l{line-height:1}
 
 /* fotografía: tres copias pegadas, como en los carruseles */
 .idx-media-copias{background:transparent;overflow:visible}
-.idx-media-copias img{position:absolute;object-fit:cover;border:9px solid #FCFBF8;box-shadow:7px 10px 0 rgba(0,0,0,.42);transition:transform .7s var(--ease)}
+.idx-media-copias img{position:absolute;inset:auto;height:auto;object-fit:cover;border:9px solid #FCFBF8;box-shadow:7px 10px 0 rgba(0,0,0,.42);transition:transform .7s var(--ease)}
 .idx-media-copias img:nth-child(1){left:2%;top:10%;width:58%;aspect-ratio:3/2;transform:rotate(-4deg)}
 .idx-media-copias img:nth-child(2){right:3%;top:0;width:36%;aspect-ratio:4/5;transform:rotate(3.5deg)}
 .idx-media-copias img:nth-child(3){left:38%;bottom:-2%;width:34%;aspect-ratio:4/5;transform:rotate(-1.5deg)}
@@ -1177,7 +1177,7 @@ footer.site > .cartel-luz.foot-mark .l{line-height:1}
 .mus-mini:hover b{color:var(--red)}
 
 /* visor fijo (PC): las muestras viven acá y se cruzan en cortina */
-.idx-visor{position:sticky;top:110px;height:min(72vh,680px);display:none}
+.idx-visor{position:sticky;top:110px;height:min(68vh,640px);display:none}
 .idx-visor .idx-panel{position:absolute;inset:0;padding:0;display:flex;flex-direction:column;opacity:0;visibility:hidden;clip-path:inset(0 0 100% 0);transition:clip-path .8s var(--ease),opacity .01s .8s,visibility 0s .8s}
 .idx-visor .idx-panel.on{opacity:1;visibility:visible;clip-path:inset(0);transition:clip-path .8s var(--ease),opacity 0s,visibility 0s;z-index:2}
 .idx-visor .idx-media{flex:1;aspect-ratio:auto;min-height:0}
