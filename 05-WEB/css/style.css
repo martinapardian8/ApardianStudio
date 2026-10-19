@@ -1151,15 +1151,11 @@ footer.site > .cartel-luz.foot-mark .l{line-height:1}
 .idx-media-copias img:nth-child(3){left:38%;bottom:-2%;width:34%;aspect-ratio:4/5;transform:rotate(-1.5deg)}
 .on .idx-media-copias img:nth-child(1),.idx-fila.activa .idx-media-copias img:nth-child(1){transform:rotate(-2.5deg) translateY(-4px)}
 
-/* Lightroom: antes y después que se arrastra */
-.idx-media-ba .ba-antes{filter:saturate(.42) contrast(.64) brightness(1.07);clip-path:inset(0 calc(100% - var(--x)) 0 0)}
-.ba-linea{position:absolute;top:0;bottom:0;left:var(--x);width:2px;margin-left:-1px;background:var(--red);pointer-events:none}
-.ba-linea::after{content:"";position:absolute;top:50%;left:50%;width:34px;height:34px;margin:-17px 0 0 -17px;border-radius:50%;background:var(--red);box-shadow:0 0 0 4px rgba(255,0,51,.25)}
-.ba-tag{position:absolute;bottom:14px;padding:6px 10px;font-size:10px;color:var(--white);pointer-events:none}
-.ba-tag-a{left:14px;background:#0c0b0a}
-.ba-tag-b{right:14px;background:var(--red)}
-.ba-rango{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:ew-resize;-webkit-appearance:none;appearance:none}
-.ba-rango:focus-visible + *,.idx-media-ba:focus-within{outline:2px solid var(--red);outline-offset:3px}
+/* Lightroom: un lote real, todo editado con la misma mirada.
+   No hay "antes": no se simula una foto sin editar. */
+.idx-media-lote{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:repeat(2,minmax(0,1fr));gap:6px;background:transparent}
+.idx-media-lote img{position:static;width:100%;height:100%;object-fit:cover}
+.lote-pie{position:absolute;left:12px;bottom:12px;padding:6px 10px;font-size:10px;color:var(--white);background:#0c0b0a}
 
 /* páginas web: la portada del sitio en una ventana */
 .idx-media-web{background:#22211f;border-radius:10px;padding-top:34px}

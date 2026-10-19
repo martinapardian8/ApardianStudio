@@ -1,45 +1,188 @@
 {
  "_nota": "Textos nuevos del 19/10/2026 (servicios en índice y sección de música). Se suman con: python3 10-MOTOR/i18n_agregar.py",
  "claves": {
-  "idx100": {"es": "Pasá por cada servicio y mirá trabajo real", "en": "Hover each service to see real work", "pt": "Passe por cada serviço e veja trabalho real"},
-  "idx101": {"es": "Video", "en": "Video", "pt": "Vídeo"},
-  "idx102": {"es": "Fotografía", "en": "Photography", "pt": "Fotografia"},
-  "idx103": {"es": "Lightroom", "en": "Lightroom", "pt": "Lightroom"},
-  "idx104": {"es": "Páginas web", "en": "Websites", "pt": "Sites"},
-  "idx105": {"es": "Música", "en": "Music", "pt": "Música"},
-  "idx106": {"es": "De la idea al master.", "en": "From idea to master.", "pt": "Da ideia ao master."},
-  "idx107": {"es": "Último EP", "en": "Latest EP", "pt": "Último EP"},
-  "idx108": {"es": "Escuchalo acá abajo &darr;", "en": "Listen to it below &darr;", "pt": "Ouça aqui embaixo &darr;"},
-  "idx109": {"es": "Soy pianista y productor. Compongo, grabo, mezclo y masterizo en Ableton. Y si el tema necesita videoclip, también lo filmo.", "en": "I'm a pianist and producer. I compose, record, mix and master in Ableton. And if the song needs a music video, I shoot that too.", "pt": "Sou pianista e produtor. Componho, gravo, mixo e masterizo no Ableton. E se a música precisar de videoclipe, eu também filmo."},
-  "idx110": {"es": "Sin editar", "en": "Unedited", "pt": "Sem edição"},
-  "idx111": {"es": "Editada", "en": "Edited", "pt": "Editada"},
-  "idx112": {"es": "Comparar sin editar y editada", "en": "Compare unedited and edited", "pt": "Comparar sem edição e editada"},
-  "idx113": {"es": "Composición", "en": "Composition", "pt": "Composição"},
-  "idx114": {"es": "Grabación", "en": "Recording", "pt": "Gravação"},
-  "idx115": {"es": "Videoclips", "en": "Music videos", "pt": "Videoclipes"},
-  "idx116": {"es": "Producir un tema <span class=\"red\">&rarr;</span>", "en": "Produce a song <span class=\"red\">&rarr;</span>", "pt": "Produzir uma música <span class=\"red\">&rarr;</span>"},
-  "lbl120": {"es": "05 — Música", "en": "05 — Music", "pt": "05 — Música"},
-  "mush2": {"es": "De la idea<br>al <span class=\"red\">master.</span>", "en": "From idea<br>to <span class=\"red\">master.</span>", "pt": "Da ideia<br>ao <span class=\"red\">master.</span>"},
-  "mus121": {"es": "Soy pianista y productor. Compongo, grabo, mezclo y masterizo en Ableton. Y si el tema pide video, también lo filmo.", "en": "I'm a pianist and producer. I compose, record, mix and master in Ableton. And if the song calls for video, I shoot that too.", "pt": "Sou pianista e produtor. Componho, gravo, mixo e masterizo no Ableton. E se a música pede vídeo, eu também filmo."},
-  "mus122": {"es": "Composición", "en": "Composition", "pt": "Composição"},
-  "mus123": {"es": "La idea, la armonía y el arreglo.", "en": "The idea, the harmony and the arrangement.", "pt": "A ideia, a harmonia e o arranjo."},
-  "mus124": {"es": "Grabación", "en": "Recording", "pt": "Gravação"},
-  "mus125": {"es": "Piano, voces e instrumentos, con el sonido que buscás.", "en": "Piano, vocals and instruments, with the sound you're after.", "pt": "Piano, vozes e instrumentos, com o som que você procura."},
-  "mus126": {"es": "Mix y mastering", "en": "Mixing and mastering", "pt": "Mixagem e masterização"},
-  "mus127": {"es": "Que suene igual de bien en el auto, en el celular y en Spotify.", "en": "So it sounds just as good in the car, on your phone and on Spotify.", "pt": "Para soar igual de bem no carro, no celular e no Spotify."},
-  "mus128": {"es": "Videoclip", "en": "Music video", "pt": "Videoclipe"},
-  "mus129": {"es": "El tema filmado y editado, listo para lanzarlo.", "en": "The song shot and edited, ready to release.", "pt": "A música filmada e editada, pronta para lançar."},
-  "mus130": {"es": "Producir un tema <span>&rarr;</span>", "en": "Produce a song <span>&rarr;</span>", "pt": "Produzir uma música <span>&rarr;</span>"},
-  "mus131": {"es": "Mi último EP", "en": "My latest EP", "pt": "Meu último EP"},
-  "mus132": {"es": "temas", "en": "songs", "pt": "músicas"},
-  "mus133": {"es": "Tocá para escucharlo acá", "en": "Tap to listen here", "pt": "Toque para ouvir aqui"},
-  "mus134": {"es": "Toda mi música en Spotify", "en": "All my music on Spotify", "pt": "Toda a minha música no Spotify"},
-  "mus135": {"es": "Cargar el reproductor de Spotify", "en": "Load the Spotify player", "pt": "Carregar o player do Spotify"},
-  "nav101": {"es": "Música", "en": "Music", "pt": "Música"},
-  "nav102": {"es": "Música", "en": "Music", "pt": "Música"}
+  "idx100": {
+   "es": "Pasá por cada servicio y mirá trabajo real",
+   "en": "Hover each service to see real work",
+   "pt": "Passe por cada serviço e veja trabalho real"
+  },
+  "idx101": {
+   "es": "Video",
+   "en": "Video",
+   "pt": "Vídeo"
+  },
+  "idx102": {
+   "es": "Fotografía",
+   "en": "Photography",
+   "pt": "Fotografia"
+  },
+  "idx103": {
+   "es": "Lightroom",
+   "en": "Lightroom",
+   "pt": "Lightroom"
+  },
+  "idx104": {
+   "es": "Páginas web",
+   "en": "Websites",
+   "pt": "Sites"
+  },
+  "idx105": {
+   "es": "Música",
+   "en": "Music",
+   "pt": "Música"
+  },
+  "idx106": {
+   "es": "De la idea al master.",
+   "en": "From idea to master.",
+   "pt": "Da ideia ao master."
+  },
+  "idx107": {
+   "es": "Último EP",
+   "en": "Latest EP",
+   "pt": "Último EP"
+  },
+  "idx108": {
+   "es": "Escuchalo acá abajo &darr;",
+   "en": "Listen to it below &darr;",
+   "pt": "Ouça aqui embaixo &darr;"
+  },
+  "idx109": {
+   "es": "Soy pianista y productor. Compongo, grabo, mezclo y masterizo en Ableton. Y si el tema necesita videoclip, también lo filmo.",
+   "en": "I'm a pianist and producer. I compose, record, mix and master in Ableton. And if the song needs a music video, I shoot that too.",
+   "pt": "Sou pianista e produtor. Componho, gravo, mixo e masterizo no Ableton. E se a música precisar de videoclipe, eu também filmo."
+  },
+  "idx113": {
+   "es": "Composición",
+   "en": "Composition",
+   "pt": "Composição"
+  },
+  "idx114": {
+   "es": "Grabación",
+   "en": "Recording",
+   "pt": "Gravação"
+  },
+  "idx115": {
+   "es": "Videoclips",
+   "en": "Music videos",
+   "pt": "Videoclipes"
+  },
+  "idx116": {
+   "es": "Producir un tema <span class=\"red\">&rarr;</span>",
+   "en": "Produce a song <span class=\"red\">&rarr;</span>",
+   "pt": "Produzir uma música <span class=\"red\">&rarr;</span>"
+  },
+  "lbl120": {
+   "es": "05 — Música",
+   "en": "05 — Music",
+   "pt": "05 — Música"
+  },
+  "mush2": {
+   "es": "De la idea<br>al <span class=\"red\">master.</span>",
+   "en": "From idea<br>to <span class=\"red\">master.</span>",
+   "pt": "Da ideia<br>ao <span class=\"red\">master.</span>"
+  },
+  "mus121": {
+   "es": "Soy pianista y productor. Compongo, grabo, mezclo y masterizo en Ableton. Y si el tema pide video, también lo filmo.",
+   "en": "I'm a pianist and producer. I compose, record, mix and master in Ableton. And if the song calls for video, I shoot that too.",
+   "pt": "Sou pianista e produtor. Componho, gravo, mixo e masterizo no Ableton. E se a música pede vídeo, eu também filmo."
+  },
+  "mus122": {
+   "es": "Composición",
+   "en": "Composition",
+   "pt": "Composição"
+  },
+  "mus123": {
+   "es": "La idea, la armonía y el arreglo.",
+   "en": "The idea, the harmony and the arrangement.",
+   "pt": "A ideia, a harmonia e o arranjo."
+  },
+  "mus124": {
+   "es": "Grabación",
+   "en": "Recording",
+   "pt": "Gravação"
+  },
+  "mus125": {
+   "es": "Piano, voces e instrumentos, con el sonido que buscás.",
+   "en": "Piano, vocals and instruments, with the sound you're after.",
+   "pt": "Piano, vozes e instrumentos, com o som que você procura."
+  },
+  "mus126": {
+   "es": "Mix y mastering",
+   "en": "Mixing and mastering",
+   "pt": "Mixagem e masterização"
+  },
+  "mus127": {
+   "es": "Que suene igual de bien en el auto, en el celular y en Spotify.",
+   "en": "So it sounds just as good in the car, on your phone and on Spotify.",
+   "pt": "Para soar igual de bem no carro, no celular e no Spotify."
+  },
+  "mus128": {
+   "es": "Videoclip",
+   "en": "Music video",
+   "pt": "Videoclipe"
+  },
+  "mus129": {
+   "es": "El tema filmado y editado, listo para lanzarlo.",
+   "en": "The song shot and edited, ready to release.",
+   "pt": "A música filmada e editada, pronta para lançar."
+  },
+  "mus130": {
+   "es": "Producir un tema <span>&rarr;</span>",
+   "en": "Produce a song <span>&rarr;</span>",
+   "pt": "Produzir uma música <span>&rarr;</span>"
+  },
+  "mus131": {
+   "es": "Mi último EP",
+   "en": "My latest EP",
+   "pt": "Meu último EP"
+  },
+  "mus132": {
+   "es": "temas",
+   "en": "songs",
+   "pt": "músicas"
+  },
+  "mus133": {
+   "es": "Tocá para escucharlo acá",
+   "en": "Tap to listen here",
+   "pt": "Toque para ouvir aqui"
+  },
+  "mus134": {
+   "es": "Toda mi música en Spotify",
+   "en": "All my music on Spotify",
+   "pt": "Toda a minha música no Spotify"
+  },
+  "mus135": {
+   "es": "Cargar el reproductor de Spotify",
+   "en": "Load the Spotify player",
+   "pt": "Carregar o player do Spotify"
+  },
+  "nav101": {
+   "es": "Música",
+   "en": "Music",
+   "pt": "Música"
+  },
+  "nav102": {
+   "es": "Música",
+   "en": "Music",
+   "pt": "Música"
+  },
+  "idx130": {
+   "es": "Seis fotos, seis revelados distintos",
+   "en": "Six photos, six different edits",
+   "pt": "Seis fotos, seis revelações diferentes"
+  }
  },
  "whatsapp": {
-  "Hola Martin, quiero producir un tema": {"en": "Hi Martin, I'd like to produce a song", "pt": "Oi Martin, quero produzir uma música"}
+  "Hola Martin, quiero producir un tema": {
+   "en": "Hi Martin, I'd like to produce a song",
+   "pt": "Oi Martin, quero produzir uma música"
+  }
  },
- "renumerar": ["lbl016", "lbl017", "lbl018", "lbl019", "lbl020"]
+ "renumerar": [
+  "lbl016",
+  "lbl017",
+  "lbl018",
+  "lbl019",
+  "lbl020"
+ ]
 }

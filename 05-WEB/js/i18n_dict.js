@@ -154,9 +154,6 @@ window.APARDIAN_I18N = {
   "idx107": "Latest EP",
   "idx108": "Listen to it below &darr;",
   "idx109": "I'm a pianist and producer. I compose, record, mix and master in Ableton. And if the song needs a music video, I shoot that too.",
-  "idx110": "Unedited",
-  "idx111": "Edited",
-  "idx112": "Compare unedited and edited",
   "idx113": "Composition",
   "idx114": "Recording",
   "idx115": "Music videos",
@@ -179,7 +176,8 @@ window.APARDIAN_I18N = {
   "mus134": "All my music on Spotify",
   "mus135": "Load the Spotify player",
   "nav101": "Music",
-  "nav102": "Music"
+  "nav102": "Music",
+  "idx130": "Six photos, six different edits"
  },
  "pt": {
   "nav001": "Trabalhos",
@@ -335,9 +333,6 @@ window.APARDIAN_I18N = {
   "idx107": "Último EP",
   "idx108": "Ouça aqui embaixo &darr;",
   "idx109": "Sou pianista e produtor. Componho, gravo, mixo e masterizo no Ableton. E se a música precisar de videoclipe, eu também filmo.",
-  "idx110": "Sem edição",
-  "idx111": "Editada",
-  "idx112": "Comparar sem edição e editada",
   "idx113": "Composição",
   "idx114": "Gravação",
   "idx115": "Videoclipes",
@@ -360,7 +355,8 @@ window.APARDIAN_I18N = {
   "mus134": "Toda a minha música no Spotify",
   "mus135": "Carregar o player do Spotify",
   "nav101": "Música",
-  "nav102": "Música"
+  "nav102": "Música",
+  "idx130": "Seis fotos, seis revelações diferentes"
  }
 };
 window.APARDIAN_I18N_GEN = {

@@ -1,12 +1,13 @@
-# Carruseles collage — textos para publicar
+# Carruseles continuos — textos para publicar
 
-Nueve carruseles continuos de 6 láminas (4:5, 1080×1350). Cada uno es un solo
-lienzo cortado en seis: las fotos, las cintas y el hilo rojo cruzan de una
-lámina a la otra, así que **se suben en orden, del 01 al 06, sin recortar**.
+Nueve carruseles de 6 láminas (4:5, 1080×1350), en estilo editorial: fotos
+derechas, mucho aire, Anton y el rojo como acento. Cada uno es un solo lienzo
+cortado en seis: las fotos y los títulos cruzan de una lámina a la otra, así
+que **se suben en orden, del 01 al 06, sin recortar**.
 
 Todas las fotos son tuyas (galería publicada). La IA de Higgsfield solo puso
-los materiales: papel, chinches, cinta, clips, broches, la mano y las copias
-en blanco donde van tus fotos.
+el papel de fondo, la mano, el celular y las copias en blanco donde van tus
+fotos. Sin cinta, sin papel roto, sin chinches ni hilo: lo pediste así.
 
 `_panorama.jpg` en cada carpeta es solo para mirar el carrusel entero; no se sube.
 
@@ -83,7 +84,7 @@ No es solo el packshot. Es el material completo para tu tienda, tu web y tus red
 ## 06 · Edición — "Vos disparás. Yo edito."
 Para: otros fotógrafos, de Uruguay y de afuera. El servicio que más escala.
 ```
-Vos disparás. Yo edito. Deslizá despacio: cada foto se arregla al pasar de lámina.
+Vos disparás. Yo edito. Te devuelvo el lote revelado, parejo y listo para entregar.
 
 Culling, revelado con tu preset, consistencia en todo el lote y catálogo listo para exportar. Tu lote en 72 horas, desde cualquier país.
 
@@ -91,9 +92,9 @@ Decime cuántas fotos son y te paso precio en el día: +598 91 962 962
 
 #lightroom #edicionfotografica #fotografosuruguay #postproduccion #photoediting
 ```
-Nota honesta: el "sin editar" es una simulación hecha desde la foto final (igual
-que en los avisos de edición). Si tenés el RAW real de alguna, conviene
-reemplazarla: un antes/después verdadero vende más.
+Todo lo que se ve es un lote real tuyo (un mismo evento), ya editado. No hay
+"antes": no tenemos el RAW y simularlo sería mentir. Si algún día exportás un
+RAW junto a su versión final, ese sí es un antes/después honesto.
 
 ## 07 · Páginas web — "Tu Instagram no es tu página web"
 Para: negocios que hoy venden solo por Instagram.

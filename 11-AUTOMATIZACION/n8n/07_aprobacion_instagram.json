@@ -1,0 +1,692 @@
+{
+  "name": "APARDIAN 07 · Aprobación de Instagram",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "days",
+              "triggerAtHour": 10
+            }
+          ]
+        }
+      },
+      "id": "889f28c5-63da-514d-ab76-b3f317b3b4a1",
+      "name": "Programado",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        -100
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "801a71ea-97df-5db9-ab55-6de891da0d30",
+      "name": "Probar a mano",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        100
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "4e066fa7-cfde-5423-80cf-d9cbae0c9643",
+              "name": "SHEET_ID",
+              "value": "PEGAR_ID_DE_LA_PLANILLA",
+              "type": "string"
+            },
+            {
+              "id": "457e262c-e158-5c7f-9684-ea02b04c22b3",
+              "name": "TELEGRAM_CHAT_ID",
+              "value": "PEGAR_CHAT_ID",
+              "type": "string"
+            },
+            {
+              "id": "bc0d9bd7-53e0-5baa-b0f8-c7a6578d32ca",
+              "name": "URL_APROBAR_IG",
+              "value": "https://TU-INSTANCIA.app.n8n.cloud/webhook/apardian-ig-aprobar",
+              "type": "string"
+            },
+            {
+              "id": "a9b5ecc4-e44b-5594-b319-aaf37e64b1f3",
+              "name": "TOKEN",
+              "value": "CAMBIAR-POR-UNA-CLAVE-LARGA",
+              "type": "string"
+            },
+            {
+              "id": "565b9a25-40c2-5808-accb-00f06d700171",
+              "name": "HORAS_ANTES",
+              "value": 36,
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "4e2449ec-23b8-50ad-8cb9-4ac7ac49d548",
+      "name": "Config",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        240,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "read",
+        "documentId": {
+          "__rl": true,
+          "value": "={{ $('Config').first().json.SHEET_ID }}",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Calendario",
+          "mode": "name"
+        },
+        "options": {}
+      },
+      "id": "c4aeb781-cb4c-5450-8d06-21e0c0f960bc",
+      "name": "Leer Calendario",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        480,
+        0
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "REEMPLAZAR",
+          "name": "Google Sheets"
+        }
+      },
+      "executeOnce": true,
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "jsCode": "const esc = s => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');\n\nconst enUY = (fecha, hora) => new Date(fecha + 'T' + (hora || '00:00') + ':00-03:00');\nconst ahoraISO = () => new Date().toISOString();\n\n// Las publicaciones pendientes de las próximas HORAS_ANTES horas (y las que\n// quedaron sin aprobar de hoy). Una por mensaje, en orden de fecha.\n// Mientras sigan pendientes, se vuelven a pedir todos los días: es el recordatorio.\nconst c = $('Config').first().json;\nconst ahora = Date.now(), lim = ahora + Number(c.HORAS_ANTES || 36) * 3600e3;\nconst link = (id, acc) => c.URL_APROBAR_IG + '?id=' + encodeURIComponent(id) + '&a=' + acc + '&t=' + encodeURIComponent(c.TOKEN);\nconst out = [];\nfor (const r of $('Leer Calendario').all()) {\n  const f = r.json;\n  if (String(f.estado || '').trim() !== 'pendiente' || !f.id) continue;\n  const t = enUY(f.fecha, f.hora).getTime();\n  if (isNaN(t) || t > lim || t < ahora - 12 * 3600e3) continue;\n  const urls = String(f.urls || '').split('|').filter(Boolean);\n  const foto = urls.find(u => /\\.jpe?g$/i.test(u)) || '';\n  const cuando = new Date(t).toLocaleString('es-UY', { timeZone: 'America/Montevideo', weekday: 'long', day: 'numeric', month: 'numeric', hour: '2-digit', minute: '2-digit', hour12: false });\n  const pie = String(f.pie || '');\n  // el pie de una foto de Telegram tiene 1024 caracteres como máximo\n  const vista = pie.length > 600 ? pie.slice(0, 600) + '…' : pie;\n  const texto = '<b>' + esc(f.tipo) + ' · ' + esc(f.titulo) + '</b>\\n' + esc(cuando) +\n    ' · ' + urls.length + ' archivo' + (urls.length === 1 ? '' : 's') + '\\n\\n' + esc(vista) +\n    (f.tipo === 'REEL' && !foto ? '\\n\\n<a href=\"' + esc(urls[0]) + '\">Ver el video</a>' : '') +\n    '\\n\\n<i>Si lo aprobás, se publica solo a esa hora.</i>';\n  out.push({ json: { id: f.id, t, foto, texto, url_aprobar: link(f.id, 'aprobar'), url_rechazar: link(f.id, 'rechazar') } });\n}\nout.sort((x, y) => x.json.t - y.json.t);\nreturn out;\n"
+      },
+      "id": "be78253b-b239-54ae-9bfb-ec414176ae64",
+      "name": "¿Qué hay que aprobar?",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        720,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose"
+          },
+          "conditions": [
+            {
+              "id": "ff9ecbd5-e40f-54dd-80c8-13d663a6bdbc",
+              "leftValue": "={{ !!$json.foto }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "0699c92e-2659-5fd4-bb72-ed7bd69c1dd5",
+      "name": "¿Tiene imagen?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        960,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Config').first().json.TELEGRAM_CHAT_ID }}",
+        "replyMarkup": "inlineKeyboard",
+        "inlineKeyboard": {
+          "rows": [
+            {
+              "row": {
+                "buttons": [
+                  {
+                    "text": "Aprobar",
+                    "additionalFields": {
+                      "url": "={{ $json.url_aprobar }}"
+                    }
+                  },
+                  {
+                    "text": "No publicar",
+                    "additionalFields": {
+                      "url": "={{ $json.url_rechazar }}"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "operation": "sendPhoto",
+        "binaryData": false,
+        "file": "={{ $json.foto }}",
+        "additionalFields": {
+          "caption": "={{ $json.texto }}",
+          "parse_mode": "HTML"
+        }
+      },
+      "id": "b4177c09-83bb-5999-b664-80c657895592",
+      "name": "Pedir aprobación (foto)",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1200,
+        -120
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "REEMPLAZAR",
+          "name": "Telegram Apardian"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Config').first().json.TELEGRAM_CHAT_ID }}",
+        "replyMarkup": "inlineKeyboard",
+        "inlineKeyboard": {
+          "rows": [
+            {
+              "row": {
+                "buttons": [
+                  {
+                    "text": "Aprobar",
+                    "additionalFields": {
+                      "url": "={{ $json.url_aprobar }}"
+                    }
+                  },
+                  {
+                    "text": "No publicar",
+                    "additionalFields": {
+                      "url": "={{ $json.url_rechazar }}"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "text": "={{ $json.texto }}",
+        "additionalFields": {
+          "appendAttribution": false,
+          "parse_mode": "HTML",
+          "disable_web_page_preview": false
+        }
+      },
+      "id": "61cfa8e0-001b-52a1-b4db-93a2b40296d9",
+      "name": "Pedir aprobación (texto)",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1200,
+        120
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "REEMPLAZAR",
+          "name": "Telegram Apardian"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "httpMethod": "GET",
+        "path": "apardian-ig-aprobar",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "bfba8923-3259-5a74-b7fc-a744e4014f2c",
+      "name": "Botón de Telegram",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        0,
+        600
+      ],
+      "webhookId": "89b07b94-f4ac-546b-9a52-8c90a8683428"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "471085fe-3fba-58f1-9bb5-acec83294b8e",
+              "name": "SHEET_ID",
+              "value": "PEGAR_ID_DE_LA_PLANILLA",
+              "type": "string"
+            },
+            {
+              "id": "1f3f1969-7c61-5d41-993b-1731edd49330",
+              "name": "TELEGRAM_CHAT_ID",
+              "value": "PEGAR_CHAT_ID",
+              "type": "string"
+            },
+            {
+              "id": "15cb77de-ece5-517e-9165-eeec1c243cf9",
+              "name": "TOKEN",
+              "value": "CAMBIAR-POR-UNA-CLAVE-LARGA",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "0a40f168-2ab6-5841-b2ff-4d06655f658c",
+      "name": "Config aprobación",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        240,
+        600
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "read",
+        "documentId": {
+          "__rl": true,
+          "value": "={{ $('Config aprobación').first().json.SHEET_ID }}",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Calendario",
+          "mode": "name"
+        },
+        "options": {}
+      },
+      "id": "3a916779-eac1-5ec6-bedb-9ceeae680651",
+      "name": "Leer Calendario (aprobación)",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        480,
+        600
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "REEMPLAZAR",
+          "name": "Google Sheets"
+        }
+      },
+      "executeOnce": true,
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "jsCode": "const esc = s => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');\n\nconst enUY = (fecha, hora) => new Date(fecha + 'T' + (hora || '00:00') + ':00-03:00');\nconst ahoraISO = () => new Date().toISOString();\n\nconst c = $('Config aprobación').first().json;\nconst q = $('Botón de Telegram').first().json.query || {};\nconst pagina = (titulo, txt) => '<!doctype html><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">' +\n  '<body style=\"font-family:system-ui;background:#F8F7F6;color:#171717;padding:32px\"><h2 style=\"margin:0 0 8px\">' +\n  esc(titulo) + '</h2><p>' + esc(txt) + '</p></body>';\nif (!q.t || q.t !== c.TOKEN) {\n  return [{ json: { ok: false, html: pagina('Link no válido', 'El token no coincide. No se cambió nada.') } }];\n}\nconst f = $input.all().map(r => r.json).find(r => String(r.id) === String(q.id));\nif (!f) return [{ json: { ok: false, html: pagina('No encontré esa publicación', String(q.id || '')) } }];\nif (f.publicado_en) return [{ json: { ok: false, html: pagina('Ya está publicada', f.titulo + ' · ' + f.publicado_en) } }];\nconst aprobar = q.a === 'aprobar';\nconst fila = { id: f.id, estado: aprobar ? 'aprobado' : 'rechazado',\n               aprobado_por: aprobar ? 'Martin (Telegram)' : '', aprobado_en: aprobar ? ahoraISO() : '', error: '' };\nconst cuando = enUY(f.fecha, f.hora).toLocaleString('es-UY', { timeZone: 'America/Montevideo', weekday: 'long', day: 'numeric', month: 'numeric', hour: '2-digit', minute: '2-digit', hour12: false });\nreturn [{ json: { ok: true, fila,\n  html: pagina(aprobar ? 'Aprobado ✓' : 'No se publica', aprobar ? f.titulo + ' sale el ' + cuando + '.' : f.titulo + ' quedó afuera del calendario.'),\n  telegram_text: (aprobar ? '✅ Aprobado: ' : '✖️ No se publica: ') + '<b>' + esc(f.titulo) + '</b>' + (aprobar ? '\\nSale el ' + esc(cuando) + '.' : '') } }];\n"
+      },
+      "id": "e61e3955-79bb-534b-83f7-9919f6c03981",
+      "name": "Validar y decidir",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        720,
+        600
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose"
+          },
+          "conditions": [
+            {
+              "id": "923ca44f-921c-54f7-a4e9-abca033e2503",
+              "leftValue": "={{ $json.ok }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "58939c4e-b7d2-5ac3-b6e6-297c8a16ac2b",
+      "name": "¿Válido?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        960,
+        600
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "return [{ json: $input.first().json.fila }];\n"
+      },
+      "id": "3837b6e2-dbf8-5246-aef9-b1a74c16d3ac",
+      "name": "Fila aprobación",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1200,
+        500
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "={{ $('Config aprobación').first().json.SHEET_ID }}",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Calendario",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": []
+        },
+        "options": {}
+      },
+      "id": "c9cfe0a2-a239-5428-bd14-5e027ee24b34",
+      "name": "Guardar aprobación",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        1440,
+        500
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "REEMPLAZAR",
+          "name": "Google Sheets"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Config aprobación').first().json.TELEGRAM_CHAT_ID }}",
+        "text": "={{ $('Validar y decidir').first().json.telegram_text }}",
+        "additionalFields": {
+          "appendAttribution": false,
+          "parse_mode": "HTML",
+          "disable_web_page_preview": true
+        }
+      },
+      "id": "c9fe1e7b-0c36-59f9-b09e-94bd3bde6359",
+      "name": "Confirmar en Telegram",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1680,
+        500
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "REEMPLAZAR",
+          "name": "Telegram Apardian"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "={{ $('Validar y decidir').first().json.html }}",
+        "options": {
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Content-Type",
+                "value": "text/html; charset=utf-8"
+              }
+            ]
+          }
+        }
+      },
+      "id": "b254679e-0278-5d20-be52-d78ff1e58bd1",
+      "name": "Página: listo",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        1920,
+        500
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "={{ $('Validar y decidir').first().json.html }}",
+        "options": {
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Content-Type",
+                "value": "text/html; charset=utf-8"
+              }
+            ]
+          }
+        }
+      },
+      "id": "14065d3f-bffc-5443-bad2-3d1e134a74d3",
+      "name": "Página: no válido",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        1200,
+        700
+      ]
+    }
+  ],
+  "connections": {
+    "Programado": {
+      "main": [
+        [
+          {
+            "node": "Config",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Probar a mano": {
+      "main": [
+        [
+          {
+            "node": "Config",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Config": {
+      "main": [
+        [
+          {
+            "node": "Leer Calendario",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Leer Calendario": {
+      "main": [
+        [
+          {
+            "node": "¿Qué hay que aprobar?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "¿Qué hay que aprobar?": {
+      "main": [
+        [
+          {
+            "node": "¿Tiene imagen?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "¿Tiene imagen?": {
+      "main": [
+        [
+          {
+            "node": "Pedir aprobación (foto)",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Pedir aprobación (texto)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Botón de Telegram": {
+      "main": [
+        [
+          {
+            "node": "Config aprobación",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Config aprobación": {
+      "main": [
+        [
+          {
+            "node": "Leer Calendario (aprobación)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Leer Calendario (aprobación)": {
+      "main": [
+        [
+          {
+            "node": "Validar y decidir",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validar y decidir": {
+      "main": [
+        [
+          {
+            "node": "¿Válido?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "¿Válido?": {
+      "main": [
+        [
+          {
+            "node": "Fila aprobación",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Página: no válido",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fila aprobación": {
+      "main": [
+        [
+          {
+            "node": "Guardar aprobación",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Guardar aprobación": {
+      "main": [
+        [
+          {
+            "node": "Confirmar en Telegram",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Confirmar en Telegram": {
+      "main": [
+        [
+          {
+            "node": "Página: listo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "America/Montevideo"
+  },
+  "meta": {
+    "templateCredsSetupCompleted": false
+  },
+  "tags": []
+}

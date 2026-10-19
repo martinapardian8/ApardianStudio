@@ -43,6 +43,7 @@ Options -Indexes -MultiViews
 # 5) Tipos correctos para las fuentes y el security.txt
 <IfModule mod_mime.c>
   AddType font/woff2 .woff2
+  AddType video/webm .webm
   AddType text/plain .txt
 </IfModule>
 
@@ -55,6 +56,7 @@ Options -Indexes -MultiViews
   ExpiresByType image/webp "access plus 30 days"
   ExpiresByType image/svg+xml "access plus 30 days"
   ExpiresByType video/mp4 "access plus 30 days"
+  ExpiresByType video/webm "access plus 30 days"
   ExpiresByType font/woff2 "access plus 30 days"
   ExpiresByType text/css "access plus 7 days"
   ExpiresByType application/javascript "access plus 7 days"

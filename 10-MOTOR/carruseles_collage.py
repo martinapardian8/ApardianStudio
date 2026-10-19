@@ -318,7 +318,7 @@ def web():
     a = L.navegador(os.path.join(CAP, "d_hero.png"), X(1, .30), 960, 760, rot=-2)
 
     b = L.telefono(os.path.join(CAP, "m_galeria.png"), X(1, .72), 520, 820, rot=4)
-    L.papel(X(1, .55), 1120, 440, 220, -3, "Anda en el celular", k=1, px=48)
+    L.papel(X(1, .82), 1265, 440, 220, -3, "Anda en el celular", k=1, px=48)
     c = L.navegador(os.path.join(CAP, "d_galeria.png"), X(2, .52), 420, 900, rot=2)
     L.papel(X(2, .30), 900, 470, 230, 3, "Tu trabajo en grande", k=2, px=48,
             sub="no en un cuadradito")
@@ -358,7 +358,8 @@ def cuadros():
     # pisar el titulo y sube en el resto para que los cuadros respiren
     cuerda = [(-20, 790), (X(1, .15), 400), (X(2, .5), 430), (X(3, .5), 400),
               (X(4, .5), 430), (X(5, .3), 560)]
-    L.hilo(cuerda, grosor=3, caida=0.03, color=NEGRO)
+    if not L.editorial:
+        L.hilo(cuerda, grosor=3, caida=0.03, color=NEGRO)
 
     def altura(x):
         for (x0, y0), (x1, y1) in zip(cuerda, cuerda[1:]):
@@ -401,7 +402,7 @@ def musica():
     a = L.foto(F("musica", "nw__IMG_7233.jpg"), X(1, .14), 860, 560, 373, rot=-3)
 
     b = L.foto(F("musica", "la-estacion__IMG_8038.jpg"), X(1, .62), 420, 600, 400, rot=3)
-    L.papel(X(1, .30), 820, 420, 220, -3, "Composición", k=1, px=56)
+    L.papel(X(1, .74), 900, 420, 220, -3, "Composición", k=1, px=56)
     c = L.foto(F("musica", "la-estacion__IMG_8044.jpg"), X(2, .40), 900, 640, 427, rot=-2)
     L.papel(X(2, .62), 330, 420, 220, 3, "Grabación", k=2, px=60)
     d = L.foto(F("musica", "la-estacion__IMG_8043.jpg"), X(3, .05), 430, 430, 580, rot=2)

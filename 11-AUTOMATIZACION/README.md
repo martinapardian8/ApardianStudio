@@ -23,11 +23,17 @@ hipótesis a validar con la operación real (se anotan en `09-ESTUDIO/APRENDIZAJ
 | **P4** | **Prospección de fotógrafos para edición en Lightroom** (mismo motor, otro rubro, ES/EN/PT) | El servicio que más escala no tiene canal de venta propio | Bajo una vez hecho P3 · 3 h (rubro nuevo + plantillas en 3 idiomas) | +US$ 5–10 | **Alto a mediano plazo**: cliente recurrente, sin estar presente, de cualquier país | 4 |
 | **P5** | **Pedido de reseña y testimonio post-entrega** | Falta prueba social con nombre y apellido (Google, web, Instagram) | Bajo · 1 h (mensaje a los 3 días de entregar) | US$ 0 | **Medio**: mejora la conversión de todo lo demás, incluido el mail en frío | 2 |
 | **P6** | **Reactivación de clientes viejos** (80+ proyectos entregados) | Gente que ya confió y no volvió a saber de Martin | Bajo · 2 h (lista + mensaje por temporada) | US$ 0 | **Medio-alto**: el cliente que ya pagó es el más barato de volver a cerrar. Fechas clave: fin de año, verano, Día de la Madre | 3 |
-| **P7** | **Publicación programada del contenido** (Meta Business Suite o n8n → Instagram Graph API) | Publicar a mano y olvidarse semanas | Bajo con Meta Business Suite (gratis) · Medio con n8n | US$ 0 | **Medio**: constancia. No vende solo, pero sostiene todo | 2 |
+| **P7** | **Calendario con aprobación y publicación automática en Instagram** (flujos `07` y `08`: Martin aprueba desde Telegram y el agente publica a la hora con la Instagram Graph API) | Publicar a mano, olvidarse semanas, o que salga algo sin que Martin lo vea | Medio · 2–3 h (cuenta profesional, app de Meta, token, planilla) | US$ 0 | **Medio**: constancia sin perder control. No vende solo, pero sostiene todo | 2 |
 | **P8** | **Reporte semanal de métricas** (lunes 9:00 en Telegram) | No se sabe qué canal trae consultas (pregunta abierta en `APRENDIZAJES.md`) | Medio · 3 h | US$ 0–2 | **Medio**: decide dónde poner plata y tiempo | 4 |
 
 **Orden de ataque:** primero P1 y P2 (cuidan las consultas que ya existen, cero
 riesgo), después P3 (trae consultas nuevas), y recién con P3 andando, P4.
+
+**P7 en detalle:** la planilla `Calendario` tiene cada posteo y reel del
+calendario con su pie de foto. Un día antes, el flujo 07 le manda a Martin por
+Telegram la imagen y el pie con dos botones, *Aprobar* y *No publicar*. Lo
+aprobado lo publica el flujo 08 a la hora fijada. Lo que no se aprueba no sale.
+Las historias siguen siendo manuales. Ver `INSTAGRAM_APROBACION.md`.
 
 ---
 
@@ -206,6 +212,10 @@ conviene dejarlas en Opus: son las que venden.
 | `n8n/04_seguimiento.json` | Seguimientos a los 4 y 9 días |
 | `n8n/05_respuestas.json` | Clasifica respuestas y avisa a Martin |
 | `n8n/06_bienvenida_whatsapp.json` | Recibe una consulta y propone respuesta (P1) |
+| `n8n/07_aprobacion_instagram.json` | Pide aprobación por Telegram de lo que sale en las próximas 36 h (P7) |
+| `n8n/08_publicador_instagram.json` | Publica en Instagram lo aprobado, a su hora (P7) |
+| `calendario_instagram.csv` | La hoja `Calendario` lista para importar (sale de `10-MOTOR/calendario_sheet.py`) |
+| `INSTAGRAM_APROBACION.md` | Cómo se arma y se usa la publicación con aprobación |
 | `prompts/*.md` | Los textos que guían a cada agente. Editables |
 | `prompts/plantillas_mail.md` | Mails de ejemplo por rubro, escritos a mano |
 | `sheets_estructura.md` | Columnas y estados del CRM |

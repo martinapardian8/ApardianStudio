@@ -96,14 +96,6 @@
     if (pc.addEventListener) pc.addEventListener('change', modo); else if (pc.addListener) pc.addListener(modo);
     modo();
 
-    // antes y después: el control es un input range, así anda con teclado
-    $$('.idx-media-ba', sec).forEach(function (fig) {
-      var r = fig.querySelector('.ba-rango');
-      if (!r) return;
-      var poner = function () { fig.style.setProperty('--x', r.value + '%'); };
-      r.addEventListener('input', poner);
-      poner();
-    });
   })();
 
   /* ---------------- MÚSICA ---------------- */

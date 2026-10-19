@@ -631,7 +631,7 @@ document.documentElement.classList.add('js');
   // cada letra se enciende con relieve según lo cerca que pase el cursor.
   (function luces() {
     if (/[?&]edit=1/.test(location.search)) return;   // el editor necesita el texto entero
-    var objetivos = $$('.hero h1, .sec-h2, .works h2, .contact h2, .grande-card h3, .svc-paso h3, .foot-mark');
+    var objetivos = $$('.hero h1, .sec-h2, .works h2, .contact h2, .grande-card h3, .svc-paso h3, .idx-nombre, .foot-mark');
     if (!objetivos.length) return;
 
     function partir(el) {

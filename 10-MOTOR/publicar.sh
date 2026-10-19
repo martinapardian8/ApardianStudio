@@ -23,7 +23,8 @@ CACHE="$P/06-NOTAS/.cache-video"
 mkdir -p "$DST/img/video" "$CACHE"
 for f in "$SRC/img/video/"*.mp4; do
   b=$(basename "$f")
-  firma=$(stat -f "%z-%m" "$f")
+  # tamaño y fecha del original: stat de macOS (-f) o de Linux (-c)
+  if [ "$(uname)" = "Darwin" ]; then firma=$(stat -f "%z-%m" "$f"); else firma=$(stat -c "%s-%Y" "$f"); fi
   c="$CACHE/${b%.mp4}__$firma.mp4"
   if [ ! -s "$c" ]; then
     rm -f "$CACHE/${b%.mp4}__"*.mp4

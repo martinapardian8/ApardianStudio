@@ -93,7 +93,12 @@ class Pieza:
 
 # ------------------------------------------------------------------ lienzo
 class Lienzo:
-    def __init__(self, n, fondo="hueso", tinte=None):
+    """estilo="editorial" (el de la marca): fotos derechas, sin borde de copia,
+    sin sombra, sin cinta ni papel rasgado; las etiquetas son tipograficas.
+    estilo="collage" conserva el look de mesa de trabajo, por si algun dia sirve."""
+    def __init__(self, n, fondo="hueso", tinte=None, estilo="editorial"):
+        self.estilo = estilo
+        self.editorial = estilo == "editorial"
         self.n, self.W, self.H = n, n * LAM, ALTO
         self.fondo = fondo
         self.oscuro = fondo == "carbon"
@@ -156,6 +161,8 @@ class Lienzo:
              color_borde=COPIA, borde_abajo=None):
         """Una copia impresa: la foto recortada sin partir caras y su borde blanco.
         borde_abajo > borde la vuelve una instantanea."""
+        if self.editorial:
+            rot, borde, sombra, borde_abajo = 0.0, 0, False, None
         ph = cargar_ok(ruta, (w, h))
         if filtro:
             ph = filtro(ph)
@@ -193,6 +200,8 @@ class Lienzo:
         return pz
 
     def circulo(self, ruta, cx, cy, r, borde=12):
+        if self.editorial:
+            borde = 0
         ph = cargar_ok(ruta, (2 * r, 2 * r)).convert("RGBA")
         m = Image.new("L", (8 * r, 8 * r), 0)
         ImageDraw.Draw(m).ellipse([0, 0, 8 * r - 1, 8 * r - 1], fill=255)
@@ -205,11 +214,13 @@ class Lienzo:
         base.putalpha(m2.resize((2 * R, 2 * R), Image.LANCZOS))
         card.alpha_composite(base)
         card.alpha_composite(ph, (borde, borde))
-        self.pegar(card, cx, cy, 0, True)
+        self.pegar(card, cx, cy, 0, not self.editorial)
         return Pieza(cx, cy, 2 * R, 2 * R, 0)
 
     def marco(self, ruta, cx, cy, w, h, rot=0.0, grosor=26, paspartu=54, color=(20, 18, 16)):
         """Cuadro enmarcado: marco de madera negra y paspartu blanco."""
+        if self.editorial:
+            rot = 0.0
         ph = cargar_ok(ruta, (w, h))
         W2, H2 = w + 2 * (grosor + paspartu), h + 2 * (grosor + paspartu)
         card = Image.new("RGBA", (W2, H2), color + (255,))
@@ -219,11 +230,13 @@ class Lienzo:
         g = grosor + paspartu
         d.rectangle([g - 3, g - 3, g + w + 2, g + h + 2], fill=(222, 219, 214))
         card.paste(ph, (g, g))
-        self.pegar(card, cx, cy, rot, True)
+        self.pegar(card, cx, cy, rot, not self.editorial)
         return Pieza(cx, cy, W2, H2, rot)
 
     # ---------------------------------------------------------------- utiles
     def cinta(self, cx, cy, largo, rot=0.0, k=1, opacidad=0.9):
+        if self.editorial:
+            return
         c = material(f"cinta_{(k - 1) % 8 + 1:02d}.png")
         esc = largo / c.width
         c = c.resize((int(largo), max(30, int(c.height * esc * 0.85))), Image.LANCZOS)
@@ -246,6 +259,8 @@ class Lienzo:
         self.pegar(c, x, y, rot, True)
 
     def broche(self, x, y, rot=0.0, k=1, tam=150):
+        if self.editorial:
+            return
         c = material(f"broche_{(k - 1) % 2 + 1:02d}.png")
         esc = tam / max(c.size)
         c = c.resize((int(c.width * esc), int(c.height * esc)), Image.LANCZOS)
@@ -286,7 +301,10 @@ class Lienzo:
 
     def papel(self, cx, cy, w, h, rot, txt, k=1, color="blanco", px=40, sub=None,
               fuente="display"):
-        """Un papel rasgado con texto, como un recorte pegado."""
+        """Un papel rasgado con texto, como un recorte pegado. En editorial es
+        una etiqueta tipografica: regla roja corta, nombre en Anton y bajada."""
+        if self.editorial:
+            return self._etiqueta_editorial(cx, cy, w, h, txt, sub, px)
         # el cuarto recorte es casi un triangulo: no sirve para escribir
         p = material(f"papel_{(k - 1) % 3 + 1:02d}.png").resize((w, h), Image.LANCZOS)
         if color == "rojo":
@@ -329,6 +347,25 @@ class Lienzo:
         self.pegar(p, cx, cy, rot, True)
         return Pieza(cx, cy, w, h, rot)
 
+    def _etiqueta_editorial(self, cx, cy, w, h, txt, sub, px):
+        d = self.d
+        x0 = int(cx - w / 2)
+        lineas = txt.upper().split("\n")
+        tam = max(30, min(int(px * 0.9), 58))
+        while tam > 24 and max(ancho(d, l, display(tam)) for l in lineas) > w:
+            tam -= 2
+        salto = int(tam * 0.95)
+        alto = 22 + len(lineas) * salto + (int(tam * 0.3) + 34 if sub else 0)
+        y = int(cy - alto / 2)
+        d.rectangle([x0, y, x0 + 46, y + 4], fill=ROJO)
+        y += 22
+        for l in lineas:
+            escribir(d, (x0, y), l, display(tam), self.tinta); y += salto
+        if sub:
+            # Anton baja mas que su salto de linea: la bajada va debajo de la tinta
+            escribir(d, (x0, y + int(tam * 0.3) + 6), sub.upper(), work(19, "SemiBold"), self.suave, 4)
+        return Pieza(cx, cy, w, alto, 0)
+
     def palabra_foto(self, txt, ruta, x, y, px, track=0, contorno=False):
         """Una palabra enorme rellena con una foto."""
         f = display(px)
@@ -369,6 +406,8 @@ class Lienzo:
     # ---------------------------------------------------------------- pantallas
     def navegador(self, captura, cx, cy, w, rot=0.0, url="apardianstudio.com"):
         """Una ventana de navegador con una captura real del sitio."""
+        if self.editorial:
+            rot = 0.0
         im = Image.open(captura).convert("RGB")
         h = int(w * im.height / im.width)
         im = im.resize((w, h), Image.LANCZOS)
@@ -388,6 +427,8 @@ class Lienzo:
 
     def telefono(self, captura, cx, cy, h, rot=0.0):
         """Un celular negro con una captura real de la version movil."""
+        if self.editorial:
+            rot = 0.0
         im = Image.open(captura).convert("RGB")
         marco = int(h * 0.028)
         hh = h - 2 * marco

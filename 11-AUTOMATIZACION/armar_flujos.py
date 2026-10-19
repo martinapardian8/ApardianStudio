@@ -818,11 +818,319 @@ return [{ json: { telegram_text:
     return fl
 
 
+# ------------------------------------------------------------------ Instagram
+# Uruguay no tiene horario de verano desde 2015: Montevideo es UTC-3 todo el año.
+JS_HORA_UY = r"""
+const enUY = (fecha, hora) => new Date(fecha + 'T' + (hora || '00:00') + ':00-03:00');
+const ahoraISO = () => new Date().toISOString();
+"""
+
+
+def webhook_respuesta(fl, nombre, ruta, pos):
+    """Webhook que contesta con una pagina corta (el boton de Telegram abre el navegador)."""
+    return fl.nodo(nombre, "n8n-nodes-base.webhook", 2,
+                   {"httpMethod": "GET", "path": ruta, "responseMode": "responseNode",
+                    "options": {}}, pos,
+                   {"webhookId": str(uuid.uuid5(uuid.NAMESPACE_URL, "apardian-wh/" + ruta))})
+
+
+def responder(fl, nombre, expr, pos):
+    return fl.nodo(nombre, "n8n-nodes-base.respondToWebhook", 1.1, {
+        "respondWith": "text",
+        "responseBody": "={{ %s }}" % expr,
+        "options": {"responseHeaders": {"entries": [
+            {"name": "Content-Type", "value": "text/html; charset=utf-8"}]}},
+    }, pos)
+
+
+def telegram_botones(fl, nombre, cfg, operacion, pos):
+    """Mensaje o foto de Telegram con dos botones que abren el link de aprobacion."""
+    p = {
+        "chatId": "={{ $('%s').first().json.TELEGRAM_CHAT_ID }}" % cfg,
+        "replyMarkup": "inlineKeyboard",
+        "inlineKeyboard": {"rows": [{"row": {"buttons": [
+            {"text": "Aprobar", "additionalFields": {"url": "={{ $json.url_aprobar }}"}},
+            {"text": "No publicar", "additionalFields": {"url": "={{ $json.url_rechazar }}"}},
+        ]}}]},
+    }
+    if operacion == "sendPhoto":
+        p.update({"operation": "sendPhoto", "binaryData": False, "file": "={{ $json.foto }}",
+                  "additionalFields": {"caption": "={{ $json.texto }}", "parse_mode": "HTML"}})
+    else:
+        p.update({"text": "={{ $json.texto }}",
+                  "additionalFields": {"appendAttribution": False, "parse_mode": "HTML",
+                                       "disable_web_page_preview": False}})
+    return fl.nodo(nombre, "n8n-nodes-base.telegram", 1.2, p, pos,
+                   {"credentials": cred("telegramApi", "Telegram Apardian")})
+
+
+# ================================================================== 07
+def f07():
+    fl = Flujo("APARDIAN 07 · Aprobación de Instagram")
+    a, b = disparadores(fl, {"field": "days", "triggerAtHour": 10})
+    v = dict(CONFIG_BASE)
+    v.update({
+        "URL_APROBAR_IG": ("https://TU-INSTANCIA.app.n8n.cloud/webhook/apardian-ig-aprobar", "string"),
+        "TOKEN": ("CAMBIAR-POR-UNA-CLAVE-LARGA", "string"),
+        "HORAS_ANTES": (36, "number"),
+    })
+    cfg = config(fl, "Config", v)
+    cal = leer_hoja(fl, "Leer Calendario", cfg, "Calendario")
+    pedir = codigo(fl, "¿Qué hay que aprobar?", JS_HTML + JS_HORA_UY + r"""
+// Las publicaciones pendientes de las próximas HORAS_ANTES horas (y las que
+// quedaron sin aprobar de hoy). Una por mensaje, en orden de fecha.
+// Mientras sigan pendientes, se vuelven a pedir todos los días: es el recordatorio.
+const c = $('Config').first().json;
+const ahora = Date.now(), lim = ahora + Number(c.HORAS_ANTES || 36) * 3600e3;
+const link = (id, acc) => c.URL_APROBAR_IG + '?id=' + encodeURIComponent(id) + '&a=' + acc + '&t=' + encodeURIComponent(c.TOKEN);
+const out = [];
+for (const r of $('Leer Calendario').all()) {
+  const f = r.json;
+  if (String(f.estado || '').trim() !== 'pendiente' || !f.id) continue;
+  const t = enUY(f.fecha, f.hora).getTime();
+  if (isNaN(t) || t > lim || t < ahora - 12 * 3600e3) continue;
+  const urls = String(f.urls || '').split('|').filter(Boolean);
+  const foto = urls.find(u => /\.jpe?g$/i.test(u)) || '';
+  const cuando = new Date(t).toLocaleString('es-UY', { timeZone: 'America/Montevideo', weekday: 'long', day: 'numeric', month: 'numeric', hour: '2-digit', minute: '2-digit', hour12: false });
+  const pie = String(f.pie || '');
+  // el pie de una foto de Telegram tiene 1024 caracteres como máximo
+  const vista = pie.length > 600 ? pie.slice(0, 600) + '…' : pie;
+  const texto = '<b>' + esc(f.tipo) + ' · ' + esc(f.titulo) + '</b>\n' + esc(cuando) +
+    ' · ' + urls.length + ' archivo' + (urls.length === 1 ? '' : 's') + '\n\n' + esc(vista) +
+    (f.tipo === 'REEL' && !foto ? '\n\n<a href="' + esc(urls[0]) + '">Ver el video</a>' : '') +
+    '\n\n<i>Si lo aprobás, se publica solo a esa hora.</i>';
+  out.push({ json: { id: f.id, t, foto, texto, url_aprobar: link(f.id, 'aprobar'), url_rechazar: link(f.id, 'rechazar') } });
+}
+out.sort((x, y) => x.json.t - y.json.t);
+return out;
+""")
+    hay_foto = si(fl, "¿Tiene imagen?", "!!$json.foto")
+    tg_foto = telegram_botones(fl, "Pedir aprobación (foto)", cfg, "sendPhoto", (fl.x, -120))
+    tg_txt = telegram_botones(fl, "Pedir aprobación (texto)", cfg, "sendMessage", (fl.x, 120))
+    fl.unir(a, cfg); fl.unir(b, cfg)
+    fl.cadena(cfg, cal, pedir, hay_foto)
+    fl.unir(hay_foto, tg_foto, 0)
+    fl.unir(hay_foto, tg_txt, 1)
+
+    # ---- segunda entrada: Martin toca "Aprobar" o "No publicar"
+    y = 600
+    wh = webhook_respuesta(fl, "Botón de Telegram", "apardian-ig-aprobar", (0, y))
+    cfg2 = config(fl, "Config aprobación", {
+        "SHEET_ID": CONFIG_BASE["SHEET_ID"],
+        "TELEGRAM_CHAT_ID": CONFIG_BASE["TELEGRAM_CHAT_ID"],
+        "TOKEN": ("CAMBIAR-POR-UNA-CLAVE-LARGA", "string"),
+    }, pos=(240, y))
+    cal2 = leer_hoja(fl, "Leer Calendario (aprobación)", cfg2, "Calendario", pos=(480, y))
+    decidir = codigo(fl, "Validar y decidir", JS_HTML + JS_HORA_UY + r"""
+const c = $('Config aprobación').first().json;
+const q = $('Botón de Telegram').first().json.query || {};
+const pagina = (titulo, txt) => '<!doctype html><meta name="viewport" content="width=device-width,initial-scale=1">' +
+  '<body style="font-family:system-ui;background:#F8F7F6;color:#171717;padding:32px"><h2 style="margin:0 0 8px">' +
+  esc(titulo) + '</h2><p>' + esc(txt) + '</p></body>';
+if (!q.t || q.t !== c.TOKEN) {
+  return [{ json: { ok: false, html: pagina('Link no válido', 'El token no coincide. No se cambió nada.') } }];
+}
+const f = $input.all().map(r => r.json).find(r => String(r.id) === String(q.id));
+if (!f) return [{ json: { ok: false, html: pagina('No encontré esa publicación', String(q.id || '')) } }];
+if (f.publicado_en) return [{ json: { ok: false, html: pagina('Ya está publicada', f.titulo + ' · ' + f.publicado_en) } }];
+const aprobar = q.a === 'aprobar';
+const fila = { id: f.id, estado: aprobar ? 'aprobado' : 'rechazado',
+               aprobado_por: aprobar ? 'Martin (Telegram)' : '', aprobado_en: aprobar ? ahoraISO() : '', error: '' };
+const cuando = enUY(f.fecha, f.hora).toLocaleString('es-UY', { timeZone: 'America/Montevideo', weekday: 'long', day: 'numeric', month: 'numeric', hour: '2-digit', minute: '2-digit', hour12: false });
+return [{ json: { ok: true, fila,
+  html: pagina(aprobar ? 'Aprobado ✓' : 'No se publica', aprobar ? f.titulo + ' sale el ' + cuando + '.' : f.titulo + ' quedó afuera del calendario.'),
+  telegram_text: (aprobar ? '✅ Aprobado: ' : '✖️ No se publica: ') + '<b>' + esc(f.titulo) + '</b>' + (aprobar ? '\nSale el ' + esc(cuando) + '.' : '') } }];
+""", pos=(720, y))
+    valido = si(fl, "¿Válido?", "$json.ok", pos=(960, y))
+    fila = codigo(fl, "Fila aprobación", "return [{ json: $input.first().json.fila }];", pos=(1200, y - 100))
+    g = escribir_hoja(fl, "Guardar aprobación", cfg2, "Calendario", pos=(1440, y - 100))
+    tg = telegram(fl, "Confirmar en Telegram", cfg2, pos=(1680, y - 100),
+                  texto="$('Validar y decidir').first().json.telegram_text")
+    r_ok = responder(fl, "Página: listo", "$('Validar y decidir').first().json.html", (1920, y - 100))
+    r_no = responder(fl, "Página: no válido", "$('Validar y decidir').first().json.html", (1200, y + 100))
+    fl.cadena(wh, cfg2, cal2, decidir, valido)
+    fl.unir(valido, fila, 0)
+    fl.unir(valido, r_no, 1)
+    fl.cadena(fila, g, tg, r_ok)
+    return fl
+
+
+# ================================================================== 08
+JS_PUBLICAR = r"""
+// Publica UNA fila aprobada con la API de Instagram (Graph API).
+// Imagen: contenedor + media_publish. Carrusel: un contenedor por hoja
+// (is_carousel_item), el contenedor padre y media_publish. Reel: contenedor
+// REELS, esperar a que Instagram termine de procesar el video, y publicar.
+const c = $('Config').first().json;
+const x = $input.first().json;
+const f = x.fila;
+const G = String(c.GRAPH_URL).replace(/\/$/, '');
+const tok = c.ACCESS_TOKEN;
+const dormir = ms => new Promise(r => setTimeout(r, ms));
+
+async function api(metodo, ruta, params) {
+  try {
+    const r = await this.helpers.httpRequest({
+      method: metodo, url: G + ruta, qs: Object.assign({ access_token: tok }, params || {}), json: true,
+    });
+    return typeof r === 'string' ? JSON.parse(r) : r;
+  } catch (e) {
+    const cuerpo = (e && e.cause && e.cause.response && e.cause.response.data) || (e && e.response && e.response.body) || null;
+    const msj = cuerpo && cuerpo.error ? cuerpo.error.message + ' (código ' + cuerpo.error.code + ')' : (e.description || e.message || String(e));
+    throw new Error(ruta.split('?')[0] + ': ' + msj);
+  }
+}
+const llamar = api.bind(this);
+
+async function esperar(id, intentos, pausa) {
+  for (let i = 0; i < intentos; i++) {
+    const s = await llamar('GET', '/' + id, { fields: 'status_code,status' });
+    if (s.status_code === 'FINISHED') return;
+    if (s.status_code === 'ERROR' || s.status_code === 'EXPIRED')
+      throw new Error('Instagram no pudo procesar el archivo: ' + (s.status || s.status_code));
+    await dormir(pausa);
+  }
+  throw new Error('Instagram sigue procesando el archivo; se reintenta en la próxima vuelta');
+}
+
+const urls = String(f.urls || '').split('|').filter(Boolean);
+const user = '/' + c.IG_USER_ID;
+let creacion;
+try {
+  if (f.tipo === 'IMAGE') {
+    creacion = (await llamar('POST', user + '/media', { image_url: urls[0], caption: f.pie })).id;
+    await esperar(creacion, 6, 5000);
+  } else if (f.tipo === 'CAROUSEL') {
+    if (urls.length < 2 || urls.length > 10) throw new Error('un carrusel lleva de 2 a 10 archivos, este tiene ' + urls.length);
+    const hijos = [];
+    for (const u of urls) {
+      const p = /\.mp4$/i.test(u) ? { media_type: 'VIDEO', video_url: u, is_carousel_item: true }
+                                  : { image_url: u, is_carousel_item: true };
+      hijos.push((await llamar('POST', user + '/media', p)).id);
+    }
+    for (const h of hijos) await esperar(h, 12, 5000);
+    creacion = (await llamar('POST', user + '/media', { media_type: 'CAROUSEL', children: hijos.join(','), caption: f.pie })).id;
+    await esperar(creacion, 6, 5000);
+  } else if (f.tipo === 'REEL') {
+    const video = urls.find(u => /\.mp4$/i.test(u));
+    const tapa = urls.find(u => /\.jpe?g$/i.test(u));
+    const p = { media_type: 'REELS', video_url: video, caption: f.pie, share_to_feed: true };
+    if (tapa) p.cover_url = tapa;
+    creacion = (await llamar('POST', user + '/media', p)).id;
+    await esperar(creacion, 10, 20000);       // hasta ~3 minutos y medio
+  } else {
+    throw new Error('tipo desconocido: ' + f.tipo);
+  }
+  const pub = await llamar('POST', user + '/media_publish', { creation_id: creacion });
+  let aviso_com = '';
+  if (f.primer_comentario) {
+    try { await llamar('POST', '/' + pub.id + '/comments', { message: f.primer_comentario }); }
+    catch (e) { aviso_com = '\n(No se pudo dejar el primer comentario: ' + e.message + ')'; }
+  }
+  let link = '';
+  try { link = (await llamar('GET', '/' + pub.id, { fields: 'permalink' })).permalink || ''; } catch (e) {}
+  return [{ json: {
+    fila: { id: f.id, estado: 'publicado', publicado_en: new Date().toISOString(), ig_media_id: pub.id, error: '' },
+    telegram_text: '📣 Publicado: <b>' + esc(f.titulo) + '</b>' + (link ? '\n' + esc(link) : '') + esc(aviso_com),
+  } }];
+} catch (e) {
+  // "sigue procesando" no es un error de la fila: queda aprobada y se reintenta
+  const reintentar = /sigue procesando/.test(e.message);
+  return [{ json: {
+    fila: { id: f.id, estado: reintentar ? 'aprobado' : 'error', error: String(e.message).slice(0, 480) },
+    telegram_text: (reintentar ? '⏳ ' : '⚠️ No se pudo publicar ') + '<b>' + esc(f.titulo) + '</b>\n' + esc(e.message),
+  } }];
+}
+"""
+
+
+def f08():
+    fl = Flujo("APARDIAN 08 · Publicador de Instagram")
+    a, b = disparadores(fl, {"field": "minutes", "minutesInterval": 15})
+    v = dict(CONFIG_BASE)
+    v.update({
+        "IG_USER_ID": ("PEGAR_IG_USER_ID", "string"),
+        "ACCESS_TOKEN": ("PEGAR_TOKEN_DE_LARGA_DURACION", "string"),
+        "GRAPH_URL": ("https://graph.facebook.com/v22.0", "string"),
+        "VENCE_HORAS": (48, "number"),
+    })
+    cfg = config(fl, "Config", v)
+    cal = leer_hoja(fl, "Leer Calendario", cfg, "Calendario")
+    elegir = codigo(fl, "¿Qué toca publicar?", JS_HTML + JS_HORA_UY + r"""
+// Solo filas "aprobado", sin publicar, cuya hora ya llegó. Una por vuelta:
+// cada 15 minutos sale como mucho una publicación, nunca una ráfaga.
+// Lo aprobado que quedó colgado más de VENCE_HORAS no se publica de golpe:
+// se marca como error y se avisa, para que Martin decida.
+const c = $('Config').first().json;
+const ahora = Date.now(), vence = Number(c.VENCE_HORAS || 48) * 3600e3;
+const listas = [], vencidas = [];
+for (const r of $('Leer Calendario').all()) {
+  const f = r.json;
+  if (String(f.estado || '').trim() !== 'aprobado' || f.publicado_en || !f.id) continue;
+  const t = enUY(f.fecha, f.hora).getTime();
+  if (isNaN(t) || t > ahora) continue;
+  (ahora - t > vence ? vencidas : listas).push({ f, t });
+}
+listas.sort((x, y) => x.t - y.t);
+const out = [];
+if (listas.length) out.push({ json: { accion: 'publicar', fila: listas[0].f } });
+for (const v of vencidas)
+  out.push({ json: { accion: 'vencida', fila: v.f,
+    telegram_text: '⚠️ Quedó aprobada pero sin publicar más de ' + c.VENCE_HORAS + ' h: <b>' + esc(v.f.titulo) +
+                   '</b>. La marqué como error; si querés que salga, cambiá la fecha y volvé a poner "aprobado".' } });
+return out;
+""")
+    hay = si(fl, "¿Publicar?", "$json.accion === 'publicar'")
+    limite = fl.nodo("Cupo del día", "n8n-nodes-base.httpRequest", 4.2, {
+        "method": "GET",
+        "url": "={{ $('Config').first().json.GRAPH_URL }}/{{ $('Config').first().json.IG_USER_ID }}/content_publishing_limit",
+        "sendQuery": True,
+        "queryParameters": {"parameters": [
+            {"name": "fields", "value": "config,quota_usage"},
+            {"name": "access_token", "value": "={{ $('Config').first().json.ACCESS_TOKEN }}"},
+        ]},
+        "options": {"timeout": 30000},
+    }, None, {"onError": "continueRegularOutput"})
+    cupo = codigo(fl, "¿Hay cupo?", JS_HTML + r"""
+// Instagram deja publicar una cantidad fija por 24 h (hoy 50 por cuenta).
+const d = (($json.data || [])[0]) || {};
+const usado = Number(d.quota_usage || 0), total = Number((d.config || {}).quota_total || 50);
+const f = $('¿Publicar?').first().json.fila;
+if ($json.error) return [{ json: { seguir: false, fila: f, telegram_text: '⚠️ No pude consultar el cupo de Instagram: ' + esc(JSON.stringify($json.error).slice(0, 300)) + '. Revisá el token.' } }];
+if (usado >= total - 1) return [{ json: { seguir: false, fila: f, telegram_text: '⏸️ Cupo de Instagram casi lleno (' + usado + '/' + total + '). ' + esc(f.titulo) + ' sale en la próxima vuelta con cupo.' } }];
+return [{ json: { seguir: true, fila: f } }];
+""")
+    sigue = si(fl, "¿Sigue?", "$json.seguir")
+    publicar = codigo(fl, "Publicar en Instagram", JS_HTML + JS_PUBLICAR)
+    fila = codigo(fl, "Fila resultado", "return [{ json: $input.first().json.fila }];")
+    g = escribir_hoja(fl, "Guardar resultado", cfg, "Calendario")
+    tg = telegram(fl, "Avisar a Martin", cfg, texto="$('Publicar en Instagram').first().json.telegram_text")
+    tg_cupo = telegram(fl, "Avisar cupo/token", cfg, pos=(fl.x - 960, 240),
+                       texto="$json.telegram_text")
+    # vencidas
+    fila_v = codigo(fl, "Fila vencida", "return { json: { id: $json.fila.id, estado: 'error', error: 'vencida sin publicar' } };",
+                    por_item=True, pos=(960, 360))
+    g_v = escribir_hoja(fl, "Guardar vencida", cfg, "Calendario", pos=(1200, 360))
+    tg_v = telegram(fl, "Avisar vencida", cfg, pos=(1440, 360),
+                    texto="$('¿Publicar?').item.json.telegram_text")
+    fl.unir(a, cfg); fl.unir(b, cfg)
+    fl.cadena(cfg, cal, elegir, hay)
+    fl.unir(hay, limite, 0)
+    fl.unir(hay, fila_v, 1)
+    fl.cadena(limite, cupo, sigue)
+    fl.unir(sigue, publicar, 0)
+    fl.unir(sigue, tg_cupo, 1)
+    fl.cadena(publicar, fila, g, tg)
+    fl.cadena(fila_v, g_v, tg_v)
+    return fl
+
+
 if __name__ == "__main__":
     os.makedirs(DEST, exist_ok=True)
     for f, archivo in ((f01, "01_prospector.json"), (f02, "02_auditor.json"),
                        (f03, "03_redactor_envio.json"), (f04, "04_seguimiento.json"),
-                       (f05, "05_respuestas.json"), (f06, "06_bienvenida_whatsapp.json")):
+                       (f05, "05_respuestas.json"), (f06, "06_bienvenida_whatsapp.json"),
+                       (f07, "07_aprobacion_instagram.json"), (f08, "08_publicador_instagram.json")):
         fl = f()
         nombres = {n["name"] for n in fl.nodos}
         for a, salidas in fl.con.items():

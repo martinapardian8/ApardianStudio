@@ -1,6 +1,6 @@
 # Estructura del CRM (Google Sheets)
 
-Una planilla con dos hojas. Los flujos de n8n leen y escriben acá; Martin
+Una planilla con tres hojas (`Leads`, `Bajas` y `Calendario`). Los flujos de n8n leen y escriben acá; Martin
 también puede editar a mano (por ejemplo, poner `descartado` a un lead).
 
 ## Hoja `Leads`
@@ -67,3 +67,30 @@ El auditor busca `mailto:` en el HTML de la portada. Si el mail solo está en
 la página de contacto, el lead queda `sin_email` y Martin lo completa a mano
 (copiándolo de la web) y le cambia el estado a `auditado`. **Nunca se adivinan mails** (tipo nombre.apellido@dominio). Si no hay un
 mail publicado, el lead queda `sin_email` para contacto manual.
+
+## Hoja `Calendario` (Instagram con aprobación)
+
+Se importa desde `calendario_instagram.csv`, que arma
+`python3 10-MOTOR/calendario_sheet.py` a partir del calendario de contenido.
+La leen el flujo 07 (pide aprobación por Telegram) y el 08 (publica).
+Detalle completo en `INSTAGRAM_APROBACION.md`.
+
+| Columna | Qué guarda | Quién la llena |
+|---|---|---|
+| `id` | `fecha-hora-pieza`, único | calendario_sheet.py |
+| `fecha` / `hora` | Cuándo sale, hora de Montevideo (AAAA-MM-DD, HH:MM) | calendario_sheet.py · Martin puede cambiarla |
+| `tipo` | `CAROUSEL`, `IMAGE` o `REEL` | calendario_sheet.py |
+| `titulo` | Para reconocerla en Telegram | calendario_sheet.py |
+| `archivos` | Rutas dentro de `08-CONTENIDO-INSTAGRAM`, separadas por `\|`, en orden de subida | calendario_sheet.py |
+| `urls` | Las mismas rutas en `https://apardianstudio.com/ig/...` | calendario_sheet.py |
+| `pie` | Pie de foto completo | calendario_sheet.py · Martin puede editarlo |
+| `primer_comentario` | Comentario que se deja apenas sale (opcional) | calendario_sheet.py · Martin |
+| `estado` | `pendiente` → `aprobado` / `rechazado` → `publicado` o `error` | 07 · 08 · Martin |
+| `aprobado_por` / `aprobado_en` | Quién y cuándo aprobó | 07 |
+| `publicado_en` | Cuándo salió | 08 |
+| `ig_media_id` | ID de la publicación en Instagram | 08 |
+| `error` | Por qué no salió (si no salió) | 08 · calendario_sheet.py |
+
+**Regla:** el publicador solo toca filas en `aprobado`. Si cambiás el pie o la
+fecha de una fila ya aprobada, no hace falta volver a aprobar; si querés que
+no salga, ponele `rechazado` a mano.
