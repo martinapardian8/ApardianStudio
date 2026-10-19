@@ -1,14 +1,17 @@
 # Instagram con aprobación: vos aprobás, el agente publica
 
-La idea: nada sale en Instagram sin que lo veas. Un día antes te llega a
-Telegram cada publicación (la imagen y el pie de foto) con dos botones,
+La idea: nada sale en Instagram sin que lo veas. **Un posteo y una historia
+por día.** Antes de llegarte, cada pieza pasa por Lupa, la crítica de diseño:
+lo que no cumple (medidas, peso, pie, reglas de marca) se frena y no te
+molesta. Un día antes te llega a Telegram cada publicación (la imagen, el pie
+de foto y lo que dijo Lupa) con dos botones,
 **Aprobar** y **No publicar**. Lo que aprobás se publica solo, a la hora del
 calendario. Lo que no tocás, no sale.
 
 ## Cómo funciona
 
 ```
- calendario.json ──▶ calendario_sheet.py ──▶ calendario_instagram.csv
+ calendario.json ──▶ calendario_sheet.py + Lupa ──▶ calendario_instagram.csv
                                                      │ (se importa una vez)
                                                      ▼
                                        Google Sheets · hoja "Calendario"
@@ -16,8 +19,8 @@ calendario. Lo que no tocás, no sale.
         ┌────────────────────────────────────────────┴───────────────┐
         ▼                                                            ▼
  07 · APROBACIÓN (todos los días 10:00)                08 · PUBLICADOR (cada 15 min)
- Busca lo "pendiente" de las próximas 36 h           Busca lo "aprobado" cuya hora llegó
- y te lo manda a Telegram con dos botones            Revisa el cupo diario de Instagram
+ Busca lo "pendiente" que Lupa dejó "ok"            Busca lo "aprobado" cuya hora llegó
+ de las próximas 36 h y te lo manda a Telegram       Revisa el cupo diario de Instagram
         │                                            Publica UNA por vuelta (Graph API)
         ▼                                            Escribe "publicado" y te avisa
  Tocás Aprobar ──▶ la fila pasa a "aprobado" ───────────────────────▶ │
@@ -31,8 +34,10 @@ Instagram los baja de ahí. Por eso se copian a `apardianstudio.com/ig/...`
 
 ## Lo que no se puede automatizar (y queda manual)
 
-- **Historias.** La API de Instagram no programa historias para una cuenta
-  como la tuya. Siguen en el calendario y en la app Centro, para subir a mano.
+- **Stickers en historias.** Las historias se publican solas (imagen o
+  video), pero la API no pone stickers de enlace, encuestas ni menciones. Por
+  eso la historia de los lunes que comparte el carrusel con el link a WhatsApp
+  queda a mano (en el calendario figura como *Historia (a mano)*).
 - **Música de Instagram.** La API no pone canciones de la biblioteca de
   Instagram. Los reels salen con el sonido que tenga el archivo (los reels
   collage no tienen audio). Si a un reel le querés poner un tema desde la app,
@@ -88,7 +93,7 @@ Después de armar el sitio para publicar:
 
 ```bash
 bash 10-MOTOR/publicar.sh            # arma 07-PUBLICAR (lo borra y lo rehace)
-python3 10-MOTOR/calendario_sheet.py # rehace la planilla desde el calendario
+python3 10-MOTOR/calendario_sheet.py # rehace la planilla desde el calendario (Lupa revisa)
 bash 10-MOTOR/preparar_ig.sh         # copia las piezas a 07-PUBLICAR/ig/
 ```
 
@@ -99,8 +104,9 @@ Y se sube como siempre (rama `hostinger`). Probá abrir una URL de la columna
 rechaza un reel por no tener audio, corré `preparar_ig.sh --pista-muda`: les
 agrega a los videos una pista de audio en silencio, sin recodificar la imagen.
 
-Requisitos de Instagram que ya cumplen las piezas: JPEG de menos de 8 MB,
-proporción entre 4:5 y 1,91:1 (las nuestras son 4:5); reels en MP4 H.264.
+Requisitos de Instagram que ya cumplen las piezas (y que Lupa revisa en cada
+una): JPEG de menos de 8 MB, proporción entre 4:5 y 1,91:1 (las nuestras son
+4:5); historias 9:16 (1080×1920); reels en MP4 H.264.
 
 ### 5. La planilla
 1. En la misma planilla de los leads, agregá una hoja llamada **Calendario**.
@@ -130,7 +136,8 @@ proporción entre 4:5 y 1,91:1 (las nuestras son 4:5); reels en MP4 H.264.
 ## El día a día
 
 - **A las 10:00** te llegan a Telegram las publicaciones de las próximas 36
-  horas. Mirás la imagen y el pie y tocás **Aprobar** o **No publicar**. Se
+  horas: el posteo y la historia de mañana. Mirás la imagen, el pie y la nota
+  de Lupa, y tocás **Aprobar** o **No publicar**. Se
   abre una página que dice *Aprobado ✓* y te llega la confirmación por Telegram.
 - Si no tocás nada, al otro día te lo vuelve a pedir. **Sin aprobación no se
   publica nunca.**
@@ -149,6 +156,7 @@ proporción entre 4:5 y 1,91:1 (las nuestras son 4:5); reels en MP4 H.264.
 | ⏸️ *Cupo casi lleno* | Llegaste al límite diario de publicaciones por API (hoy 50 cada 24 h) | Sale en la próxima vuelta con cupo |
 | ⚠️ *Quedó aprobada pero sin publicar más de 48 h* | n8n estuvo apagado o el token caído | Cambiá la fecha y volvé a poner `aprobado` |
 | No llega nada a las 10 | El 07 está inactivo o el `SHEET_ID` está mal | Abrí la ejecución en n8n y mirá el error |
+| Falta una pieza en Telegram | Lupa la frenó (columna `revision`) | Mirá `06-NOTAS/lupa/REVISION.md`, corregí y volvé a correr `lupa.py` |
 
 Las filas con `error` no se vuelven a intentar solas: arreglás la causa y
 cambiás el estado a `aprobado` otra vez.
@@ -170,6 +178,7 @@ cambiás el estado a `aprobado` otra vez.
 | Archivo | Qué es |
 |---|---|
 | `10-MOTOR/calendario_sheet.py` | Arma `calendario_instagram.csv` desde el calendario |
+| `10-MOTOR/lupa.py` | Lupa: revisa cada pieza y llena `revision`; `--semana AAAA-MM-DD` arma la hoja de contacto |
 | `10-MOTOR/preparar_ig.sh` | Copia las piezas a `07-PUBLICAR/ig/` (`--dry-run`, `--pista-muda`) |
 | `n8n/07_aprobacion_instagram.json` | Pide aprobación por Telegram y guarda tu respuesta |
 | `n8n/08_publicador_instagram.json` | Publica lo aprobado con la Graph API |

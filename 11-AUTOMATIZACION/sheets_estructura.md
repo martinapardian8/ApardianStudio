@@ -79,7 +79,7 @@ Detalle completo en `INSTAGRAM_APROBACION.md`.
 |---|---|---|
 | `id` | `fecha-hora-pieza`, único | calendario_sheet.py |
 | `fecha` / `hora` | Cuándo sale, hora de Montevideo (AAAA-MM-DD, HH:MM) | calendario_sheet.py · Martin puede cambiarla |
-| `tipo` | `CAROUSEL`, `IMAGE` o `REEL` | calendario_sheet.py |
+| `tipo` | `CAROUSEL`, `IMAGE`, `REEL` o `STORY` | calendario_sheet.py |
 | `titulo` | Para reconocerla en Telegram | calendario_sheet.py |
 | `archivos` | Rutas dentro de `08-CONTENIDO-INSTAGRAM`, separadas por `\|`, en orden de subida | calendario_sheet.py |
 | `urls` | Las mismas rutas en `https://apardianstudio.com/ig/...` | calendario_sheet.py |
@@ -90,6 +90,7 @@ Detalle completo en `INSTAGRAM_APROBACION.md`.
 | `publicado_en` | Cuándo salió | 08 |
 | `ig_media_id` | ID de la publicación en Instagram | 08 |
 | `error` | Por qué no salió (si no salió) | 08 · calendario_sheet.py |
+| `revision` | Lo que dijo Lupa: `ok`, `ok · nota: …` o `frenado: …`. El 07 solo pide aprobación de lo que empieza con `ok` | lupa.py · agente Lupa |
 
 **Regla:** el publicador solo toca filas en `aprobado`. Si cambiás el pie o la
 fecha de una fila ya aprobada, no hace falta volver a aprobar; si querés que

@@ -267,7 +267,8 @@ function renderCal(){
   const tipos = ["Todo","Carrusel collage","Reel","Tus fotos en el mundo","Historia","Venta","Automatización","Publicaciones armadas"];
   const f = $("#filtros"); f.replaceChildren(...tipos.map(t => { const b = el("button", {class:"chip", type:"button", "aria-pressed": String(t === filtro), text:t}); b.addEventListener("click", () => { filtro = t; renderCal(); }); return b; }));
   const pasa = it => filtro === "Todo" || it.tipo === filtro ||
-    (filtro === "Publicaciones armadas" && (it.pieza || "").startsWith("00-SUBIR") || filtro === "Publicaciones armadas" && (it.pieza || "").startsWith("05-videos"));
+    (filtro === "Historia" && it.tipo.startsWith("Historia")) ||
+    (filtro === "Publicaciones armadas" && /^(00-SUBIR|05-videos|01-posteos)/.test(it.pieza || ""));
   const c = $("#cal"); c.replaceChildren();
   const hoy = hoyISO();
   for (const s of D.calendario.semanas){

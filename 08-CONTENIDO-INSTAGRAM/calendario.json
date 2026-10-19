@@ -115,11 +115,11 @@
      "nota": "Las parejas del verano 26/27 están cerrando fotógrafo ahora."
     },
     {
-     "tipo": "Historia",
+     "tipo": "Historia (a mano)",
      "hora": "20:00",
      "titulo": "Nuevo carrusel: compartilo en historias",
      "pieza": "06-carruseles-collage/01-bodas-un-si/01.jpg",
-     "nota": "Con sticker de enlace a WhatsApp."
+     "nota": "Desde la app, con sticker de enlace a WhatsApp (la API no pone stickers)."
     }
    ]
   },
@@ -139,9 +139,16 @@
     {
      "tipo": "Historia",
      "hora": "12:30",
-     "titulo": "Esta la saqué desde el piso",
-     "pieza": "04-historias-organicas/002_foto_esta-la-saque-desde-el-piso.jpg",
-     "nota": ""
+     "titulo": "Dentro de diez años, esto es lo que te va a quedar",
+     "pieza": "02-historias-pauta/002_bodas_dentro-de-diez-anos-esto-es-lo-que-te-va-a-que.jpg",
+     "nota": "Historia de la campaña de la semana, con CTA a WhatsApp."
+    },
+    {
+     "tipo": "Posteo",
+     "hora": "13:00",
+     "titulo": "Una boda completa",
+     "pieza": "01-posteos-pauta/003_bodas_una-boda-completa.jpg",
+     "nota": "Pieza de la campaña, con CTA."
     }
    ]
   },
@@ -192,7 +199,7 @@
      "hora": "19:30",
      "titulo": "Reel del carrusel: Un sí dura un segundo",
      "pieza": "07-reels-collage/01-bodas-un-si.mp4",
-     "nota": "Ponele un tema tuyo de fondo."
+     "nota": "Sale con el audio del archivo; si le querés poner un tema tuyo, subilo a mano."
     }
    ]
   },
@@ -205,9 +212,9 @@
     {
      "tipo": "Historia",
      "hora": "12:30",
-     "titulo": "Le dije dos cosas y me callé",
-     "pieza": "04-historias-organicas/005_foto_le-dije-dos-cosas-y-me-calle.jpg",
-     "nota": ""
+     "titulo": "Tus fotos en diez días",
+     "pieza": "02-historias-pauta/006_bodas_tus-fotos-en-diez-dias.jpg",
+     "nota": "Historia de la campaña de la semana, con CTA a WhatsApp."
     },
     {
      "tipo": "Venta",
@@ -217,10 +224,10 @@
      "nota": "Todo presupuesto sin respuesta hace 2+ días recibe un mensaje."
     },
     {
-     "tipo": "Posteo de una foto",
+     "tipo": "Carrusel de 8 fotos",
      "hora": "19:30",
-     "titulo": "La gente pide con los ojos",
-     "pieza": "00-SUBIR-EN-ORDEN/02",
+     "titulo": "Casamientos",
+     "pieza": "00-SUBIR-EN-ORDEN/04",
      "nota": "Publicación ya armada (si ya la subiste, saltala)."
     }
    ]
@@ -237,6 +244,42 @@
      "titulo": "Un sí, entre miles que pasan.",
      "pieza": "08-tus-fotos-en-el-mundo/02_estacion_central.jpg",
      "nota": "Nueva York · Grand Central. Es un montaje: decilo en el pie."
+    },
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "Esta la saqué desde el piso",
+     "pieza": "04-historias-organicas/002_foto_esta-la-saque-desde-el-piso.jpg",
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "fecha": "2026-10-25",
+   "dia": "Domingo",
+   "semana": 1,
+   "vertical": "Bodas",
+   "items": [
+    {
+     "tipo": "Posteo",
+     "hora": "11:00",
+     "titulo": "Tu carta se vende sola cuando la foto acompaña",
+     "pieza": "01-posteos-pauta/011_gastronomia_tu-carta-se-vende-sola-cuando-la-foto-acompana.jpg",
+     "nota": "Pieza de la campaña, con CTA."
+    },
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "Le dije dos cosas y me callé",
+     "pieza": "04-historias-organicas/005_foto_le-dije-dos-cosas-y-me-calle.jpg",
+     "nota": ""
+    },
+    {
+     "tipo": "Equipo",
+     "hora": "18:00",
+     "titulo": "Luz arma la semana que viene y Lupa la revisa",
+     "pieza": "09-ESTUDIO/EQUIPO.md",
+     "nota": "El lunes a las 10 te llegan a Telegram las piezas para aprobar."
     }
    ]
   },
@@ -261,11 +304,11 @@
      "nota": "Restaurantes y paradores arman la carta de verano en noviembre."
     },
     {
-     "tipo": "Historia",
+     "tipo": "Historia (a mano)",
      "hora": "20:00",
      "titulo": "Nuevo carrusel: compartilo en historias",
      "pieza": "06-carruseles-collage/02-gastronomia-cuatro-fotos/01.jpg",
-     "nota": "Con sticker de enlace a WhatsApp."
+     "nota": "Desde la app, con sticker de enlace a WhatsApp (la API no pone stickers)."
     }
    ]
   },
@@ -285,9 +328,16 @@
     {
      "tipo": "Historia",
      "hora": "12:30",
-     "titulo": "Poca luz y una sola pasada",
-     "pieza": "04-historias-organicas/007_foto_poca-luz-y-una-sola-pasada.jpg",
-     "nota": ""
+     "titulo": "Comida que se ve como se come",
+     "pieza": "02-historias-pauta/014_gastronomia_comida-que-se-ve-como-se-come.jpg",
+     "nota": "Historia de la campaña de la semana, con CTA a WhatsApp."
+    },
+    {
+     "tipo": "Posteo",
+     "hora": "13:00",
+     "titulo": "Qué te llevás",
+     "pieza": "01-posteos-pauta/012_gastronomia_que-te-llevas.jpg",
+     "nota": "Pieza de la campaña, con CTA."
     }
    ]
   },
@@ -300,15 +350,15 @@
     {
      "tipo": "Historia",
      "hora": "12:30",
-     "titulo": "Este no entendió nada y salió mejor que yo",
-     "pieza": "04-historias-organicas/008_foto_este-no-entendio-nada-y-salio-mejor-que-yo.jpg",
+     "titulo": "Poca luz y una sola pasada",
+     "pieza": "04-historias-organicas/007_foto_poca-luz-y-una-sola-pasada.jpg",
      "nota": ""
     },
     {
-     "tipo": "Carrusel de 8 fotos",
+     "tipo": "Posteo de una foto",
      "hora": "19:30",
-     "titulo": "Casamientos",
-     "pieza": "00-SUBIR-EN-ORDEN/04",
+     "titulo": "La gente pide con los ojos",
+     "pieza": "00-SUBIR-EN-ORDEN/02",
      "nota": "Publicación ya armada (si ya la subiste, saltala)."
     }
    ]
@@ -329,8 +379,8 @@
     {
      "tipo": "Historia",
      "hora": "12:30",
-     "titulo": "Salí a caminar y volví con esto",
-     "pieza": "04-historias-organicas/009_foto_sali-a-caminar-y-volvi-con-esto.jpg",
+     "titulo": "Este no entendió nada y salió mejor que yo",
+     "pieza": "04-historias-organicas/008_foto_este-no-entendio-nada-y-salio-mejor-que-yo.jpg",
      "nota": ""
     },
     {
@@ -338,7 +388,7 @@
      "hora": "19:30",
      "titulo": "Reel del carrusel: La gente come con los ojos",
      "pieza": "07-reels-collage/02-gastronomia-cuatro-fotos.mp4",
-     "nota": "Ponele un tema tuyo de fondo."
+     "nota": "Sale con el audio del archivo; si le querés poner un tema tuyo, subilo a mano."
     }
    ]
   },
@@ -351,9 +401,9 @@
     {
      "tipo": "Historia",
      "hora": "12:30",
-     "titulo": "Vacío a las cinco, lleno a las nueve",
-     "pieza": "04-historias-organicas/010_foto_vacio-a-las-cinco-lleno-a-las-nueve.jpg",
-     "nota": ""
+     "titulo": "Fotos de tu carta en una jornada",
+     "pieza": "02-historias-pauta/013_gastronomia_fotos-de-tu-carta-en-una-jornada.jpg",
+     "nota": "Historia de la campaña de la semana, con CTA a WhatsApp."
     },
     {
      "tipo": "Venta",
@@ -383,6 +433,42 @@
      "titulo": "Un plato que se ve desde el ómnibus.",
      "pieza": "08-tus-fotos-en-el-mundo/06_parada_rambla.jpg",
      "nota": "Montevideo · Rambla. Es un montaje: decilo en el pie."
+    },
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "Salí a caminar y volví con esto",
+     "pieza": "04-historias-organicas/009_foto_sali-a-caminar-y-volvi-con-esto.jpg",
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "fecha": "2026-11-01",
+   "dia": "Domingo",
+   "semana": 2,
+   "vertical": "Gastronomía",
+   "items": [
+    {
+     "tipo": "Posteo",
+     "hora": "11:00",
+     "titulo": "Nadie pide un plato que se ve mal",
+     "pieza": "01-posteos-pauta/015_gastronomia_nadie-pide-un-plato-que-se-ve-mal.jpg",
+     "nota": "Pieza de la campaña, con CTA."
+    },
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "Vacío a las cinco, lleno a las nueve",
+     "pieza": "04-historias-organicas/010_foto_vacio-a-las-cinco-lleno-a-las-nueve.jpg",
+     "nota": ""
+    },
+    {
+     "tipo": "Equipo",
+     "hora": "18:00",
+     "titulo": "Luz arma la semana que viene y Lupa la revisa",
+     "pieza": "09-ESTUDIO/EQUIPO.md",
+     "nota": "El lunes a las 10 te llegan a Telegram las piezas para aprobar."
     }
    ]
   },
@@ -407,11 +493,11 @@
      "nota": "Plena temporada de bodas: los fotógrafos están tapados de edición."
     },
     {
-     "tipo": "Historia",
+     "tipo": "Historia (a mano)",
      "hora": "20:00",
      "titulo": "Nuevo carrusel: compartilo en historias",
      "pieza": "06-carruseles-collage/06-edicion-vos-disparas/01.jpg",
-     "nota": "Con sticker de enlace a WhatsApp."
+     "nota": "Desde la app, con sticker de enlace a WhatsApp (la API no pone stickers)."
     }
    ]
   },
@@ -431,9 +517,16 @@
     {
      "tipo": "Historia",
      "hora": "12:30",
-     "titulo": "Ese es mi plazo de entrega",
-     "pieza": "04-historias-organicas/012_dato_ese-es-mi-plazo-de-entrega.jpg",
-     "nota": ""
+     "titulo": "Entregá en tres días, no en tres semanas",
+     "pieza": "02-historias-pauta/019_edicion_entrega-en-tres-dias-no-en-tres-semanas.jpg",
+     "nota": "Historia de la campaña de la semana, con CTA a WhatsApp."
+    },
+    {
+     "tipo": "Reel de 6 segundos",
+     "hora": "13:00",
+     "titulo": "Sacás 800 fotos y las editás de a una",
+     "pieza": "05-videos/018_edicion_sacas-800-fotos-y-las-editas-de-a-una_feed.mp4",
+     "nota": "Video animado de un aviso."
     }
    ]
   },
@@ -446,8 +539,8 @@
     {
      "tipo": "Historia",
      "hora": "12:30",
-     "titulo": "Foto, video, web y edición",
-     "pieza": "04-historias-organicas/013_dato_foto-video-web-y-edicion.jpg",
+     "titulo": "Ese es mi plazo de entrega",
+     "pieza": "04-historias-organicas/012_dato_ese-es-mi-plazo-de-entrega.jpg",
      "nota": ""
     },
     {
@@ -475,8 +568,8 @@
     {
      "tipo": "Historia",
      "hora": "12:30",
-     "titulo": "El 70% te va a mirar desde el celular",
-     "pieza": "04-historias-organicas/014_dato_el-70-te-va-a-mirar-desde-el-celular.jpg",
+     "titulo": "Foto, video, web y edición",
+     "pieza": "04-historias-organicas/013_dato_foto-video-web-y-edicion.jpg",
      "nota": ""
     },
     {
@@ -484,7 +577,7 @@
      "hora": "19:30",
      "titulo": "Reel del carrusel: Vos disparás. Yo edito.",
      "pieza": "07-reels-collage/06-edicion-vos-disparas.mp4",
-     "nota": "Ponele un tema tuyo de fondo."
+     "nota": "Sale con el audio del archivo; si le querés poner un tema tuyo, subilo a mano."
     }
    ]
   },
@@ -497,9 +590,9 @@
     {
      "tipo": "Historia",
      "hora": "12:30",
-     "titulo": "Lo que tardo en editar un lote",
-     "pieza": "04-historias-organicas/015_dato_lo-que-tardo-en-editar-un-lote.jpg",
-     "nota": ""
+     "titulo": "Edición por lote",
+     "pieza": "02-historias-pauta/020_edicion_edicion-por-lote.jpg",
+     "nota": "Historia de la campaña de la semana, con CTA a WhatsApp."
     },
     {
      "tipo": "Venta",
@@ -529,6 +622,42 @@
      "titulo": "La luz que te frena en la escalera.",
      "pieza": "08-tus-fotos-en-el-mundo/04_londres_subte.jpg",
      "nota": "Londres · Underground. Es un montaje: decilo en el pie."
+    },
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "El 70% te va a mirar desde el celular",
+     "pieza": "04-historias-organicas/014_dato_el-70-te-va-a-mirar-desde-el-celular.jpg",
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "fecha": "2026-11-08",
+   "dia": "Domingo",
+   "semana": 3,
+   "vertical": "Edición Lightroom",
+   "items": [
+    {
+     "tipo": "Posteo",
+     "hora": "11:00",
+     "titulo": "Tu lote editado en 72 horas",
+     "pieza": "01-posteos-pauta/022_edicion_tu-lote-editado-en-72-horas.jpg",
+     "nota": "Pieza de la campaña, con CTA."
+    },
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "Lo que tardo en editar un lote",
+     "pieza": "04-historias-organicas/015_dato_lo-que-tardo-en-editar-un-lote.jpg",
+     "nota": ""
+    },
+    {
+     "tipo": "Equipo",
+     "hora": "18:00",
+     "titulo": "Luz arma la semana que viene y Lupa la revisa",
+     "pieza": "09-ESTUDIO/EQUIPO.md",
+     "nota": "El lunes a las 10 te llegan a Telegram las piezas para aprobar."
     }
    ]
   },
@@ -541,9 +670,44 @@
     {
      "tipo": "Historia",
      "hora": "12:30",
+     "titulo": "Dos cámaras y ningún plan B",
+     "pieza": "04-historias-organicas/026_detras_dos-camaras-y-ningun-plan-b.jpg",
+     "nota": ""
+    },
+    {
+     "tipo": "Historia (a mano)",
+     "hora": "18:00",
      "titulo": "¿Ceremonia de día o de noche?",
      "pieza": "04-historias-organicas/021_pregunta_ceremonia-de-dia-o-de-noche.jpg",
-     "nota": ""
+     "nota": "Subila desde la app y poné el sticker de encuesta sobre los botones dibujados."
+    },
+    {
+     "tipo": "Historia (a mano)",
+     "hora": "18:00",
+     "titulo": "¿Qué foto te da más hambre?",
+     "pieza": "04-historias-organicas/022_pregunta_que-foto-te-da-mas-hambre.jpg",
+     "nota": "Subila desde la app y poné el sticker de encuesta sobre los botones dibujados."
+    },
+    {
+     "tipo": "Historia (a mano)",
+     "hora": "18:00",
+     "titulo": "¿Color o blanco y negro?",
+     "pieza": "04-historias-organicas/023_pregunta_color-o-blanco-y-negro.jpg",
+     "nota": "Subila desde la app y poné el sticker de encuesta sobre los botones dibujados."
+    },
+    {
+     "tipo": "Historia (a mano)",
+     "hora": "18:00",
+     "titulo": "¿Posás o te da vergüenza?",
+     "pieza": "04-historias-organicas/024_pregunta_posas-o-te-da-verguenza.jpg",
+     "nota": "Subila desde la app y poné el sticker de encuesta sobre los botones dibujados."
+    },
+    {
+     "tipo": "Historia (a mano)",
+     "hora": "18:00",
+     "titulo": "¿Foto o video en tu fiesta?",
+     "pieza": "04-historias-organicas/025_pregunta_foto-o-video-en-tu-fiesta.jpg",
+     "nota": "Subila desde la app y poné el sticker de encuesta sobre los botones dibujados."
     },
     {
      "tipo": "Carrusel collage",
@@ -553,11 +717,11 @@
      "nota": "Las empresas reservan la fiesta de diciembre a principios de noviembre."
     },
     {
-     "tipo": "Historia",
+     "tipo": "Historia (a mano)",
      "hora": "20:00",
      "titulo": "Nuevo carrusel: compartilo en historias",
      "pieza": "06-carruseles-collage/04-fin-de-anio/01.jpg",
-     "nota": "Con sticker de enlace a WhatsApp."
+     "nota": "Desde la app, con sticker de enlace a WhatsApp (la API no pone stickers)."
     }
    ]
   },
@@ -577,9 +741,16 @@
     {
      "tipo": "Historia",
      "hora": "12:30",
-     "titulo": "¿Qué foto te da más hambre?",
-     "pieza": "04-historias-organicas/022_pregunta_que-foto-te-da-mas-hambre.jpg",
-     "nota": ""
+     "titulo": "El día entero, sin que nadie note que estoy",
+     "pieza": "02-historias-pauta/042_eventos_el-dia-entero-sin-que-nadie-note-que-estoy.jpg",
+     "nota": "Historia de la campaña de la semana, con CTA a WhatsApp."
+    },
+    {
+     "tipo": "Reel de 6 segundos",
+     "hora": "13:00",
+     "titulo": "La fiesta dura una noche",
+     "pieza": "05-videos/041_eventos_la-fiesta-dura-una-noche_feed.mp4",
+     "nota": "Video animado de un aviso."
     }
    ]
   },
@@ -592,8 +763,8 @@
     {
      "tipo": "Historia",
      "hora": "12:30",
-     "titulo": "¿Color o blanco y negro?",
-     "pieza": "04-historias-organicas/023_pregunta_color-o-blanco-y-negro.jpg",
+     "titulo": "El plato se enfría en tres minutos",
+     "pieza": "04-historias-organicas/027_detras_el-plato-se-enfria-en-tres-minutos.jpg",
      "nota": ""
     },
     {
@@ -621,8 +792,8 @@
     {
      "tipo": "Historia",
      "hora": "12:30",
-     "titulo": "¿Posás o te da vergüenza?",
-     "pieza": "04-historias-organicas/024_pregunta_posas-o-te-da-verguenza.jpg",
+     "titulo": "Trabajo casi siempre con luz de ventana",
+     "pieza": "04-historias-organicas/029_detras_trabajo-casi-siempre-con-luz-de-ventana.jpg",
      "nota": ""
     },
     {
@@ -630,7 +801,7 @@
      "hora": "19:30",
      "titulo": "Reel del carrusel: La fiesta de fin de año pasa una vez",
      "pieza": "07-reels-collage/04-fin-de-anio.mp4",
-     "nota": "Ponele un tema tuyo de fondo."
+     "nota": "Sale con el audio del archivo; si le querés poner un tema tuyo, subilo a mano."
     }
    ]
   },
@@ -643,9 +814,9 @@
     {
      "tipo": "Historia",
      "hora": "12:30",
-     "titulo": "¿Foto o video en tu fiesta?",
-     "pieza": "04-historias-organicas/025_pregunta_foto-o-video-en-tu-fiesta.jpg",
-     "nota": ""
+     "titulo": "Reservá con tiempo",
+     "pieza": "02-historias-pauta/044_eventos_reserva-con-tiempo.jpg",
+     "nota": "Historia de la campaña de la semana, con CTA a WhatsApp."
     },
     {
      "tipo": "Venta",
@@ -675,6 +846,42 @@
      "titulo": "Un cumpleaños que merece afiche.",
      "pieza": "08-tus-fotos-en-el-mundo/10_afiche_montevideo.jpg",
      "nota": "Montevideo · Ciudad Vieja. Es un montaje: decilo en el pie."
+    },
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "El fondo blanco no es una pared blanca",
+     "pieza": "04-historias-organicas/028_detras_el-fondo-blanco-no-es-una-pared-blanca.jpg",
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "fecha": "2026-11-15",
+   "dia": "Domingo",
+   "semana": 4,
+   "vertical": "Eventos y empresas",
+   "items": [
+    {
+     "tipo": "Posteo",
+     "hora": "11:00",
+     "titulo": "Qué incluye",
+     "pieza": "01-posteos-pauta/045_eventos_que-incluye.jpg",
+     "nota": "Pieza de la campaña, con CTA."
+    },
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "El instante que no se repite",
+     "pieza": "04-historias-organicas/031_dato_el-instante-que-no-se-repite.jpg",
+     "nota": ""
+    },
+    {
+     "tipo": "Equipo",
+     "hora": "18:00",
+     "titulo": "Luz arma la semana que viene y Lupa la revisa",
+     "pieza": "09-ESTUDIO/EQUIPO.md",
+     "nota": "El lunes a las 10 te llegan a Telegram las piezas para aprobar."
     }
    ]
   },
@@ -687,8 +894,8 @@
     {
      "tipo": "Historia",
      "hora": "12:30",
-     "titulo": "Dos cámaras y ningún plan B",
-     "pieza": "04-historias-organicas/026_detras_dos-camaras-y-ningun-plan-b.jpg",
+     "titulo": "Me muevo rápido y en silencio",
+     "pieza": "04-historias-organicas/030_detras_me-muevo-rapido-y-en-silencio.jpg",
      "nota": ""
     },
     {
@@ -699,11 +906,11 @@
      "nota": "Cierre de año: profesionales actualizan web y LinkedIn para enero."
     },
     {
-     "tipo": "Historia",
+     "tipo": "Historia (a mano)",
      "hora": "20:00",
      "titulo": "Nuevo carrusel: compartilo en historias",
      "pieza": "06-carruseles-collage/03-marca-personal-cinco-usos/01.jpg",
-     "nota": "Con sticker de enlace a WhatsApp."
+     "nota": "Desde la app, con sticker de enlace a WhatsApp (la API no pone stickers)."
     }
    ]
   },
@@ -723,9 +930,16 @@
     {
      "tipo": "Historia",
      "hora": "12:30",
-     "titulo": "El plato se enfría en tres minutos",
-     "pieza": "04-historias-organicas/027_detras_el-plato-se-enfria-en-tres-minutos.jpg",
-     "nota": ""
+     "titulo": "Odiaba las fotos mías hasta esta sesión",
+     "pieza": "02-historias-pauta/040_retratos_odiaba-las-fotos-mias-hasta-esta-sesion.jpg",
+     "nota": "Historia de la campaña de la semana, con CTA a WhatsApp."
+    },
+    {
+     "tipo": "Posteo",
+     "hora": "13:00",
+     "titulo": "Si vendés vos, la cara importa",
+     "pieza": "01-posteos-pauta/038_retratos_si-vendes-vos-la-cara-importa.jpg",
+     "nota": "Pieza de la campaña, con CTA."
     }
    ]
   },
@@ -738,8 +952,8 @@
     {
      "tipo": "Historia",
      "hora": "12:30",
-     "titulo": "El fondo blanco no es una pared blanca",
-     "pieza": "04-historias-organicas/028_detras_el-fondo-blanco-no-es-una-pared-blanca.jpg",
+     "titulo": "Lo que entra por los ojos antes que por la boca",
+     "pieza": "04-historias-organicas/032_dato_lo-que-entra-por-los-ojos-antes-que-por-la-b.jpg",
      "nota": ""
     },
     {
@@ -767,8 +981,8 @@
     {
      "tipo": "Historia",
      "hora": "12:30",
-     "titulo": "Trabajo casi siempre con luz de ventana",
-     "pieza": "04-historias-organicas/029_detras_trabajo-casi-siempre-con-luz-de-ventana.jpg",
+     "titulo": "Una persona, sin pose y sin apuro",
+     "pieza": "04-historias-organicas/033_dato_una-persona-sin-pose-y-sin-apuro.jpg",
      "nota": ""
     },
     {
@@ -776,7 +990,7 @@
      "hora": "19:30",
      "titulo": "Reel del carrusel: Tu marca personal no entra en una selfie",
      "pieza": "07-reels-collage/03-marca-personal-cinco-usos.mp4",
-     "nota": "Ponele un tema tuyo de fondo."
+     "nota": "Sale con el audio del archivo; si le querés poner un tema tuyo, subilo a mano."
     }
    ]
   },
@@ -789,9 +1003,9 @@
     {
      "tipo": "Historia",
      "hora": "12:30",
-     "titulo": "Me muevo rápido y en silencio",
-     "pieza": "04-historias-organicas/030_detras_me-muevo-rapido-y-en-silencio.jpg",
-     "nota": ""
+     "titulo": "Un book que no parece de estudio",
+     "pieza": "02-historias-pauta/036_retratos_un-book-que-no-parece-de-estudio.jpg",
+     "nota": "Historia de la campaña de la semana, con CTA a WhatsApp."
     },
     {
      "tipo": "Venta",
@@ -821,6 +1035,42 @@
      "titulo": "Un retrato que se ve desde la esquina.",
      "pieza": "08-tus-fotos-en-el-mundo/01_manhattan_edificio.jpg",
      "nota": "Nueva York. Es un montaje: decilo en el pie."
+    },
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "Los que nunca posan y siempre miran",
+     "pieza": "04-historias-organicas/034_dato_los-que-nunca-posan-y-siempre-miran.jpg",
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "fecha": "2026-11-22",
+   "dia": "Domingo",
+   "semana": 5,
+   "vertical": "Retrato / marca personal",
+   "items": [
+    {
+     "tipo": "Posteo",
+     "hora": "11:00",
+     "titulo": "Cómo es una sesión",
+     "pieza": "01-posteos-pauta/039_retratos_como-es-una-sesion.jpg",
+     "nota": "Pieza de la campaña, con CTA."
+    },
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "Dos personas y todo el resto de la vida esperando",
+     "pieza": "04-historias-organicas/035_dato_dos-personas-y-todo-el-resto-de-la-vida-espe.jpg",
+     "nota": ""
+    },
+    {
+     "tipo": "Equipo",
+     "hora": "18:00",
+     "titulo": "Luz arma la semana que viene y Lupa la revisa",
+     "pieza": "09-ESTUDIO/EQUIPO.md",
+     "nota": "El lunes a las 10 te llegan a Telegram las piezas para aprobar."
     }
    ]
   },
@@ -833,8 +1083,8 @@
     {
      "tipo": "Historia",
      "hora": "12:30",
-     "titulo": "El instante que no se repite",
-     "pieza": "04-historias-organicas/031_dato_el-instante-que-no-se-repite.jpg",
+     "titulo": "Uruguay también es esto",
+     "pieza": "04-historias-organicas/036_foto_uruguay-tambien-es-esto.jpg",
      "nota": ""
     },
     {
@@ -845,11 +1095,11 @@
      "nota": "Black Friday (27/11): los negocios que venden por Instagram sienten el límite."
     },
     {
-     "tipo": "Historia",
+     "tipo": "Historia (a mano)",
      "hora": "20:00",
      "titulo": "Nuevo carrusel: compartilo en historias",
      "pieza": "06-carruseles-collage/07-web-tu-instagram-no-es-tu-web/01.jpg",
-     "nota": "Con sticker de enlace a WhatsApp."
+     "nota": "Desde la app, con sticker de enlace a WhatsApp (la API no pone stickers)."
     }
    ]
   },
@@ -869,9 +1119,16 @@
     {
      "tipo": "Historia",
      "hora": "12:30",
-     "titulo": "Lo que entra por los ojos antes que por la boca",
-     "pieza": "04-historias-organicas/032_dato_lo-que-entra-por-los-ojos-antes-que-por-la-b.jpg",
-     "nota": ""
+     "titulo": "Una web completa",
+     "pieza": "02-historias-pauta/032_web_una-web-completa.jpg",
+     "nota": "Historia de la campaña de la semana, con CTA a WhatsApp."
+    },
+    {
+     "tipo": "Posteo",
+     "hora": "13:00",
+     "titulo": "Rápida en el celular o no sirve",
+     "pieza": "01-posteos-pauta/031_web_rapida-en-el-celular-o-no-sirve.jpg",
+     "nota": "Pieza de la campaña, con CTA."
     }
    ]
   },
@@ -884,16 +1141,16 @@
     {
      "tipo": "Historia",
      "hora": "12:30",
-     "titulo": "Una persona, sin pose y sin apuro",
-     "pieza": "04-historias-organicas/033_dato_una-persona-sin-pose-y-sin-apuro.jpg",
+     "titulo": "Nadie en kilómetros",
+     "pieza": "04-historias-organicas/037_foto_nadie-en-kilometros.jpg",
      "nota": ""
     },
     {
-     "tipo": "Reel de 6 segundos",
+     "tipo": "Posteo",
      "hora": "19:30",
-     "titulo": "Tu casamiento pasa una sola vez",
-     "pieza": "05-videos/001_bodas_tu-casamiento-pasa-una-sola-vez_feed.mp4",
-     "nota": "Video animado de un aviso."
+     "titulo": "Tu web andando en una semana",
+     "pieza": "01-posteos-pauta/033_web_tu-web-andando-en-una-semana.jpg",
+     "nota": "Pieza de la campaña, con CTA."
     }
    ]
   },
@@ -913,8 +1170,8 @@
     {
      "tipo": "Historia",
      "hora": "12:30",
-     "titulo": "Los que nunca posan y siempre miran",
-     "pieza": "04-historias-organicas/034_dato_los-que-nunca-posan-y-siempre-miran.jpg",
+     "titulo": "Me miró y se fue",
+     "pieza": "04-historias-organicas/038_foto_me-miro-y-se-fue.jpg",
      "nota": ""
     },
     {
@@ -922,7 +1179,7 @@
      "hora": "19:30",
      "titulo": "Reel del carrusel: Tu Instagram no es tu página web",
      "pieza": "07-reels-collage/07-web-tu-instagram-no-es-tu-web.mp4",
-     "nota": "Ponele un tema tuyo de fondo."
+     "nota": "Sale con el audio del archivo; si le querés poner un tema tuyo, subilo a mano."
     }
    ]
   },
@@ -935,9 +1192,9 @@
     {
      "tipo": "Historia",
      "hora": "12:30",
-     "titulo": "Dos personas y todo el resto de la vida esperando",
-     "pieza": "04-historias-organicas/035_dato_dos-personas-y-todo-el-resto-de-la-vida-espe.jpg",
-     "nota": ""
+     "titulo": "Le mandé el logo un lunes y el viernes ya estaba online",
+     "pieza": "02-historias-pauta/035_web_le-mande-el-logo-un-lunes-y-el-viernes-ya-esta.jpg",
+     "nota": "Historia de la campaña de la semana, con CTA a WhatsApp."
     },
     {
      "tipo": "Venta",
@@ -947,11 +1204,11 @@
      "nota": "Todo presupuesto sin respuesta hace 2+ días recibe un mensaje."
     },
     {
-     "tipo": "Reel de 6 segundos",
+     "tipo": "Posteo",
      "hora": "19:30",
-     "titulo": "La gente pide con los ojos",
-     "pieza": "05-videos/009_gastronomia_la-gente-pide-con-los-ojos_feed.mp4",
-     "nota": "Video animado de un aviso."
+     "titulo": "Las fotos y el lugar donde se muestran",
+     "pieza": "01-posteos-pauta/034_web_las-fotos-y-el-lugar-donde-se-muestran.jpg",
+     "nota": "Pieza de la campaña, con CTA."
     }
    ]
   },
@@ -967,6 +1224,42 @@
      "titulo": "Tu trabajo, en tu propia página.",
      "pieza": "08-tus-fotos-en-el-mundo/12_notebook.jpg",
      "nota": "Tu web. Es un montaje: decilo en el pie."
+    },
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "No se movió en veinte minutos",
+     "pieza": "04-historias-organicas/039_foto_no-se-movio-en-veinte-minutos.jpg",
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "fecha": "2026-11-29",
+   "dia": "Domingo",
+   "semana": 6,
+   "vertical": "Páginas web",
+   "items": [
+    {
+     "tipo": "Reel de 6 segundos",
+     "hora": "11:00",
+     "titulo": "Tu casamiento pasa una sola vez",
+     "pieza": "05-videos/001_bodas_tu-casamiento-pasa-una-sola-vez_feed.mp4",
+     "nota": "Video animado de un aviso."
+    },
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "Esto salió del horno hace un minuto",
+     "pieza": "04-historias-organicas/040_foto_esto-salio-del-horno-hace-un-minuto.jpg",
+     "nota": ""
+    },
+    {
+     "tipo": "Equipo",
+     "hora": "18:00",
+     "titulo": "Luz arma la semana que viene y Lupa la revisa",
+     "pieza": "09-ESTUDIO/EQUIPO.md",
+     "nota": "El lunes a las 10 te llegan a Telegram las piezas para aprobar."
     }
    ]
   },
@@ -979,8 +1272,8 @@
     {
      "tipo": "Historia",
      "hora": "12:30",
-     "titulo": "Uruguay también es esto",
-     "pieza": "04-historias-organicas/036_foto_uruguay-tambien-es-esto.jpg",
+     "titulo": "Producto uruguayo, foto uruguaya",
+     "pieza": "04-historias-organicas/041_foto_producto-uruguayo-foto-uruguaya.jpg",
      "nota": ""
     },
     {
@@ -991,11 +1284,11 @@
      "nota": "Compras de Navidad: el cuadro es regalo y deco a la vez."
     },
     {
-     "tipo": "Historia",
+     "tipo": "Historia (a mano)",
      "hora": "20:00",
      "titulo": "Nuevo carrusel: compartilo en historias",
      "pieza": "06-carruseles-collage/08-cuadros-regala-un-lugar/01.jpg",
-     "nota": "Con sticker de enlace a WhatsApp."
+     "nota": "Desde la app, con sticker de enlace a WhatsApp (la API no pone stickers)."
     }
    ]
   },
@@ -1015,9 +1308,16 @@
     {
      "tipo": "Historia",
      "hora": "12:30",
-     "titulo": "Nadie en kilómetros",
-     "pieza": "04-historias-organicas/037_foto_nadie-en-kilometros.jpg",
-     "nota": ""
+     "titulo": "Colgá tu mejor foto",
+     "pieza": "02-historias-pauta/046_cuadros_colga-tu-mejor-foto.jpg",
+     "nota": "Historia de la campaña de la semana, con CTA a WhatsApp."
+    },
+    {
+     "tipo": "Reel de 6 segundos",
+     "hora": "13:00",
+     "titulo": "Una foto en el teléfono no decora nada",
+     "pieza": "05-videos/047_cuadros_una-foto-en-el-telefono-no-decora-nada_feed.mp4",
+     "nota": "Video animado de un aviso."
     }
    ]
   },
@@ -1030,16 +1330,16 @@
     {
      "tipo": "Historia",
      "hora": "12:30",
-     "titulo": "Me miró y se fue",
-     "pieza": "04-historias-organicas/038_foto_me-miro-y-se-fue.jpg",
+     "titulo": "Se casaron con viento a favor",
+     "pieza": "04-historias-organicas/042_foto_se-casaron-con-viento-a-favor.jpg",
      "nota": ""
     },
     {
-     "tipo": "Reel de 6 segundos",
+     "tipo": "Posteo",
      "hora": "19:30",
-     "titulo": "Sacas 800 fotos y las editas de a una",
-     "pieza": "05-videos/018_edicion_sacas-800-fotos-y-las-editas-de-a-una_feed.mp4",
-     "nota": "Video animado de un aviso."
+     "titulo": "Paisajes de Uruguay, impresos en grande",
+     "pieza": "01-posteos-pauta/048_cuadros_paisajes-de-uruguay-impresos-en-grande.jpg",
+     "nota": "Pieza de la campaña, con CTA."
     }
    ]
   },
@@ -1059,8 +1359,8 @@
     {
      "tipo": "Historia",
      "hora": "12:30",
-     "titulo": "No se movió en veinte minutos",
-     "pieza": "04-historias-organicas/039_foto_no-se-movio-en-veinte-minutos.jpg",
+     "titulo": "Quince años, cero poses",
+     "pieza": "04-historias-organicas/043_foto_quince-anos-cero-poses.jpg",
      "nota": ""
     },
     {
@@ -1068,7 +1368,7 @@
      "hora": "19:30",
      "titulo": "Reel del carrusel: Regalá un lugar",
      "pieza": "07-reels-collage/08-cuadros-regala-un-lugar.mp4",
-     "nota": "Ponele un tema tuyo de fondo."
+     "nota": "Sale con el audio del archivo; si le querés poner un tema tuyo, subilo a mano."
     }
    ]
   },
@@ -1081,9 +1381,9 @@
     {
      "tipo": "Historia",
      "hora": "12:30",
-     "titulo": "Esto salió del horno hace un minuto",
-     "pieza": "04-historias-organicas/040_foto_esto-salio-del-horno-hace-un-minuto.jpg",
-     "nota": ""
+     "titulo": "Tu producto, como se merece",
+     "pieza": "02-historias-pauta/016_gastronomia_tu-producto-como-se-merece.jpg",
+     "nota": "Historia de la campaña de la semana, con CTA a WhatsApp."
     },
     {
      "tipo": "Venta",
@@ -1093,11 +1393,11 @@
      "nota": "Todo presupuesto sin respuesta hace 2+ días recibe un mensaje."
     },
     {
-     "tipo": "Reel de 6 segundos",
+     "tipo": "Posteo",
      "hora": "19:30",
-     "titulo": "Tu producto merece una foto que lo venda",
-     "pieza": "05-videos/024_marcas_tu-producto-merece-una-foto-que-lo-venda_feed.mp4",
-     "nota": "Video animado de un aviso."
+     "titulo": "Nos entregó todas las fotos en diez días y quedamos mudos",
+     "pieza": "01-posteos-pauta/008_bodas_nos-entrego-todas-las-fotos-en-diez-dias-y-que.jpg",
+     "nota": "Pieza de la campaña, con CTA."
     }
    ]
   },
@@ -1113,6 +1413,42 @@
      "titulo": "El mar, colgado en el living.",
      "pieza": "08-tus-fotos-en-el-mundo/11_cuadro_living.jpg",
      "nota": "En tu casa. Es un montaje: decilo en el pie."
+    },
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "Tres canciones y se acabó la luz",
+     "pieza": "04-historias-organicas/044_foto_tres-canciones-y-se-acabo-la-luz.jpg",
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "fecha": "2026-12-06",
+   "dia": "Domingo",
+   "semana": 7,
+   "vertical": "Cuadros",
+   "items": [
+    {
+     "tipo": "Posteo",
+     "hora": "11:00",
+     "titulo": "Quedan pocas fechas para el verano",
+     "pieza": "01-posteos-pauta/007_bodas_quedan-pocas-fechas-para-el-verano.jpg",
+     "nota": "Pieza de la campaña, con CTA."
+    },
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "Mañana esto va a estar lleno",
+     "pieza": "04-historias-organicas/045_foto_manana-esto-va-a-estar-lleno.jpg",
+     "nota": ""
+    },
+    {
+     "tipo": "Equipo",
+     "hora": "18:00",
+     "titulo": "Luz arma la semana que viene y Lupa la revisa",
+     "pieza": "09-ESTUDIO/EQUIPO.md",
+     "nota": "El lunes a las 10 te llegan a Telegram las piezas para aprobar."
     }
    ]
   },
@@ -1125,8 +1461,8 @@
     {
      "tipo": "Historia",
      "hora": "12:30",
-     "titulo": "Producto uruguayo, foto uruguaya",
-     "pieza": "04-historias-organicas/041_foto_producto-uruguayo-foto-uruguaya.jpg",
+     "titulo": "No hay segunda toma",
+     "pieza": "04-historias-organicas/046_foto_no-hay-segunda-toma.jpg",
      "nota": ""
     },
     {
@@ -1137,11 +1473,11 @@
      "nota": "Se lanza la sección de producción musical en la web."
     },
     {
-     "tipo": "Historia",
+     "tipo": "Historia (a mano)",
      "hora": "20:00",
      "titulo": "Nuevo carrusel: compartilo en historias",
      "pieza": "06-carruseles-collage/09-musica-de-la-idea-al-master/01.jpg",
-     "nota": "Con sticker de enlace a WhatsApp."
+     "nota": "Desde la app, con sticker de enlace a WhatsApp (la API no pone stickers)."
     }
    ]
   },
@@ -1161,9 +1497,16 @@
     {
      "tipo": "Historia",
      "hora": "12:30",
-     "titulo": "Se casaron con viento a favor",
-     "pieza": "04-historias-organicas/042_foto_se-casaron-con-viento-a-favor.jpg",
-     "nota": ""
+     "titulo": "Qué te llevás",
+     "pieza": "02-historias-pauta/050_empresas_que-te-llevas.jpg",
+     "nota": "Historia de la campaña de la semana, con CTA a WhatsApp."
+    },
+    {
+     "tipo": "Posteo",
+     "hora": "13:00",
+     "titulo": "Fotos de tu equipo que no parecen de banco de imágenes",
+     "pieza": "01-posteos-pauta/049_empresas_fotos-de-tu-equipo-que-no-parecen-de-banco-de-.jpg",
+     "nota": "Pieza de la campaña, con CTA."
     }
    ]
   },
@@ -1176,16 +1519,16 @@
     {
      "tipo": "Historia",
      "hora": "12:30",
-     "titulo": "Quince años, cero poses",
-     "pieza": "04-historias-organicas/043_foto_quince-anos-cero-poses.jpg",
+     "titulo": "Una foto que sí se puede mandar",
+     "pieza": "04-historias-organicas/047_foto_una-foto-que-si-se-puede-mandar.jpg",
      "nota": ""
     },
     {
-     "tipo": "Reel de 6 segundos",
+     "tipo": "Posteo",
      "hora": "19:30",
-     "titulo": "Tu instagram no es tu pagina web",
-     "pieza": "05-videos/030_web_tu-instagram-no-es-tu-pagina-web_feed.mp4",
-     "nota": "Video animado de un aviso."
+     "titulo": "Así se ve un casamiento bien fotografiado",
+     "pieza": "01-posteos-pauta/005_bodas_asi-se-ve-un-casamiento-bien-fotografiado.jpg",
+     "nota": "Pieza de la campaña, con CTA."
     }
    ]
   },
@@ -1205,8 +1548,8 @@
     {
      "tipo": "Historia",
      "hora": "12:30",
-     "titulo": "Tres canciones y se acabó la luz",
-     "pieza": "04-historias-organicas/044_foto_tres-canciones-y-se-acabo-la-luz.jpg",
+     "titulo": "Fotos de equipo que no dan vergüenza",
+     "pieza": "04-historias-organicas/048_foto_fotos-de-equipo-que-no-dan-verguenza.jpg",
      "nota": ""
     },
     {
@@ -1214,7 +1557,7 @@
      "hora": "19:30",
      "titulo": "Reel del carrusel: La música también la hago",
      "pieza": "07-reels-collage/09-musica-de-la-idea-al-master.mp4",
-     "nota": "Ponele un tema tuyo de fondo."
+     "nota": "Sale con el audio del archivo; si le querés poner un tema tuyo, subilo a mano."
     }
    ]
   },
@@ -1227,9 +1570,9 @@
     {
      "tipo": "Historia",
      "hora": "12:30",
-     "titulo": "Mañana esto va a estar lleno",
-     "pieza": "04-historias-organicas/045_foto_manana-esto-va-a-estar-lleno.jpg",
-     "nota": ""
+     "titulo": "Tu producto merece una foto que lo venda",
+     "pieza": "02-historias-pauta/024_marcas_tu-producto-merece-una-foto-que-lo-venda.jpg",
+     "nota": "Historia de la campaña de la semana, con CTA a WhatsApp."
     },
     {
      "tipo": "Venta",
@@ -1239,11 +1582,11 @@
      "nota": "Todo presupuesto sin respuesta hace 2+ días recibe un mensaje."
     },
     {
-     "tipo": "Reel de 6 segundos",
+     "tipo": "Posteo",
      "hora": "19:30",
-     "titulo": "Una foto tuya que no te da verguenza man",
-     "pieza": "05-videos/037_retratos_una-foto-tuya-que-no-te-da-verguenza-man_feed.mp4",
-     "nota": "Video animado de un aviso."
+     "titulo": "La foto la sacaste bien. Ahora que se note.",
+     "pieza": "01-posteos-pauta/023_edicion_la-foto-la-sacaste-bien-ahora-que-se-note.jpg",
+     "nota": "Pieza de la campaña, con CTA."
     }
    ]
   },
@@ -1259,6 +1602,42 @@
      "titulo": "La banda que fotografié, en la pantalla más grande.",
      "pieza": "08-tus-fotos-en-el-mundo/03_tokio_pantalla.jpg",
      "nota": "Tokio · Shibuya. Es un montaje: decilo en el pie."
+    },
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "Quedan fechas para diciembre",
+     "pieza": "04-historias-organicas/049_dato_quedan-fechas-para-diciembre.jpg",
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "fecha": "2026-12-13",
+   "dia": "Domingo",
+   "semana": 8,
+   "vertical": "Producción musical",
+   "items": [
+    {
+     "tipo": "Posteo",
+     "hora": "11:00",
+     "titulo": "Aceite, dulces, empanadas y kamados",
+     "pieza": "01-posteos-pauta/026_marcas_aceite-dulces-empanadas-y-kamados.jpg",
+     "nota": "Pieza de la campaña, con CTA."
+    },
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "Tengo lugar para editar dos lotes esta semana",
+     "pieza": "04-historias-organicas/050_dato_tengo-lugar-para-editar-dos-lotes-esta-seman.jpg",
+     "nota": ""
+    },
+    {
+     "tipo": "Equipo",
+     "hora": "18:00",
+     "titulo": "Luz arma la semana que viene y Lupa la revisa",
+     "pieza": "09-ESTUDIO/EQUIPO.md",
+     "nota": "El lunes a las 10 te llegan a Telegram las piezas para aprobar."
     }
    ]
   },
@@ -1271,9 +1650,9 @@
     {
      "tipo": "Historia",
      "hora": "12:30",
-     "titulo": "No hay segunda toma",
-     "pieza": "04-historias-organicas/046_foto_no-hay-segunda-toma.jpg",
-     "nota": ""
+     "titulo": "Nadie compra lo que no se ve bien",
+     "pieza": "02-historias-pauta/025_marcas_nadie-compra-lo-que-no-se-ve-bien.jpg",
+     "nota": "Historia de la campaña de la semana, con CTA a WhatsApp."
     },
     {
      "tipo": "Carrusel collage",
@@ -1283,11 +1662,11 @@
      "nota": "Las marcas planifican el contenido de verano y la tienda online de enero."
     },
     {
-     "tipo": "Historia",
+     "tipo": "Historia (a mano)",
      "hora": "20:00",
      "titulo": "Nuevo carrusel: compartilo en historias",
      "pieza": "06-carruseles-collage/05-producto-del-olivo-a-la-mesa/01.jpg",
-     "nota": "Con sticker de enlace a WhatsApp."
+     "nota": "Desde la app, con sticker de enlace a WhatsApp (la API no pone stickers)."
     }
    ]
   },
@@ -1307,9 +1686,16 @@
     {
      "tipo": "Historia",
      "hora": "12:30",
-     "titulo": "Una foto que sí se puede mandar",
-     "pieza": "04-historias-organicas/047_foto_una-foto-que-si-se-puede-mandar.jpg",
-     "nota": ""
+     "titulo": "Fondo blanco, sin sorpresas",
+     "pieza": "02-historias-pauta/029_marcas_fondo-blanco-sin-sorpresas.jpg",
+     "nota": "Historia de la campaña de la semana, con CTA a WhatsApp."
+    },
+    {
+     "tipo": "Posteo",
+     "hora": "13:00",
+     "titulo": "Qué incluye",
+     "pieza": "01-posteos-pauta/028_marcas_que-incluye.jpg",
+     "nota": "Pieza de la campaña, con CTA."
     }
    ]
   },
@@ -1322,16 +1708,16 @@
     {
      "tipo": "Historia",
      "hora": "12:30",
-     "titulo": "Fotos de equipo que no dan vergüenza",
-     "pieza": "04-historias-organicas/048_foto_fotos-de-equipo-que-no-dan-verguenza.jpg",
-     "nota": ""
+     "titulo": "Tu casamiento pasa una sola vez",
+     "pieza": "02-historias-pauta/001_bodas_tu-casamiento-pasa-una-sola-vez.jpg",
+     "nota": "Historia de la campaña de la semana, con CTA a WhatsApp."
     },
     {
-     "tipo": "Reel de 6 segundos",
+     "tipo": "Posteo",
      "hora": "19:30",
-     "titulo": "La fiesta dura una noche",
-     "pieza": "05-videos/041_eventos_la-fiesta-dura-una-noche_feed.mp4",
-     "nota": "Video animado de un aviso."
+     "titulo": "Dentro de diez años, esto es lo que te va a quedar",
+     "pieza": "01-posteos-pauta/002_bodas_dentro-de-diez-anos-esto-es-lo-que-te-va-a-que.jpg",
+     "nota": "Pieza de la campaña, con CTA."
     }
    ]
   },
@@ -1351,16 +1737,16 @@
     {
      "tipo": "Historia",
      "hora": "12:30",
-     "titulo": "Quedan fechas para diciembre",
-     "pieza": "04-historias-organicas/049_dato_quedan-fechas-para-diciembre.jpg",
-     "nota": ""
+     "titulo": "Una boda completa",
+     "pieza": "02-historias-pauta/003_bodas_una-boda-completa.jpg",
+     "nota": "Historia de la campaña de la semana, con CTA a WhatsApp."
     },
     {
      "tipo": "Reel",
      "hora": "19:30",
      "titulo": "Reel del carrusel: Un producto tiene una historia entera",
      "pieza": "07-reels-collage/05-producto-del-olivo-a-la-mesa.mp4",
-     "nota": "Ponele un tema tuyo de fondo."
+     "nota": "Sale con el audio del archivo; si le querés poner un tema tuyo, subilo a mano."
     }
    ]
   },
@@ -1373,9 +1759,9 @@
     {
      "tipo": "Historia",
      "hora": "12:30",
-     "titulo": "Tengo lugar para editar dos lotes esta semana",
-     "pieza": "04-historias-organicas/050_dato_tengo-lugar-para-editar-dos-lotes-esta-seman.jpg",
-     "nota": ""
+     "titulo": "No es mi primera boda",
+     "pieza": "02-historias-pauta/004_bodas_no-es-mi-primera-boda.jpg",
+     "nota": "Historia de la campaña de la semana, con CTA a WhatsApp."
     },
     {
      "tipo": "Venta",
@@ -1385,11 +1771,11 @@
      "nota": "Todo presupuesto sin respuesta hace 2+ días recibe un mensaje."
     },
     {
-     "tipo": "Reel de 6 segundos",
+     "tipo": "Posteo",
      "hora": "19:30",
-     "titulo": "Una foto en el telefono no decora nada",
-     "pieza": "05-videos/047_cuadros_una-foto-en-el-telefono-no-decora-nada_feed.mp4",
-     "nota": "Video animado de un aviso."
+     "titulo": "Tus fotos en diez días",
+     "pieza": "01-posteos-pauta/006_bodas_tus-fotos-en-diez-dias.jpg",
+     "nota": "Pieza de la campaña, con CTA."
     }
    ]
   },
@@ -1405,6 +1791,42 @@
      "titulo": "Un producto uruguayo, a la altura de cualquier ruta.",
      "pieza": "08-tus-fotos-en-el-mundo/08_los_angeles_cartel.jpg",
      "nota": "Los Ángeles. Es un montaje: decilo en el pie."
+    },
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "Así se ve un casamiento bien fotografiado",
+     "pieza": "02-historias-pauta/005_bodas_asi-se-ve-un-casamiento-bien-fotografiado.jpg",
+     "nota": "Historia de la campaña de la semana, con CTA a WhatsApp."
+    }
+   ]
+  },
+  {
+   "fecha": "2026-12-20",
+   "dia": "Domingo",
+   "semana": 9,
+   "vertical": "Producto / marcas",
+   "items": [
+    {
+     "tipo": "Posteo",
+     "hora": "11:00",
+     "titulo": "Fotos de tu carta en una jornada",
+     "pieza": "01-posteos-pauta/013_gastronomia_fotos-de-tu-carta-en-una-jornada.jpg",
+     "nota": "Pieza de la campaña, con CTA."
+    },
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "Quedan pocas fechas para el verano",
+     "pieza": "02-historias-pauta/007_bodas_quedan-pocas-fechas-para-el-verano.jpg",
+     "nota": "Historia de la campaña de la semana, con CTA a WhatsApp."
+    },
+    {
+     "tipo": "Equipo",
+     "hora": "18:00",
+     "titulo": "Luz arma la semana que viene y Lupa la revisa",
+     "pieza": "09-ESTUDIO/EQUIPO.md",
+     "nota": "El lunes a las 10 te llegan a Telegram las piezas para aprobar."
     }
    ]
   }

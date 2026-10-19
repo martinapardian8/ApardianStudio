@@ -3,20 +3,25 @@
 
 Lee 08-CONTENIDO-INSTAGRAM/calendario.json y escribe
 11-AUTOMATIZACION/calendario_instagram.csv: una fila por publicación de feed
-o reel, con los archivos en el orden en que se suben, la URL pública de cada
+reel o historia, con los archivos en el orden en que se suben, la URL pública de cada
 uno (apardianstudio.com/ig/...) y el pie de foto completo.
 
 Esa planilla se importa a Google Sheets (hoja "Calendario") y es lo que leen
 los flujos 07 (aprobación por Telegram) y 08 (publicador). Nada se publica si
 la fila no dice "aprobado".
 
-Las historias quedan afuera: la API de Instagram no programa historias para
-una cuenta como la de Martin. Siguen siendo manuales (están en el calendario).
+Las historias también van (tipo STORY, sin pie): la API publica historias de
+imagen o video en cuentas profesionales. La de los lunes que comparte el
+carrusel con sticker de enlace sigue a mano, porque la API no pone stickers.
+
+Antes de escribir, Lupa (10-MOTOR/lupa.py) revisa cada fila y llena la
+columna `revision`: el flujo 07 solo le manda a Martin lo que dice "ok".
 
 python3 10-MOTOR/calendario_sheet.py
 """
 import os, re, csv, json, glob
 from urllib.parse import quote
+import lupa
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 IG = os.path.join(RAIZ, "08-CONTENIDO-INSTAGRAM")
@@ -24,7 +29,7 @@ SALIDA = os.path.join(RAIZ, "11-AUTOMATIZACION", "calendario_instagram.csv")
 BASE_URL = "https://apardianstudio.com/ig/"
 COLUMNAS = ["id", "fecha", "hora", "tipo", "titulo", "archivos", "urls", "pie",
             "primer_comentario", "estado", "aprobado_por", "aprobado_en",
-            "publicado_en", "ig_media_id", "error"]
+            "publicado_en", "ig_media_id", "error", "revision"]
 MAX_PIE = 2200          # límite de Instagram para el pie de foto
 MAX_CARRUSEL = 10       # hojas por carrusel que acepta la API
 
@@ -86,13 +91,16 @@ def tipo_de(archivos):
 
 
 def fila(item, fecha, collage, campanas, mundo, base_mundo):
-    """Devuelve la fila de la planilla o None si no es una publicación de feed/reel."""
+    """Devuelve la fila de la planilla o None si no es una publicación de feed,
+    reel o historia."""
     pieza, tipo_cal = item.get("pieza") or "", item["tipo"]
-    if tipo_cal in ("Historia", "Venta", "Automatización") or not pieza:
+    if tipo_cal in ("Historia (a mano)", "Venta", "Automatización", "Equipo") or not pieza:
         return None
     pie, comentario, archivos = "", "", []
 
-    if pieza.startswith("06-carruseles-collage/"):
+    if tipo_cal == "Historia":
+        archivos = [pieza]                    # las historias no llevan pie
+    elif pieza.startswith("06-carruseles-collage/"):
         slug = pieza.split("/")[1]
         archivos = archivos_carpeta(pieza)
         c = collage.get(slug[:2], {})
@@ -114,7 +122,7 @@ def fila(item, fecha, collage, campanas, mundo, base_mundo):
         archivos = archivos_carpeta(pieza)
         cp = os.path.join(IG, pieza, "copy.txt")
         pie = leer(cp).strip() if os.path.exists(cp) else ""
-    elif pieza.startswith("05-videos/"):
+    elif pieza.startswith("05-videos/") or pieza.startswith("01-posteos-pauta/"):
         archivos = [pieza]
         campana = os.path.basename(pieza).split("_")[1]
         pie = campanas.get(campana, "")
@@ -125,7 +133,7 @@ def fila(item, fecha, collage, campanas, mundo, base_mundo):
     if not archivos or faltan:
         print("  OJO, faltan archivos para", pieza, faltan)
         return None
-    tipo = tipo_de(archivos)
+    tipo = "STORY" if tipo_cal == "Historia" else tipo_de(archivos)
     error = ""
     if tipo == "CAROUSEL" and len(archivos) > MAX_CARRUSEL:
         error = "carrusel de más de %d hojas: la API no lo acepta" % MAX_CARRUSEL
@@ -144,7 +152,7 @@ def fila(item, fecha, collage, campanas, mundo, base_mundo):
         "pie": pie, "primer_comentario": comentario,
         "estado": "error" if error else "pendiente",
         "aprobado_por": "", "aprobado_en": "", "publicado_en": "", "ig_media_id": "",
-        "error": error,
+        "error": error, "revision": "",
     }
 
 
@@ -153,13 +161,14 @@ def main():
     collage, campanas = pies_collage(), pies_campana()
     mundo = json.load(open(os.path.join(IG, "08-tus-fotos-en-el-mundo", "indice.json"), encoding="utf-8"))
     base_mundo = pie_mundo_base()
-    filas, historias = [], 0
+    filas, a_mano, vistos, cercanas = [], 0, {}, {}
     for d in cal["dias"]:
         for it in d["items"]:
-            if it["tipo"] == "Historia":
-                historias += 1
+            if it["tipo"] == "Historia (a mano)":
+                a_mano += 1
             f = fila(it, d["fecha"], collage, campanas, mundo, base_mundo)
             if f:
+                f["revision"] = lupa.revisar(f, vistos, cercanas)
                 filas.append(f)
     ids = [f["id"] for f in filas]
     assert len(ids) == len(set(ids)), "ids repetidos"
@@ -172,8 +181,10 @@ def main():
     for f in filas:
         por_tipo[f["tipo"]] = por_tipo.get(f["tipo"], 0) + 1
     print(json.dumps({"filas": len(filas), "por_tipo": por_tipo,
-                      "historias_manuales": historias,
-                      "sin_pie": [f["id"] for f in filas if not f["pie"]],
+                      "historias_a_mano": a_mano,
+                      "frenadas_por_lupa": [f["id"] + ": " + f["revision"] for f in filas if f["revision"].startswith("frenado")],
+                      "sin_pie": [f["id"] for f in filas if not f["pie"] and f["tipo"] != "STORY"],
+                      "con_nota_de_lupa": sum("nota" in f["revision"] for f in filas),
                       "con_error": [f["id"] for f in filas if f["error"]]},
                      ensure_ascii=False, indent=1))
 

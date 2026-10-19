@@ -29,11 +29,13 @@ hipótesis a validar con la operación real (se anotan en `09-ESTUDIO/APRENDIZAJ
 **Orden de ataque:** primero P1 y P2 (cuidan las consultas que ya existen, cero
 riesgo), después P3 (trae consultas nuevas), y recién con P3 andando, P4.
 
-**P7 en detalle:** la planilla `Calendario` tiene cada posteo y reel del
-calendario con su pie de foto. Un día antes, el flujo 07 le manda a Martin por
-Telegram la imagen y el pie con dos botones, *Aprobar* y *No publicar*. Lo
-aprobado lo publica el flujo 08 a la hora fijada. Lo que no se aprueba no sale.
-Las historias siguen siendo manuales. Ver `INSTAGRAM_APROBACION.md`.
+**P7 en detalle:** la planilla `Calendario` tiene un posteo y una historia
+por día, con su pie de foto. Lupa (`10-MOTOR/lupa.py`) revisa cada pieza; lo
+que pasa, el flujo 07 se lo manda a Martin por Telegram un día antes con dos
+botones, *Aprobar* y *No publicar*. Lo aprobado lo publica el flujo 08 a la
+hora fijada (feed, reels e historias). Lo que no se aprueba no sale. Solo la
+historia del lunes con sticker de enlace queda a mano. Ver
+`INSTAGRAM_APROBACION.md` y el equipo en `09-ESTUDIO/EQUIPO.md`.
 
 ---
 
@@ -222,4 +224,4 @@ conviene dejarlas en Opus: son las que venden.
 | `leads_plantilla.csv` / `bajas_plantilla.csv` | Encabezados para importar a Sheets |
 | `armar_flujos.py` | Regenera los JSON de `n8n/` a partir de `prompts/` |
 | `../09-ESTUDIO/CM_VENTAS.md` | Playbook del community manager de ventas |
-| `../.claude/agents/cm-ventas.md` | El agente CM de ventas para Claude Code |
+| `../.claude/agents/trato-ventas.md` | Trato, el agente de ventas (equipo en `09-ESTUDIO/EQUIPO.md`) |

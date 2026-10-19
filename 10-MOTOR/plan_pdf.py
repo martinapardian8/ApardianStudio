@@ -66,12 +66,12 @@ ul{{margin:0 0 8pt;padding-left:14pt}} li{{margin:0 0 3pt}}
 <span class="eti">01 · Resumen</span><h2>Qué cambió hoy</h2>
 <table><tr><th>Área</th><th>Qué hay ahora</th><th>Dónde está</th></tr>
 <tr><td><b>Contenido</b></td><td>9 carruseles continuos en estilo editorial, 9 reels que los recorren, 12 posteos "Tus fotos en el mundo" y 4 animaciones de fotos tuyas.</td><td>08-CONTENIDO-INSTAGRAM/06, 07 y 08</td></tr>
-<tr><td><b>Calendario</b></td><td>9 semanas, 126 tareas: qué se publica, cuándo, el foco de venta y la automatización de cada semana.</td><td>CALENDARIO.md y la app Centro</td></tr>
+<tr><td><b>Calendario</b></td><td>9 semanas, un posteo y una historia todos los días (63 + 63), sin repetir foto en menos de 3 días, más el foco de venta y la automatización de cada semana.</td><td>CALENDARIO.md y la app Centro</td></tr>
 <tr><td><b>App Centro</b></td><td>Calendario con tildes, carruseles con sus textos para copiar, clientes y guiones de venta. Se usa desde el celular.</td><td>claude.ai (página privada)</td></tr>
-<tr><td><b>Ventas</b></td><td>Community manager de ventas: embudo, rutina de 30 minutos, guiones, objeciones y KPIs.</td><td>09-ESTUDIO/CM_VENTAS.md</td></tr>
+<tr><td><b>Equipo</b></td><td>Tres agentes: Luz (community manager), Lupa (crítica de diseño, con veto) y Trato (ventas), con una escalera de confianza.</td><td>09-ESTUDIO/EQUIPO.md</td></tr>
 <tr><td><b>Prospección</b></td><td>6 flujos de n8n: buscar negocios, auditar su web, redactar el mail, aprobar, seguir y clasificar respuestas.</td><td>11-AUTOMATIZACION</td></tr>
-<tr><td><b>Instagram</b></td><td>Calendario de aprobación: aprobás por Telegram y un agente publica a la hora pactada.</td><td>11-AUTOMATIZACION/INSTAGRAM_APROBACION.md</td></tr>
-<tr><td><b>Web</b></td><td>Servicios rediseñado, sección nueva de Música con el EP FUGAZ y seguridad endurecida. Sin publicar.</td><td>05-WEB y 06-NOTAS/vista-previa</td></tr>
+<tr><td><b>Instagram</b></td><td>Calendario de aprobación: Lupa revisa, aprobás por Telegram y un agente publica a la hora pactada, posteos e historias.</td><td>11-AUTOMATIZACION/INSTAGRAM_APROBACION.md</td></tr>
+<tr><td><b>Web</b></td><td>Servicios rediseñado, sección nueva de Música con el EP FUGAZ y seguridad endurecida. Publicada.</td><td>05-WEB y apardianstudio.com</td></tr>
 </table>
 <div class="caja"><b>Regla de la casa, reforzada hoy:</b> solo fotos tuyas. La IA pone escenas, materiales y movimiento, nunca reemplaza una foto ni inventa un "antes". Todo lo que simulaba un antes/después quedó en <i>_NO-PUBLICAR-antes-simulado</i>.</div>
 </div>
@@ -90,12 +90,18 @@ ul{{margin:0 0 8pt;padding-left:14pt}} li{{margin:0 0 3pt}}
 
 <div class="sec">
 <span class="eti">03 · Calendario</span><h2>Nueve semanas, una idea por semana</h2>
-<p>Lunes carrusel · martes foco de venta · miércoles y viernes publicaciones ya armadas · jueves reel y una automatización · viernes seguimiento de presupuestos · sábado "Tus fotos en el mundo" · historias de lunes a viernes.</p>
+<p><b>Un posteo y una historia todos los días.</b> Lunes carrusel · jueves su reel · sábado "Tus fotos en el mundo" · martes, miércoles, viernes y domingo publicaciones armadas y piezas de la campaña · historias a las 12:30 · martes foco de venta · viernes seguimiento · domingo Luz arma la semana siguiente.</p>
 <table><tr><th>Sem.</th><th>Lunes</th><th>Tema y carrusel</th><th>Venta</th><th>Automatización</th></tr>{filas}</table>
 </div>
 
 <div class="sec">
-<span class="eti">04 · Ventas</span><h2>El community manager de ventas</h2>
+<span class="eti">04 · Equipo</span><h2>Luz, Lupa y Trato</h2>
+<table><tr><th>Agente</th><th>Qué hace</th><th>Nunca</th></tr>
+<tr><td><b>Luz</b> · community manager</td><td>Un posteo y una historia por día. Arma la semana el domingo, elige fotos, escribe pies, genera piezas nuevas con el motor.</td><td>Publicar sola. Fotos que no son tuyas.</td></tr>
+<tr><td><b>Lupa</b> · crítica de diseño</td><td>Revisa todo antes de que te llegue: medidas, peso, pie, marca, fotos repetidas aunque estén recortadas. Tiene veto.</td><td>Dejar pasar algo "porque ya está hecho".</td></tr>
+<tr><td><b>Trato</b> · ventas</td><td>Consultas, presupuestos, seguimientos, prospección y el reporte del lunes.</td><td>Escribirle a un cliente sin que lo veas.</td></tr></table>
+<p><b>Escalera de confianza:</b> hoy aprobás todo por Telegram → 4 semanas sin rechazos de diseño: aprobás la semana de una vez → 8 semanas: las historias orgánicas salen solas → precios, clientes y lo nuevo pasan siempre por vos.</p>
+<h3>Trato: cómo vende</h3>
 <div class="dos"><div>
 <h3>El embudo</h3>
 <ul><li><b>Atención:</b> carrusel, reel, aviso o mail.</li><li><b>Interés:</b> perfil y web con WhatsApp a un toque.</li><li><b>Conversación:</b> respuesta en menos de 1 hora y 3 preguntas para calificar.</li><li><b>Presupuesto:</b> en 24 horas, en una página.</li><li><b>Cierre:</b> seguimiento a los 2 y 5 días.</li><li><b>Reseña y referido:</b> a los 3 días de entregar.</li></ul>
@@ -138,8 +144,6 @@ ul{{margin:0 0 8pt;padding-left:14pt}} li{{margin:0 0 3pt}}
 <div class="sec">
 <span class="eti">07 · Lo que falta</span><h2>Lo que solo podés hacer vos</h2>
 <ul class="check">
-<li><b>Dar acceso de GitHub a Claude</b> (claude.ai/connect-github) para subir todo lo de hoy. Hasta entonces vive solo en la sesión.</li>
-<li>Revisar la vista previa de la web y decir "publicá".</li>
 <li>Confirmar que FUGAZ es el EP a mostrar, y pasar fotos tuyas en el piano si las tenés.</li>
 <li>Instagram: cuenta profesional vinculada a una página de Facebook y app de Meta para la publicación con aprobación.</li>
 <li>n8n: crear la cuenta y cargar credenciales (Anthropic, Google Places, Sheets, Gmail, Telegram).</li>

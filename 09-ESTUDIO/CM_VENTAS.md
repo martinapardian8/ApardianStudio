@@ -4,7 +4,7 @@ El objetivo es uno: **que la gente escriba, pida presupuesto y contrate.**
 Seguidores, likes y alcance sirven solo si terminan en una conversación por
 WhatsApp.
 
-Lo usa el agente `cm-ventas` (`.claude/agents/cm-ventas.md`) y lo puede usar
+Lo usa Trato, el agente de ventas (`.claude/agents/trato-ventas.md`), y lo puede usar
 Martin a mano. Regla de siempre: **antes de mandar cualquier mensaje a un
 cliente real, se lo muestra a Martin.**
 

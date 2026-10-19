@@ -880,6 +880,7 @@ def f07():
 // Las publicaciones pendientes de las próximas HORAS_ANTES horas (y las que
 // quedaron sin aprobar de hoy). Una por mensaje, en orden de fecha.
 // Mientras sigan pendientes, se vuelven a pedir todos los días: es el recordatorio.
+// Solo pasa lo que Lupa dejó en "ok" (columna revision): lo frenado no llega.
 const c = $('Config').first().json;
 const ahora = Date.now(), lim = ahora + Number(c.HORAS_ANTES || 36) * 3600e3;
 const link = (id, acc) => c.URL_APROBAR_IG + '?id=' + encodeURIComponent(id) + '&a=' + acc + '&t=' + encodeURIComponent(c.TOKEN);
@@ -887,6 +888,7 @@ const out = [];
 for (const r of $('Leer Calendario').all()) {
   const f = r.json;
   if (String(f.estado || '').trim() !== 'pendiente' || !f.id) continue;
+  if (!/^ok/.test(String(f.revision || '').trim())) continue;
   const t = enUY(f.fecha, f.hora).getTime();
   if (isNaN(t) || t > lim || t < ahora - 12 * 3600e3) continue;
   const urls = String(f.urls || '').split('|').filter(Boolean);
@@ -895,9 +897,12 @@ for (const r of $('Leer Calendario').all()) {
   const pie = String(f.pie || '');
   // el pie de una foto de Telegram tiene 1024 caracteres como máximo
   const vista = pie.length > 600 ? pie.slice(0, 600) + '…' : pie;
-  const texto = '<b>' + esc(f.tipo) + ' · ' + esc(f.titulo) + '</b>\n' + esc(cuando) +
+  const nombre = { STORY: 'HISTORIA', IMAGE: 'POSTEO', CAROUSEL: 'CARRUSEL', REEL: 'REEL' }[f.tipo] || f.tipo;
+  const nota = String(f.revision || '').split('nota: ')[1];
+  const texto = '<b>' + esc(nombre) + ' · ' + esc(f.titulo) + '</b>\n' + esc(cuando) +
     ' · ' + urls.length + ' archivo' + (urls.length === 1 ? '' : 's') + '\n\n' + esc(vista) +
-    (f.tipo === 'REEL' && !foto ? '\n\n<a href="' + esc(urls[0]) + '">Ver el video</a>' : '') +
+    (!foto && urls[0] ? '\n\n<a href="' + esc(urls[0]) + '">Ver el video</a>' : '') +
+    '\n\n🔍 Lupa: ' + (nota ? esc(nota) : 'sin observaciones') +
     '\n\n<i>Si lo aprobás, se publica solo a esa hora.</i>';
   out.push({ json: { id: f.id, t, foto, texto, url_aprobar: link(f.id, 'aprobar'), url_rechazar: link(f.id, 'rechazar') } });
 }
@@ -961,6 +966,7 @@ JS_PUBLICAR = r"""
 // Imagen: contenedor + media_publish. Carrusel: un contenedor por hoja
 // (is_carousel_item), el contenedor padre y media_publish. Reel: contenedor
 // REELS, esperar a que Instagram termine de procesar el video, y publicar.
+// Historia: contenedor STORIES con la imagen o el video (sin pie ni comentario).
 const c = $('Config').first().json;
 const x = $input.first().json;
 const f = x.fila;
@@ -1018,12 +1024,18 @@ try {
     if (tapa) p.cover_url = tapa;
     creacion = (await llamar('POST', user + '/media', p)).id;
     await esperar(creacion, 10, 20000);       // hasta ~3 minutos y medio
+  } else if (f.tipo === 'STORY') {
+    const u = urls[0];
+    const esVideo = /\.mp4$/i.test(u);
+    const p = esVideo ? { media_type: 'STORIES', video_url: u } : { media_type: 'STORIES', image_url: u };
+    creacion = (await llamar('POST', user + '/media', p)).id;
+    await esperar(creacion, esVideo ? 10 : 6, esVideo ? 15000 : 5000);
   } else {
     throw new Error('tipo desconocido: ' + f.tipo);
   }
   const pub = await llamar('POST', user + '/media_publish', { creation_id: creacion });
   let aviso_com = '';
-  if (f.primer_comentario) {
+  if (f.primer_comentario && f.tipo !== 'STORY') {
     try { await llamar('POST', '/' + pub.id + '/comments', { message: f.primer_comentario }); }
     catch (e) { aviso_com = '\n(No se pudo dejar el primer comentario: ' + e.message + ')'; }
   }
@@ -1031,7 +1043,7 @@ try {
   try { link = (await llamar('GET', '/' + pub.id, { fields: 'permalink' })).permalink || ''; } catch (e) {}
   return [{ json: {
     fila: { id: f.id, estado: 'publicado', publicado_en: new Date().toISOString(), ig_media_id: pub.id, error: '' },
-    telegram_text: '📣 Publicado: <b>' + esc(f.titulo) + '</b>' + (link ? '\n' + esc(link) : '') + esc(aviso_com),
+    telegram_text: (f.tipo === 'STORY' ? '📣 Historia arriba: <b>' : '📣 Publicado: <b>') + esc(f.titulo) + '</b>' + (link ? '\n' + esc(link) : '') + esc(aviso_com),
   } }];
 } catch (e) {
   // "sigue procesando" no es un error de la fila: queda aprobada y se reintenta
