@@ -244,6 +244,28 @@ tr.grp td{padding-top:30px;font-size:11px;font-weight:500;letter-spacing:.22em;t
   .total{margin-top:40px;break-inside:avoid}
   .total .in{padding:12mm 14mm 8mm;max-width:none}
 }
+
+/* armado a medida */
+.builder{margin-top:24px;display:grid;grid-template-columns:1.4fr 1fr;gap:18px;align-items:start}
+@media (max-width:820px){.builder{grid-template-columns:1fr}}
+.pick{border:1px solid var(--line);border-radius:4px;background:var(--panel);padding:8px 20px}
+.pick label{display:grid;grid-template-columns:22px 1fr auto;gap:10px;align-items:center;padding:11px 0;border-bottom:1px solid var(--line);cursor:pointer;font-size:15px;color:var(--ink)}
+.pick label:last-child{border-bottom:0}
+.pick input{width:18px;height:18px;accent-color:var(--terra);margin:0}
+.pick label span:last-child{font-variant-numeric:tabular-nums;color:var(--fg)}
+.quick{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.quick button{min-height:38px;padding:0 14px;border:1px solid var(--line);border-radius:99px;background:transparent;color:var(--fg);font:500 12px/1 var(--body);letter-spacing:.12em;text-transform:uppercase;cursor:pointer}
+.quick button:hover{border-color:var(--terra);color:var(--terra)}
+.sum{border:1px solid var(--fg);border-radius:4px;overflow:hidden;position:sticky;top:calc(env(safe-area-inset-top,0px) + 16px)}
+.sum .hd{padding:14px 20px;background:var(--fg);color:var(--bg);font-size:11px;font-weight:500;letter-spacing:.22em;text-transform:uppercase}
+.sum .bd{padding:18px 20px;display:grid;gap:10px;background:var(--panel)}
+.sum .ln{display:flex;justify-content:space-between;gap:12px;font-size:14.5px;color:var(--ink);font-variant-numeric:tabular-nums}
+.sum .ln.big{padding-top:12px;border-top:1px solid var(--line);align-items:baseline}
+.sum .ln.big b{font-family:var(--display);font-weight:400;font-size:40px;line-height:1;color:var(--fg)}
+.sum .why2{font-size:13px;color:var(--terra);min-height:1.3em}
+.sum .pays{font-size:13.5px;color:var(--mute);line-height:1.5}
+.sum .pays b{color:var(--fg);font-weight:500}
+@media print{.quick{display:none}.sum{position:static}}
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -272,9 +294,9 @@ tr.grp td{padding-top:30px;font-size:11px;font-weight:500;letter-spacing:.22em;t
 
   <!-- PUNTO DE PARTIDA -->
   <section>
-    <div class="sec-t"><span class="lbl">Punto de partida</span><span class="lbl">Todo se arma desde cero</span></div>
-    <h2 class="disp">Hoy Pier 21 tiene el lugar y el logo. Todo lo demás lo creamos nosotros.</h2>
-    <p class="lead">No hay fotos, videos, carta definida, textos ni manual de marca para usar en digital. Por eso esta propuesta no adapta material existente: produce todo el contenido en el local y define la identidad visual de Pier 21 para la web, la carta y las redes.</p>
+    <div class="sec-t"><span class="lbl">Punto de partida</span><span class="lbl">Un lugar que recién abre</span></div>
+    <h2 class="disp">Como Pier 21 recién abre, armamos todo desde cero.</h2>
+    <p class="lead">La propuesta produce todo el contenido en el local y define cómo se ve Pier 21 en la web, la carta y las redes, partiendo del logo y de la estética del lugar.</p>
     <div class="two">
       <ul class="cond">
         <li><span><b>Identidad visual digital</b>: paleta, tipografías, uso del logo, estilo de fotos y tono de los textos, en un manual breve que queda para Pier 21.</span></li>
@@ -473,6 +495,30 @@ tr.grp td{padding-top:30px;font-size:11px;font-weight:500;letter-spacing:.22em;t
     <p class="fine">Los combinados mensuales se suman al plan base, que ya incluye la web, y tienen un mínimo de 3 meses. Si el logo no está en vectorial, se suma el redibujo (USD 80) a cualquier paquete.</p>
   </section>
 
+  <!-- A MEDIDA -->
+  <section>
+    <div class="sec-t"><span class="lbl">Armen su propuesta</span><span class="lbl">Elijan solo lo que necesitan</span></div>
+    <h2 class="disp">Cada servicio se puede sacar o sumar.</h2>
+    <p class="lead">Marquen los servicios que quieren. Con 4 servicios o más, el armado tiene un 15 % de descuento. Si eligen exactamente uno de los paquetes, se aplica el precio del paquete.</p>
+    <div class="builder">
+      <div>
+        <div class="quick"><button type="button" data-set="esencial">Paquete Esencial</button><button type="button" data-set="completo">Paquete Completo</button><button type="button" data-set="none">Desmarcar todo</button></div>
+        <div class="pick" id="pick"></div>
+      </div>
+      <div class="sum" aria-live="polite">
+        <div class="hd">Su selección</div>
+        <div class="bd">
+          <div class="ln"><span>Precio suelto</span><span id="bSum">—</span></div>
+          <div class="ln"><span>Descuento</span><span id="bOff">—</span></div>
+          <div class="why2" id="bWhy"></div>
+          <div class="ln big"><span>Total</span><b id="bTot">—</b></div>
+          <div class="pays" id="bPay"></div>
+        </div>
+      </div>
+    </div>
+    <p class="fine">Los servicios mensuales (gestión web y contenido) y los que se cobran por unidad (flyers, edición de fotos, visitas de carta nueva) se suman aparte, con los precios de arriba.</p>
+  </section>
+
   <!-- FORMA DE PAGO -->
   <section>
     <div class="sec-t"><span class="lbl">Forma de pago</span></div>
@@ -489,7 +535,7 @@ tr.grp td{padding-top:30px;font-size:11px;font-weight:500;letter-spacing:.22em;t
     <p class="fine">Paquete Esencial (USD 1.990), con los mismos 3 pasos: USD 796 al firmar, USD 597 con fotos y diseño, USD 597 antes de publicar.</p>
 
     <div class="rules">
-      <div><b>Servicios sueltos</b><p>Hasta USD 500: se paga el 100 % al encargarlo. Más de USD 500: 50 % al encargarlo y 50 % antes de entregar los archivos finales.</p></div>
+      <div><b>Servicios sueltos</b><p>Con 4 servicios o más, igual que los paquetes: 40 %, 30 % y 30 %. Con menos de 4: si suman hasta USD 500, se paga el 100 % al encargar; si suman más, 50 % al encargar y 50 % antes de entregar los archivos finales.</p></div>
       <div><b>Planes mensuales</b><p>Se pagan por mes adelantado, del 1 al 5 de cada mes. La Gestión web y carta empieza a pagarse el mes siguiente a publicar la web. Los planes de contenido pagan el primer mes al firmar. Mínimo 3 meses. Después, mes a mes, con 30 días de aviso para darlo de baja. Un mensaje de WhatsApp alcanza.</p></div>
       <div><b>Cómo se paga</b><p>Transferencia bancaria en dólares, o en pesos al tipo de cambio BROU del día del pago. Se emite factura por cada pago.</p></div>
       <div><b>Impuestos</b><p>Todos los precios están en dólares estadounidenses y no incluyen impuestos.</p></div>
@@ -569,6 +615,51 @@ tr.grp td{padding-top:30px;font-size:11px;font-weight:500;letter-spacing:.22em;t
   </div>
 </footer>
 
+<script>
+(function () {
+  var S = [
+    ['id', 'Identidad visual digital', 250], ['web', 'Web Pier 21', 800], ['carta', 'Carta impresa + online, con fotos de platos', 450],
+    ['lang', 'Idioma adicional (uno)', 50], ['gmb', 'Ficha de Google', 90], ['logo', 'Logo en vectorial', 80],
+    ['fotos', 'Producción de fotos del lugar', 800], ['drone', 'Video con drone', 250], ['reel', 'Reel de apertura', 240],
+    ['kit', 'Kit de lanzamiento', 250], ['ia', 'Pack de piezas con IA', 150]
+  ];
+  var P = { esencial: { k: ['id', 'web', 'carta', 'fotos', 'drone'], p: 1990, n: 'Paquete Esencial' },
+            completo: { k: ['id', 'web', 'carta', 'gmb', 'fotos', 'drone', 'reel', 'kit'], p: 2450, n: 'Paquete Completo' } };
+  var box = document.getElementById('pick');
+  S.forEach(function (x) {
+    var l = document.createElement('label');
+    l.innerHTML = '<input type="checkbox" id="b-' + x[0] + '" value="' + x[0] + '"><span>' + x[1] + '</span><span>USD ' + x[2] + '</span>';
+    box.appendChild(l);
+  });
+  function f(n) { return 'USD ' + Math.round(n).toLocaleString('es-UY'); }
+  function sel() { return S.filter(function (x) { return document.getElementById('b-' + x[0]).checked; }); }
+  function same(a, b) { return a.length === b.length && a.every(function (k) { return b.indexOf(k) > -1; }); }
+  function calc() {
+    var c = sel(), keys = c.map(function (x) { return x[0]; });
+    var sum = c.reduce(function (a, x) { return a + x[2]; }, 0), tot = sum, why = '';
+    for (var k in P) if (same(keys, P[k].k)) { tot = P[k].p; why = 'Precio del ' + P[k].n; }
+    if (!why && c.length >= 4) { tot = Math.round(sum * 0.85 / 10) * 10; why = '15 % por elegir 4 servicios o más'; }
+    document.getElementById('bSum').textContent = sum ? f(sum) : '—';
+    document.getElementById('bOff').textContent = sum && tot < sum ? '− ' + f(sum - tot) : '—';
+    document.getElementById('bWhy').textContent = why;
+    document.getElementById('bTot').textContent = sum ? f(tot) : '—';
+    var pay = '';
+    if (sum && (why || tot > 500)) {
+      if (why) pay = 'En 3 pagos: <b>' + f(tot * 0.4) + '</b> al firmar, <b>' + f(tot * 0.3) + '</b> con fotos y diseño, <b>' + f(tot * 0.3) + '</b> antes de publicar.';
+      else pay = 'En 2 pagos: <b>' + f(tot / 2) + '</b> al encargar y <b>' + f(tot / 2) + '</b> antes de la entrega final.';
+    } else if (sum) pay = 'Se paga el 100 % al encargar.';
+    if (keys.indexOf('web') > -1) pay += (pay ? ' ' : '') + 'La web suma la Gestión web y carta desde el segundo mes: USD ' + (same(keys, P.completo.k) ? 60 : 80) + ' al mes.';
+    document.getElementById('bPay').innerHTML = pay;
+  }
+  function setPack(name) {
+    S.forEach(function (x) { document.getElementById('b-' + x[0]).checked = name !== 'none' && P[name].k.indexOf(x[0]) > -1; });
+    calc();
+  }
+  box.addEventListener('change', calc);
+  Array.prototype.forEach.call(document.querySelectorAll('[data-set]'), function (b) { b.addEventListener('click', function () { setPack(b.getAttribute('data-set')); }); });
+  setPack('completo');
+})();
+</script>
 <script>
 (function () {
   // Puesta de sol en Montevideo (34.9 S, 56.16 O, UTC-3) con el algoritmo del Almanaque Náutico
