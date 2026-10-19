@@ -1,0 +1,18 @@
+CENTRO APARDIAN - instalar en Windows
+
+1. Clic derecho sobre este ZIP > "Extraer todo..." > Extraer.
+   (No lo abras desde adentro del ZIP: tiene que estar extraido.)
+2. En la carpeta extraida, doble clic en "instalar-windows.bat".
+3. Si aparece "Windows protegio su PC": tocar "Mas informacion" y despues
+   "Ejecutar de todas formas". Es una sola vez.
+4. Listo: queda el icono "Centro APARDIAN" en el Escritorio y en el menu
+   Inicio, y se abre la app.
+
+Se abre en una ventana propia con Chrome (si lo tenes) o con Edge.
+La primera vez te pide entrar con tu cuenta de claude.ai.
+
+Para tenerla en la barra de tareas: con la app abierta, clic derecho en su
+icono de la barra > "Anclar a la barra de tareas".
+
+Para desinstalar: borrar el icono del Escritorio y del menu Inicio, y la
+carpeta %LOCALAPPDATA%\CentroAPARDIAN.

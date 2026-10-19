@@ -1,0 +1,3 @@
+*.bat text eol=crlf
+*.ps1 text eol=crlf
+13-APP-CENTRO/windows/LEEME.txt text eol=crlf

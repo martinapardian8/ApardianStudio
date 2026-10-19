@@ -25,3 +25,18 @@ pide entrar. Después queda.
 `icono/` tiene el ícono en PNG (1024 a 32 px) y en `.icns`. Se regenera con
 `python3 10-MOTOR/icono_app.py`: squircle negro, la A en Anton y el punto
 rojo de APARDIAN.
+
+## Windows
+
+`Centro-APARDIAN-Windows.zip` trae todo lo necesario (son 25 KB; no hace falta
+bajar el repo entero):
+
+1. Clic derecho en el ZIP → **Extraer todo** → Extraer.
+2. Doble clic en `instalar-windows.bat`. Si aparece *Windows protegió su PC*:
+   **Más información** → **Ejecutar de todas formas** (una sola vez).
+3. Queda **Centro APARDIAN** en el Escritorio y en el menú Inicio, con su
+   ícono, y se abre en ventana propia con Chrome o con Edge.
+
+Los archivos sueltos están en `windows/` (`instalar.ps1` hace el trabajo:
+crea los accesos directos y copia el ícono a `%LOCALAPPDATA%\CentroAPARDIAN`).
+Si cambia el ícono, `CentroAPARDIAN.ico` se rehace desde `icono/icono_1024.png`.
