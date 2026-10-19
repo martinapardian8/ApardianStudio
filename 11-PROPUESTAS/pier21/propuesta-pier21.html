@@ -77,9 +77,9 @@ h2{margin:24px 0 12px;font-size:clamp(30px,4.4vw,46px)}
 .hero .nav{position:absolute;top:0;left:0;right:0;display:flex;justify-content:space-between;align-items:center;padding:3.2% 4%;font-size:clamp(8px,1.1vw,12px);letter-spacing:.24em;text-transform:uppercase}
 .hero .nav .pl{font-weight:500;letter-spacing:.32em;font-size:clamp(10px,1.5vw,16px)}
 .hero .nav .links{display:flex;gap:2.4vw;opacity:.9}
-.hero .copy{position:absolute;left:4%;bottom:9%;max-width:58%}
+.hero .copy{position:absolute;left:4%;top:17%;max-width:52%}
 .hero .copy .k{font-size:clamp(7px,1vw,11px);letter-spacing:.3em;text-transform:uppercase;opacity:.85}
-.hero .copy .t{font-family:var(--display);font-size:clamp(20px,4.4vw,50px);line-height:1.02;margin-top:.4em}
+.hero .copy .t{font-family:var(--display);font-size:clamp(18px,3.8vw,44px);line-height:1.02;margin-top:.4em}
 .hero .copy .cta{display:inline-block;margin-top:1.1em;padding:.75em 1.4em;border:1px solid rgba(251,244,236,.7);font-size:clamp(7px,.95vw,11px);letter-spacing:.24em;text-transform:uppercase}
 .hero .sun{position:absolute;right:4%;bottom:9%;text-align:right;font-size:clamp(7px,1vw,11px);letter-spacing:.2em;text-transform:uppercase;opacity:.9}
 .hero .sun b{display:block;font-family:var(--display);font-weight:400;font-size:clamp(16px,2.8vw,32px);letter-spacing:.02em;margin-top:.2em}
@@ -239,7 +239,7 @@ tr.grp td{padding-top:30px;font-size:11px;font-weight:500;letter-spacing:.22em;t
   html,body{background:var(--bg)!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
   .sheet{padding:12mm 14mm 0;max-width:none}
   section{margin-top:40px}
-  .drow,tr,.pack,.plan,.step,.rules div,.cal>div,.why>div,.inc li,.meta,.cond li,.mock,.trio{break-inside:avoid}
+  .keep,.paybox,.paper,.ex,.cal,.sum,.combo>div,.drow,tr,.pack,.plan,.step,.rules div,.cal>div,.why>div,.inc li,.meta,.cond li,.mock,.trio{break-inside:avoid}
   h2,.sec-t{break-after:avoid}
   .total{margin-top:40px;break-inside:avoid}
   .total .in{padding:12mm 14mm 8mm;max-width:none}
@@ -266,6 +266,18 @@ tr.grp td{padding-top:30px;font-size:11px;font-weight:500;letter-spacing:.22em;t
 .sum .pays{font-size:13.5px;color:var(--mute);line-height:1.5}
 .sum .pays b{color:var(--fg);font-weight:500}
 @media print{.quick{display:none}.sum{position:static}}
+
+.print-only,.print-inline{display:none}
+.paper{border:1px solid var(--line);border-radius:4px;background:var(--panel);padding:6px 20px;margin-top:24px}
+.paper .r{display:grid;grid-template-columns:22px 1fr auto;gap:12px;align-items:center;padding:9px 0;border-bottom:1px solid var(--line);font-size:14.5px;color:var(--ink)}
+.paper .r:last-child{border-bottom:0}
+.paper .r i{width:14px;height:14px;border:1.4px solid var(--fg);display:block}
+.paper .r span:last-child{font-variant-numeric:tabular-nums;color:var(--fg)}
+.paper .t{display:grid;grid-template-columns:1fr auto;gap:12px;padding:12px 0;border-top:1px solid var(--fg);font-size:14.5px;color:var(--fg)}
+.paper .t span:last-child{min-width:140px;border-bottom:1px solid var(--fg)}
+.ex{width:100%;border-collapse:collapse;margin-top:14px;min-width:0}
+.ex td,.ex th{font-size:13.5px;padding:8px 10px 8px 0}
+@media print{.builder,.screen-only{display:none!important}.print-only{display:block}.print-inline{display:inline}}
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -347,13 +359,11 @@ tr.grp td{padding-top:30px;font-size:11px;font-weight:500;letter-spacing:.22em;t
           <g stroke="#17130F" fill="none" stroke-linecap="round">
             <path d="M1010 520c-6-80-2-150 8-210" stroke-width="7"/>
             <path d="M1018 312c-30-6-56 6-74 24M1018 312c-24-22-52-26-76-18M1018 312c4-30 22-48 44-56M1018 312c30-10 58-2 76 16M1018 312c24 6 42 24 50 46M1018 312c-12 18-18 40-16 62" stroke-width="5"/>
-            <path d="M176 506c4-70 0-120-10-168" stroke-width="6"/>
-            <path d="M166 340c-26-4-48 6-62 22M166 340c-20-18-44-22-64-14M166 340c4-26 20-40 38-46M166 340c26-8 48 0 62 14M166 340c18 6 34 22 40 40" stroke-width="4.5"/>
           </g>
           <rect width="1200" height="600" fill="url(#fade)"/>
         </svg>
         <div class="nav"><span class="pl">Pier 21</span><span class="links"><span>La casa</span><span>Carta</span><span>Eventos</span><span>Reservas</span><span>ES · EN · PT</span></span></div>
-        <div class="copy"><div class="k">Rambla de Montevideo · Abierto hoy hasta las 00:30</div><div class="t">Frente al mar,<br>del mediodía a la última copa.</div><span class="cta">Reservar una mesa</span></div>
+        <div class="copy"><div class="k">Rambla de Montevideo · Abierto hoy hasta las 00:30</div><div class="t">Frente al mar,<br>hasta la última copa.</div><span class="cta">Reservar una mesa</span></div>
         <div class="sun">Puesta de sol hoy<b id="sunset">—</b></div>
       </div>
     </figure>
@@ -499,7 +509,7 @@ tr.grp td{padding-top:30px;font-size:11px;font-weight:500;letter-spacing:.22em;t
   <section>
     <div class="sec-t"><span class="lbl">Armen su propuesta</span><span class="lbl">Elijan solo lo que necesitan</span></div>
     <h2 class="disp">Cada servicio se puede sacar o sumar.</h2>
-    <p class="lead">Marquen los servicios que quieren. Con 4 servicios o más, el armado tiene un 15 % de descuento. Si eligen exactamente uno de los paquetes, se aplica el precio del paquete.</p>
+    <p class="lead"><span class="screen-only">Marquen los servicios que quieren.</span><span class="print-inline">Marquen en la lista los servicios que quieren.</span> Con 4 servicios o más, el armado tiene un 15 % de descuento. Si eligen exactamente uno de los paquetes, se aplica el precio del paquete.</p>
     <div class="builder">
       <div>
         <div class="quick"><button type="button" data-set="esencial">Paquete Esencial</button><button type="button" data-set="completo">Paquete Completo</button><button type="button" data-set="none">Desmarcar todo</button></div>
@@ -515,6 +525,21 @@ tr.grp td{padding-top:30px;font-size:11px;font-weight:500;letter-spacing:.22em;t
           <div class="pays" id="bPay"></div>
         </div>
       </div>
+    </div>
+    <div class="print-only">
+      <div class="paper"><div class="r"><i></i><span>Identidad visual digital</span><span>USD 250</span></div><div class="r"><i></i><span>Web Pier 21</span><span>USD 800</span></div><div class="r"><i></i><span>Carta impresa + online. con fotos de platos</span><span>USD 450</span></div><div class="r"><i></i><span>Idioma adicional (cada uno)</span><span>USD 50</span></div><div class="r"><i></i><span>Ficha de Google</span><span>USD 90</span></div><div class="r"><i></i><span>Logo en vectorial</span><span>USD 80</span></div><div class="r"><i></i><span>Producción de fotos del lugar</span><span>USD 800</span></div><div class="r"><i></i><span>Video con drone</span><span>USD 250</span></div><div class="r"><i></i><span>Reel de apertura</span><span>USD 240</span></div><div class="r"><i></i><span>Kit de lanzamiento</span><span>USD 250</span></div><div class="r"><i></i><span>Pack de piezas con IA</span><span>USD 150</span></div>
+        <div class="t"><span>Precio suelto de lo marcado</span><span></span></div>
+        <div class="t"><span>Total con descuento (15 % si son 4 servicios o más)</span><span></span></div>
+      </div>
+      <table class="ex">
+        <thead><tr><th>Ejemplo</th><th style="text-align:right">Suelto</th><th style="text-align:right">Total</th></tr></thead>
+        <tbody>
+          <tr><td>Paquete Completo</td><td class="num" style="text-align:right">USD 3.130</td><td class="num" style="text-align:right">USD 2.450</td></tr>
+          <tr><td>Paquete Esencial</td><td class="num" style="text-align:right">USD 2.550</td><td class="num" style="text-align:right">USD 1.990</td></tr>
+          <tr><td>Web, carta, fotos y drone, sin identidad visual (4 servicios, 15 %)</td><td class="num" style="text-align:right">USD 2.300</td><td class="num" style="text-align:right">USD 1.960</td></tr>
+          <tr><td>Web y carta (2 servicios, precio suelto)</td><td class="num" style="text-align:right">USD 1.250</td><td class="num" style="text-align:right">USD 1.250</td></tr>
+        </tbody>
+      </table>
     </div>
     <p class="fine">Los servicios mensuales (gestión web y contenido) y los que se cobran por unidad (flyers, edición de fotos, visitas de carta nueva) se suman aparte, con los precios de arriba.</p>
   </section>
@@ -572,7 +597,7 @@ tr.grp td{padding-top:30px;font-size:11px;font-weight:500;letter-spacing:.22em;t
   </section>
 
   <!-- NO INCLUYE -->
-  <section>
+  <section class="keep">
     <div class="sec-t"><span class="lbl">Qué no está incluido</span><span class="lbl">Costos de terceros, se pagan directo</span></div>
     <div class="two">
       <ul class="cond">
@@ -589,7 +614,7 @@ tr.grp td{padding-top:30px;font-size:11px;font-weight:500;letter-spacing:.22em;t
   </section>
 
   <!-- CALENDARIO -->
-  <section>
+  <section class="keep">
     <div class="sec-t"><span class="lbl">Calendario</span><span class="lbl">Paquete completo en 4 semanas desde el pago 1</span></div>
     <div class="cal">
       <div><span class="lbl">Semana 1</span><span class="disp">Producción y drone</span><p>Fotos del lugar y de la carta, reel de apertura y vuelo al atardecer. Identidad visual y textos de la web.</p></div>
