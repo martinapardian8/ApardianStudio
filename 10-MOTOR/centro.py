@@ -1,15 +1,21 @@
 # -*- coding: utf-8 -*-
 """Arma la app "Centro APARDIAN" (12-CENTRO/index.html + miniaturas).
 
-Junta en una sola pagina el calendario (calendario.json), los carruseles
-collage con sus textos (00_COPYS.md) y los guiones de venta (CM_VENTAS.md).
-Lo que cambia con el uso (que se publico, los clientes) vive en la base de
-datos del artifact, no en este archivo.
+Junta en una sola pagina el calendario (calendario.json), cada pieza de
+Instagram con su miniatura, su pie y lo que dijo Lupa (calendario_instagram.csv),
+los carruseles collage con sus textos (00_COPYS.md), los guiones de venta
+(CM_VENTAS.md) y las instrucciones de los tres agentes (.claude/agents), que
+la app usa para que Luz, Lupa y Trato trabajen desde ahi. Lo que cambia con el
+uso (que se publico, los clientes, las ordenes a los agentes) vive en la base
+de datos del artifact, no en este archivo.
 
 python3 10-MOTOR/centro.py
 """
-import os, re, json, glob
+import os, re, csv, sys, json, glob
 from PIL import Image
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import calendario_sheet as hoja
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 IG = os.path.join(RAIZ, "08-CONTENIDO-INSTAGRAM")
@@ -79,17 +85,94 @@ def guiones():
     return [g for g in grupos if g["items"]]
 
 
+def miniatura(rel, destino, ancho):
+    """Primera imagen (o un cuadro del video) de una pieza, chica, para la app."""
+    r = os.path.join(IG, rel)
+    if rel.endswith(".mp4"):
+        import cv2
+        v = cv2.VideoCapture(r)
+        v.set(cv2.CAP_PROP_POS_FRAMES, 30)
+        ok, im = v.read()
+        if not ok:
+            return False
+        im = Image.fromarray(cv2.cvtColor(im, cv2.COLOR_BGR2RGB))
+    else:
+        im = Image.open(r).convert("RGB")
+    im.thumbnail((ancho, ancho * 2), Image.LANCZOS)
+    im.save(destino, quality=72, optimize=True, progressive=True)
+    return True
+
+
+def piezas(cal):
+    """Una entrada por posteo o historia del calendario, con el id de la
+    planilla, la tarea del calendario a la que corresponde y su miniatura."""
+    revision = {}
+    if os.path.exists(hoja.SALIDA):
+        revision = {r["id"]: r.get("revision", "") for r in csv.DictReader(open(hoja.SALIDA, encoding="utf-8"))}
+    collage, campanas = hoja.pies_collage(), hoja.pies_campana()
+    mundo = json.load(open(os.path.join(IG, "08-tus-fotos-en-el-mundo", "indice.json"), encoding="utf-8"))
+    base_mundo = hoja.pie_mundo_base()
+    dst = os.path.join(OUT, "pz")
+    os.makedirs(dst, exist_ok=True)
+    out = []
+    for d in cal["dias"]:
+        for i, it in enumerate(d["items"]):
+            f = hoja.fila(it, d["fecha"], collage, campanas, mundo, base_mundo)
+            if not f:
+                continue
+            archivos = f["archivos"].split("|")
+            principal = archivos[0]
+            nombre = f["id"] + ".jpg"
+            if not os.path.exists(os.path.join(dst, nombre)):
+                miniatura(principal, os.path.join(dst, nombre), 240 if f["tipo"] == "STORY" else 360)
+            out.append({"id": f["id"], "cal": d["fecha"] + "-" + str(i), "fecha": d["fecha"], "hora": f["hora"],
+                        "tipo": f["tipo"], "titulo": f["titulo"], "pie": f["pie"],
+                        "comentario": f["primer_comentario"], "hojas": len([a for a in archivos if not a.endswith("_portada.jpg")]),
+                        "pieza": it["pieza"], "nota": it.get("nota", ""),
+                        "revision": revision.get(f["id"], ""), "img": "pz/" + nombre})
+    # las miniaturas de piezas que ya no estan en el calendario se borran
+    vigentes = {os.path.basename(p["img"]) for p in out}
+    for x in os.listdir(dst):
+        if x not in vigentes:
+            os.remove(os.path.join(dst, x))
+    return out
+
+
+def leer(rel):
+    with open(os.path.join(RAIZ, rel), encoding="utf-8") as f:
+        return f.read()
+
+
+def agentes():
+    """Instrucciones de cada agente (sin el encabezado) y lo que tienen que
+    saber del negocio. La app se las pasa a Claude en cada pedido."""
+    def cuerpo(rel):
+        t = leer(rel)
+        return t.split("---", 2)[2].strip() if t.startswith("---") else t
+    base = "\n\n".join(leer(r) for r in ["09-ESTUDIO/NEGOCIO.md", "09-ESTUDIO/MARCA.md", "09-ESTUDIO/APRENDIZAJES.md"])
+    base += ("\n\nTambién vende producción musical (composición, grabación, mix, mastering y videoclip; "
+             "Martin es pianista y productor, trabaja en Ableton; su último EP es FUGAZ, en Spotify como Marto Apardian) "
+             "y cuadros (fotos de su archivo impresas, con marco).")
+    return {
+        "luz": cuerpo(".claude/agents/luz-community-manager.md") + "\n\n" + base,
+        "lupa": cuerpo(".claude/agents/lupa-critica-diseno.md") + "\n\n" + base,
+        "trato": cuerpo(".claude/agents/trato-ventas.md") + "\n\n" + base + "\n\n" + leer("09-ESTUDIO/CM_VENTAS.md"),
+    }
+
+
 def main():
     os.makedirs(OUT, exist_ok=True)
-    datos = {"calendario": json.load(open(os.path.join(IG, "calendario.json"))),
+    cal = json.load(open(os.path.join(IG, "calendario.json")))
+    datos = {"calendario": cal, "piezas": piezas(cal),
              "carruseles": carruseles(), "guiones": guiones(),
-             "whatsapp": "+598 91 962 962"}
+             "agentes": agentes(), "whatsapp": "+598 91 962 962"}
     html = open(PLANTILLA).read().replace("/*__DATOS__*/null",
                                           json.dumps(datos, ensure_ascii=False))
     open(os.path.join(OUT, "index.html"), "w").write(html)
     n = sum(len(g["items"]) for g in datos["guiones"])
     print(json.dumps({"carruseles": len(datos["carruseles"]), "guiones": n,
-                      "dias": len(datos["calendario"]["dias"])}))
+                      "dias": len(datos["calendario"]["dias"]), "piezas": len(datos["piezas"]),
+                      "kb_html": os.path.getsize(os.path.join(OUT, "index.html")) // 1024}))
 
 
 if __name__ == "__main__":

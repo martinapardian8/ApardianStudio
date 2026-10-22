@@ -69,6 +69,20 @@ Y con los ojos, la semana entera de una (`06-NOTAS/lupa/semana-AAAA-MM-DD.jpg`):
 si son de tus mejores fotos, si se lee en el celular, si la grilla se ve pareja,
 si parece APARDIAN y no una plantilla.
 
+## Desde la app Centro
+
+En la pestaña **Agentes** de la app hablás con cada uno: le pedís un pie a
+Luz, le mandás una foto a Lupa para que la critique, le pegás una consulta a
+Trato para que te arme la respuesta. Ya conocen tus reglas, la semana y tus
+clientes. Responden borradores; no publican ni mandan nada.
+
+Lo que necesita tocar archivos (armar piezas nuevas, cambiar el calendario)
+lo dejás como **orden**. En la próxima sesión de Claude Code decís "hacé las
+órdenes del Centro" y se ejecutan; en la app quedan tachadas.
+
+En **Semana** ves cada pieza con su pie y lo que dijo Lupa, y desde ahí le
+pedís un cambio a Luz o una segunda opinión a Lupa.
+
 ## La escalera de confianza
 
 Confiar no es un salto: se gana con semanas que salen bien. Cuatro escalones.
