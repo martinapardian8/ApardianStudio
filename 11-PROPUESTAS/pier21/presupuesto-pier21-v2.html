@@ -7,17 +7,17 @@
 /* Presupuesto con la identidad del local: franja negra como la fachada, beige de la cal,
    terracota de las lámparas y verde del mármol de la barra. Hoja 1 decide, hoja 2 detalla. */
 :root{
-  --bg:#EFE7DA; --sheet:#F6F0E6; --line:#D9CCB8; --fg:#231D18; --ink:#4B4036; --mute:#857464;
+  --bg:#EFE7DA; --sheet:#F6F0E6; --line:#C9B9A2; --fg:#1A1512; --ink:#2E2620; --mute:#5A4D41;
   --night:#17130F; --terra:#A9513A; --marble:#3E5A4C; --cream:#F3EADC;
   --display:'Marcellus',Georgia,'Times New Roman',serif;
   --body:'Jost','Futura','Century Gothic',system-ui,sans-serif;
   color-scheme:light;
 }
 html,body{background:var(--bg);color:var(--fg)}
-body{font-family:var(--body);font-weight:300;font-size:9pt;line-height:1.42;-webkit-font-smoothing:antialiased;padding-block:24px}
+body{font-family:var(--body);font-weight:400;font-size:10.5pt;line-height:1.4;-webkit-font-smoothing:antialiased;padding-block:24px}
 .page{box-sizing:border-box;width:210mm;max-width:calc(100% - 32px);min-height:297mm;margin:0 auto 24px;background:var(--sheet);display:flex;flex-direction:column}
 .in{padding:0 14mm;display:flex;flex-direction:column;gap:5mm}
-.lb{font-size:6.8pt;font-weight:500;letter-spacing:.24em;text-transform:uppercase;color:var(--mute)}
+.lb{font-size:8pt;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--mute)}
 .serif{font-family:var(--display);font-weight:400}
 .num{font-variant-numeric:tabular-nums}
 
@@ -26,72 +26,72 @@ body{font-family:var(--body);font-weight:300;font-size:9pt;line-height:1.42;-web
 .band .top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
 .band .ap{font-family:'Anton','Impact',sans-serif;font-size:13pt;line-height:1;letter-spacing:.02em}
 .band .ap i{font-style:normal;color:#FF0033}
-.band .lb{color:#B7A893;text-align:right;line-height:1.9}
-.band .pier{font-weight:500;letter-spacing:.42em;font-size:9pt}
-.band h1{margin:2mm 0 0;font-family:var(--display);font-weight:400;font-size:29pt;line-height:1.05}
+.band .lb{color:#E2D6C4;text-align:right;line-height:1.9}
+.band .pier{font-weight:500;letter-spacing:.42em;font-size:10pt}
+.band h1{margin:1.5mm 0 0;font-family:var(--display);font-weight:400;font-size:26pt;line-height:1.05}
 .band h1 em{font-style:normal;color:#E39A78}
-.band p{margin:0;max-width:150mm;color:#D9CDBB;font-size:9.5pt}
+.band p{margin:0;max-width:165mm;color:#F3EADC;font-size:11pt}
 .waves{width:16mm;height:5.5mm;color:#E39A78;display:block}
 
 h2{margin:0;display:flex;justify-content:space-between;align-items:baseline;gap:10px;padding-bottom:2mm;border-bottom:1px solid var(--fg);font-family:var(--display);font-weight:400;font-size:14pt}
-h2 small{font-family:var(--body);font-size:6.8pt;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--mute)}
+h2 small{font-family:var(--body);font-size:8pt;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
 
 /* tabla comparativa */
 .cmp{width:100%;border-collapse:collapse}
-.cmp th,.cmp td{padding:1.3mm 2mm;border-bottom:1px solid var(--line);text-align:center;vertical-align:middle}
+.cmp th,.cmp td{padding:.95mm 2mm;border-bottom:1px solid var(--line);text-align:center;vertical-align:middle}
 .cmp th:first-child,.cmp td:first-child{text-align:left;padding-left:0}
 .cmp thead th{border-bottom:0;padding-top:0;vertical-align:bottom}
-.cmp .opt{display:block;font-family:var(--display);font-weight:400;font-size:12pt;color:var(--fg);line-height:1.1}
-.cmp .opt-s{display:block;margin-top:1mm;font-size:6.8pt;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--mute)}
+.cmp .opt{display:block;font-family:var(--display);font-weight:400;font-size:14pt;color:var(--fg);line-height:1.1}
+.cmp .opt-s{display:block;margin-top:1mm;font-size:7.8pt;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--mute)}
 .cmp .rec{background:#EFE1D2}
 .cmp thead .rec{border-top:2px solid var(--terra)}
-.cmp .flag{display:inline-block;margin-bottom:1.5mm;padding:.6mm 2mm;background:var(--terra);color:var(--cream);font-size:6.3pt;font-weight:500;letter-spacing:.18em;text-transform:uppercase}
-.cmp td.s{text-align:right;color:var(--mute);white-space:nowrap}
+.cmp .flag{display:inline-block;margin-bottom:1.5mm;padding:.6mm 2mm;background:var(--terra);color:var(--cream);font-size:7.5pt;font-weight:500;letter-spacing:.18em;text-transform:uppercase}
+.cmp td.s{text-align:right;color:var(--fg);font-weight:500;white-space:nowrap}
 .cmp td b{display:block;font-weight:500;color:var(--fg)}
-.cmp td small{display:block;color:var(--mute);font-size:7.3pt}
+.cmp td small{display:block;color:var(--ink);font-size:8.6pt;font-weight:400}
 .dot{display:inline-block;width:2.4mm;height:2.4mm;border-radius:50%;background:var(--terra)}
 .dash{color:var(--line)}
 .cmp tr.sum td{border-bottom:0;padding-top:2.5mm}
-.cmp tr.sum td:first-child{font-size:7pt;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--mute)}
+.cmp tr.sum td:first-child{font-size:8pt;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--mute)}
 .cmp tr.price td{padding-top:1mm;padding-bottom:1mm;border-bottom:0}
-.cmp .big{font-family:var(--display);font-size:17pt;color:var(--fg);white-space:nowrap}
-.cmp .big small{font-family:var(--body);font-size:7.5pt;color:var(--mute)}
+.cmp .big{font-family:var(--display);font-size:20pt;color:var(--fg);white-space:nowrap}
+.cmp .big small{font-family:var(--body);font-size:8.5pt;color:var(--ink)}
 .cmp s{color:var(--mute)}
-.cmp .save{color:var(--marble);font-weight:500;font-size:8pt}
-.cmp tr.mo td{padding-top:1.5mm;font-size:8.3pt;color:var(--ink);border-bottom:1px solid var(--fg)}
+.cmp .save{color:var(--marble);font-weight:500;font-size:9.5pt}
+.cmp tr.mo td{padding-top:1.5mm;font-size:9.5pt;color:var(--ink);border-bottom:1px solid var(--fg)}
 
 .promise{display:grid;grid-template-columns:repeat(3,1fr);gap:5mm}
 .promise div{border-top:2px solid var(--marble);padding-top:2mm}
-.promise b{display:block;font-family:var(--display);font-weight:400;font-size:11.5pt;line-height:1.15;color:var(--fg)}
+.promise b{display:block;font-family:var(--display);font-weight:400;font-size:12.5pt;line-height:1.15;color:var(--fg)}
 .promise p{margin:1mm 0 0;color:var(--ink)}
 
 /* hoja 2 */
 .head2{display:flex;justify-content:space-between;align-items:center;padding:9mm 14mm 0}
-.head2 .pier{font-weight:500;letter-spacing:.42em;font-size:9pt}
+.head2 .pier{font-weight:500;letter-spacing:.42em;font-size:10pt}
 .list{display:grid}
-.it{display:grid;grid-template-columns:46mm 1fr 24mm;gap:4mm;padding:1.8mm 0;border-bottom:1px solid var(--line);align-items:start}
-.it b{font-family:var(--display);font-weight:400;font-size:10.5pt;color:var(--fg);line-height:1.2}
+.it{display:grid;grid-template-columns:46mm 1fr 24mm;gap:4mm;padding:1.25mm 0;border-bottom:1px solid var(--line);align-items:start}
+.it b{font-family:var(--display);font-weight:400;font-size:12pt;color:var(--fg);line-height:1.2}
 .it p{margin:0;color:var(--ink)}
-.it .p{text-align:right;font-family:var(--display);font-size:11.5pt;white-space:nowrap}
-.it .p small{display:block;font-family:var(--body);font-size:6.8pt;color:var(--mute)}
+.it .p{text-align:right;font-family:var(--display);font-size:13pt;white-space:nowrap}
+.it .p small{display:block;font-family:var(--body);font-size:8pt;color:var(--ink)}
 .two{display:grid;grid-template-columns:1fr 1fr;gap:8mm}
 ul.d{margin:2mm 0 0;padding:0;list-style:none;display:grid;gap:1.2mm}
 ul.d li{display:grid;grid-template-columns:4mm 1fr;color:var(--ink)}
 ul.d li::before{content:"—";color:var(--terra)}
 ul.d b{font-weight:500;color:var(--fg)}
 .pay{width:100%;border-collapse:collapse;margin-top:2mm}
-.pay th{text-align:right;font-size:6.5pt;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);padding:0 0 1.5mm 2mm;border-bottom:1px solid var(--line)}
+.pay th{text-align:right;font-size:7.8pt;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);padding:0 0 1.5mm 2mm;border-bottom:1px solid var(--line)}
 .pay th:first-child{text-align:left;padding-left:0}
 .pay td{padding:1.4mm 0 1.4mm 2mm;border-bottom:1px solid var(--line);color:var(--ink);text-align:right;white-space:nowrap}
 .pay td:first-child{text-align:left;padding-left:0;white-space:normal}
-.pay td.n{font-family:var(--display);font-size:10.5pt;color:var(--fg)}
+.pay td.n{font-family:var(--display);font-size:12pt;color:var(--fg)}
 .choose{margin-top:auto;background:var(--night);color:var(--cream);padding:6mm 14mm 5mm;display:flex;flex-direction:column;gap:4mm}
-.choose .opts{display:flex;gap:8mm;flex-wrap:wrap;font-family:var(--display);font-size:11.5pt}
+.choose .opts{display:flex;gap:8mm;flex-wrap:wrap;font-family:var(--display);font-size:13pt}
 .choose .opts span::before{content:"";display:inline-block;width:3.2mm;height:3.2mm;border:1.2px solid var(--cream);margin-right:2.5mm;vertical-align:-.3mm}
 .choose .sig{display:grid;grid-template-columns:1fr 1fr;gap:10mm;padding-top:6mm}
-.choose .sig div{border-top:1px solid #B7A893;padding-top:1.5mm;color:#B7A893}
-.choose .foot{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;color:#B7A893}
-.choose .lb{color:#B7A893}
+.choose .sig div{border-top:1px solid #E2D6C4;padding-top:1.5mm;color:#E2D6C4}
+.choose .foot{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;color:#E2D6C4}
+.choose .lb{color:#E2D6C4}
 
 @media (max-width:640px){
   .page{min-height:0}
@@ -126,7 +126,6 @@ ul.d b{font-weight:500;color:var(--fg)}
       <h1>Listo para su <em>primer verano.</em></h1>
     </div>
     <p>Web, carta en varios idiomas, fotos y video propios, en cuatro semanas. Ustedes atienden el restaurante; nosotros producimos todo, desde cero.</p>
-    <svg class="waves" aria-hidden="true"><use href="#w"/></svg>
   </div>
 
   <div class="in" style="padding-top:5mm;padding-bottom:6mm;flex:1">
