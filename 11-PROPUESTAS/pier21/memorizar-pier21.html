@@ -1,0 +1,141 @@
+<title>Paquetes Pier 21 de memoria</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Marcellus&family=Jost:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* Hoja para memorizar: los paquetes se arman como bloques que se suman (3, luego 5, luego 3 meses). */
+:root{
+  --sheet:#F6F0E6; --bg:#EFE7DA; --line:#C9B9A2; --fg:#1A1512; --ink:#2E2620; --mute:#5A4D41;
+  --night:#17130F; --terra:#A9513A; --marble:#3E5A4C; --cream:#F3EADC; --tint:#EFE1D2;
+  --display:'Marcellus',Georgia,serif; --body:'Jost','Futura',system-ui,sans-serif;
+  color-scheme:light;
+}
+html,body{background:var(--bg);color:var(--fg)}
+body{font-family:var(--body);font-weight:400;font-size:10.5pt;line-height:1.38;-webkit-font-smoothing:antialiased;padding-block:24px}
+.page{box-sizing:border-box;width:210mm;max-width:calc(100% - 32px);min-height:297mm;margin:0 auto;background:var(--sheet);display:flex;flex-direction:column}
+.band{background:var(--night);color:var(--cream);padding:6mm 12mm 5mm}
+.band h1{margin:0;font-family:var(--display);font-weight:400;font-size:23pt;line-height:1.05}
+.band h1 em{font-style:normal;color:#E39A78}
+.band p{margin:2mm 0 0;font-size:11pt;color:#F3EADC}
+.in{padding:4.5mm 12mm 4mm;display:flex;flex-direction:column;gap:3.6mm;flex:1}
+.rule{display:grid;grid-template-columns:repeat(3,1fr);gap:4mm}
+.rule div{background:var(--night);color:var(--cream);padding:3mm 4mm}
+.rule .n{font-family:'Anton',sans-serif;font-size:22pt;line-height:1;color:#E39A78}
+.rule b{display:block;font-family:var(--display);font-weight:400;font-size:13pt;margin-top:1mm}
+.rule span{display:block;font-size:9.5pt;color:#E2D6C4;margin-top:.5mm}
+.pk{border:1.5px solid var(--fg);display:grid;grid-template-columns:1fr 54mm}
+.pk.rec{border-color:var(--terra)}
+.pk .body{padding:2.8mm 4mm}
+.pk h2{margin:0;display:flex;align-items:baseline;gap:3mm;font-family:var(--display);font-weight:400;font-size:17pt;line-height:1}
+.pk h2 small{font-family:var(--body);font-size:9pt;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--terra)}
+.pk .formula{margin:1.2mm 0 1.4mm;font-weight:500;color:var(--marble)}
+.pk ul{margin:0;padding:0;list-style:none;display:grid;gap:.7mm}
+.pk li{display:grid;grid-template-columns:28mm 1fr;gap:3mm;padding-bottom:.7mm;border-bottom:1px solid var(--line)}
+.pk li:last-child{border-bottom:0;padding-bottom:0}
+.pk li b{font-weight:500}
+.pk li span{color:var(--ink)}
+.pk .side{background:var(--tint);padding:3.5mm 4mm;display:flex;flex-direction:column;justify-content:center;gap:1.5mm;border-left:1.5px solid var(--fg)}
+.pk.rec .side{border-left-color:var(--terra)}
+.pk .price{font-family:var(--display);font-size:21pt;line-height:1;white-space:nowrap}
+.pk .price.sm{font-size:16pt}
+.pk .side small{font-size:9.5pt;color:var(--ink)}
+.say{margin:2mm 0 0;padding:2mm 3mm;background:#FBF7F0;border-left:3px solid var(--terra);font-style:italic}
+.bottom{display:grid;grid-template-columns:1fr 1fr;gap:6mm}
+h3{margin:0 0 1.5mm;padding-bottom:1mm;border-bottom:1px solid var(--fg);font-family:var(--display);font-weight:400;font-size:13pt}
+.bottom ul{margin:0;padding:0;list-style:none;display:grid;gap:1mm}
+.bottom li{display:grid;grid-template-columns:4mm 1fr}
+.bottom li::before{content:"—";color:var(--terra)}
+.bottom b{font-weight:500}
+.foot{padding:0 12mm 5mm;font-size:8pt;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+@media (max-width:640px){
+  .page{min-height:0}
+  .band,.in,.foot{padding-left:16px;padding-right:16px}
+  .rule,.bottom{grid-template-columns:1fr}
+  .pk{grid-template-columns:1fr}
+  .pk .side{border-left:0;border-top:1.5px solid var(--fg)}
+  .pk li{grid-template-columns:1fr}
+}
+@page{size:A4;margin:0}
+@media print{
+  html,body{background:var(--sheet);padding:0;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .page{width:210mm;height:297mm;max-width:none;margin:0;overflow:hidden}
+}
+</style>
+
+<section class="page">
+  <div class="band">
+    <h1>Los paquetes de <em>Pier 21</em>, de memoria</h1>
+    <p>Cada paquete es el anterior más un bloque. Si te acordás de los bloques, te acordás de todo.</p>
+  </div>
+
+  <div class="in">
+    <div class="rule">
+      <div><span class="n">3</span><b>Que lo encuentren</b><span>Web · Carta · Google</span></div>
+      <div><span class="n">+5</span><b>Que lo quieran</b><span>Fotos · Drone · Reel · Identidad · Kit</span></div>
+      <div><span class="n">+3</span><b>Meses de redes</b><span>Contenido y gestión, sin pensar</span></div>
+    </div>
+
+    <div class="pk">
+      <div class="body">
+        <h2>Presencia <small>Que lo encuentren</small></h2>
+        <div class="formula">3 cosas: web, carta y Google</div>
+        <ul>
+          <li><b>Web</b><span>A medida, en español, inglés, portugués y más. Reservas por WhatsApp, mapa y horario.</span></li>
+          <li><b>Carta</b><span>Impresa y online con QR en las mesas, en varios idiomas. Incluye las fotos de los platos.</span></li>
+          <li><b>Google</b><span>La ficha de Google Maps con fotos, horario, carta y reservas.</span></li>
+        </ul>
+      </div>
+      <div class="side"><span class="price">USD 1.370</span><small>Después, gestión 80 por mes desde el mes 2</small></div>
+    </div>
+
+    <div class="pk rec">
+      <div class="body">
+        <h2>Apertura <small>★ La que recomendás</small></h2>
+        <div class="formula">Presencia + 5 cosas: fotos, drone, reel, identidad y kit</div>
+        <ul>
+          <li><b>Fotos</b><span>3 visitas: mañana, atardecer y noche con el salón lleno. Sin límite de fotos.</span></li>
+          <li><b>Drone</b><span>La caja negra sobre las rocas al atardecer. Video corto y 10 clips.</span></li>
+          <li><b>Reel</b><span>Uno de apertura, de hasta 1 minuto, para Instagram y para la web.</span></li>
+          <li><b>Identidad</b><span>Colores, letras y estilo de fotos para que todo se vea igual.</span></li>
+          <li><b>Kit</b><span>Instagram listo: 9 posteos, 10 historias y plantillas para el equipo.</span></li>
+        </ul>
+      </div>
+      <div class="side"><span class="price">USD 2.330</span><small>Pagos: 932 al firmar · 699 con fotos y diseño · 699 antes de publicar</small><small>Gestión 80 por mes, el mes 2 de regalo</small></div>
+    </div>
+
+    <div class="pk">
+      <div class="body">
+        <h2>Primer verano <small>Sin pensar en redes</small></h2>
+        <div class="formula">Apertura + 3 meses de contenido y gestión</div>
+        <ul>
+          <li><b>Contenido</b><span>2 visitas por mes: fotos sin límite, 2 reels y 8 historias.</span></li>
+          <li><b>Gestión</b><span>Los cambios de la web y la carta, incluidos los 3 meses.</span></li>
+        </ul>
+      </div>
+      <div class="side"><span class="price sm">2.330 + 360 × 3</span><small>Apertura, más 360 por mes durante 3 meses</small></div>
+    </div>
+
+    <div class="bottom">
+      <div>
+        <h3>Si te preguntan</h3>
+        <ul>
+          <li><span><b>Gestión:</b> 80 por mes. Hasta 6 cambios de carta, precios o eventos.</span></li>
+          <li><span><b>Sueltos:</b> web 1.100 · fotos 680 · carta 400 · drone 280.</span></li>
+          <li><span><b>Extras:</b> reel 120 · visita de carta nueva 100 · flyer 30.</span></li>
+          <li><span><b>Publicidad:</b> 200 por mes. La inversión la pagan ellos a Meta.</span></li>
+        </ul>
+      </div>
+      <div>
+        <h3>No incluye</h3>
+        <ul>
+          <li><span>El dominio, entre 20 y 45 dólares por año.</span></li>
+          <li><span>La impresión de la carta.</span></li>
+          <li><span>La comida para las fotos.</span></li>
+          <li><span>La plata que se invierte en publicidad.</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="foot">Para practicar: tapá la columna de cada paquete y decilo en voz alta · Uso interno · Apardian Studio</div>
+</section>
