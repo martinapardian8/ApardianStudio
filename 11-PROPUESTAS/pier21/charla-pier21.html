@@ -1,0 +1,166 @@
+<title>Charla Pier 21</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Marcellus&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+/* Tarjeta de repaso antes de la reunión: una hoja A4, dos columnas, en el orden de la charla. */
+:root{
+  --sheet:#F6F0E6; --bg:#EFE7DA; --line:#D9CCB8; --fg:#231D18; --ink:#4B4036; --mute:#857464;
+  --night:#17130F; --terra:#A9513A; --marble:#3E5A4C; --cream:#F3EADC;
+  --display:'Marcellus',Georgia,serif; --body:'Jost','Futura',system-ui,sans-serif;
+  color-scheme:light;
+}
+html,body{background:var(--bg);color:var(--fg)}
+body{font-family:var(--body);font-weight:300;font-size:8.6pt;line-height:1.38;-webkit-font-smoothing:antialiased;padding-block:24px}
+.page{box-sizing:border-box;width:210mm;max-width:calc(100% - 32px);min-height:297mm;margin:0 auto;background:var(--sheet);display:flex;flex-direction:column}
+.band{background:var(--night);color:var(--cream);padding:7mm 12mm 6mm;display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap}
+.band h1{margin:0;font-family:var(--display);font-weight:400;font-size:22pt;line-height:1}
+.band h1 em{font-style:normal;color:#E39A78}
+.band p{margin:1.5mm 0 0;color:#D9CDBB}
+.band .goal{text-align:right;font-size:7pt;letter-spacing:.2em;text-transform:uppercase;color:#B7A893;line-height:1.8}
+.band .goal b{color:var(--cream);font-weight:500}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:6mm;padding:5mm 12mm 4mm;flex:1}
+.col{display:flex;flex-direction:column;gap:3.6mm;min-width:0}
+h2{margin:0 0 1.2mm;display:flex;align-items:baseline;gap:2mm;padding-bottom:1mm;border-bottom:1px solid var(--fg);font-family:var(--display);font-weight:400;font-size:11.5pt}
+h2 i{font-style:normal;font-family:'Anton',sans-serif;font-size:10pt;color:var(--terra)}
+h2 small{margin-left:auto;font-family:var(--body);font-size:6.6pt;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--mute)}
+p{margin:0;color:var(--ink)}
+.say{margin:1mm 0 0;padding:1.6mm 2.4mm;background:#FBF7F0;border-left:2px solid var(--terra);color:var(--fg);font-style:italic}
+ul{margin:0;padding:0;list-style:none;display:grid;gap:.9mm}
+li{display:grid;grid-template-columns:3.5mm 1fr;color:var(--ink)}
+li::before{content:"—";color:var(--terra)}
+b{font-weight:500;color:var(--fg)}
+table{width:100%;border-collapse:collapse}
+td{padding:1.1mm 2mm 1.1mm 0;border-bottom:1px solid var(--line);vertical-align:top;color:var(--ink)}
+td:first-child{width:30%;color:var(--fg);font-weight:500}
+.no li::before{content:"✕";color:var(--terra);font-size:7pt}
+.nums{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--fg);margin:0 12mm}
+.nums div{padding:2mm 2mm 2mm 0}
+.nums div+div{padding-left:2.5mm;border-left:1px solid var(--line)}
+.nums .k{font-size:6.4pt;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--mute)}
+.nums .v{display:block;margin-top:.8mm;font-family:var(--display);font-size:11.5pt;color:var(--fg)}
+.nums small{display:block;color:var(--ink);font-size:7.2pt}
+.key{margin:3mm 12mm 0;padding:3mm 4mm;background:var(--night);color:var(--cream);font-family:var(--display);font-size:11pt;line-height:1.3}
+.key span{color:#E39A78}
+.foot{padding:2.5mm 12mm 6mm;font-size:6.6pt;letter-spacing:.18em;text-transform:uppercase;color:var(--mute)}
+@media (max-width:640px){
+  .page{min-height:0}
+  .band,.cols,.foot{padding-left:16px;padding-right:16px}
+  .nums,.key{margin-left:16px;margin-right:16px}
+  .cols{grid-template-columns:1fr}
+  .nums{grid-template-columns:1fr 1fr}
+  .nums div:nth-child(3){padding-left:0;border-left:0}
+  .band .goal{text-align:left}
+}
+@page{size:A4;margin:0}
+@media print{
+  html,body{background:var(--sheet);padding:0;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .page{width:210mm;height:297mm;max-width:none;margin:0;overflow:hidden}
+}
+</style>
+
+<section class="page">
+  <div class="band">
+    <div>
+      <h1>Charla con <em>Pier 21</em></h1>
+      <p>Diez minutos, con el presupuesto impreso sobre la mesa.</p>
+    </div>
+    <div class="goal">Objetivo<br><b>Que elija una de las tres columnas</b></div>
+  </div>
+
+  <div class="cols">
+    <div class="col">
+      <div>
+        <h2><i>0</i> Antes de ir</h2>
+        <ul>
+          <li><span><b>Media tarde</b>, entre el almuerzo y la cena. Nunca en servicio.</span></li>
+          <li><span><b>Dos copias</b> del presupuesto: una para él, otra para vos.</span></li>
+          <li><span><b>5 o 6 fotos de gastronomía tuyas</b> abiertas en el celular.</span></li>
+          <li><span>Buscá <b>"Pier 21 Montevideo"</b> en Google Maps e Instagram. No lo critiques; tenelo a mano.</span></li>
+        </ul>
+      </div>
+
+      <div>
+        <h2><i>1</i> Entrar sin vender <small>1 min</small></h2>
+        <p class="say">"Te robo diez minutos. Quedó impresionante el local. Antes de mostrarte nada: ¿cómo se está enterando la gente de que abrieron?"</p>
+        <p style="margin-top:1mm">Escuchá. Su respuesta es tu argumento después.</p>
+      </div>
+
+      <div>
+        <h2><i>2</i> Que él diga lo que falta <small>2 min</small></h2>
+        <ul>
+          <li><span>"Cuando lleguen los cruceros y los brasileños, ¿dónde ven la carta?"</span></li>
+          <li><span>"Si mañana cambiás un precio, ¿qué hacés con las cartas impresas?"</span></li>
+          <li><span>"¿Quién les saca las fotos para redes?"</span></li>
+        </ul>
+      </div>
+
+      <div>
+        <h2><i>3</i> Mostrar la hoja 1 <small>2 min</small></h2>
+        <p class="say">"Armé tres opciones. Esta es lo básico. Esta es lo que yo haría con un lugar como este. Y esta es lo mismo, más tres meses de contenido."</p>
+        <p style="margin:1.4mm 0 1mm">Explicá solo la del medio, sin palabras técnicas:</p>
+        <table>
+          <tr><td>Web</td><td>"Tu vidriera en Google las 24 horas, en portugués e inglés. Reservan por WhatsApp."</td></tr>
+          <tr><td>Carta</td><td>"Cambiás un precio y en el día está cambiado, sin reimprimir. El turista la lee en su idioma."</td></tr>
+          <tr><td>Fotos</td><td>"La gente come con los ojos. Mañana, atardecer y noche con el salón lleno."</td></tr>
+          <tr><td>Drone</td><td>"La caja negra sobre las rocas al atardecer. Esa imagen no la tiene nadie en la rambla."</td></tr>
+          <tr><td>Gestión</td><td>"Después no te ocupás. Me mandás un WhatsApp y lo cambio yo."</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="col">
+      <div>
+        <h2><i>4</i> Justificar el precio <small>usá uno solo</small></h2>
+        <ul>
+          <li><span><b>Por separado sale más:</b> "Fotógrafo, drone, diseñador y programador por separado: 3.140. Todo junto: 2.330."</span></li>
+          <li><span><b>Por día:</b> "Repartido en un verano son unos 20 dólares por día. Menos que una mesa."</span></li>
+          <li><span><b>Contra entrega:</b> "40 % para arrancar, 30 % cuando ves las fotos y el diseño, 30 % con la web terminada."</span></li>
+        </ul>
+      </div>
+
+      <div>
+        <h2><i>5</i> Objeciones</h2>
+        <table>
+          <tr><td>"Es caro."</td><td>"¿Comparado con qué?" Y callate. Si insiste: Presencia a 1.370. <b>Nunca bajes precio: sacá servicios.</b></td></tr>
+          <tr><td>"Las sacamos con el celular."</td><td>"Sirve para historias. La foto que ve el turista en Google tiene que estar a la altura del local."</td></tr>
+          <tr><td>"Ya tenemos Instagram."</td><td>"Instagram es para los que ya te siguen. La web es para el turista que te busca en Google."</td></tr>
+          <tr><td>"Lo hace un conocido."</td><td>"Perfecto, te queda como referencia." No pelees.</td></tr>
+          <tr><td>"Más adelante."</td><td>"El verano no espera. Arrancando ahora, en cuatro semanas está todo pronto."</td></tr>
+          <tr><td>"Lo hablo con mis socios."</td><td>"Te dejo la copia. ¿Paso el jueves a esta hora?" <b>Fijá día y hora.</b></td></tr>
+        </table>
+      </div>
+
+      <div>
+        <h2><i>6</i> Cerrar <small>1 min</small></h2>
+        <p class="say">"¿Con cuál de las tres te ves más cómodo?"</p>
+        <ul style="margin-top:1.2mm">
+          <li><span><b>Elige:</b> "Marcamos, firmamos y con el primer pago coordino la primera visita esta semana."</span></li>
+          <li><span><b>Duda entre dos:</b> Apertura. "Con Presencia tenés web, pero sin fotos propias queda vacía."</span></li>
+          <li><span><b>No decide:</b> dejá la copia y fijá cuándo volvés.</span></li>
+        </ul>
+      </div>
+
+      <div>
+        <h2>No hacer</h2>
+        <ul class="no">
+          <li><span>Hablar más de 10 minutos si no te da pie.</span></li>
+          <li><span>Criticar lo que tienen. Preguntá y que lo diga él.</span></li>
+          <li><span>Bajar el precio en la mesa.</span></li>
+          <li><span>Decir SEO, hosting, dominio, responsive o Lightroom.</span></li>
+          <li><span>Explicar la hoja 2 completa: es para que la lea con los socios.</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="nums">
+    <div><span class="k">Presencia</span><span class="v">USD 1.370</span><small>Web, carta y Google</small></div>
+    <div><span class="k">Apertura ★</span><span class="v">USD 2.330</span><small>932 · 699 · 699</small></div>
+    <div><span class="k">Primer verano</span><span class="v">2.330 + 360 × 3</span><small>Apertura + 3 meses</small></div>
+    <div><span class="k">Después</span><span class="v">USD 80 / mes</span><small>Gestión web y carta</small></div>
+  </div>
+  <div class="key">No compra una web ni unas fotos. Compra que <span>el turista lo encuentre, lo entienda y quiera ir</span>, sin tener que ocuparse él.</div>
+  <div class="foot">Uso interno · Apardian Studio</div>
+</section>
