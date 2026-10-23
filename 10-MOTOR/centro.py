@@ -11,7 +11,7 @@ de datos del artifact, no en este archivo.
 
 python3 10-MOTOR/centro.py
 """
-import os, re, csv, sys, json, glob
+import os, re, csv, sys, json, glob, datetime as dt
 from PIL import Image
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -138,6 +138,67 @@ def piezas(cal):
     return out
 
 
+DIAS_ES = ["lunes", "martes", "miércoles", "jueves", "viernes", "sábado", "domingo"]
+
+
+def _sin_tildes(t):
+    # los nombres dentro del ZIP van sin tildes: así se leen igual en Mac y Windows
+    import unicodedata
+    return "".join(c for c in unicodedata.normalize("NFD", t) if not unicodedata.combining(c))
+
+
+def _limpio(t, largo=48):
+    t = _sin_tildes(t)
+    t = re.sub(r'[\\/:*?"<>|\n]+', " ", t).strip().rstrip(".")
+    return (t[:largo].rstrip() + "…") if len(t) > largo else t
+
+
+def archivos_por_dia(cal):
+    """Qué va en la carpeta de cada día: una subcarpeta por pieza con los
+    archivos en el orden en que se suben (01.jpg, 02.jpg… o el video) y el pie
+    en pie.txt. La app arma el ZIP en el navegador con esta lista; los
+    archivos se publican en ig/ con la misma ruta que en 08-CONTENIDO-INSTAGRAM
+    (ver archivos_ig). Al bajarlo, Safari lo abre solo y queda la carpeta."""
+    collage, campanas = hoja.pies_collage(), hoja.pies_campana()
+    mundo = json.load(open(os.path.join(IG, "08-tus-fotos-en-el-mundo", "indice.json"), encoding="utf-8"))
+    base_mundo = hoja.pie_mundo_base()
+    out = {}
+    for d in cal["dias"]:
+        filas = [f for it in d["items"] for f in [hoja.fila(it, d["fecha"], collage, campanas, mundo, base_mundo)] if f]
+        if not filas:
+            continue
+        fecha = dt.date.fromisoformat(d["fecha"])
+        raiz = "APARDIAN %s %s" % (fecha.strftime("%d-%m"), _sin_tildes(DIAS_ES[fecha.weekday()]))
+        items, peso = [], 0
+        for i, f in enumerate(sorted(filas, key=lambda f: (f["tipo"] == "STORY", f["hora"])), 1):
+            tipo = {"STORY": "Historia", "IMAGE": "Posteo", "CAROUSEL": "Carrusel", "REEL": "Reel"}[f["tipo"]]
+            carpeta = "%s/%d %s %s - %s/" % (raiz, i, tipo, f["hora"].replace(":", "."), _limpio(f["titulo"]))
+            archivos = f["archivos"].split("|")
+            hojas = [a for a in archivos if not a.endswith("_portada.jpg")]
+            for k, a in enumerate(hojas, 1):
+                ext = os.path.splitext(a)[1]
+                nom = ("%02d%s" % (k, ext)) if len(hojas) > 1 else (tipo.lower() + ext)
+                items.append({"ruta": carpeta + nom, "src": "ig/" + a})
+                peso += os.path.getsize(os.path.join(IG, a))
+            for a in archivos:
+                if a.endswith("_portada.jpg"):
+                    items.append({"ruta": carpeta + "tapa del reel.jpg", "src": "ig/" + a})
+                    peso += os.path.getsize(os.path.join(IG, a))
+            if f["pie"]:
+                texto = f["pie"] + ("\n\n— Primer comentario (fijalo):\n" + f["primer_comentario"] if f["primer_comentario"] else "") + "\n"
+            else:
+                texto = "Historia: no lleva pie. Sale a las " + f["hora"] + ".\n"
+            items.append({"ruta": carpeta + "pie.txt", "texto": texto})
+        out[d["fecha"]] = {"nombre": raiz + ".zip", "kb": peso // 1024, "items": items}
+    return out
+
+
+def archivos_ig(dias):
+    """{ruta publicada: ruta en el repo} de todos los archivos que bajan los días."""
+    return {it["src"]: "08-CONTENIDO-INSTAGRAM/" + it["src"][3:]
+            for d in dias.values() for it in d["items"] if "src" in it}
+
+
 def leer(rel):
     with open(os.path.join(RAIZ, rel), encoding="utf-8") as f:
         return f.read()
@@ -163,12 +224,15 @@ def agentes():
 def main():
     os.makedirs(OUT, exist_ok=True)
     cal = json.load(open(os.path.join(IG, "calendario.json")))
-    datos = {"calendario": cal, "piezas": piezas(cal),
+    dias = archivos_por_dia(cal)
+    datos = {"calendario": cal, "piezas": piezas(cal), "zips": dias,
              "carruseles": carruseles(), "guiones": guiones(),
              "agentes": agentes(), "whatsapp": "+598 91 962 962"}
     html = open(PLANTILLA).read().replace("/*__DATOS__*/null",
                                           json.dumps(datos, ensure_ascii=False))
     open(os.path.join(OUT, "index.html"), "w").write(html)
+    # lo que hay que publicar junto a la página para que se puedan bajar los días
+    json.dump(archivos_ig(dias), open(os.path.join(OUT, "archivos_ig.json"), "w"), ensure_ascii=False, indent=0)
     n = sum(len(g["items"]) for g in datos["guiones"])
     print(json.dumps({"carruseles": len(datos["carruseles"]), "guiones": n,
                       "dias": len(datos["calendario"]["dias"]), "piezas": len(datos["piezas"]),

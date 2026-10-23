@@ -3,6 +3,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Work+Sans:wght@300;400;500;600&display=swap">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 <style>
 /* La estética de apardianstudio.com: banda clara arriba con la marca, todo lo
    demás sobre negro, títulos enormes en Anton con un brillo rojo, etiquetas
@@ -121,6 +122,11 @@ a.paso:hover .nom{color:var(--red)}
 .dia .d{display:flex;justify-content:space-between;align-items:baseline}
 .dia .d b{font-family:var(--display);font-weight:400;font-size:22px;line-height:1}
 .dia.hoy{background:var(--panel)}
+.bajar-dia{display:grid;gap:2px;background:transparent;border:1px solid var(--line-2);color:var(--fg);text-align:left;padding:8px 10px;width:100%}
+.bajar-dia:hover{border-color:var(--red)}
+.bajar-dia b{font:600 10px/1.2 var(--body);letter-spacing:.16em;text-transform:uppercase}
+.bajar-dia span{font-size:11px;color:var(--muted)}
+.bajar-dia:disabled{opacity:.6;cursor:default}
 .dia.hoy .d b{color:var(--red)}
 .mini{display:grid;gap:6px;background:none;border:0;padding:0;color:var(--fg);text-align:left;position:relative}
 .mini img{width:100%;display:block;object-fit:cover;background:var(--panel);outline:1px solid transparent;transition:outline-color .2s}
@@ -239,6 +245,7 @@ form.alta .ancho{grid-column:1/-1}
       <p class="bajada" id="hoy-sub"></p>
     </div>
     <div class="hoy-sale" id="hoy-sale"></div>
+    <div class="fila" id="hoy-bajar" style="margin-top:14px"></div>
 
     <div class="bloque">
       <div class="bloque-cab"><h2>El equipo</h2><span class="mono muted">Luz arma · Lupa revisa · vos aprobás · Trato vende</span></div>
@@ -257,7 +264,7 @@ form.alta .ancho{grid-column:1/-1}
     <div class="cab">
       <span class="ceja mono">02 — La semana en Instagram</span>
       <h1 id="sem-tit">Semana</h1>
-      <p class="bajada">Un posteo y una historia por día, como se van a ver. Tocá una pieza para ver el pie, lo que dijo Lupa y pedir un cambio. Lo que sale lo aprobás en Telegram el día anterior.</p>
+      <p class="bajada">Un posteo y una historia por día, como se van a ver. Tocá una pieza para ver el pie, lo que dijo Lupa y pedir un cambio. Con "Bajar archivos" de cada día te queda en Descargas una carpeta con las fotos en orden, el video y el pie.</p>
     </div>
     <div class="fila" style="justify-content:space-between;margin-bottom:18px">
       <div class="chips" id="sem-chips" role="group" aria-label="Elegir semana"></div>
@@ -382,7 +389,7 @@ const TODAS = D.calendario.dias.flatMap(d => d.items.map(it => ({...it, fecha: d
 const PZ = D.piezas;
 const PZ_ID = Object.fromEntries(PZ.map(p => [p.id, p]));
 
-let hecho = {}, clientes = [], ordenes = [], db = null, puedeEscribir = true, sample = null, sampleMotivo = "";
+let hecho = {}, clientes = [], ordenes = [], db = null, puedeEscribir = true, sample = null, sampleMotivo = "", bajadas = null;
 
 function hoyISO(){ const t = new Date(); return new Date(t.getTime() - t.getTimezoneOffset()*60000).toISOString().slice(0,10); }
 function fechaLinda(iso){ const [, m, d] = iso.split("-"); return d + "/" + m; }
@@ -420,6 +427,43 @@ async function copiar(texto, boton, nodo){
   setTimeout(() => boton.textContent = antes, 1800);
 }
 
+// ---------------------------------------------------------------- bajar los archivos del día
+// Cada día se baja como un ZIP con una carpeta por pieza: las fotos en el
+// orden en que se suben (01, 02…), el video y el pie en pie.txt. El ZIP se
+// arma acá con los archivos publicados en ig/. Safari lo abre solo y deja la
+// carpeta del día en Descargas.
+function botonDia(fecha, texto){
+  const z = D.zips[fecha]; if (!z) return null;
+  const b = el("button", {class:"bajar-dia", type:"button", title:"Baja " + z.nombre},
+    el("b", {text: texto || "Bajar archivos"}), el("span", {text: (z.kb > 1024 ? (z.kb/1024).toFixed(1) + " MB" : z.kb + " KB") + " · fotos, video y pie"}));
+  b.addEventListener("click", ev => { ev.stopPropagation(); bajarDia(fecha, b); });
+  return b;
+}
+async function bajarDia(fecha, boton){
+  const z = D.zips[fecha]; if (!z) return;
+  const rot = boton.querySelector("b") || boton, antes = rot.textContent;
+  const fin = (t, ms) => { rot.textContent = t; boton.disabled = false; setTimeout(() => rot.textContent = antes, ms || 4000); };
+  if (!bajadas){ fin("Abrí el Centro desde claude.ai para bajar", 5000); return; }
+  if (!window.JSZip){ fin("No se pudo cargar el armador de ZIP", 5000); return; }
+  boton.disabled = true; rot.textContent = "Preparando…";
+  try {
+    const zip = new JSZip();
+    let n = 0;
+    for (const it of z.items){
+      if (it.texto != null){ zip.file(it.ruta, it.texto); continue; }
+      const r = await fetch(it.src); if (!r.ok) throw {code:"no_file"};
+      zip.file(it.ruta, await r.blob());
+      rot.textContent = "Preparando " + (++n) + "…";
+    }
+    const blob = await zip.generateAsync({type:"blob", compression:"STORE"});
+    const res = await bajadas.save({filename: z.nombre, data: blob});
+    fin(res.status === "saved" ? "Listo: está en Descargas" : "Listo", 6000);
+  } catch(e){
+    const c = e && e.code;
+    fin(c === "declined" ? "No se bajó" : c === "rate_limited" ? "Esperá un momento y probá de nuevo" : c === "no_file" ? "No encontré los archivos de ese día" : "No se puede bajar desde esta vista", 5000);
+  }
+}
+
 // ---------------------------------------------------------------- tareas
 function tarea(it, conFecha){
   const id = "t-" + it.id;
@@ -447,6 +491,11 @@ function salida(p, rotulo){
     el("span", {class:"muted", text: TIPO[p.tipo] + (p.hojas > 1 ? " de " + p.hojas + " hojas" : "")}),
     el("div", {class:"fila"}, sello(p.revision), pub ? el("span", {class:"sello pub", text:"Publicado"}) : null),
     el("div", {class:"fila"}, ver)));
+}
+function bajarHoy(){
+  const hoy = hoyISO(); const b = botonDia(hoy, "Bajar los archivos de hoy");
+  const c = $("#hoy-bajar"); c.replaceChildren();
+  if (b){ b.style.width = "auto"; c.append(b); }
 }
 
 function estadoAgentes(){
@@ -476,6 +525,7 @@ function renderHoy(){
   $("#hoy-sub").textContent = fuera ? "" : sem.porque + " Foco de venta: " + sem.venta;
   const deHoy = PZ.filter(p => p.fecha === hoy);
   $("#hoy-sale").replaceChildren(salida(deHoy.find(p => !esStory(p)), "Posteo de hoy"), salida(deHoy.find(esStory), "Historia de hoy"));
+  bajarHoy();
   const e = estadoAgentes();
   $("#hoy-equipo").replaceChildren(...[
     ["01","Luz","Community manager","luz"],["02","Lupa","Crítica de diseño","lupa"],["03","Vos","Aprobás","vos"],["04","Trato","Ventas","trato"]
@@ -514,7 +564,8 @@ function renderSemana(){
   $("#grilla").replaceChildren(...dias.map(f => {
     const ps = deSem.filter(p => p.fecha === f);
     const col = el("div", {class:"dia" + (f === hoy ? " hoy" : "")},
-      el("div", {class:"d"}, el("b", {text: new Date(f + "T12:00").toLocaleDateString("es-UY", {weekday:"short"}).replace(".", "")}), el("span", {class:"mono muted", text: fechaLinda(f)})));
+      el("div", {class:"d"}, el("b", {text: new Date(f + "T12:00").toLocaleDateString("es-UY", {weekday:"short"}).replace(".", "")}), el("span", {class:"mono muted", text: fechaLinda(f)})),
+      botonDia(f));
     for (const p of [...ps.filter(x => !esStory(x)), ...ps.filter(esStory)]){
       const rev = p.revision || "";
       const color = rev.startsWith("frenado") ? "var(--red)" : rev.includes("nota") ? "var(--warn)" : rev.startsWith("ok") ? "var(--ok)" : "var(--muted)";
@@ -542,6 +593,7 @@ function renderDetalle(){
   const lupa = el("button", {class:"b l", type:"button", text:"Preguntarle a Lupa"});
   lupa.addEventListener("click", () => abrirAgente("lupa", "Revisá esta pieza del " + fechaLinda(p.fecha) + " (" + TIPO[p.tipo] + ", " + p.hora + "): \"" + p.titulo + "\".\n" + (p.pie ? "Pie:\n" + p.pie + "\n" : "") + (p.revision ? "La revisión automática dijo: " + p.revision + "\n" : "") + "Decime si está a la altura de la marca y qué cambiarías.", p.img));
   acc.append(lupa);
+  const bd = botonDia(p.fecha, "Bajar los archivos del " + fechaLinda(p.fecha)); if (bd){ bd.style.width = "auto"; acc.append(bd); }
   const ta = el("textarea", {id:"det-orden", rows:"2", maxlength:"400", placeholder:"Cambiá la foto por una de la Rambla, esta ya salió hace poco"});
   const env = el("button", {class:"b r", type:"button", text:"Pedirle el cambio a Luz"});
   const msj = el("span", {class:"adj", role:"status"});
@@ -918,7 +970,8 @@ $("#red-enviar").disabled = true;
 
 (async () => {
   if (!window.claude) { $("#sin-db").hidden = false; sampleMotivo = "Abrí el Centro desde claude.ai para que los agentes puedan responder."; renderChat(); return; }
-  const [dbx, userx, samplex] = await Promise.all([claude.use("db"), claude.use("user"), claude.use("sample")]);
+  const [dbx, userx, samplex, bajx] = await Promise.all([claude.use("db"), claude.use("user"), claude.use("sample"), claude.use("downloads")]);
+  bajadas = bajx;
   sample = samplex;
   if (!sample) sampleMotivo = "Los agentes necesitan Claude, y esta vista no lo tiene disponible. Las órdenes siguen funcionando.";
   else { try { sampleLimits = await sample.limits(); } catch(e){ sampleLimits = null; } }

@@ -29,4 +29,7 @@ su base (`agente`, `texto`, `pieza`, `estado`, `creada`). Cuando diga "hacé las
    pasando el `if_version` que leíste.
 4. Si cambiaste el calendario o las piezas, regenerá en este orden:
    `calendario.py` → `calendario_sheet.py` → `lupa.py` → `centro.py`, y
-   republicá el Centro (mismo URL, con las miniaturas nuevas de `12-CENTRO/pz`).
+   republicá el Centro (mismo URL, con las miniaturas nuevas de `12-CENTRO/pz`
+   y los archivos de `12-CENTRO/archivos_ig.json`, que son los que se bajan
+   con "Bajar archivos" de cada día; van con `root` en la raíz del repo, en
+   tandas de menos de 64 MB).
