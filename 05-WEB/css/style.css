@@ -1159,6 +1159,8 @@ footer.site > .cartel-luz.foot-mark .l{line-height:1}
 
 /* páginas web: la portada del sitio en una ventana */
 .idx-media-web{background:#22211f;border-radius:10px;padding-top:34px}
+.idx-media-marca{background:#F8F7F6}
+.idx-media-marca > img{object-fit:contain}
 .idx-media-web > img{top:34px;height:calc(100% - 34px);object-position:top}
 .web-barra{position:absolute;top:0;left:0;right:0;height:34px;display:flex;align-items:center;gap:7px;padding:0 14px}
 .web-barra i{width:10px;height:10px;border-radius:50%;background:rgba(248,247,246,.28)}
