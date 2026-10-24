@@ -1,18 +1,18 @@
 {
-  "name": "APARDIAN 03 · Redactor y envío",
+  "name": "APARDIAN 03 · Radar: redactor y envío",
   "nodes": [
     {
       "parameters": {
         "rule": {
           "interval": [
             {
-              "field": "days",
-              "triggerAtHour": 10
+              "field": "cronExpression",
+              "expression": "0 9-17 * * 1-5"
             }
           ]
         }
       },
-      "id": "515ad418-ea57-5c47-9d4f-fa44b9fe85dc",
+      "id": "28fd8a65-7427-5da7-be14-787d13451048",
       "name": "Programado",
       "type": "n8n-nodes-base.scheduleTrigger",
       "typeVersion": 1.2,
@@ -23,7 +23,7 @@
     },
     {
       "parameters": {},
-      "id": "5c08cf32-dead-5347-b862-e43a6a301365",
+      "id": "6bd23853-957a-598d-b0e8-5e40dd57995a",
       "name": "Probar a mano",
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
@@ -37,55 +37,73 @@
         "assignments": {
           "assignments": [
             {
-              "id": "cbfc7254-8255-563b-9ec7-3a4bb1f4b4f3",
+              "id": "485980ca-660c-5183-8244-7687480887dd",
               "name": "SHEET_ID",
               "value": "PEGAR_ID_DE_LA_PLANILLA",
               "type": "string"
             },
             {
-              "id": "9202a2e5-03db-5e0f-b419-2c6a5205f6d6",
+              "id": "60d91b87-b65f-55d5-9256-1bf27a35ab6c",
               "name": "TELEGRAM_CHAT_ID",
               "value": "PEGAR_CHAT_ID",
               "type": "string"
             },
             {
-              "id": "d34c5c51-e7d6-5575-aca6-514b41182b47",
+              "id": "43623d1b-4e01-5258-9ca7-f7f1f6ead60e",
               "name": "MI_EMAIL",
               "value": "Martin Apardian <martin@TU-DOMINIO-DE-ENVIO>",
               "type": "string"
             },
             {
-              "id": "b568e270-85c5-5abc-af77-c00b0c32b573",
+              "id": "9b9ed57e-2e35-5c3a-bca4-9b7f3b626ad3",
               "name": "SCORE_MINIMO",
               "value": 60,
               "type": "number"
             },
             {
-              "id": "f8faef3d-4811-5c80-b367-4cedb08cf2ff",
+              "id": "8a9c3bdb-d6ec-5abc-b882-b2a3fa38e7bf",
+              "name": "AUTO_ENVIO",
+              "value": true,
+              "type": "boolean"
+            },
+            {
+              "id": "602900db-39e3-5ede-9778-bbd6f0ca6254",
               "name": "MAX_POR_DIA",
               "value": 20,
               "type": "number"
             },
             {
-              "id": "a63ee8ad-41b2-502b-ae1f-3faafe220dfc",
-              "name": "AUTO_ENVIO",
-              "value": false,
-              "type": "boolean"
-            },
-            {
-              "id": "c84ab600-7145-593f-8a1d-3c2690df14d9",
+              "id": "5b7231a5-3492-5d42-b1d2-1f3edd87b385",
               "name": "SCORE_AUTO",
-              "value": 80,
+              "value": 0,
               "type": "number"
             },
             {
-              "id": "76323dfb-3147-5359-b87b-fc4725edf103",
+              "id": "169b85b5-185a-5ca5-8a3f-0f78bd107042",
+              "name": "FECHA_INICIO",
+              "value": "PEGAR_FECHA_DE_ARRANQUE",
+              "type": "string"
+            },
+            {
+              "id": "089bf815-b423-5172-8154-b8e48be993c7",
+              "name": "CUPOS_POR_SEMANA",
+              "value": "10,20,35,50",
+              "type": "string"
+            },
+            {
+              "id": "dbd5cd11-f3fb-5a7f-9a8c-3e3a82c25f24",
+              "name": "DIRECCION_POSTAL",
+              "value": "",
+              "type": "string"
+            },
+            {
+              "id": "d1068b6b-fc6e-5641-94eb-5057db693a37",
               "name": "URL_APROBAR",
               "value": "https://TU-INSTANCIA.app.n8n.cloud/webhook/apardian-aprobar",
               "type": "string"
             },
             {
-              "id": "45407d1f-270f-560e-92fc-85a3b637be9e",
+              "id": "a318020d-a271-5c44-800b-da5ec08f2431",
               "name": "TOKEN",
               "value": "CAMBIAR-POR-UNA-CLAVE-LARGA",
               "type": "string"
@@ -94,7 +112,7 @@
         },
         "options": {}
       },
-      "id": "36943455-d892-597a-920c-d25305b5850a",
+      "id": "db667fab-f629-5e33-ab8b-63047c90ef91",
       "name": "Config",
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
@@ -118,7 +136,7 @@
         },
         "options": {}
       },
-      "id": "ea87debd-969a-5b8f-8767-6d891bc34507",
+      "id": "b10cf1b0-5435-53ec-8af2-50a6720bec5b",
       "name": "Leer Leads",
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.5,
@@ -150,7 +168,7 @@
         },
         "options": {}
       },
-      "id": "04fac9c0-737f-5c4b-a32b-099b4428f643",
+      "id": "31d4ff67-bb0c-5bf9-80c2-22b797438cb1",
       "name": "Leer Bajas",
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.5,
@@ -169,28 +187,92 @@
     },
     {
       "parameters": {
-        "jsCode": "const c = $('Config').first().json;\nconst bm = new Set(), bd = new Set();\nfor (const r of $('Leer Bajas').all()) {\n  if (r.json.email) bm.add(String(r.json.email).toLowerCase());\n  if (r.json.dominio) bd.add(String(r.json.dominio).toLowerCase());\n}\n// Corre una vez por día: MAX_POR_DIA es el tope de mails nuevos por día.\nconst todos = $('Leer Leads').all().map(r => r.json);\nconst cupo = c.MAX_POR_DIA || 20;\nreturn todos\n  .filter(l => l.estado === 'auditado' && Number(l.score) >= (c.SCORE_MINIMO || 60) && l.email)\n  .filter(l => { const e = String(l.email).toLowerCase(); return !bm.has(e) && !bd.has(e.split('@')[1]); })\n  .sort((x, y) => Number(y.score) - Number(x.score))\n  .slice(0, cupo)\n  .map(l => ({ json: l }));\n"
+        "operation": "read",
+        "documentId": {
+          "__rl": true,
+          "value": "={{ $('Config').first().json.SHEET_ID }}",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Ofertas",
+          "mode": "name"
+        },
+        "options": {}
       },
-      "id": "ee735046-3422-553b-beb0-0ff6b2a5517b",
+      "id": "ce94b1b7-99e1-5488-a164-023d00ccc5e8",
+      "name": "Leer Ofertas",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        960,
+        0
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "REEMPLAZAR",
+          "name": "Google Sheets"
+        }
+      },
+      "executeOnce": true,
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "operation": "read",
+        "documentId": {
+          "__rl": true,
+          "value": "={{ $('Config').first().json.SHEET_ID }}",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Entrenamiento",
+          "mode": "name"
+        },
+        "options": {}
+      },
+      "id": "765ada46-a455-535a-868c-42586b2bac6b",
+      "name": "Leer Entrenamiento",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        1200,
+        0
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "REEMPLAZAR",
+          "name": "Google Sheets"
+        }
+      },
+      "executeOnce": true,
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "jsCode": "const hoy = () => new Date().toISOString().slice(0, 10);\nconst diasDesde = f => f ? Math.floor((Date.now() - new Date(f + 'T12:00:00').getTime()) / 86400000) : -1;\n\n// Hora y día en la zona horaria del destinatario (Intl viene con Node).\nconst horaEn = z => { try { return Number(new Intl.DateTimeFormat('en-US', { timeZone: z, hour: 'numeric', hourCycle: 'h23' }).format(new Date())); } catch (e) { return 12; } };\nconst diaEn = z => { try { return new Intl.DateTimeFormat('en-US', { timeZone: z, weekday: 'short' }).format(new Date()); } catch (e) { return 'Mon'; } };\nconst horarioDeOficina = z => { const h = horaEn(z), d = diaEn(z); return d !== 'Sat' && d !== 'Sun' && h >= 9 && h < 17; };\nconst hoyUY = () => new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Montevideo' }).format(new Date());\n\nconst c = $('Config').first().json;\nconst bm = new Set(), bd = new Set();\nfor (const r of $('Leer Bajas').all()) {\n  if (r.json.email) bm.add(String(r.json.email).toLowerCase());\n  if (r.json.dominio) bd.add(String(r.json.dominio).toLowerCase());\n}\nconst todos = $('Leer Leads').all().map(r => r.json).filter(l => l.id);\nlet cupo, tanda;\nif (c.AUTO_ENVIO) {\n  // Cupo del día según la semana de calentamiento, repartido en las horas que quedan.\n  const cupos = String(c.CUPOS_POR_SEMANA || '10,20,35,50').split(',').map(Number).filter(n => n > 0);\n  const ini = /^\\d{4}-\\d{2}-\\d{2}$/.test(String(c.FECHA_INICIO || '')) ? c.FECHA_INICIO : '';\n  const semana = ini ? Math.max(0, Math.floor(diasDesde(ini) / 7)) : 0;\n  cupo = cupos[Math.min(semana, cupos.length - 1)] || 10;\n  const enviadosHoy = todos.filter(l => String(l.fecha_envio || '') === hoyUY()).length;\n  const restante = Math.max(0, cupo - enviadosHoy);\n  const horas = Math.max(1, 18 - horaEn('America/Montevideo'));\n  tanda = Math.ceil(restante / horas);\n} else {\n  // Modo con aprobación: una vez por día, a las 10, deja borradores.\n  if (horaEn('America/Montevideo') !== 10) return [];\n  cupo = tanda = c.MAX_POR_DIA || 20;\n}\nif (!tanda) return [];\nreturn todos\n  .filter(l => l.estado === 'auditado' && Number(l.score) >= (c.SCORE_MINIMO || 60) && l.email)\n  .filter(l => { const e = String(l.email).toLowerCase(); return !bm.has(e) && !bd.has(e.split('@')[1]); })\n  // a EE.UU. solo con dirección postal en la firma (CAN-SPAM)\n  .filter(l => String(l.pais || '') !== 'Estados Unidos' || String(c.DIRECCION_POSTAL || '').trim())\n  // en horario de oficina del destinatario: de lunes a viernes, de 9 a 17\n  .filter(l => horarioDeOficina(l.zona || 'America/Montevideo'))\n  .sort((x, y) => Number(y.score) - Number(x.score))\n  .slice(0, tanda)\n  .map(l => ({ json: l }));\n"
+      },
+      "id": "b6baa9e3-2532-50f7-899c-6b8bef88509a",
       "name": "Elegir auditados",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        960,
+        1440,
         0
       ]
     },
     {
       "parameters": {
-        "jsCode": "function cuerpoClaude(system, user, maxTokens, effort) {\n  return {\n    model: 'claude-opus-5-5',\n    max_tokens: maxTokens,\n    system: system,\n    messages: [{ role: 'user', content: user }],\n    output_config: { effort: effort },\n    fallbacks: 'default',\n  };\n}\n\nconst SYSTEM = \"Sos Martin Apardian, comunicador visual freelance de Uruguay (APARDIAN STUDIO:\\nfotografía, video, páginas web y edición en Lightroom). Escribís un primer mail\\na un negocio que no te conoce, a partir de una auditoría de su web.\\n\\nCómo escribe Martin: directo, rioplatense, voseo, frases cortas, sin adornos.\\nEntra con clase pero con estilo: seguro, específico, cero desesperación.\\nMuestra trabajo antes que hablar de sí mismo.\\n\\nEstructura del mail (en este orden, sin títulos):\\n1. Una línea que abre con algo concreto y verdadero que viste en su web o su\\n   ficha (usá el gancho personal de la auditoría). Nada de \\\"espero que estés\\n   bien\\\", nada de presentarte primero.\\n2. El problema, con su evidencia, dicho como colega y no como vendedor.\\n3. Cómo lo resolverías vos, en una o dos frases, con el servicio que corresponde.\\n4. Una prueba: apardianstudio.com y, si aplica, una pieza o rubro relevante de\\n   tu trabajo (gastronomía, marcas, salones, retratos, etc.). No inventes\\n   clientes ni resultados.\\n5. Un llamado a la acción suave, fácil de contestar con un sí. Ejemplos:\\n   \\\"¿Te mando 3 ideas para tu carta en un video de 2 minutos?\\\",\\n   \\\"¿Te paso un boceto de cómo se vería la portada de tu web?\\\".\\n6. Firma:\\n   Martin Apardian\\n   APARDIAN STUDIO · apardianstudio.com · WhatsApp +598 91 962 962\\n7. Última línea, pequeña: \\\"Si no te interesa, respondé 'no' y no te escribo más.\\\"\\n\\nReglas:\\n- Máximo 120 palabras en el cuerpo, sin contar la firma ni la línea de baja.\\n- Asunto corto (máximo 6 palabras), en minúscula salvo nombres propios, sin\\n  clickbait, sin signos de exclamación, sin \\\"propuesta\\\", \\\"oferta\\\" ni \\\"gratis\\\".\\n  Buen asunto: \\\"la foto del menú de {negocio}\\\", \\\"tu web en el celular\\\".\\n- Prohibido: \\\"estimado/a\\\", \\\"¡Hola! 👋\\\", emojis, mayúsculas para gritar,\\n  promesas exageradas (\\\"triplicá tus ventas\\\"), números que no estén en los datos.\\n- Tuteo con voseo (vos, mirá, contame). Si el idioma es \\\"en\\\" o \\\"pt\\\", escribí en\\n  ese idioma con el mismo tono y la misma estructura.\\n- Si la auditoría no tiene evidencia suficiente, devolvé \\\"omitir\\\": true.\\n\\nDatos del negocio y auditoría: los recibís en el mensaje del usuario.\\n\\nRespondé SOLO con un objeto JSON válido, sin texto antes ni después:\\n{\\n  \\\"omitir\\\": false,\\n  \\\"asunto\\\": \\\"\\\",\\n  \\\"cuerpo\\\": \\\"\\\"\\n}\\n\\\"cuerpo\\\" incluye la firma y la línea de baja, con saltos de línea \\\\n.\";\nlet audit = {};\ntry { audit = JSON.parse($json.notas || '{}').auditoria || {}; } catch (e) {}\nconst usuario = 'Negocio: ' + $json.nombre + '\\nRubro: ' + $json.rubro + '\\nCiudad: ' + $json.ciudad +\n  '\\nWeb: ' + $json.web + ($json.instagram ? '\\nInstagram: ' + $json.instagram : '') +\n  '\\n\\nAuditoría:\\n' + JSON.stringify(audit, null, 2);\nreturn { json: { lead: $json, claude_body: cuerpoClaude(SYSTEM, usuario, 6000, 'medium') } };\n",
+        "jsCode": "function cuerpoClaude(system, user, maxTokens, effort) {\n  return {\n    model: 'claude-opus-5-5',\n    max_tokens: maxTokens,\n    system: system,\n    messages: [{ role: 'user', content: user }],\n    output_config: { effort: effort },\n    fallbacks: 'default',\n  };\n}\n\nconst hoy = () => new Date().toISOString().slice(0, 10);\nconst diasDesde = f => f ? Math.floor((Date.now() - new Date(f + 'T12:00:00').getTime()) / 86400000) : -1;\n\nconst SYSTEM = \"Sos Radar, el agente de prospección de APARDIAN STUDIO, y escribís en nombre\\nde Martin Apardian (fotografía, video, páginas web, edición en Lightroom,\\nmarca 360 y producción musical; Uruguay). Escribís un primer mail a un negocio\\nque no lo conoce, a partir de una auditoría real de su web. Este mail sale\\nsolo, sin que Martin lo lea antes: tiene que estar bien a la primera.\\n\\nCómo escribe Martin: directo, seguro, específico, cero desesperación. Entra\\ncon clase pero con estilo. Muestra trabajo antes que hablar de sí mismo.\\n\\nIdioma y tono según el MERCADO y el PAÍS del negocio (vienen en los datos):\\n- Uruguay y Argentina: español rioplatense con voseo (vos, mirá, contame).\\n- México y el resto de Latinoamérica: español neutro con tuteo (tú, mira,\\n  cuéntame). Nada de modismos rioplatenses.\\n- España: español neutro con tuteo, sin voseo ni modismos americanos.\\n- Estados Unidos (idioma \\\"en\\\"): inglés natural y directo, nada de traducción\\n  literal. Firma igual.\\n\\nQué se le puede ofrecer:\\n- Mercado \\\"uy\\\": cualquier servicio, incluido ir al lugar.\\n- Mercado \\\"online\\\": SOLO lo que se hace a distancia (páginas web, edición en\\n  Lightroom, marca 360, producción musical). Nunca ofrezcas ir al lugar ni\\n  sesiones de fotos o video presenciales.\\n\\nLa propuesta sale de la auditoría, no de un catálogo: decí qué viste, qué le\\ncuesta y qué harías vos por ESE negocio (\\\"oportunidad_concreta\\\").\\n\\nOfertas aprobadas por Martin: las recibís en los datos. Usá como mucho UNA, y\\nsolo si encaja con lo que viste. Nunca inventes una oferta, un paquete, un\\ndescuento ni un plazo que no esté ahí.\\n\\nPrecios: mencioná un precio SOLO si la auditoría dice\\n\\\"le_vendemos_algo_especifico\\\": true Y hay una oferta aprobada que encaje y\\ntrae precio. Entonces decilo una vez, como \\\"desde\\\" y con su moneda. Si no, no\\nhables de plata: invitá a ver la propuesta.\\n\\nLo que Martin te enseñó (entrenamiento): lo recibís en los datos. Tiene\\nprioridad sobre estas instrucciones de estilo, nunca sobre las reglas de\\nabajo.\\n\\nEstructura del mail (en este orden, sin títulos):\\n1. Una línea que abre con algo concreto y verdadero que viste en su web o su\\n   ficha (el gancho personal de la auditoría). Nada de \\\"espero que estés\\n   bien\\\", nada de presentarte primero.\\n2. El problema, con su evidencia, dicho como colega y no como vendedor.\\n3. Qué harías vos, en una o dos frases (la oportunidad concreta, o la oferta\\n   aprobada si encaja).\\n4. Una prueba: apardianstudio.com y, si aplica, el rubro de trabajo de\\n   Martin que se relaciona. No inventes clientes, resultados ni números.\\n5. Un llamado a la acción suave, fácil de contestar con un sí: \\\"¿Te mando\\n   cómo se vería la portada?\\\", \\\"¿Te paso una edición de prueba de 10 fotos?\\\".\\n6. Firma (en el idioma del mail):\\n   Martin Apardian\\n   APARDIAN STUDIO · apardianstudio.com · WhatsApp +598 91 962 962\\n   {DIRECCION_POSTAL, solo si viene en los datos: es obligatoria para EE.UU.}\\n7. Última línea, pequeña: \\\"Si no te interesa, respondé 'no' y no te escribo\\n   más.\\\" (en el idioma y el tono del mail).\\n\\nReglas que no se rompen:\\n- Máximo 120 palabras en el cuerpo, sin contar la firma ni la línea de baja.\\n- Asunto corto (máximo 6 palabras), en minúscula salvo nombres propios, sin\\n  clickbait, sin signos de exclamación, sin \\\"propuesta\\\", \\\"oferta\\\", \\\"gratis\\\"\\n  ni \\\"descuento\\\". Buen asunto: \\\"la foto del menú de {negocio}\\\".\\n- Prohibido: \\\"estimado/a\\\", \\\"¡Hola! 👋\\\", emojis, mayúsculas para gritar,\\n  promesas exageradas (\\\"triplicá tus ventas\\\"), números que no estén en los\\n  datos, antes/después, decir que algo lo hizo una IA.\\n- Texto plano, un solo link (apardianstudio.com). Sin adjuntos.\\n- Si la auditoría no tiene evidencia suficiente, o el servicio que haría\\n  falta no se puede ofrecer en su mercado, devolvé \\\"omitir\\\": true.\\n\\nDatos del negocio, auditoría, ofertas y entrenamiento: en el mensaje del\\nusuario.\\n\\nRespondé SOLO con un objeto JSON válido, sin texto antes ni después:\\n{\\n  \\\"omitir\\\": false,\\n  \\\"asunto\\\": \\\"\\\",\\n  \\\"cuerpo\\\": \\\"\\\",\\n  \\\"oferta_id\\\": \\\"\\\"\\n}\\n\\\"cuerpo\\\" incluye la firma y la línea de baja, con saltos de línea \\\\n.\\n\\\"oferta_id\\\" es el id de la oferta aprobada que usaste, o \\\"\\\" si no usaste ninguna.\";\nconst c = $('Config').first().json;\nlet audit = {};\ntry { audit = JSON.parse($json.notas || '{}').auditoria || {}; } catch (e) {}\nconst mercado = $json.mercado || 'uy';\n// Solo las ofertas que Martin aprobó en el Centro, vigentes y de este mercado.\nconst ofertas = $('Leer Ofertas').all().map(r => r.json)\n  .filter(o => o.id && String(o.estado || '') === 'activa')\n  .filter(o => !o.vigencia_hasta || String(o.vigencia_hasta) >= hoy())\n  .filter(o => !o.mercado || o.mercado === 'todos' || o.mercado === mercado)\n  .map(o => ({ id: o.id, servicio: o.servicio, nombre: o.nombre, para_quien: o.para_quien, que_incluye: o.que_incluye,\n               plazo: o.plazo, precio_desde: o.precio_desde, moneda: o.moneda, vigencia_hasta: o.vigencia_hasta, angulo: o.angulo }));\nconst entrenamiento = $('Leer Entrenamiento').all().map(r => r.json)\n  .filter(e => e.clave && String(e.respuesta || '').trim())\n  .map(e => '- ' + (e.pregunta || e.clave) + '\\n  ' + e.respuesta).join('\\n');\nconst usuario = 'MERCADO: ' + mercado + '\\nPaís: ' + ($json.pais || 'Uruguay') + '\\nIdioma: ' + ($json.idioma || 'es') +\n  '\\nNegocio: ' + $json.nombre + '\\nRubro: ' + $json.rubro + '\\nBúsqueda: ' + $json.ciudad +\n  '\\nWeb: ' + $json.web + ($json.instagram ? '\\nInstagram: ' + $json.instagram : '') +\n  (String($json.pais || '') === 'Estados Unidos' ? '\\nDIRECCION_POSTAL (va en la firma): ' + c.DIRECCION_POSTAL : '') +\n  '\\n\\nAuditoría:\\n' + JSON.stringify(audit, null, 2) +\n  '\\n\\nOfertas aprobadas por Martin para este mercado:\\n' + (ofertas.length ? JSON.stringify(ofertas, null, 2) : '(ninguna: no menciones ofertas ni precios)') +\n  '\\n\\nLo que Martin te enseñó:\\n' + (entrenamiento || '(todavía nada)');\nreturn { json: { lead: $json, claude_body: cuerpoClaude(SYSTEM, usuario, 6000, 'medium') } };\n",
         "mode": "runOnceForEachItem"
       },
-      "id": "1529a0ee-6c25-5ac6-a927-58e131c995f0",
+      "id": "d211fd23-c19a-5951-aecb-73dcf1b9cae0",
       "name": "Prompt redactor",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1200,
+        1680,
         0
       ]
     },
@@ -220,12 +302,12 @@
           "timeout": 180000
         }
       },
-      "id": "4a7ad066-c19b-5ad2-8f55-9b4f55bdbb96",
+      "id": "5914ca2f-9cf4-5e11-bcc5-abedb7963828",
       "name": "Claude · redactor",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        1440,
+        1920,
         0
       ],
       "credentials": {
@@ -241,15 +323,15 @@
     },
     {
       "parameters": {
-        "jsCode": "// Lee la respuesta de Claude. Antes de tocar content mira stop_reason:\n// un rechazo o un corte por max_tokens no se trata como respuesta valida.\nfunction leerClaude(r) {\n  if (!r || r.error) return { ok: false, motivo: 'error_http: ' + JSON.stringify(r && r.error || '').slice(0, 300) };\n  if (r.stop_reason === 'refusal') return { ok: false, motivo: 'refusal' };\n  if (r.stop_reason === 'max_tokens') return { ok: false, motivo: 'max_tokens' };\n  const texto = (r.content || []).filter(b => b.type === 'text').map(b => b.text).join('\\n').trim();\n  const limpio = texto.replace(/^```(?:json)?\\s*/i, '').replace(/```\\s*$/, '');\n  const i = limpio.indexOf('{'), j = limpio.lastIndexOf('}');\n  if (i < 0 || j <= i) return { ok: false, motivo: 'sin_json' };\n  try { return { ok: true, data: JSON.parse(limpio.slice(i, j + 1)) }; }\n  catch (e) { return { ok: false, motivo: 'json_invalido' }; }\n}\n\n// Mail en texto plano, UTF-8, listo para la API de Gmail (base64url).\nfunction mime({ de, para, asunto, cuerpo, enRespuestaA }) {\n  const b64 = s => Buffer.from(s, 'utf8').toString('base64');\n  const h = [\n    'From: ' + de,\n    'To: ' + para,\n    'Subject: =?UTF-8?B?' + b64(asunto) + '?=',\n    'MIME-Version: 1.0',\n    'Content-Type: text/plain; charset=\"UTF-8\"',\n    'Content-Transfer-Encoding: base64',\n  ];\n  if (enRespuestaA) h.push('In-Reply-To: ' + enRespuestaA, 'References: ' + enRespuestaA);\n  const raw = h.join('\\r\\n') + '\\r\\n\\r\\n' + b64(cuerpo).replace(/(.{76})/g, '$1\\r\\n');\n  return Buffer.from(raw, 'utf8').toString('base64').replace(/\\+/g, '-').replace(/\\//g, '_').replace(/=+$/, '');\n}\n\nconst c = $('Config').first().json;\nconst lead = $('Prompt redactor').item.json.lead;\nconst r = leerClaude($json);\nif (!r.ok || r.data.omitir) {\n  return { json: { omitir: true, fila: { id: lead.id, estado: r.ok ? 'descartado' : 'error_redaccion',\n    notas: lead.notas } } };\n}\nconst m = r.data;\nconst raw = mime({ de: c.MI_EMAIL, para: lead.email, asunto: m.asunto, cuerpo: m.cuerpo });\nreturn { json: { omitir: false, lead, asunto: m.asunto, cuerpo: m.cuerpo,\n  gmail_body: { message: { raw } },\n  auto: !!c.AUTO_ENVIO && Number(lead.score) >= (c.SCORE_AUTO || 80) } };\n",
+        "jsCode": "// Lee la respuesta de Claude. Antes de tocar content mira stop_reason:\n// un rechazo o un corte por max_tokens no se trata como respuesta valida.\nfunction leerClaude(r) {\n  if (!r || r.error) return { ok: false, motivo: 'error_http: ' + JSON.stringify(r && r.error || '').slice(0, 300) };\n  if (r.stop_reason === 'refusal') return { ok: false, motivo: 'refusal' };\n  if (r.stop_reason === 'max_tokens') return { ok: false, motivo: 'max_tokens' };\n  const texto = (r.content || []).filter(b => b.type === 'text').map(b => b.text).join('\\n').trim();\n  const limpio = texto.replace(/^```(?:json)?\\s*/i, '').replace(/```\\s*$/, '');\n  const i = limpio.indexOf('{'), j = limpio.lastIndexOf('}');\n  if (i < 0 || j <= i) return { ok: false, motivo: 'sin_json' };\n  try { return { ok: true, data: JSON.parse(limpio.slice(i, j + 1)) }; }\n  catch (e) { return { ok: false, motivo: 'json_invalido' }; }\n}\n\n// Mail en texto plano, UTF-8, listo para la API de Gmail (base64url).\nfunction mime({ de, para, asunto, cuerpo, enRespuestaA }) {\n  const b64 = s => Buffer.from(s, 'utf8').toString('base64');\n  const h = [\n    'From: ' + de,\n    'To: ' + para,\n    'Subject: =?UTF-8?B?' + b64(asunto) + '?=',\n    'MIME-Version: 1.0',\n    'Content-Type: text/plain; charset=\"UTF-8\"',\n    'Content-Transfer-Encoding: base64',\n  ];\n  if (enRespuestaA) h.push('In-Reply-To: ' + enRespuestaA, 'References: ' + enRespuestaA);\n  const raw = h.join('\\r\\n') + '\\r\\n\\r\\n' + b64(cuerpo).replace(/(.{76})/g, '$1\\r\\n');\n  return Buffer.from(raw, 'utf8').toString('base64').replace(/\\+/g, '-').replace(/\\//g, '_').replace(/=+$/, '');\n}\n\nconst c = $('Config').first().json;\nconst lead = $('Prompt redactor').item.json.lead;\nconst r = leerClaude($json);\nif (!r.ok || r.data.omitir) {\n  return { json: { omitir: true, fila: { id: lead.id, estado: r.ok ? 'descartado' : 'error_redaccion',\n    notas: lead.notas } } };\n}\nconst m = r.data;\nconst raw = mime({ de: c.MI_EMAIL, para: lead.email, asunto: m.asunto, cuerpo: m.cuerpo });\nreturn { json: { omitir: false, lead, asunto: m.asunto, cuerpo: m.cuerpo, oferta_id: m.oferta_id || '',\n  gmail_body: { message: { raw } },\n  auto: !!c.AUTO_ENVIO && Number(lead.score) >= (Number(c.SCORE_AUTO) || 0) } };\n",
         "mode": "runOnceForEachItem"
       },
-      "id": "e00fd8c7-b6c5-5adc-af12-d3369605f085",
+      "id": "e8711b5f-db97-5c4a-bc9b-392b1604e926",
       "name": "Leer mail",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1680,
+        2160,
         0
       ]
     },
@@ -263,7 +345,7 @@
           },
           "conditions": [
             {
-              "id": "5dd2ffb5-0d95-5bc4-a109-90e0d465a307",
+              "id": "f7cddf7b-3346-5e1a-855f-6b8f8a630f60",
               "leftValue": "={{ !$json.omitir }}",
               "rightValue": "",
               "operator": {
@@ -277,12 +359,12 @@
         },
         "options": {}
       },
-      "id": "56227e24-7ef8-5676-bebe-0c665966b873",
+      "id": "98841668-7b57-55df-af9c-ab8661b9dc3d",
       "name": "¿Hay mail?",
       "type": "n8n-nodes-base.if",
       "typeVersion": 2,
       "position": [
-        1920,
+        2400,
         0
       ]
     },
@@ -291,12 +373,12 @@
         "jsCode": "return { json: $json.fila };\n",
         "mode": "runOnceForEachItem"
       },
-      "id": "d851962d-f8f8-5975-9781-db93b1cd327f",
+      "id": "a8b2375d-208b-504e-80de-1f953091c792",
       "name": "Fila descartada",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        2160,
+        2640,
         220
       ]
     },
@@ -323,12 +405,12 @@
         },
         "options": {}
       },
-      "id": "4b1ecef3-9590-57f8-b97b-61481d93754b",
+      "id": "0d939939-cd49-580c-948f-73e0014c5366",
       "name": "Marcar descartado",
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.5,
       "position": [
-        2400,
+        2880,
         220
       ],
       "credentials": {
@@ -349,12 +431,12 @@
         "specifyBody": "json",
         "jsonBody": "={{ JSON.stringify($json.gmail_body) }}"
       },
-      "id": "94553fc9-aa43-58a6-9d2b-8fe24e0b3c27",
+      "id": "3462c454-82af-5ea8-84e0-6fcd2898275e",
       "name": "Crear borrador Gmail",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        2160,
+        2640,
         0
       ],
       "credentials": {
@@ -367,15 +449,15 @@
     },
     {
       "parameters": {
-        "jsCode": "const esc = s => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');\n\nconst c = $('Config').first().json;\nconst x = $('Leer mail').item.json;\nconst draft = $json.id || '';\nconst link = acc => c.URL_APROBAR + '?id=' + encodeURIComponent(x.lead.id) + '&k=inicial&a=' + acc + '&t=' + encodeURIComponent(c.TOKEN);\nreturn { json: {\n  fila: { id: x.lead.id, estado: draft ? 'borrador' : 'error_borrador', asunto: x.asunto,\n          borrador: x.cuerpo, draft_id: draft },\n  draft_id: draft, auto: x.auto,\n  telegram_text: '<b>Mail listo para ' + esc(x.lead.nombre) + '</b> (' + esc(x.lead.rubro) + ', score ' + esc(x.lead.score) + ')\\n' +\n    esc(x.lead.web) + '\\n\\n<b>' + esc(x.asunto) + '</b>\\n' + esc(x.cuerpo) +\n    '\\n\\nPodés editarlo en Gmail (Borradores) antes de aprobar.\\n' +\n    '<a href=\"' + esc(link('enviar')) + '\">✅ Enviar</a>   <a href=\"' + esc(link('descartar')) + '\">✖️ Descartar</a>',\n} };\n",
+        "jsCode": "const esc = s => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');\n\nconst c = $('Config').first().json;\nconst x = $('Leer mail').item.json;\nconst draft = $json.id || '';\nconst link = acc => c.URL_APROBAR + '?id=' + encodeURIComponent(x.lead.id) + '&k=inicial&a=' + acc + '&t=' + encodeURIComponent(c.TOKEN);\nreturn { json: {\n  fila: { id: x.lead.id, estado: draft ? 'borrador' : 'error_borrador', asunto: x.asunto,\n          borrador: x.cuerpo, draft_id: draft, oferta_id: x.oferta_id },\n  draft_id: draft, auto: x.auto,\n  telegram_text: '<b>Mail listo para ' + esc(x.lead.nombre) + '</b> (' + esc(x.lead.rubro) + ', score ' + esc(x.lead.score) + ')\\n' +\n    esc(x.lead.web) + '\\n\\n<b>' + esc(x.asunto) + '</b>\\n' + esc(x.cuerpo) +\n    '\\n\\nPodés editarlo en Gmail (Borradores) antes de aprobar.\\n' +\n    '<a href=\"' + esc(link('enviar')) + '\">✅ Enviar</a>   <a href=\"' + esc(link('descartar')) + '\">✖️ Descartar</a>',\n} };\n",
         "mode": "runOnceForEachItem"
       },
-      "id": "caa9ceb0-bb12-585f-b318-60aa3b09a7f8",
+      "id": "c060a234-da36-5b1d-8a8a-27e694df6ae4",
       "name": "Datos del borrador",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        2400,
+        2880,
         0
       ]
     },
@@ -384,12 +466,12 @@
         "jsCode": "return { json: $json.fila };\n",
         "mode": "runOnceForEachItem"
       },
-      "id": "fa2e6317-101b-50bc-bcfd-b2d0b82436b6",
+      "id": "0a03537f-7340-54fc-b133-c33321fc59bd",
       "name": "Fila borrador",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        2640,
+        3120,
         220
       ]
     },
@@ -416,12 +498,12 @@
         },
         "options": {}
       },
-      "id": "ba80eeb6-4a03-50ea-9f88-f2c3c5987df9",
+      "id": "581920a3-ce41-5541-8fd2-10832bb6a833",
       "name": "Guardar borrador",
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.5,
       "position": [
-        2880,
+        3360,
         220
       ],
       "credentials": {
@@ -441,7 +523,7 @@
           },
           "conditions": [
             {
-              "id": "2c45c03b-72a3-5236-b7b9-70469d0b997b",
+              "id": "9c342040-76e3-5e80-ba9e-f8cae82f5c24",
               "leftValue": "={{ $('Datos del borrador').item.json.auto && !!$('Datos del borrador').item.json.draft_id }}",
               "rightValue": "",
               "operator": {
@@ -455,12 +537,12 @@
         },
         "options": {}
       },
-      "id": "aed92461-67e3-5176-81ae-f54d61dd2aa4",
+      "id": "68de9f98-b926-5fb0-8662-0058d56b1dd9",
       "name": "¿Auto-envío?",
       "type": "n8n-nodes-base.if",
       "typeVersion": 2,
       "position": [
-        2640,
+        3120,
         0
       ]
     },
@@ -475,12 +557,12 @@
         "specifyBody": "json",
         "jsonBody": "={{ JSON.stringify({ id: $('Datos del borrador').item.json.draft_id }) }}"
       },
-      "id": "af150512-be63-52d8-a923-55c088021744",
+      "id": "b89157b4-9f33-5a95-8cf0-652a784bd972",
       "name": "Enviar (auto)",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        2880,
+        3360,
         0
       ],
       "credentials": {
@@ -493,15 +575,15 @@
     },
     {
       "parameters": {
-        "jsCode": "const hoy = () => new Date().toISOString().slice(0, 10);\nconst diasDesde = f => f ? Math.floor((Date.now() - new Date(f + 'T12:00:00').getTime()) / 86400000) : -1;\n\nconst x = $('Datos del borrador').item.json;\nreturn { json: { id: x.fila.id, estado: $json.id ? 'enviado' : 'error_envio', fecha_envio: hoy(),\n  thread_id: $json.threadId || '', mensaje_id: $json.id || '', seguimientos: 0 } };\n",
+        "jsCode": "const hoy = () => new Date().toISOString().slice(0, 10);\nconst diasDesde = f => f ? Math.floor((Date.now() - new Date(f + 'T12:00:00').getTime()) / 86400000) : -1;\n\n// Hora y día en la zona horaria del destinatario (Intl viene con Node).\nconst horaEn = z => { try { return Number(new Intl.DateTimeFormat('en-US', { timeZone: z, hour: 'numeric', hourCycle: 'h23' }).format(new Date())); } catch (e) { return 12; } };\nconst diaEn = z => { try { return new Intl.DateTimeFormat('en-US', { timeZone: z, weekday: 'short' }).format(new Date()); } catch (e) { return 'Mon'; } };\nconst horarioDeOficina = z => { const h = horaEn(z), d = diaEn(z); return d !== 'Sat' && d !== 'Sun' && h >= 9 && h < 17; };\nconst hoyUY = () => new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Montevideo' }).format(new Date());\n\nconst x = $('Datos del borrador').item.json;\nreturn { json: { id: x.fila.id, estado: $json.id ? 'enviado' : 'error_envio', fecha_envio: hoyUY(),\n  thread_id: $json.threadId || '', mensaje_id: $json.id || '', seguimientos: 0 } };\n",
         "mode": "runOnceForEachItem"
       },
-      "id": "a88a6360-4c30-5de2-bc95-a484c6fc3633",
+      "id": "c191bc5c-84d2-5b46-a1e7-6720a8a07166",
       "name": "Fila enviada (auto)",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        3120,
+        3600,
         0
       ]
     },
@@ -528,12 +610,12 @@
         },
         "options": {}
       },
-      "id": "01f83eef-643f-5552-b7aa-c9b3767bff3f",
+      "id": "61cff13a-48aa-584b-9f97-861f47a73711",
       "name": "Guardar envío (auto)",
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.5,
       "position": [
-        3360,
+        3840,
         0
       ],
       "credentials": {
@@ -553,12 +635,12 @@
           "disable_web_page_preview": true
         }
       },
-      "id": "9a36aeea-b96b-5c47-b971-dd863ab0df08",
+      "id": "310ec8a8-d27b-55b2-a56f-ef4a39d290de",
       "name": "Pedir aprobación",
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        2880,
+        3360,
         440
       ],
       "credentials": {
@@ -575,7 +657,7 @@
         "responseMode": "onReceived",
         "options": {}
       },
-      "id": "f1c38fb8-147f-5326-b2ec-0ee1e7f475b2",
+      "id": "31eee271-9b8d-5ed2-ad4b-f284d08e44c1",
       "name": "Aprobación (link de Telegram)",
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2,
@@ -590,19 +672,19 @@
         "assignments": {
           "assignments": [
             {
-              "id": "d082a425-2652-56a7-bba7-923c1c711548",
+              "id": "e5cf473b-2fc5-5de8-81ae-8020f89f6bda",
               "name": "SHEET_ID",
               "value": "PEGAR_ID_DE_LA_PLANILLA",
               "type": "string"
             },
             {
-              "id": "e1fb9339-ad71-5fc8-8616-f9eb7769a8f8",
+              "id": "9617b67a-9a00-5bb0-b445-8781558cfecb",
               "name": "TELEGRAM_CHAT_ID",
               "value": "PEGAR_CHAT_ID",
               "type": "string"
             },
             {
-              "id": "41f4729d-b069-5d8e-be05-9115582d9bd1",
+              "id": "81852621-bcc7-55f5-a5b3-4167c0d8af19",
               "name": "TOKEN",
               "value": "CAMBIAR-POR-UNA-CLAVE-LARGA",
               "type": "string"
@@ -611,7 +693,7 @@
         },
         "options": {}
       },
-      "id": "8b069d27-9099-58b8-b06c-15d8283a564b",
+      "id": "a4dfc0f8-4821-51f2-8913-9fd107ee23d8",
       "name": "Config aprobación",
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
@@ -635,7 +717,7 @@
         },
         "options": {}
       },
-      "id": "1aa33636-2ccb-582c-a45e-8c75941f8bfb",
+      "id": "51834dce-8565-5f51-880e-5da170aba464",
       "name": "Leer Leads (aprobación)",
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.5,
@@ -656,7 +738,7 @@
       "parameters": {
         "jsCode": "const c = $('Config aprobación').first().json;\nconst q = $('Aprobación (link de Telegram)').first().json.query || {};\nif (!q.t || q.t !== c.TOKEN) throw new Error('Token inválido');\nconst l = $input.all().map(r => r.json).find(r => String(r.id) === String(q.id));\nif (!l) throw new Error('Lead no encontrado: ' + q.id);\n// Solo se manda lo que todavía es borrador: si respondió entretanto, no se envía.\nif (!/^borrador/.test(l.estado || '')) throw new Error('El lead ya no está en borrador: ' + l.estado);\nreturn [{ json: { lead: l, k: q.k || 'inicial', enviar: q.a === 'enviar' } }];\n"
       },
-      "id": "5cae1021-7ebc-5ff1-bb68-2c79c897a651",
+      "id": "8dd83b4d-2aee-577e-aedd-e4efabca3589",
       "name": "Buscar lead",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -675,7 +757,7 @@
           },
           "conditions": [
             {
-              "id": "dd6d734e-6902-549f-b06f-2053bf62a871",
+              "id": "163219cf-ea84-5c04-8bd1-af8d879c8fa3",
               "leftValue": "={{ $json.enviar }}",
               "rightValue": "",
               "operator": {
@@ -689,7 +771,7 @@
         },
         "options": {}
       },
-      "id": "ae059cc5-9385-5b01-8ee7-2170fb0f3d6b",
+      "id": "7b18a481-cd91-51b1-b2e1-570d941e3dcc",
       "name": "¿Enviar?",
       "type": "n8n-nodes-base.if",
       "typeVersion": 2,
@@ -709,7 +791,7 @@
         "specifyBody": "json",
         "jsonBody": "={{ JSON.stringify({ id: $json.lead.draft_id }) }}"
       },
-      "id": "aa066575-bc40-5eb8-8b48-ae23d90dd177",
+      "id": "91ed0a1b-b6b8-5aeb-9260-bf6cf1508daa",
       "name": "Enviar borrador",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
@@ -729,7 +811,7 @@
       "parameters": {
         "jsCode": "const hoy = () => new Date().toISOString().slice(0, 10);\nconst diasDesde = f => f ? Math.floor((Date.now() - new Date(f + 'T12:00:00').getTime()) / 86400000) : -1;\n\nconst esc = s => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');\n\nconst x = $('Buscar lead').first().json;\nconst l = x.lead, ok = !!$json.id;\nconst f = { id: l.id };\nif (!ok) f.estado = 'error_envio';\nelse if (x.k === 'seg1') { f.estado = 'seguimiento_1'; f.seguimientos = 1; }\nelse if (x.k === 'seg2') { f.estado = 'seguimiento_2'; f.seguimientos = 2; }\nelse { f.estado = 'enviado'; f.fecha_envio = hoy(); f.thread_id = $json.threadId || ''; f.mensaje_id = $json.id || ''; f.seguimientos = 0; }\nreturn [{ json: { fila: f, telegram_text: (ok ? '✅ Enviado a ' : '⚠️ No se pudo enviar a ') + esc(l.nombre) } }];\n"
       },
-      "id": "eb3f42f6-96cf-5161-990c-7cebf671d820",
+      "id": "16e2d43b-ff01-539b-8d8f-8dd8826b8b7e",
       "name": "Estado enviado",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -742,7 +824,7 @@
       "parameters": {
         "jsCode": "return [{ json: $input.first().json.fila }];\n"
       },
-      "id": "d812a018-567f-5898-8172-a41401b06319",
+      "id": "958c382d-f948-5323-940c-0d92fc824f7b",
       "name": "Fila enviado",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -774,7 +856,7 @@
         },
         "options": {}
       },
-      "id": "1e92cf84-1c0d-5f13-a220-ee3db4ee5345",
+      "id": "bac88e3e-6c53-548f-9cb7-9f38964ab650",
       "name": "Guardar enviado",
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.5,
@@ -799,7 +881,7 @@
           "disable_web_page_preview": true
         }
       },
-      "id": "628065e0-5af5-5860-9a66-b40e4d88a1c6",
+      "id": "87089f1b-f509-5863-8928-f150e1147cfc",
       "name": "Confirmar envío",
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
@@ -822,7 +904,7 @@
         "nodeCredentialType": "gmailOAuth2",
         "options": {}
       },
-      "id": "689a259d-9197-578c-969c-548282419f0b",
+      "id": "c479f3f6-7124-55fd-94b4-54344abb3217",
       "name": "Borrar borrador",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
@@ -842,7 +924,7 @@
       "parameters": {
         "jsCode": "const esc = s => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');\n\nconst x = $('Buscar lead').first().json;\n// Un seguimiento descartado vuelve al estado anterior; un primer mail, se descarta.\nconst estado = x.k === 'seg1' ? 'enviado' : x.k === 'seg2' ? 'seguimiento_1' : 'descartado';\nreturn [{ json: { fila: { id: x.lead.id, estado, draft_id: '' }, telegram_text: '✖️ Descartado: ' + esc(x.lead.nombre) } }];\n"
       },
-      "id": "d9447366-bcc8-5f63-8258-2a316b483b2b",
+      "id": "42ed737c-2514-5e0d-90ce-b3c981628cc0",
       "name": "Estado descartado",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -855,7 +937,7 @@
       "parameters": {
         "jsCode": "return [{ json: $input.first().json.fila }];\n"
       },
-      "id": "4f50cbdf-0f65-5a42-b810-21ff67cb164b",
+      "id": "a984ae19-18a4-5439-991b-e93ce496f211",
       "name": "Fila descarte",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -887,7 +969,7 @@
         },
         "options": {}
       },
-      "id": "94dec366-3e9f-501b-b267-4d6d249cf18b",
+      "id": "7d3f0f8d-6bde-58a7-8bfa-e2df002f5bb0",
       "name": "Guardar descarte",
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.5,
@@ -912,7 +994,7 @@
           "disable_web_page_preview": true
         }
       },
-      "id": "63e53606-a333-521d-9e39-086ab3b6304f",
+      "id": "299feb5e-1f6d-5ab5-a181-ff99e462d6e8",
       "name": "Confirmar descarte",
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
@@ -974,6 +1056,28 @@
       ]
     },
     "Leer Bajas": {
+      "main": [
+        [
+          {
+            "node": "Leer Ofertas",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Leer Ofertas": {
+      "main": [
+        [
+          {
+            "node": "Leer Entrenamiento",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Leer Entrenamiento": {
       "main": [
         [
           {

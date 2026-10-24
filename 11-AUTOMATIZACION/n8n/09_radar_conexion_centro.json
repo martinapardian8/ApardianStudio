@@ -1,0 +1,429 @@
+{
+  "name": "APARDIAN 09 · Radar: conexión con el Centro",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "GET",
+        "path": "apardian-radar",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "67fd9af8-2c56-5f16-ae0d-71bfd4d03b24",
+      "name": "Link del Centro",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        0,
+        0
+      ],
+      "webhookId": "a475a8c3-bdfe-51b5-ac14-4acf112a121e"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "cbda59c1-706a-5b76-9934-f5c71d200baa",
+              "name": "SHEET_ID",
+              "value": "PEGAR_ID_DE_LA_PLANILLA",
+              "type": "string"
+            },
+            {
+              "id": "d17a913c-45ea-50b2-9c9d-5c846e634efe",
+              "name": "TOKEN",
+              "value": "CAMBIAR-POR-UNA-CLAVE-LARGA-DE-RADAR",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "589af2a7-e287-5958-bc35-94d2b7a75ed2",
+      "name": "Config",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        240,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const esc = s => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');\n\n// Hora y día en la zona horaria del destinatario (Intl viene con Node).\nconst horaEn = z => { try { return Number(new Intl.DateTimeFormat('en-US', { timeZone: z, hour: 'numeric', hourCycle: 'h23' }).format(new Date())); } catch (e) { return 12; } };\nconst diaEn = z => { try { return new Intl.DateTimeFormat('en-US', { timeZone: z, weekday: 'short' }).format(new Date()); } catch (e) { return 'Mon'; } };\nconst horarioDeOficina = z => { const h = horaEn(z), d = diaEn(z); return d !== 'Sat' && d !== 'Sun' && h >= 9 && h < 17; };\nconst hoyUY = () => new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Montevideo' }).format(new Date());\n\nconst c = $('Config').first().json;\nconst q = $('Link del Centro').first().json.query || {};\nconst pagina = (titulo, txt) => '<!doctype html><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">' +\n  '<body style=\"font-family:system-ui;background:#0B0B0B;color:#F8F7F6;padding:40px\"><p style=\"letter-spacing:.2em;font-size:11px;color:#FF0033\">APARDIAN · RADAR</p>' +\n  '<h2 style=\"margin:8px 0\">' + esc(titulo) + '</h2><p style=\"color:#9A9592\">' + esc(txt) + '</p></body>';\nif (!q.t || q.t !== c.TOKEN) return [{ json: { ok: false, html: pagina('Link no válido', 'La clave no coincide con la de n8n. Revisala en el Centro → Radar → Conexión.') } }];\nlet d;\ntry { d = JSON.parse(Buffer.from(String(q.d || '').replace(/-/g, '+').replace(/_/g, '/'), 'base64').toString('utf8')); }\ncatch (e) { return [{ json: { ok: false, html: pagina('No pude leer los datos', 'Volvé a tocar el botón en el Centro.') } }]; }\nconst ahora = new Date().toISOString();\nif (q.tipo === 'oferta') {\n  const campos = ['id','estado','mercado','servicio','nombre','para_quien','que_incluye','plazo','precio_desde','moneda','vigencia_hasta','angulo'];\n  const f = {}; for (const k of campos) f[k] = String(d[k] == null ? '' : d[k]).slice(0, 1500);\n  if (!f.id || !['activa','pausada'].includes(f.estado)) return [{ json: { ok: false, html: pagina('Oferta incompleta', 'Falta el id o el estado.') } }];\n  f.actualizado = ahora;\n  return [{ json: { ok: true, tipo: 'oferta', filas: [f], html: pagina(f.estado === 'activa' ? 'Oferta activada ✓' : 'Oferta pausada',\n    f.nombre + (f.estado === 'activa' ? ': Radar ya la puede usar en los mails.' : ': Radar deja de usarla.') + ' Podés cerrar esta pestaña.') } }];\n}\nif (q.tipo === 'entrenamiento') {\n  const filas = (Array.isArray(d) ? d : []).filter(x => x && x.clave)\n    .map(x => ({ clave: String(x.clave).slice(0, 60), pregunta: String(x.pregunta || '').slice(0, 300), respuesta: String(x.respuesta || '').slice(0, 2000), actualizado: ahora }));\n  if (!filas.length) return [{ json: { ok: false, html: pagina('Nada para guardar', 'No llegaron respuestas.') } }];\n  return [{ json: { ok: true, tipo: 'entrenamiento', filas, html: pagina('Radar aprendió ✓', filas.length + ' respuestas guardadas. Desde el próximo mail las usa. Podés cerrar esta pestaña.') } }];\n}\nreturn [{ json: { ok: false, html: pagina('Pedido desconocido', String(q.tipo || '')) } }];\n"
+      },
+      "id": "d7890ff4-6e40-5f12-a240-6c18373eac69",
+      "name": "Validar",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        480,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose"
+          },
+          "conditions": [
+            {
+              "id": "90be9673-7f37-575d-bdd2-df424d592e9b",
+              "leftValue": "={{ $json.ok }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "c171164f-223b-5258-ba45-2b102a58628c",
+      "name": "¿Válido?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        720,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose"
+          },
+          "conditions": [
+            {
+              "id": "71f103b9-49f0-5679-848a-7a16a51e89b3",
+              "leftValue": "={{ $json.tipo === 'oferta' }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "64e5a464-3ca0-5bde-9b01-6ba973fe2bca",
+      "name": "¿Es oferta?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        960,
+        -120
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "return $('Validar').first().json.filas.map(f => ({ json: f }));\n"
+      },
+      "id": "4a5be798-474d-524f-ad1b-6c332ad25a52",
+      "name": "Filas oferta",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        960,
+        -240
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "={{ $('Config').first().json.SHEET_ID }}",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Ofertas",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": []
+        },
+        "options": {}
+      },
+      "id": "94bc9f76-ce0e-571f-a1eb-dea589033919",
+      "name": "Guardar oferta",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        1200,
+        -240
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "REEMPLAZAR",
+          "name": "Google Sheets"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "return $('Validar').first().json.filas.map(f => ({ json: f }));\n"
+      },
+      "id": "090cc31c-6898-581e-8a67-cff021ff70fc",
+      "name": "Filas entrenamiento",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        960,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "={{ $('Config').first().json.SHEET_ID }}",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Entrenamiento",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [
+            "clave"
+          ],
+          "schema": []
+        },
+        "options": {}
+      },
+      "id": "5b4c0dca-081f-5cc7-91da-35c8d7d323d0",
+      "name": "Guardar entrenamiento",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        1200,
+        0
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "REEMPLAZAR",
+          "name": "Google Sheets"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "={{ $('Validar').first().json.html }}",
+        "options": {
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Content-Type",
+                "value": "text/html; charset=utf-8"
+              }
+            ]
+          }
+        }
+      },
+      "id": "1effd4c5-61e7-5452-a017-1beea79dad0a",
+      "name": "Página: oferta",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        1440,
+        -240
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "={{ $('Validar').first().json.html }}",
+        "options": {
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Content-Type",
+                "value": "text/html; charset=utf-8"
+              }
+            ]
+          }
+        }
+      },
+      "id": "c9fb3d73-a411-56a6-8814-4731bfcf3272",
+      "name": "Página: entrenamiento",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        1440,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "={{ $('Validar').first().json.html }}",
+        "options": {
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Content-Type",
+                "value": "text/html; charset=utf-8"
+              }
+            ]
+          }
+        }
+      },
+      "id": "df3c74d1-b17e-53a9-b1e9-cc1b9c42acb6",
+      "name": "Página: no válido",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        720,
+        240
+      ]
+    }
+  ],
+  "connections": {
+    "Link del Centro": {
+      "main": [
+        [
+          {
+            "node": "Config",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Config": {
+      "main": [
+        [
+          {
+            "node": "Validar",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validar": {
+      "main": [
+        [
+          {
+            "node": "¿Válido?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "¿Válido?": {
+      "main": [
+        [
+          {
+            "node": "¿Es oferta?",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Página: no válido",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "¿Es oferta?": {
+      "main": [
+        [
+          {
+            "node": "Filas oferta",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Filas entrenamiento",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filas oferta": {
+      "main": [
+        [
+          {
+            "node": "Guardar oferta",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Guardar oferta": {
+      "main": [
+        [
+          {
+            "node": "Página: oferta",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filas entrenamiento": {
+      "main": [
+        [
+          {
+            "node": "Guardar entrenamiento",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Guardar entrenamiento": {
+      "main": [
+        [
+          {
+            "node": "Página: entrenamiento",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "America/Montevideo"
+  },
+  "meta": {
+    "templateCredsSetupCompleted": false
+  },
+  "tags": []
+}

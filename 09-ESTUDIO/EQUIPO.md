@@ -8,9 +8,10 @@ en `.claude/agents/` y se llaman por el nombre ("Luz, armá la semana que viene"
 |---|---|---|---|
 | ☀️ | **Luz** · community manager | Un posteo y una historia por día, los siete días. Arma la semana, elige fotos, escribe pies, genera piezas nuevas con el motor cuando se acaba lo armado. | Publicar sola. Usar fotos que no son tuyas. Antes/después. |
 | 🔍 | **Lupa** · crítica de diseño | Revisa cada pieza antes de que llegue a vos: medidas, peso, pie, reglas de marca y, mirándola, si está a la altura. Detecta la misma foto repetida aunque esté recortada o con texto. **Tiene veto.** | Dejar pasar algo "porque ya está hecho". Rehacer piezas (eso es de Luz). |
+| 📡 | **Radar** · prospección | Busca negocios en Uruguay y afuera, audita su web y les manda una propuesta hecha para ellos: hasta 50 mails por día, solos, con las ofertas que aprobaste en el Centro. En Uruguay ofrece todo; afuera, solo lo que se hace online. Detalle en `11-AUTOMATIZACION/RADAR_PASO_A_PASO.md`. | Inventar una oferta, un precio o un cliente. Escribirle a quien pidió la baja. |
 | 🤝 | **Trato** · ventas | Convierte consultas en presupuestos y presupuestos en trabajos. Seguimientos, prospección, pipeline, reporte semanal. Le cuenta a Luz qué pregunta la gente. | Mandarle algo a un cliente sin que vos lo veas. Inventar precios. |
 
-Vos sos el cuarto: **aprobás**. Sin tu "Aprobar" en Telegram no sale nada.
+Vos sos el que **aprueba**. Sin tu "Aprobar" en Telegram no sale nada.
 
 ## Cómo sale un posteo
 
@@ -111,6 +112,7 @@ dos piezas por lo mismo, se vuelve un escalón para atrás.
 | `.claude/agents/luz-community-manager.md` | Luz |
 | `.claude/agents/lupa-critica-diseno.md` | Lupa |
 | `.claude/agents/trato-ventas.md` | Trato (playbook en `CM_VENTAS.md`) |
+| `.claude/agents/radar-prospeccion.md` | Radar (paso a paso en `11-AUTOMATIZACION/RADAR_PASO_A_PASO.md`) |
 | `10-MOTOR/calendario.py` | El calendario: un posteo y una historia por día, sin fotos repetidas |
 | `10-MOTOR/calendario_sheet.py` | La planilla de aprobación (con la revisión de Lupa) |
 | `10-MOTOR/lupa.py` | La revisión automática y la hoja de contacto de la semana |

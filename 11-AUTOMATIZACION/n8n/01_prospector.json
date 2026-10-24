@@ -1,21 +1,18 @@
 {
-  "name": "APARDIAN 01 · Prospector",
+  "name": "APARDIAN 01 · Prospector (Radar)",
   "nodes": [
     {
       "parameters": {
         "rule": {
           "interval": [
             {
-              "field": "weeks",
-              "triggerAtDay": [
-                1
-              ],
-              "triggerAtHour": 8
+              "field": "days",
+              "triggerAtHour": 7
             }
           ]
         }
       },
-      "id": "ada2a322-c31d-5933-a8e9-88b33e9e311f",
+      "id": "8e3ae726-addb-5136-a7de-278861b1e44a",
       "name": "Programado",
       "type": "n8n-nodes-base.scheduleTrigger",
       "typeVersion": 1.2,
@@ -26,7 +23,7 @@
     },
     {
       "parameters": {},
-      "id": "da794814-424d-57fd-bfe1-b995123c60cd",
+      "id": "6aa266da-d7b4-5362-b929-5055e8bb506d",
       "name": "Probar a mano",
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
@@ -40,22 +37,28 @@
         "assignments": {
           "assignments": [
             {
-              "id": "5f34f639-50b8-5c93-973b-f50f8f35d842",
+              "id": "5b6f529b-7f6d-5df4-b591-02dd7994bf44",
               "name": "SHEET_ID",
               "value": "PEGAR_ID_DE_LA_PLANILLA",
               "type": "string"
             },
             {
-              "id": "7697d309-0465-5d0a-af40-ac6476c91bad",
+              "id": "03ce0859-94bb-5d48-a3de-035e1b5cf6b7",
               "name": "TELEGRAM_CHAT_ID",
               "value": "PEGAR_CHAT_ID",
               "type": "string"
+            },
+            {
+              "id": "7a83d7ca-db87-5bc3-bf7f-db8cb80c2a17",
+              "name": "BUSQUEDAS_POR_DIA",
+              "value": 12,
+              "type": "number"
             }
           ]
         },
         "options": {}
       },
-      "id": "51c9c021-cbd8-51a1-8171-289959a4b0e2",
+      "id": "237a9a6d-8c5c-54a4-9f53-2ec1d65236ce",
       "name": "Config",
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
@@ -66,14 +69,46 @@
     },
     {
       "parameters": {
-        "jsCode": "// Rubro x ciudad. Agregá o sacá filas: cada una es una búsqueda en Google Maps.\n// Ojo: cada búsqueda trae hasta 20 negocios y cuesta (ver README, costos).\nconst rubros = [\n  { rubro: 'restaurante', q: 'restaurantes' },\n  { rubro: 'parrilla', q: 'parrillas' },\n  { rubro: 'cafe', q: 'cafeterías de especialidad' },\n  { rubro: 'salon', q: 'salones de eventos' },\n  { rubro: 'inmobiliaria', q: 'inmobiliarias' },\n  { rubro: 'marca', q: 'tienda de productos artesanales' },\n];\nconst ciudades = ['Pocitos, Montevideo', 'Carrasco, Montevideo', 'Ciudad Vieja, Montevideo',\n                  'Punta del Este', 'Ciudad de la Costa, Canelones'];\nconst out = [];\nfor (const r of rubros) for (const c of ciudades)\n  out.push({ json: { rubro: r.rubro, ciudad: c, query: r.q + ' en ' + c + ', Uruguay' } });\nreturn out;\n"
+        "operation": "read",
+        "documentId": {
+          "__rl": true,
+          "value": "={{ $('Config').first().json.SHEET_ID }}",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Busquedas",
+          "mode": "name"
+        },
+        "options": {}
       },
-      "id": "df4f152f-8350-5253-94c4-68a2082e35e1",
-      "name": "Búsquedas",
+      "id": "090da595-e8db-561b-ba94-5acbb5b3747c",
+      "name": "Leer Búsquedas",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        480,
+        0
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "REEMPLAZAR",
+          "name": "Google Sheets"
+        }
+      },
+      "executeOnce": true,
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "jsCode": "const hoy = () => new Date().toISOString().slice(0, 10);\nconst diasDesde = f => f ? Math.floor((Date.now() - new Date(f + 'T12:00:00').getTime()) / 86400000) : -1;\n\n// La hoja \"Busquedas\" es el plan de Radar: país, idioma, rubro, búsqueda en\n// Google Maps y servicio que se le ofrece. Cada día toma las que hace más\n// tiempo que no corren (las nunca usadas primero). Cada búsqueda trae hasta 20\n// negocios: 12 por día alcanzan para sostener 50 mails diarios.\nconst n = Number($('Config').first().json.BUSQUEDAS_POR_DIA) || 12;\nreturn $input.all().map(r => r.json)\n  .filter(b => b.id && String(b.activo || '').trim().toLowerCase() === 'si' && b.query)\n  .sort((x, y) => String(x.ultima_vez || '').localeCompare(String(y.ultima_vez || '')))\n  .slice(0, n)\n  .map(b => ({ json: b }));\n"
+      },
+      "id": "efdc189c-282d-58d8-866d-9740e35d6c02",
+      "name": "Elegir búsquedas",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        480,
+        720,
         0
       ]
     },
@@ -94,17 +129,17 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{ JSON.stringify({ textQuery: $json.query, languageCode: 'es', regionCode: 'UY', pageSize: 20 }) }}",
+        "jsonBody": "={{ JSON.stringify({ textQuery: $json.query, languageCode: $json.idioma || 'es', regionCode: $json.region || 'UY', pageSize: 20 }) }}",
         "options": {
           "timeout": 30000
         }
       },
-      "id": "1a63753b-6715-591c-a08c-6a5a220908fa",
+      "id": "28fc0e00-be9e-5840-994b-1e5b9ae9c25f",
       "name": "Google Places",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        720,
+        960,
         0
       ],
       "credentials": {
@@ -117,14 +152,14 @@
     },
     {
       "parameters": {
-        "jsCode": "// Una fila por negocio. Places devuelve una respuesta por búsqueda, en orden.\nconst busq = $('Búsquedas').all();\nconst out = [];\n$input.all().forEach((it, i) => {\n  const b = busq[i] ? busq[i].json : {};\n  for (const p of (it.json.places || [])) {\n    out.push({ json: {\n      id: p.id,\n      nombre: (p.displayName && p.displayName.text) || '',\n      web: p.websiteUri || '',\n      telefono: p.nationalPhoneNumber || '',\n      direccion: p.formattedAddress || '',\n      rating: p.rating || '',\n      reseñas: p.userRatingCount || 0,\n      maps: p.googleMapsUri || '',\n      rubro: b.rubro, ciudad: b.ciudad,\n    } });\n  }\n});\nreturn out;\n"
+        "jsCode": "// Una fila por negocio, con el país, idioma, mercado y zona horaria de su búsqueda.\nconst busq = $('Elegir búsquedas').all();\nconst out = [];\n$input.all().forEach((it, i) => {\n  const b = busq[i] ? busq[i].json : {};\n  for (const p of (it.json.places || [])) {\n    out.push({ json: {\n      id: p.id,\n      nombre: (p.displayName && p.displayName.text) || '',\n      web: p.websiteUri || '',\n      telefono: p.nationalPhoneNumber || '',\n      direccion: p.formattedAddress || '',\n      rating: p.rating || '',\n      reseñas: p.userRatingCount || 0,\n      maps: p.googleMapsUri || '',\n      rubro: b.rubro, ciudad: b.query, pais: b.pais || 'Uruguay', idioma: b.idioma || 'es',\n      mercado: b.mercado || 'uy', zona: b.zona || 'America/Montevideo', servicio_objetivo: b.servicio_objetivo || '',\n    } });\n  }\n});\nreturn out;\n"
       },
-      "id": "195b715d-abc0-55cb-8873-218eff618229",
+      "id": "6e8aa00b-af94-5c03-a98e-06ca5b5607c7",
       "name": "Aplanar",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        960,
+        1200,
         0
       ]
     },
@@ -143,12 +178,12 @@
         },
         "options": {}
       },
-      "id": "ba1f5f5a-9eeb-5671-9e25-02f423f518f9",
+      "id": "93b6e02d-27a3-52a3-b3a4-dee02b6b1363",
       "name": "Leer Leads",
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.5,
       "position": [
-        1200,
+        1440,
         0
       ],
       "credentials": {
@@ -162,14 +197,14 @@
     },
     {
       "parameters": {
-        "jsCode": "const hoy = () => new Date().toISOString().slice(0, 10);\nconst diasDesde = f => f ? Math.floor((Date.now() - new Date(f + 'T12:00:00').getTime()) / 86400000) : -1;\n\n// Saca los que ya están en la planilla (por id de Google o por web).\nconst ya = new Set(), webs = new Set();\nfor (const r of $('Leer Leads').all()) {\n  if (r.json.id) ya.add(String(r.json.id));\n  if (r.json.web) webs.add(String(r.json.web).replace(/^https?:\\/\\/(www\\.)?/, '').replace(/\\/$/, ''));\n}\nconst vistos = new Set(), out = [];\nfor (const it of $('Aplanar').all()) {\n  const p = it.json;\n  const w = p.web.replace(/^https?:\\/\\/(www\\.)?/, '').replace(/\\/$/, '');\n  if (!p.id || ya.has(p.id) || vistos.has(p.id) || (w && webs.has(w))) continue;\n  vistos.add(p.id);\n  out.push({ json: {\n    id: p.id, fecha: hoy(), rubro: p.rubro, nombre: p.nombre, web: p.web,\n    instagram: '', email: '', telefono: p.telefono, ciudad: p.ciudad,\n    fuente: 'google_places', score: '', servicio: '', problemas: '',\n    estado: p.web ? 'nuevo' : 'sin_web', asunto: '', borrador: '', fecha_envio: '',\n    seguimientos: 0, respuesta: '',\n    notas: [p.direccion, p.rating ? ('rating ' + p.rating + ' (' + p['reseñas'] + ' reseñas)') : '', p.maps].filter(Boolean).join(' · '),\n    draft_id: '', thread_id: '', mensaje_id: '',\n  } });\n}\nreturn out;\n"
+        "jsCode": "const hoy = () => new Date().toISOString().slice(0, 10);\nconst diasDesde = f => f ? Math.floor((Date.now() - new Date(f + 'T12:00:00').getTime()) / 86400000) : -1;\n\n// Saca los que ya están en la planilla (por id de Google o por web).\nconst ya = new Set(), webs = new Set();\nfor (const r of $('Leer Leads').all()) {\n  if (r.json.id) ya.add(String(r.json.id));\n  if (r.json.web) webs.add(String(r.json.web).replace(/^https?:\\/\\/(www\\.)?/, '').replace(/\\/$/, ''));\n}\nconst vistos = new Set(), out = [];\nfor (const it of $('Aplanar').all()) {\n  const p = it.json;\n  const w = p.web.replace(/^https?:\\/\\/(www\\.)?/, '').replace(/\\/$/, '');\n  if (!p.id || ya.has(p.id) || vistos.has(p.id) || (w && webs.has(w))) continue;\n  vistos.add(p.id);\n  out.push({ json: {\n    id: p.id, fecha: hoy(), rubro: p.rubro, nombre: p.nombre, web: p.web,\n    instagram: '', email: '', telefono: p.telefono, ciudad: p.ciudad,\n    fuente: 'google_places', score: '', servicio: p.servicio_objetivo, problemas: '',\n    estado: p.web ? 'nuevo' : 'sin_web', asunto: '', borrador: '', fecha_envio: '',\n    seguimientos: 0, respuesta: '',\n    notas: [p.direccion, p.rating ? ('rating ' + p.rating + ' (' + p['reseñas'] + ' reseñas)') : '', p.maps].filter(Boolean).join(' · '),\n    draft_id: '', thread_id: '', mensaje_id: '',\n    pais: p.pais, idioma: p.idioma, mercado: p.mercado, zona: p.zona, oferta_id: '',\n  } });\n}\nreturn out;\n"
       },
-      "id": "cdcd972b-c6f6-5e08-9bfc-bf2e2075d6a1",
+      "id": "82b701f1-fdb1-50ec-a2dd-b5869edf5c13",
       "name": "Solo nuevos",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1440,
+        1680,
         0
       ]
     },
@@ -194,13 +229,64 @@
         },
         "options": {}
       },
-      "id": "631dacdf-8bb6-5e5c-994f-236c37b0d650",
+      "id": "d31ca56c-02ec-5c5d-999f-805d08de4d53",
       "name": "Agregar a Leads",
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.5,
       "position": [
-        1680,
+        1920,
         0
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "REEMPLAZAR",
+          "name": "Google Sheets"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const hoy = () => new Date().toISOString().slice(0, 10);\nconst diasDesde = f => f ? Math.floor((Date.now() - new Date(f + 'T12:00:00').getTime()) / 86400000) : -1;\n\nreturn $('Elegir búsquedas').all().map(r => ({ json: { id: r.json.id, ultima_vez: hoy() } }));\n"
+      },
+      "id": "d814a8a8-c743-5b6d-ba44-4d31242ff95a",
+      "name": "Marcar búsquedas",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1200,
+        240
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "={{ $('Config').first().json.SHEET_ID }}",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Busquedas",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": []
+        },
+        "options": {}
+      },
+      "id": "5bee62a0-1905-5bdc-a9a5-673668726449",
+      "name": "Guardar búsquedas",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        1440,
+        240
       ],
       "credentials": {
         "googleSheetsOAuth2Api": {
@@ -237,18 +323,34 @@
       "main": [
         [
           {
-            "node": "Búsquedas",
+            "node": "Leer Búsquedas",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Búsquedas": {
+    "Leer Búsquedas": {
+      "main": [
+        [
+          {
+            "node": "Elegir búsquedas",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Elegir búsquedas": {
       "main": [
         [
           {
             "node": "Google Places",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Marcar búsquedas",
             "type": "main",
             "index": 0
           }
@@ -293,6 +395,17 @@
         [
           {
             "node": "Agregar a Leads",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Marcar búsquedas": {
+      "main": [
+        [
+          {
+            "node": "Guardar búsquedas",
             "type": "main",
             "index": 0
           }

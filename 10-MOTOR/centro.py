@@ -218,6 +218,8 @@ def agentes():
         "luz": cuerpo(".claude/agents/luz-community-manager.md") + "\n\n" + base,
         "lupa": cuerpo(".claude/agents/lupa-critica-diseno.md") + "\n\n" + base,
         "trato": cuerpo(".claude/agents/trato-ventas.md") + "\n\n" + base + "\n\n" + leer("09-ESTUDIO/CM_VENTAS.md"),
+        "radar": cuerpo(".claude/agents/radar-prospeccion.md") + "\n\n" + base +
+                 "\n\n=== Cómo escribe los mails (el mismo texto que usa n8n) ===\n" + leer("11-AUTOMATIZACION/prompts/redactor.md"),
     }
 
 

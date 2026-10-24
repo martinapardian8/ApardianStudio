@@ -165,13 +165,13 @@ def leer_hoja(fl, nombre, cfg, pestana, pos=None):
              "executeOnce": True, "alwaysOutputData": True})
 
 
-def escribir_hoja(fl, nombre, cfg, pestana, operacion="update", pos=None):
+def escribir_hoja(fl, nombre, cfg, pestana, operacion="update", pos=None, clave="id"):
     p = {
         "operation": operacion,
         "documentId": hoja(cfg),
         "sheetName": {"__rl": True, "value": pestana, "mode": "name"},
         "columns": {"mappingMode": "autoMapInputData", "value": {},
-                    "matchingColumns": ["id"] if operacion == "update" else [],
+                    "matchingColumns": [clave] if operacion in ("update", "appendOrUpdate") else [],
                     "schema": []},
         "options": {},
     }
@@ -261,26 +261,22 @@ def disparadores(fl, regla):
 
 # ================================================================== 01
 def f01():
-    fl = Flujo("APARDIAN 01 · Prospector")
-    a, b = disparadores(fl, {"field": "weeks", "triggerAtDay": [1], "triggerAtHour": 8})
-    cfg = config(fl, "Config", dict(CONFIG_BASE))
-    busq = codigo(fl, "Búsquedas", r"""
-// Rubro x ciudad. Agregá o sacá filas: cada una es una búsqueda en Google Maps.
-// Ojo: cada búsqueda trae hasta 20 negocios y cuesta (ver README, costos).
-const rubros = [
-  { rubro: 'restaurante', q: 'restaurantes' },
-  { rubro: 'parrilla', q: 'parrillas' },
-  { rubro: 'cafe', q: 'cafeterías de especialidad' },
-  { rubro: 'salon', q: 'salones de eventos' },
-  { rubro: 'inmobiliaria', q: 'inmobiliarias' },
-  { rubro: 'marca', q: 'tienda de productos artesanales' },
-];
-const ciudades = ['Pocitos, Montevideo', 'Carrasco, Montevideo', 'Ciudad Vieja, Montevideo',
-                  'Punta del Este', 'Ciudad de la Costa, Canelones'];
-const out = [];
-for (const r of rubros) for (const c of ciudades)
-  out.push({ json: { rubro: r.rubro, ciudad: c, query: r.q + ' en ' + c + ', Uruguay' } });
-return out;
+    fl = Flujo("APARDIAN 01 · Prospector (Radar)")
+    a, b = disparadores(fl, {"field": "days", "triggerAtHour": 7})
+    v = dict(CONFIG_BASE); v["BUSQUEDAS_POR_DIA"] = (12, "number")
+    cfg = config(fl, "Config", v)
+    busq = leer_hoja(fl, "Leer Búsquedas", cfg, "Busquedas")
+    elegir = codigo(fl, "Elegir búsquedas", JS_FECHA + r"""
+// La hoja "Busquedas" es el plan de Radar: país, idioma, rubro, búsqueda en
+// Google Maps y servicio que se le ofrece. Cada día toma las que hace más
+// tiempo que no corren (las nunca usadas primero). Cada búsqueda trae hasta 20
+// negocios: 12 por día alcanzan para sostener 50 mails diarios.
+const n = Number($('Config').first().json.BUSQUEDAS_POR_DIA) || 12;
+return $input.all().map(r => r.json)
+  .filter(b => b.id && String(b.activo || '').trim().toLowerCase() === 'si' && b.query)
+  .sort((x, y) => String(x.ultima_vez || '').localeCompare(String(y.ultima_vez || '')))
+  .slice(0, n)
+  .map(b => ({ json: b }));
 """)
     places = fl.nodo("Google Places", "n8n-nodes-base.httpRequest", 4.2, {
         "method": "POST",
@@ -295,13 +291,13 @@ return out;
         }]},
         "sendBody": True,
         "specifyBody": "json",
-        "jsonBody": "={{ JSON.stringify({ textQuery: $json.query, languageCode: 'es', regionCode: 'UY', pageSize: 20 }) }}",
+        "jsonBody": "={{ JSON.stringify({ textQuery: $json.query, languageCode: $json.idioma || 'es', regionCode: $json.region || 'UY', pageSize: 20 }) }}",
         "options": {"timeout": 30000},
     }, None, {"credentials": cred("httpHeaderAuth", "Google Places API"),
               "onError": "continueRegularOutput"})
     plano = codigo(fl, "Aplanar", r"""
-// Una fila por negocio. Places devuelve una respuesta por búsqueda, en orden.
-const busq = $('Búsquedas').all();
+// Una fila por negocio, con el país, idioma, mercado y zona horaria de su búsqueda.
+const busq = $('Elegir búsquedas').all();
 const out = [];
 $input.all().forEach((it, i) => {
   const b = busq[i] ? busq[i].json : {};
@@ -315,7 +311,8 @@ $input.all().forEach((it, i) => {
       rating: p.rating || '',
       reseñas: p.userRatingCount || 0,
       maps: p.googleMapsUri || '',
-      rubro: b.rubro, ciudad: b.ciudad,
+      rubro: b.rubro, ciudad: b.query, pais: b.pais || 'Uruguay', idioma: b.idioma || 'es',
+      mercado: b.mercado || 'uy', zona: b.zona || 'America/Montevideo', servicio_objetivo: b.servicio_objetivo || '',
     } });
   }
 });
@@ -338,18 +335,24 @@ for (const it of $('Aplanar').all()) {
   out.push({ json: {
     id: p.id, fecha: hoy(), rubro: p.rubro, nombre: p.nombre, web: p.web,
     instagram: '', email: '', telefono: p.telefono, ciudad: p.ciudad,
-    fuente: 'google_places', score: '', servicio: '', problemas: '',
+    fuente: 'google_places', score: '', servicio: p.servicio_objetivo, problemas: '',
     estado: p.web ? 'nuevo' : 'sin_web', asunto: '', borrador: '', fecha_envio: '',
     seguimientos: 0, respuesta: '',
     notas: [p.direccion, p.rating ? ('rating ' + p.rating + ' (' + p['reseñas'] + ' reseñas)') : '', p.maps].filter(Boolean).join(' · '),
     draft_id: '', thread_id: '', mensaje_id: '',
+    pais: p.pais, idioma: p.idioma, mercado: p.mercado, zona: p.zona, oferta_id: '',
   } });
 }
 return out;
 """)
     guardar = escribir_hoja(fl, "Agregar a Leads", cfg, "Leads", "append")
+    marca = codigo(fl, "Marcar búsquedas", JS_FECHA + r"""
+return $('Elegir búsquedas').all().map(r => ({ json: { id: r.json.id, ultima_vez: hoy() } }));
+""", pos=(fl.x - 960, 240))
+    g_marca = escribir_hoja(fl, "Guardar búsquedas", cfg, "Busquedas", pos=(fl.x - 720, 240))
     fl.unir(a, cfg); fl.unir(b, cfg)
-    fl.cadena(cfg, busq, places, plano, leads, dedupe, guardar)
+    fl.cadena(cfg, busq, elegir, places, plano, leads, dedupe, guardar)
+    fl.cadena(elegir, marca, g_marca)
     return fl
 
 
@@ -357,11 +360,13 @@ return out;
 def f02():
     fl = Flujo("APARDIAN 02 · Auditor")
     a, b = disparadores(fl, {"field": "days", "triggerAtHour": 9})
-    v = dict(CONFIG_BASE); v["LIMITE_DIARIO"] = (15, "number")
+    # para sostener 50 mails por día hacen falta ~90 auditorías: la mitad no
+    # publica mail o no tiene una oportunidad clara
+    v = dict(CONFIG_BASE); v["LIMITE_DIARIO"] = (90, "number")
     cfg = config(fl, "Config", v)
     leads = leer_hoja(fl, "Leer Leads", cfg, "Leads")
     elegir = codigo(fl, "Elegir nuevos", r"""
-const lim = $('Config').first().json.LIMITE_DIARIO || 15;
+const lim = $('Config').first().json.LIMITE_DIARIO || 90;
 return $input.all()
   .filter(r => r.json.estado === 'nuevo' && r.json.web)
   .slice(0, lim)
@@ -392,7 +397,13 @@ const texto = html
   .replace(/\s+/g, ' ').trim();
 const imgs = [...html.matchAll(/<img[^>]*>/gi)].map(x => x[0]);
 const altVacios = imgs.filter(t => !/alt\s*=\s*["'][^"']+["']/i.test(t)).length;
-const mails = [...new Set([...html.matchAll(/mailto:([A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,})/gi)].map(x => x[1].toLowerCase()))];
+// Mails publicados: los mailto y los que aparecen escritos en la página
+// (sin los de imágenes, servicios del constructor ni ejemplos).
+const ruido = /\.(png|jpe?g|gif|webp|svg)$|sentry|wixpress|example\.|@2x|godaddy|domain\.com|tudominio|yourdomain/i;
+const mails = [...new Set([
+  ...[...html.matchAll(/mailto:([A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,})/gi)].map(x => x[1]),
+  ...[...texto.matchAll(/\b([A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,})\b/gi)].map(x => x[1]),
+].map(x => x.toLowerCase()).filter(x => !ruido.test(x)))];
 const ig = m(/href=["'](https?:\/\/(?:www\.)?instagram\.com\/[^"'?#]+)/i);
 const s = {
   url: lead.web,
@@ -413,7 +424,9 @@ const s = {
     : /squarespace/i.test(html) ? 'Squarespace' : /shopify/i.test(html) ? 'Shopify' : '',
   mails_publicados: mails,
 };
-const usuario = 'Negocio: ' + lead.nombre + '\nRubro: ' + lead.rubro + '\nCiudad: ' + lead.ciudad +
+const usuario = 'MERCADO: ' + (lead.mercado || 'uy') + ' (país: ' + (lead.pais || 'Uruguay') + ')' +
+  '\nNegocio: ' + lead.nombre + '\nRubro: ' + lead.rubro + '\nBúsqueda: ' + lead.ciudad +
+  (lead.servicio ? '\nServicio que buscábamos ofrecerle: ' + lead.servicio : '') +
   '\nFicha de Google: ' + (lead.notas || '') +
   '\n\nSeñales medidas en la web:\n' + JSON.stringify(s, null, 2) +
   '\n\nTexto visible de la portada (extracto):\n' + texto.slice(0, 6000);
@@ -439,6 +452,7 @@ const problemas = (a.problemas || []).map(p => '• ' + p.problema + ' — ' + p
 return { json: {
   id: lead.id, instagram: s.link_instagram || '', email, score,
   servicio: a.servicio_principal || '', problemas, estado,
+  idioma: a.idioma || lead.idioma || 'es', mercado: lead.mercado || 'uy',
   notas: JSON.stringify({ auditoria: a, ficha: lead.notas || '' }),
 } };
 """, por_item=True)
@@ -448,47 +462,105 @@ return { json: {
     return fl
 
 
+# ================================================================== Radar
+JS_RADAR = r"""
+// Hora y día en la zona horaria del destinatario (Intl viene con Node).
+const horaEn = z => { try { return Number(new Intl.DateTimeFormat('en-US', { timeZone: z, hour: 'numeric', hourCycle: 'h23' }).format(new Date())); } catch (e) { return 12; } };
+const diaEn = z => { try { return new Intl.DateTimeFormat('en-US', { timeZone: z, weekday: 'short' }).format(new Date()); } catch (e) { return 'Mon'; } };
+const horarioDeOficina = z => { const h = horaEn(z), d = diaEn(z); return d !== 'Sat' && d !== 'Sun' && h >= 9 && h < 17; };
+const hoyUY = () => new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Montevideo' }).format(new Date());
+"""
+
+
 # ================================================================== 03
 def f03():
-    fl = Flujo("APARDIAN 03 · Redactor y envío")
-    a, b = disparadores(fl, {"field": "days", "triggerAtHour": 10})
+    fl = Flujo("APARDIAN 03 · Radar: redactor y envío")
+    # cada hora de 9 a 17 (Montevideo), de lunes a viernes: los mails salen de a
+    # pocos durante el día, nunca en ráfaga
+    a, b = disparadores(fl, {"field": "cronExpression", "expression": "0 9-17 * * 1-5"})
     v = dict(CONFIG_BASE)
     v.update({
         "MI_EMAIL": ("Martin Apardian <martin@TU-DOMINIO-DE-ENVIO>", "string"),
         "SCORE_MINIMO": (60, "number"),
+        # Envío automático (decisión de Martin, 24/10/2026): salen solos, con las
+        # ofertas que aprobó en el Centro. Con false vuelve a pedir aprobación
+        # por Telegram mail por mail (MAX_POR_DIA borradores, a las 10).
+        "AUTO_ENVIO": (True, "boolean"),
         "MAX_POR_DIA": (20, "number"),
-        "AUTO_ENVIO": (False, "boolean"),
-        "SCORE_AUTO": (80, "number"),
+        "SCORE_AUTO": (0, "number"),
+        # Calentamiento del dominio: cupo diario por semana desde FECHA_INICIO
+        # (AAAA-MM-DD, el primer día de envío). Sin fecha, usa el de la semana 1.
+        "FECHA_INICIO": ("PEGAR_FECHA_DE_ARRANQUE", "string"),
+        "CUPOS_POR_SEMANA": ("10,20,35,50", "string"),
+        # Obligatoria para escribir a EE.UU. (ley CAN-SPAM). Sin ella, Radar no les escribe.
+        "DIRECCION_POSTAL": ("", "string"),
         "URL_APROBAR": ("https://TU-INSTANCIA.app.n8n.cloud/webhook/apardian-aprobar", "string"),
         "TOKEN": ("CAMBIAR-POR-UNA-CLAVE-LARGA", "string"),
     })
     cfg = config(fl, "Config", v)
     leads = leer_hoja(fl, "Leer Leads", cfg, "Leads")
     bajas = leer_hoja(fl, "Leer Bajas", cfg, "Bajas")
-    elegir = codigo(fl, "Elegir auditados", r"""
+    ofertas = leer_hoja(fl, "Leer Ofertas", cfg, "Ofertas")
+    entren = leer_hoja(fl, "Leer Entrenamiento", cfg, "Entrenamiento")
+    elegir = codigo(fl, "Elegir auditados", JS_FECHA + JS_RADAR + r"""
 const c = $('Config').first().json;
 const bm = new Set(), bd = new Set();
 for (const r of $('Leer Bajas').all()) {
   if (r.json.email) bm.add(String(r.json.email).toLowerCase());
   if (r.json.dominio) bd.add(String(r.json.dominio).toLowerCase());
 }
-// Corre una vez por día: MAX_POR_DIA es el tope de mails nuevos por día.
-const todos = $('Leer Leads').all().map(r => r.json);
-const cupo = c.MAX_POR_DIA || 20;
+const todos = $('Leer Leads').all().map(r => r.json).filter(l => l.id);
+let cupo, tanda;
+if (c.AUTO_ENVIO) {
+  // Cupo del día según la semana de calentamiento, repartido en las horas que quedan.
+  const cupos = String(c.CUPOS_POR_SEMANA || '10,20,35,50').split(',').map(Number).filter(n => n > 0);
+  const ini = /^\d{4}-\d{2}-\d{2}$/.test(String(c.FECHA_INICIO || '')) ? c.FECHA_INICIO : '';
+  const semana = ini ? Math.max(0, Math.floor(diasDesde(ini) / 7)) : 0;
+  cupo = cupos[Math.min(semana, cupos.length - 1)] || 10;
+  const enviadosHoy = todos.filter(l => String(l.fecha_envio || '') === hoyUY()).length;
+  const restante = Math.max(0, cupo - enviadosHoy);
+  const horas = Math.max(1, 18 - horaEn('America/Montevideo'));
+  tanda = Math.ceil(restante / horas);
+} else {
+  // Modo con aprobación: una vez por día, a las 10, deja borradores.
+  if (horaEn('America/Montevideo') !== 10) return [];
+  cupo = tanda = c.MAX_POR_DIA || 20;
+}
+if (!tanda) return [];
 return todos
   .filter(l => l.estado === 'auditado' && Number(l.score) >= (c.SCORE_MINIMO || 60) && l.email)
   .filter(l => { const e = String(l.email).toLowerCase(); return !bm.has(e) && !bd.has(e.split('@')[1]); })
+  // a EE.UU. solo con dirección postal en la firma (CAN-SPAM)
+  .filter(l => String(l.pais || '') !== 'Estados Unidos' || String(c.DIRECCION_POSTAL || '').trim())
+  // en horario de oficina del destinatario: de lunes a viernes, de 9 a 17
+  .filter(l => horarioDeOficina(l.zona || 'America/Montevideo'))
   .sort((x, y) => Number(y.score) - Number(x.score))
-  .slice(0, cupo)
+  .slice(0, tanda)
   .map(l => ({ json: l }));
 """)
-    prep = codigo(fl, "Prompt redactor", JS_CLAUDE + r"""
+    prep = codigo(fl, "Prompt redactor", JS_CLAUDE + JS_FECHA + r"""
 const SYSTEM = %s;
+const c = $('Config').first().json;
 let audit = {};
 try { audit = JSON.parse($json.notas || '{}').auditoria || {}; } catch (e) {}
-const usuario = 'Negocio: ' + $json.nombre + '\nRubro: ' + $json.rubro + '\nCiudad: ' + $json.ciudad +
+const mercado = $json.mercado || 'uy';
+// Solo las ofertas que Martin aprobó en el Centro, vigentes y de este mercado.
+const ofertas = $('Leer Ofertas').all().map(r => r.json)
+  .filter(o => o.id && String(o.estado || '') === 'activa')
+  .filter(o => !o.vigencia_hasta || String(o.vigencia_hasta) >= hoy())
+  .filter(o => !o.mercado || o.mercado === 'todos' || o.mercado === mercado)
+  .map(o => ({ id: o.id, servicio: o.servicio, nombre: o.nombre, para_quien: o.para_quien, que_incluye: o.que_incluye,
+               plazo: o.plazo, precio_desde: o.precio_desde, moneda: o.moneda, vigencia_hasta: o.vigencia_hasta, angulo: o.angulo }));
+const entrenamiento = $('Leer Entrenamiento').all().map(r => r.json)
+  .filter(e => e.clave && String(e.respuesta || '').trim())
+  .map(e => '- ' + (e.pregunta || e.clave) + '\n  ' + e.respuesta).join('\n');
+const usuario = 'MERCADO: ' + mercado + '\nPaís: ' + ($json.pais || 'Uruguay') + '\nIdioma: ' + ($json.idioma || 'es') +
+  '\nNegocio: ' + $json.nombre + '\nRubro: ' + $json.rubro + '\nBúsqueda: ' + $json.ciudad +
   '\nWeb: ' + $json.web + ($json.instagram ? '\nInstagram: ' + $json.instagram : '') +
-  '\n\nAuditoría:\n' + JSON.stringify(audit, null, 2);
+  (String($json.pais || '') === 'Estados Unidos' ? '\nDIRECCION_POSTAL (va en la firma): ' + c.DIRECCION_POSTAL : '') +
+  '\n\nAuditoría:\n' + JSON.stringify(audit, null, 2) +
+  '\n\nOfertas aprobadas por Martin para este mercado:\n' + (ofertas.length ? JSON.stringify(ofertas, null, 2) : '(ninguna: no menciones ofertas ni precios)') +
+  '\n\nLo que Martin te enseñó:\n' + (entrenamiento || '(todavía nada)');
 return { json: { lead: $json, claude_body: cuerpoClaude(SYSTEM, usuario, 6000, 'medium') } };
 """ % json.dumps(prompt("redactor"), ensure_ascii=False), por_item=True)
     cl = claude(fl, "Claude · redactor")
@@ -502,9 +574,9 @@ if (!r.ok || r.data.omitir) {
 }
 const m = r.data;
 const raw = mime({ de: c.MI_EMAIL, para: lead.email, asunto: m.asunto, cuerpo: m.cuerpo });
-return { json: { omitir: false, lead, asunto: m.asunto, cuerpo: m.cuerpo,
+return { json: { omitir: false, lead, asunto: m.asunto, cuerpo: m.cuerpo, oferta_id: m.oferta_id || '',
   gmail_body: { message: { raw } },
-  auto: !!c.AUTO_ENVIO && Number(lead.score) >= (c.SCORE_AUTO || 80) } };
+  auto: !!c.AUTO_ENVIO && Number(lead.score) >= (Number(c.SCORE_AUTO) || 0) } };
 """, por_item=True)
     hay = si(fl, "¿Hay mail?", "!$json.omitir")
     descarte = codigo(fl, "Fila descartada", "return { json: $json.fila };", por_item=True,
@@ -520,7 +592,7 @@ const draft = $json.id || '';
 const link = acc => c.URL_APROBAR + '?id=' + encodeURIComponent(x.lead.id) + '&k=inicial&a=' + acc + '&t=' + encodeURIComponent(c.TOKEN);
 return { json: {
   fila: { id: x.lead.id, estado: draft ? 'borrador' : 'error_borrador', asunto: x.asunto,
-          borrador: x.cuerpo, draft_id: draft },
+          borrador: x.cuerpo, draft_id: draft, oferta_id: x.oferta_id },
   draft_id: draft, auto: x.auto,
   telegram_text: '<b>Mail listo para ' + esc(x.lead.nombre) + '</b> (' + esc(x.lead.rubro) + ', score ' + esc(x.lead.score) + ')\n' +
     esc(x.lead.web) + '\n\n<b>' + esc(x.asunto) + '</b>\n' + esc(x.cuerpo) +
@@ -537,9 +609,9 @@ return { json: {
     env_auto = gmail_api(fl, "Enviar (auto)", "POST",
                          "https://gmail.googleapis.com/gmail/v1/users/me/drafts/send",
                          "={{ JSON.stringify({ id: $('Datos del borrador').item.json.draft_id }) }}")
-    fila_auto = codigo(fl, "Fila enviada (auto)", JS_FECHA + r"""
+    fila_auto = codigo(fl, "Fila enviada (auto)", JS_FECHA + JS_RADAR + r"""
 const x = $('Datos del borrador').item.json;
-return { json: { id: x.fila.id, estado: $json.id ? 'enviado' : 'error_envio', fecha_envio: hoy(),
+return { json: { id: x.fila.id, estado: $json.id ? 'enviado' : 'error_envio', fecha_envio: hoyUY(),
   thread_id: $json.threadId || '', mensaje_id: $json.id || '', seguimientos: 0 } };
 """, por_item=True)
     g_auto = escribir_hoja(fl, "Guardar envío (auto)", cfg, "Leads")
@@ -547,7 +619,7 @@ return { json: { id: x.fila.id, estado: $json.id ? 'enviado' : 'error_envio', fe
                   texto="$('Datos del borrador').item.json.telegram_text")
 
     fl.unir(a, cfg); fl.unir(b, cfg)
-    fl.cadena(cfg, leads, bajas, elegir, prep, cl, leer, hay)
+    fl.cadena(cfg, leads, bajas, ofertas, entren, elegir, prep, cl, leer, hay)
     fl.unir(hay, borr, 0)
     fl.unir(hay, descarte, 1)
     fl.unir(descarte, g_desc)
@@ -618,25 +690,30 @@ return [{ json: { fila: { id: x.lead.id, estado, draft_id: '' }, telegram_text: 
 
 # ================================================================== 04
 def f04():
-    fl = Flujo("APARDIAN 04 · Seguimiento")
-    a, b = disparadores(fl, {"field": "days", "triggerAtHour": 11})
+    fl = Flujo("APARDIAN 04 · Radar: seguimiento")
+    a, b = disparadores(fl, {"field": "cronExpression", "expression": "30 9-17 * * 1-5"})
     v = dict(CONFIG_BASE)
     v.update({
         "MI_EMAIL": ("Martin Apardian <martin@TU-DOMINIO-DE-ENVIO>", "string"),
+        # igual que en el 03: con true los seguimientos salen solos
+        "AUTO_ENVIO": (True, "boolean"),
+        "DIRECCION_POSTAL": ("", "string"),
         "URL_APROBAR": ("https://TU-INSTANCIA.app.n8n.cloud/webhook/apardian-aprobar", "string"),
         "TOKEN": ("CAMBIAR-POR-UNA-CLAVE-LARGA", "string"),
     })
     cfg = config(fl, "Config", v)
     leads = leer_hoja(fl, "Leer Leads", cfg, "Leads")
     bajas = leer_hoja(fl, "Leer Bajas", cfg, "Bajas")
-    toca = codigo(fl, "¿A quién le toca?", JS_FECHA + r"""
+    toca = codigo(fl, "¿A quién le toca?", JS_FECHA + JS_RADAR + r"""
 // Día 4 sin respuesta: seguimiento 1. Día 9: seguimiento 2. Día 14: se cierra.
-// Quien respondió ya cambió de estado (flujo 05) y no entra acá.
+// Quien respondió ya cambió de estado (flujo 05) y no entra acá. Corre cada
+// hora y solo toma a quien está en horario de oficina en su país.
 const bm = new Set($('Leer Bajas').all().map(r => String(r.json.email || '').toLowerCase()));
 const out = [];
 for (const r of $('Leer Leads').all()) {
   const l = r.json, d = diasDesde(l.fecha_envio);
   if (!l.thread_id || bm.has(String(l.email || '').toLowerCase())) continue;
+  if (!horarioDeOficina(l.zona || 'America/Montevideo')) continue;
   if (l.estado === 'enviado' && d >= 4) out.push({ json: { lead: l, n: 1, cerrar: false } });
   else if (l.estado === 'seguimiento_1' && d >= 9) out.push({ json: { lead: l, n: 2, cerrar: false } });
   else if (l.estado === 'seguimiento_2' && d >= 14) out.push({ json: { lead: l, n: 0, cerrar: true } });
@@ -655,7 +732,10 @@ const x = $('¿Cerrar?').item.json;
 const hdr = (($json.payload || {}).headers || []).find(h => /^message-id$/i.test(h.name));
 let audit = {};
 try { audit = JSON.parse(x.lead.notas || '{}').auditoria || {}; } catch (e) {}
+const c = $('Config').first().json;
 const usuario = 'Seguimiento número: ' + x.n + '\nNegocio: ' + x.lead.nombre +
+  '\nPaís: ' + (x.lead.pais || 'Uruguay') + '\nIdioma: ' + (x.lead.idioma || 'es') +
+  (String(x.lead.pais || '') === 'Estados Unidos' ? '\nDIRECCION_POSTAL: ' + c.DIRECCION_POSTAL : '') +
   '\n\nPrimer mail (asunto): ' + x.lead.asunto + '\nPrimer mail (cuerpo):\n' + x.lead.borrador +
   '\n\nAuditoría:\n' + JSON.stringify(audit, null, 2);
 return { json: { ...x, message_id_hdr: hdr ? hdr.value : '', claude_body: cuerpoClaude(SYSTEM, usuario, 4000, 'medium') } };
@@ -681,6 +761,7 @@ const x = $('Leer seguimiento').item.json;
 const k = x.n === 1 ? 'seg1' : 'seg2';
 const link = acc => c.URL_APROBAR + '?id=' + encodeURIComponent(x.lead.id) + '&k=' + k + '&a=' + acc + '&t=' + encodeURIComponent(c.TOKEN);
 return { json: {
+  draft_id: $json.id || '', auto: !!c.AUTO_ENVIO && !!$json.id, n: x.n, lead_id: x.lead.id,
   fila: { id: x.lead.id, estado: $json.id ? ('borrador_seg' + x.n) : 'error_borrador', draft_id: $json.id || '' },
   telegram_text: '<b>Seguimiento ' + x.n + ' para ' + esc(x.lead.nombre) + '</b>\n\n<b>' + esc(x.asunto) + '</b>\n' +
     esc(x.cuerpo) + '\n\n<a href="' + esc(link('enviar')) + '">✅ Enviar</a>   <a href="' + esc(link('descartar')) + '">✖️ Descartar</a>',
@@ -688,14 +769,26 @@ return { json: {
 """, por_item=True)
     fila = codigo(fl, "Fila seguimiento", "return { json: $json.fila };", por_item=True)
     g = escribir_hoja(fl, "Guardar borrador seguimiento", cfg, "Leads")
-    tg = telegram(fl, "Pedir aprobación", cfg,
+    auto = si(fl, "¿Auto-envío?", "$('Datos del seguimiento').item.json.auto")
+    env = gmail_api(fl, "Enviar seguimiento (auto)", "POST",
+                    "https://gmail.googleapis.com/gmail/v1/users/me/drafts/send",
+                    "={{ JSON.stringify({ id: $('Datos del seguimiento').item.json.draft_id }) }}")
+    fila_env = codigo(fl, "Fila seguimiento enviado", r"""
+const x = $('Datos del seguimiento').item.json;
+return { json: { id: x.lead_id, estado: $json.id ? ('seguimiento_' + x.n) : 'error_envio', seguimientos: x.n, draft_id: '' } };
+""", por_item=True)
+    g_env = escribir_hoja(fl, "Guardar seguimiento enviado", cfg, "Leads")
+    tg = telegram(fl, "Pedir aprobación", cfg, pos=(fl.x - 720, 240),
                   texto="$('Datos del seguimiento').item.json.telegram_text")
     fl.unir(a, cfg); fl.unir(b, cfg)
     fl.cadena(cfg, leads, bajas, toca, cerrar)
     fl.unir(cerrar, fila_c, 0)
     fl.unir(fila_c, g_c)
     fl.unir(cerrar, msgid, 1)
-    fl.cadena(msgid, prep, cl, leer, borr, datos, fila, g, tg)
+    fl.cadena(msgid, prep, cl, leer, borr, datos, fila, g, auto)
+    fl.unir(auto, env, 0)
+    fl.unir(auto, tg, 1)
+    fl.cadena(env, fila_env, g_env)
     return fl
 
 
@@ -1137,12 +1230,117 @@ return [{ json: { seguir: true, fila: f } }];
     return fl
 
 
+# ================================================================== 09
+def f09():
+    """Lo que Martin aprueba en el Centro (ofertas y entrenamiento de Radar)
+    llega acá: el botón de la app abre este link con los datos y la clave."""
+    fl = Flujo("APARDIAN 09 · Radar: conexión con el Centro")
+    wh = webhook_respuesta(fl, "Link del Centro", "apardian-radar", (0, 0))
+    fl.x = 240
+    cfg = config(fl, "Config", {
+        "SHEET_ID": CONFIG_BASE["SHEET_ID"],
+        "TOKEN": ("CAMBIAR-POR-UNA-CLAVE-LARGA-DE-RADAR", "string"),
+    })
+    validar = codigo(fl, "Validar", JS_HTML + JS_RADAR + r"""
+const c = $('Config').first().json;
+const q = $('Link del Centro').first().json.query || {};
+const pagina = (titulo, txt) => '<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">' +
+  '<body style="font-family:system-ui;background:#0B0B0B;color:#F8F7F6;padding:40px"><p style="letter-spacing:.2em;font-size:11px;color:#FF0033">APARDIAN · RADAR</p>' +
+  '<h2 style="margin:8px 0">' + esc(titulo) + '</h2><p style="color:#9A9592">' + esc(txt) + '</p></body>';
+if (!q.t || q.t !== c.TOKEN) return [{ json: { ok: false, html: pagina('Link no válido', 'La clave no coincide con la de n8n. Revisala en el Centro → Radar → Conexión.') } }];
+let d;
+try { d = JSON.parse(Buffer.from(String(q.d || '').replace(/-/g, '+').replace(/_/g, '/'), 'base64').toString('utf8')); }
+catch (e) { return [{ json: { ok: false, html: pagina('No pude leer los datos', 'Volvé a tocar el botón en el Centro.') } }]; }
+const ahora = new Date().toISOString();
+if (q.tipo === 'oferta') {
+  const campos = ['id','estado','mercado','servicio','nombre','para_quien','que_incluye','plazo','precio_desde','moneda','vigencia_hasta','angulo'];
+  const f = {}; for (const k of campos) f[k] = String(d[k] == null ? '' : d[k]).slice(0, 1500);
+  if (!f.id || !['activa','pausada'].includes(f.estado)) return [{ json: { ok: false, html: pagina('Oferta incompleta', 'Falta el id o el estado.') } }];
+  f.actualizado = ahora;
+  return [{ json: { ok: true, tipo: 'oferta', filas: [f], html: pagina(f.estado === 'activa' ? 'Oferta activada ✓' : 'Oferta pausada',
+    f.nombre + (f.estado === 'activa' ? ': Radar ya la puede usar en los mails.' : ': Radar deja de usarla.') + ' Podés cerrar esta pestaña.') } }];
+}
+if (q.tipo === 'entrenamiento') {
+  const filas = (Array.isArray(d) ? d : []).filter(x => x && x.clave)
+    .map(x => ({ clave: String(x.clave).slice(0, 60), pregunta: String(x.pregunta || '').slice(0, 300), respuesta: String(x.respuesta || '').slice(0, 2000), actualizado: ahora }));
+  if (!filas.length) return [{ json: { ok: false, html: pagina('Nada para guardar', 'No llegaron respuestas.') } }];
+  return [{ json: { ok: true, tipo: 'entrenamiento', filas, html: pagina('Radar aprendió ✓', filas.length + ' respuestas guardadas. Desde el próximo mail las usa. Podés cerrar esta pestaña.') } }];
+}
+return [{ json: { ok: false, html: pagina('Pedido desconocido', String(q.tipo || '')) } }];
+""")
+    valido = si(fl, "¿Válido?", "$json.ok")
+    tipo = si(fl, "¿Es oferta?", "$json.tipo === 'oferta'", pos=(fl.x, -120))
+    filas_o = codigo(fl, "Filas oferta", "return $('Validar').first().json.filas.map(f => ({ json: f }));", pos=(fl.x, -240))
+    g_o = escribir_hoja(fl, "Guardar oferta", cfg, "Ofertas", "appendOrUpdate", pos=(fl.x + 240, -240))
+    filas_e = codigo(fl, "Filas entrenamiento", "return $('Validar').first().json.filas.map(f => ({ json: f }));", pos=(fl.x, 0))
+    g_e = escribir_hoja(fl, "Guardar entrenamiento", cfg, "Entrenamiento", "appendOrUpdate", pos=(fl.x + 240, 0), clave="clave")
+    r_o = responder(fl, "Página: oferta", "$('Validar').first().json.html", (fl.x + 480, -240))
+    r_e = responder(fl, "Página: entrenamiento", "$('Validar').first().json.html", (fl.x + 480, 0))
+    r_no = responder(fl, "Página: no válido", "$('Validar').first().json.html", (fl.x - 240, 240))
+    fl.cadena(wh, cfg, validar, valido)
+    fl.unir(valido, tipo, 0)
+    fl.unir(valido, r_no, 1)
+    fl.unir(tipo, filas_o, 0)
+    fl.unir(tipo, filas_e, 1)
+    fl.cadena(filas_o, g_o, r_o)
+    fl.cadena(filas_e, g_e, r_e)
+    return fl
+
+
+# ================================================================== 10
+def f10():
+    fl = Flujo("APARDIAN 10 · Radar: reporte del día")
+    a, b = disparadores(fl, {"field": "cronExpression", "expression": "0 18 * * 1-5"})
+    v = dict(CONFIG_BASE)
+    v.update({"FECHA_INICIO": ("PEGAR_FECHA_DE_ARRANQUE", "string"),
+              "CUPOS_POR_SEMANA": ("10,20,35,50", "string")})
+    cfg = config(fl, "Config", v)
+    leads = leer_hoja(fl, "Leer Leads", cfg, "Leads")
+    resumen = codigo(fl, "Resumen", JS_HTML + JS_FECHA + JS_RADAR + r"""
+// Lo que hizo Radar hoy y si hay algo para mirar. Nada de esto manda mails.
+const c = $('Config').first().json;
+const L = $('Leer Leads').all().map(r => r.json).filter(l => l.id);
+const h = hoyUY();
+const n = f => L.filter(f).length;
+const cupos = String(c.CUPOS_POR_SEMANA || '10,20,35,50').split(',').map(Number).filter(x => x > 0);
+const ini = /^\d{4}-\d{2}-\d{2}$/.test(String(c.FECHA_INICIO || '')) ? c.FECHA_INICIO : '';
+const semana = ini ? Math.max(0, Math.floor((diasDesde(ini) + 1) / 7)) : 0;
+const cupoManana = cupos[Math.min(semana, cupos.length - 1)] || 10;
+const hoyEnv = L.filter(l => String(l.fecha_envio || '') === h);
+const enviados = n(l => l.fecha_envio);
+const interes = L.filter(l => ['interesado', 'pide_precio'].includes(l.estado));
+const rebotes = n(l => l.estado === 'rebote');
+const stock = n(l => l.estado === 'auditado' && l.email);
+const porPais = {};
+for (const l of hoyEnv) porPais[l.pais || 'Uruguay'] = (porPais[l.pais || 'Uruguay'] || 0) + 1;
+const avisos = [];
+if (enviados >= 40 && rebotes / enviados > 0.05) avisos.push('⚠️ Rebotan ' + Math.round(100 * rebotes / enviados) + '% de los mails. Pausá el envío (AUTO_ENVIO en false en el flujo 03) y revisá las direcciones: un dominio con muchos rebotes termina en spam.');
+if (stock < cupoManana * 2) avisos.push('Quedan ' + stock + ' leads listos para escribir. Subí BUSQUEDAS_POR_DIA en el flujo 01 o agregá búsquedas en la hoja Busquedas.');
+if (!ini) avisos.push('Falta FECHA_INICIO en los flujos 03 y 10: Radar está en el cupo de la semana 1.');
+const lineas = [
+  '<b>Radar · ' + esc(h) + '</b>',
+  'Mails nuevos hoy: <b>' + hoyEnv.length + '</b>' + (Object.keys(porPais).length ? ' (' + Object.entries(porPais).map(([p, k]) => esc(p) + ' ' + k).join(', ') + ')' : ''),
+  'En total: ' + enviados + ' enviados · ' + interes.length + ' con interés · ' + n(l => l.estado === 'baja') + ' bajas · ' + rebotes + ' rebotes',
+  'Mañana: cupo de ' + cupoManana + ' · ' + stock + ' leads listos · ' + n(l => l.estado === 'nuevo') + ' por auditar',
+];
+const nuevosInteres = interes.slice(-5).map(l => '• ' + esc(l.nombre) + ' (' + esc(l.pais || 'Uruguay') + ', ' + esc(l.servicio || '') + '): ' + esc(String(l.respuesta || '').slice(0, 120)));
+if (nuevosInteres.length) lineas.push('', '<b>Para contestar vos</b>', ...nuevosInteres);
+if (avisos.length) lineas.push('', ...avisos.map(esc));
+return [{ json: { telegram_text: lineas.join('\n') } }];
+""")
+    tg = telegram(fl, "Mandar reporte", cfg)
+    fl.unir(a, cfg); fl.unir(b, cfg)
+    fl.cadena(cfg, leads, resumen, tg)
+    return fl
+
+
 if __name__ == "__main__":
     os.makedirs(DEST, exist_ok=True)
     for f, archivo in ((f01, "01_prospector.json"), (f02, "02_auditor.json"),
                        (f03, "03_redactor_envio.json"), (f04, "04_seguimiento.json"),
                        (f05, "05_respuestas.json"), (f06, "06_bienvenida_whatsapp.json"),
-                       (f07, "07_aprobacion_instagram.json"), (f08, "08_publicador_instagram.json")):
+                       (f07, "07_aprobacion_instagram.json"), (f08, "08_publicador_instagram.json"),
+                       (f09, "09_radar_conexion_centro.json"), (f10, "10_radar_reporte.json")):
         fl = f()
         nombres = {n["name"] for n in fl.nodos}
         for a, salidas in fl.con.items():

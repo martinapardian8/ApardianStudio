@@ -89,15 +89,19 @@ En palabras:
 Los textos que manejan a cada agente están en `prompts/` y se editan sin tocar
 n8n. Ejemplos escritos a mano por rubro en `prompts/plantillas_mail.md`.
 
-### La regla de la casa
+### La regla de la casa, y su excepción
 
 > Antes de mandar cualquier mensaje a un cliente real, se lo muestra a Martin.
 
-Por eso el redactor **nunca envía**: crea un borrador. Las primeras 4 semanas,
-cada mail se revisa. Cuando haya 50 mails revisados y Martin no esté
-corrigiendo casi nada, se puede activar el envío automático **solo** para leads
-con puntaje ≥ 80 (en el nodo `Config` del flujo 03, cambiar `AUTO_ENVIO` a
-`true`; el umbral es `SCORE_AUTO`). El resto sigue pasando por aprobación.
+Excepción decidida por Martin el 24/10/2026: los mails en frío de **Radar**
+salen solos (`AUTO_ENVIO` en `true` en los flujos 03 y 04), hasta 50 nuevos
+por día con calentamiento de 10 → 20 → 35 → 50, y solo con las ofertas y el
+entrenamiento que Martin aprueba en el Centro (pestaña Radar, flujo 09). Las
+respuestas de los clientes las contesta Martin. Todo el detalle, incluidos los
+mercados de afuera y la parte legal por país, en `RADAR_PASO_A_PASO.md`.
+
+Con `AUTO_ENVIO` en `false` vuelve el modo anterior: cada mail queda como
+borrador y se aprueba por Telegram.
 
 **Cómo se aprueba:** el mensaje de Telegram trae dos links, *Enviar* y
 *Descartar*. Si querés cambiar algo, editás el borrador en Gmail (carpeta

@@ -1,6 +1,7 @@
 # Estructura del CRM (Google Sheets)
 
-Una planilla con tres hojas (`Leads`, `Bajas` y `Calendario`). Los flujos de n8n leen y escriben acá; Martin
+Una planilla con estas hojas: `Leads`, `Bajas`, `Calendario` y, para Radar,
+`Busquedas`, `Ofertas` y `Entrenamiento`. Los flujos de n8n leen y escriben acá; Martin
 también puede editar a mano (por ejemplo, poner `descartado` a un lead).
 
 ## Hoja `Leads`
@@ -30,6 +31,11 @@ también puede editar a mano (por ejemplo, poner `descartado` a un lead).
 | `draft_id` | ID del borrador pendiente en Gmail | 03 / 04 |
 | `thread_id` | Hilo de Gmail del primer mail (para seguimientos y respuestas) | 03 |
 | `mensaje_id` | ID del primer mail enviado | 03 |
+| `pais` | País del negocio (de su búsqueda) | 01 |
+| `idioma` | `es` o `en` (el auditor puede corregirlo) | 01 / 02 |
+| `mercado` | `uy` (se ofrece todo, presencial incluido) u `online` (solo lo que se hace a distancia) | 01 |
+| `zona` | Zona horaria del negocio: el mail sale en su horario de oficina | 01 |
+| `oferta_id` | Oferta aprobada que usó el mail, si usó alguna | 03 |
 
 El auditor reemplaza `notas` por un JSON con la auditoría completa y la ficha
 de Google: lo usan el redactor y el seguimiento 1. Si Martin quiere anotar algo,
@@ -95,3 +101,36 @@ Detalle completo en `INSTAGRAM_APROBACION.md`.
 **Regla:** el publicador solo toca filas en `aprobado`. Si cambiás el pie o la
 fecha de una fila ya aprobada, no hace falta volver a aprobar; si querés que
 no salga, ponele `rechazado` a mano.
+
+
+## Hoja `Busquedas` (el plan de Radar)
+
+Se importa de `radar_busquedas.csv`. Cada fila es una búsqueda en Google Maps;
+el flujo 01 corre 12 por día, empezando por las que hace más tiempo que no corren.
+
+| Columna | Qué guarda |
+|---|---|
+| `id` | b001, b002… |
+| `activo` | `si` o `no` (España arranca en `no`: ver la parte legal en `RADAR_PASO_A_PASO.md`) |
+| `mercado` | `uy` u `online` |
+| `pais` / `region` | País y su código de dos letras (UY, AR, MX, ES, US…) |
+| `idioma` | `es` o `en` |
+| `zona` | Zona horaria (America/Montevideo, Europe/Madrid…) |
+| `rubro` | fotografo, restaurante, marca, hotel… |
+| `query` | Lo que se busca en Google Maps |
+| `servicio_objetivo` | Lo que se le quiere ofrecer a ese rubro |
+| `ultima_vez` | Cuándo corrió por última vez (la llena el 01) |
+
+## Hoja `Ofertas`
+
+La llena el flujo 09 cuando Martin aprueba o pausa una oferta en el Centro.
+No se edita a mano. Columnas: `id`, `estado` (`activa` o `pausada`),
+`mercado` (`uy`, `online` o `todos`), `servicio`, `nombre`, `para_quien`,
+`que_incluye`, `plazo`, `precio_desde`, `moneda`, `vigencia_hasta`, `angulo`,
+`actualizado`. El redactor solo usa las `activa` vigentes de su mercado.
+
+## Hoja `Entrenamiento`
+
+Las respuestas de Martin a las preguntas de Radar en el Centro (flujo 09).
+Columnas: `clave`, `pregunta`, `respuesta`, `actualizado`. El redactor las lee
+antes de cada mail.

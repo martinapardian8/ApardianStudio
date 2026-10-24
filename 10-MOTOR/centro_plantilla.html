@@ -90,7 +90,7 @@ pre.pie{white-space:pre-wrap;font:14px/1.6 var(--body);background:var(--panel);b
 .sale img.h{width:118px;aspect-ratio:9/16}
 .sale .txt{display:grid;gap:8px;min-width:0}
 .sale .tit{font-family:var(--display);font-size:clamp(22px,2.4vw,30px);text-transform:uppercase;line-height:1}
-.equipo{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--line)}
+.equipo{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));border-top:1px solid var(--line)}
 .paso{display:grid;gap:8px;padding:22px 20px 22px 0;border-bottom:1px solid var(--line);text-decoration:none;min-width:0}
 .paso+.paso{padding-left:20px;border-left:1px solid var(--line)}
 .paso .n{font-family:var(--display);color:var(--red);font-size:15px}
@@ -144,7 +144,7 @@ a.paso:hover .nom{color:var(--red)}
 .orden-mini{display:grid;gap:8px;background:var(--panel);padding:14px;border:1px solid var(--line)}
 
 /* ---------- agentes ---------- */
-.agentes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.agentes{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
 .ag{background:var(--bg);border:0;color:var(--fg);text-align:left;padding:22px;display:grid;gap:10px;align-content:start}
 .ag .nom{font-family:var(--display);font-size:clamp(44px,5.4vw,76px);line-height:.88;text-transform:uppercase}
 .ag .rol{font-size:13px;color:var(--muted)}
@@ -196,13 +196,39 @@ form.alta .ancho{grid-column:1/-1}
 .grupo-est h3{display:flex;gap:10px;align-items:baseline;border-bottom:1px solid var(--line-2);padding-bottom:8px}
 .grupo-est h3 small{font:500 12px var(--body);color:var(--muted)}
 
+/* ---------- radar ---------- */
+.rampa{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.rampa div{background:var(--bg);padding:16px;display:grid;gap:8px;align-content:end;min-height:150px}
+.rampa i{display:block;background:var(--red);opacity:.85}
+.rampa b{font-family:var(--display);font-weight:400;font-size:40px;line-height:1}
+.rampa span{font-size:12px;color:var(--muted)}
+.rampa div.ya i{opacity:.35}
+.pasos{display:grid;border-top:1px solid var(--line)}
+.paso-r{display:grid;grid-template-columns:26px minmax(0,1fr);gap:14px;padding:14px 0;border-bottom:1px solid var(--line)}
+.paso-r input{width:18px;height:18px;accent-color:var(--red);margin:3px 0 0;padding:0}
+.paso-r b{font-weight:600}
+.paso-r p{margin:4px 0 0;color:var(--muted);font-size:14px;max-width:80ch}
+.paso-r.ok b{text-decoration:line-through;color:var(--muted)}
+.ofertas{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,380px),1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.ofertas:has(> .vacio){display:block;background:none;border:0}
+.oferta{background:var(--bg);padding:18px;display:grid;gap:10px;align-content:start;min-width:0}
+.oferta .dos{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.oferta textarea,.oferta input,.oferta select{font-size:14px;padding:9px 10px}
+.preg{display:grid;gap:8px;padding:16px 0;border-bottom:1px solid var(--line)}
+.preg label{font-weight:500}
+.preg small{color:var(--muted);font-size:12px}
+a.b{display:inline-block;text-decoration:none}
+a.b[aria-disabled="true"]{opacity:.4;pointer-events:none}
+
 /* ---------- guiones ---------- */
 .guion{display:grid;gap:8px;padding:18px 0;border-bottom:1px solid var(--line)}
 .guion p{margin:0;max-width:70ch}
 
 @media (max-width:900px){
   .equipo{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .paso:nth-child(3){padding-left:0;border-left:0}
+  .paso:nth-child(odd){padding-left:0;border-left:0}
+  .paso:nth-child(even){padding-left:20px;border-left:1px solid var(--line)}
+  .rampa{grid-template-columns:repeat(2,minmax(0,1fr))}
   .mesa,.detalle{grid-template-columns:minmax(0,1fr)}
   .detalle img{max-width:320px}
   .agentes{grid-template-columns:minmax(0,1fr)}
@@ -230,6 +256,7 @@ form.alta .ancho{grid-column:1/-1}
     <a href="#calendario" data-tab="calendario"><span class="n">05</span>Calendario</a>
     <a href="#carruseles" data-tab="carruseles"><span class="n">06</span>Carruseles</a>
     <a href="#guiones" data-tab="guiones"><span class="n">07</span>Guiones</a>
+    <a href="#radar" data-tab="radar"><span class="n">08</span>Radar</a>
   </nav>
   <a class="cta" href="#agentes">Hablar con un agente</a>
 </div></header>
@@ -248,7 +275,7 @@ form.alta .ancho{grid-column:1/-1}
     <div class="fila" id="hoy-bajar" style="margin-top:14px"></div>
 
     <div class="bloque">
-      <div class="bloque-cab"><h2>El equipo</h2><span class="mono muted">Luz arma · Lupa revisa · vos aprobás · Trato vende</span></div>
+      <div class="bloque-cab"><h2>El equipo</h2><span class="mono muted">Luz arma · Lupa revisa · vos aprobás · Radar busca · Trato vende</span></div>
       <div class="equipo" id="hoy-equipo"></div>
     </div>
 
@@ -371,6 +398,56 @@ form.alta .ancho{grid-column:1/-1}
     </div>
     <div id="guiones"></div>
   </section>
+  <!-- 08 RADAR -->
+  <section data-sec="radar" hidden>
+    <div class="cab">
+      <span class="ceja mono">08 — Prospección</span>
+      <h1>Radar</h1>
+      <p class="bajada">Busca negocios en Uruguay, Argentina, México y Latinoamérica, España y EE.UU., audita su web y les escribe una propuesta hecha para ellos. En Uruguay ofrece todo; afuera, solo lo que se hace online. Los mails salen solos, hasta 50 por día. Lo que no sale sin vos: las ofertas, los paquetes y los precios, que aprobás acá.</p>
+    </div>
+
+    <div class="bloque">
+      <div class="bloque-cab"><h2>La cuenta</h2><span class="mono muted" id="rd-semana"></span></div>
+      <div class="rampa" id="rd-rampa"></div>
+      <p class="muted" style="margin:0;max-width:80ch">Un dominio nuevo que manda 50 mails el primer día termina en spam. Por eso sube de a poco: 10, 20, 35 y desde la cuarta semana 50 por día, de lunes a viernes, en el horario de oficina de cada país. A 50 por día son unos 1.100 mails por mes. Si responde entre el 1 y el 3 %, que es lo habitual en mail en frío bien hecho, son de 11 a 33 conversaciones por mes. Es una estimación: el reporte de las 18:00 te da los números reales.</p>
+    </div>
+
+    <div class="bloque">
+      <div class="bloque-cab"><h2>Ofertas</h2><span class="mono muted" id="rd-of-n"></span></div>
+      <p class="muted" style="margin:0;max-width:80ch">Radar solo usa en los mails las ofertas que están activas. Pedile ideas, editá lo que quieras y aprobá: se abre una pestaña de n8n que confirma que quedó activa.</p>
+      <form class="alta" id="rd-pedir" autocomplete="off">
+        <label class="campo"><span>Mercado</span><select id="rd-p-mercado"><option value="online">Afuera (online)</option><option value="uy">Uruguay</option><option value="todos">Todos</option></select></label>
+        <label class="campo"><span>Servicio</span><select id="rd-p-servicio"></select></label>
+        <label class="campo ancho"><span>Idea o temporada (opcional)</span><input id="rd-p-idea" maxlength="200" placeholder="Temporada de bodas en EE.UU., Black Friday para marcas…"></label>
+        <div class="fila ancho"><button class="b r" type="submit" id="rd-p-ok">Pedirle 3 propuestas a Radar</button><span class="muted" id="rd-p-msj" role="status"></span></div>
+      </form>
+      <div class="ofertas" id="rd-ofertas"></div>
+    </div>
+
+    <div class="bloque">
+      <div class="bloque-cab"><h2>Entrenamiento</h2><span class="mono muted" id="rd-en-n"></span></div>
+      <p class="muted" style="margin:0;max-width:80ch">Contestá lo que puedas; lo demás, después. Radar lo usa acá enseguida y en los mails cuando tocás "Enseñarle a Radar". Si algo no está contestado, Radar no lo inventa: no habla de precios ni de casos que no le diste.</p>
+      <div id="rd-preguntas"></div>
+      <div class="fila"><button class="b" type="button" id="rd-en-guardar">Guardar respuestas</button><span id="rd-en-links" class="fila"></span><span class="muted" id="rd-en-msj" role="status"></span></div>
+    </div>
+
+    <div class="bloque">
+      <div class="bloque-cab"><h2>Puesta en marcha</h2><span class="mono muted" id="rd-pasos-n"></span></div>
+      <p class="muted" style="margin:0;max-width:80ch">Lo que tenés que hacer vos, una sola vez. El detalle de cada paso está en <code>11-AUTOMATIZACION/RADAR_PASO_A_PASO.md</code>; si te trabás, abrí una sesión de Claude Code y pedí ayuda con ese paso.</p>
+      <div class="pasos" id="rd-pasos"></div>
+    </div>
+
+    <div class="bloque">
+      <div class="bloque-cab"><h2>Conexión con n8n</h2><span class="mono muted" id="rd-cx-estado"></span></div>
+      <form class="alta" id="rd-cx" autocomplete="off">
+        <label class="campo ancho"><span>Dirección del webhook (flujo 09)</span><input id="rd-cx-url" type="url" placeholder="https://tu-cuenta.app.n8n.cloud/webhook/apardian-radar"></label>
+        <label class="campo"><span>Clave (la misma del Config del flujo 09)</span><input id="rd-cx-token" type="password" autocomplete="off"></label>
+        <label class="campo"><span>Primer día de envío</span><input id="rd-cx-inicio" type="date"></label>
+        <div class="fila ancho"><button class="b" type="submit">Guardar conexión</button><span class="muted" id="rd-cx-msj" role="status">Se guarda en tu parte privada de la base: nadie más la ve.</span></div>
+      </form>
+    </div>
+  </section>
+
 </main>
 
 <script>
@@ -378,7 +455,7 @@ const D = /*__DATOS__*/null;
 const SERVICIOS = ["Bodas","Eventos","Gastronomía","Producto / marcas","Retrato / marca personal","Empresas","Páginas web","Edición Lightroom","Producción musical","Video","Cuadros"];
 const CANALES = ["Instagram","WhatsApp","Mail en frío","Recomendación","Web","Otro"];
 const ESTADOS = ["prospecto","contactado","conversando","presupuesto enviado","cerrado","perdido"];
-const TABS = ["hoy","semana","agentes","clientes","calendario","carruseles","guiones"];
+const TABS = ["hoy","semana","agentes","clientes","calendario","carruseles","guiones","radar"];
 const $ = s => document.querySelector(s);
 const el = (tag, attrs = {}, ...kids) => { const e = document.createElement(tag);
   for (const [k, v] of Object.entries(attrs)) { if (v == null) continue; if (k === "class") e.className = v; else if (k === "text") e.textContent = v; else e.setAttribute(k, v); }
@@ -389,7 +466,7 @@ const TODAS = D.calendario.dias.flatMap(d => d.items.map(it => ({...it, fecha: d
 const PZ = D.piezas;
 const PZ_ID = Object.fromEntries(PZ.map(p => [p.id, p]));
 
-let hecho = {}, clientes = [], ordenes = [], db = null, puedeEscribir = true, sample = null, sampleMotivo = "", bajadas = null;
+let hecho = {}, clientes = [], ordenes = [], ofertas = [], db = null, puedeEscribir = true, sample = null, sampleMotivo = "", bajadas = null;
 
 function hoyISO(){ const t = new Date(); return new Date(t.getTime() - t.getTimezoneOffset()*60000).toISOString().slice(0,10); }
 function fechaLinda(iso){ const [, m, d] = iso.split("-"); return d + "/" + m; }
@@ -512,6 +589,8 @@ function estadoAgentes(){
     lupa: fren ? fren + " piezas frenadas esta semana." : (notas ? notas + " piezas con nota esta semana." : "Los próximos 7 días están revisados y en orden."),
     vos: "Aprobás en Telegram a las 10:00 lo de mañana.",
     trato: activos.length ? activos.length + " clientes activos" + (vencidos ? ", " + vencidos + " con seguimiento para hoy o vencido." : ".") : "Sin clientes cargados todavía.",
+    radar: (() => { const act = ofertas.filter(o => o.estado === "activa").length, prop = ofertas.filter(o => o.estado === "propuesta").length;
+      return (act ? act + " ofertas activas" : "Sin ofertas activas todavía") + (prop ? " · " + prop + " para revisar." : "."); })(),
   };
 }
 function sumarDias(iso, n){ const d = new Date(iso + "T12:00"); d.setDate(d.getDate() + n); return d.toISOString().slice(0,10); }
@@ -528,7 +607,7 @@ function renderHoy(){
   bajarHoy();
   const e = estadoAgentes();
   $("#hoy-equipo").replaceChildren(...[
-    ["01","Luz","Community manager","luz"],["02","Lupa","Crítica de diseño","lupa"],["03","Vos","Aprobás","vos"],["04","Trato","Ventas","trato"]
+    ["01","Luz","Community manager","luz"],["02","Lupa","Crítica de diseño","lupa"],["03","Vos","Aprobás","vos"],["04","Radar","Prospección","radar"],["05","Trato","Ventas","trato"]
   ].map(([n, nom, rol, k]) => {
     const kids = [el("span", {class:"n", text:n}), el("span", {class:"nom", text:nom}), el("span", {class:"rol", text:rol}), el("span", {class:"est", text:e[k]})];
     if (k === "vos") return el("div", {class:"paso"}, ...kids);
@@ -638,9 +717,16 @@ const AG = {
       ["Reporte de la semana", "Con lo que hay cargado", "Armame el reporte semanal de ventas con la plantilla del playbook, usando los datos del pipeline. Si falta un dato, decilo; no lo inventes."],
       ["Prospección", "Cinco mensajes a cuentas objetivo", "Proponé 5 tipos de cuentas para prospectar esta semana según el foco de venta, y el DM de primer contacto para cada uno, con un hueco para citar algo real de su perfil."],
     ]},
+  radar: {nom:"Radar", rol:"Prospección", hace:"Busca negocios en Uruguay y afuera, audita su web y les manda una propuesta hecha para ellos: hasta 50 mails por día, solos, con las ofertas que aprobaste.", nunca:"Inventar una oferta, un precio o un cliente, o escribirle a quien pidió la baja.",
+    acciones:[
+      ["Probá un mail", "Pegá la web o la descripción de un negocio", "Escribime el primer mail que le mandarías a este negocio, como saldría solo desde n8n. Decime también qué viste, qué servicio le ofrecés y por qué:\n\n"],
+      ["Ideas de paquetes", "Para un país y un servicio", "Proponé 3 paquetes o promos de temporada que se puedan vender por mail en "],
+      ["¿Dónde atacamos?", "Países y rubros para este mes", "Con mis servicios online y la época del año, ¿qué países y qué rubros conviene priorizar este mes? Dame 5, con la búsqueda exacta para Google Maps y por qué."],
+      ["Revisá el entrenamiento", "Qué falta para que escriba mejor", "Mirá lo que te contesté en el entrenamiento y decime qué falta o qué está flojo para que tus mails vendan mejor. Hacé las preguntas que me harías."],
+    ]},
 };
 let agSel = "luz", sampleLimits = null;
-const charlas = {luz:[], lupa:[], trato:[]};
+const charlas = {luz:[], lupa:[], trato:[], radar:[]};
 let adjuntos = [], ctl = null, ocupado = false;
 const LS_CH = "centro-apardian-charlas";
 try { Object.assign(charlas, JSON.parse(localStorage.getItem(LS_CH) || "{}")); } catch(e){}
@@ -650,9 +736,19 @@ function contextoVivo(k){
   const hoy = hoyISO(), sem = semanaDe(hoy);
   const dias = Array.from({length:7}, (_, i) => sumarDias(D.calendario.semanas.find(s => s.n === semSel).lunes, i));
   const lineas = ["Hoy es " + diaLargo(hoy) + " (" + hoy + "). Semana " + sem.n + " del calendario: " + sem.vertical + ". Foco de venta: " + sem.venta + " WhatsApp del estudio: " + D.whatsapp + "."];
-  if (k !== "trato"){
+  if (k === "luz" || k === "lupa"){
     lineas.push("\nPiezas de la semana " + semSel + " (fecha · hora · tipo · título · revisión de Lupa):");
     PZ.filter(p => dias.includes(p.fecha)).forEach(p => lineas.push("- " + p.fecha + " " + p.hora + " · " + TIPO[p.tipo] + " · " + p.titulo + " · " + (p.revision || "sin revisar") + (p.pie ? "\n  Pie: " + p.pie.replace(/\n+/g, " / ") : "")));
+  }
+  if (k === "radar"){
+    const qs = RD_PREGUNTAS.flatMap(([, ps]) => ps);
+    const resp = qs.filter(([kk]) => String(rdEntren[kk] || "").trim());
+    lineas.push("\nLo que Martin contestó en tu entrenamiento:");
+    if (!resp.length) lineas.push("(todavía nada: no hables de precios ni de casos concretos)");
+    resp.forEach(([kk, q]) => lineas.push("- " + q + "\n  " + rdEntren[kk]));
+    lineas.push("\nOfertas (estado · mercado · servicio · nombre · precio desde):");
+    if (!ofertas.length) lineas.push("(ninguna todavía)");
+    ofertas.filter(o => o.estado !== "descartada").forEach(o => lineas.push("- " + [o.estado, o.mercado, o.servicio, o.nombre, o.precio_desde ? o.precio_desde + " " + (o.moneda || "") : "sin precio"].join(" · ")));
   }
   if (k === "trato"){
     lineas.push("\nPipeline de clientes (nombre · servicio · canal · estado · próximo paso · fecha · notas):");
@@ -946,6 +1042,250 @@ function renderGuiones(){
   }
 }
 
+// ---------------------------------------------------------------- 08 radar
+const RD_SERVICIOS = [["pagina_web","Páginas web"],["edicion_lightroom","Edición en Lightroom"],["marca_360","Marca 360 + manual"],["produccion_musical","Producción musical"],
+  ["fotografia_gastronomica","Fotografía gastronómica (UY)"],["fotografia_producto","Fotografía de producto (UY)"],["fotografia_corporativa","Fotografía corporativa (UY)"],
+  ["retratos","Retratos (UY)"],["eventos","Eventos y bodas (UY)"],["video","Video (UY)"]];
+const RD_SOLO_UY = new Set(["fotografia_gastronomica","fotografia_producto","fotografia_corporativa","retratos","eventos","video"]);
+const RD_PREGUNTAS = [
+  ["Vos y la marca", [
+    ["q_quien", "¿Cómo te presentás en una línea a alguien que no te conoce?", "Ej.: Soy Martin, fotógrafo y diseñador; hago que los negocios se vean como son."],
+    ["q_diferencia", "¿Por qué te contratarían a vos y no a otro estudio?", "Lo que tenés que otros no: velocidad, criterio, que hacés foto + web + marca, etc."],
+    ["q_tono", "¿Cómo querés sonar? Palabras que usarías y palabras que nunca usarías.", ""],
+    ["q_casos", "Trabajos que Radar puede nombrar como prueba (rubro y qué hiciste). Si se puede nombrar al cliente, aclaralo.", "Si un cliente es confidencial, decí 'restaurante en Barcelona', no el nombre."],
+  ]],
+  ["Clientes", [
+    ["q_ideal", "Tu cliente ideal: rubro, tamaño y qué le pasa cuando te necesita.", ""],
+    ["q_no", "¿A quién NO querés escribirle? Rubros, tipos de negocio o países.", ""],
+    ["q_ticket", "¿Cuál es el trabajo más chico que te sirve tomar? (en US$)", "Radar no propone nada por debajo de esto."],
+    ["q_capacidad", "¿Cuántos trabajos nuevos por mes podés tomar?", "Para no vender más de lo que podés entregar."],
+  ]],
+  ["Servicios y precios (solo los usa si un cliente es para algo específico)", [
+    ["q_web", "Páginas web: precio desde, plazo y qué incluye.", ""],
+    ["q_lightroom", "Edición en Lightroom: precio por foto o por lote, plazo y mínimo.", ""],
+    ["q_marca", "Marca 360 + manual: precio desde, plazo y entregables.", ""],
+    ["q_musica", "Producción musical: precio por tema (composición, mezcla, mastering) y plazo.", ""],
+    ["q_uy", "En Uruguay (foto y video en el lugar): rangos por tipo de trabajo.", ""],
+    ["q_pagos", "¿Cómo cobrás afuera y en qué moneda? (PayPal, Wise, transferencia, seña)", ""],
+  ]],
+  ["Cómo abre la puerta", [
+    ["q_gancho", "¿Qué podés regalar para empezar? (edición de prueba de 10 fotos, boceto de portada, auditoría en video) ¿Cuánto te lleva?", ""],
+    ["q_temporadas", "Promos o temporadas que quieras empujar, con fechas.", ""],
+    ["q_respuesta", "Cuando alguien responde con interés, ¿qué querés que le propongamos? (WhatsApp, videollamada, presupuesto por mail)", ""],
+    ["q_direccion", "Dirección postal para la firma. Es obligatoria para escribirle a EE.UU.; puede ser una casilla de correo.", ""],
+  ]],
+];
+const RD_PASOS = [
+  ["dominio", "Comprar el dominio para los mails", "Un dominio hermano de apardianstudio.com (por ejemplo apardian.studio o apardianstudio.co) en Hostinger o Google. Así, si algo sale mal con los mails en frío, tu web y tu mail principal no se tocan."],
+  ["workspace", "Crear la casilla en Google Workspace", "martin@ el dominio nuevo. Plan Business Starter alcanza. Agregá tu foto de perfil y una firma igual a la de los mails."],
+  ["dns", "Configurar SPF, DKIM y DMARC", "Google Workspace te guía paso a paso; los registros se pegan en el DNS del dominio. Sin esto, todo va a spam."],
+  ["redirigir", "Que el dominio nuevo lleve a tu web", "Redirigí el dominio nuevo a apardianstudio.com, para que quien lo escriba en el navegador te encuentre."],
+  ["calentar", "Calentar la casilla dos semanas", "Mandá 5 a 10 mails reales por día desde la casilla nueva a gente que te conoce y te contesta. Recién después se prende Radar."],
+  ["n8n", "Crear la cuenta de n8n", "n8n.io → plan Starter. Ahí corren todos los flujos."],
+  ["places", "Clave de Google Places", "En Google Cloud: crear un proyecto, activar Places API (New), crear una clave y ponerle un tope de gasto mensual."],
+  ["anthropic", "Clave de Claude (Anthropic)", "console.anthropic.com → API keys. Poné un límite de gasto mensual."],
+  ["telegram", "Bot de Telegram", "Con @BotFather creás el bot; te llega el reporte diario y los avisos de clientes interesados."],
+  ["planilla", "Planilla en Google Sheets", "Una planilla con las hojas Leads, Bajas, Busquedas, Ofertas y Entrenamiento (las plantillas están en 11-AUTOMATIZACION)."],
+  ["importar", "Importar los flujos 01 a 05, 09 y 10", "En n8n: Import from file. En cada Config pegás el ID de la planilla, tu chat de Telegram, la casilla nueva, la clave y la fecha de arranque."],
+  ["conectar", "Conectar el Centro con n8n", "Abajo, en Conexión con n8n: la dirección del webhook del flujo 09 y su clave."],
+  ["entrenar", "Contestar el entrenamiento y aprobar las primeras ofertas", "Con eso Radar ya sabe cómo hablar y qué ofrecer."],
+  ["prender", "Prender los flujos", "Activá 01, 02, 03, 04, 05, 09 y 10. El primer reporte llega a las 18:00."],
+];
+let rdEntren = {}, rdPasos = {}, rdCx = {}, rdUid = null, rdOfEdit = {};
+const b64u = txt => { const by = new TextEncoder().encode(txt); let bin = ""; by.forEach(b => bin += String.fromCharCode(b)); return btoa(bin).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, ""); };
+function linkN8n(tipo, datos){
+  if (!rdCx.url || !rdCx.token) return null;
+  const u = rdCx.url.replace(/[?#].*$/, "");
+  return u + "?t=" + encodeURIComponent(rdCx.token) + "&tipo=" + tipo + "&d=" + b64u(JSON.stringify(datos));
+}
+function semanaRadar(){
+  if (!rdCx.inicio) return 0;
+  return Math.max(0, Math.floor((new Date(hoyISO() + "T12:00") - new Date(rdCx.inicio + "T12:00")) / (7 * 86400000)));
+}
+function renderRadar(){
+  const sem = semanaRadar(), cupos = [10, 20, 35, 50];
+  $("#rd-semana").textContent = rdCx.inicio ? (hoyISO() < rdCx.inicio ? "Arranca el " + fechaLinda(rdCx.inicio) : "Semana " + (sem + 1) + " desde el " + fechaLinda(rdCx.inicio)) : "Sin fecha de arranque";
+  $("#rd-rampa").replaceChildren(...cupos.map((c, i) => {
+    const barra = el("i"); barra.style.height = Math.round(c * 1.6) + "px";
+    const actual = rdCx.inicio && hoyISO() >= rdCx.inicio && Math.min(sem, 3) === i;
+    return el("div", {class: (rdCx.inicio && Math.min(sem, 3) > i) ? "ya" : null, style: actual ? "background:var(--panel)" : null},
+      barra, el("b", {text: String(c)}), el("span", {text: (i < 3 ? "Semana " + (i + 1) : "Desde la semana 4") + " · mails por día" + (actual ? " · ahora" : "")}));
+  }));
+  renderOfertas(); renderPreguntas(); renderPasos(); renderCx();
+}
+function opcionesServ(sel, val){ sel.replaceChildren(...RD_SERVICIOS.map(([v, t]) => el("option", {value: v, text: t}))); if (val) sel.value = val; }
+
+function renderOfertas(){
+  const c = $("#rd-ofertas"); c.replaceChildren();
+  const orden = {propuesta: 0, activa: 1, pausada: 2};
+  const lista = ofertas.filter(o => o.estado !== "descartada").sort((a, b) => (orden[a.estado] ?? 3) - (orden[b.estado] ?? 3) || String(b.creada || "").localeCompare(String(a.creada || "")));
+  $("#rd-of-n").textContent = lista.filter(o => o.estado === "activa").length + " activas · " + lista.filter(o => o.estado === "propuesta").length + " para revisar";
+  if (!lista.length){ c.append(el("p", {class:"vacio", style:"background:var(--bg)", text: db ? "Todavía no hay ofertas. Pedile a Radar tres propuestas arriba, o esperá a que conteste el entrenamiento para que salgan mejor." : "Las ofertas necesitan la base del Centro, y no hay conexión."})); return; }
+  for (const o of lista){
+    const ed = rdOfEdit[o.id] || (rdOfEdit[o.id] = {...o});
+    const campo = (k, etiqueta, tipo, extra) => {
+      const id = "of-" + o.id + "-" + k;
+      const inp = tipo === "area" ? el("textarea", {id, rows:"3", maxlength:"800"}) : tipo === "select" ? el("select", {id}) : el("input", {id, type: tipo || "text", maxlength:"200"});
+      if (k === "servicio") opcionesServ(inp);
+      if (k === "mercado") inp.replaceChildren(...[["online","Afuera (online)"],["uy","Uruguay"],["todos","Todos"]].map(([v, t]) => el("option", {value: v, text: t})));
+      if (k === "moneda") inp.replaceChildren(...["USD","UYU","EUR","ARS","MXN"].map(v => el("option", {value: v, text: v})));
+      inp.value = ed[k] || (k === "moneda" ? "USD" : "");
+      inp.addEventListener("input", () => { ed[k] = inp.value; });
+      inp.addEventListener("change", () => { ed[k] = inp.value; });
+      return el("label", {class:"campo", for: id, style: extra || null}, el("span", {text: etiqueta}), inp);
+    };
+    const estado = o.estado === "activa" ? el("span", {class:"sello ok", text:"Activa"}) : o.estado === "pausada" ? el("span", {class:"sello", text:"Pausada"}) : el("span", {class:"sello nota", text:"Propuesta de Radar"});
+    const aviso = el("span", {class:"adj", role:"status"});
+    const guardar = async (cambios, txt) => {
+      if (!db || !puedeEscribir){ aviso.textContent = "Sin conexión a la base."; return false; }
+      const lim = {}; for (const k of ["nombre","mercado","servicio","para_quien","que_incluye","plazo","precio_desde","moneda","vigencia_hasta","angulo"]) lim[k] = String(ed[k] || "").slice(0, 800);
+      if (RD_SOLO_UY.has(lim.servicio) && lim.mercado !== "uy"){ aviso.textContent = "Ese servicio es en el lugar: solo puede ser para Uruguay."; return false; }
+      try { await db.doc("ofertas/" + o.id).update({...lim, ...cambios, actualizada: new Date().toISOString()}); aviso.textContent = txt || "Guardado."; return true; }
+      catch(e){ aviso.textContent = "No se pudo guardar."; return false; }
+    };
+    const acc = el("div", {class:"fila"});
+    const linkDe = estadoNuevo => { const d = {...ed, id: o.id, estado: estadoNuevo}; delete d.creada; delete d.actualizada; return linkN8n("oferta", d); };
+    const bApr = el("a", {class:"b r", href:"#", target:"_blank", rel:"noopener", text: o.estado === "activa" ? "Actualizar en Radar" : "Aprobar y activar"});
+    bApr.addEventListener("click", ev => {
+      if (RD_SOLO_UY.has(ed.servicio) && ed.mercado !== "uy"){ ev.preventDefault(); aviso.textContent = "Ese servicio es en el lugar: solo puede ser para Uruguay."; return; }
+      const l = linkDe("activa");
+      if (!l){ ev.preventDefault(); aviso.textContent = "Primero completá la Conexión con n8n, abajo."; return; }
+      bApr.href = l; guardar({estado:"activa", aprobada_en: new Date().toISOString()}, "Activada. Confirmalo en la pestaña de n8n que se abrió.");
+    });
+    acc.append(bApr);
+    if (o.estado === "activa"){
+      const bP = el("a", {class:"b l", href:"#", target:"_blank", rel:"noopener", text:"Pausar"});
+      bP.addEventListener("click", ev => { const l = linkDe("pausada"); if (!l){ ev.preventDefault(); aviso.textContent = "Primero completá la Conexión con n8n."; return; } bP.href = l; guardar({estado:"pausada"}, "Pausada."); });
+      acc.append(bP);
+    } else {
+      const bG = el("button", {class:"b l", type:"button", text:"Guardar cambios"}); bG.addEventListener("click", () => guardar({})); acc.append(bG);
+      const bD = el("button", {class:"b l", type:"button", text:"Descartar"});
+      bD.addEventListener("click", () => { if (bD.dataset.seguro) guardar({estado:"descartada"}, "Descartada."); else { bD.dataset.seguro = "1"; bD.textContent = "¿Seguro? Tocá de nuevo"; setTimeout(() => { delete bD.dataset.seguro; bD.textContent = "Descartar"; }, 3000); } });
+      acc.append(bD);
+    }
+    c.append(el("article", {class:"oferta"},
+      el("div", {class:"fila", style:"justify-content:space-between"}, estado, el("span", {class:"mono muted", text: o.creada ? fechaLinda(String(o.creada).slice(0,10)) : ""})),
+      campo("nombre", "Nombre de la oferta"),
+      el("div", {class:"dos"}, campo("mercado", "Mercado", "select"), campo("servicio", "Servicio", "select")),
+      campo("para_quien", "Para quién"),
+      campo("que_incluye", "Qué incluye", "area"),
+      el("div", {class:"dos"}, campo("plazo", "Plazo"), campo("vigencia_hasta", "Vale hasta", "date")),
+      el("div", {class:"dos"}, campo("precio_desde", "Precio desde (opcional)"), campo("moneda", "Moneda", "select")),
+      campo("angulo", "Por qué ahora (el ángulo)", "area"),
+      acc, aviso));
+  }
+}
+
+$("#rd-pedir").addEventListener("submit", async ev => {
+  ev.preventDefault();
+  const msj = $("#rd-p-msj"), bot = $("#rd-p-ok");
+  if (!sample){ msj.textContent = sampleMotivo || "Radar necesita Claude para proponer."; return; }
+  if (!db || !puedeEscribir){ msj.textContent = "Sin conexión a la base: no se pueden guardar propuestas."; return; }
+  const mercado = $("#rd-p-mercado").value, servicio = $("#rd-p-servicio").value, idea = $("#rd-p-idea").value.trim();
+  if (RD_SOLO_UY.has(servicio) && mercado !== "uy"){ msj.textContent = "Ese servicio es en el lugar: elegí Uruguay."; return; }
+  bot.disabled = true; msj.textContent = "Radar está pensando…";
+  try {
+    const pedido = reglasDe("radar") + "\n\n=== Pedido ===\nProponé 3 ofertas distintas para el mercado '" + mercado + "' y el servicio '" + servicio + "'" + (idea ? ", con esta idea: " + idea : "") +
+      ". Cada una tiene que poder venderse por mail a un negocio que no conoce a Martin, ser realizable a distancia si el mercado no es 'uy', y respetar lo que Martin contestó en el entrenamiento. " +
+      "No inventes precios: si Martin no dio un precio para ese servicio, dejá precio_desde vacío. Fechas en AAAA-MM-DD.\n" +
+      "Respondé SOLO un array JSON de 3 objetos con estas claves: nombre, para_quien, que_incluye, plazo, precio_desde, moneda, vigencia_hasta, angulo.";
+    const r = await sample.json(pedido, {modelTier: "default"});
+    const lista = (Array.isArray(r) ? r : (r && r.ofertas) || []).slice(0, 3);
+    if (!lista.length) throw {code: "empty_completion"};
+    for (const o of lista){
+      await db.collection("ofertas").add({mercado, servicio, estado:"propuesta", creada: new Date().toISOString(),
+        nombre: String(o.nombre || "").slice(0, 200), para_quien: String(o.para_quien || "").slice(0, 400), que_incluye: String(o.que_incluye || "").slice(0, 800),
+        plazo: String(o.plazo || "").slice(0, 120), precio_desde: String(o.precio_desde || "").slice(0, 40), moneda: String(o.moneda || "USD").slice(0, 6),
+        vigencia_hasta: /^\d{4}-\d{2}-\d{2}$/.test(String(o.vigencia_hasta || "")) ? o.vigencia_hasta : "", angulo: String(o.angulo || "").slice(0, 600)});
+    }
+    msj.textContent = lista.length + " propuestas nuevas abajo. Revisalas antes de aprobar.";
+  } catch(e){ msj.textContent = (e && e.code === "invalid_json") ? "Radar respondió algo que no pude leer. Probá de nuevo." : (ERRORES[e && e.code] || ERRORES.upstream_error); }
+  finally { bot.disabled = false; }
+});
+
+function renderPreguntas(){
+  const c = $("#rd-preguntas");
+  if (!c.dataset.hecho){
+    c.dataset.hecho = "1";
+    for (const [grupo, preguntas] of RD_PREGUNTAS){
+      c.append(el("h3", {text: grupo, style:"margin-top:28px"}));
+      for (const [k, q, ayuda] of preguntas){
+        const ta = el("textarea", {id: "rq-" + k, rows:"2", maxlength:"1500"});
+        c.append(el("div", {class:"preg"}, el("label", {for: "rq-" + k, text: q}), ayuda ? el("small", {text: ayuda}) : null, ta));
+      }
+    }
+  }
+  for (const [, preguntas] of RD_PREGUNTAS) for (const [k] of preguntas){
+    const ta = $("#rq-" + k); if (ta && document.activeElement !== ta && !ta.dataset.tocado) ta.value = rdEntren[k] || "";
+  }
+  const total = RD_PREGUNTAS.reduce((n, [, ps]) => n + ps.length, 0);
+  const hechas = Object.values(rdEntren).filter(v => String(v || "").trim()).length;
+  $("#rd-en-n").textContent = hechas + " de " + total + " contestadas";
+  renderLinksEntren();
+}
+document.addEventListener("input", ev => { if (ev.target && ev.target.id && ev.target.id.startsWith("rq-")) ev.target.dataset.tocado = "1"; });
+function respuestasActuales(){
+  const r = {};
+  for (const [, preguntas] of RD_PREGUNTAS) for (const [k] of preguntas){ const ta = $("#rq-" + k); r[k] = ta ? ta.value.trim() : (rdEntren[k] || ""); }
+  return r;
+}
+function renderLinksEntren(){
+  const c = $("#rd-en-links"); c.replaceChildren();
+  const filas = [];
+  for (const [, preguntas] of RD_PREGUNTAS) for (const [k, q] of preguntas) if (String(rdEntren[k] || "").trim()) filas.push({clave: k, pregunta: q, respuesta: rdEntren[k]});
+  if (!filas.length) return;
+  // partes chicas para que el link no sea demasiado largo
+  const partes = []; let actual = [], largo = 0;
+  for (const f of filas){ const t = JSON.stringify(f).length; if (actual.length && largo + t > 3500){ partes.push(actual); actual = []; largo = 0; } actual.push(f); largo += t; }
+  if (actual.length) partes.push(actual);
+  partes.forEach((p, i) => {
+    const l = linkN8n("entrenamiento", p);
+    c.append(el("a", {class:"b r", href: l || "#", target:"_blank", rel:"noopener", "aria-disabled": l ? null : "true",
+      text: "Enseñarle a Radar" + (partes.length > 1 ? " (" + (i + 1) + "/" + partes.length + ")" : "")}));
+  });
+  if (!linkN8n("entrenamiento", [])) c.append(el("span", {class:"adj", text:"Para mandarlo a los mails, completá la Conexión con n8n."}));
+}
+$("#rd-en-guardar").addEventListener("click", async () => {
+  const msj = $("#rd-en-msj");
+  if (!db || !puedeEscribir){ msj.textContent = "Sin conexión a la base."; return; }
+  const r = respuestasActuales();
+  try { await db.doc("radar/entrenamiento").set({respuestas: r, actualizado: new Date().toISOString()}); rdEntren = r;
+    document.querySelectorAll("#rd-preguntas textarea").forEach(t => delete t.dataset.tocado);
+    msj.textContent = "Guardado. Ahora tocá \"Enseñarle a Radar\" para que lo use en los mails."; renderPreguntas(); }
+  catch(e){ msj.textContent = "No se pudo guardar."; }
+});
+
+function renderPasos(){
+  const c = $("#rd-pasos"); c.replaceChildren();
+  const hechos = RD_PASOS.filter(([k]) => rdPasos[k]).length;
+  $("#rd-pasos-n").textContent = hechos + " de " + RD_PASOS.length;
+  RD_PASOS.forEach(([k, t, d], i) => {
+    const id = "rp-" + k, chk = el("input", {type:"checkbox", id});
+    chk.checked = !!rdPasos[k];
+    chk.addEventListener("change", async () => {
+      rdPasos[k] = chk.checked; renderPasos();
+      if (db && puedeEscribir){ try { await db.doc("radar/pasos").set({hechos: rdPasos, actualizado: new Date().toISOString()}); } catch(e){} }
+    });
+    c.append(el("div", {class:"paso-r" + (rdPasos[k] ? " ok" : "")}, chk, el("label", {for: id}, el("b", {text: (i + 1) + ". " + t}), el("p", {text: d}))));
+  });
+}
+function renderCx(){
+  const ok = !!(rdCx.url && rdCx.token);
+  $("#rd-cx-estado").textContent = ok ? "Conectado" : "Sin conectar";
+  if (!$("#rd-cx").dataset.tocado){ $("#rd-cx-url").value = rdCx.url || ""; $("#rd-cx-token").value = rdCx.token || ""; $("#rd-cx-inicio").value = rdCx.inicio || ""; }
+}
+$("#rd-cx").addEventListener("input", () => $("#rd-cx").dataset.tocado = "1");
+$("#rd-cx").addEventListener("submit", async ev => {
+  ev.preventDefault();
+  const msj = $("#rd-cx-msj");
+  const url = $("#rd-cx-url").value.trim(), token = $("#rd-cx-token").value.trim(), inicio = $("#rd-cx-inicio").value;
+  if (url && !/^https:\/\/[^\s]+\/webhook\/apardian-radar\/?$/.test(url)){ msj.textContent = "La dirección tiene que terminar en /webhook/apardian-radar (la de producción del flujo 09)."; return; }
+  if (!db || !rdUid){ msj.textContent = "Sin conexión a la base: no se puede guardar."; return; }
+  try { await db.collection("data/users/" + rdUid).doc("n8n").set({url, token, inicio, actualizado: new Date().toISOString()});
+    rdCx = {url, token, inicio}; delete $("#rd-cx").dataset.tocado; msj.textContent = "Guardado. Acordate de poner la misma fecha en FECHA_INICIO de los flujos 03 y 10."; renderRadar(); }
+  catch(e){ msj.textContent = "No se pudo guardar."; }
+});
+
 // ---------------------------------------------------------------- pestañas
 function tabActual(){ const h = location.hash.slice(1); return TABS.includes(h) ? h : (h === "ventas" ? "clientes" : "hoy"); }
 function mostrar(tab){
@@ -953,6 +1293,7 @@ function mostrar(tab){
   document.querySelectorAll("nav.tabs a").forEach(a => a.dataset.tab === tab ? a.setAttribute("aria-current", "page") : a.removeAttribute("aria-current"));
   if (tab === "semana") renderSemana();
   if (tab === "agentes") renderAgentes();
+  if (tab === "radar") renderRadar();
 }
 addEventListener("hashchange", () => { mostrar(tabActual()); scrollTo(0, 0); });
 
@@ -961,9 +1302,11 @@ function render(){
   const t = tabActual();
   if (t === "semana") renderSemana();
   if (t === "agentes"){ renderAgentes(); }
+  if (t === "radar") renderRadar();
 }
 
 opciones($("#f-servicio"), SERVICIOS); opciones($("#f-canal"), CANALES); opciones($("#f-estado"), ESTADOS);
+opcionesServ($("#rd-p-servicio"));
 hecho = leerLocal();
 renderGuiones(); render(); mostrar(tabActual());
 $("#red-enviar").disabled = true;
@@ -983,6 +1326,11 @@ $("#red-enviar").disabled = true;
   if (!puedeEscribir){ $("#f-ok").disabled = true; $("#f-msj").textContent = "Acceso de solo lectura."; }
   db.collection("hecho").onSnapshot(s => { hecho = {}; s.docs.forEach(d => hecho[d.id] = true); render(); }, () => { $("#sin-db").hidden = false; });
   db.collection("clientes").onSnapshot(s => { clientes = s.docs.map(d => ({id: d.id, ...d.data()})); renderClientes(); renderHoy(); if (tabActual() === "agentes") renderAgentes(); }, () => { $("#sin-db").hidden = false; });
+  try { rdUid = userx ? await userx.id() : null; } catch(e){ rdUid = null; }
+  if (rdUid) db.collection("data/users/" + rdUid).doc("n8n").onSnapshot(d => { rdCx = (d && d.exists !== false && d.data && d.data()) || {}; if (tabActual() === "radar") renderRadar(); }, () => {});
+  db.doc("radar/entrenamiento").onSnapshot(d => { rdEntren = ((d && d.data && d.data()) || {}).respuestas || {}; if (tabActual() === "radar") renderPreguntas(); }, () => {});
+  db.doc("radar/pasos").onSnapshot(d => { rdPasos = ((d && d.data && d.data()) || {}).hechos || {}; if (tabActual() === "radar") renderPasos(); }, () => {});
+  db.collection("ofertas").onSnapshot(s => { ofertas = s.docs.map(d => ({id: d.id, ...d.data()})); renderHoy(); if (tabActual() === "radar") renderOfertas(); if (tabActual() === "agentes") renderAgentes(); }, () => {});
   db.collection("ordenes").onSnapshot(s => { ordenes = s.docs.map(d => ({id: d.id, ...d.data()})); renderHoy(); if (tabActual() === "agentes"){ renderOrdenes(); renderAgentes(); } }, () => {});
 })();
 </script>

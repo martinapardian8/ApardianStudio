@@ -16,9 +16,13 @@ Seguimiento 2 (día 9) — cierre elegante:
   renovar las fotos de la carta, ya sabés dónde estoy."
 - Máximo 50 palabras.
 
-Siempre: voseo, frases cortas, sin emojis, sin "estimado/a", sin signos de
-exclamación. Mismo idioma que el primer mail. Firma corta:
+Siempre: el mismo idioma y el mismo trato que el primer mail (vos en Uruguay
+y Argentina, tú en México, Latinoamérica y España, inglés en EE.UU.), frases
+cortas, sin emojis, sin "estimado/a", sin signos de exclamación. Este mail sale
+solo, sin que Martin lo lea: no inventes nada que no esté en los datos. Firma
+corta:
 Martin · apardianstudio.com · +598 91 962 962
+(y la DIRECCION_POSTAL debajo, si viene en los datos)
 Y la línea: "Si no te interesa, respondé 'no' y no te escribo más."
 
 El asunto es el mismo del primer mail con "Re: " adelante.

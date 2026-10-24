@@ -9,11 +9,16 @@ musical). Uruguay. WhatsApp +598 91 962 962.
 - Nada de antes/después ni "sin editar": no tenemos los originales.
 - Estilo editorial: sin chinches, hilo rojo, cinta ni papel roto. Los montajes
   dicen que son montajes.
-- Ningún mensaje a un cliente real sale sin que Martin lo vea.
+- Ningún mensaje a un cliente real sale sin que Martin lo vea. Única excepción
+  (decisión de Martin, 24/10/2026): los mails en frío de Radar y sus dos
+  seguimientos salen solos, hasta 50 nuevos por día, pero solo con ofertas y
+  entrenamiento que Martin aprobó en el Centro. Las respuestas de clientes
+  siempre las contesta Martin.
 - No se publica la web ni se empuja a `hostinger` sin su OK.
 
 ## El equipo
-Luz (community manager), Lupa (crítica de diseño) y Trato (ventas), en
+Luz (community manager), Lupa (crítica de diseño), Trato (ventas) y Radar
+(prospección por mail, `11-AUTOMATIZACION/RADAR_PASO_A_PASO.md`), en
 `.claude/agents/`. Cómo trabajan: `09-ESTUDIO/EQUIPO.md`.
 
 ## Órdenes desde el Centro

@@ -1,18 +1,18 @@
 {
-  "name": "APARDIAN 04 · Seguimiento",
+  "name": "APARDIAN 04 · Radar: seguimiento",
   "nodes": [
     {
       "parameters": {
         "rule": {
           "interval": [
             {
-              "field": "days",
-              "triggerAtHour": 11
+              "field": "cronExpression",
+              "expression": "30 9-17 * * 1-5"
             }
           ]
         }
       },
-      "id": "6d4c15df-960b-59e8-b4f2-0ede793096e2",
+      "id": "49546c0c-e01c-5ba0-9543-e03356c4d377",
       "name": "Programado",
       "type": "n8n-nodes-base.scheduleTrigger",
       "typeVersion": 1.2,
@@ -23,7 +23,7 @@
     },
     {
       "parameters": {},
-      "id": "55464d1b-7491-5154-85f9-4a8bdc4e9194",
+      "id": "f50a458c-abfd-5fc6-ba2d-e3bfc21e430c",
       "name": "Probar a mano",
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
@@ -37,31 +37,43 @@
         "assignments": {
           "assignments": [
             {
-              "id": "fb4455ef-b2df-55a7-8a56-ebaf603abdd6",
+              "id": "4df9a4a5-b252-5e49-ae61-a2f72bfbead9",
               "name": "SHEET_ID",
               "value": "PEGAR_ID_DE_LA_PLANILLA",
               "type": "string"
             },
             {
-              "id": "bcd5ac3b-bf95-5d4b-8e75-f09c513bf6db",
+              "id": "deb50378-abe5-5605-8201-5be93766fed1",
               "name": "TELEGRAM_CHAT_ID",
               "value": "PEGAR_CHAT_ID",
               "type": "string"
             },
             {
-              "id": "cf48420f-48eb-5497-9cc2-fef1136ff737",
+              "id": "4f2139af-8613-50b4-9cd3-61ada64c52fd",
               "name": "MI_EMAIL",
               "value": "Martin Apardian <martin@TU-DOMINIO-DE-ENVIO>",
               "type": "string"
             },
             {
-              "id": "1591f73f-62b4-5c1d-802f-2874defd504f",
+              "id": "98651c7b-c5ec-5247-aa12-a039f636fe48",
+              "name": "AUTO_ENVIO",
+              "value": true,
+              "type": "boolean"
+            },
+            {
+              "id": "865f970a-1ccd-5cd9-a111-9cc213b3e7c0",
+              "name": "DIRECCION_POSTAL",
+              "value": "",
+              "type": "string"
+            },
+            {
+              "id": "35783d23-1613-5dd0-a6e9-f44540df40d4",
               "name": "URL_APROBAR",
               "value": "https://TU-INSTANCIA.app.n8n.cloud/webhook/apardian-aprobar",
               "type": "string"
             },
             {
-              "id": "12e7d932-4fa4-53a7-937a-9f60e0724cd8",
+              "id": "0433ab51-b6e2-5148-ad1c-78c20a737816",
               "name": "TOKEN",
               "value": "CAMBIAR-POR-UNA-CLAVE-LARGA",
               "type": "string"
@@ -70,7 +82,7 @@
         },
         "options": {}
       },
-      "id": "9b9c62cf-0787-5b89-945f-a2f6221a8cb6",
+      "id": "2f700770-8822-514d-801d-249e3982da7c",
       "name": "Config",
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
@@ -94,7 +106,7 @@
         },
         "options": {}
       },
-      "id": "e81a1ee2-9562-5914-9269-b8a980e42c0e",
+      "id": "148583bb-0491-5dd9-9433-abcba3a0a248",
       "name": "Leer Leads",
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.5,
@@ -126,7 +138,7 @@
         },
         "options": {}
       },
-      "id": "aa44f932-c607-5865-a8ae-1eb5f4288105",
+      "id": "7eb081dc-31f7-554c-a28b-6e0a916be576",
       "name": "Leer Bajas",
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.5,
@@ -145,9 +157,9 @@
     },
     {
       "parameters": {
-        "jsCode": "const hoy = () => new Date().toISOString().slice(0, 10);\nconst diasDesde = f => f ? Math.floor((Date.now() - new Date(f + 'T12:00:00').getTime()) / 86400000) : -1;\n\n// Día 4 sin respuesta: seguimiento 1. Día 9: seguimiento 2. Día 14: se cierra.\n// Quien respondió ya cambió de estado (flujo 05) y no entra acá.\nconst bm = new Set($('Leer Bajas').all().map(r => String(r.json.email || '').toLowerCase()));\nconst out = [];\nfor (const r of $('Leer Leads').all()) {\n  const l = r.json, d = diasDesde(l.fecha_envio);\n  if (!l.thread_id || bm.has(String(l.email || '').toLowerCase())) continue;\n  if (l.estado === 'enviado' && d >= 4) out.push({ json: { lead: l, n: 1, cerrar: false } });\n  else if (l.estado === 'seguimiento_1' && d >= 9) out.push({ json: { lead: l, n: 2, cerrar: false } });\n  else if (l.estado === 'seguimiento_2' && d >= 14) out.push({ json: { lead: l, n: 0, cerrar: true } });\n}\nreturn out;\n"
+        "jsCode": "const hoy = () => new Date().toISOString().slice(0, 10);\nconst diasDesde = f => f ? Math.floor((Date.now() - new Date(f + 'T12:00:00').getTime()) / 86400000) : -1;\n\n// Hora y día en la zona horaria del destinatario (Intl viene con Node).\nconst horaEn = z => { try { return Number(new Intl.DateTimeFormat('en-US', { timeZone: z, hour: 'numeric', hourCycle: 'h23' }).format(new Date())); } catch (e) { return 12; } };\nconst diaEn = z => { try { return new Intl.DateTimeFormat('en-US', { timeZone: z, weekday: 'short' }).format(new Date()); } catch (e) { return 'Mon'; } };\nconst horarioDeOficina = z => { const h = horaEn(z), d = diaEn(z); return d !== 'Sat' && d !== 'Sun' && h >= 9 && h < 17; };\nconst hoyUY = () => new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Montevideo' }).format(new Date());\n\n// Día 4 sin respuesta: seguimiento 1. Día 9: seguimiento 2. Día 14: se cierra.\n// Quien respondió ya cambió de estado (flujo 05) y no entra acá. Corre cada\n// hora y solo toma a quien está en horario de oficina en su país.\nconst bm = new Set($('Leer Bajas').all().map(r => String(r.json.email || '').toLowerCase()));\nconst out = [];\nfor (const r of $('Leer Leads').all()) {\n  const l = r.json, d = diasDesde(l.fecha_envio);\n  if (!l.thread_id || bm.has(String(l.email || '').toLowerCase())) continue;\n  if (!horarioDeOficina(l.zona || 'America/Montevideo')) continue;\n  if (l.estado === 'enviado' && d >= 4) out.push({ json: { lead: l, n: 1, cerrar: false } });\n  else if (l.estado === 'seguimiento_1' && d >= 9) out.push({ json: { lead: l, n: 2, cerrar: false } });\n  else if (l.estado === 'seguimiento_2' && d >= 14) out.push({ json: { lead: l, n: 0, cerrar: true } });\n}\nreturn out;\n"
       },
-      "id": "5c12c582-813f-5b10-ab8a-0c2c76a75e11",
+      "id": "6465740e-8347-5899-87fe-bc5761d11024",
       "name": "¿A quién le toca?",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -166,7 +178,7 @@
           },
           "conditions": [
             {
-              "id": "91c887eb-7623-5e1e-83e9-7da1a8df35b7",
+              "id": "d64e65bb-4f36-5b31-a386-c1543753b6f1",
               "leftValue": "={{ $json.cerrar }}",
               "rightValue": "",
               "operator": {
@@ -180,7 +192,7 @@
         },
         "options": {}
       },
-      "id": "e87cb823-d90a-5b0b-9a12-3fea850ec607",
+      "id": "b1301466-1b9f-54ed-8ed6-256201eb4b15",
       "name": "¿Cerrar?",
       "type": "n8n-nodes-base.if",
       "typeVersion": 2,
@@ -194,7 +206,7 @@
         "jsCode": "return { json: { id: $json.lead.id, estado: 'cerrado_sin_respuesta' } };\n",
         "mode": "runOnceForEachItem"
       },
-      "id": "42d1a2f4-aff0-5d0c-aa3d-2712530cdbe6",
+      "id": "d4e42a1f-de26-558b-be3f-9014f064bdfa",
       "name": "Fila cerrada",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -226,7 +238,7 @@
         },
         "options": {}
       },
-      "id": "96a42541-87af-578a-913d-4dd787fc9cd8",
+      "id": "029d6270-22d4-50f1-af59-d0749693537b",
       "name": "Guardar cierre",
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.5,
@@ -249,7 +261,7 @@
         "nodeCredentialType": "gmailOAuth2",
         "options": {}
       },
-      "id": "0bdd5be4-6de4-5d29-97a6-95d6e19165f7",
+      "id": "769b2494-a82f-5c4e-909a-c0e7fd0b6a3b",
       "name": "Message-ID original",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
@@ -267,10 +279,10 @@
     },
     {
       "parameters": {
-        "jsCode": "function cuerpoClaude(system, user, maxTokens, effort) {\n  return {\n    model: 'claude-opus-5-5',\n    max_tokens: maxTokens,\n    system: system,\n    messages: [{ role: 'user', content: user }],\n    output_config: { effort: effort },\n    fallbacks: 'default',\n  };\n}\n\nconst SYSTEM = \"Sos Martin Apardian (APARDIAN STUDIO). Escribís un seguimiento a un negocio al\\nque ya le mandaste un primer mail y no contestó. Recibís el mail original, la\\nauditoría y el número de seguimiento (1 o 2).\\n\\nSeguimiento 1 (día 4) — aporta algo:\\n- No repitas el primer mail ni preguntes \\\"¿viste mi mail?\\\".\\n- Dale una idea concreta y usable que salga de la auditoría (ej.: \\\"la foto de la\\n  milanesa que tenés en portada, con luz lateral y fondo oscuro, se vería como\\n  el plato que es\\\"). Que sirva aunque nunca te contrate.\\n- Cerrá con la misma pregunta fácil del primer mail, reformulada.\\n- Máximo 70 palabras.\\n\\nSeguimiento 2 (día 9) — cierre elegante:\\n- Breve, sin culpa, sin presión. Dejás la puerta abierta y te despedís.\\n- Ejemplo de tono: \\\"No te escribo más por esto. Si en algún momento querés\\n  renovar las fotos de la carta, ya sabés dónde estoy.\\\"\\n- Máximo 50 palabras.\\n\\nSiempre: voseo, frases cortas, sin emojis, sin \\\"estimado/a\\\", sin signos de\\nexclamación. Mismo idioma que el primer mail. Firma corta:\\nMartin · apardianstudio.com · +598 91 962 962\\nY la línea: \\\"Si no te interesa, respondé 'no' y no te escribo más.\\\"\\n\\nEl asunto es el mismo del primer mail con \\\"Re: \\\" adelante.\\n\\nRespondé SOLO con un objeto JSON válido:\\n{\\n  \\\"asunto\\\": \\\"\\\",\\n  \\\"cuerpo\\\": \\\"\\\"\\n}\";\nconst x = $('¿Cerrar?').item.json;\nconst hdr = (($json.payload || {}).headers || []).find(h => /^message-id$/i.test(h.name));\nlet audit = {};\ntry { audit = JSON.parse(x.lead.notas || '{}').auditoria || {}; } catch (e) {}\nconst usuario = 'Seguimiento número: ' + x.n + '\\nNegocio: ' + x.lead.nombre +\n  '\\n\\nPrimer mail (asunto): ' + x.lead.asunto + '\\nPrimer mail (cuerpo):\\n' + x.lead.borrador +\n  '\\n\\nAuditoría:\\n' + JSON.stringify(audit, null, 2);\nreturn { json: { ...x, message_id_hdr: hdr ? hdr.value : '', claude_body: cuerpoClaude(SYSTEM, usuario, 4000, 'medium') } };\n",
+        "jsCode": "function cuerpoClaude(system, user, maxTokens, effort) {\n  return {\n    model: 'claude-opus-5-5',\n    max_tokens: maxTokens,\n    system: system,\n    messages: [{ role: 'user', content: user }],\n    output_config: { effort: effort },\n    fallbacks: 'default',\n  };\n}\n\nconst SYSTEM = \"Sos Martin Apardian (APARDIAN STUDIO). Escribís un seguimiento a un negocio al\\nque ya le mandaste un primer mail y no contestó. Recibís el mail original, la\\nauditoría y el número de seguimiento (1 o 2).\\n\\nSeguimiento 1 (día 4) — aporta algo:\\n- No repitas el primer mail ni preguntes \\\"¿viste mi mail?\\\".\\n- Dale una idea concreta y usable que salga de la auditoría (ej.: \\\"la foto de la\\n  milanesa que tenés en portada, con luz lateral y fondo oscuro, se vería como\\n  el plato que es\\\"). Que sirva aunque nunca te contrate.\\n- Cerrá con la misma pregunta fácil del primer mail, reformulada.\\n- Máximo 70 palabras.\\n\\nSeguimiento 2 (día 9) — cierre elegante:\\n- Breve, sin culpa, sin presión. Dejás la puerta abierta y te despedís.\\n- Ejemplo de tono: \\\"No te escribo más por esto. Si en algún momento querés\\n  renovar las fotos de la carta, ya sabés dónde estoy.\\\"\\n- Máximo 50 palabras.\\n\\nSiempre: el mismo idioma y el mismo trato que el primer mail (vos en Uruguay\\ny Argentina, tú en México, Latinoamérica y España, inglés en EE.UU.), frases\\ncortas, sin emojis, sin \\\"estimado/a\\\", sin signos de exclamación. Este mail sale\\nsolo, sin que Martin lo lea: no inventes nada que no esté en los datos. Firma\\ncorta:\\nMartin · apardianstudio.com · +598 91 962 962\\n(y la DIRECCION_POSTAL debajo, si viene en los datos)\\nY la línea: \\\"Si no te interesa, respondé 'no' y no te escribo más.\\\"\\n\\nEl asunto es el mismo del primer mail con \\\"Re: \\\" adelante.\\n\\nRespondé SOLO con un objeto JSON válido:\\n{\\n  \\\"asunto\\\": \\\"\\\",\\n  \\\"cuerpo\\\": \\\"\\\"\\n}\";\nconst x = $('¿Cerrar?').item.json;\nconst hdr = (($json.payload || {}).headers || []).find(h => /^message-id$/i.test(h.name));\nlet audit = {};\ntry { audit = JSON.parse(x.lead.notas || '{}').auditoria || {}; } catch (e) {}\nconst c = $('Config').first().json;\nconst usuario = 'Seguimiento número: ' + x.n + '\\nNegocio: ' + x.lead.nombre +\n  '\\nPaís: ' + (x.lead.pais || 'Uruguay') + '\\nIdioma: ' + (x.lead.idioma || 'es') +\n  (String(x.lead.pais || '') === 'Estados Unidos' ? '\\nDIRECCION_POSTAL: ' + c.DIRECCION_POSTAL : '') +\n  '\\n\\nPrimer mail (asunto): ' + x.lead.asunto + '\\nPrimer mail (cuerpo):\\n' + x.lead.borrador +\n  '\\n\\nAuditoría:\\n' + JSON.stringify(audit, null, 2);\nreturn { json: { ...x, message_id_hdr: hdr ? hdr.value : '', claude_body: cuerpoClaude(SYSTEM, usuario, 4000, 'medium') } };\n",
         "mode": "runOnceForEachItem"
       },
-      "id": "037aa095-6c4c-5ea7-a110-26419af74242",
+      "id": "032d57e9-b985-542f-bfa3-195ea6675845",
       "name": "Prompt seguimiento",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -305,7 +317,7 @@
           "timeout": 180000
         }
       },
-      "id": "e4b5f8f4-d37c-57de-999f-f1757a367bc3",
+      "id": "2e326b20-4589-522f-af4c-2ded85e758d4",
       "name": "Claude · seguimiento",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
@@ -329,7 +341,7 @@
         "jsCode": "// Lee la respuesta de Claude. Antes de tocar content mira stop_reason:\n// un rechazo o un corte por max_tokens no se trata como respuesta valida.\nfunction leerClaude(r) {\n  if (!r || r.error) return { ok: false, motivo: 'error_http: ' + JSON.stringify(r && r.error || '').slice(0, 300) };\n  if (r.stop_reason === 'refusal') return { ok: false, motivo: 'refusal' };\n  if (r.stop_reason === 'max_tokens') return { ok: false, motivo: 'max_tokens' };\n  const texto = (r.content || []).filter(b => b.type === 'text').map(b => b.text).join('\\n').trim();\n  const limpio = texto.replace(/^```(?:json)?\\s*/i, '').replace(/```\\s*$/, '');\n  const i = limpio.indexOf('{'), j = limpio.lastIndexOf('}');\n  if (i < 0 || j <= i) return { ok: false, motivo: 'sin_json' };\n  try { return { ok: true, data: JSON.parse(limpio.slice(i, j + 1)) }; }\n  catch (e) { return { ok: false, motivo: 'json_invalido' }; }\n}\n\n// Mail en texto plano, UTF-8, listo para la API de Gmail (base64url).\nfunction mime({ de, para, asunto, cuerpo, enRespuestaA }) {\n  const b64 = s => Buffer.from(s, 'utf8').toString('base64');\n  const h = [\n    'From: ' + de,\n    'To: ' + para,\n    'Subject: =?UTF-8?B?' + b64(asunto) + '?=',\n    'MIME-Version: 1.0',\n    'Content-Type: text/plain; charset=\"UTF-8\"',\n    'Content-Transfer-Encoding: base64',\n  ];\n  if (enRespuestaA) h.push('In-Reply-To: ' + enRespuestaA, 'References: ' + enRespuestaA);\n  const raw = h.join('\\r\\n') + '\\r\\n\\r\\n' + b64(cuerpo).replace(/(.{76})/g, '$1\\r\\n');\n  return Buffer.from(raw, 'utf8').toString('base64').replace(/\\+/g, '-').replace(/\\//g, '_').replace(/=+$/, '');\n}\n\nconst c = $('Config').first().json;\nconst x = $('Prompt seguimiento').item.json;\nconst r = leerClaude($json);\nif (!r.ok) throw new Error('Seguimiento de ' + x.lead.nombre + ': ' + r.motivo);\nconst asunto = r.data.asunto || ('Re: ' + x.lead.asunto);\nconst raw = mime({ de: c.MI_EMAIL, para: x.lead.email, asunto, cuerpo: r.data.cuerpo,\n                   enRespuestaA: x.message_id_hdr });\nreturn { json: { ...x, asunto, cuerpo: r.data.cuerpo,\n  gmail_body: { message: { raw, threadId: x.lead.thread_id } } } };\n",
         "mode": "runOnceForEachItem"
       },
-      "id": "78f97dd5-f070-5c77-b65b-5da2d20c2eae",
+      "id": "1af8e488-0ca5-5522-a3c0-80407e938a1c",
       "name": "Leer seguimiento",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -349,7 +361,7 @@
         "specifyBody": "json",
         "jsonBody": "={{ JSON.stringify($json.gmail_body) }}"
       },
-      "id": "9d73a142-e994-5a59-bc3a-0a299c3e63ce",
+      "id": "0969522b-8de1-5c5c-8237-a446706fff0a",
       "name": "Crear borrador en el hilo",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
@@ -367,10 +379,10 @@
     },
     {
       "parameters": {
-        "jsCode": "const esc = s => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');\n\nconst c = $('Config').first().json;\nconst x = $('Leer seguimiento').item.json;\nconst k = x.n === 1 ? 'seg1' : 'seg2';\nconst link = acc => c.URL_APROBAR + '?id=' + encodeURIComponent(x.lead.id) + '&k=' + k + '&a=' + acc + '&t=' + encodeURIComponent(c.TOKEN);\nreturn { json: {\n  fila: { id: x.lead.id, estado: $json.id ? ('borrador_seg' + x.n) : 'error_borrador', draft_id: $json.id || '' },\n  telegram_text: '<b>Seguimiento ' + x.n + ' para ' + esc(x.lead.nombre) + '</b>\\n\\n<b>' + esc(x.asunto) + '</b>\\n' +\n    esc(x.cuerpo) + '\\n\\n<a href=\"' + esc(link('enviar')) + '\">✅ Enviar</a>   <a href=\"' + esc(link('descartar')) + '\">✖️ Descartar</a>',\n} };\n",
+        "jsCode": "const esc = s => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');\n\nconst c = $('Config').first().json;\nconst x = $('Leer seguimiento').item.json;\nconst k = x.n === 1 ? 'seg1' : 'seg2';\nconst link = acc => c.URL_APROBAR + '?id=' + encodeURIComponent(x.lead.id) + '&k=' + k + '&a=' + acc + '&t=' + encodeURIComponent(c.TOKEN);\nreturn { json: {\n  draft_id: $json.id || '', auto: !!c.AUTO_ENVIO && !!$json.id, n: x.n, lead_id: x.lead.id,\n  fila: { id: x.lead.id, estado: $json.id ? ('borrador_seg' + x.n) : 'error_borrador', draft_id: $json.id || '' },\n  telegram_text: '<b>Seguimiento ' + x.n + ' para ' + esc(x.lead.nombre) + '</b>\\n\\n<b>' + esc(x.asunto) + '</b>\\n' +\n    esc(x.cuerpo) + '\\n\\n<a href=\"' + esc(link('enviar')) + '\">✅ Enviar</a>   <a href=\"' + esc(link('descartar')) + '\">✖️ Descartar</a>',\n} };\n",
         "mode": "runOnceForEachItem"
       },
-      "id": "ef543340-7980-59cd-87a4-ec417d59038d",
+      "id": "84a49902-54ac-521b-83c6-d5a028b7e251",
       "name": "Datos del seguimiento",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -384,7 +396,7 @@
         "jsCode": "return { json: $json.fila };\n",
         "mode": "runOnceForEachItem"
       },
-      "id": "27a1df84-2e70-5b04-902d-fc5c669aab75",
+      "id": "c7f544a8-aae0-5158-b66d-2f6150a679d2",
       "name": "Fila seguimiento",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -416,12 +428,124 @@
         },
         "options": {}
       },
-      "id": "73324440-6b12-5e3e-b1f0-d88a9e4b938e",
+      "id": "01635951-3934-50d3-bbcf-a0250e55341d",
       "name": "Guardar borrador seguimiento",
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.5,
       "position": [
         3120,
+        0
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "REEMPLAZAR",
+          "name": "Google Sheets"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose"
+          },
+          "conditions": [
+            {
+              "id": "c26dccda-ee82-5683-8cad-06623325d4b4",
+              "leftValue": "={{ $('Datos del seguimiento').item.json.auto }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "f40db498-16e4-51b2-9651-ec224360a3dd",
+      "name": "¿Auto-envío?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        3360,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://gmail.googleapis.com/gmail/v1/users/me/drafts/send",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "gmailOAuth2",
+        "options": {},
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ id: $('Datos del seguimiento').item.json.draft_id }) }}"
+      },
+      "id": "0de05bc7-e44d-57b4-9624-a69050fda86e",
+      "name": "Enviar seguimiento (auto)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        3600,
+        0
+      ],
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "REEMPLAZAR",
+          "name": "Gmail Apardian"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "jsCode": "const x = $('Datos del seguimiento').item.json;\nreturn { json: { id: x.lead_id, estado: $json.id ? ('seguimiento_' + x.n) : 'error_envio', seguimientos: x.n, draft_id: '' } };\n",
+        "mode": "runOnceForEachItem"
+      },
+      "id": "3a9ef8e1-5912-5339-a04b-ab4eaf9b8f0f",
+      "name": "Fila seguimiento enviado",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3840,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "={{ $('Config').first().json.SHEET_ID }}",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Leads",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": []
+        },
+        "options": {}
+      },
+      "id": "b175f5c6-bb44-5e3e-bea6-352cb710b117",
+      "name": "Guardar seguimiento enviado",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        4080,
         0
       ],
       "credentials": {
@@ -441,13 +565,13 @@
           "disable_web_page_preview": true
         }
       },
-      "id": "64b4d294-11fa-5519-9f0c-6c85dff34562",
+      "id": "69ac23eb-9a46-52d9-80bb-8adc790dc00f",
       "name": "Pedir aprobación",
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        3360,
-        0
+        3600,
+        240
       ],
       "credentials": {
         "telegramApi": {
@@ -634,7 +758,47 @@
       "main": [
         [
           {
+            "node": "¿Auto-envío?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "¿Auto-envío?": {
+      "main": [
+        [
+          {
+            "node": "Enviar seguimiento (auto)",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
             "node": "Pedir aprobación",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Enviar seguimiento (auto)": {
+      "main": [
+        [
+          {
+            "node": "Fila seguimiento enviado",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fila seguimiento enviado": {
+      "main": [
+        [
+          {
+            "node": "Guardar seguimiento enviado",
             "type": "main",
             "index": 0
           }
