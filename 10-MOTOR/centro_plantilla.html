@@ -243,7 +243,9 @@ a.b[aria-disabled="true"]{opacity:.4;pointer-events:none}
   .mesa,.detalle{grid-template-columns:minmax(0,1fr)}
   .detalle img{max-width:320px}
   .agentes{grid-template-columns:minmax(0,1fr)}
-  .ag{grid-template-columns:auto minmax(0,1fr);align-items:baseline;column-gap:16px}
+  .ag{grid-template-columns:auto minmax(0,1fr);align-items:end;column-gap:14px;row-gap:10px}
+  .ag .rol{padding-bottom:6px}
+  .ag .est{grid-column:1/-1}
   .cta{display:none}
 }
 @media (max-width:640px){
@@ -838,7 +840,7 @@ function renderAgentes(){
     const b = el("button", {class:"ag", type:"button", "aria-pressed": String(k === agSel)},
       el("span", {class:"nom", text: a.nom}),
       el("span", {class:"rol", text: a.rol + (pend ? " · " + pend + " órdenes pendientes" : "")}),
-      el("span", {style:"font-size:14px", text: e[k]}));
+      el("span", {class:"est", style:"font-size:14px", text: e[k]}));
     b.addEventListener("click", () => { agSel = k; adjuntos = []; renderAgentes(); });
     return b;
   }));
