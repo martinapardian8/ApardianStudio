@@ -125,7 +125,13 @@ def piezas(cal):
             nombre = f["id"] + ".jpg"
             if not os.path.exists(os.path.join(dst, nombre)):
                 miniatura(principal, os.path.join(dst, nombre), 240 if f["tipo"] == "STORY" else 360)
-            out.append({"id": f["id"], "cal": d["fecha"] + "-" + str(i), "fecha": d["fecha"], "hora": f["hora"],
+            # los archivos en el orden en que se suben, para guardarlos de a uno en el celular
+            hojas = [x for x in archivos if not x.endswith("_portada.jpg")]
+            base = "apardian-%s-%s" % (d["fecha"][8:10] + d["fecha"][5:7], "historia" if f["tipo"] == "STORY" else "posteo")
+            bajar = [{"src": "ig/" + x, "nombre": base + ("-%02d" % k if len(hojas) > 1 else "") + os.path.splitext(x)[1]}
+                     for k, x in enumerate(hojas, 1)]
+            bajar += [{"src": "ig/" + x, "nombre": base + "-tapa.jpg"} for x in archivos if x.endswith("_portada.jpg")]
+            out.append({"id": f["id"], "cal": d["fecha"] + "-" + str(i), "fecha": d["fecha"], "hora": f["hora"], "bajar": bajar,
                         "tipo": f["tipo"], "titulo": f["titulo"], "pie": f["pie"],
                         "comentario": f["primer_comentario"], "hojas": len([a for a in archivos if not a.endswith("_portada.jpg")]),
                         "pieza": it["pieza"], "nota": it.get("nota", ""),

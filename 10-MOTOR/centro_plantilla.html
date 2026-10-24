@@ -143,6 +143,17 @@ a.paso:hover .nom{color:var(--red)}
 .detalle .der{display:grid;gap:14px;align-content:start;min-width:0}
 .orden-mini{display:grid;gap:8px;background:var(--panel);padding:14px;border:1px solid var(--line)}
 
+/* ---------- guardar en el celular ---------- */
+.celu{display:grid;gap:12px;background:var(--panel);border:1px solid var(--line);padding:16px}
+.celu-cab{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.celu-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px}
+.celu-item{display:grid;gap:6px;min-width:0}
+.celu-item img,.celu-item video{width:100%;aspect-ratio:4/5;object-fit:cover;background:var(--bg);display:block}
+.celu-item.h img,.celu-item.h video{aspect-ratio:9/16}
+.celu-item button{font:600 10px/1 var(--body);letter-spacing:.14em;text-transform:uppercase;padding:10px 8px;border:1px solid var(--line-2);background:transparent;color:var(--fg)}
+.celu-item button.ok{border-color:var(--ok);color:var(--ok)}
+.celu-item span{font-size:11px;color:var(--muted);overflow-wrap:anywhere}
+
 /* ---------- agentes ---------- */
 .agentes{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
 .ag{background:var(--bg);border:0;color:var(--fg);text-align:left;padding:22px;display:grid;gap:10px;align-content:start}
@@ -541,6 +552,53 @@ async function bajarDia(fecha, boton){
   }
 }
 
+// ---------------------------------------------------------------- guardar en el celular
+// Cada foto o video de la pieza se guarda de a uno: en el celular aparece la
+// pantalla para guardarlo (en iPhone, "Guardar imagen" o "Guardar video" lo
+// manda a Fotos). También se puede mantener apretada una foto y guardarla.
+async function guardarArchivo(a, boton){
+  if (!bajadas) throw {code: "sin_bajadas"};
+  const r = await fetch(a.src); if (!r.ok) throw {code: "no_file"};
+  const res = await bajadas.save({filename: a.nombre, data: await r.blob()});
+  if (boton){ boton.textContent = "Guardada ✓"; boton.classList.add("ok"); }
+  return res;
+}
+function mensajeGuardar(e){
+  const c = e && e.code;
+  return c === "declined" ? "No se guardó." : c === "rate_limited" ? "Esperá unos segundos y tocá de nuevo." : c === "no_file" ? "No encontré el archivo." :
+    c === "sin_bajadas" ? "Abrí el Centro desde claude.ai para guardar." : "No se puede guardar desde esta vista.";
+}
+function panelCelu(p){
+  const lista = p.bajar || []; if (!lista.length) return null;
+  const msj = el("span", {class:"adj", role:"status"});
+  const grid = el("div", {class:"celu-grid"});
+  const botones = [];
+  lista.forEach((a, i) => {
+    const esVideo = /\.mp4$/i.test(a.src);
+    const media = esVideo ? el("video", {src: a.src, controls:"", playsinline:"", preload:"metadata"}) : el("img", {src: a.src, alt: (i + 1) + " de " + lista.length, loading:"lazy"});
+    const b = el("button", {type:"button", text: "Guardar " + (lista.length > 1 ? (i + 1) : (esVideo ? "video" : "foto"))});
+    b.addEventListener("click", async () => { b.disabled = true; try { await guardarArchivo(a, b); msj.textContent = ""; } catch(e){ msj.textContent = mensajeGuardar(e); } finally { b.disabled = false; } });
+    botones.push(b);
+    grid.append(el("div", {class:"celu-item" + (esStory(p) ? " h" : "")}, media, b, el("span", {text: a.nombre})));
+  });
+  const todo = el("button", {class:"b r", type:"button", text: lista.length > 1 ? "Guardar las " + lista.length + " en el celular" : "Guardar en el celular"});
+  todo.addEventListener("click", async () => {
+    todo.disabled = true;
+    for (let i = 0; i < lista.length; i++){
+      if (botones[i].classList.contains("ok")) continue;
+      msj.textContent = "Guardando " + (i + 1) + " de " + lista.length + "…";
+      try { await guardarArchivo(lista[i], botones[i]); }
+      catch(e){ msj.textContent = mensajeGuardar(e) + (lista.length > 1 && e && e.code !== "declined" ? " Seguí con el botón de la " + (i + 1) + "." : ""); todo.disabled = false; return; }
+    }
+    msj.textContent = lista.length > 1 ? "Listo: las " + lista.length + " están guardadas, en orden." : "Listo.";
+    todo.disabled = false;
+  });
+  return el("div", {class:"celu"},
+    el("div", {class:"celu-cab"}, el("span", {class:"mono", style:"color:var(--red)", text:"Para subir desde el celular"}), todo),
+    el("p", {class:"muted", style:"margin:0;font-size:13px", text: "En iPhone, cuando aparezca la pantalla, tocá \"Guardar imagen\" (o \"Guardar video\") y va a Fotos. Se guardan en el orden en que se suben" + (lista.length > 1 ? ": 1, 2, 3…" : ".") + " También podés mantener apretada una foto y guardarla."}),
+    grid, msj);
+}
+
 // ---------------------------------------------------------------- tareas
 function tarea(it, conFecha){
   const id = "t-" + it.id;
@@ -559,7 +617,7 @@ function tarea(it, conFecha){
 function salida(p, rotulo){
   if (!p) return el("div", {class:"sale"}, el("div", {class:"txt"}, el("span", {class:"mono muted", text: rotulo}), el("p", {class:"muted", text:"Nada programado."})));
   const img = el("img", {src: p.img, alt: rotulo + ": " + p.titulo, class: esStory(p) ? "h" : "f", loading:"lazy"});
-  const ver = el("button", {class:"b l", type:"button", text:"Ver la pieza"});
+  const ver = el("button", {class:"b l", type:"button", text:"Ver y guardar en el celu"});
   ver.addEventListener("click", () => { semSel = semanaDe(p.fecha).n; piezaSel = p.id; location.hash = "semana"; });
   const pub = hecho[p.cal];
   return el("div", {class:"sale"}, img, el("div", {class:"txt"},
@@ -691,7 +749,7 @@ function renderDetalle(){
       el("div", {class:"fila"}, el("span", {class:"sello", text: TIPO[p.tipo] + (p.hojas > 1 ? " · " + p.hojas + " hojas" : "")}), sello(p.revision), pub ? el("span", {class:"sello pub", text:"Publicado"}) : null),
       notaLupa ? el("p", {class:"muted", style:"margin:0", text:"Lupa: " + notaLupa}) : null,
       p.nota ? el("p", {class:"muted", style:"margin:0", text: p.nota}) : null,
-      pie, acc,
+      pie, acc, panelCelu(p),
       el("div", {class:"orden-mini"}, el("label", {class:"campo", for:"det-orden"}, el("span", {text:"Pedir un cambio"}), ta), el("div", {class:"fila"}, env, msj)))));
 }
 
