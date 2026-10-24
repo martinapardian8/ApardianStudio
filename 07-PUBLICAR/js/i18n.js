@@ -81,8 +81,10 @@
       if (el.innerHTML !== v) el.innerHTML = v;
     });
     if (!('title' in base)) { base.title = document.title; base.desc = ($('meta[name="description"]') || {}).content || ''; base.ogt = ($('meta[property="og:title"]') || {}).content || ''; base.ogd = ($('meta[property="og:description"]') || {}).content || ''; }
-    document.title = (lang !== 'es' && dic.title) || base.title;
-    metaSet('meta[name="description"]', 'content', (lang !== 'es' && dic.desc) || base.desc);
+    // una página que no es la home trae sus propias claves de título y descripción
+    var kt = document.body.dataset.i18nTitle || 'title', kd = document.body.dataset.i18nDesc || 'desc';
+    document.title = (lang !== 'es' && dic[kt]) || base.title;
+    metaSet('meta[name="description"]', 'content', (lang !== 'es' && dic[kd]) || base.desc);
     metaSet('meta[property="og:title"]', 'content', (lang !== 'es' && dic.ogtitle) || base.ogt);
     metaSet('meta[property="og:description"]', 'content', (lang !== 'es' && dic.ogdesc) || base.ogd);
     document.documentElement.lang = LANGS[lang];

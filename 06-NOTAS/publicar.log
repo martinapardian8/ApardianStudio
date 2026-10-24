@@ -1,1301 +1,22 @@
-ffmpeg version 7.0.2-static https://johnvansickle.com/ffmpeg/  Copyright (c) 2000-2024 the FFmpeg developers
-  built with gcc 8 (Debian 8.3.0-6)
-  configuration: --enable-gpl --enable-version3 --enable-static --disable-debug --disable-ffplay --disable-indev=sndio --disable-outdev=sndio --cc=gcc --enable-fontconfig --enable-frei0r --enable-gnutls --enable-gmp --enable-libgme --enable-gray --enable-libaom --enable-libfribidi --enable-libass --enable-libvmaf --enable-libfreetype --enable-libmp3lame --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libopenjpeg --enable-librubberband --enable-libsoxr --enable-libspeex --enable-libsrt --enable-libvorbis --enable-libopus --enable-libtheora --enable-libvidstab --enable-libvo-amrwbenc --enable-libvpx --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxml2 --enable-libdav1d --enable-libxvid --enable-libzvbi --enable-libzimg
-  libavutil      59.  8.100 / 59.  8.100
-  libavcodec     61.  3.100 / 61.  3.100
-  libavformat    61.  1.100 / 61.  1.100
-  libavdevice    61.  1.100 / 61.  1.100
-  libavfilter    10.  1.100 / 10.  1.100
-  libswscale      8.  1.100 /  8.  1.100
-  libswresample   5.  1.100 /  5.  1.100
-  libpostproc    58.  1.100 / 58.  1.100
-Input #0, mov,mp4,m4a,3gp,3g2,mj2, from '/home/user/ApardianStudio/05-WEB/img/video/00_REEL_HERO.mp4':
-  Metadata:
-    major_brand     : isom
-    minor_version   : 512
-    compatible_brands: isomiso2avc1mp41
-    encoder         : Lavf61.7.100
-  Duration: 00:00:26.60, start: 0.000000, bitrate: 6048 kb/s
-  Stream #0:0[0x1](und): Video: h264 (High) (avc1 / 0x31637661), yuv420p(progressive), 1920x1080 [SAR 1:1 DAR 16:9], 6045 kb/s, 30 fps, 30 tbr, 15360 tbn (default)
-      Metadata:
-        handler_name    : VideoHandler
-        vendor_id       : [0][0][0][0]
-        encoder         : Lavc61.19.100 libx264
-Stream mapping:
-  Stream #0:0 -> #0:0 (h264 (native) -> h264 (libx264))
-Press [q] to stop, [?] for help
-[libx264 @ 0x2d5a7f00] using SAR=1/1
-[libx264 @ 0x2d5a7f00] using cpu capabilities: MMX2 SSE2Fast SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2 AVX512
-[libx264 @ 0x2d5a7f00] profile High, level 3.1, 4:2:0, 8-bit
-[libx264 @ 0x2d5a7f00] 264 - core 164 r3191 4613ac3 - H.264/MPEG-4 AVC codec - Copyleft 2003-2024 - http://www.videolan.org/x264.html - options: cabac=1 ref=5 deblock=1:0:0 analyse=0x3:0x113 me=hex subme=8 psy=1 psy_rd=1.00:0.00 mixed_ref=1 me_range=16 chroma_me=1 trellis=2 8x8dct=1 cqm=0 deadzone=21,11 fast_pskip=1 chroma_qp_offset=-2 threads=6 lookahead_threads=1 sliced_threads=0 nr=0 decimate=1 interlaced=0 bluray_compat=0 constrained_intra=0 bframes=3 b_pyramid=2 b_adapt=1 b_bias=0 direct=3 weightb=1 open_gop=0 weightp=2 keyint=250 keyint_min=25 scenecut=40 intra_refresh=0 rc_lookahead=50 rc=crf mbtree=1 crf=30.0 qcomp=0.60 qpmin=0 qpmax=69 qpstep=4 ip_ratio=1.40 aq=1:1.00
-Output #0, mp4, to '/home/user/ApardianStudio/06-NOTAS/.cache-video/00_REEL_HERO__20111959-1792423241.mp4':
-  Metadata:
-    major_brand     : isom
-    minor_version   : 512
-    compatible_brands: isomiso2avc1mp41
-    encoder         : Lavf61.1.100
-  Stream #0:0(und): Video: h264 (avc1 / 0x31637661), yuv420p(progressive), 1280x720 [SAR 1:1 DAR 16:9], q=2-31, 30 fps, 15360 tbn (default)
-      Metadata:
-        handler_name    : VideoHandler
-        vendor_id       : [0][0][0][0]
-        encoder         : Lavc61.3.100 libx264
-      Side data:
-        cpb: bitrate max/min/avg: 0/0/0 buffer size: 0 vbv_delay: N/A
-frame=    0 fps=0.0 q=0.0 size=       0KiB time=N/A bitrate=N/A speed=N/A    frame=    0 fps=0.0 q=0.0 size=       0KiB time=N/A bitrate=N/A speed=N/A    frame=    0 fps=0.0 q=0.0 size=       0KiB time=N/A bitrate=N/A speed=N/A    frame=    0 fps=0.0 q=0.0 size=       0KiB time=N/A bitrate=N/A speed=N/A    frame=   14 fps=5.6 q=36.0 size=       0KiB time=00:00:00.40 bitrate=   1.0kbits/s speed=0.16x    frame=   29 fps=9.6 q=36.0 size=       0KiB time=00:00:00.90 bitrate=   0.4kbits/s speed=0.299x    frame=   39 fps= 11 q=36.0 size=       0KiB time=00:00:01.23 bitrate=   0.3kbits/s speed=0.352x    frame=   48 fps= 12 q=36.0 size=     256KiB time=00:00:01.53 bitrate=1368.0kbits/s speed=0.383x    frame=   65 fps= 14 q=36.0 size=     256KiB time=00:00:02.10 bitrate= 998.8kbits/s speed=0.466x    frame=   84 fps= 17 q=36.0 size=     512KiB time=00:00:02.73 bitrate=1534.6kbits/s speed=0.546x    frame=  103 fps= 19 q=36.0 size=     512KiB time=00:00:03.36 bitrate=1245.9kbits/s speed=0.61x    frame=  118 fps= 20 q=36.0 size=     512KiB time=00:00:03.86 bitrate=1084.8kbits/s speed=0.642x    frame=  134 fps= 21 q=36.0 size=     512KiB time=00:00:04.40 bitrate= 953.3kbits/s speed=0.675x    frame=  146 fps= 21 q=36.0 size=     768KiB time=00:00:04.80 bitrate=1310.8kbits/s speed=0.683x    frame=  158 fps= 21 q=36.0 size=     768KiB time=00:00:05.20 bitrate=1210.0kbits/s speed=0.69x    frame=  168 fps= 21 q=36.0 size=     768KiB time=00:00:05.53 bitrate=1137.1kbits/s speed=0.688x    frame=  178 fps= 21 q=36.0 size=     768KiB time=00:00:05.86 bitrate=1072.5kbits/s speed=0.687x    frame=  190 fps= 21 q=36.0 size=     768KiB time=00:00:06.26 bitrate=1004.0kbits/s speed=0.693x    frame=  200 fps= 21 q=36.0 size=    1024KiB time=00:00:06.60 bitrate=1271.1kbits/s speed=0.691x    frame=  208 fps= 21 q=36.0 size=    1024KiB time=00:00:06.86 bitrate=1221.7kbits/s speed=0.683x    frame=  220 fps= 21 q=36.0 size=    1024KiB time=00:00:07.26 bitrate=1154.4kbits/s speed=0.688x    frame=  234 fps= 21 q=36.0 size=    1024KiB time=00:00:07.73 bitrate=1084.8kbits/s speed=0.698x    frame=  246 fps= 21 q=36.0 size=    1280KiB time=00:00:08.13 bitrate=1289.3kbits/s speed=0.702x    frame=  261 fps= 22 q=36.0 size=    1280KiB time=00:00:08.63 bitrate=1214.6kbits/s speed=0.711x    frame=  273 fps= 22 q=36.0 size=    1280KiB time=00:00:09.03 bitrate=1160.8kbits/s speed=0.715x    frame=  284 fps= 22 q=36.0 size=    1280KiB time=00:00:09.40 bitrate=1115.5kbits/s speed=0.715x    frame=  299 fps= 22 q=36.0 size=    1280KiB time=00:00:09.90 bitrate=1059.2kbits/s speed=0.726x    frame=  313 fps= 22 q=36.0 size=    1536KiB time=00:00:10.36 bitrate=1213.8kbits/s speed=0.733x    frame=  323 fps= 22 q=36.0 size=    1536KiB time=00:00:10.70 bitrate=1176.0kbits/s speed=0.731x    frame=  333 fps= 22 q=36.0 size=    1536KiB time=00:00:11.03 bitrate=1140.5kbits/s speed=0.728x    frame=  342 fps= 22 q=36.0 size=    1536KiB time=00:00:11.33 bitrate=1110.3kbits/s speed=0.724x    frame=  354 fps= 22 q=36.0 size=    1536KiB time=00:00:11.73 bitrate=1072.4kbits/s speed=0.726x    frame=  362 fps= 22 q=36.0 size=    1792KiB time=00:00:12.00 bitrate=1223.4kbits/s speed=0.72x    frame=  375 fps= 22 q=36.0 size=    1792KiB time=00:00:12.43 bitrate=1180.7kbits/s speed=0.725x    frame=  387 fps= 22 q=36.0 size=    1792KiB time=00:00:12.83 bitrate=1143.9kbits/s speed=0.727x    frame=  400 fps= 22 q=36.0 size=    1792KiB time=00:00:13.26 bitrate=1106.6kbits/s speed=0.73x    frame=  408 fps= 22 q=36.0 size=    1792KiB time=00:00:13.53 bitrate=1084.8kbits/s speed=0.725x    frame=  423 fps= 22 q=36.0 size=    1792KiB time=00:00:14.03 bitrate=1046.1kbits/s speed=0.732x    frame=  439 fps= 22 q=36.0 size=    2048KiB time=00:00:14.56 bitrate=1151.8kbits/s speed=0.741x    frame=  455 fps= 23 q=36.0 size=    2048KiB time=00:00:15.10 bitrate=1111.1kbits/s speed=0.749x    frame=  467 fps= 23 q=36.0 size=    2048KiB time=00:00:15.50 bitrate=1082.4kbits/s speed=0.75x    frame=  478 fps= 23 q=33.0 size=    2048KiB time=00:00:15.90 bitrate=1055.2kbits/s speed=0.751x    frame=  493 fps= 23 q=36.0 size=    2048KiB time=00:00:16.36 bitrate=1025.1kbits/s speed=0.755x    frame=  508 fps= 23 q=36.0 size=    2048KiB time=00:00:16.86 bitrate= 994.7kbits/s speed=0.761x    frame=  515 fps= 23 q=36.0 size=    2304KiB time=00:00:17.10 bitrate=1103.8kbits/s speed=0.754x    frame=  532 fps= 23 q=36.0 size=    2304KiB time=00:00:17.66 bitrate=1068.4kbits/s speed=0.762x    frame=  542 fps= 23 q=36.0 size=    2304KiB time=00:00:18.00 bitrate=1048.6kbits/s speed=0.76x    frame=  553 fps= 23 q=33.0 size=    2304KiB time=00:00:18.36 bitrate=1027.7kbits/s speed=0.759x    frame=  564 fps= 23 q=36.0 size=    2304KiB time=00:00:18.73 bitrate=1007.5kbits/s speed=0.759x    frame=  576 fps= 23 q=36.0 size=    2304KiB time=00:00:19.16 bitrate= 984.8kbits/s speed=0.761x    frame=  583 fps= 23 q=36.0 size=    2304KiB time=00:00:19.46 bitrate= 969.6kbits/s speed=0.758x    frame=  600 fps= 23 q=36.0 size=    2560KiB time=00:00:19.93 bitrate=1052.1kbits/s speed=0.761x    frame=  608 fps= 23 q=36.0 size=    2560KiB time=00:00:20.20 bitrate=1038.2kbits/s speed=0.757x    frame=  621 fps= 23 q=36.0 size=    2560KiB time=00:00:20.63 bitrate=1016.4kbits/s speed=0.759x    frame=  635 fps= 23 q=36.0 size=    2560KiB time=00:00:21.10 bitrate= 993.9kbits/s speed=0.762x    frame=  648 fps= 23 q=36.0 size=    2816KiB time=00:00:21.53 bitrate=1071.3kbits/s speed=0.763x    frame=  659 fps= 23 q=36.0 size=    2816KiB time=00:00:21.90 bitrate=1053.4kbits/s speed=0.763x    frame=  674 fps= 23 q=36.0 size=    2816KiB time=00:00:22.40 bitrate=1029.9kbits/s speed=0.767x    frame=  687 fps= 23 q=36.0 size=    2816KiB time=00:00:22.83 bitrate=1010.3kbits/s speed=0.768x    frame=  699 fps= 23 q=36.0 size=    3072KiB time=00:00:23.23 bitrate=1083.2kbits/s speed=0.769x    frame=  708 fps= 23 q=36.0 size=    3072KiB time=00:00:23.53 bitrate=1069.4kbits/s speed=0.766x    frame=  722 fps= 23 q=36.0 size=    3072KiB time=00:00:24.00 bitrate=1048.6kbits/s speed=0.768x    frame=  734 fps= 23 q=36.0 size=    3072KiB time=00:00:24.40 bitrate=1031.4kbits/s speed=0.769x    frame=  756 fps= 23 q=36.0 size=    3072KiB time=00:00:25.13 bitrate=1001.3kbits/s speed=0.779x    frame=  777 fps= 24 q=36.0 size=    3328KiB time=00:00:25.83 bitrate=1055.4kbits/s speed=0.789x    [mp4 @ 0x2d59ae40] Starting second pass: moving the moov atom to the beginning of the file
-[out#0/mp4 @ 0x2d5ac1c0] video:3432KiB audio:0KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: 0.292321%
-frame=  798 fps= 24 q=-1.0 Lsize=    3442KiB time=00:00:26.53 bitrate=1062.6kbits/s speed=0.801x    
-[libx264 @ 0x2d5a7f00] frame I:31    Avg QP:27.04  size: 46259
-[libx264 @ 0x2d5a7f00] frame P:233   Avg QP:30.89  size:  5833
-[libx264 @ 0x2d5a7f00] frame B:534   Avg QP:33.37  size:  1348
-[libx264 @ 0x2d5a7f00] consecutive B-frames:  5.9% 10.8% 11.7% 71.7%
-[libx264 @ 0x2d5a7f00] mb I  I16..4: 19.8% 72.2%  8.0%
-[libx264 @ 0x2d5a7f00] mb P  I16..4:  3.1%  4.2%  0.1%  P16..4: 32.5%  6.2%  2.9%  0.0%  0.0%    skip:51.1%
-[libx264 @ 0x2d5a7f00] mb B  I16..4:  0.2%  0.4%  0.0%  B16..8: 24.7%  0.8%  0.1%  direct: 0.2%  skip:73.6%  L0:44.5% L1:53.9% BI: 1.6%
-[libx264 @ 0x2d5a7f00] 8x8 transform intra:66.5% inter:79.8%
-[libx264 @ 0x2d5a7f00] direct mvs  spatial:99.4% temporal:0.6%
-[libx264 @ 0x2d5a7f00] coded y,uvDC,uvAC intra: 46.7% 51.2% 18.0% inter: 2.7% 3.2% 0.0%
-[libx264 @ 0x2d5a7f00] i16 v,h,dc,p: 23% 32% 11% 35%
-[libx264 @ 0x2d5a7f00] i8 v,h,dc,ddl,ddr,vr,hd,vl,hu: 11% 11% 16%  8% 10% 10% 11% 10% 13%
-[libx264 @ 0x2d5a7f00] i4 v,h,dc,ddl,ddr,vr,hd,vl,hu: 12% 12%  6%  9% 13% 12% 14% 10% 14%
-[libx264 @ 0x2d5a7f00] i8c dc,h,v,p: 49% 25% 14% 11%
-[libx264 @ 0x2d5a7f00] Weighted P-Frames: Y:0.9% UV:0.4%
-[libx264 @ 0x2d5a7f00] ref P L0: 66.3% 17.5% 10.9%  2.9%  2.3%  0.1%
-[libx264 @ 0x2d5a7f00] ref B L0: 93.9%  4.3%  1.5%  0.3%
-[libx264 @ 0x2d5a7f00] ref B L1: 98.7%  1.3%
-[libx264 @ 0x2d5a7f00] kb/s:1056.62
-video codificado 00_REEL_HERO.mp4
-ffmpeg version 7.0.2-static https://johnvansickle.com/ffmpeg/  Copyright (c) 2000-2024 the FFmpeg developers
-  built with gcc 8 (Debian 8.3.0-6)
-  configuration: --enable-gpl --enable-version3 --enable-static --disable-debug --disable-ffplay --disable-indev=sndio --disable-outdev=sndio --cc=gcc --enable-fontconfig --enable-frei0r --enable-gnutls --enable-gmp --enable-libgme --enable-gray --enable-libaom --enable-libfribidi --enable-libass --enable-libvmaf --enable-libfreetype --enable-libmp3lame --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libopenjpeg --enable-librubberband --enable-libsoxr --enable-libspeex --enable-libsrt --enable-libvorbis --enable-libopus --enable-libtheora --enable-libvidstab --enable-libvo-amrwbenc --enable-libvpx --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxml2 --enable-libdav1d --enable-libxvid --enable-libzvbi --enable-libzimg
-  libavutil      59.  8.100 / 59.  8.100
-  libavcodec     61.  3.100 / 61.  3.100
-  libavformat    61.  1.100 / 61.  1.100
-  libavdevice    61.  1.100 / 61.  1.100
-  libavfilter    10.  1.100 / 10.  1.100
-  libswscale      8.  1.100 /  8.  1.100
-  libswresample   5.  1.100 /  5.  1.100
-  libpostproc    58.  1.100 / 58.  1.100
-Input #0, mov,mp4,m4a,3gp,3g2,mj2, from '/home/user/ApardianStudio/05-WEB/img/video/01_hero_fuego.mp4':
-  Metadata:
-    minor_version   : 512
-    major_brand     : isom
-    compatible_brands: isomiso2avc1mp41
-    encoder         : Lavf60.16.100
-  Duration: 00:00:05.04, start: 0.000000, bitrate: 11489 kb/s
-  Stream #0:0[0x1](und): Audio: aac (LC) (mp4a / 0x6134706D), 44100 Hz, stereo, fltp, 128 kb/s (default)
-      Metadata:
-        handler_name    : SoundHandler
-        vendor_id       : [0][0][0][0]
-  Stream #0:1[0x2](und): Video: h264 (Main) (avc1 / 0x31637661), yuv420p(progressive), 1280x720, 11352 kb/s, 24 fps, 24 tbr, 12288 tbn (default)
-      Metadata:
-        handler_name    : VideoHandler
-        vendor_id       : [0][0][0][0]
-        encoder         : Lavc60.31.102 h264_slapi
-Stream mapping:
-  Stream #0:1 -> #0:0 (h264 (native) -> h264 (libx264))
-Press [q] to stop, [?] for help
-[h264 @ 0x442c11c0] Late SEI is not implemented. Update your FFmpeg version to the newest one from Git. If the problem still occurs, it means that your file has a feature which has not been implemented.
-[h264 @ 0x442c11c0] If you want to help, upload a sample of this file to https://streams.videolan.org/upload/ and contact the ffmpeg-devel mailing list. (ffmpeg-devel@ffmpeg.org)
-[libx264 @ 0x442c23c0] using cpu capabilities: MMX2 SSE2Fast SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2 AVX512
-[libx264 @ 0x442c23c0] profile High, level 3.1, 4:2:0, 8-bit
-[libx264 @ 0x442c23c0] 264 - core 164 r3191 4613ac3 - H.264/MPEG-4 AVC codec - Copyleft 2003-2024 - http://www.videolan.org/x264.html - options: cabac=1 ref=5 deblock=1:0:0 analyse=0x3:0x113 me=hex subme=8 psy=1 psy_rd=1.00:0.00 mixed_ref=1 me_range=16 chroma_me=1 trellis=2 8x8dct=1 cqm=0 deadzone=21,11 fast_pskip=1 chroma_qp_offset=-2 threads=6 lookahead_threads=1 sliced_threads=0 nr=0 decimate=1 interlaced=0 bluray_compat=0 constrained_intra=0 bframes=3 b_pyramid=2 b_adapt=1 b_bias=0 direct=3 weightb=1 open_gop=0 weightp=2 keyint=250 keyint_min=24 scenecut=40 intra_refresh=0 rc_lookahead=50 rc=crf mbtree=1 crf=30.0 qcomp=0.60 qpmin=0 qpmax=69 qpstep=4 ip_ratio=1.40 aq=1:1.00
-Output #0, mp4, to '/home/user/ApardianStudio/06-NOTAS/.cache-video/01_hero_fuego__7240713-1792423241.mp4':
-  Metadata:
-    minor_version   : 512
-    major_brand     : isom
-    compatible_brands: isomiso2avc1mp41
-    encoder         : Lavf61.1.100
-  Stream #0:0(und): Video: h264 (avc1 / 0x31637661), yuv420p(progressive), 1280x720, q=2-31, 24 fps, 12288 tbn (default)
-      Metadata:
-        handler_name    : VideoHandler
-        vendor_id       : [0][0][0][0]
-        encoder         : Lavc61.3.100 libx264
-      Side data:
-        cpb: bitrate max/min/avg: 0/0/0 buffer size: 0 vbv_delay: N/A
-frame=    0 fps=0.0 q=0.0 size=       0KiB time=N/A bitrate=N/A speed=N/A    frame=    1 fps=1.0 q=35.0 size=       0KiB time=-00:00:00.04 bitrate=N/A speed=N/A    frame=   12 fps=8.0 q=35.0 size=       0KiB time=00:00:00.41 bitrate=   0.9kbits/s speed=0.277x    frame=   21 fps= 10 q=35.0 size=       0KiB time=00:00:00.79 bitrate=   0.5kbits/s speed=0.395x    frame=   30 fps= 12 q=35.0 size=       0KiB time=00:00:01.16 bitrate=   0.3kbits/s speed=0.466x    frame=   44 fps= 15 q=35.0 size=     256KiB time=00:00:01.83 bitrate=1144.1kbits/s speed=0.61x    frame=   58 fps= 17 q=35.0 size=     256KiB time=00:00:02.33 bitrate= 898.9kbits/s speed=0.665x    frame=   73 fps= 18 q=35.0 size=     256KiB time=00:00:02.95 bitrate= 709.0kbits/s speed=0.738x    frame=   87 fps= 19 q=35.0 size=     256KiB time=00:00:03.54 bitrate= 592.2kbits/s speed=0.785x    frame=   98 fps= 20 q=35.0 size=     256KiB time=00:00:04.00 bitrate= 524.4kbits/s speed=0.798x    frame=  113 fps= 20 q=35.0 size=     512KiB time=00:00:04.62 bitrate= 907.0kbits/s speed=0.839x    [mp4 @ 0x4436f580] Starting second pass: moving the moov atom to the beginning of the file
-[out#0/mp4 @ 0x442bc180] video:558KiB audio:0KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: 0.397444%
-frame=  121 fps= 21 q=-1.0 Lsize=     560KiB time=00:00:04.95 bitrate= 925.6kbits/s speed=0.874x    
-[libx264 @ 0x442c23c0] frame I:1     Avg QP:31.52  size: 20155
-[libx264 @ 0x442c23c0] frame P:32    Avg QP:29.48  size:  8620
-[libx264 @ 0x442c23c0] frame B:88    Avg QP:31.63  size:  3122
-[libx264 @ 0x442c23c0] consecutive B-frames:  1.7%  0.0% 12.4% 86.0%
-[libx264 @ 0x442c23c0] mb I  I16..4: 30.7% 66.6%  2.7%
-[libx264 @ 0x442c23c0] mb P  I16..4: 14.4% 12.1%  0.2%  P16..4: 37.6%  3.9%  2.3%  0.0%  0.0%    skip:29.6%
-[libx264 @ 0x442c23c0] mb B  I16..4:  2.4%  2.5%  0.0%  B16..8: 33.7%  1.7%  0.2%  direct: 0.6%  skip:59.0%  L0:44.1% L1:54.2% BI: 1.6%
-[libx264 @ 0x442c23c0] 8x8 transform intra:48.7% inter:92.3%
-[libx264 @ 0x442c23c0] direct mvs  spatial:96.6% temporal:3.4%
-[libx264 @ 0x442c23c0] coded y,uvDC,uvAC intra: 17.9% 50.2% 13.5% inter: 4.8% 8.8% 0.0%
-[libx264 @ 0x442c23c0] i16 v,h,dc,p: 24% 31% 20% 25%
-[libx264 @ 0x442c23c0] i8 v,h,dc,ddl,ddr,vr,hd,vl,hu: 11% 12% 30%  6%  9%  8%  9%  6%  8%
-[libx264 @ 0x442c23c0] i4 v,h,dc,ddl,ddr,vr,hd,vl,hu: 10%  8% 13% 11% 14% 12% 12%  9% 11%
-[libx264 @ 0x442c23c0] i8c dc,h,v,p: 59% 20% 13%  8%
-[libx264 @ 0x442c23c0] Weighted P-Frames: Y:0.0% UV:0.0%
-[libx264 @ 0x442c23c0] ref P L0: 43.2% 31.6% 13.7%  5.7%  5.7%  0.1%
-[libx264 @ 0x442c23c0] ref B L0: 84.7%  9.2%  4.3%  1.9%
-[libx264 @ 0x442c23c0] ref B L1: 95.9%  4.1%
-[libx264 @ 0x442c23c0] kb/s:905.59
-video codificado 01_hero_fuego.mp4
-ffmpeg version 7.0.2-static https://johnvansickle.com/ffmpeg/  Copyright (c) 2000-2024 the FFmpeg developers
-  built with gcc 8 (Debian 8.3.0-6)
-  configuration: --enable-gpl --enable-version3 --enable-static --disable-debug --disable-ffplay --disable-indev=sndio --disable-outdev=sndio --cc=gcc --enable-fontconfig --enable-frei0r --enable-gnutls --enable-gmp --enable-libgme --enable-gray --enable-libaom --enable-libfribidi --enable-libass --enable-libvmaf --enable-libfreetype --enable-libmp3lame --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libopenjpeg --enable-librubberband --enable-libsoxr --enable-libspeex --enable-libsrt --enable-libvorbis --enable-libopus --enable-libtheora --enable-libvidstab --enable-libvo-amrwbenc --enable-libvpx --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxml2 --enable-libdav1d --enable-libxvid --enable-libzvbi --enable-libzimg
-  libavutil      59.  8.100 / 59.  8.100
-  libavcodec     61.  3.100 / 61.  3.100
-  libavformat    61.  1.100 / 61.  1.100
-  libavdevice    61.  1.100 / 61.  1.100
-  libavfilter    10.  1.100 / 10.  1.100
-  libswscale      8.  1.100 /  8.  1.100
-  libswresample   5.  1.100 /  5.  1.100
-  libpostproc    58.  1.100 / 58.  1.100
-Input #0, mov,mp4,m4a,3gp,3g2,mj2, from '/home/user/ApardianStudio/05-WEB/img/video/02_parrilla_pollo.mp4':
-  Metadata:
-    minor_version   : 512
-    major_brand     : isom
-    compatible_brands: isomiso2avc1mp41
-    encoder         : Lavf60.16.100
-  Duration: 00:00:05.04, start: 0.000000, bitrate: 8002 kb/s
-  Stream #0:0[0x1](und): Audio: aac (LC) (mp4a / 0x6134706D), 44100 Hz, stereo, fltp, 128 kb/s (default)
-      Metadata:
-        handler_name    : SoundHandler
-        vendor_id       : [0][0][0][0]
-  Stream #0:1[0x2](und): Video: h264 (Main) (avc1 / 0x31637661), yuv420p(progressive), 784x1176, 7865 kb/s, 24 fps, 24 tbr, 12288 tbn (default)
-      Metadata:
-        handler_name    : VideoHandler
-        vendor_id       : [0][0][0][0]
-        encoder         : Lavc60.31.102 h264_slapi
-Stream mapping:
-  Stream #0:1 -> #0:0 (h264 (native) -> h264 (libx264))
-Press [q] to stop, [?] for help
-[h264 @ 0x39bdb340] Late SEI is not implemented. Update your FFmpeg version to the newest one from Git. If the problem still occurs, it means that your file has a feature which has not been implemented.
-[h264 @ 0x39bdb340] If you want to help, upload a sample of this file to https://streams.videolan.org/upload/ and contact the ffmpeg-devel mailing list. (ffmpeg-devel@ffmpeg.org)
-[libx264 @ 0x39bd6b40] using cpu capabilities: MMX2 SSE2Fast SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2 AVX512
-[libx264 @ 0x39bd6b40] profile High, level 5.0, 4:2:0, 8-bit
-[libx264 @ 0x39bd6b40] 264 - core 164 r3191 4613ac3 - H.264/MPEG-4 AVC codec - Copyleft 2003-2024 - http://www.videolan.org/x264.html - options: cabac=1 ref=5 deblock=1:0:0 analyse=0x3:0x113 me=hex subme=8 psy=1 psy_rd=1.00:0.00 mixed_ref=1 me_range=16 chroma_me=1 trellis=2 8x8dct=1 cqm=0 deadzone=21,11 fast_pskip=1 chroma_qp_offset=-2 threads=6 lookahead_threads=1 sliced_threads=0 nr=0 decimate=1 interlaced=0 bluray_compat=0 constrained_intra=0 bframes=3 b_pyramid=2 b_adapt=1 b_bias=0 direct=3 weightb=1 open_gop=0 weightp=2 keyint=250 keyint_min=24 scenecut=40 intra_refresh=0 rc_lookahead=50 rc=crf mbtree=1 crf=30.0 qcomp=0.60 qpmin=0 qpmax=69 qpstep=4 ip_ratio=1.40 aq=1:1.00
-Output #0, mp4, to '/home/user/ApardianStudio/06-NOTAS/.cache-video/02_parrilla_pollo__5043121-1792423241.mp4':
-  Metadata:
-    minor_version   : 512
-    major_brand     : isom
-    compatible_brands: isomiso2avc1mp41
-    encoder         : Lavf61.1.100
-  Stream #0:0(und): Video: h264 (avc1 / 0x31637661), yuv420p(progressive), 1280x1920, q=2-31, 24 fps, 12288 tbn (default)
-      Metadata:
-        handler_name    : VideoHandler
-        vendor_id       : [0][0][0][0]
-        encoder         : Lavc61.3.100 libx264
-      Side data:
-        cpb: bitrate max/min/avg: 0/0/0 buffer size: 0 vbv_delay: N/A
-frame=    0 fps=0.0 q=0.0 size=       0KiB time=N/A bitrate=N/A speed=N/A    frame=    0 fps=0.0 q=0.0 size=       0KiB time=N/A bitrate=N/A speed=N/A    frame=    0 fps=0.0 q=0.0 size=       0KiB time=N/A bitrate=N/A speed=N/A    frame=    0 fps=0.0 q=0.0 size=       0KiB time=N/A bitrate=N/A speed=N/A    frame=    0 fps=0.0 q=0.0 size=       0KiB time=N/A bitrate=N/A speed=N/A    frame=    0 fps=0.0 q=0.0 size=       0KiB time=N/A bitrate=N/A speed=N/A    frame=    0 fps=0.0 q=0.0 size=       0KiB time=N/A bitrate=N/A speed=N/A    frame=    0 fps=0.0 q=0.0 size=       0KiB time=N/A bitrate=N/A speed=N/A    frame=    0 fps=0.0 q=0.0 size=       0KiB time=N/A bitrate=N/A speed=N/A    frame=    5 fps=1.0 q=35.0 size=       0KiB time=00:00:00.12 bitrate=   3.1kbits/s speed=0.0249x    frame=    9 fps=1.6 q=35.0 size=       0KiB time=00:00:00.29 bitrate=   1.3kbits/s speed=0.0528x    frame=   13 fps=2.2 q=35.0 size=       0KiB time=00:00:00.45 bitrate=   0.8kbits/s speed=0.0761x    frame=   17 fps=2.6 q=35.0 size=       0KiB time=00:00:00.62 bitrate=   0.6kbits/s speed=0.0958x    frame=   21 fps=3.0 q=35.0 size=       0KiB time=00:00:00.79 bitrate=   0.5kbits/s speed=0.113x    frame=   23 fps=3.1 q=35.0 size=       0KiB time=00:00:00.87 bitrate=   0.4kbits/s speed=0.116x    frame=   29 fps=3.6 q=35.0 size=     256KiB time=00:00:01.12 bitrate=1864.5kbits/s speed=0.14x    frame=   35 fps=4.1 q=35.0 size=     256KiB time=00:00:01.37 bitrate=1525.5kbits/s speed=0.161x    frame=   41 fps=4.5 q=35.0 size=     256KiB time=00:00:01.62 bitrate=1290.8kbits/s speed=0.18x    frame=   45 fps=4.7 q=35.0 size=     256KiB time=00:00:01.79 bitrate=1170.7kbits/s speed=0.188x    frame=   51 fps=5.1 q=35.0 size=     256KiB time=00:00:02.04 bitrate=1027.4kbits/s speed=0.203x    frame=   57 fps=5.4 q=35.0 size=     256KiB time=00:00:02.29 bitrate= 915.3kbits/s speed=0.217x    frame=   63 fps=5.7 q=35.0 size=     256KiB time=00:00:02.54 bitrate= 825.3kbits/s speed=0.23x    frame=   66 fps=5.7 q=35.0 size=     256KiB time=00:00:02.66 bitrate= 786.6kbits/s speed=0.231x    frame=   73 fps=6.1 q=35.0 size=     512KiB time=00:00:02.95 bitrate=1417.9kbits/s speed=0.245x    frame=   80 fps=6.4 q=35.0 size=     512KiB time=00:00:03.25 bitrate=1290.7kbits/s speed=0.259x    frame=   86 fps=6.5 q=35.0 size=     512KiB time=00:00:03.50 bitrate=1198.5kbits/s speed=0.265x    frame=   92 fps=6.7 q=35.0 size=     512KiB time=00:00:03.75 bitrate=1118.6kbits/s speed=0.274x    frame=   97 fps=6.8 q=35.0 size=     512KiB time=00:00:03.95 bitrate=1059.7kbits/s speed=0.279x    frame=  101 fps=6.9 q=35.0 size=     768KiB time=00:00:04.12 bitrate=1525.3kbits/s speed=0.281x    frame=  109 fps=7.2 q=35.0 size=     768KiB time=00:00:04.45 bitrate=1411.3kbits/s speed=0.293x    frame=  114 fps=7.3 q=35.0 size=     768KiB time=00:00:04.66 bitrate=1348.3kbits/s speed=0.297x    [mp4 @ 0x39c65dc0] Starting second pass: moving the moov atom to the beginning of the file
-[out#0/mp4 @ 0x39c152c0] video:944KiB audio:0KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: 0.239059%
-frame=  121 fps=7.6 q=-1.0 Lsize=     946KiB time=00:00:04.95 bitrate=1563.5kbits/s speed=0.31x    
-[libx264 @ 0x39bd6b40] frame I:1     Avg QP:29.45  size: 40036
-[libx264 @ 0x39bd6b40] frame P:30    Avg QP:29.12  size: 17011
-[libx264 @ 0x39bd6b40] frame B:90    Avg QP:31.43  size:  4618
-[libx264 @ 0x39bd6b40] consecutive B-frames:  0.8%  0.0%  0.0% 99.2%
-[libx264 @ 0x39bd6b40] mb I  I16..4: 38.0% 60.5%  1.4%
-[libx264 @ 0x39bd6b40] mb P  I16..4:  5.7%  9.1%  0.1%  P16..4: 40.6%  4.5%  2.4%  0.0%  0.0%    skip:37.6%
-[libx264 @ 0x39bd6b40] mb B  I16..4:  0.5%  0.7%  0.0%  B16..8: 29.8%  1.0%  0.1%  direct: 0.4%  skip:67.5%  L0:37.8% L1:61.3% BI: 0.9%
-[libx264 @ 0x39bd6b40] 8x8 transform intra:60.9% inter:93.0%
-[libx264 @ 0x39bd6b40] direct mvs  spatial:95.6% temporal:4.4%
-[libx264 @ 0x39bd6b40] coded y,uvDC,uvAC intra: 17.0% 29.6% 4.4% inter: 2.6% 4.9% 0.0%
-[libx264 @ 0x39bd6b40] i16 v,h,dc,p: 25% 27% 10% 38%
-[libx264 @ 0x39bd6b40] i8 v,h,dc,ddl,ddr,vr,hd,vl,hu: 12%  9% 36%  5%  8%  8%  9%  6%  7%
-[libx264 @ 0x39bd6b40] i4 v,h,dc,ddl,ddr,vr,hd,vl,hu: 10%  8%  5%  8% 15% 14% 16% 10% 15%
-[libx264 @ 0x39bd6b40] i8c dc,h,v,p: 66% 15% 10%  9%
-[libx264 @ 0x39bd6b40] Weighted P-Frames: Y:0.0% UV:0.0%
-[libx264 @ 0x39bd6b40] ref P L0: 61.2% 15.8% 17.1%  3.1%  2.7%
-[libx264 @ 0x39bd6b40] ref B L0: 90.0%  7.0%  2.2%  0.7%
-[libx264 @ 0x39bd6b40] ref B L1: 97.3%  2.7%
-[libx264 @ 0x39bd6b40] kb/s:1532.85
-video codificado 02_parrilla_pollo.mp4
-ffmpeg version 7.0.2-static https://johnvansickle.com/ffmpeg/  Copyright (c) 2000-2024 the FFmpeg developers
-  built with gcc 8 (Debian 8.3.0-6)
-  configuration: --enable-gpl --enable-version3 --enable-static --disable-debug --disable-ffplay --disable-indev=sndio --disable-outdev=sndio --cc=gcc --enable-fontconfig --enable-frei0r --enable-gnutls --enable-gmp --enable-libgme --enable-gray --enable-libaom --enable-libfribidi --enable-libass --enable-libvmaf --enable-libfreetype --enable-libmp3lame --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libopenjpeg --enable-librubberband --enable-libsoxr --enable-libspeex --enable-libsrt --enable-libvorbis --enable-libopus --enable-libtheora --enable-libvidstab --enable-libvo-amrwbenc --enable-libvpx --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxml2 --enable-libdav1d --enable-libxvid --enable-libzvbi --enable-libzimg
-  libavutil      59.  8.100 / 59.  8.100
-  libavcodec     61.  3.100 / 61.  3.100
-  libavformat    61.  1.100 / 61.  1.100
-  libavdevice    61.  1.100 / 61.  1.100
-  libavfilter    10.  1.100 / 10.  1.100
-  libswscale      8.  1.100 /  8.  1.100
-  libswresample   5.  1.100 /  5.  1.100
-  libpostproc    58.  1.100 / 58.  1.100
-Input #0, mov,mp4,m4a,3gp,3g2,mj2, from '/home/user/ApardianStudio/05-WEB/img/video/03_empanadas.mp4':
-  Metadata:
-    minor_version   : 512
-    major_brand     : isom
-    compatible_brands: isomiso2avc1mp41
-    encoder         : Lavf60.16.100
-  Duration: 00:00:05.04, start: 0.000000, bitrate: 5649 kb/s
-  Stream #0:0[0x1](und): Audio: aac (LC) (mp4a / 0x6134706D), 44100 Hz, stereo, fltp, 128 kb/s (default)
-      Metadata:
-        handler_name    : SoundHandler
-        vendor_id       : [0][0][0][0]
-  Stream #0:1[0x2](und): Video: h264 (Main) (avc1 / 0x31637661), yuv420p(progressive), 772x1192, 5512 kb/s, 24 fps, 24 tbr, 12288 tbn (default)
-      Metadata:
-        handler_name    : VideoHandler
-        vendor_id       : [0][0][0][0]
-        encoder         : Lavc60.31.102 h264_slapi
-Stream mapping:
-  Stream #0:1 -> #0:0 (h264 (native) -> h264 (libx264))
-Press [q] to stop, [?] for help
-[h264 @ 0x2507e740] Late SEI is not implemented. Update your FFmpeg version to the newest one from Git. If the problem still occurs, it means that your file has a feature which has not been implemented.
-[h264 @ 0x2507e740] If you want to help, upload a sample of this file to https://streams.videolan.org/upload/ and contact the ffmpeg-devel mailing list. (ffmpeg-devel@ffmpeg.org)
-[libx264 @ 0x25078e40] using cpu capabilities: MMX2 SSE2Fast SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2 AVX512
-[libx264 @ 0x25078e40] profile High, level 5.0, 4:2:0, 8-bit
-[libx264 @ 0x25078e40] 264 - core 164 r3191 4613ac3 - H.264/MPEG-4 AVC codec - Copyleft 2003-2024 - http://www.videolan.org/x264.html - options: cabac=1 ref=5 deblock=1:0:0 analyse=0x3:0x113 me=hex subme=8 psy=1 psy_rd=1.00:0.00 mixed_ref=1 me_range=16 chroma_me=1 trellis=2 8x8dct=1 cqm=0 deadzone=21,11 fast_pskip=1 chroma_qp_offset=-2 threads=6 lookahead_threads=1 sliced_threads=0 nr=0 decimate=1 interlaced=0 bluray_compat=0 constrained_intra=0 bframes=3 b_pyramid=2 b_adapt=1 b_bias=0 direct=3 weightb=1 open_gop=0 weightp=2 keyint=250 keyint_min=24 scenecut=40 intra_refresh=0 rc_lookahead=50 rc=crf mbtree=1 crf=30.0 qcomp=0.60 qpmin=0 qpmax=69 qpstep=4 ip_ratio=1.40 aq=1:1.00
-Output #0, mp4, to '/home/user/ApardianStudio/06-NOTAS/.cache-video/03_empanadas__3560252-1792423241.mp4':
-  Metadata:
-    minor_version   : 512
-    major_brand     : isom
-    compatible_brands: isomiso2avc1mp41
-    encoder         : Lavf61.1.100
-  Stream #0:0(und): Video: h264 (avc1 / 0x31637661), yuv420p(progressive), 1280x1976, q=2-31, 24 fps, 12288 tbn (default)
-      Metadata:
-        handler_name    : VideoHandler
-        vendor_id       : [0][0][0][0]
-        encoder         : Lavc61.3.100 libx264
-      Side data:
-        cpb: bitrate max/min/avg: 0/0/0 buffer size: 0 vbv_delay: N/A
-frame=    0 fps=0.0 q=0.0 size=       0KiB time=N/A bitrate=N/A speed=N/A    frame=    0 fps=0.0 q=0.0 size=       0KiB time=N/A bitrate=N/A speed=N/A    frame=    0 fps=0.0 q=0.0 size=       0KiB time=N/A bitrate=N/A speed=N/A    frame=    0 fps=0.0 q=0.0 size=       0KiB time=N/A bitrate=N/A speed=N/A    frame=    6 fps=2.4 q=35.0 size=       0KiB time=00:00:00.16 bitrate=   2.3kbits/s speed=0.0666x    frame=    7 fps=2.3 q=35.0 size=       0KiB time=00:00:00.20 bitrate=   1.8kbits/s speed=0.0694x    frame=   13 fps=3.7 q=35.0 size=       0KiB time=00:00:00.45 bitrate=   0.8kbits/s speed=0.131x    frame=   18 fps=4.5 q=35.0 size=       0KiB time=00:00:00.66 bitrate=   0.6kbits/s speed=0.166x    frame=   23 fps=5.1 q=35.0 size=       0KiB time=00:00:00.87 bitrate=   0.4kbits/s speed=0.194x    frame=   28 fps=5.6 q=35.0 size=       0KiB time=00:00:01.08 bitrate=   0.4kbits/s speed=0.216x    frame=   34 fps=6.2 q=35.0 size=       0KiB time=00:00:01.33 bitrate=   0.3kbits/s speed=0.241x    frame=   41 fps=6.8 q=35.0 size=       0KiB time=00:00:01.62 bitrate=   0.2kbits/s speed=0.27x    frame=   46 fps=7.0 q=35.0 size=       0KiB time=00:00:01.83 bitrate=   0.2kbits/s speed=0.281x    frame=   52 fps=7.4 q=35.0 size=       0KiB time=00:00:02.08 bitrate=   0.2kbits/s speed=0.296x    frame=   58 fps=7.7 q=35.0 size=     256KiB time=00:00:02.33 bitrate= 898.9kbits/s speed=0.31x    frame=   69 fps=8.6 q=35.0 size=     256KiB time=00:00:02.79 bitrate= 751.4kbits/s speed=0.347x    frame=   84 fps=9.8 q=35.0 size=     256KiB time=00:00:03.41 bitrate= 613.9kbits/s speed= 0.4x    frame=   95 fps= 10 q=35.0 size=     256KiB time=00:00:03.87 bitrate= 541.3kbits/s speed=0.428x    frame=  112 fps= 12 q=35.0 size=     512KiB time=00:00:04.58 bitrate= 915.2kbits/s speed=0.48x    [mp4 @ 0x25101680] Starting second pass: moving the moov atom to the beginning of the file
-[out#0/mp4 @ 0x2506cc00] video:560KiB audio:0KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: 0.403375%
-frame=  121 fps= 12 q=-1.0 Lsize=     562KiB time=00:00:04.95 bitrate= 928.5kbits/s speed=0.505x    
-[libx264 @ 0x25078e40] frame I:1     Avg QP:28.87  size: 44596
-[libx264 @ 0x25078e40] frame P:30    Avg QP:29.09  size:  9682
-[libx264 @ 0x25078e40] frame B:90    Avg QP:30.82  size:  2638
-[libx264 @ 0x25078e40] consecutive B-frames:  0.8%  0.0%  0.0% 99.2%
-[libx264 @ 0x25078e40] mb I  I16..4: 39.1% 59.9%  1.0%
-[libx264 @ 0x25078e40] mb P  I16..4:  2.7%  2.5%  0.0%  P16..4: 37.8%  2.5%  2.5%  0.0%  0.0%    skip:52.1%
-[libx264 @ 0x25078e40] mb B  I16..4:  0.3%  0.3%  0.0%  B16..8: 23.8%  0.2%  0.0%  direct: 0.1%  skip:75.2%  L0:35.9% L1:63.9% BI: 0.2%
-[libx264 @ 0x25078e40] 8x8 transform intra:52.9% inter:96.3%
-[libx264 @ 0x25078e40] direct mvs  spatial:95.6% temporal:4.4%
-[libx264 @ 0x25078e40] coded y,uvDC,uvAC intra: 17.4% 33.2% 4.8% inter: 0.8% 3.6% 0.0%
-[libx264 @ 0x25078e40] i16 v,h,dc,p: 14% 28% 10% 48%
-[libx264 @ 0x25078e40] i8 v,h,dc,ddl,ddr,vr,hd,vl,hu:  9% 12% 27%  6% 11%  7% 13%  6%  9%
-[libx264 @ 0x25078e40] i4 v,h,dc,ddl,ddr,vr,hd,vl,hu:  7%  7%  6%  7% 18% 13% 18%  9% 14%
-[libx264 @ 0x25078e40] i8c dc,h,v,p: 63% 17%  7% 12%
-[libx264 @ 0x25078e40] Weighted P-Frames: Y:0.0% UV:0.0%
-[libx264 @ 0x25078e40] ref P L0: 61.1% 18.5% 15.4%  2.5%  2.6%
-[libx264 @ 0x25078e40] ref B L0: 90.5%  6.3%  2.4%  0.9%
-[libx264 @ 0x25078e40] ref B L1: 97.8%  2.2%
-[libx264 @ 0x25078e40] kb/s:908.39
-video codificado 03_empanadas.mp4
-ffmpeg version 7.0.2-static https://johnvansickle.com/ffmpeg/  Copyright (c) 2000-2024 the FFmpeg developers
-  built with gcc 8 (Debian 8.3.0-6)
-  configuration: --enable-gpl --enable-version3 --enable-static --disable-debug --disable-ffplay --disable-indev=sndio --disable-outdev=sndio --cc=gcc --enable-fontconfig --enable-frei0r --enable-gnutls --enable-gmp --enable-libgme --enable-gray --enable-libaom --enable-libfribidi --enable-libass --enable-libvmaf --enable-libfreetype --enable-libmp3lame --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libopenjpeg --enable-librubberband --enable-libsoxr --enable-libspeex --enable-libsrt --enable-libvorbis --enable-libopus --enable-libtheora --enable-libvidstab --enable-libvo-amrwbenc --enable-libvpx --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxml2 --enable-libdav1d --enable-libxvid --enable-libzvbi --enable-libzimg
-  libavutil      59.  8.100 / 59.  8.100
-  libavcodec     61.  3.100 / 61.  3.100
-  libavformat    61.  1.100 / 61.  1.100
-  libavdevice    61.  1.100 / 61.  1.100
-  libavfilter    10.  1.100 / 10.  1.100
-  libswscale      8.  1.100 /  8.  1.100
-  libswresample   5.  1.100 /  5.  1.100
-  libpostproc    58.  1.100 / 58.  1.100
-Input #0, mov,mp4,m4a,3gp,3g2,mj2, from '/home/user/ApardianStudio/05-WEB/img/video/04_salon.mp4':
-  Metadata:
-    minor_version   : 512
-    major_brand     : isom
-    compatible_brands: isomiso2avc1mp41
-    encoder         : Lavf60.16.100
-  Duration: 00:00:05.04, start: 0.000000, bitrate: 11758 kb/s
-  Stream #0:0[0x1](und): Audio: aac (LC) (mp4a / 0x6134706D), 44100 Hz, stereo, fltp, 128 kb/s (default)
-      Metadata:
-        handler_name    : SoundHandler
-        vendor_id       : [0][0][0][0]
-  Stream #0:1[0x2](und): Video: h264 (Main) (avc1 / 0x31637661), yuv420p(progressive), 1176x784, 11622 kb/s, 24 fps, 24 tbr, 12288 tbn (default)
-      Metadata:
-        handler_name    : VideoHandler
-        vendor_id       : [0][0][0][0]
-        encoder         : Lavc60.31.102 h264_slapi
-Stream mapping:
-  Stream #0:1 -> #0:0 (h264 (native) -> h264 (libx264))
-Press [q] to stop, [?] for help
-[h264 @ 0x2e1d5600] Late SEI is not implemented. Update your FFmpeg version to the newest one from Git. If the problem still occurs, it means that your file has a feature which has not been implemented.
-[h264 @ 0x2e1d5600] If you want to help, upload a sample of this file to https://streams.videolan.org/upload/ and contact the ffmpeg-devel mailing list. (ffmpeg-devel@ffmpeg.org)
-[libx264 @ 0x2e1d4480] using cpu capabilities: MMX2 SSE2Fast SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2 AVX512
-[libx264 @ 0x2e1d4480] profile High, level 4.0, 4:2:0, 8-bit
-[libx264 @ 0x2e1d4480] 264 - core 164 r3191 4613ac3 - H.264/MPEG-4 AVC codec - Copyleft 2003-2024 - http://www.videolan.org/x264.html - options: cabac=1 ref=5 deblock=1:0:0 analyse=0x3:0x113 me=hex subme=8 psy=1 psy_rd=1.00:0.00 mixed_ref=1 me_range=16 chroma_me=1 trellis=2 8x8dct=1 cqm=0 deadzone=21,11 fast_pskip=1 chroma_qp_offset=-2 threads=6 lookahead_threads=1 sliced_threads=0 nr=0 decimate=1 interlaced=0 bluray_compat=0 constrained_intra=0 bframes=3 b_pyramid=2 b_adapt=1 b_bias=0 direct=3 weightb=1 open_gop=0 weightp=2 keyint=250 keyint_min=24 scenecut=40 intra_refresh=0 rc_lookahead=50 rc=crf mbtree=1 crf=30.0 qcomp=0.60 qpmin=0 qpmax=69 qpstep=4 ip_ratio=1.40 aq=1:1.00
-Output #0, mp4, to '/home/user/ApardianStudio/06-NOTAS/.cache-video/04_salon__7410612-1792423241.mp4':
-  Metadata:
-    minor_version   : 512
-    major_brand     : isom
-    compatible_brands: isomiso2avc1mp41
-    encoder         : Lavf61.1.100
-  Stream #0:0(und): Video: h264 (avc1 / 0x31637661), yuv420p(progressive), 1280x854, q=2-31, 24 fps, 12288 tbn (default)
-      Metadata:
-        handler_name    : VideoHandler
-        vendor_id       : [0][0][0][0]
-        encoder         : Lavc61.3.100 libx264
-      Side data:
-        cpb: bitrate max/min/avg: 0/0/0 buffer size: 0 vbv_delay: N/A
-frame=    0 fps=0.0 q=0.0 size=       0KiB time=N/A bitrate=N/A speed=N/A    frame=    0 fps=0.0 q=0.0 size=       0KiB time=N/A bitrate=N/A speed=N/A    frame=    0 fps=0.0 q=0.0 size=       0KiB time=N/A bitrate=N/A speed=N/A    frame=   14 fps=7.0 q=35.0 size=       0KiB time=00:00:00.50 bitrate=   0.8kbits/s speed=0.249x    frame=   31 fps= 12 q=35.0 size=       0KiB time=00:00:01.25 bitrate=   0.3kbits/s speed=0.499x    frame=   49 fps= 16 q=35.0 size=     256KiB time=00:00:01.95 bitrate=1071.1kbits/s speed=0.651x    frame=   69 fps= 20 q=35.0 size=     256KiB time=00:00:02.79 bitrate= 751.4kbits/s speed=0.796x    frame=   93 fps= 23 q=35.0 size=     256KiB time=00:00:03.79 bitrate= 553.2kbits/s speed=0.946x    frame=  116 fps= 26 q=35.0 size=     512KiB time=00:00:04.75 bitrate= 883.1kbits/s speed=1.05x    [mp4 @ 0x2e482440] Starting second pass: moving the moov atom to the beginning of the file
-[out#0/mp4 @ 0x2e1d37c0] video:617KiB audio:0KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: 0.366200%
-frame=  121 fps= 26 q=-1.0 Lsize=     619KiB time=00:00:04.95 bitrate=1022.4kbits/s speed=1.08x    
-[libx264 @ 0x2e1d4480] frame I:1     Avg QP:30.09  size: 55917
-[libx264 @ 0x2e1d4480] frame P:30    Avg QP:30.53  size: 12303
-[libx264 @ 0x2e1d4480] frame B:90    Avg QP:35.17  size:  2285
-[libx264 @ 0x2e1d4480] consecutive B-frames:  0.8%  0.0%  0.0% 99.2%
-[libx264 @ 0x2e1d4480] mb I  I16..4: 20.0% 66.3% 13.7%
-[libx264 @ 0x2e1d4480] mb P  I16..4:  1.7%  1.5%  0.1%  P16..4: 49.8% 14.3%  5.2%  0.0%  0.0%    skip:27.5%
-[libx264 @ 0x2e1d4480] mb B  I16..4:  0.1%  0.1%  0.0%  B16..8: 40.3%  1.3%  0.1%  direct: 0.1%  skip:58.0%  L0:32.0% L1:66.8% BI: 1.2%
-[libx264 @ 0x2e1d4480] 8x8 transform intra:57.5% inter:78.7%
-[libx264 @ 0x2e1d4480] direct mvs  spatial:95.6% temporal:4.4%
-[libx264 @ 0x2e1d4480] coded y,uvDC,uvAC intra: 40.4% 67.4% 33.9% inter: 4.0% 9.3% 0.7%
-[libx264 @ 0x2e1d4480] i16 v,h,dc,p: 31% 38% 10% 21%
-[libx264 @ 0x2e1d4480] i8 v,h,dc,ddl,ddr,vr,hd,vl,hu: 24% 16% 13%  5%  7%  9%  8%  7% 11%
-[libx264 @ 0x2e1d4480] i4 v,h,dc,ddl,ddr,vr,hd,vl,hu: 16% 26%  5%  7%  9%  9% 11%  6% 11%
-[libx264 @ 0x2e1d4480] i8c dc,h,v,p: 25% 37% 25% 13%
-[libx264 @ 0x2e1d4480] Weighted P-Frames: Y:0.0% UV:0.0%
-[libx264 @ 0x2e1d4480] ref P L0: 68.3% 16.9% 10.7%  2.5%  1.6%
-[libx264 @ 0x2e1d4480] ref B L0: 96.1%  3.4%  0.4%  0.1%
-[libx264 @ 0x2e1d4480] ref B L1: 98.1%  1.9%
-[libx264 @ 0x2e1d4480] kb/s:1000.72
-video codificado 04_salon.mp4
-ffmpeg version 7.0.2-static https://johnvansickle.com/ffmpeg/  Copyright (c) 2000-2024 the FFmpeg developers
-  built with gcc 8 (Debian 8.3.0-6)
-  configuration: --enable-gpl --enable-version3 --enable-static --disable-debug --disable-ffplay --disable-indev=sndio --disable-outdev=sndio --cc=gcc --enable-fontconfig --enable-frei0r --enable-gnutls --enable-gmp --enable-libgme --enable-gray --enable-libaom --enable-libfribidi --enable-libass --enable-libvmaf --enable-libfreetype --enable-libmp3lame --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libopenjpeg --enable-librubberband --enable-libsoxr --enable-libspeex --enable-libsrt --enable-libvorbis --enable-libopus --enable-libtheora --enable-libvidstab --enable-libvo-amrwbenc --enable-libvpx --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxml2 --enable-libdav1d --enable-libxvid --enable-libzvbi --enable-libzimg
-  libavutil      59.  8.100 / 59.  8.100
-  libavcodec     61.  3.100 / 61.  3.100
-  libavformat    61.  1.100 / 61.  1.100
-  libavdevice    61.  1.100 / 61.  1.100
-  libavfilter    10.  1.100 / 10.  1.100
-  libswscale      8.  1.100 /  8.  1.100
-  libswresample   5.  1.100 /  5.  1.100
-  libpostproc    58.  1.100 / 58.  1.100
-Input #0, mov,mp4,m4a,3gp,3g2,mj2, from '/home/user/ApardianStudio/05-WEB/img/video/06_chocolate.mp4':
-  Metadata:
-    minor_version   : 512
-    major_brand     : isom
-    compatible_brands: isomiso2avc1mp41
-    encoder         : Lavf60.16.100
-  Duration: 00:00:05.04, start: 0.000000, bitrate: 7588 kb/s
-  Stream #0:0[0x1](und): Audio: aac (LC) (mp4a / 0x6134706D), 44100 Hz, stereo, fltp, 128 kb/s (default)
-      Metadata:
-        handler_name    : SoundHandler
-        vendor_id       : [0][0][0][0]
-  Stream #0:1[0x2](und): Video: h264 (Main) (avc1 / 0x31637661), yuv420p(progressive), 784x1176, 7451 kb/s, 24 fps, 24 tbr, 12288 tbn (default)
-      Metadata:
-        handler_name    : VideoHandler
-        vendor_id       : [0][0][0][0]
-        encoder         : Lavc60.31.102 h264_slapi
-Stream mapping:
-  Stream #0:1 -> #0:0 (h264 (native) -> h264 (libx264))
-Press [q] to stop, [?] for help
-[h264 @ 0x135ced80] Late SEI is not implemented. Update your FFmpeg version to the newest one from Git. If the problem still occurs, it means that your file has a feature which has not been implemented.
-[h264 @ 0x135ced80] If you want to help, upload a sample of this file to https://streams.videolan.org/upload/ and contact the ffmpeg-devel mailing list. (ffmpeg-devel@ffmpeg.org)
-[libx264 @ 0x135cc400] using cpu capabilities: MMX2 SSE2Fast SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2 AVX512
-[libx264 @ 0x135cc400] profile High, level 5.0, 4:2:0, 8-bit
-[libx264 @ 0x135cc400] 264 - core 164 r3191 4613ac3 - H.264/MPEG-4 AVC codec - Copyleft 2003-2024 - http://www.videolan.org/x264.html - options: cabac=1 ref=5 deblock=1:0:0 analyse=0x3:0x113 me=hex subme=8 psy=1 psy_rd=1.00:0.00 mixed_ref=1 me_range=16 chroma_me=1 trellis=2 8x8dct=1 cqm=0 deadzone=21,11 fast_pskip=1 chroma_qp_offset=-2 threads=6 lookahead_threads=1 sliced_threads=0 nr=0 decimate=1 interlaced=0 bluray_compat=0 constrained_intra=0 bframes=3 b_pyramid=2 b_adapt=1 b_bias=0 direct=3 weightb=1 open_gop=0 weightp=2 keyint=250 keyint_min=24 scenecut=40 intra_refresh=0 rc_lookahead=50 rc=crf mbtree=1 crf=30.0 qcomp=0.60 qpmin=0 qpmax=69 qpstep=4 ip_ratio=1.40 aq=1:1.00
-Output #0, mp4, to '/home/user/ApardianStudio/06-NOTAS/.cache-video/06_chocolate__4782650-1792423241.mp4':
-  Metadata:
-    minor_version   : 512
-    major_brand     : isom
-    compatible_brands: isomiso2avc1mp41
-    encoder         : Lavf61.1.100
-  Stream #0:0(und): Video: h264 (avc1 / 0x31637661), yuv420p(progressive), 1280x1920, q=2-31, 24 fps, 12288 tbn (default)
-      Metadata:
-        handler_name    : VideoHandler
-        vendor_id       : [0][0][0][0]
-        encoder         : Lavc61.3.100 libx264
-      Side data:
-        cpb: bitrate max/min/avg: 0/0/0 buffer size: 0 vbv_delay: N/A
-frame=    0 fps=0.0 q=0.0 size=       0KiB time=N/A bitrate=N/A speed=N/A    frame=    0 fps=0.0 q=0.0 size=       0KiB time=N/A bitrate=N/A speed=N/A    frame=    0 fps=0.0 q=0.0 size=       0KiB time=N/A bitrate=N/A speed=N/A    frame=    0 fps=0.0 q=0.0 size=       0KiB time=N/A bitrate=N/A speed=N/A    frame=    0 fps=0.0 q=0.0 size=       0KiB time=N/A bitrate=N/A speed=N/A    frame=    0 fps=0.0 q=0.0 size=       0KiB time=N/A bitrate=N/A speed=N/A    frame=    5 fps=1.4 q=35.0 size=       0KiB time=00:00:00.12 bitrate=   3.1kbits/s speed=0.0357x    frame=   13 fps=3.2 q=35.0 size=       0KiB time=00:00:00.45 bitrate=   0.8kbits/s speed=0.114x    frame=   21 fps=4.7 q=35.0 size=       0KiB time=00:00:00.79 bitrate=   0.5kbits/s speed=0.176x    frame=   33 fps=6.6 q=35.0 size=       0KiB time=00:00:01.29 bitrate=   0.3kbits/s speed=0.258x    frame=   43 fps=7.8 q=35.0 size=     256KiB time=00:00:01.70 bitrate=1227.8kbits/s speed=0.31x    frame=   54 fps=9.0 q=35.0 size=     256KiB time=00:00:02.16 bitrate= 968.1kbits/s speed=0.36x    frame=   65 fps= 10 q=35.0 size=     256KiB time=00:00:02.62 bitrate= 799.1kbits/s speed=0.403x    frame=   77 fps= 11 q=35.0 size=     256KiB time=00:00:03.12 bitrate= 671.2kbits/s speed=0.445x    frame=   89 fps= 12 q=35.0 size=     256KiB time=00:00:03.62 bitrate= 578.6kbits/s speed=0.482x    frame=  105 fps= 13 q=35.0 size=     512KiB time=00:00:04.29 bitrate= 977.4kbits/s speed=0.535x    frame=  118 fps= 14 q=-1.0 size=     512KiB time=00:00:04.83 bitrate= 867.9kbits/s speed=0.567x    [mp4 @ 0x13768d40] Starting second pass: moving the moov atom to the beginning of the file
-[out#0/mp4 @ 0x135c1c00] video:616KiB audio:0KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: 0.366368%
-frame=  121 fps= 14 q=-1.0 Lsize=     618KiB time=00:00:04.95 bitrate=1021.5kbits/s speed=0.576x    
-[libx264 @ 0x135cc400] frame I:1     Avg QP:28.92  size: 60213
-[libx264 @ 0x135cc400] frame P:30    Avg QP:28.87  size: 10702
-[libx264 @ 0x135cc400] frame B:90    Avg QP:34.13  size:  2765
-[libx264 @ 0x135cc400] consecutive B-frames:  0.8%  0.0%  0.0% 99.2%
-[libx264 @ 0x135cc400] mb I  I16..4: 23.6% 73.6%  2.8%
-[libx264 @ 0x135cc400] mb P  I16..4:  0.5%  0.4%  0.0%  P16..4: 43.4%  3.6%  4.1%  0.0%  0.0%    skip:47.9%
-[libx264 @ 0x135cc400] mb B  I16..4:  0.0%  0.0%  0.0%  B16..8: 32.9%  0.2%  0.0%  direct: 0.0%  skip:66.9%  L0:41.8% L1:58.0% BI: 0.2%
-[libx264 @ 0x135cc400] 8x8 transform intra:68.1% inter:89.6%
-[libx264 @ 0x135cc400] direct mvs  spatial:95.6% temporal:4.4%
-[libx264 @ 0x135cc400] coded y,uvDC,uvAC intra: 46.4% 53.7% 10.5% inter: 1.2% 3.2% 0.0%
-[libx264 @ 0x135cc400] i16 v,h,dc,p: 16% 25%  8% 51%
-[libx264 @ 0x135cc400] i8 v,h,dc,ddl,ddr,vr,hd,vl,hu:  7%  9%  5%  9% 12% 10% 16%  9% 23%
-[libx264 @ 0x135cc400] i4 v,h,dc,ddl,ddr,vr,hd,vl,hu: 12%  8%  3%  8% 14% 11% 18%  8% 18%
-[libx264 @ 0x135cc400] i8c dc,h,v,p: 31% 38% 16% 15%
-[libx264 @ 0x135cc400] Weighted P-Frames: Y:3.3% UV:3.3%
-[libx264 @ 0x135cc400] ref P L0: 58.3% 18.6% 19.1%  2.2%  1.8%
-[libx264 @ 0x135cc400] ref B L0: 95.2%  4.4%  0.3%  0.1%
-[libx264 @ 0x135cc400] ref B L1: 98.8%  1.2%
-[libx264 @ 0x135cc400] kb/s:999.82
-video codificado 06_chocolate.mp4
-ffmpeg version 7.0.2-static https://johnvansickle.com/ffmpeg/  Copyright (c) 2000-2024 the FFmpeg developers
-  built with gcc 8 (Debian 8.3.0-6)
-  configuration: --enable-gpl --enable-version3 --enable-static --disable-debug --disable-ffplay --disable-indev=sndio --disable-outdev=sndio --cc=gcc --enable-fontconfig --enable-frei0r --enable-gnutls --enable-gmp --enable-libgme --enable-gray --enable-libaom --enable-libfribidi --enable-libass --enable-libvmaf --enable-libfreetype --enable-libmp3lame --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libopenjpeg --enable-librubberband --enable-libsoxr --enable-libspeex --enable-libsrt --enable-libvorbis --enable-libopus --enable-libtheora --enable-libvidstab --enable-libvo-amrwbenc --enable-libvpx --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxml2 --enable-libdav1d --enable-libxvid --enable-libzvbi --enable-libzimg
-  libavutil      59.  8.100 / 59.  8.100
-  libavcodec     61.  3.100 / 61.  3.100
-  libavformat    61.  1.100 / 61.  1.100
-  libavdevice    61.  1.100 / 61.  1.100
-  libavfilter    10.  1.100 / 10.  1.100
-  libswscale      8.  1.100 /  8.  1.100
-  libswresample   5.  1.100 /  5.  1.100
-  libpostproc    58.  1.100 / 58.  1.100
-Input #0, mov,mp4,m4a,3gp,3g2,mj2, from '/home/user/ApardianStudio/05-WEB/img/video/07_boda_rambla.mp4':
-  Metadata:
-    minor_version   : 512
-    major_brand     : isom
-    compatible_brands: isomiso2avc1mp41
-    encoder         : Lavf60.16.100
-  Duration: 00:00:05.04, start: 0.000000, bitrate: 12508 kb/s
-  Stream #0:0[0x1](und): Audio: aac (LC) (mp4a / 0x6134706D), 44100 Hz, stereo, fltp, 128 kb/s (default)
-      Metadata:
-        handler_name    : SoundHandler
-        vendor_id       : [0][0][0][0]
-  Stream #0:1[0x2](und): Video: h264 (Main) (avc1 / 0x31637661), yuv420p(progressive), 1176x784, 12371 kb/s, 24 fps, 24 tbr, 12288 tbn (default)
-      Metadata:
-        handler_name    : VideoHandler
-        vendor_id       : [0][0][0][0]
-        encoder         : Lavc60.31.102 h264_slapi
-Stream mapping:
-  Stream #0:1 -> #0:0 (h264 (native) -> h264 (libx264))
-Press [q] to stop, [?] for help
-[h264 @ 0x25ab0040] Late SEI is not implemented. Update your FFmpeg version to the newest one from Git. If the problem still occurs, it means that your file has a feature which has not been implemented.
-[h264 @ 0x25ab0040] If you want to help, upload a sample of this file to https://streams.videolan.org/upload/ and contact the ffmpeg-devel mailing list. (ffmpeg-devel@ffmpeg.org)
-[libx264 @ 0x25aa9580] using cpu capabilities: MMX2 SSE2Fast SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2 AVX512
-[libx264 @ 0x25aa9580] profile High, level 4.0, 4:2:0, 8-bit
-[libx264 @ 0x25aa9580] 264 - core 164 r3191 4613ac3 - H.264/MPEG-4 AVC codec - Copyleft 2003-2024 - http://www.videolan.org/x264.html - options: cabac=1 ref=5 deblock=1:0:0 analyse=0x3:0x113 me=hex subme=8 psy=1 psy_rd=1.00:0.00 mixed_ref=1 me_range=16 chroma_me=1 trellis=2 8x8dct=1 cqm=0 deadzone=21,11 fast_pskip=1 chroma_qp_offset=-2 threads=6 lookahead_threads=1 sliced_threads=0 nr=0 decimate=1 interlaced=0 bluray_compat=0 constrained_intra=0 bframes=3 b_pyramid=2 b_adapt=1 b_bias=0 direct=3 weightb=1 open_gop=0 weightp=2 keyint=250 keyint_min=24 scenecut=40 intra_refresh=0 rc_lookahead=50 rc=crf mbtree=1 crf=30.0 qcomp=0.60 qpmin=0 qpmax=69 qpstep=4 ip_ratio=1.40 aq=1:1.00
-Output #0, mp4, to '/home/user/ApardianStudio/06-NOTAS/.cache-video/07_boda_rambla__7882937-1792423241.mp4':
-  Metadata:
-    minor_version   : 512
-    major_brand     : isom
-    compatible_brands: isomiso2avc1mp41
-    encoder         : Lavf61.1.100
-  Stream #0:0(und): Video: h264 (avc1 / 0x31637661), yuv420p(progressive), 1280x854, q=2-31, 24 fps, 12288 tbn (default)
-      Metadata:
-        handler_name    : VideoHandler
-        vendor_id       : [0][0][0][0]
-        encoder         : Lavc61.3.100 libx264
-      Side data:
-        cpb: bitrate max/min/avg: 0/0/0 buffer size: 0 vbv_delay: N/A
-frame=    0 fps=0.0 q=0.0 size=       0KiB time=N/A bitrate=N/A speed=N/A    frame=    5 fps=5.0 q=35.0 size=       0KiB time=00:00:00.12 bitrate=   3.1kbits/s speed=0.125x    frame=   24 fps= 16 q=35.0 size=       0KiB time=00:00:00.91 bitrate=   0.4kbits/s speed=0.611x    frame=   43 fps= 21 q=35.0 size=       0KiB time=00:00:01.70 bitrate=   0.2kbits/s speed=0.853x    frame=   63 fps= 25 q=35.0 size=     256KiB time=00:00:02.54 bitrate= 825.3kbits/s speed=1.02x    frame=   83 fps= 28 q=35.0 size=     256KiB time=00:00:03.37 bitrate= 621.5kbits/s speed=1.12x    frame=  106 fps= 30 q=35.0 size=     512KiB time=00:00:04.33 bitrate= 968.0kbits/s speed=1.24x    [mp4 @ 0x25b7ed40] Starting second pass: moving the moov atom to the beginning of the file
-[out#0/mp4 @ 0x25b12880] video:599KiB audio:0KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: 0.368816%
-frame=  121 fps= 32 q=-1.0 Lsize=     602KiB time=00:00:04.95 bitrate= 994.1kbits/s speed=1.31x    
-[libx264 @ 0x25aa9580] frame I:1     Avg QP:29.26  size: 41368
-[libx264 @ 0x25aa9580] frame P:32    Avg QP:28.66  size: 12915
-[libx264 @ 0x25aa9580] frame B:88    Avg QP:35.06  size:  1801
-[libx264 @ 0x25aa9580] consecutive B-frames:  0.8%  1.7% 14.9% 82.6%
-[libx264 @ 0x25aa9580] mb I  I16..4: 47.6% 48.4%  4.0%
-[libx264 @ 0x25aa9580] mb P  I16..4:  3.3%  3.1%  0.1%  P16..4: 28.4% 14.5%  6.4%  0.0%  0.0%    skip:44.1%
-[libx264 @ 0x25aa9580] mb B  I16..4:  0.0%  0.1%  0.0%  B16..8: 30.8%  0.9%  0.2%  direct: 0.5%  skip:67.4%  L0:30.7% L1:66.8% BI: 2.5%
-[libx264 @ 0x25aa9580] 8x8 transform intra:49.4% inter:66.6%
-[libx264 @ 0x25aa9580] direct mvs  spatial:95.5% temporal:4.5%
-[libx264 @ 0x25aa9580] coded y,uvDC,uvAC intra: 33.9% 26.9% 1.2% inter: 5.9% 1.7% 0.0%
-[libx264 @ 0x25aa9580] i16 v,h,dc,p: 18% 15%  7% 60%
-[libx264 @ 0x25aa9580] i8 v,h,dc,ddl,ddr,vr,hd,vl,hu: 24%  8% 22%  6%  7%  7%  8%  6% 13%
-[libx264 @ 0x25aa9580] i4 v,h,dc,ddl,ddr,vr,hd,vl,hu: 22% 11%  9%  6%  9% 10% 11%  7% 16%
-[libx264 @ 0x25aa9580] i8c dc,h,v,p: 64% 24%  9%  3%
-[libx264 @ 0x25aa9580] Weighted P-Frames: Y:3.1% UV:0.0%
-[libx264 @ 0x25aa9580] ref P L0: 72.0% 10.1% 11.9%  2.6%  3.4%
-[libx264 @ 0x25aa9580] ref B L0: 94.4%  3.4%  1.3%  0.8%
-[libx264 @ 0x25aa9580] ref B L1: 98.5%  1.5%
-[libx264 @ 0x25aa9580] kb/s:972.96
-video codificado 07_boda_rambla.mp4
-ffmpeg version 7.0.2-static https://johnvansickle.com/ffmpeg/  Copyright (c) 2000-2024 the FFmpeg developers
-  built with gcc 8 (Debian 8.3.0-6)
-  configuration: --enable-gpl --enable-version3 --enable-static --disable-debug --disable-ffplay --disable-indev=sndio --disable-outdev=sndio --cc=gcc --enable-fontconfig --enable-frei0r --enable-gnutls --enable-gmp --enable-libgme --enable-gray --enable-libaom --enable-libfribidi --enable-libass --enable-libvmaf --enable-libfreetype --enable-libmp3lame --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libopenjpeg --enable-librubberband --enable-libsoxr --enable-libspeex --enable-libsrt --enable-libvorbis --enable-libopus --enable-libtheora --enable-libvidstab --enable-libvo-amrwbenc --enable-libvpx --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxml2 --enable-libdav1d --enable-libxvid --enable-libzvbi --enable-libzimg
-  libavutil      59.  8.100 / 59.  8.100
-  libavcodec     61.  3.100 / 61.  3.100
-  libavformat    61.  1.100 / 61.  1.100
-  libavdevice    61.  1.100 / 61.  1.100
-  libavfilter    10.  1.100 / 10.  1.100
-  libswscale      8.  1.100 /  8.  1.100
-  libswresample   5.  1.100 /  5.  1.100
-  libpostproc    58.  1.100 / 58.  1.100
-Input #0, mov,mp4,m4a,3gp,3g2,mj2, from '/home/user/ApardianStudio/05-WEB/img/video/08_baterista.mp4':
-  Metadata:
-    minor_version   : 512
-    major_brand     : isom
-    compatible_brands: isomiso2avc1mp41
-    encoder         : Lavf60.16.100
-  Duration: 00:00:05.04, start: 0.000000, bitrate: 9870 kb/s
-  Stream #0:0[0x1](und): Audio: aac (LC) (mp4a / 0x6134706D), 44100 Hz, stereo, fltp, 128 kb/s (default)
-      Metadata:
-        handler_name    : SoundHandler
-        vendor_id       : [0][0][0][0]
-  Stream #0:1[0x2](und): Video: h264 (Main) (avc1 / 0x31637661), yuv420p(progressive), 864x1064, 9734 kb/s, 24 fps, 24 tbr, 12288 tbn (default)
-      Metadata:
-        handler_name    : VideoHandler
-        vendor_id       : [0][0][0][0]
-        encoder         : Lavc60.31.102 h264_slapi
-Stream mapping:
-  Stream #0:1 -> #0:0 (h264 (native) -> h264 (libx264))
-Press [q] to stop, [?] for help
-[h264 @ 0x3c542880] Late SEI is not implemented. Update your FFmpeg version to the newest one from Git. If the problem still occurs, it means that your file has a feature which has not been implemented.
-[h264 @ 0x3c542880] If you want to help, upload a sample of this file to https://streams.videolan.org/upload/ and contact the ffmpeg-devel mailing list. (ffmpeg-devel@ffmpeg.org)
-[libx264 @ 0x3c53ccc0] using cpu capabilities: MMX2 SSE2Fast SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2 AVX512
-[libx264 @ 0x3c53ccc0] profile High, level 5.0, 4:2:0, 8-bit
-[libx264 @ 0x3c53ccc0] 264 - core 164 r3191 4613ac3 - H.264/MPEG-4 AVC codec - Copyleft 2003-2024 - http://www.videolan.org/x264.html - options: cabac=1 ref=5 deblock=1:0:0 analyse=0x3:0x113 me=hex subme=8 psy=1 psy_rd=1.00:0.00 mixed_ref=1 me_range=16 chroma_me=1 trellis=2 8x8dct=1 cqm=0 deadzone=21,11 fast_pskip=1 chroma_qp_offset=-2 threads=6 lookahead_threads=1 sliced_threads=0 nr=0 decimate=1 interlaced=0 bluray_compat=0 constrained_intra=0 bframes=3 b_pyramid=2 b_adapt=1 b_bias=0 direct=3 weightb=1 open_gop=0 weightp=2 keyint=250 keyint_min=24 scenecut=40 intra_refresh=0 rc_lookahead=50 rc=crf mbtree=1 crf=30.0 qcomp=0.60 qpmin=0 qpmax=69 qpstep=4 ip_ratio=1.40 aq=1:1.00
-Output #0, mp4, to '/home/user/ApardianStudio/06-NOTAS/.cache-video/08_baterista__6220784-1792423241.mp4':
-  Metadata:
-    minor_version   : 512
-    major_brand     : isom
-    compatible_brands: isomiso2avc1mp41
-    encoder         : Lavf61.1.100
-  Stream #0:0(und): Video: h264 (avc1 / 0x31637661), yuv420p(progressive), 1280x1576, q=2-31, 24 fps, 12288 tbn (default)
-      Metadata:
-        handler_name    : VideoHandler
-        vendor_id       : [0][0][0][0]
-        encoder         : Lavc61.3.100 libx264
-      Side data:
-        cpb: bitrate max/min/avg: 0/0/0 buffer size: 0 vbv_delay: N/A
-frame=    0 fps=0.0 q=0.0 size=       0KiB time=N/A bitrate=N/A speed=N/A    frame=    0 fps=0.0 q=0.0 size=       0KiB time=N/A bitrate=N/A speed=N/A    frame=    0 fps=0.0 q=0.0 size=       0KiB time=N/A bitrate=N/A speed=N/A    frame=    5 fps=2.5 q=35.0 size=       0KiB time=00:00:00.12 bitrate=   3.1kbits/s speed=0.0623x    frame=   13 fps=5.2 q=35.0 size=       0KiB time=00:00:00.45 bitrate=   0.8kbits/s speed=0.183x    frame=   22 fps=7.3 q=35.0 size=       0KiB time=00:00:00.83 bitrate=   0.5kbits/s speed=0.277x    frame=   33 fps=9.4 q=35.0 size=     256KiB time=00:00:01.29 bitrate=1623.9kbits/s speed=0.368x    frame=   41 fps= 10 q=35.0 size=     256KiB time=00:00:01.62 bitrate=1290.8kbits/s speed=0.405x    frame=   52 fps= 12 q=35.0 size=     256KiB time=00:00:02.08 bitrate=1006.8kbits/s speed=0.462x    frame=   65 fps= 13 q=35.0 size=     512KiB time=00:00:02.62 bitrate=1598.0kbits/s speed=0.524x    frame=   73 fps= 13 q=35.0 size=     512KiB time=00:00:02.95 bitrate=1417.9kbits/s speed=0.537x    frame=   86 fps= 14 q=35.0 size=     512KiB time=00:00:03.50 bitrate=1198.5kbits/s speed=0.582x    frame=   98 fps= 15 q=35.0 size=     768KiB time=00:00:04.00 bitrate=1573.0kbits/s speed=0.614x    frame=  112 fps= 16 q=35.0 size=     768KiB time=00:00:04.58 bitrate=1372.8kbits/s speed=0.654x    [mp4 @ 0x3c5d5580] Starting second pass: moving the moov atom to the beginning of the file
-[out#0/mp4 @ 0x3c531c00] video:956KiB audio:0KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: 0.232069%
-frame=  121 fps= 17 q=-1.0 Lsize=     958KiB time=00:00:04.95 bitrate=1583.3kbits/s speed=0.68x    
-[libx264 @ 0x3c53ccc0] frame I:1     Avg QP:30.62  size: 33546
-[libx264 @ 0x3c53ccc0] frame P:32    Avg QP:31.24  size: 14590
-[libx264 @ 0x3c53ccc0] frame B:88    Avg QP:35.79  size:  5431
-[libx264 @ 0x3c53ccc0] consecutive B-frames:  1.7%  0.0% 12.4% 86.0%
-[libx264 @ 0x3c53ccc0] mb I  I16..4: 30.2% 66.0%  3.8%
-[libx264 @ 0x3c53ccc0] mb P  I16..4:  4.0%  8.7%  0.2%  P16..4: 41.8%  5.2%  2.7%  0.0%  0.0%    skip:37.4%
-[libx264 @ 0x3c53ccc0] mb B  I16..4:  0.5%  1.6%  0.0%  B16..8: 39.2%  2.1%  0.2%  direct: 0.3%  skip:56.1%  L0:43.5% L1:55.3% BI: 1.2%
-[libx264 @ 0x3c53ccc0] 8x8 transform intra:69.5% inter:94.2%
-[libx264 @ 0x3c53ccc0] direct mvs  spatial:95.5% temporal:4.5%
-[libx264 @ 0x3c53ccc0] coded y,uvDC,uvAC intra: 33.3% 1.3% 0.0% inter: 3.8% 0.1% 0.0%
-[libx264 @ 0x3c53ccc0] i16 v,h,dc,p: 22% 33%  9% 36%
-[libx264 @ 0x3c53ccc0] i8 v,h,dc,ddl,ddr,vr,hd,vl,hu: 13% 13% 13%  6% 12% 12% 14%  8%  9%
-[libx264 @ 0x3c53ccc0] i4 v,h,dc,ddl,ddr,vr,hd,vl,hu: 16% 12%  7%  6% 14% 14% 15%  6% 10%
-[libx264 @ 0x3c53ccc0] i8c dc,h,v,p: 98%  1%  1%  0%
-[libx264 @ 0x3c53ccc0] Weighted P-Frames: Y:6.2% UV:0.0%
-[libx264 @ 0x3c53ccc0] ref P L0: 49.8% 15.5% 17.4%  7.6%  9.6%  0.2%
-[libx264 @ 0x3c53ccc0] ref B L0: 86.2%  8.4%  3.7%  1.7%
-[libx264 @ 0x3c53ccc0] ref B L1: 96.6%  3.4%
-[libx264 @ 0x3c53ccc0] kb/s:1552.39
-video codificado 08_baterista.mp4
-ffmpeg version 7.0.2-static https://johnvansickle.com/ffmpeg/  Copyright (c) 2000-2024 the FFmpeg developers
-  built with gcc 8 (Debian 8.3.0-6)
-  configuration: --enable-gpl --enable-version3 --enable-static --disable-debug --disable-ffplay --disable-indev=sndio --disable-outdev=sndio --cc=gcc --enable-fontconfig --enable-frei0r --enable-gnutls --enable-gmp --enable-libgme --enable-gray --enable-libaom --enable-libfribidi --enable-libass --enable-libvmaf --enable-libfreetype --enable-libmp3lame --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libopenjpeg --enable-librubberband --enable-libsoxr --enable-libspeex --enable-libsrt --enable-libvorbis --enable-libopus --enable-libtheora --enable-libvidstab --enable-libvo-amrwbenc --enable-libvpx --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxml2 --enable-libdav1d --enable-libxvid --enable-libzvbi --enable-libzimg
-  libavutil      59.  8.100 / 59.  8.100
-  libavcodec     61.  3.100 / 61.  3.100
-  libavformat    61.  1.100 / 61.  1.100
-  libavdevice    61.  1.100 / 61.  1.100
-  libavfilter    10.  1.100 / 10.  1.100
-  libswscale      8.  1.100 /  8.  1.100
-  libswresample   5.  1.100 /  5.  1.100
-  libpostproc    58.  1.100 / 58.  1.100
-Input #0, mov,mp4,m4a,3gp,3g2,mj2, from '/home/user/ApardianStudio/05-WEB/img/video/09_bahia.mp4':
-  Metadata:
-    minor_version   : 512
-    major_brand     : isom
-    compatible_brands: isomiso2avc1mp41
-    encoder         : Lavf60.16.100
-  Duration: 00:00:03.04, start: 0.000000, bitrate: 21994 kb/s
-  Stream #0:0[0x1](und): Video: h264 (Main) (avc1 / 0x31637661), yuv420p(progressive), 1280x720, 21990 kb/s, 24 fps, 24 tbr, 12288 tbn (default)
-      Metadata:
-        handler_name    : VideoHandler
-        vendor_id       : [0][0][0][0]
-        encoder         : Lavc60.31.102 h264_slapi
-Stream mapping:
-  Stream #0:0 -> #0:0 (h264 (native) -> h264 (libx264))
-Press [q] to stop, [?] for help
-[h264 @ 0x1bd8bf80] Late SEI is not implemented. Update your FFmpeg version to the newest one from Git. If the problem still occurs, it means that your file has a feature which has not been implemented.
-[h264 @ 0x1bd8bf80] If you want to help, upload a sample of this file to https://streams.videolan.org/upload/ and contact the ffmpeg-devel mailing list. (ffmpeg-devel@ffmpeg.org)
-[libx264 @ 0x1bd53f80] using cpu capabilities: MMX2 SSE2Fast SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2 AVX512
-[libx264 @ 0x1bd53f80] profile High, level 3.1, 4:2:0, 8-bit
-[libx264 @ 0x1bd53f80] 264 - core 164 r3191 4613ac3 - H.264/MPEG-4 AVC codec - Copyleft 2003-2024 - http://www.videolan.org/x264.html - options: cabac=1 ref=5 deblock=1:0:0 analyse=0x3:0x113 me=hex subme=8 psy=1 psy_rd=1.00:0.00 mixed_ref=1 me_range=16 chroma_me=1 trellis=2 8x8dct=1 cqm=0 deadzone=21,11 fast_pskip=1 chroma_qp_offset=-2 threads=6 lookahead_threads=1 sliced_threads=0 nr=0 decimate=1 interlaced=0 bluray_compat=0 constrained_intra=0 bframes=3 b_pyramid=2 b_adapt=1 b_bias=0 direct=3 weightb=1 open_gop=0 weightp=2 keyint=250 keyint_min=24 scenecut=40 intra_refresh=0 rc_lookahead=50 rc=crf mbtree=1 crf=30.0 qcomp=0.60 qpmin=0 qpmax=69 qpstep=4 ip_ratio=1.40 aq=1:1.00
-Output #0, mp4, to '/home/user/ApardianStudio/06-NOTAS/.cache-video/09_bahia__8362510-1792423241.mp4':
-  Metadata:
-    minor_version   : 512
-    major_brand     : isom
-    compatible_brands: isomiso2avc1mp41
-    encoder         : Lavf61.1.100
-  Stream #0:0(und): Video: h264 (avc1 / 0x31637661), yuv420p(progressive), 1280x720, q=2-31, 24 fps, 12288 tbn (default)
-      Metadata:
-        handler_name    : VideoHandler
-        vendor_id       : [0][0][0][0]
-        encoder         : Lavc61.3.100 libx264
-      Side data:
-        cpb: bitrate max/min/avg: 0/0/0 buffer size: 0 vbv_delay: N/A
-frame=    0 fps=0.0 q=0.0 size=       0KiB time=N/A bitrate=N/A speed=N/A    frame=    9 fps=9.0 q=35.0 size=       0KiB time=00:00:00.29 bitrate=   1.3kbits/s speed=0.291x    frame=   25 fps= 17 q=35.0 size=       0KiB time=00:00:00.95 bitrate=   0.4kbits/s speed=0.638x    frame=   49 fps= 24 q=35.0 size=     256KiB time=00:00:01.95 bitrate=1071.1kbits/s speed=0.976x    frame=   67 fps= 27 q=35.0 size=     256KiB time=00:00:02.70 bitrate= 774.5kbits/s speed=1.08x    [mp4 @ 0x1bd51040] Starting second pass: moving the moov atom to the beginning of the file
-[out#0/mp4 @ 0x1bde8900] video:414KiB audio:0KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: 0.409088%
-frame=   73 fps= 28 q=-1.0 Lsize=     416KiB time=00:00:02.95 bitrate=1151.6kbits/s speed=1.15x    
-[libx264 @ 0x1bd53f80] frame I:1     Avg QP:30.20  size: 77370
-[libx264 @ 0x1bd53f80] frame P:18    Avg QP:30.57  size: 15683
-[libx264 @ 0x1bd53f80] frame B:54    Avg QP:35.96  size:  1181
-[libx264 @ 0x1bd53f80] consecutive B-frames:  1.4%  0.0%  0.0% 98.6%
-[libx264 @ 0x1bd53f80] mb I  I16..4:  0.6% 91.4%  8.0%
-[libx264 @ 0x1bd53f80] mb P  I16..4:  0.0%  0.1%  0.0%  P16..4: 48.0% 19.3%  9.4%  0.0%  0.0%    skip:23.1%
-[libx264 @ 0x1bd53f80] mb B  I16..4:  0.0%  0.0%  0.0%  B16..8: 38.9%  0.2%  0.0%  direct: 0.0%  skip:60.8%  L0:36.6% L1:61.9% BI: 1.5%
-[libx264 @ 0x1bd53f80] 8x8 transform intra:91.0% inter:69.5%
-[libx264 @ 0x1bd53f80] direct mvs  spatial:92.6% temporal:7.4%
-[libx264 @ 0x1bd53f80] coded y,uvDC,uvAC intra: 96.8% 32.4% 0.5% inter: 10.0% 1.7% 0.0%
-[libx264 @ 0x1bd53f80] i16 v,h,dc,p:  7% 48% 25% 20%
-[libx264 @ 0x1bd53f80] i8 v,h,dc,ddl,ddr,vr,hd,vl,hu:  4%  5%  4% 13% 14% 12% 17% 12% 20%
-[libx264 @ 0x1bd53f80] i4 v,h,dc,ddl,ddr,vr,hd,vl,hu:  5%  4%  2% 10% 15% 16% 18% 12% 19%
-[libx264 @ 0x1bd53f80] i8c dc,h,v,p: 87%  9%  4%  1%
-[libx264 @ 0x1bd53f80] Weighted P-Frames: Y:22.2% UV:11.1%
-[libx264 @ 0x1bd53f80] ref P L0: 71.1% 19.8%  8.3%  0.6%  0.3%  0.0%
-[libx264 @ 0x1bd53f80] ref B L0: 99.5%  0.4%  0.0%  0.0%
-[libx264 @ 0x1bd53f80] ref B L1: 99.8%  0.2%
-[libx264 @ 0x1bd53f80] kb/s:1113.67
-video codificado 09_bahia.mp4
-ffmpeg version 7.0.2-static https://johnvansickle.com/ffmpeg/  Copyright (c) 2000-2024 the FFmpeg developers
-  built with gcc 8 (Debian 8.3.0-6)
-  configuration: --enable-gpl --enable-version3 --enable-static --disable-debug --disable-ffplay --disable-indev=sndio --disable-outdev=sndio --cc=gcc --enable-fontconfig --enable-frei0r --enable-gnutls --enable-gmp --enable-libgme --enable-gray --enable-libaom --enable-libfribidi --enable-libass --enable-libvmaf --enable-libfreetype --enable-libmp3lame --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libopenjpeg --enable-librubberband --enable-libsoxr --enable-libspeex --enable-libsrt --enable-libvorbis --enable-libopus --enable-libtheora --enable-libvidstab --enable-libvo-amrwbenc --enable-libvpx --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxml2 --enable-libdav1d --enable-libxvid --enable-libzvbi --enable-libzimg
-  libavutil      59.  8.100 / 59.  8.100
-  libavcodec     61.  3.100 / 61.  3.100
-  libavformat    61.  1.100 / 61.  1.100
-  libavdevice    61.  1.100 / 61.  1.100
-  libavfilter    10.  1.100 / 10.  1.100
-  libswscale      8.  1.100 /  8.  1.100
-  libswresample   5.  1.100 /  5.  1.100
-  libpostproc    58.  1.100 / 58.  1.100
-Input #0, mov,mp4,m4a,3gp,3g2,mj2, from '/home/user/ApardianStudio/05-WEB/img/video/10_caballo.mp4':
-  Metadata:
-    minor_version   : 512
-    major_brand     : isom
-    compatible_brands: isomiso2avc1mp41
-    encoder         : Lavf60.16.100
-  Duration: 00:00:03.04, start: 0.000000, bitrate: 17471 kb/s
-  Stream #0:0[0x1](und): Video: h264 (Main) (avc1 / 0x31637661), yuv420p(progressive), 1280x720, 17468 kb/s, 24 fps, 24 tbr, 12288 tbn (default)
-      Metadata:
-        handler_name    : VideoHandler
-        vendor_id       : [0][0][0][0]
-        encoder         : Lavc60.31.102 h264_slapi
-Stream mapping:
-  Stream #0:0 -> #0:0 (h264 (native) -> h264 (libx264))
-Press [q] to stop, [?] for help
-[h264 @ 0x288c3400] Late SEI is not implemented. Update your FFmpeg version to the newest one from Git. If the problem still occurs, it means that your file has a feature which has not been implemented.
-[h264 @ 0x288c3400] If you want to help, upload a sample of this file to https://streams.videolan.org/upload/ and contact the ffmpeg-devel mailing list. (ffmpeg-devel@ffmpeg.org)
-[libx264 @ 0x28893e40] using cpu capabilities: MMX2 SSE2Fast SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2 AVX512
-[libx264 @ 0x28893e40] profile High, level 3.1, 4:2:0, 8-bit
-[libx264 @ 0x28893e40] 264 - core 164 r3191 4613ac3 - H.264/MPEG-4 AVC codec - Copyleft 2003-2024 - http://www.videolan.org/x264.html - options: cabac=1 ref=5 deblock=1:0:0 analyse=0x3:0x113 me=hex subme=8 psy=1 psy_rd=1.00:0.00 mixed_ref=1 me_range=16 chroma_me=1 trellis=2 8x8dct=1 cqm=0 deadzone=21,11 fast_pskip=1 chroma_qp_offset=-2 threads=6 lookahead_threads=1 sliced_threads=0 nr=0 decimate=1 interlaced=0 bluray_compat=0 constrained_intra=0 bframes=3 b_pyramid=2 b_adapt=1 b_bias=0 direct=3 weightb=1 open_gop=0 weightp=2 keyint=250 keyint_min=24 scenecut=40 intra_refresh=0 rc_lookahead=50 rc=crf mbtree=1 crf=30.0 qcomp=0.60 qpmin=0 qpmax=69 qpstep=4 ip_ratio=1.40 aq=1:1.00
-Output #0, mp4, to '/home/user/ApardianStudio/06-NOTAS/.cache-video/10_caballo__6642977-1792423241.mp4':
-  Metadata:
-    minor_version   : 512
-    major_brand     : isom
-    compatible_brands: isomiso2avc1mp41
-    encoder         : Lavf61.1.100
-  Stream #0:0(und): Video: h264 (avc1 / 0x31637661), yuv420p(progressive), 1280x720, q=2-31, 24 fps, 12288 tbn (default)
-      Metadata:
-        handler_name    : VideoHandler
-        vendor_id       : [0][0][0][0]
-        encoder         : Lavc61.3.100 libx264
-      Side data:
-        cpb: bitrate max/min/avg: 0/0/0 buffer size: 0 vbv_delay: N/A
-frame=    0 fps=0.0 q=0.0 size=       0KiB time=N/A bitrate=N/A speed=N/A    frame=    9 fps=9.0 q=35.0 size=       0KiB time=00:00:00.29 bitrate=   1.3kbits/s speed=0.292x    frame=   33 fps= 22 q=35.0 size=       0KiB time=00:00:01.29 bitrate=   0.3kbits/s speed=0.86x    frame=   54 fps= 27 q=35.0 size=     256KiB time=00:00:02.16 bitrate= 968.1kbits/s speed=1.08x    [mp4 @ 0x288c1b40] Starting second pass: moving the moov atom to the beginning of the file
-[out#0/mp4 @ 0x28893a80] video:494KiB audio:0KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: 0.341477%
-frame=   73 fps= 29 q=-1.0 Lsize=     496KiB time=00:00:02.95 bitrate=1372.3kbits/s speed=1.19x    
-[libx264 @ 0x28893e40] frame I:1     Avg QP:30.18  size: 47736
-[libx264 @ 0x28893e40] frame P:20    Avg QP:30.22  size: 14942
-[libx264 @ 0x28893e40] frame B:52    Avg QP:33.31  size:  3048
-[libx264 @ 0x28893e40] consecutive B-frames:  4.1%  2.7%  0.0% 93.2%
-[libx264 @ 0x28893e40] mb I  I16..4: 33.1% 59.8%  7.2%
-[libx264 @ 0x28893e40] mb P  I16..4:  6.4%  6.2%  0.4%  P16..4: 39.2% 11.8%  7.2%  0.0%  0.0%    skip:28.7%
-[libx264 @ 0x28893e40] mb B  I16..4:  0.5%  0.9%  0.0%  B16..8: 37.8%  2.7%  0.4%  direct: 0.8%  skip:56.8%  L0:40.8% L1:55.5% BI: 3.7%
-[libx264 @ 0x28893e40] 8x8 transform intra:53.2% inter:69.1%
-[libx264 @ 0x28893e40] direct mvs  spatial:92.3% temporal:7.7%
-[libx264 @ 0x28893e40] coded y,uvDC,uvAC intra: 34.0% 37.4% 1.7% inter: 7.7% 3.9% 0.0%
-[libx264 @ 0x28893e40] i16 v,h,dc,p: 22% 40% 18% 20%
-[libx264 @ 0x28893e40] i8 v,h,dc,ddl,ddr,vr,hd,vl,hu: 14%  7% 26%  8%  8% 12%  6% 13%  7%
-[libx264 @ 0x28893e40] i4 v,h,dc,ddl,ddr,vr,hd,vl,hu: 20%  5% 12%  9% 11% 15%  8% 11%  8%
-[libx264 @ 0x28893e40] i8c dc,h,v,p: 55% 24% 15%  5%
-[libx264 @ 0x28893e40] Weighted P-Frames: Y:0.0% UV:0.0%
-[libx264 @ 0x28893e40] ref P L0: 60.4% 15.1% 15.8%  4.7%  3.9%  0.2%
-[libx264 @ 0x28893e40] ref B L0: 90.3%  6.4%  2.5%  0.8%
-[libx264 @ 0x28893e40] ref B L1: 96.9%  3.1%
-[libx264 @ 0x28893e40] kb/s:1328.36
-video codificado 10_caballo.mp4
-ffmpeg version 7.0.2-static https://johnvansickle.com/ffmpeg/  Copyright (c) 2000-2024 the FFmpeg developers
-  built with gcc 8 (Debian 8.3.0-6)
-  configuration: --enable-gpl --enable-version3 --enable-static --disable-debug --disable-ffplay --disable-indev=sndio --disable-outdev=sndio --cc=gcc --enable-fontconfig --enable-frei0r --enable-gnutls --enable-gmp --enable-libgme --enable-gray --enable-libaom --enable-libfribidi --enable-libass --enable-libvmaf --enable-libfreetype --enable-libmp3lame --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libopenjpeg --enable-librubberband --enable-libsoxr --enable-libspeex --enable-libsrt --enable-libvorbis --enable-libopus --enable-libtheora --enable-libvidstab --enable-libvo-amrwbenc --enable-libvpx --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxml2 --enable-libdav1d --enable-libxvid --enable-libzvbi --enable-libzimg
-  libavutil      59.  8.100 / 59.  8.100
-  libavcodec     61.  3.100 / 61.  3.100
-  libavformat    61.  1.100 / 61.  1.100
-  libavdevice    61.  1.100 / 61.  1.100
-  libavfilter    10.  1.100 / 10.  1.100
-  libswscale      8.  1.100 /  8.  1.100
-  libswresample   5.  1.100 /  5.  1.100
-  libpostproc    58.  1.100 / 58.  1.100
-Input #0, mov,mp4,m4a,3gp,3g2,mj2, from '/home/user/ApardianStudio/05-WEB/img/video/11_retrato_bn.mp4':
-  Metadata:
-    minor_version   : 512
-    major_brand     : isom
-    compatible_brands: isomiso2avc1mp41
-    encoder         : Lavf60.16.100
-  Duration: 00:00:03.04, start: 0.000000, bitrate: 11530 kb/s
-  Stream #0:0[0x1](und): Video: h264 (Main) (avc1 / 0x31637661), yuv420p(progressive), 1280x720, 11526 kb/s, 24 fps, 24 tbr, 12288 tbn (default)
-      Metadata:
-        handler_name    : VideoHandler
-        vendor_id       : [0][0][0][0]
-        encoder         : Lavc60.31.102 h264_slapi
-Stream mapping:
-  Stream #0:0 -> #0:0 (h264 (native) -> h264 (libx264))
-Press [q] to stop, [?] for help
-[h264 @ 0x2073b5c0] Late SEI is not implemented. Update your FFmpeg version to the newest one from Git. If the problem still occurs, it means that your file has a feature which has not been implemented.
-[h264 @ 0x2073b5c0] If you want to help, upload a sample of this file to https://streams.videolan.org/upload/ and contact the ffmpeg-devel mailing list. (ffmpeg-devel@ffmpeg.org)
-[libx264 @ 0x2073e800] using cpu capabilities: MMX2 SSE2Fast SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2 AVX512
-[libx264 @ 0x2073e800] profile High, level 3.1, 4:2:0, 8-bit
-[libx264 @ 0x2073e800] 264 - core 164 r3191 4613ac3 - H.264/MPEG-4 AVC codec - Copyleft 2003-2024 - http://www.videolan.org/x264.html - options: cabac=1 ref=5 deblock=1:0:0 analyse=0x3:0x113 me=hex subme=8 psy=1 psy_rd=1.00:0.00 mixed_ref=1 me_range=16 chroma_me=1 trellis=2 8x8dct=1 cqm=0 deadzone=21,11 fast_pskip=1 chroma_qp_offset=-2 threads=6 lookahead_threads=1 sliced_threads=0 nr=0 decimate=1 interlaced=0 bluray_compat=0 constrained_intra=0 bframes=3 b_pyramid=2 b_adapt=1 b_bias=0 direct=3 weightb=1 open_gop=0 weightp=2 keyint=250 keyint_min=24 scenecut=40 intra_refresh=0 rc_lookahead=50 rc=crf mbtree=1 crf=30.0 qcomp=0.60 qpmin=0 qpmax=69 qpstep=4 ip_ratio=1.40 aq=1:1.00
-Output #0, mp4, to '/home/user/ApardianStudio/06-NOTAS/.cache-video/11_retrato_bn__4383869-1792423241.mp4':
-  Metadata:
-    minor_version   : 512
-    major_brand     : isom
-    compatible_brands: isomiso2avc1mp41
-    encoder         : Lavf61.1.100
-  Stream #0:0(und): Video: h264 (avc1 / 0x31637661), yuv420p(progressive), 1280x720, q=2-31, 24 fps, 12288 tbn (default)
-      Metadata:
-        handler_name    : VideoHandler
-        vendor_id       : [0][0][0][0]
-        encoder         : Lavc61.3.100 libx264
-      Side data:
-        cpb: bitrate max/min/avg: 0/0/0 buffer size: 0 vbv_delay: N/A
-frame=    0 fps=0.0 q=0.0 size=       0KiB time=N/A bitrate=N/A speed=N/A    frame=   16 fps= 16 q=35.0 size=       0KiB time=00:00:00.58 bitrate=   0.7kbits/s speed=0.58x    frame=   39 fps= 26 q=35.0 size=       0KiB time=00:00:01.54 bitrate=   0.2kbits/s speed=1.02x    frame=   72 fps= 36 q=-1.0 size=       0KiB time=00:00:02.91 bitrate=   0.1kbits/s speed=1.45x    [mp4 @ 0x2070be40] Starting second pass: moving the moov atom to the beginning of the file
-[out#0/mp4 @ 0x2070d480] video:240KiB audio:0KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: 0.698029%
-frame=   73 fps= 36 q=-1.0 Lsize=     242KiB time=00:00:02.95 bitrate= 670.6kbits/s speed=1.47x    
-[libx264 @ 0x2073e800] frame I:1     Avg QP:32.04  size: 28184
-[libx264 @ 0x2073e800] frame P:19    Avg QP:30.61  size:  8064
-[libx264 @ 0x2073e800] frame B:53    Avg QP:31.54  size:  1211
-[libx264 @ 0x2073e800] consecutive B-frames:  2.7%  0.0%  4.1% 93.2%
-[libx264 @ 0x2073e800] mb I  I16..4: 38.6% 52.6%  8.8%
-[libx264 @ 0x2073e800] mb P  I16..4:  2.0%  2.0%  0.1%  P16..4: 33.7%  9.3%  4.9%  0.0%  0.0%    skip:48.1%
-[libx264 @ 0x2073e800] mb B  I16..4:  0.1%  0.1%  0.0%  B16..8: 31.7%  0.4%  0.0%  direct: 0.1%  skip:67.6%  L0:39.8% L1:58.6% BI: 1.6%
-[libx264 @ 0x2073e800] 8x8 transform intra:50.4% inter:74.2%
-[libx264 @ 0x2073e800] direct mvs  spatial:92.5% temporal:7.5%
-[libx264 @ 0x2073e800] coded y,uvDC,uvAC intra: 33.0% 3.1% 0.0% inter: 4.1% 0.1% 0.0%
-[libx264 @ 0x2073e800] i16 v,h,dc,p: 28% 24% 17% 31%
-[libx264 @ 0x2073e800] i8 v,h,dc,ddl,ddr,vr,hd,vl,hu:  9%  3% 26%  9% 12% 11% 10% 13%  7%
-[libx264 @ 0x2073e800] i4 v,h,dc,ddl,ddr,vr,hd,vl,hu: 11%  2%  6% 12% 15% 16% 11% 17% 10%
-[libx264 @ 0x2073e800] i8c dc,h,v,p: 99%  0%  0%  0%
-[libx264 @ 0x2073e800] Weighted P-Frames: Y:5.3% UV:0.0%
-[libx264 @ 0x2073e800] ref P L0: 64.1% 17.0% 14.3%  2.1%  2.4%  0.1%
-[libx264 @ 0x2073e800] ref B L0: 85.9%  6.7%  3.0%  4.4%
-[libx264 @ 0x2073e800] ref B L1: 96.8%  3.2%
-[libx264 @ 0x2073e800] kb/s:645.90
-video codificado 11_retrato_bn.mp4
-ffmpeg version 7.0.2-static https://johnvansickle.com/ffmpeg/  Copyright (c) 2000-2024 the FFmpeg developers
-  built with gcc 8 (Debian 8.3.0-6)
-  configuration: --enable-gpl --enable-version3 --enable-static --disable-debug --disable-ffplay --disable-indev=sndio --disable-outdev=sndio --cc=gcc --enable-fontconfig --enable-frei0r --enable-gnutls --enable-gmp --enable-libgme --enable-gray --enable-libaom --enable-libfribidi --enable-libass --enable-libvmaf --enable-libfreetype --enable-libmp3lame --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libopenjpeg --enable-librubberband --enable-libsoxr --enable-libspeex --enable-libsrt --enable-libvorbis --enable-libopus --enable-libtheora --enable-libvidstab --enable-libvo-amrwbenc --enable-libvpx --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxml2 --enable-libdav1d --enable-libxvid --enable-libzvbi --enable-libzimg
-  libavutil      59.  8.100 / 59.  8.100
-  libavcodec     61.  3.100 / 61.  3.100
-  libavformat    61.  1.100 / 61.  1.100
-  libavdevice    61.  1.100 / 61.  1.100
-  libavfilter    10.  1.100 / 10.  1.100
-  libswscale      8.  1.100 /  8.  1.100
-  libswresample   5.  1.100 /  5.  1.100
-  libpostproc    58.  1.100 / 58.  1.100
-Input #0, mov,mp4,m4a,3gp,3g2,mj2, from '/home/user/ApardianStudio/05-WEB/img/video/12_drift.mp4':
-  Metadata:
-    minor_version   : 512
-    major_brand     : isom
-    compatible_brands: isomiso2avc1mp41
-    encoder         : Lavf60.16.100
-  Duration: 00:00:03.04, start: 0.000000, bitrate: 12075 kb/s
-  Stream #0:0[0x1](und): Video: h264 (Main) (avc1 / 0x31637661), yuv420p(progressive), 1280x720, 12071 kb/s, 24 fps, 24 tbr, 12288 tbn (default)
-      Metadata:
-        handler_name    : VideoHandler
-        vendor_id       : [0][0][0][0]
-        encoder         : Lavc60.31.102 h264_slapi
-Stream mapping:
-  Stream #0:0 -> #0:0 (h264 (native) -> h264 (libx264))
-Press [q] to stop, [?] for help
-[h264 @ 0x418fb880] Late SEI is not implemented. Update your FFmpeg version to the newest one from Git. If the problem still occurs, it means that your file has a feature which has not been implemented.
-[h264 @ 0x418fb880] If you want to help, upload a sample of this file to https://streams.videolan.org/upload/ and contact the ffmpeg-devel mailing list. (ffmpeg-devel@ffmpeg.org)
-[libx264 @ 0x418fa240] using cpu capabilities: MMX2 SSE2Fast SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2 AVX512
-[libx264 @ 0x418fa240] profile High, level 3.1, 4:2:0, 8-bit
-[libx264 @ 0x418fa240] 264 - core 164 r3191 4613ac3 - H.264/MPEG-4 AVC codec - Copyleft 2003-2024 - http://www.videolan.org/x264.html - options: cabac=1 ref=5 deblock=1:0:0 analyse=0x3:0x113 me=hex subme=8 psy=1 psy_rd=1.00:0.00 mixed_ref=1 me_range=16 chroma_me=1 trellis=2 8x8dct=1 cqm=0 deadzone=21,11 fast_pskip=1 chroma_qp_offset=-2 threads=6 lookahead_threads=1 sliced_threads=0 nr=0 decimate=1 interlaced=0 bluray_compat=0 constrained_intra=0 bframes=3 b_pyramid=2 b_adapt=1 b_bias=0 direct=3 weightb=1 open_gop=0 weightp=2 keyint=250 keyint_min=24 scenecut=40 intra_refresh=0 rc_lookahead=50 rc=crf mbtree=1 crf=30.0 qcomp=0.60 qpmin=0 qpmax=69 qpstep=4 ip_ratio=1.40 aq=1:1.00
-Output #0, mp4, to '/home/user/ApardianStudio/06-NOTAS/.cache-video/12_drift__4591170-1792423241.mp4':
-  Metadata:
-    minor_version   : 512
-    major_brand     : isom
-    compatible_brands: isomiso2avc1mp41
-    encoder         : Lavf61.1.100
-  Stream #0:0(und): Video: h264 (avc1 / 0x31637661), yuv420p(progressive), 1280x720, q=2-31, 24 fps, 12288 tbn (default)
-      Metadata:
-        handler_name    : VideoHandler
-        vendor_id       : [0][0][0][0]
-        encoder         : Lavc61.3.100 libx264
-      Side data:
-        cpb: bitrate max/min/avg: 0/0/0 buffer size: 0 vbv_delay: N/A
-frame=    0 fps=0.0 q=0.0 size=       0KiB time=N/A bitrate=N/A speed=N/A    frame=    6 fps=6.0 q=35.0 size=       0KiB time=00:00:00.16 bitrate=   2.3kbits/s speed=0.166x    frame=   18 fps= 12 q=35.0 size=       0KiB time=00:00:00.66 bitrate=   0.6kbits/s speed=0.443x    frame=   34 fps= 17 q=35.0 size=     256KiB time=00:00:01.33 bitrate=1573.2kbits/s speed=0.665x    frame=   49 fps= 20 q=35.0 size=     256KiB time=00:00:01.95 bitrate=1071.1kbits/s speed=0.782x    frame=   64 fps= 21 q=35.0 size=     512KiB time=00:00:02.58 bitrate=1623.8kbits/s speed=0.86x    [mp4 @ 0x418c6500] Starting second pass: moving the moov atom to the beginning of the file
-[out#0/mp4 @ 0x418f4000] video:603KiB audio:0KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: 0.260461%
-frame=   73 fps= 23 q=-1.0 Lsize=     604KiB time=00:00:02.95 bitrate=1672.8kbits/s speed=0.915x    
-[libx264 @ 0x418fa240] frame I:1     Avg QP:33.99  size: 11982
-[libx264 @ 0x418fa240] frame P:46    Avg QP:34.10  size:  9428
-[libx264 @ 0x418fa240] frame B:26    Avg QP:34.68  size:  6563
-[libx264 @ 0x418fa240] consecutive B-frames: 32.9% 54.8% 12.3%  0.0%
-[libx264 @ 0x418fa240] mb I  I16..4: 42.9% 54.2%  2.9%
-[libx264 @ 0x418fa240] mb P  I16..4: 29.1% 21.0%  0.3%  P16..4: 33.3%  3.6%  0.7%  0.0%  0.0%    skip:12.1%
-[libx264 @ 0x418fa240] mb B  I16..4:  8.3%  5.5%  0.0%  B16..8: 43.3%  6.4%  0.3%  direct: 2.2%  skip:34.0%  L0:56.6% L1:40.9% BI: 2.5%
-[libx264 @ 0x418fa240] 8x8 transform intra:42.0% inter:96.0%
-[libx264 @ 0x418fa240] direct mvs  spatial:96.2% temporal:3.8%
-[libx264 @ 0x418fa240] coded y,uvDC,uvAC intra: 21.0% 21.0% 0.6% inter: 14.3% 13.1% 0.1%
-[libx264 @ 0x418fa240] i16 v,h,dc,p:  4% 78%  4% 14%
-[libx264 @ 0x418fa240] i8 v,h,dc,ddl,ddr,vr,hd,vl,hu:  4% 67% 12%  2%  2%  2%  5%  2%  5%
-[libx264 @ 0x418fa240] i4 v,h,dc,ddl,ddr,vr,hd,vl,hu:  6% 61% 13%  2%  4%  3%  5%  2%  4%
-[libx264 @ 0x418fa240] i8c dc,h,v,p: 53% 44%  2%  1%
-[libx264 @ 0x418fa240] Weighted P-Frames: Y:0.0% UV:0.0%
-[libx264 @ 0x418fa240] ref P L0: 60.6% 13.3% 14.7%  6.5%  3.9%  1.0%
-[libx264 @ 0x418fa240] ref B L0: 83.8% 10.2%  5.7%  0.3%
-[libx264 @ 0x418fa240] kb/s:1620.93
-video codificado 12_drift.mp4
-ffmpeg version 7.0.2-static https://johnvansickle.com/ffmpeg/  Copyright (c) 2000-2024 the FFmpeg developers
-  built with gcc 8 (Debian 8.3.0-6)
-  configuration: --enable-gpl --enable-version3 --enable-static --disable-debug --disable-ffplay --disable-indev=sndio --disable-outdev=sndio --cc=gcc --enable-fontconfig --enable-frei0r --enable-gnutls --enable-gmp --enable-libgme --enable-gray --enable-libaom --enable-libfribidi --enable-libass --enable-libvmaf --enable-libfreetype --enable-libmp3lame --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libopenjpeg --enable-librubberband --enable-libsoxr --enable-libspeex --enable-libsrt --enable-libvorbis --enable-libopus --enable-libtheora --enable-libvidstab --enable-libvo-amrwbenc --enable-libvpx --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxml2 --enable-libdav1d --enable-libxvid --enable-libzvbi --enable-libzimg
-  libavutil      59.  8.100 / 59.  8.100
-  libavcodec     61.  3.100 / 61.  3.100
-  libavformat    61.  1.100 / 61.  1.100
-  libavdevice    61.  1.100 / 61.  1.100
-  libavfilter    10.  1.100 / 10.  1.100
-  libswscale      8.  1.100 /  8.  1.100
-  libswresample   5.  1.100 /  5.  1.100
-  libpostproc    58.  1.100 / 58.  1.100
-Input #0, mov,mp4,m4a,3gp,3g2,mj2, from '/home/user/ApardianStudio/05-WEB/img/video/13_quince.mp4':
-  Metadata:
-    minor_version   : 512
-    major_brand     : isom
-    compatible_brands: isomiso2avc1mp41
-    encoder         : Lavf60.16.100
-  Duration: 00:00:03.04, start: 0.000000, bitrate: 16436 kb/s
-  Stream #0:0[0x1](und): Video: h264 (Main) (avc1 / 0x31637661), yuv420p(progressive), 1280x720, 16432 kb/s, 24 fps, 24 tbr, 12288 tbn (default)
-      Metadata:
-        handler_name    : VideoHandler
-        vendor_id       : [0][0][0][0]
-        encoder         : Lavc60.31.102 h264_slapi
-Stream mapping:
-  Stream #0:0 -> #0:0 (h264 (native) -> h264 (libx264))
-Press [q] to stop, [?] for help
-[h264 @ 0x12d4b000] Late SEI is not implemented. Update your FFmpeg version to the newest one from Git. If the problem still occurs, it means that your file has a feature which has not been implemented.
-[h264 @ 0x12d4b000] If you want to help, upload a sample of this file to https://streams.videolan.org/upload/ and contact the ffmpeg-devel mailing list. (ffmpeg-devel@ffmpeg.org)
-[libx264 @ 0x12d1c700] using cpu capabilities: MMX2 SSE2Fast SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2 AVX512
-[libx264 @ 0x12d1c700] profile High, level 3.1, 4:2:0, 8-bit
-[libx264 @ 0x12d1c700] 264 - core 164 r3191 4613ac3 - H.264/MPEG-4 AVC codec - Copyleft 2003-2024 - http://www.videolan.org/x264.html - options: cabac=1 ref=5 deblock=1:0:0 analyse=0x3:0x113 me=hex subme=8 psy=1 psy_rd=1.00:0.00 mixed_ref=1 me_range=16 chroma_me=1 trellis=2 8x8dct=1 cqm=0 deadzone=21,11 fast_pskip=1 chroma_qp_offset=-2 threads=6 lookahead_threads=1 sliced_threads=0 nr=0 decimate=1 interlaced=0 bluray_compat=0 constrained_intra=0 bframes=3 b_pyramid=2 b_adapt=1 b_bias=0 direct=3 weightb=1 open_gop=0 weightp=2 keyint=250 keyint_min=24 scenecut=40 intra_refresh=0 rc_lookahead=50 rc=crf mbtree=1 crf=30.0 qcomp=0.60 qpmin=0 qpmax=69 qpstep=4 ip_ratio=1.40 aq=1:1.00
-Output #0, mp4, to '/home/user/ApardianStudio/06-NOTAS/.cache-video/13_quince__6249147-1792423241.mp4':
-  Metadata:
-    minor_version   : 512
-    major_brand     : isom
-    compatible_brands: isomiso2avc1mp41
-    encoder         : Lavf61.1.100
-  Stream #0:0(und): Video: h264 (avc1 / 0x31637661), yuv420p(progressive), 1280x720, q=2-31, 24 fps, 12288 tbn (default)
-      Metadata:
-        handler_name    : VideoHandler
-        vendor_id       : [0][0][0][0]
-        encoder         : Lavc61.3.100 libx264
-      Side data:
-        cpb: bitrate max/min/avg: 0/0/0 buffer size: 0 vbv_delay: N/A
-frame=    0 fps=0.0 q=0.0 size=       0KiB time=N/A bitrate=N/A speed=N/A    frame=    6 fps=6.0 q=35.0 size=       0KiB time=00:00:00.16 bitrate=   2.3kbits/s speed=0.167x    frame=   24 fps= 16 q=35.0 size=       0KiB time=00:00:00.91 bitrate=   0.4kbits/s speed=0.61x    frame=   39 fps= 19 q=35.0 size=       0KiB time=00:00:01.54 bitrate=   0.2kbits/s speed=0.77x    frame=   53 fps= 21 q=35.0 size=     256KiB time=00:00:02.12 bitrate= 987.1kbits/s speed=0.849x    [mp4 @ 0x12d49b40] Starting second pass: moving the moov atom to the beginning of the file
-[out#0/mp4 @ 0x12d1f880] video:361KiB audio:0KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: 0.467531%
-frame=   73 fps= 25 q=-1.0 Lsize=     362KiB time=00:00:02.95 bitrate=1003.6kbits/s speed=1.02x    
-[libx264 @ 0x12d1c700] frame I:1     Avg QP:29.30  size: 57631
-[libx264 @ 0x12d1c700] frame P:19    Avg QP:30.18  size: 11114
-[libx264 @ 0x12d1c700] frame B:53    Avg QP:31.84  size:  1885
-[libx264 @ 0x12d1c700] consecutive B-frames:  2.7%  0.0%  4.1% 93.2%
-[libx264 @ 0x12d1c700] mb I  I16..4: 10.5% 69.3% 20.2%
-[libx264 @ 0x12d1c700] mb P  I16..4:  0.9%  1.0%  0.0%  P16..4: 49.5% 14.4%  6.4%  0.0%  0.0%    skip:27.7%
-[libx264 @ 0x12d1c700] mb B  I16..4:  0.1%  0.1%  0.0%  B16..8: 47.4%  0.7%  0.0%  direct: 0.1%  skip:51.6%  L0:41.0% L1:58.4% BI: 0.6%
-[libx264 @ 0x12d1c700] 8x8 transform intra:64.2% inter:67.7%
-[libx264 @ 0x12d1c700] direct mvs  spatial:92.5% temporal:7.5%
-[libx264 @ 0x12d1c700] coded y,uvDC,uvAC intra: 55.7% 61.8% 29.3% inter: 5.1% 6.3% 0.2%
-[libx264 @ 0x12d1c700] i16 v,h,dc,p: 36% 41% 16%  8%
-[libx264 @ 0x12d1c700] i8 v,h,dc,ddl,ddr,vr,hd,vl,hu: 13% 10% 20%  6% 10% 11% 12%  8% 10%
-[libx264 @ 0x12d1c700] i4 v,h,dc,ddl,ddr,vr,hd,vl,hu: 17% 11%  7%  8% 12% 12% 13%  8% 13%
-[libx264 @ 0x12d1c700] i8c dc,h,v,p: 35% 32% 23%  9%
-[libx264 @ 0x12d1c700] Weighted P-Frames: Y:0.0% UV:0.0%
-[libx264 @ 0x12d1c700] ref P L0: 78.5% 12.1%  7.3%  1.2%  0.9%
-[libx264 @ 0x12d1c700] ref B L0: 97.4%  1.9%  0.5%  0.1%
-[libx264 @ 0x12d1c700] ref B L1: 98.8%  1.2%
-[libx264 @ 0x12d1c700] kb/s:969.73
-video codificado 13_quince.mp4
-ffmpeg version 7.0.2-static https://johnvansickle.com/ffmpeg/  Copyright (c) 2000-2024 the FFmpeg developers
-  built with gcc 8 (Debian 8.3.0-6)
-  configuration: --enable-gpl --enable-version3 --enable-static --disable-debug --disable-ffplay --disable-indev=sndio --disable-outdev=sndio --cc=gcc --enable-fontconfig --enable-frei0r --enable-gnutls --enable-gmp --enable-libgme --enable-gray --enable-libaom --enable-libfribidi --enable-libass --enable-libvmaf --enable-libfreetype --enable-libmp3lame --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libopenjpeg --enable-librubberband --enable-libsoxr --enable-libspeex --enable-libsrt --enable-libvorbis --enable-libopus --enable-libtheora --enable-libvidstab --enable-libvo-amrwbenc --enable-libvpx --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxml2 --enable-libdav1d --enable-libxvid --enable-libzvbi --enable-libzimg
-  libavutil      59.  8.100 / 59.  8.100
-  libavcodec     61.  3.100 / 61.  3.100
-  libavformat    61.  1.100 / 61.  1.100
-  libavdevice    61.  1.100 / 61.  1.100
-  libavfilter    10.  1.100 / 10.  1.100
-  libswscale      8.  1.100 /  8.  1.100
-  libswresample   5.  1.100 /  5.  1.100
-  libpostproc    58.  1.100 / 58.  1.100
-Input #0, mov,mp4,m4a,3gp,3g2,mj2, from '/home/user/ApardianStudio/05-WEB/img/video/14_fondo_proceso.mp4':
-  Metadata:
-    minor_version   : 512
-    major_brand     : isom
-    compatible_brands: isomiso2avc1mp41
-    encoder         : Lavf60.16.100
-  Duration: 00:00:05.04, start: 0.000000, bitrate: 17538 kb/s
-  Stream #0:0[0x1](und): Audio: aac (LC) (mp4a / 0x6134706D), 44100 Hz, stereo, fltp, 128 kb/s (default)
-      Metadata:
-        handler_name    : SoundHandler
-        vendor_id       : [0][0][0][0]
-  Stream #0:1[0x2](und): Video: h264 (Main) (avc1 / 0x31637661), yuv420p(progressive), 1280x720, 17401 kb/s, 24 fps, 24 tbr, 12288 tbn (default)
-      Metadata:
-        handler_name    : VideoHandler
-        vendor_id       : [0][0][0][0]
-        encoder         : Lavc60.31.102 h264_slapi
-Stream mapping:
-  Stream #0:1 -> #0:0 (h264 (native) -> h264 (libx264))
-Press [q] to stop, [?] for help
-[h264 @ 0x2bd001c0] Late SEI is not implemented. Update your FFmpeg version to the newest one from Git. If the problem still occurs, it means that your file has a feature which has not been implemented.
-[h264 @ 0x2bd001c0] If you want to help, upload a sample of this file to https://streams.videolan.org/upload/ and contact the ffmpeg-devel mailing list. (ffmpeg-devel@ffmpeg.org)
-[libx264 @ 0x2bd013c0] using cpu capabilities: MMX2 SSE2Fast SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2 AVX512
-[libx264 @ 0x2bd013c0] profile High, level 3.1, 4:2:0, 8-bit
-[libx264 @ 0x2bd013c0] 264 - core 164 r3191 4613ac3 - H.264/MPEG-4 AVC codec - Copyleft 2003-2024 - http://www.videolan.org/x264.html - options: cabac=1 ref=5 deblock=1:0:0 analyse=0x3:0x113 me=hex subme=8 psy=1 psy_rd=1.00:0.00 mixed_ref=1 me_range=16 chroma_me=1 trellis=2 8x8dct=1 cqm=0 deadzone=21,11 fast_pskip=1 chroma_qp_offset=-2 threads=6 lookahead_threads=1 sliced_threads=0 nr=0 decimate=1 interlaced=0 bluray_compat=0 constrained_intra=0 bframes=3 b_pyramid=2 b_adapt=1 b_bias=0 direct=3 weightb=1 open_gop=0 weightp=2 keyint=250 keyint_min=24 scenecut=40 intra_refresh=0 rc_lookahead=50 rc=crf mbtree=1 crf=30.0 qcomp=0.60 qpmin=0 qpmax=69 qpstep=4 ip_ratio=1.40 aq=1:1.00
-Output #0, mp4, to '/home/user/ApardianStudio/06-NOTAS/.cache-video/14_fondo_proceso__11052825-1792423242.mp4':
-  Metadata:
-    minor_version   : 512
-    major_brand     : isom
-    compatible_brands: isomiso2avc1mp41
-    encoder         : Lavf61.1.100
-  Stream #0:0(und): Video: h264 (avc1 / 0x31637661), yuv420p(progressive), 1280x720, q=2-31, 24 fps, 12288 tbn (default)
-      Metadata:
-        handler_name    : VideoHandler
-        vendor_id       : [0][0][0][0]
-        encoder         : Lavc61.3.100 libx264
-      Side data:
-        cpb: bitrate max/min/avg: 0/0/0 buffer size: 0 vbv_delay: N/A
-frame=    0 fps=0.0 q=0.0 size=       0KiB time=N/A bitrate=N/A speed=N/A    frame=    5 fps=5.0 q=35.0 size=       0KiB time=00:00:00.12 bitrate=   3.1kbits/s speed=0.125x    frame=   18 fps= 12 q=35.0 size=       0KiB time=00:00:00.66 bitrate=   0.6kbits/s speed=0.444x    frame=   32 fps= 16 q=35.0 size=     256KiB time=00:00:01.25 bitrate=1678.0kbits/s speed=0.625x    frame=   44 fps= 18 q=35.0 size=     256KiB time=00:00:01.75 bitrate=1198.6kbits/s speed= 0.7x    frame=   60 fps= 20 q=35.0 size=     512KiB time=00:00:02.41 bitrate=1735.7kbits/s speed=0.805x    frame=   79 fps= 23 q=35.0 size=     512KiB time=00:00:03.20 bitrate=1307.4kbits/s speed=0.916x    frame=   95 fps= 24 q=35.0 size=     768KiB time=00:00:03.87 bitrate=1623.7kbits/s speed=0.968x    frame=  117 fps= 26 q=-1.0 size=    1024KiB time=00:00:04.79 bitrate=1750.7kbits/s speed=1.06x    [mp4 @ 0x2bde0380] Starting second pass: moving the moov atom to the beginning of the file
-[out#0/mp4 @ 0x2bcfb180] video:1127KiB audio:0KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: 0.185035%
-frame=  121 fps= 26 q=-1.0 Lsize=    1129KiB time=00:00:04.95 bitrate=1865.1kbits/s speed=1.08x    
-[libx264 @ 0x2bd013c0] frame I:1     Avg QP:31.45  size: 44546
-[libx264 @ 0x2bd013c0] frame P:68    Avg QP:31.12  size: 14272
-[libx264 @ 0x2bd013c0] frame B:52    Avg QP:34.59  size:  2656
-[libx264 @ 0x2bd013c0] consecutive B-frames: 26.4% 38.0% 32.2%  3.3%
-[libx264 @ 0x2bd013c0] mb I  I16..4: 24.5% 64.9% 10.6%
-[libx264 @ 0x2bd013c0] mb P  I16..4:  4.5%  4.5%  0.1%  P16..4: 42.9% 16.3%  7.9%  0.0%  0.0%    skip:23.9%
-[libx264 @ 0x2bd013c0] mb B  I16..4:  0.6%  0.9%  0.0%  B16..8: 40.9%  2.2%  0.2%  direct: 0.7%  skip:54.5%  L0:33.8% L1:60.0% BI: 6.2%
-[libx264 @ 0x2bd013c0] 8x8 transform intra:52.5% inter:64.1%
-[libx264 @ 0x2bd013c0] direct mvs  spatial:94.2% temporal:5.8%
-[libx264 @ 0x2bd013c0] coded y,uvDC,uvAC intra: 16.2% 33.8% 7.5% inter: 14.3% 10.7% 0.3%
-[libx264 @ 0x2bd013c0] i16 v,h,dc,p: 28% 37% 22% 13%
-[libx264 @ 0x2bd013c0] i8 v,h,dc,ddl,ddr,vr,hd,vl,hu: 14% 15% 47%  3%  4%  4%  5%  3%  6%
-[libx264 @ 0x2bd013c0] i4 v,h,dc,ddl,ddr,vr,hd,vl,hu: 10% 16% 18%  6%  9%  7% 10%  8% 15%
-[libx264 @ 0x2bd013c0] i8c dc,h,v,p: 57% 28% 13%  2%
-[libx264 @ 0x2bd013c0] Weighted P-Frames: Y:13.2% UV:2.9%
-[libx264 @ 0x2bd013c0] ref P L0: 74.2% 15.5%  5.9%  1.8%  1.6%  0.8%  0.2%
-[libx264 @ 0x2bd013c0] ref B L0: 93.9%  3.7%  1.9%  0.5%
-[libx264 @ 0x2bd013c0] ref B L1: 99.9%  0.1%
-[libx264 @ 0x2bd013c0] kb/s:1829.79
-video codificado 14_fondo_proceso.mp4
-ffmpeg version 7.0.2-static https://johnvansickle.com/ffmpeg/  Copyright (c) 2000-2024 the FFmpeg developers
-  built with gcc 8 (Debian 8.3.0-6)
-  configuration: --enable-gpl --enable-version3 --enable-static --disable-debug --disable-ffplay --disable-indev=sndio --disable-outdev=sndio --cc=gcc --enable-fontconfig --enable-frei0r --enable-gnutls --enable-gmp --enable-libgme --enable-gray --enable-libaom --enable-libfribidi --enable-libass --enable-libvmaf --enable-libfreetype --enable-libmp3lame --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libopenjpeg --enable-librubberband --enable-libsoxr --enable-libspeex --enable-libsrt --enable-libvorbis --enable-libopus --enable-libtheora --enable-libvidstab --enable-libvo-amrwbenc --enable-libvpx --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxml2 --enable-libdav1d --enable-libxvid --enable-libzvbi --enable-libzimg
-  libavutil      59.  8.100 / 59.  8.100
-  libavcodec     61.  3.100 / 61.  3.100
-  libavformat    61.  1.100 / 61.  1.100
-  libavdevice    61.  1.100 / 61.  1.100
-  libavfilter    10.  1.100 / 10.  1.100
-  libswscale      8.  1.100 /  8.  1.100
-  libswresample   5.  1.100 /  5.  1.100
-  libpostproc    58.  1.100 / 58.  1.100
-Input #0, mov,mp4,m4a,3gp,3g2,mj2, from '/home/user/ApardianStudio/05-WEB/img/video/15_torta_bengala.mp4':
-  Metadata:
-    minor_version   : 512
-    major_brand     : isom
-    compatible_brands: isomiso2avc1mp41
-    encoder         : Lavf60.16.100
-  Duration: 00:00:03.04, start: 0.000000, bitrate: 11567 kb/s
-  Stream #0:0[0x1](und): Video: h264 (Main) (avc1 / 0x31637661), yuv420p(progressive), 1280x720, 11563 kb/s, 24 fps, 24 tbr, 12288 tbn (default)
-      Metadata:
-        handler_name    : VideoHandler
-        vendor_id       : [0][0][0][0]
-        encoder         : Lavc60.31.102 h264_slapi
-Stream mapping:
-  Stream #0:0 -> #0:0 (h264 (native) -> h264 (libx264))
-Press [q] to stop, [?] for help
-[h264 @ 0x1b49fd40] Late SEI is not implemented. Update your FFmpeg version to the newest one from Git. If the problem still occurs, it means that your file has a feature which has not been implemented.
-[h264 @ 0x1b49fd40] If you want to help, upload a sample of this file to https://streams.videolan.org/upload/ and contact the ffmpeg-devel mailing list. (ffmpeg-devel@ffmpeg.org)
-[libx264 @ 0x1b46c040] using cpu capabilities: MMX2 SSE2Fast SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2 AVX512
-[libx264 @ 0x1b46c040] profile High, level 3.1, 4:2:0, 8-bit
-[libx264 @ 0x1b46c040] 264 - core 164 r3191 4613ac3 - H.264/MPEG-4 AVC codec - Copyleft 2003-2024 - http://www.videolan.org/x264.html - options: cabac=1 ref=5 deblock=1:0:0 analyse=0x3:0x113 me=hex subme=8 psy=1 psy_rd=1.00:0.00 mixed_ref=1 me_range=16 chroma_me=1 trellis=2 8x8dct=1 cqm=0 deadzone=21,11 fast_pskip=1 chroma_qp_offset=-2 threads=6 lookahead_threads=1 sliced_threads=0 nr=0 decimate=1 interlaced=0 bluray_compat=0 constrained_intra=0 bframes=3 b_pyramid=2 b_adapt=1 b_bias=0 direct=3 weightb=1 open_gop=0 weightp=2 keyint=250 keyint_min=24 scenecut=40 intra_refresh=0 rc_lookahead=50 rc=crf mbtree=1 crf=30.0 qcomp=0.60 qpmin=0 qpmax=69 qpstep=4 ip_ratio=1.40 aq=1:1.00
-Output #0, mp4, to '/home/user/ApardianStudio/06-NOTAS/.cache-video/15_torta_bengala__4398017-1792423242.mp4':
-  Metadata:
-    minor_version   : 512
-    major_brand     : isom
-    compatible_brands: isomiso2avc1mp41
-    encoder         : Lavf61.1.100
-  Stream #0:0(und): Video: h264 (avc1 / 0x31637661), yuv420p(progressive), 1280x720, q=2-31, 24 fps, 12288 tbn (default)
-      Metadata:
-        handler_name    : VideoHandler
-        vendor_id       : [0][0][0][0]
-        encoder         : Lavc61.3.100 libx264
-      Side data:
-        cpb: bitrate max/min/avg: 0/0/0 buffer size: 0 vbv_delay: N/A
-frame=    0 fps=0.0 q=0.0 size=       0KiB time=N/A bitrate=N/A speed=N/A    frame=   12 fps= 12 q=35.0 size=       0KiB time=00:00:00.41 bitrate=   0.9kbits/s speed=0.416x    frame=   29 fps= 19 q=35.0 size=       0KiB time=00:00:01.12 bitrate=   0.3kbits/s speed=0.747x    frame=   51 fps= 25 q=35.0 size=     256KiB time=00:00:02.04 bitrate=1027.4kbits/s speed=1.02x    [mp4 @ 0x1b46dd40] Starting second pass: moving the moov atom to the beginning of the file
-[out#0/mp4 @ 0x1b6323c0] video:412KiB audio:0KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: 0.375599%
-frame=   73 fps= 30 q=-1.0 Lsize=     413KiB time=00:00:02.95 bitrate=1144.0kbits/s speed=1.22x    
-[libx264 @ 0x1b46c040] frame I:1     Avg QP:30.42  size: 36930
-[libx264 @ 0x1b46c040] frame P:36    Avg QP:30.98  size:  7587
-[libx264 @ 0x1b46c040] frame B:36    Avg QP:34.65  size:  3075
-[libx264 @ 0x1b46c040] consecutive B-frames: 30.1%  2.7% 28.8% 38.4%
-[libx264 @ 0x1b46c040] mb I  I16..4: 16.7% 73.8%  9.5%
-[libx264 @ 0x1b46c040] mb P  I16..4:  3.7%  4.5%  0.3%  P16..4: 46.8%  7.0%  3.2%  0.0%  0.0%    skip:34.6%
-[libx264 @ 0x1b46c040] mb B  I16..4:  0.6%  1.2%  0.1%  B16..8: 40.2%  1.9%  0.2%  direct: 0.8%  skip:55.1%  L0:56.8% L1:41.5% BI: 1.7%
-[libx264 @ 0x1b46c040] 8x8 transform intra:59.2% inter:86.0%
-[libx264 @ 0x1b46c040] direct mvs  spatial:88.9% temporal:11.1%
-[libx264 @ 0x1b46c040] coded y,uvDC,uvAC intra: 39.9% 46.9% 10.1% inter: 6.6% 8.6% 0.1%
-[libx264 @ 0x1b46c040] i16 v,h,dc,p: 40% 19% 14% 27%
-[libx264 @ 0x1b46c040] i8 v,h,dc,ddl,ddr,vr,hd,vl,hu: 21%  7% 15%  7%  9% 13%  9% 11%  8%
-[libx264 @ 0x1b46c040] i4 v,h,dc,ddl,ddr,vr,hd,vl,hu: 20%  7% 11%  8% 11% 13% 10%  9% 10%
-[libx264 @ 0x1b46c040] i8c dc,h,v,p: 53% 16% 22%  9%
-[libx264 @ 0x1b46c040] Weighted P-Frames: Y:8.3% UV:5.6%
-[libx264 @ 0x1b46c040] ref P L0: 70.1% 16.3%  9.5%  2.4%  1.1%  0.4%  0.1%
-[libx264 @ 0x1b46c040] ref B L0: 92.4%  5.4%  1.8%  0.5%
-[libx264 @ 0x1b46c040] ref B L1: 99.0%  1.0%
-[libx264 @ 0x1b46c040] kb/s:1106.69
-video codificado 15_torta_bengala.mp4
-ffmpeg version 7.0.2-static https://johnvansickle.com/ffmpeg/  Copyright (c) 2000-2024 the FFmpeg developers
-  built with gcc 8 (Debian 8.3.0-6)
-  configuration: --enable-gpl --enable-version3 --enable-static --disable-debug --disable-ffplay --disable-indev=sndio --disable-outdev=sndio --cc=gcc --enable-fontconfig --enable-frei0r --enable-gnutls --enable-gmp --enable-libgme --enable-gray --enable-libaom --enable-libfribidi --enable-libass --enable-libvmaf --enable-libfreetype --enable-libmp3lame --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libopenjpeg --enable-librubberband --enable-libsoxr --enable-libspeex --enable-libsrt --enable-libvorbis --enable-libopus --enable-libtheora --enable-libvidstab --enable-libvo-amrwbenc --enable-libvpx --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxml2 --enable-libdav1d --enable-libxvid --enable-libzvbi --enable-libzimg
-  libavutil      59.  8.100 / 59.  8.100
-  libavcodec     61.  3.100 / 61.  3.100
-  libavformat    61.  1.100 / 61.  1.100
-  libavdevice    61.  1.100 / 61.  1.100
-  libavfilter    10.  1.100 / 10.  1.100
-  libswscale      8.  1.100 /  8.  1.100
-  libswresample   5.  1.100 /  5.  1.100
-  libpostproc    58.  1.100 / 58.  1.100
-Input #0, mov,mp4,m4a,3gp,3g2,mj2, from '/home/user/ApardianStudio/05-WEB/img/video/16_fondo_escritorio.mp4':
-  Metadata:
-    minor_version   : 512
-    major_brand     : isom
-    compatible_brands: isomiso2avc1mp41
-    encoder         : Lavf60.16.100
-  Duration: 00:00:05.04, start: 0.000000, bitrate: 4892 kb/s
-  Stream #0:0[0x1](und): Video: h264 (Main) (avc1 / 0x31637661), yuv420p(progressive), 1280x720, 4890 kb/s, 24 fps, 24 tbr, 12288 tbn (default)
-      Metadata:
-        handler_name    : VideoHandler
-        vendor_id       : [0][0][0][0]
-        encoder         : Lavc60.31.102 h264_slapi
-Stream mapping:
-  Stream #0:0 -> #0:0 (h264 (native) -> h264 (libx264))
-Press [q] to stop, [?] for help
-[h264 @ 0x1f598240] Late SEI is not implemented. Update your FFmpeg version to the newest one from Git. If the problem still occurs, it means that your file has a feature which has not been implemented.
-[h264 @ 0x1f598240] If you want to help, upload a sample of this file to https://streams.videolan.org/upload/ and contact the ffmpeg-devel mailing list. (ffmpeg-devel@ffmpeg.org)
-[libx264 @ 0x1f593b40] using cpu capabilities: MMX2 SSE2Fast SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2 AVX512
-[libx264 @ 0x1f593b40] profile High, level 3.1, 4:2:0, 8-bit
-[libx264 @ 0x1f593b40] 264 - core 164 r3191 4613ac3 - H.264/MPEG-4 AVC codec - Copyleft 2003-2024 - http://www.videolan.org/x264.html - options: cabac=1 ref=5 deblock=1:0:0 analyse=0x3:0x113 me=hex subme=8 psy=1 psy_rd=1.00:0.00 mixed_ref=1 me_range=16 chroma_me=1 trellis=2 8x8dct=1 cqm=0 deadzone=21,11 fast_pskip=1 chroma_qp_offset=-2 threads=6 lookahead_threads=1 sliced_threads=0 nr=0 decimate=1 interlaced=0 bluray_compat=0 constrained_intra=0 bframes=3 b_pyramid=2 b_adapt=1 b_bias=0 direct=3 weightb=1 open_gop=0 weightp=2 keyint=250 keyint_min=24 scenecut=40 intra_refresh=0 rc_lookahead=50 rc=crf mbtree=1 crf=30.0 qcomp=0.60 qpmin=0 qpmax=69 qpstep=4 ip_ratio=1.40 aq=1:1.00
-Output #0, mp4, to '/home/user/ApardianStudio/06-NOTAS/.cache-video/16_fondo_escritorio__3083457-1792423242.mp4':
-  Metadata:
-    minor_version   : 512
-    major_brand     : isom
-    compatible_brands: isomiso2avc1mp41
-    encoder         : Lavf61.1.100
-  Stream #0:0(und): Video: h264 (avc1 / 0x31637661), yuv420p(progressive), 1280x720, q=2-31, 24 fps, 12288 tbn (default)
-      Metadata:
-        handler_name    : VideoHandler
-        vendor_id       : [0][0][0][0]
-        encoder         : Lavc61.3.100 libx264
-      Side data:
-        cpb: bitrate max/min/avg: 0/0/0 buffer size: 0 vbv_delay: N/A
-frame=    0 fps=0.0 q=0.0 size=       0KiB time=N/A bitrate=N/A speed=N/A    frame=   13 fps= 13 q=35.0 size=       0KiB time=00:00:00.45 bitrate=   0.8kbits/s speed=0.457x    frame=   39 fps= 26 q=35.0 size=       0KiB time=00:00:01.54 bitrate=   0.2kbits/s speed=1.03x    frame=   71 fps= 35 q=35.0 size=       0KiB time=00:00:02.87 bitrate=   0.1kbits/s speed=1.43x    frame=  108 fps= 43 q=35.0 size=       0KiB time=00:00:04.41 bitrate=   0.1kbits/s speed=1.76x    [mp4 @ 0x1f566300] Starting second pass: moving the moov atom to the beginning of the file
-[out#0/mp4 @ 0x1f567080] video:119KiB audio:0KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: 1.876533%
-frame=  121 fps= 45 q=-1.0 Lsize=     122KiB time=00:00:04.95 bitrate= 201.0kbits/s speed=1.83x    
-[libx264 @ 0x1f593b40] frame I:1     Avg QP:27.48  size: 11362
-[libx264 @ 0x1f593b40] frame P:31    Avg QP:26.66  size:  2079
-[libx264 @ 0x1f593b40] frame B:89    Avg QP:32.66  size:   515
-[libx264 @ 0x1f593b40] consecutive B-frames:  0.8%  1.7%  5.0% 92.6%
-[libx264 @ 0x1f593b40] mb I  I16..4: 63.7% 34.4%  1.9%
-[libx264 @ 0x1f593b40] mb P  I16..4:  3.1%  2.7%  0.0%  P16..4: 21.7%  1.1%  2.0%  0.0%  0.0%    skip:69.4%
-[libx264 @ 0x1f593b40] mb B  I16..4:  0.1%  0.2%  0.0%  B16..8: 17.8%  0.0%  0.0%  direct: 0.0%  skip:81.9%  L0:31.3% L1:68.7% BI: 0.0%
-[libx264 @ 0x1f593b40] 8x8 transform intra:44.7% inter:82.2%
-[libx264 @ 0x1f593b40] direct mvs  spatial:97.8% temporal:2.2%
-[libx264 @ 0x1f593b40] coded y,uvDC,uvAC intra: 6.3% 22.7% 1.2% inter: 0.3% 1.2% 0.0%
-[libx264 @ 0x1f593b40] i16 v,h,dc,p: 38% 23% 10% 29%
-[libx264 @ 0x1f593b40] i8 v,h,dc,ddl,ddr,vr,hd,vl,hu:  5%  6% 70%  2%  4%  2%  4%  2%  5%
-[libx264 @ 0x1f593b40] i4 v,h,dc,ddl,ddr,vr,hd,vl,hu:  7% 13%  7% 10%  9%  6% 13% 12% 24%
-[libx264 @ 0x1f593b40] i8c dc,h,v,p: 74% 16%  8%  2%
-[libx264 @ 0x1f593b40] Weighted P-Frames: Y:0.0% UV:0.0%
-[libx264 @ 0x1f593b40] ref P L0: 55.0%  8.0% 22.2%  7.2%  7.6%
-[libx264 @ 0x1f593b40] ref B L0: 80.1% 12.3%  4.4%  3.2%
-[libx264 @ 0x1f593b40] ref B L1: 94.9%  5.1%
-[libx264 @ 0x1f593b40] kb/s:192.97
-video codificado 16_fondo_escritorio.mp4
-ffmpeg version 7.0.2-static https://johnvansickle.com/ffmpeg/  Copyright (c) 2000-2024 the FFmpeg developers
-  built with gcc 8 (Debian 8.3.0-6)
-  configuration: --enable-gpl --enable-version3 --enable-static --disable-debug --disable-ffplay --disable-indev=sndio --disable-outdev=sndio --cc=gcc --enable-fontconfig --enable-frei0r --enable-gnutls --enable-gmp --enable-libgme --enable-gray --enable-libaom --enable-libfribidi --enable-libass --enable-libvmaf --enable-libfreetype --enable-libmp3lame --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libopenjpeg --enable-librubberband --enable-libsoxr --enable-libspeex --enable-libsrt --enable-libvorbis --enable-libopus --enable-libtheora --enable-libvidstab --enable-libvo-amrwbenc --enable-libvpx --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxml2 --enable-libdav1d --enable-libxvid --enable-libzvbi --enable-libzimg
-  libavutil      59.  8.100 / 59.  8.100
-  libavcodec     61.  3.100 / 61.  3.100
-  libavformat    61.  1.100 / 61.  1.100
-  libavdevice    61.  1.100 / 61.  1.100
-  libavfilter    10.  1.100 / 10.  1.100
-  libswscale      8.  1.100 /  8.  1.100
-  libswresample   5.  1.100 /  5.  1.100
-  libpostproc    58.  1.100 / 58.  1.100
-Input #0, mov,mp4,m4a,3gp,3g2,mj2, from '/home/user/ApardianStudio/05-WEB/img/video/cartel_apardian.mp4':
-  Metadata:
-    major_brand     : isom
-    minor_version   : 512
-    compatible_brands: isomiso2avc1mp41
-    encoder         : Lavf61.7.100
-  Duration: 00:00:05.04, start: 0.000000, bitrate: 2033 kb/s
-  Stream #0:0[0x1](und): Video: h264 (High) (avc1 / 0x31637661), yuv420p(progressive), 1600x902, 2029 kb/s, 24 fps, 24 tbr, 12288 tbn (default)
-      Metadata:
-        handler_name    : VideoHandler
-        vendor_id       : [0][0][0][0]
-        encoder         : Lavc61.19.100 libx264
-Stream mapping:
-  Stream #0:0 -> #0:0 (h264 (native) -> h264 (libx264))
-Press [q] to stop, [?] for help
-[libx264 @ 0x10ac3940] using cpu capabilities: MMX2 SSE2Fast SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2 AVX512
-[libx264 @ 0x10ac3940] profile High, level 3.2, 4:2:0, 8-bit
-[libx264 @ 0x10ac3940] 264 - core 164 r3191 4613ac3 - H.264/MPEG-4 AVC codec - Copyleft 2003-2024 - http://www.videolan.org/x264.html - options: cabac=1 ref=5 deblock=1:0:0 analyse=0x3:0x113 me=hex subme=8 psy=1 psy_rd=1.00:0.00 mixed_ref=1 me_range=16 chroma_me=1 trellis=2 8x8dct=1 cqm=0 deadzone=21,11 fast_pskip=1 chroma_qp_offset=-2 threads=6 lookahead_threads=1 sliced_threads=0 nr=0 decimate=1 interlaced=0 bluray_compat=0 constrained_intra=0 bframes=3 b_pyramid=2 b_adapt=1 b_bias=0 direct=3 weightb=1 open_gop=0 weightp=2 keyint=250 keyint_min=24 scenecut=40 intra_refresh=0 rc_lookahead=50 rc=crf mbtree=1 crf=30.0 qcomp=0.60 qpmin=0 qpmax=69 qpstep=4 ip_ratio=1.40 aq=1:1.00
-Output #0, mp4, to '/home/user/ApardianStudio/06-NOTAS/.cache-video/cartel_apardian__1281540-1792423242.mp4':
-  Metadata:
-    major_brand     : isom
-    minor_version   : 512
-    compatible_brands: isomiso2avc1mp41
-    encoder         : Lavf61.1.100
-  Stream #0:0(und): Video: h264 (avc1 / 0x31637661), yuv420p(progressive), 1280x722, q=2-31, 24 fps, 12288 tbn (default)
-      Metadata:
-        handler_name    : VideoHandler
-        vendor_id       : [0][0][0][0]
-        encoder         : Lavc61.3.100 libx264
-      Side data:
-        cpb: bitrate max/min/avg: 0/0/0 buffer size: 0 vbv_delay: N/A
-frame=    0 fps=0.0 q=0.0 size=       0KiB time=N/A bitrate=N/A speed=N/A    frame=   10 fps= 10 q=35.0 size=       0KiB time=00:00:00.37 bitrate=   1.0kbits/s speed=0.375x    frame=   38 fps= 25 q=35.0 size=       0KiB time=00:00:01.50 bitrate=   0.3kbits/s speed=   1x    frame=   76 fps= 38 q=35.0 size=       0KiB time=00:00:03.08 bitrate=   0.1kbits/s speed=1.54x    [mp4 @ 0x10ac4ac0] Starting second pass: moving the moov atom to the beginning of the file
-[out#0/mp4 @ 0x10ac4700] video:311KiB audio:0KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: 0.725333%
-frame=  121 fps= 49 q=-1.0 Lsize=     314KiB time=00:00:04.95 bitrate= 518.0kbits/s speed=2.03x    
-[libx264 @ 0x10ac3940] frame I:1     Avg QP:27.60  size: 39283
-[libx264 @ 0x10ac3940] frame P:31    Avg QP:27.15  size:  4422
-[libx264 @ 0x10ac3940] frame B:89    Avg QP:32.27  size:  1592
-[libx264 @ 0x10ac3940] consecutive B-frames:  0.8%  3.3%  0.0% 95.9%
-[libx264 @ 0x10ac3940] mb I  I16..4: 23.3% 65.9% 10.8%
-[libx264 @ 0x10ac3940] mb P  I16..4:  0.7%  2.1%  0.4%  P16..4: 13.0%  4.2%  2.4%  0.0%  0.0%    skip:77.2%
-[libx264 @ 0x10ac3940] mb B  I16..4:  0.0%  0.2%  0.0%  B16..8:  9.8%  2.2%  0.4%  direct: 0.4%  skip:86.9%  L0:37.4% L1:54.9% BI: 7.7%
-[libx264 @ 0x10ac3940] 8x8 transform intra:67.5% inter:74.3%
-[libx264 @ 0x10ac3940] direct mvs  spatial:95.5% temporal:4.5%
-[libx264 @ 0x10ac3940] coded y,uvDC,uvAC intra: 56.8% 24.6% 8.0% inter: 2.6% 1.4% 0.2%
-[libx264 @ 0x10ac3940] i16 v,h,dc,p: 32% 47%  8% 13%
-[libx264 @ 0x10ac3940] i8 v,h,dc,ddl,ddr,vr,hd,vl,hu: 13% 14% 12%  7%  9%  8% 14%  8% 14%
-[libx264 @ 0x10ac3940] i4 v,h,dc,ddl,ddr,vr,hd,vl,hu: 20% 15% 12%  6%  9%  8% 13%  6% 11%
-[libx264 @ 0x10ac3940] i8c dc,h,v,p: 61% 21% 14%  4%
-[libx264 @ 0x10ac3940] Weighted P-Frames: Y:3.2% UV:3.2%
-[libx264 @ 0x10ac3940] ref P L0: 57.6% 17.6% 13.6%  5.7%  5.5%
-[libx264 @ 0x10ac3940] ref B L0: 83.4% 10.7%  4.1%  1.8%
-[libx264 @ 0x10ac3940] ref B L1: 94.8%  5.2%
-[libx264 @ 0x10ac3940] kb/s:504.69
-video codificado cartel_apardian.mp4
-ffmpeg version 7.0.2-static https://johnvansickle.com/ffmpeg/  Copyright (c) 2000-2024 the FFmpeg developers
-  built with gcc 8 (Debian 8.3.0-6)
-  configuration: --enable-gpl --enable-version3 --enable-static --disable-debug --disable-ffplay --disable-indev=sndio --disable-outdev=sndio --cc=gcc --enable-fontconfig --enable-frei0r --enable-gnutls --enable-gmp --enable-libgme --enable-gray --enable-libaom --enable-libfribidi --enable-libass --enable-libvmaf --enable-libfreetype --enable-libmp3lame --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libopenjpeg --enable-librubberband --enable-libsoxr --enable-libspeex --enable-libsrt --enable-libvorbis --enable-libopus --enable-libtheora --enable-libvidstab --enable-libvo-amrwbenc --enable-libvpx --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxml2 --enable-libdav1d --enable-libxvid --enable-libzvbi --enable-libzimg
-  libavutil      59.  8.100 / 59.  8.100
-  libavcodec     61.  3.100 / 61.  3.100
-  libavformat    61.  1.100 / 61.  1.100
-  libavdevice    61.  1.100 / 61.  1.100
-  libavfilter    10.  1.100 / 10.  1.100
-  libswscale      8.  1.100 /  8.  1.100
-  libswresample   5.  1.100 /  5.  1.100
-  libpostproc    58.  1.100 / 58.  1.100
-Input #0, mov,mp4,m4a,3gp,3g2,mj2, from '/home/user/ApardianStudio/05-WEB/img/video/cartel_apardian_pc.mp4':
-  Metadata:
-    major_brand     : isom
-    minor_version   : 512
-    compatible_brands: isomiso2avc1mp41
-    encoder         : Lavf61.7.100
-  Duration: 00:00:05.04, start: 0.000000, bitrate: 1818 kb/s
-  Stream #0:0[0x1](und): Video: h264 (High) (avc1 / 0x31637661), yuv420p(progressive), 1600x776, 1815 kb/s, 24 fps, 24 tbr, 12288 tbn (default)
-      Metadata:
-        handler_name    : VideoHandler
-        vendor_id       : [0][0][0][0]
-        encoder         : Lavc61.19.100 libx264
-Stream mapping:
-  Stream #0:0 -> #0:0 (h264 (native) -> h264 (libx264))
-Press [q] to stop, [?] for help
-[libx264 @ 0x44051940] using cpu capabilities: MMX2 SSE2Fast SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2 AVX512
-[libx264 @ 0x44051940] profile High, level 3.1, 4:2:0, 8-bit
-[libx264 @ 0x44051940] 264 - core 164 r3191 4613ac3 - H.264/MPEG-4 AVC codec - Copyleft 2003-2024 - http://www.videolan.org/x264.html - options: cabac=1 ref=5 deblock=1:0:0 analyse=0x3:0x113 me=hex subme=8 psy=1 psy_rd=1.00:0.00 mixed_ref=1 me_range=16 chroma_me=1 trellis=2 8x8dct=1 cqm=0 deadzone=21,11 fast_pskip=1 chroma_qp_offset=-2 threads=6 lookahead_threads=1 sliced_threads=0 nr=0 decimate=1 interlaced=0 bluray_compat=0 constrained_intra=0 bframes=3 b_pyramid=2 b_adapt=1 b_bias=0 direct=3 weightb=1 open_gop=0 weightp=2 keyint=250 keyint_min=24 scenecut=40 intra_refresh=0 rc_lookahead=50 rc=crf mbtree=1 crf=30.0 qcomp=0.60 qpmin=0 qpmax=69 qpstep=4 ip_ratio=1.40 aq=1:1.00
-Output #0, mp4, to '/home/user/ApardianStudio/06-NOTAS/.cache-video/cartel_apardian_pc__1146261-1792423242.mp4':
-  Metadata:
-    major_brand     : isom
-    minor_version   : 512
-    compatible_brands: isomiso2avc1mp41
-    encoder         : Lavf61.1.100
-  Stream #0:0(und): Video: h264 (avc1 / 0x31637661), yuv420p(progressive), 1280x620, q=2-31, 24 fps, 12288 tbn (default)
-      Metadata:
-        handler_name    : VideoHandler
-        vendor_id       : [0][0][0][0]
-        encoder         : Lavc61.3.100 libx264
-      Side data:
-        cpb: bitrate max/min/avg: 0/0/0 buffer size: 0 vbv_delay: N/A
-frame=    0 fps=0.0 q=0.0 size=       0KiB time=N/A bitrate=N/A speed=N/A    frame=   29 fps= 29 q=35.0 size=       0KiB time=00:00:01.12 bitrate=   0.3kbits/s speed=1.12x    frame=   70 fps= 47 q=35.0 size=       0KiB time=00:00:02.83 bitrate=   0.1kbits/s speed=1.88x    frame=  114 fps= 57 q=35.0 size=     256KiB time=00:00:04.66 bitrate= 449.5kbits/s speed=2.33x    [mp4 @ 0x44052d00] Starting second pass: moving the moov atom to the beginning of the file
-[out#0/mp4 @ 0x44052bc0] video:296KiB audio:0KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: 0.761821%
-frame=  121 fps= 59 q=-1.0 Lsize=     298KiB time=00:00:04.95 bitrate= 493.2kbits/s speed=2.42x    
-[libx264 @ 0x44051940] frame I:1     Avg QP:28.02  size: 38500
-[libx264 @ 0x44051940] frame P:30    Avg QP:27.30  size:  4264
-[libx264 @ 0x44051940] frame B:90    Avg QP:35.14  size:  1514
-[libx264 @ 0x44051940] consecutive B-frames:  0.8%  0.0%  0.0% 99.2%
-[libx264 @ 0x44051940] mb I  I16..4: 13.7% 74.5% 11.8%
-[libx264 @ 0x44051940] mb P  I16..4:  0.5%  2.5%  0.5%  P16..4: 14.1%  4.7%  2.6%  0.0%  0.0%    skip:75.1%
-[libx264 @ 0x44051940] mb B  I16..4:  0.0%  0.2%  0.0%  B16..8: 10.1%  2.5%  0.4%  direct: 0.5%  skip:86.1%  L0:34.2% L1:57.3% BI: 8.4%
-[libx264 @ 0x44051940] 8x8 transform intra:73.4% inter:73.3%
-[libx264 @ 0x44051940] direct mvs  spatial:95.6% temporal:4.4%
-[libx264 @ 0x44051940] coded y,uvDC,uvAC intra: 64.2% 27.3% 9.3% inter: 3.0% 1.6% 0.2%
-[libx264 @ 0x44051940] i16 v,h,dc,p: 41% 35% 12% 13%
-[libx264 @ 0x44051940] i8 v,h,dc,ddl,ddr,vr,hd,vl,hu: 12% 15% 10%  7% 10%  8% 15%  8% 15%
-[libx264 @ 0x44051940] i4 v,h,dc,ddl,ddr,vr,hd,vl,hu: 20% 16% 10%  6%  9%  8% 13%  7% 11%
-[libx264 @ 0x44051940] i8c dc,h,v,p: 58% 21% 17%  4%
-[libx264 @ 0x44051940] Weighted P-Frames: Y:3.3% UV:3.3%
-[libx264 @ 0x44051940] ref P L0: 57.0% 17.7% 14.1%  5.6%  5.5%
-[libx264 @ 0x44051940] ref B L0: 83.5% 10.4%  4.1%  2.1%
-[libx264 @ 0x44051940] ref B L1: 95.0%  5.0%
-[libx264 @ 0x44051940] kb/s:480.26
-video codificado cartel_apardian_pc.mp4
-ffmpeg version 7.0.2-static https://johnvansickle.com/ffmpeg/  Copyright (c) 2000-2024 the FFmpeg developers
-  built with gcc 8 (Debian 8.3.0-6)
-  configuration: --enable-gpl --enable-version3 --enable-static --disable-debug --disable-ffplay --disable-indev=sndio --disable-outdev=sndio --cc=gcc --enable-fontconfig --enable-frei0r --enable-gnutls --enable-gmp --enable-libgme --enable-gray --enable-libaom --enable-libfribidi --enable-libass --enable-libvmaf --enable-libfreetype --enable-libmp3lame --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libopenjpeg --enable-librubberband --enable-libsoxr --enable-libspeex --enable-libsrt --enable-libvorbis --enable-libopus --enable-libtheora --enable-libvidstab --enable-libvo-amrwbenc --enable-libvpx --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxml2 --enable-libdav1d --enable-libxvid --enable-libzvbi --enable-libzimg
-  libavutil      59.  8.100 / 59.  8.100
-  libavcodec     61.  3.100 / 61.  3.100
-  libavformat    61.  1.100 / 61.  1.100
-  libavdevice    61.  1.100 / 61.  1.100
-  libavfilter    10.  1.100 / 10.  1.100
-  libswscale      8.  1.100 /  8.  1.100
-  libswresample   5.  1.100 /  5.  1.100
-  libpostproc    58.  1.100 / 58.  1.100
-Input #0, mov,mp4,m4a,3gp,3g2,mj2, from '/home/user/ApardianStudio/05-WEB/img/video/reel_hero.mp4':
-  Metadata:
-    major_brand     : isom
-    minor_version   : 512
-    compatible_brands: isomiso2avc1mp41
-    encoder         : Lavf61.7.100
-  Duration: 00:00:26.60, start: 0.000000, bitrate: 2411 kb/s
-  Stream #0:0[0x1](und): Video: h264 (High) (avc1 / 0x31637661), yuv420p(progressive), 1600x900 [SAR 1:1 DAR 16:9], 2407 kb/s, 30 fps, 30 tbr, 15360 tbn (default)
-      Metadata:
-        handler_name    : VideoHandler
-        vendor_id       : [0][0][0][0]
-        encoder         : Lavc61.19.100 libx264
-Stream mapping:
-  Stream #0:0 -> #0:0 (h264 (native) -> h264 (libx264))
-Press [q] to stop, [?] for help
-[libx264 @ 0x15d82d80] using SAR=1/1
-[libx264 @ 0x15d82d80] using cpu capabilities: MMX2 SSE2Fast SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2 AVX512
-[libx264 @ 0x15d82d80] profile High, level 3.1, 4:2:0, 8-bit
-[libx264 @ 0x15d82d80] 264 - core 164 r3191 4613ac3 - H.264/MPEG-4 AVC codec - Copyleft 2003-2024 - http://www.videolan.org/x264.html - options: cabac=1 ref=5 deblock=1:0:0 analyse=0x3:0x113 me=hex subme=8 psy=1 psy_rd=1.00:0.00 mixed_ref=1 me_range=16 chroma_me=1 trellis=2 8x8dct=1 cqm=0 deadzone=21,11 fast_pskip=1 chroma_qp_offset=-2 threads=6 lookahead_threads=1 sliced_threads=0 nr=0 decimate=1 interlaced=0 bluray_compat=0 constrained_intra=0 bframes=3 b_pyramid=2 b_adapt=1 b_bias=0 direct=3 weightb=1 open_gop=0 weightp=2 keyint=250 keyint_min=25 scenecut=40 intra_refresh=0 rc_lookahead=50 rc=crf mbtree=1 crf=30.0 qcomp=0.60 qpmin=0 qpmax=69 qpstep=4 ip_ratio=1.40 aq=1:1.00
-Output #0, mp4, to '/home/user/ApardianStudio/06-NOTAS/.cache-video/reel_hero__8016785-1792423242.mp4':
-  Metadata:
-    major_brand     : isom
-    minor_version   : 512
-    compatible_brands: isomiso2avc1mp41
-    encoder         : Lavf61.1.100
-  Stream #0:0(und): Video: h264 (avc1 / 0x31637661), yuv420p(progressive), 1280x720 [SAR 1:1 DAR 16:9], q=2-31, 30 fps, 15360 tbn (default)
-      Metadata:
-        handler_name    : VideoHandler
-        vendor_id       : [0][0][0][0]
-        encoder         : Lavc61.3.100 libx264
-      Side data:
-        cpb: bitrate max/min/avg: 0/0/0 buffer size: 0 vbv_delay: N/A
-frame=    0 fps=0.0 q=0.0 size=       0KiB time=N/A bitrate=N/A speed=N/A    frame=    9 fps=9.0 q=36.0 size=       0KiB time=00:00:00.23 bitrate=   1.6kbits/s speed=0.233x    frame=   28 fps= 19 q=36.0 size=       0KiB time=00:00:00.86 bitrate=   0.4kbits/s speed=0.577x    frame=   43 fps= 21 q=36.0 size=     256KiB time=00:00:01.36 bitrate=1534.8kbits/s speed=0.681x    frame=   55 fps= 22 q=36.0 size=     256KiB time=00:00:01.76 bitrate=1187.3kbits/s speed=0.704x    frame=   76 fps= 25 q=36.0 size=     256KiB time=00:00:02.46 bitrate= 850.4kbits/s speed=0.82x    frame=   98 fps= 28 q=36.0 size=     512KiB time=00:00:03.20 bitrate=1310.8kbits/s speed=0.911x    frame=  121 fps= 30 q=36.0 size=     512KiB time=00:00:03.96 bitrate=1057.5kbits/s speed=0.988x    frame=  141 fps= 31 q=36.0 size=     512KiB time=00:00:04.63 bitrate= 905.3kbits/s speed=1.03x    frame=  166 fps= 33 q=36.0 size=     768KiB time=00:00:05.46 bitrate=1150.9kbits/s speed=1.09x    frame=  186 fps= 34 q=36.0 size=     768KiB time=00:00:06.13 bitrate=1025.8kbits/s speed=1.11x    frame=  203 fps= 34 q=36.0 size=    1024KiB time=00:00:06.70 bitrate=1252.1kbits/s speed=1.11x    frame=  227 fps= 35 q=36.0 size=    1024KiB time=00:00:07.50 bitrate=1118.5kbits/s speed=1.15x    frame=  241 fps= 34 q=36.0 size=    1024KiB time=00:00:07.96 bitrate=1053.0kbits/s speed=1.13x    frame=  264 fps= 35 q=36.0 size=    1280KiB time=00:00:08.73 bitrate=1200.7kbits/s speed=1.15x    frame=  288 fps= 36 q=36.0 size=    1280KiB time=00:00:09.53 bitrate=1099.9kbits/s speed=1.18x    frame=  314 fps= 37 q=36.0 size=    1280KiB time=00:00:10.40 bitrate=1008.3kbits/s speed=1.21x    frame=  338 fps= 37 q=36.0 size=    1536KiB time=00:00:11.20 bitrate=1123.5kbits/s speed=1.23x    frame=  358 fps= 37 q=36.0 size=    1536KiB time=00:00:11.86 bitrate=1060.4kbits/s speed=1.24x    frame=  384 fps= 38 q=36.0 size=    1792KiB time=00:00:12.73 bitrate=1152.9kbits/s speed=1.26x    frame=  408 fps= 39 q=36.0 size=    1792KiB time=00:00:13.53 bitrate=1084.8kbits/s speed=1.28x    frame=  440 fps= 40 q=36.0 size=    1792KiB time=00:00:14.60 bitrate=1005.5kbits/s speed=1.32x    frame=  466 fps= 40 q=36.0 size=    2048KiB time=00:00:15.46 bitrate=1084.8kbits/s speed=1.34x    frame=  491 fps= 41 q=36.0 size=    2048KiB time=00:00:16.30 bitrate=1029.3kbits/s speed=1.35x    frame=  517 fps= 41 q=36.0 size=    2048KiB time=00:00:17.16 bitrate= 977.3kbits/s speed=1.37x    frame=  546 fps= 42 q=36.0 size=    2304KiB time=00:00:18.13 bitrate=1040.9kbits/s speed=1.39x    frame=  568 fps= 42 q=36.0 size=    2304KiB time=00:00:18.86 bitrate=1000.4kbits/s speed=1.39x    frame=  589 fps= 42 q=36.0 size=    2304KiB time=00:00:19.56 bitrate= 964.6kbits/s speed=1.39x    frame=  614 fps= 42 q=36.0 size=    2560KiB time=00:00:20.40 bitrate=1028.0kbits/s speed= 1.4x    frame=  634 fps= 42 q=36.0 size=    2560KiB time=00:00:21.06 bitrate= 995.5kbits/s speed= 1.4x    frame=  655 fps= 42 q=33.0 size=    2560KiB time=00:00:21.76 bitrate= 963.5kbits/s speed= 1.4x    frame=  682 fps= 42 q=36.0 size=    2816KiB time=00:00:22.66 bitrate=1017.8kbits/s speed=1.41x    frame=  702 fps= 42 q=36.0 size=    2816KiB time=00:00:23.33 bitrate= 988.7kbits/s speed=1.41x    frame=  726 fps= 42 q=36.0 size=    3072KiB time=00:00:24.13 bitrate=1042.8kbits/s speed=1.41x    frame=  750 fps= 43 q=36.0 size=    3072KiB time=00:00:24.93 bitrate=1009.3kbits/s speed=1.42x    frame=  788 fps= 44 q=36.0 size=    3328KiB time=00:00:26.20 bitrate=1040.6kbits/s speed=1.45x    [mp4 @ 0x15d81c00] Starting second pass: moving the moov atom to the beginning of the file
-[out#0/mp4 @ 0x15d8d380] video:3345KiB audio:0KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: 0.301744%
-frame=  798 fps= 44 q=-1.0 Lsize=    3355KiB time=00:00:26.53 bitrate=1035.9kbits/s speed=1.46x    
-[libx264 @ 0x15d82d80] frame I:31    Avg QP:26.79  size: 46850
-[libx264 @ 0x15d82d80] frame P:232   Avg QP:30.92  size:  5512
-[libx264 @ 0x15d82d80] frame B:535   Avg QP:33.57  size:  1296
-[libx264 @ 0x15d82d80] consecutive B-frames:  5.6% 12.0%  8.6% 73.7%
-[libx264 @ 0x15d82d80] mb I  I16..4: 17.5% 74.2%  8.3%
-[libx264 @ 0x15d82d80] mb P  I16..4:  2.8%  3.9%  0.1%  P16..4: 32.6%  6.1%  2.6%  0.0%  0.0%    skip:51.8%
-[libx264 @ 0x15d82d80] mb B  I16..4:  0.2%  0.4%  0.0%  B16..8: 23.8%  0.8%  0.1%  direct: 0.2%  skip:74.6%  L0:45.0% L1:53.4% BI: 1.6%
-[libx264 @ 0x15d82d80] 8x8 transform intra:68.3% inter:81.1%
-[libx264 @ 0x15d82d80] direct mvs  spatial:99.4% temporal:0.6%
-[libx264 @ 0x15d82d80] coded y,uvDC,uvAC intra: 48.8% 51.6% 18.5% inter: 2.4% 2.9% 0.0%
-[libx264 @ 0x15d82d80] i16 v,h,dc,p: 23% 32% 10% 35%
-[libx264 @ 0x15d82d80] i8 v,h,dc,ddl,ddr,vr,hd,vl,hu: 11% 11% 14%  8% 10% 10% 11% 10% 14%
-[libx264 @ 0x15d82d80] i4 v,h,dc,ddl,ddr,vr,hd,vl,hu: 12% 12%  5%  9% 13% 12% 14% 10% 14%
-[libx264 @ 0x15d82d80] i8c dc,h,v,p: 50% 24% 14% 12%
-[libx264 @ 0x15d82d80] Weighted P-Frames: Y:0.9% UV:0.4%
-[libx264 @ 0x15d82d80] ref P L0: 67.7% 16.4% 11.0%  2.8%  2.1%  0.1%
-[libx264 @ 0x15d82d80] ref B L0: 94.2%  4.3%  1.3%  0.3%
-[libx264 @ 0x15d82d80] ref B L1: 98.7%  1.3%
-[libx264 @ 0x15d82d80] kb/s:1029.99
-video codificado reel_hero.mp4
+video en cache 00_REEL_HERO.mp4
+video en cache 01_hero_fuego.mp4
+video en cache 02_parrilla_pollo.mp4
+video en cache 03_empanadas.mp4
+video en cache 04_salon.mp4
+video en cache 06_chocolate.mp4
+video en cache 07_boda_rambla.mp4
+video en cache 08_baterista.mp4
+video en cache 09_bahia.mp4
+video en cache 10_caballo.mp4
+video en cache 11_retrato_bn.mp4
+video en cache 12_drift.mp4
+video en cache 13_quince.mp4
+video en cache 14_fondo_proceso.mp4
+video en cache 15_torta_bengala.mp4
+video en cache 16_fondo_escritorio.mp4
+video en cache cartel_apardian.mp4
+video en cache cartel_apardian_pc.mp4
+video en cache reel_hero.mp4
 imagenes recomprimidas: 298
 === LISTO ===
-88M	/home/user/ApardianStudio/07-PUBLICAR
+89M	/home/user/ApardianStudio/07-PUBLICAR

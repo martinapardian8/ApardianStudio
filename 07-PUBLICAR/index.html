@@ -22,7 +22,7 @@
 <link rel="preload" href="fonts/anton-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/worksans-latin-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="css/fonts.css?v=1789010043">
-<link rel="stylesheet" href="css/style.css?v=1789060000">
+<link rel="stylesheet" href="css/style.css?v=1790000000">
 <link rel="stylesheet" href="css/editor.css?v=1789010043">
 </head>
 <body>
@@ -211,11 +211,29 @@
       <li class="idx-fila" data-fila="4">
         <button type="button" class="idx-cab" aria-expanded="false" aria-controls="idx-p4" id="idx-c4">
           <span class="idx-n">05</span>
+          <span class="idx-nombre d" data-i18n="m36001">Marca 360</span>
+          <span class="idx-claim" data-i18n="m36002">Que te reconozcan en todos lados.</span>
+          <span class="idx-mas" aria-hidden="true"></span>
+        </button>
+        <div class="idx-panel" id="idx-p4" role="region" aria-labelledby="idx-c4">
+          <figure class="idx-media idx-media-marca">
+            <img src="img/marca360/manual_apardian_960.jpg" srcset="img/marca360/manual_apardian_960.jpg 960w, img/marca360/manual_apardian.jpg 1920w" sizes="(min-width: 901px) 45vw, 100vw" alt="Página del manual de marca de APARDIAN: logo, paleta, tipografías y aplicaciones" loading="lazy" decoding="async">
+          </figure>
+          <div class="idx-texto">
+            <p data-i18n="m36004">Tu identidad completa, de punta a punta: logo o ajuste del que tenés, paleta, tipografías, manual de marca y plantillas para redes. Se hace online, para cualquier país. El caso que ves es nuestra propia marca.</p>
+            <ul><li data-i18n="m36005">Logo</li><li data-i18n="m36006">Paleta</li><li data-i18n="m36007">Tipografías</li><li data-i18n="m36008">Manual de marca</li><li data-i18n="m36009">Plantillas para redes</li></ul>
+            <a data-i18n="m36010" class="svc-cta" href="propuesta.html">Pedir una propuesta <span class="red">&rarr;</span></a>
+          </div>
+        </div>
+      </li>
+      <li class="idx-fila" data-fila="5">
+        <button type="button" class="idx-cab" aria-expanded="false" aria-controls="idx-p5" id="idx-c5">
+          <span class="idx-n">06</span>
           <span class="idx-nombre d" data-i18n="idx105">Música</span>
           <span class="idx-claim" data-i18n="idx106">De la idea al master.</span>
           <span class="idx-mas" aria-hidden="true"></span>
         </button>
-        <div class="idx-panel" id="idx-p4" role="region" aria-labelledby="idx-c4">
+        <div class="idx-panel" id="idx-p5" role="region" aria-labelledby="idx-c5">
           <figure class="idx-media idx-media-musica">
             <img src="img/produccion/fondo_musica_960.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async">
             <a class="mus-mini" href="#musica"><span class="mono" data-i18n="idx107">Último EP</span><b class="d">Fugaz</b><span data-i18n="idx108">Escuchalo acá abajo &darr;</span></a>
@@ -228,7 +246,7 @@
         </div>
       </li>
     </ol>
-    <div class="idx-visor" aria-hidden="true"><span class="idx-cuenta"><b>01</b> / 05</span></div>
+    <div class="idx-visor" aria-hidden="true"><span class="idx-cuenta"><b>01</b> / 06</span></div>
   </div>
 </section>
 
@@ -290,6 +308,62 @@
       <h4 data-ed="bloque.h4">Catálogo</h4>
       <p data-i18n="packp075">Tus productos ordenados, buscables y con foto propia. Con el pie puesto para sumar carrito cuando lo necesites.</p>
       <span data-i18n="who079" class="who">Para comercios y marcas</span>
+    </article>
+  </div>
+
+  <!-- Webs que hice. Las de clientes confidenciales van como "Lorem Ipsum":
+       sin nombre, logo ni dominio. Las imágenes salen de 10-MOTOR/webs_portfolio.py.
+       VISTA PREVIA: los dos confidenciales todavía muestran la lámina "captura pendiente". -->
+  <div class="webs-hechas" hidden style="display:none"><!-- oculto hasta tener las capturas reales de los clientes -->
+    <div class="webs-cab">
+      <span class="mono" data-i18n="web140" style="color:var(--grey-2)">Trabajos</span>
+      <h3 class="d" data-i18n="web141">Webs que hice</h3>
+      <p data-i18n="web142">Algunos clientes prefieren no aparecer con su nombre. Los muestro como Lorem Ipsum: el trabajo es real, el nombre no.</p>
+    </div>
+    <article class="web-caso">
+      <div class="web-mock">
+        <figure class="mock-pc">
+          <span class="web-barra" aria-hidden="true"><i></i><i></i><i></i><b>apardianstudio.com</b></span>
+          <img src="img/webs/apardian_pc.jpg" alt="" loading="lazy" decoding="async" width="1440" height="900">
+        </figure>
+        <figure class="mock-cel"><img src="img/webs/apardian_cel.jpg" alt="" loading="lazy" decoding="async" width="780" height="1688"></figure>
+      </div>
+      <div class="web-info">
+        <span class="mono red">01 — <span data-i18n="web143">Portfolio · Uruguay</span></span>
+        <h4 class="d">Apardian Studio</h4>
+        
+        <p data-i18n="web144">Esta misma web. En tres idiomas, con un editor propio para cambiar textos y fotos sin tocar código.</p>
+      </div>
+    </article>
+    <article class="web-caso conf">
+      <div class="web-mock">
+        <figure class="mock-pc">
+          <span class="web-barra" aria-hidden="true"><i></i><i></i><i></i><b>lorem-ipsum</b></span>
+          <img src="img/webs/confidencial-1_pc.jpg" alt="" loading="lazy" decoding="async" width="1440" height="900">
+        </figure>
+        <figure class="mock-cel"><img src="img/webs/confidencial-1_cel.jpg" alt="" loading="lazy" decoding="async" width="780" height="1688"></figure>
+      </div>
+      <div class="web-info">
+        <span class="mono red">02 — <span data-i18n="web145">Restaurante · Barcelona</span></span>
+        <h4 class="d">Lorem Ipsum</h4>
+        <span class="web-conf mono" data-i18n="web147">Cliente confidencial</span>
+        <p data-i18n="web146">Sitio a medida para un restaurante de Barcelona.</p>
+      </div>
+    </article>
+    <article class="web-caso conf">
+      <div class="web-mock">
+        <figure class="mock-pc">
+          <span class="web-barra" aria-hidden="true"><i></i><i></i><i></i><b>lorem-ipsum</b></span>
+          <img src="img/webs/confidencial-2_pc.jpg" alt="" loading="lazy" decoding="async" width="1440" height="900">
+        </figure>
+        <figure class="mock-cel"><img src="img/webs/confidencial-2_cel.jpg" alt="" loading="lazy" decoding="async" width="780" height="1688"></figure>
+      </div>
+      <div class="web-info">
+        <span class="mono red">03 — <span data-i18n="web148">Sitio de negocio</span></span>
+        <h4 class="d">Lorem Ipsum</h4>
+        <span class="web-conf mono" data-i18n="web147">Cliente confidencial</span>
+        <p data-i18n="web149">Sitio a medida, de punta a punta.</p>
+      </div>
     </article>
   </div>
 </section>
@@ -487,9 +561,9 @@
 
 <script src="js/data.js?v=1789010043"></script>
 <script src="js/main.js?v=1789060000"></script>
-<script src="js/indice.js?v=1789060000"></script>
-<script src="js/i18n_dict.js?v=1789060000"></script>
-<script src="js/i18n.js?v=1789010043"></script>
+<script src="js/indice.js?v=1790000000"></script>
+<script src="js/i18n_dict.js?v=1790000000"></script>
+<script src="js/i18n.js?v=1790000000"></script>
 <script src="js/agente.js?v=1789010043"></script>
 <script src="js/editor.js?v=1789010043"></script>
 </body>
