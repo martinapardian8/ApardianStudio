@@ -92,3 +92,21 @@ Ningún elemento atrapa el foco. No hay modales. El canvas y el reloj del nav es
 - Manejo del foco: **CON OBSERVACIONES** (foco invisible #3, tapado por el nav #6)
 - Contraste de color: **CON OBSERVACIONES** (#1, #2, #7; es el problema principal)
 - Sensibilidad al movimiento: **APROBADA**
+
+## Estado después de los arreglos (2026-10-24)
+| # | Estado | Qué se hizo |
+|---|--------|-------------|
+| 1 | Corregido | Todo el texto toma el tono del cielo de ese momento (`data-tone` en la raíz), y el cielo queda quieto mientras se lee cada capítulo: cambia en el 16% del tramo entre uno y otro. Además, halo del color del fondo detrás del texto. |
+| 2 | Corregido | En el primer scroll la ciudad baja siguiendo directamente el scroll y se redibuja aunque el cielo no cambie. Ventanas al 45% de opacidad. Las opciones del formulario tienen fondo propio. |
+| 3 | Corregido | Color de foco según el tono: tinta sobre fondo claro, bronce sobre fondo oscuro, también en el nav. |
+| 4 | Corregido | `#confirm` queda siempre en el DOM; solo cambia el contenido. |
+| 5 | Corregido | `document.documentElement.lang = "es-UY"`. |
+| 6–9, 11–14 | Corregido | `scroll-padding-top`, placeholder a 70% de marfil, `aria-invalid` y `aria-describedby` en los errores, `required` con «(obligatorio)» visible, precio con «Precio: … pesos» para lectores de pantalla, `h2` en el footer, copa nombrada con trago y tipo, aviso en vivo del atardecer al cambiar de día. |
+| 10 | Parcial | La lista se nombra «Elegí un cocktail para verlo servido»; los botones siguen con `aria-pressed`. |
+
+**Contraste medido de nuevo** (mismo método; los halos no se cuentan, así que el resultado real es algo mejor):
+- **Escritorio:** de 35 textos por debajo de AA a 0.
+- **Celular:** de 27 a 8. Lo que queda:
+  - Cinco textos (nav y datos de la terraza) dan 3.35–3.55:1, solo durante el cambio rápido de luz entre la terraza y la carta.
+  - Los horarios del programa pasan por encima de la luna (1.14:1) por un momento.
+  - Dos medidas sobre ventanas iluminadas (3.82 y 4.2:1). La de la opción del formulario no cuenta su fondo propio, que el script de medición no considera.

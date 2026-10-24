@@ -21,6 +21,8 @@
   --bronce-claro:#D2B07A;
   --noche:#0E1524;
   --veil:rgb(8 10 18 / .32);
+  --halo-claro:rgb(247 228 198 / .75);
+  --halo-oscuro:rgb(14 21 36 / .85);
   --serif:"Bodoni Moda","Bodoni 72","Didot",Georgia,serif;
   --sans:"Hanken Grotesk","Helvetica Neue",Arial,sans-serif;
   --gutter:clamp(16px,4.5vw,64px);
@@ -29,10 +31,11 @@
   color-scheme:light;
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;scroll-padding-top:6rem}
 body{margin:0;background:var(--s3);color:var(--tinta);font-family:var(--sans);font-weight:300;font-size:1.0625rem;line-height:1.62;overflow-x:clip;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
 ::selection{background:var(--campari);color:var(--marmol)}
-:focus-visible{outline:2px solid var(--bronce-claro);outline-offset:3px}
+:focus-visible{outline:2px solid var(--focus,var(--bronce-claro));outline-offset:3px}
+.sr-only{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
 
 /* ---------- the sky ---------- */
 .scene{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
@@ -55,7 +58,7 @@ body{margin:0;background:var(--s3);color:var(--tinta);font-family:var(--sans);fo
 .dial svg{width:62px;height:38px;overflow:visible}
 .dial-text{display:grid;line-height:1.1}
 .dial-time{font-family:var(--serif);font-size:1.3rem;font-variant-numeric:tabular-nums lining-nums}
-.dial-phase{font-size:.8125rem;opacity:.78;white-space:nowrap}
+.dial-phase{font-size:.8125rem;white-space:nowrap}
 .links{display:flex;align-items:center;gap:clamp(1rem,2vw,1.75rem)}
 .links a:not(.btn){color:inherit;text-decoration:none;font-size:.95rem;background:linear-gradient(currentColor,currentColor) 0 100%/0 1px no-repeat;transition:background-size .5s cubic-bezier(.2,.7,.1,1)}
 .links a:not(.btn):hover{background-size:100% 1px}
@@ -70,15 +73,17 @@ body{margin:0;background:var(--s3);color:var(--tinta);font-family:var(--sans);fo
 main,footer{position:relative;z-index:2}
 .wrap{max-width:1320px;margin-inline:auto;padding-left:max(var(--gutter),env(safe-area-inset-left,0px));padding-right:max(var(--gutter),env(safe-area-inset-right,0px))}
 .chapter{padding-block:clamp(6rem,17vh,11rem)}
-.tone-light{color:var(--tinta)}
-.tone-dark{color:var(--marmol)}
-.tone-dark h2,.tone-dark .copy{text-shadow:0 0 28px var(--noche)}
+/* all text takes the tone of the sky behind it; the script flips data-tone when the light turns */
+main,footer{color:var(--tinta);text-shadow:0 0 2px var(--halo-claro),0 0 16px var(--halo-claro);--focus:var(--tinta);transition:color .35s ease,text-shadow .35s ease}
+:root[data-tone="dark"] main,:root[data-tone="dark"] footer{color:var(--marmol);text-shadow:0 0 2px var(--noche),0 0 18px var(--halo-oscuro);--focus:var(--bronce-claro)}
+.nav[data-tone="light"]{--focus:var(--tinta)}
+.btn,.chip:has(input:checked){text-shadow:none}
 h1,h2{font-family:var(--serif);font-weight:400;margin:0;text-wrap:balance}
 h1{font-size:clamp(3rem,7.2vw,7.2rem);line-height:.93;letter-spacing:-.024em}
 h2{font-size:clamp(2.4rem,5.2vw,4.6rem);line-height:1.02;letter-spacing:-.016em;max-width:15ch}
 p{margin:0}
 .copy{max-width:52ch;margin-top:1.5rem}
-.small{font-size:.9rem;opacity:.78}
+.small{font-size:.9rem;opacity:.88}
 
 /* hero */
 .hero{min-height:94svh;display:flex;align-items:flex-start;padding-top:clamp(7.5rem,17vh,10.5rem);padding-bottom:calc(var(--cityH,300px) * .95)}
@@ -117,15 +122,15 @@ p{margin:0}
 .glass .garnish{fill:none;stroke:var(--marmol);stroke-width:1.1;opacity:.75}
 .glass .shine{fill:none;stroke:var(--marmol);stroke-width:2.2;stroke-linecap:round;opacity:.28}
 .glass-name{font-family:var(--serif);font-style:italic;font-size:1.5rem;line-height:1.2}
-.glass-cap{font-size:.9rem;opacity:.75}
+.glass-cap{font-size:.9rem;opacity:.88}
 .drinks{list-style:none;margin:0;padding:0;border-top:1px solid color-mix(in srgb,var(--bronce-claro) 45%,transparent)}
 .drink{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.3rem 1.5rem;width:100%;padding:1.2rem 0;text-align:left;
   background:none;border:0;border-bottom:1px solid color-mix(in srgb,var(--bronce-claro) 45%,transparent);color:inherit;font:inherit;cursor:pointer;transition:padding .6s cubic-bezier(.2,.7,.1,1)}
 .drink[aria-pressed="true"]{padding-left:.9rem}
 .d-name{font-family:var(--serif);font-style:italic;font-size:clamp(1.6rem,2.6vw,2.15rem);line-height:1.1;transition:color .5s ease}
-.drink[aria-pressed="true"] .d-name{color:var(--bronce-claro)}
+:root[data-tone="dark"] .drink[aria-pressed="true"] .d-name{color:var(--bronce-claro)}
 .d-price{font-family:var(--serif);font-size:1.25rem;font-variant-numeric:tabular-nums lining-nums;align-self:start;padding-top:.3rem}
-.d-ing{grid-column:1/-1;font-size:.95rem;opacity:.78}
+.d-ing{grid-column:1/-1;font-size:.95rem;opacity:.88}
 .menu-note{margin-top:1.25rem}
 
 /* nights */
@@ -141,28 +146,31 @@ form{display:grid;gap:2rem}
 fieldset{border:0;padding:0;margin:0;min-width:0}
 legend,.field-label{font-family:var(--serif);font-style:italic;font-size:1.2rem;padding:0;margin-bottom:.7rem;display:block}
 .chips{display:grid;grid-template-columns:repeat(auto-fill,minmax(8.25rem,1fr));gap:.55rem}
-.chip{position:relative;display:grid;gap:.1rem;padding:.75rem .9rem;border:1px solid color-mix(in srgb,var(--bronce-claro) 50%,transparent);cursor:pointer;transition:background .45s ease,color .45s ease,border-color .45s ease}
+.chip{position:relative;display:grid;gap:.1rem;padding:.75rem .9rem;background:color-mix(in srgb,var(--noche) 62%,transparent);border:1px solid color-mix(in srgb,var(--bronce-claro) 50%,transparent);cursor:pointer;transition:background .45s ease,color .45s ease,border-color .45s ease}
 .chip:hover{border-color:var(--bronce-claro)}
 .chip input{position:absolute;inset:0;opacity:0;margin:0;cursor:pointer}
 .chip:has(input:checked){background:var(--marmol);color:var(--noche);border-color:var(--marmol)}
 .chip:has(input:focus-visible){outline:2px solid var(--bronce-claro);outline-offset:3px}
 .chip-main{font-weight:500}
-.chip-sub{font-size:.85rem;opacity:.75;font-variant-numeric:tabular-nums}
+.chip-sub{font-size:.85rem;opacity:.85;font-variant-numeric:tabular-nums}
 .fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.75rem 1.5rem}
 .field{display:grid;gap:.15rem;min-width:0}
 .field .field-label{margin-bottom:.2rem}
 input[type=text],input[type=tel],select{width:100%;font:inherit;font-weight:400;color:inherit;background:transparent;border:0;border-bottom:1px solid color-mix(in srgb,var(--bronce-claro) 65%,transparent);border-radius:0;padding:.55rem 0;transition:border-color .4s ease}
 input[type=text]:focus-visible,input[type=tel]:focus-visible,select:focus-visible{outline:none;border-bottom-color:var(--bronce-claro);box-shadow:0 1px 0 var(--bronce-claro)}
 select option{background:var(--noche);color:var(--marmol)}
+::placeholder{color:var(--marmol);opacity:.7}
+.req{font-family:var(--sans);font-style:normal;font-size:.85rem;opacity:.8}
 .form-end{display:flex;flex-wrap:wrap;align-items:center;gap:1rem 1.5rem}
 .form-error{color:var(--bronce-claro);font-size:.95rem}
 .confirm{padding:1.25rem 1.5rem;border:1px solid var(--bronce-claro)}
+.confirm:empty{padding:0;border:0}
 .confirm strong{font-family:var(--serif);font-style:italic;font-weight:400;font-size:1.3rem;display:block;margin-bottom:.35rem}
 
 /* footer */
 footer{color:var(--marmol);padding-block:clamp(4rem,10vh,7rem) clamp(2rem,5vh,3rem)}
 .foot-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:2rem;padding-top:2rem;border-top:1px solid color-mix(in srgb,var(--bronce-claro) 45%,transparent);font-size:.95rem}
-.foot-grid h3{font-family:var(--serif);font-style:italic;font-weight:400;font-size:1.15rem;margin:0 0 .4rem}
+.foot-grid h2{font-style:italic;font-size:1.15rem;line-height:1.3;letter-spacing:0;max-width:none;margin:0 0 .4rem}
 .signoff{font-family:var(--serif);font-style:italic;font-size:clamp(3rem,12.5vw,11.5rem);line-height:.9;letter-spacing:-.03em;margin-top:clamp(3rem,8vh,5rem);white-space:nowrap;opacity:.92}
 
 @media (max-width:900px){
@@ -185,7 +193,7 @@ footer{color:var(--marmol);padding-block:clamp(4rem,10vh,7rem) clamp(2rem,5vh,3r
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   .grain,.line>span,.hero-foot,.glass.pour .outline{animation:none}
-  #liquid,.drink,.chip,.nav{transition:none}
+  #liquid,.drink,.d-name,.chip,.nav,main,footer{transition:none}
 }
 </style>
 
@@ -258,7 +266,7 @@ footer{color:var(--marmol);padding-block:clamp(4rem,10vh,7rem) clamp(2rem,5vh,3r
       <p class="copy">Seis tragos pensados para el momento de la noche en que se toman. Elegí uno para verlo servido.</p>
       <div class="menu">
         <div class="glass-col">
-          <svg class="glass" id="glass" viewBox="0 0 200 260" role="img" aria-labelledby="glass-name">
+          <svg class="glass" id="glass" viewBox="0 0 200 260" role="img" aria-labelledby="glass-name glass-cap">
             <defs><clipPath id="glass-clip"><path id="glass-bowl" d=""/></clipPath></defs>
             <g clip-path="url(#glass-clip)"><rect id="liquid" x="0" y="0" width="200" height="260" fill="#E8DDB0" style="transform:translateY(260px)"/></g>
             <path class="garnish" id="glass-garnish" d=""/>
@@ -271,7 +279,7 @@ footer{color:var(--marmol);padding-block:clamp(4rem,10vh,7rem) clamp(2rem,5vh,3r
           </div>
         </div>
         <div>
-          <ul class="drinks" id="drinks"></ul>
+          <ul class="drinks" id="drinks" aria-label="Elegí un cocktail para verlo servido"></ul>
           <p class="menu-note small">Precios en pesos uruguayos. La barra prepara cualquiera de la carta sin alcohol.</p>
         </div>
       </div>
@@ -309,6 +317,7 @@ footer{color:var(--marmol);padding-block:clamp(4rem,10vh,7rem) clamp(2rem,5vh,3r
           <legend>Hora</legend>
           <div class="chips" id="times"></div>
         </fieldset>
+        <p class="sr-only" id="sun-note" aria-live="polite"></p>
         <div class="fields">
           <div class="field">
             <label class="field-label" for="personas">Personas</label>
@@ -326,19 +335,19 @@ footer{color:var(--marmol);padding-block:clamp(4rem,10vh,7rem) clamp(2rem,5vh,3r
             </select>
           </div>
           <div class="field">
-            <label class="field-label" for="nombre">Nombre</label>
-            <input type="text" id="nombre" name="nombre" autocomplete="name" placeholder="Como figura en la reserva">
+            <label class="field-label" for="nombre">Nombre <span class="req">(obligatorio)</span></label>
+            <input type="text" id="nombre" name="nombre" autocomplete="name" required aria-required="true" placeholder="Como figura en la reserva">
           </div>
           <div class="field">
-            <label class="field-label" for="telefono">WhatsApp</label>
-            <input type="tel" id="telefono" name="telefono" autocomplete="tel" placeholder="099 123 456">
+            <label class="field-label" for="telefono">WhatsApp <span class="req">(obligatorio)</span></label>
+            <input type="tel" id="telefono" name="telefono" autocomplete="tel" required aria-required="true" placeholder="099 123 456">
           </div>
         </div>
         <div class="form-end">
           <button class="btn" type="submit">Pedir la mesa</button>
           <span class="form-error" id="form-error" role="alert"></span>
         </div>
-        <div class="confirm" id="confirm" role="status" hidden></div>
+        <div class="confirm" id="confirm" role="status"></div>
       </form>
     </div>
   </section>
@@ -347,9 +356,9 @@ footer{color:var(--marmol);padding-block:clamp(4rem,10vh,7rem) clamp(2rem,5vh,3r
 <footer>
   <div class="wrap">
     <div class="foot-grid">
-      <div><h3>Dónde</h3><p>Séptimo piso, Ciudad Vieja, Montevideo.<br>34°54′ S, 56°12′ O.</p></div>
-      <div><h3>Cuándo</h3><p>Miércoles a domingo, desde una hora antes del atardecer hasta la 1:00.</p></div>
-      <div><h3>Hoy</h3><p>El sol se pone a las <time data-sunset>19:00</time>, con azimut <span data-azimuth>259°</span>. La barra mira justo hacia ahí.</p></div>
+      <div><h2>Dónde</h2><p>Séptimo piso, Ciudad Vieja, Montevideo.<br>34°54′ S, 56°12′ O.</p></div>
+      <div><h2>Cuándo</h2><p>Miércoles a domingo, desde una hora antes del atardecer hasta la 1:00.</p></div>
+      <div><h2>Hoy</h2><p>El sol se pone a las <time data-sunset>19:00</time>, con azimut <span data-azimuth>259°</span>. La barra mira justo hacia ahí.</p></div>
     </div>
     <div class="signoff" aria-hidden="true">Almanac Azimuth</div>
   </div>
@@ -359,6 +368,7 @@ footer{color:var(--marmol);padding-block:clamp(4rem,10vh,7rem) clamp(2rem,5vh,3r
 (() => {
   // Venue: change these to move the sunset, the dial and the booking days.
   const VENUE = { city: "Montevideo", lat: -34.9058, lon: -56.2011, tz: "America/Montevideo", openDays: [3, 4, 5, 6, 0] };
+  document.documentElement.lang = "es-UY";
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const R = Math.PI / 180;
 
@@ -405,13 +415,13 @@ footer{color:var(--marmol);padding-block:clamp(4rem,10vh,7rem) clamp(2rem,5vh,3r
 
   const SKY_TOP = pal(["#A7B8CB", "#8393B0", "#1E2A44", "#0B1120", "#070B14"]);
   const SKY_MID = pal(["#EECBA2", "#DB9C86", "#34486A", "#151F33", "#0E1524"]);
-  const SKY_LOW = pal(["#F7E4C6", "#F1BB8E", "#4C5C80", "#24304A", "#18223A"]);
+  const SKY_LOW = pal(["#F7E4C6", "#F1BB8E", "#3F4E72", "#24304A", "#18223A"]);
   const FAR = pal(["#B9A4A0", "#9A8796", "#2A3550", "#141C2C", "#111827"]);
   const NEAR = pal(["#5B4B45", "#43363B", "#161D2C", "#0B111C", "#090E18"]);
   const RAIL = pal(["#2E2622", "#241D20", "#0A0F18", "#060A12", "#05080F"]);
   const SUN_CORE = pal(["#FFF2D2", "#FFC48C", "#F27A4E", "#F27A4E", "#F27A4E"]);
   const SUN_GLOW = pal(["#FFDBA3", "#F89C6C", "#D9544A", "#D9544A", "#D9544A"]);
-  const SINK = [0, .74, .93, .22, .5];
+  const SINK = [0, .97, .97, .22, .5];
 
   /* ---------- the scene ---------- */
   const sky = document.getElementById("sky");
@@ -521,7 +531,7 @@ footer{color:var(--marmol);padding-block:clamp(4rem,10vh,7rem) clamp(2rem,5vh,3r
     // moon
     const moonA = clamp((f - 2.2) / .6);
     if (moonA > 0) {
-      const mx = W * (W < 900 ? .84 : .44), my = H * (.92 - clamp((f - 2.2) / 1.8) * .76), mr = moonImg.r;
+      const mx = W * (W < 900 ? .84 : .44), my = W < 900 ? H * (.92 - clamp((f - 2.2) / .8) * .8) : H * (.92 - clamp((f - 2.2) / 1.8) * .76), mr = moonImg.r;
       const g = ctx.createRadialGradient(mx, my, 0, mx, my, mr * 5);
       g.addColorStop(0, `rgb(220 226 240 / ${.18 * moonA})`); g.addColorStop(1, "rgb(220 226 240 / 0)");
       ctx.fillStyle = g; ctx.fillRect(mx - mr * 5, my - mr * 5, mr * 10, mr * 10);
@@ -543,7 +553,8 @@ footer{color:var(--marmol);padding-block:clamp(4rem,10vh,7rem) clamp(2rem,5vh,3r
     }
 
     // the city sinks while you read and comes back lit at night
-    const sink = num(SINK, f);
+    // in the first scroll the roofs leave with the page, so the terrace text never lands on them
+    const sink = Math.max(num(SINK, f), f < 1.5 ? smooth(clamp(scrollY / (cityH * .7))) : 0);
     ctx.save(); ctx.translate(0, H - cityH * .14 + sink * cityH * .86);
     ctx.fillStyle = rgb(mix(FAR, f)); ctx.fill(farPath); ctx.restore();
 
@@ -551,7 +562,7 @@ footer{color:var(--marmol);padding-block:clamp(4rem,10vh,7rem) clamp(2rem,5vh,3r
     ctx.fillStyle = rgb(mix(NEAR, f)); ctx.fill(nearPath);
     for (const w of windows) {
       const a = clamp((f - w.t) / .25);
-      if (a > 0) { ctx.fillStyle = `rgb(255 201 119 / ${a * .85})`; ctx.fillRect(w.x, w.y, w.w, w.h); }
+      if (a > 0) { ctx.fillStyle = `rgb(255 190 110 / ${a * .45})`; ctx.fillRect(w.x, w.y, w.w, w.h); }
     }
     ctx.restore();
 
@@ -568,8 +579,8 @@ footer{color:var(--marmol);padding-block:clamp(4rem,10vh,7rem) clamp(2rem,5vh,3r
     const top = rgb(mix(SKY_TOP, f)), mid = rgb(mix(SKY_MID, f)), low = rgb(mix(SKY_LOW, f));
     sky.style.setProperty("--s1", top); sky.style.setProperty("--s2", mid); sky.style.setProperty("--s3", low);
     nav.style.setProperty("--s1", top);
-    const tone = f > 1.45 ? "dark" : "light";
-    if (tone !== lastTone) { nav.style.setProperty("--fg", tone === "dark" ? "var(--marmol)" : "var(--tinta)"); lastTone = tone; }
+    const tone = f > 1.5 ? "dark" : "light";
+    if (tone !== lastTone) { nav.dataset.tone = tone; document.documentElement.dataset.tone = tone; nav.style.setProperty("--fg", tone === "dark" ? "var(--marmol)" : "var(--tinta)"); lastTone = tone; }
 
     const [x, y] = onArc(num([40, 0, -28, -40, -40], f));
     dialSun.setAttribute("cx", x.toFixed(1)); dialSun.setAttribute("cy", y.toFixed(1));
@@ -594,17 +605,18 @@ footer{color:var(--marmol);padding-block:clamp(4rem,10vh,7rem) clamp(2rem,5vh,3r
   function target() {
     const c = scrollY + innerHeight / 2;
     if (c <= centers[0]) return 0;
-    for (let i = 0; i < centers.length - 1; i++) if (c < centers[i + 1]) return i + (c - centers[i]) / Math.max(1, centers[i + 1] - centers[i]);
+    for (let i = 0; i < centers.length - 1; i++) if (c < centers[i + 1]) return i + smooth(clamp(((c - centers[i]) / Math.max(1, centers[i + 1] - centers[i]) - .42) / .16)); // the sky holds while a chapter is read and turns between chapters
     return centers.length - 1;
   }
 
-  let f = 0, drawn = -1;
+  let f = 0, drawn = -1, drawnScroll = -1;
   function frame(t) {
     const goal = target();
     f = reduce ? goal : f + (goal - f) * .07;
     if (Math.abs(goal - f) < .0005) f = goal;
     const twinkle = f > 1.55 && !reduce;
-    if (Math.abs(f - drawn) > .0003 || twinkle) { draw(f, t); if (Math.abs(f - drawn) > .0003) ui(f); drawn = f; }
+    const heroMoved = f < 1.5 && scrollY !== drawnScroll;
+    if (Math.abs(f - drawn) > .0003 || twinkle || heroMoved) { draw(f, t); if (Math.abs(f - drawn) > .0003) ui(f); drawn = f; drawnScroll = scrollY; }
     requestAnimationFrame(frame);
   }
 
@@ -640,7 +652,7 @@ footer{color:var(--marmol);padding-block:clamp(4rem,10vh,7rem) clamp(2rem,5vh,3r
   let current = -1;
   DRINKS.forEach((d, i) => {
     const li = document.createElement("li");
-    li.innerHTML = `<button class="drink" type="button" aria-pressed="false"><span class="d-name">${d.name}</span><span class="d-price">${d.price}</span><span class="d-ing">${d.ing}</span></button>`;
+    li.innerHTML = `<button class="drink" type="button" aria-pressed="false"><span class="d-name">${d.name}</span><span class="d-price"><span class="sr-only">Precio: </span>${d.price}<span class="sr-only"> pesos</span></span><span class="d-ing">${d.ing}</span></button>`;
     const b = li.firstChild;
     b.addEventListener("click", () => pour(i));
     b.addEventListener("mouseenter", () => { if (matchMedia("(hover: hover)").matches) pour(i); });
@@ -684,17 +696,23 @@ footer{color:var(--marmol);padding-block:clamp(4rem,10vh,7rem) clamp(2rem,5vh,3r
     timesEl.innerHTML = slots.map((s, i) => `<label class="chip"><input type="radio" name="hora" id="hora-${i}" value="${s.v}"${"hora-" + i === keep ? " checked" : ""}><span class="chip-main">${s.main}</span><span class="chip-sub">${s.sub}</span></label>`).join("");
   }
   renderTimes();
-  daysEl.addEventListener("change", renderTimes);
+  const sunNote = document.getElementById("sun-note");
+  daysEl.addEventListener("change", () => {
+    renderTimes();
+    const d = days[+document.querySelector("input[name=dia]:checked").value];
+    sunNote.textContent = `${d.label}: el sol se pone a las ${hhmm(d.sun)}. El horario al atardecer es a las ${document.getElementById("hora-0").value}.`;
+  });
 
   const form = document.getElementById("booking"), err = document.getElementById("form-error"), confirmEl = document.getElementById("confirm");
   form.addEventListener("submit", e => {
     e.preventDefault();
     const name = form.nombre.value.trim(), phone = form.telefono.value.trim();
-    if (!name) { err.textContent = "Escribí el nombre para la reserva."; form.nombre.focus(); return; }
-    if (phone.replace(/\D/g, "").length < 8) { err.textContent = "Escribí un WhatsApp con al menos 8 números."; form.telefono.focus(); return; }
+    const fail = (field, msg) => { err.textContent = msg; field.setAttribute("aria-invalid", "true"); field.setAttribute("aria-describedby", "form-error"); field.focus(); };
+    [form.nombre, form.telefono].forEach(el => { el.removeAttribute("aria-invalid"); el.removeAttribute("aria-describedby"); });
+    if (!name) return fail(form.nombre, "Escribí el nombre para la reserva.");
+    if (phone.replace(/\D/g, "").length < 8) return fail(form.telefono, "Escribí un WhatsApp con al menos 8 números.");
     err.textContent = "";
     const d = days[+form.dia.value], hora = form.hora.value, n = +form.personas.value;
-    confirmEl.hidden = false;
     const esc = s => s.replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
     confirmEl.innerHTML = `<strong>Mesa pedida, ${esc(name.split(" ")[0])}.</strong>Para ${n} ${n === 1 ? "persona" : "personas"}, ${d.full} a las ${hora}, ${form.lugar.value}. Esta página es una maqueta: el pedido todavía no se envía a ningún lado.`;
   });
