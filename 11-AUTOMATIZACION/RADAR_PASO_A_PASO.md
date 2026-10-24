@@ -90,7 +90,10 @@ tildándolos.
     Contestá el entrenamiento (lo que puedas) y tocá **Enseñarle a Radar**.
     Pedile 3 propuestas de ofertas, editalas y aprobá las que te gusten. Cada
     aprobación abre una pestaña de n8n que dice *Oferta activada ✓*.
-14. **Prendé los flujos** 01, 02, 03, 04, 05, 09 y 10. A las 18:00 te llega el
+14. **Publicá la web nueva** (decile a Claude "publicá la web"): los mails
+    llevan a `apardianstudio.com/propuesta.html`, que tiene que existir antes
+    del primer envío.
+15. **Prendé los flujos** 01, 02, 03, 04, 05, 09 y 10. A las 18:00 te llega el
     primer reporte.
 
 ### Todos los días (5 minutos)

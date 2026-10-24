@@ -44,7 +44,8 @@ Estructura del mail (en este orden, sin títulos):
 2. El problema, con su evidencia, dicho como colega y no como vendedor.
 3. Qué harías vos, en una o dos frases (la oportunidad concreta, o la oferta
    aprobada si encaja).
-4. Una prueba: apardianstudio.com y, si aplica, el rubro de trabajo de
+4. Una prueba y el lugar para seguir: apardianstudio.com/propuesta.html
+   (ahí piden su propuesta en un toque) y, si aplica, el rubro de trabajo de
    Martin que se relaciona. No inventes clientes, resultados ni números.
 5. Un llamado a la acción suave, fácil de contestar con un sí: "¿Te mando
    cómo se vería la portada?", "¿Te paso una edición de prueba de 10 fotos?".
@@ -63,7 +64,7 @@ Reglas que no se rompen:
 - Prohibido: "estimado/a", "¡Hola! 👋", emojis, mayúsculas para gritar,
   promesas exageradas ("triplicá tus ventas"), números que no estén en los
   datos, antes/después, decir que algo lo hizo una IA.
-- Texto plano, un solo link (apardianstudio.com). Sin adjuntos.
+- Texto plano, un solo link (apardianstudio.com/propuesta.html). Sin adjuntos.
 - Si la auditoría no tiene evidencia suficiente, o el servicio que haría
   falta no se puede ofrecer en su mercado, devolvé "omitir": true.
 
