@@ -155,6 +155,44 @@ de edición, también lo hago para colegas.")
 
 ---
 
+### 3.6 Reactivación de diciembre (clientes que ya trabajaron con Martin)
+
+**Empresa o evento de 2024–2025 (fiesta de fin de año)**
+> {Nombre}, ¿cómo va? Soy Martin, hicimos juntos {el evento} en {año}. Se viene
+> fin de año: si la fiesta de {empresa} ya tiene fecha, me encantaría estar de
+> nuevo. Toda la noche, sin tope de fotos y galería para los invitados en 10
+> días. ¿Te paso disponibilidad?
+(Mandarlo entre el 1 y el 20 de noviembre: las empresas cierran fecha temprano.)
+
+**Pareja que se casó (un cuadro para las fiestas)**
+> {Nombres}, ¿cómo están? Pasó {tiempo} desde su casamiento y todavía me acuerdo
+> de {un momento real de ese día}. Para estas fiestas imprimo fotos en papel de
+> archivo, con marco y listas para colgar. ¿Les paso tamaños para elegir una
+> de ese día?
+(Antes del 10 de diciembre, para llegar al 24. Precios y tamaños: los define Martin.)
+
+**Restaurante, café o parrilla (carta de verano)**
+> {Nombre}, ¿cómo viene la temporada? Las fotos que hicimos de {local} ya tienen
+> platos nuevos por delante. Si cambiás la carta para el verano, en una jornada
+> fotografío lo nuevo, en tu local y sin cerrar, con entrega en 7 días. ¿Lo
+> coordinamos antes de que arranque enero?
+
+**Marca o producto (temporada de regalos)**
+> {Nombre}, vi que {producto o novedad real de su cuenta}. Para la temporada de
+> regalos te hago las fotos de lo nuevo para la tienda y las redes, mismo
+> estilo que la otra vez, en 5 días. ¿Te sirve antes del {fecha}?
+
+**Retrato o marca personal (arrancar el año)**
+> {Nombre}, ¿cómo estás? Pasó un tiempo desde las fotos que hicimos. Si en enero
+> actualizás la web, LinkedIn o la bio, hago una sesión corta para renovarlas,
+> en tu lugar y con luz natural. ¿Te interesa que lo agendemos?
+
+**A cualquier cliente contento (pedir una recomendación)**
+> {Nombre}, una pregunta corta: ¿conocés a alguien que se case este verano, que
+> esté armando su negocio o que necesite una web? Me ayuda mucho que me
+> recomienden quienes ya trabajaron conmigo. Gracias de verdad.
+(Solo a quien quedó contento. Uno por persona, nunca insistir.)
+
 ## 4. WhatsApp Business
 
 **Mensaje de bienvenida** (automático, primera vez que escriben):
