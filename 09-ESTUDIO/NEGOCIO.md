@@ -1,7 +1,7 @@
 # APARDIAN STUDIO — el negocio
 
 **Quién:** Martin Apardian. Comunicador visual freelance en Uruguay.
-**Contacto:** WhatsApp +598 91 962 962 · martinapardian8@gmail.com · apardianstudio.com
+**Contacto:** WhatsApp +598 91 962 962 · contacto@apardianstudio.com (público, el de la web) · martin@apardianstudio.com (clientes) · apardianstudio.com
 
 ## Qué vende (4 servicios)
 1. **Fotografía** — bodas, eventos, gastronomía, retratos, marcas, producto.

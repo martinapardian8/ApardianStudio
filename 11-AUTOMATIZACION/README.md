@@ -114,7 +114,7 @@ respondió mientras tanto, el link ya no envía nada.
 
 ### Que los mails lleguen (entregabilidad)
 
-- **Dominio de envío separado.** No mandar en frío desde `martinapardian8@gmail.com`
+- **Dominio de envío separado.** No mandar en frío desde tu Gmail personal
   ni desde el dominio principal. Comprar un dominio hermano (por ejemplo
   `apardian.studio` o `apardianstudio.co`) y usar `martin@` ese dominio con
   Google Workspace. Si algo sale mal, se quema ese dominio, no la web.
