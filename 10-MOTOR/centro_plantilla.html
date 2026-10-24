@@ -751,7 +751,7 @@ function renderDetalle(){
       el("div", {class:"fila"}, el("span", {class:"sello", text: TIPO[p.tipo] + (p.hojas > 1 ? " · " + p.hojas + " hojas" : "")}), sello(p.revision), pub ? el("span", {class:"sello pub", text:"Publicado"}) : null),
       notaLupa ? el("p", {class:"muted", style:"margin:0", text:"Lupa: " + notaLupa}) : null,
       p.nota ? el("p", {class:"muted", style:"margin:0", text: p.nota}) : null,
-      pie, acc, panelCelu(p),
+      pie, acc, panelCelu(p) || el("p", {class:"muted", style:"margin:0;font-size:13px", text: p.fecha < hoyISO() ? "Esta pieza ya pasó: sus archivos ya no están para bajar." : "Los archivos para bajar se habilitan unas semanas antes de que salga la pieza."}),
       el("div", {class:"orden-mini"}, el("label", {class:"campo", for:"det-orden"}, el("span", {text:"Pedir un cambio"}), ta), el("div", {class:"fila"}, env, msj)))));
 }
 

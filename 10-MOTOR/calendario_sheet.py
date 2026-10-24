@@ -71,6 +71,18 @@ def pie_mundo_base():
     return m.group(1).strip() if m else "{Frase del posteo}"
 
 
+_PORTFOLIO = None
+
+
+def _portfolio():
+    """{archivo: entrada} de 09-posteos-portfolio/indice.json (con su pie)."""
+    global _PORTFOLIO
+    if _PORTFOLIO is None:
+        ruta = os.path.join(IG, "09-posteos-portfolio", "indice.json")
+        _PORTFOLIO = {p["archivo"]: p for p in json.load(open(ruta, encoding="utf-8"))} if os.path.exists(ruta) else {}
+    return _PORTFOLIO
+
+
 # ------------------------------------------------------------------ piezas
 def archivos_carpeta(rel):
     """Archivos de una carpeta, en orden de subida, relativos a 08-CONTENIDO-INSTAGRAM."""
@@ -122,6 +134,10 @@ def fila(item, fecha, collage, campanas, mundo, base_mundo):
         archivos = archivos_carpeta(pieza)
         cp = os.path.join(IG, pieza, "copy.txt")
         pie = leer(cp).strip() if os.path.exists(cp) else ""
+    elif pieza.startswith("09-posteos-portfolio/"):
+        archivos = [pieza]
+        p = _portfolio().get(os.path.basename(pieza), {})
+        pie = p.get("pie", "")
     elif pieza.startswith("05-videos/") or pieza.startswith("01-posteos-pauta/"):
         archivos = [pieza]
         campana = os.path.basename(pieza).split("_")[1]

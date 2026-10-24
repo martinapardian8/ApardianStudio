@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Calendario de contenido y ventas: 9 semanas, del 19/10 al 20/12/2026.
+"""Calendario de contenido y ventas: 15 semanas, del 19/10/2026 al 31/01/2027.
 
 Una sola fuente: arma 08-CONTENIDO-INSTAGRAM/calendario.json (lo leen la app
 centro de mando y el PDF) y 08-CONTENIDO-INSTAGRAM/CALENDARIO.md (para leer).
@@ -55,12 +55,37 @@ SEMANAS = [
      "Las marcas planifican el contenido de verano y la tienda online de enero.",
      "Producto / marcas", "Prospector con 'marcas uruguayas', 'tiendas online', 'productores'; proponer sesión de origen + packshot.",
      "Revisar todo el sistema: qué canal trajo más consultas (APRENDIZAJES.md)"),
+    ("10-cuadros-un-viaje-que-se-cuelga", "Un viaje que se cuelga",
+     "Última semana para regalos de Navidad, y Reyes el 6 de enero.",
+     "Cuadros · Navidad y Reyes", "Historias con los cuadros y el plazo real de pedido (lo pone Martin); escribir a los clientes de 2025 con la idea de regalo.",
+     "Radar: comprar el dominio para los mails y empezar a calentar la casilla (semana 1 de 2)"),
+    ("11-eventos-el-verano-se-festeja", "El verano se festeja afuera",
+     "Entre fiestas, la gente arma los cumpleaños y casamientos chicos de enero y febrero.",
+     "Eventos de verano", "Mensaje a clientes de eventos 2025 (reactivación) y a 10 chacras y salones de jardín para alianzas.",
+     "Radar: segunda semana de calentamiento; contestar el entrenamiento en el Centro"),
+    ("12-gastronomia-carta-de-verano", "Tu carta de verano entra por los ojos",
+     "Plena temporada en Punta del Este y José Ignacio: los paradores necesitan fotos ya.",
+     "Gastronomía de temporada", "DMs a paradores y restaurantes de la costa con la carta vieja o sin fotos propias; ofrecer jornada en la semana.",
+     "Radar arranca: 10 mails por día con las ofertas aprobadas"),
+    ("13-bodas-entre-el-si-y-la-fiesta", "Entre el sí y la fiesta pasa todo",
+     "Las parejas que se casan en otoño 2027 eligen fotógrafo en el verano.",
+     "Bodas otoño 2027", "Escribir a 10 salones y wedding planners con el carrusel; responder toda consulta de fecha en menos de 1 h.",
+     "Radar: 20 por día; leer el primer reporte semanal y ajustar ofertas"),
+    ("14-edicion-en-enero-no-se-duerme", "En enero no se duerme",
+     "Temporada alta de bodas en el hemisferio sur: los fotógrafos están tapados de edición.",
+     "Edición Lightroom", "Radar con foco en fotógrafos de bodas (Argentina, México, EE.UU.); ofrecer lote de prueba chico pago.",
+     "Radar: 35 por día; sumar búsquedas de fotógrafos si quedan pocos leads"),
+    ("15-marca-360-una-marca-entera", "Una marca se ve igual en todos lados",
+     "Fin de temporada: los negocios piensan en marzo y en cómo se ven el año que viene.",
+     "Marca 360 y web", "Ofrecer marca 360 + web a los clientes de gastronomía y eventos del verano; Radar con foco en marcas chicas.",
+     "Radar: 50 por día; qué país y qué rubro respondió mejor (APRENDIZAJES.md)"),
 ]
 
 
 # campañas de 01-posteos-pauta que acompañan el foco de cada semana
 CAMPANAS = [["bodas"], ["gastronomia"], ["edicion"], ["eventos", "empresas"], ["retratos"],
-            ["web"], ["cuadros"], ["eventos", "empresas", "cuadros"], ["marcas"]]
+            ["web"], ["cuadros"], ["eventos", "empresas", "cuadros"], ["marcas"],
+            ["cuadros"], ["eventos", "empresas"], ["gastronomia"], ["bodas"], ["edicion"], ["web", "marcas", "retratos"]]
 # (la semana de musica no tiene piezas de pauta: el carrusel, su reel y el
 # sabado ya son de musica; el resto del feed acompaña diciembre: fiestas y regalos)
 # dias de la semana con un posteo de la cola (los otros tienen pieza fija)
@@ -89,7 +114,10 @@ def main():
     videos = {f[:3]: f for f in os.listdir(os.path.join(IG, "05-videos")) if f.endswith("_feed.mp4")}
     mundo = json.load(open(os.path.join(IG, "08-tus-fotos-en-el-mundo", "indice.json")))
     # orden de la serie segun el foco de cada semana
-    orden_mundo = [2, 6, 4, 10, 1, 12, 11, 3, 8]
+    orden_mundo = [2, 6, 4, 10, 1, 12, 11, 3, 8, 5, 14, 13, 9, 15, 7]
+    # lo armado para el verano (posteos de portfolio, historias 051+) sale
+    # desde la semana 9: las semanas que ya estan en curso no cambian
+    DESDE_NUEVO = "2026-12-14"
 
     # cola de posteos de pauta: un numero sale una sola vez (como video si lo
     # tiene, si no como foto) y no se repite lo que ya esta en 00-SUBIR
@@ -107,6 +135,13 @@ def main():
                            "titulo": p["titular"],
                            "pieza": f"05-videos/{v}" if v else f"01-posteos-pauta/{f}",
                            "nota": "Video animado de un aviso." if v else "Pieza de la campaña, con CTA."})
+    portfolio = os.path.join(IG, "09-posteos-portfolio", "indice.json")
+    if os.path.exists(portfolio):
+        for p in json.load(open(portfolio, encoding="utf-8")):
+            cola_pauta.append({"campana": p["campana"], "n": p["id"], "desde": DESDE_NUEVO,
+                               "tipo": "Posteo", "titulo": p["titulo"],
+                               "pieza": "09-posteos-portfolio/" + p["archivo"],
+                               "nota": "Foto de portfolio, con el llamado a WhatsApp en el pie."})
     hist_pauta = [f for f in sorted(os.listdir(os.path.join(IG, "02-historias-pauta")))
                   if f.endswith(".jpg") and f in pauta]
 
@@ -119,17 +154,28 @@ def main():
                        lambda c: c["n"] not in usados and not choca(c["pieza"], fecha),
                        lambda c: c["n"] not in usados, lambda c: True):
             for c in cola_pauta:
+                if c.get("desde", "") > fecha.isoformat():
+                    continue
                 if quiero(c):
                     cola_pauta.remove(c); usados.add(c["n"])
                     return c
         return None
 
-    def sacar_hist_pauta(campanas, fecha, evitar=()):
+    # historias de campaña con fecha adentro: despues de esto ya no dicen la verdad
+    VENCE = {"007": "2027-01-01",         # "Quedan pocas fechas para el verano"
+             "008": DESDE_NUEVO}          # cita de Sofia y Nicolas: hasta que Martin confirme que es real
+
+    def sacar_hist_pauta(campanas, fecha, evitar=(), solo_libres=False):
         ruta = lambda f: f"02-historias-pauta/{f}"
-        for quiero in (lambda f: pauta[f]["campana"] in campanas and f[:3] not in usados and not choca(ruta(f), fecha),
-                       lambda f: f[:3] not in usados and not choca(ruta(f), fecha),
-                       lambda f: f[:3] not in usados, lambda f: f[:3] not in evitar):
-            for f in hist_pauta:
+        vigentes = [f for f in hist_pauta if fecha.isoformat() < VENCE.get(f[:3], "9999")]
+        criterios = [lambda f: pauta[f]["campana"] in campanas and f[:3] not in usados and not choca(ruta(f), fecha),
+                     lambda f: f[:3] not in usados and not choca(ruta(f), fecha)]
+        if not solo_libres:
+            criterios += [lambda f: f[:3] not in usados]
+            if fecha.isoformat() < DESDE_NUEVO:      # desde la semana 9 no se repite una pieza ya usada
+                criterios += [lambda f: f[:3] not in evitar]
+        for quiero in criterios:
+            for f in vigentes:
                 if quiero(f):
                     hist_pauta.remove(f); usados.add(f[:3])
                     return f
@@ -221,17 +267,28 @@ def main():
                               "titulo": titulos.get(q, _titulo_archivo(q)),
                               "pieza": f"04-historias-organicas/{q}",
                               "nota": "Subila desde la app y poné el sticker de encuesta sobre los botones dibujados."})
-            if d not in (1, 4) and hist:
+            hd = [x for x in hist if int(x[:3]) < 51 or f.isoformat() >= DESDE_NUEVO]
+            if d not in (1, 4) and hd:
                 # la proxima que no repita foto (las de pregunta se saltean aca)
-                libres = [x for x in hist[:6] if "_pregunta_" not in x]
+                libres = [x for x in hd[:6] if "_pregunta_" not in x]
                 h = next((x for x in libres if not choca(f"04-historias-organicas/{x}", f)),
-                         libres[0] if libres else hist[0])
+                         libres[0] if libres else hd[0])
                 hist.remove(h)
                 items.append({"tipo": "Historia", "hora": "12:30",
                               "titulo": titulos.get(h, _titulo_archivo(h)),
                               "pieza": f"04-historias-organicas/{h}", "nota": ""})
             else:
-                h = sacar_hist_pauta(CAMPANAS[s], f, en_feed)
+                h = sacar_hist_pauta(CAMPANAS[s], f, en_feed, solo_libres=True)
+                # si todas las de campaña repiten una foto cercana, va una organica que no repita
+                org = None if h else next((x for x in hd if "_pregunta_" not in x
+                                           and not choca(f"04-historias-organicas/{x}", f)), None)
+                if org:
+                    hist.remove(org)
+                    items.append({"tipo": "Historia", "hora": "12:30",
+                                  "titulo": titulos.get(org, _titulo_archivo(org)),
+                                  "pieza": f"04-historias-organicas/{org}", "nota": ""})
+                else:
+                    h = h or sacar_hist_pauta(CAMPANAS[s], f, en_feed)
                 if h:
                     items.append({"tipo": "Historia", "hora": "12:30", "titulo": pauta[h]["titular"],
                                   "pieza": f"02-historias-pauta/{h}",

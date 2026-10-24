@@ -1,6 +1,6 @@
 # Carruseles continuos — textos para publicar
 
-Nueve carruseles de 6 láminas (4:5, 1080×1350), en estilo editorial: fotos
+Quince carruseles de 6 láminas (4:5, 1080×1350), en estilo editorial: fotos
 derechas, mucho aire, Anton y el rojo como acento. Cada uno es un solo lienzo
 cortado en seis: las fotos y los títulos cruzan de una lámina a la otra, así
 que **se suben en orden, del 01 al 06, sin recortar**.
@@ -13,7 +13,8 @@ fotos. Sin cinta, sin papel roto, sin chinches ni hilo: lo pediste así.
 
 Para regenerarlos: `python3 10-MOTOR/carruseles_collage.py` (o con el nombre:
 `bodas`, `gastronomia`, `marca`, `findeanio`, `producto`, `edicion`, `web`,
-`cuadros`, `musica`).
+`cuadros`, `musica`, y los del verano: `viajes`, `verano`, `carta`, `bodas2`,
+`edicion2`, `marca360`).
 
 ---
 
@@ -134,3 +135,85 @@ Escuchá mi último EP en Spotify: Marto Apardian. Y escribime: +598 91 962 962
 Nota: las fotos de este carrusel son shows y sesiones que fotografiaste. Si
 tenés fotos tuyas en el piano o en el estudio, van primero: muestran que la
 música la hacés vos.
+
+---
+
+# Verano 26/27 (semanas 10 a 15)
+
+## 10 · Cuadros — "Un viaje que se cuelga"
+Para: regalos de Navidad y Reyes.
+```
+Un viaje que se cuelga.
+
+Fotos de mis viajes, impresas en papel de archivo y enmarcadas. Elegís la foto, el tamaño y el marco, y te llega lista para colgar.
+
+Si no llega para Navidad, llega para Reyes. Pedila por WhatsApp: +598 91 962 962
+
+#cuadros #regalosnavidad #fotografiadeviaje #decoracion #reyes
+```
+Primer comentario: `¿Cuál colgarías vos? Decime el número de la lámina.`
+
+## 11 · Eventos — "El verano se festeja afuera"
+Para: cumpleaños, casamientos chicos y fiestas de empresa de enero y febrero.
+```
+El verano se festeja afuera.
+
+Cumpleaños, casamientos chicos y fiestas de fin de año en chacras y jardines. Toda la fiesta, sin tope de fotos, con galería para los invitados. Entrega en 10 días.
+
+Contame la fecha y el lugar: +598 91 962 962
+
+#eventosuruguay #fotografodeeventos #fiestasdeverano #montevideo #chacras
+```
+Primer comentario: `Etiquetá a quien está armando la fiesta de este verano.`
+
+## 12 · Gastronomía — "Tu carta de verano entra por los ojos"
+Para: restaurantes y paradores de Punta del Este, José Ignacio y Montevideo.
+```
+Tu carta de verano entra por los ojos.
+
+La temporada se juega en las fotos: el fuego, lo que se comparte, lo fresco y el lugar lleno. Voy a tu restaurante o parador en una jornada, sin que cierres. Entrega en 7 días.
+
+Antes de que llegue la gente: +598 91 962 962
+
+#fotografiagastronomica #puntadeleste #joseignacio #restaurantesuruguay #paradores
+```
+Primer comentario: `Guardalo para cuando armes la carta de la temporada.`
+
+## 13 · Bodas — "Entre el sí y la fiesta pasa todo"
+Para: parejas que se casan en otoño 2027.
+```
+Entre el sí y la fiesta pasa todo.
+
+El altar, la llegada, los detalles y lo que nadie mira durante la fiesta y todos miran después. Ceremonia, salón y fiesta: todas las fotos, editadas una por una. Entrega en 10 días.
+
+Contame tu fecha: +598 91 962 962
+
+#fotografodebodas #bodasuruguay #casamiento2027 #montevideo #fotografiadebodas
+```
+Primer comentario: `¿Ya tienen fecha? Escribime "FECHA" por WhatsApp y te paso disponibilidad.`
+
+## 14 · Edición — "En enero no se duerme"
+Para: fotógrafos de bodas y eventos en plena temporada, de cualquier país.
+```
+En enero no se duerme. Vos seguí disparando: el lote me lo mandás a mí.
+
+Culling, revelado con tu estilo y catálogo listo para exportar, en 72 horas. Todo lo que ves es un lote real de un mismo cumpleaños, editado parejo de la primera a la última.
+
+Decime cuántas fotos son y te paso precio en el día: +598 91 962 962
+
+#lightroom #edicionfotografica #fotografosdebodas #postproduccion #photoediting
+```
+Nota: el lote es real y ya editado. No hay "antes": no tenemos el RAW.
+
+## 15 · Marca 360 — "Una marca se ve igual en todos lados"
+Para: negocios y emprendedores que quieren ordenar su imagen.
+```
+Una marca se ve igual en todos lados.
+
+Esta es la mía: un logo, tres colores, dos tipografías, la web, el celular y las redes, todo hablando igual. Marca 360 es eso: identidad, manual de marca y plantillas para redes listas para usar.
+
+Online, desde cualquier país: +598 91 962 962
+
+#identidaddemarca #branding #manualdemarca #diseñografico #emprendedores
+```
+Primer comentario: `¿Tu marca se ve igual en Instagram que en tu web? Contame y te digo qué cambiaría.`

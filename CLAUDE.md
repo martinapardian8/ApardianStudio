@@ -35,6 +35,9 @@ su base (`agente`, `texto`, `pieza`, `estado`, `creada`). Cuando diga "hacé las
 4. Si cambiaste el calendario o las piezas, regenerá en este orden:
    `calendario.py` → `calendario_sheet.py` → `lupa.py` → `centro.py`, y
    republicá el Centro (mismo URL, con las miniaturas nuevas de `12-CENTRO/pz`
-   y los archivos de `12-CENTRO/archivos_ig.json`, que son los que se bajan
-   con "Bajar archivos" de cada día; van con `root` en la raíz del repo, en
-   tandas de menos de 64 MB).
+   y `12-CENTRO/car`, y los archivos de `12-CENTRO/archivos_ig.json`, que son
+   los que se bajan de cada día; van con `root` en la raíz del repo, en tandas
+   de menos de 64 MB y 240 archivos).
+5. La app admite 511 archivos: los de bajar (`ig/`) son solo los de los
+   próximos 42 días (`VENTANA_DIAS` en `centro.py`). Al republicar, pasá en
+   `null` los `ig/` y `pz/` publicados que ya no están en la lista nueva.

@@ -1,6 +1,6 @@
 {
  "desde": "2026-10-19",
- "hasta": "2026-12-20",
+ "hasta": "2027-01-31",
  "semanas": [
   {
    "n": 1,
@@ -91,6 +91,66 @@
    "vertical": "Producto / marcas",
    "venta": "Prospector con 'marcas uruguayas', 'tiendas online', 'productores'; proponer sesión de origen + packshot.",
    "automatizacion": "Revisar todo el sistema: qué canal trajo más consultas (APRENDIZAJES.md)"
+  },
+  {
+   "n": 10,
+   "lunes": "2026-12-21",
+   "carrusel": "Un viaje que se cuelga",
+   "pieza": "06-carruseles-collage/10-cuadros-un-viaje-que-se-cuelga",
+   "porque": "Última semana para regalos de Navidad, y Reyes el 6 de enero.",
+   "vertical": "Cuadros · Navidad y Reyes",
+   "venta": "Historias con los cuadros y el plazo real de pedido (lo pone Martin); escribir a los clientes de 2025 con la idea de regalo.",
+   "automatizacion": "Radar: comprar el dominio para los mails y empezar a calentar la casilla (semana 1 de 2)"
+  },
+  {
+   "n": 11,
+   "lunes": "2026-12-28",
+   "carrusel": "El verano se festeja afuera",
+   "pieza": "06-carruseles-collage/11-eventos-el-verano-se-festeja",
+   "porque": "Entre fiestas, la gente arma los cumpleaños y casamientos chicos de enero y febrero.",
+   "vertical": "Eventos de verano",
+   "venta": "Mensaje a clientes de eventos 2025 (reactivación) y a 10 chacras y salones de jardín para alianzas.",
+   "automatizacion": "Radar: segunda semana de calentamiento; contestar el entrenamiento en el Centro"
+  },
+  {
+   "n": 12,
+   "lunes": "2027-01-04",
+   "carrusel": "Tu carta de verano entra por los ojos",
+   "pieza": "06-carruseles-collage/12-gastronomia-carta-de-verano",
+   "porque": "Plena temporada en Punta del Este y José Ignacio: los paradores necesitan fotos ya.",
+   "vertical": "Gastronomía de temporada",
+   "venta": "DMs a paradores y restaurantes de la costa con la carta vieja o sin fotos propias; ofrecer jornada en la semana.",
+   "automatizacion": "Radar arranca: 10 mails por día con las ofertas aprobadas"
+  },
+  {
+   "n": 13,
+   "lunes": "2027-01-11",
+   "carrusel": "Entre el sí y la fiesta pasa todo",
+   "pieza": "06-carruseles-collage/13-bodas-entre-el-si-y-la-fiesta",
+   "porque": "Las parejas que se casan en otoño 2027 eligen fotógrafo en el verano.",
+   "vertical": "Bodas otoño 2027",
+   "venta": "Escribir a 10 salones y wedding planners con el carrusel; responder toda consulta de fecha en menos de 1 h.",
+   "automatizacion": "Radar: 20 por día; leer el primer reporte semanal y ajustar ofertas"
+  },
+  {
+   "n": 14,
+   "lunes": "2027-01-18",
+   "carrusel": "En enero no se duerme",
+   "pieza": "06-carruseles-collage/14-edicion-en-enero-no-se-duerme",
+   "porque": "Temporada alta de bodas en el hemisferio sur: los fotógrafos están tapados de edición.",
+   "vertical": "Edición Lightroom",
+   "venta": "Radar con foco en fotógrafos de bodas (Argentina, México, EE.UU.); ofrecer lote de prueba chico pago.",
+   "automatizacion": "Radar: 35 por día; sumar búsquedas de fotógrafos si quedan pocos leads"
+  },
+  {
+   "n": 15,
+   "lunes": "2027-01-25",
+   "carrusel": "Una marca se ve igual en todos lados",
+   "pieza": "06-carruseles-collage/15-marca-360-una-marca-entera",
+   "porque": "Fin de temporada: los negocios piensan en marzo y en cómo se ven el año que viene.",
+   "vertical": "Marca 360 y web",
+   "venta": "Ofrecer marca 360 + web a los clientes de gastronomía y eventos del verano; Radar con foco en marcas chicas.",
+   "automatizacion": "Radar: 50 por día; qué país y qué rubro respondió mejor (APRENDIZAJES.md)"
   }
  ],
  "dias": [
@@ -1650,9 +1710,9 @@
     {
      "tipo": "Historia",
      "hora": "12:30",
-     "titulo": "Nadie compra lo que no se ve bien",
-     "pieza": "02-historias-pauta/025_marcas_nadie-compra-lo-que-no-se-ve-bien.jpg",
-     "nota": "Historia de la campaña de la semana, con CTA a WhatsApp."
+     "titulo": "Hasta el faro y volver",
+     "pieza": "04-historias-organicas/051_foto_hasta-el-faro-y-volver.jpg",
+     "nota": ""
     },
     {
      "tipo": "Carrusel collage",
@@ -1686,16 +1746,16 @@
     {
      "tipo": "Historia",
      "hora": "12:30",
-     "titulo": "Fondo blanco, sin sorpresas",
-     "pieza": "02-historias-pauta/029_marcas_fondo-blanco-sin-sorpresas.jpg",
-     "nota": "Historia de la campaña de la semana, con CTA a WhatsApp."
+     "titulo": "Otra ciudad, la misma luz",
+     "pieza": "04-historias-organicas/052_foto_otra-ciudad-la-misma-luz.jpg",
+     "nota": ""
     },
     {
      "tipo": "Posteo",
      "hora": "13:00",
-     "titulo": "Qué incluye",
-     "pieza": "01-posteos-pauta/028_marcas_que-incluye.jpg",
-     "nota": "Pieza de la campaña, con CTA."
+     "titulo": "El mar desde arriba",
+     "pieza": "09-posteos-portfolio/01_el-mar-desde-arriba.jpg",
+     "nota": "Foto de portfolio, con el llamado a WhatsApp en el pie."
     }
    ]
   },
@@ -1708,16 +1768,16 @@
     {
      "tipo": "Historia",
      "hora": "12:30",
-     "titulo": "Tu casamiento pasa una sola vez",
-     "pieza": "02-historias-pauta/001_bodas_tu-casamiento-pasa-una-sola-vez.jpg",
-     "nota": "Historia de la campaña de la semana, con CTA a WhatsApp."
+     "titulo": "Si no llega para Navidad, llega para Reyes",
+     "pieza": "04-historias-organicas/053_dato_si-no-llega-para-navidad-llega-para-reyes.jpg",
+     "nota": ""
     },
     {
      "tipo": "Posteo",
      "hora": "19:30",
-     "titulo": "Dentro de diez años, esto es lo que te va a quedar",
-     "pieza": "01-posteos-pauta/002_bodas_dentro-de-diez-anos-esto-es-lo-que-te-va-a-que.jpg",
-     "nota": "Pieza de la campaña, con CTA."
+     "titulo": "Desde ahí arriba se ve todo",
+     "pieza": "09-posteos-portfolio/03_desde-ahi-arriba-se-ve-todo.jpg",
+     "nota": "Foto de portfolio, con el llamado a WhatsApp en el pie."
     }
    ]
   },
@@ -1737,9 +1797,9 @@
     {
      "tipo": "Historia",
      "hora": "12:30",
-     "titulo": "Una boda completa",
-     "pieza": "02-historias-pauta/003_bodas_una-boda-completa.jpg",
-     "nota": "Historia de la campaña de la semana, con CTA a WhatsApp."
+     "titulo": "Posó mejor que muchos",
+     "pieza": "04-historias-organicas/054_foto_poso-mejor-que-muchos.jpg",
+     "nota": ""
     },
     {
      "tipo": "Reel",
@@ -1759,8 +1819,8 @@
     {
      "tipo": "Historia",
      "hora": "12:30",
-     "titulo": "No es mi primera boda",
-     "pieza": "02-historias-pauta/004_bodas_no-es-mi-primera-boda.jpg",
+     "titulo": "Qué incluye",
+     "pieza": "02-historias-pauta/028_marcas_que-incluye.jpg",
      "nota": "Historia de la campaña de la semana, con CTA a WhatsApp."
     },
     {
@@ -1773,8 +1833,8 @@
     {
      "tipo": "Posteo",
      "hora": "19:30",
-     "titulo": "Tus fotos en diez días",
-     "pieza": "01-posteos-pauta/006_bodas_tus-fotos-en-diez-dias.jpg",
+     "titulo": "Nadie compra lo que no se ve bien",
+     "pieza": "01-posteos-pauta/025_marcas_nadie-compra-lo-que-no-se-ve-bien.jpg",
      "nota": "Pieza de la campaña, con CTA."
     }
    ]
@@ -1795,9 +1855,9 @@
     {
      "tipo": "Historia",
      "hora": "12:30",
-     "titulo": "Así se ve un casamiento bien fotografiado",
-     "pieza": "02-historias-pauta/005_bodas_asi-se-ve-un-casamiento-bien-fotografiado.jpg",
-     "nota": "Historia de la campaña de la semana, con CTA a WhatsApp."
+     "titulo": "Fin de año: los chicos primero",
+     "pieza": "04-historias-organicas/056_detras_fin-de-ano-los-chicos-primero.jpg",
+     "nota": ""
     }
    ]
   },
@@ -1810,16 +1870,1150 @@
     {
      "tipo": "Posteo",
      "hora": "11:00",
-     "titulo": "Fotos de tu carta en una jornada",
-     "pieza": "01-posteos-pauta/013_gastronomia_fotos-de-tu-carta-en-una-jornada.jpg",
+     "titulo": "Fondo blanco, sin sorpresas",
+     "pieza": "01-posteos-pauta/029_marcas_fondo-blanco-sin-sorpresas.jpg",
      "nota": "Pieza de la campaña, con CTA."
     },
     {
      "tipo": "Historia",
      "hora": "12:30",
-     "titulo": "Quedan pocas fechas para el verano",
-     "pieza": "02-historias-pauta/007_bodas_quedan-pocas-fechas-para-el-verano.jpg",
-     "nota": "Historia de la campaña de la semana, con CTA a WhatsApp."
+     "titulo": "Agua quieta, verano largo",
+     "pieza": "04-historias-organicas/057_foto_agua-quieta-verano-largo.jpg",
+     "nota": ""
+    },
+    {
+     "tipo": "Equipo",
+     "hora": "18:00",
+     "titulo": "Luz arma la semana que viene y Lupa la revisa",
+     "pieza": "09-ESTUDIO/EQUIPO.md",
+     "nota": "El lunes a las 10 te llegan a Telegram las piezas para aprobar."
+    }
+   ]
+  },
+  {
+   "fecha": "2026-12-21",
+   "dia": "Lunes",
+   "semana": 10,
+   "vertical": "Cuadros · Navidad y Reyes",
+   "items": [
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "¿Tenés fiesta en enero o febrero?",
+     "pieza": "04-historias-organicas/058_dato_tenes-fiesta-en-enero-o-febrero.jpg",
+     "nota": ""
+    },
+    {
+     "tipo": "Carrusel collage",
+     "hora": "19:30",
+     "titulo": "Un viaje que se cuelga",
+     "pieza": "06-carruseles-collage/10-cuadros-un-viaje-que-se-cuelga",
+     "nota": "Última semana para regalos de Navidad, y Reyes el 6 de enero."
+    },
+    {
+     "tipo": "Historia (a mano)",
+     "hora": "20:00",
+     "titulo": "Nuevo carrusel: compartilo en historias",
+     "pieza": "06-carruseles-collage/10-cuadros-un-viaje-que-se-cuelga/01.jpg",
+     "nota": "Desde la app, con sticker de enlace a WhatsApp (la API no pone stickers)."
+    }
+   ]
+  },
+  {
+   "fecha": "2026-12-22",
+   "dia": "Martes",
+   "semana": 10,
+   "vertical": "Cuadros · Navidad y Reyes",
+   "items": [
+    {
+     "tipo": "Venta",
+     "hora": "10:00",
+     "titulo": "Foco de la semana: Cuadros · Navidad y Reyes",
+     "pieza": "",
+     "nota": "Historias con los cuadros y el plazo real de pedido (lo pone Martin); escribir a los clientes de 2025 con la idea de regalo."
+    },
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "Un segundo antes",
+     "pieza": "04-historias-organicas/059_foto_un-segundo-antes.jpg",
+     "nota": ""
+    },
+    {
+     "tipo": "Posteo",
+     "hora": "13:00",
+     "titulo": "Agua que no se mueve",
+     "pieza": "09-posteos-portfolio/02_agua-que-no-se-mueve.jpg",
+     "nota": "Foto de portfolio, con el llamado a WhatsApp en el pie."
+    }
+   ]
+  },
+  {
+   "fecha": "2026-12-23",
+   "dia": "Miércoles",
+   "semana": 10,
+   "vertical": "Cuadros · Navidad y Reyes",
+   "items": [
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "El sonido también se ve",
+     "pieza": "04-historias-organicas/060_foto_el-sonido-tambien-se-ve.jpg",
+     "nota": ""
+    },
+    {
+     "tipo": "Posteo",
+     "hora": "19:30",
+     "titulo": "Un verano en otro lado",
+     "pieza": "09-posteos-portfolio/04_un-verano-en-otro-lado.jpg",
+     "nota": "Foto de portfolio, con el llamado a WhatsApp en el pie."
+    }
+   ]
+  },
+  {
+   "fecha": "2026-12-24",
+   "dia": "Jueves",
+   "semana": 10,
+   "vertical": "Cuadros · Navidad y Reyes",
+   "items": [
+    {
+     "tipo": "Automatización",
+     "hora": "10:00",
+     "titulo": "Radar: comprar el dominio para los mails y empezar a calentar la casilla (semana 1 de 2)",
+     "pieza": "11-AUTOMATIZACION/README.md",
+     "nota": ""
+    },
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "Una gorra, el sol y nada más",
+     "pieza": "04-historias-organicas/055_foto_una-gorra-el-sol-y-nada-mas.jpg",
+     "nota": ""
+    },
+    {
+     "tipo": "Reel",
+     "hora": "19:30",
+     "titulo": "Reel del carrusel: Un viaje que se cuelga",
+     "pieza": "07-reels-collage/10-cuadros-un-viaje-que-se-cuelga.mp4",
+     "nota": "Sale con el audio del archivo; si le querés poner un tema tuyo, subilo a mano."
+    }
+   ]
+  },
+  {
+   "fecha": "2026-12-25",
+   "dia": "Viernes",
+   "semana": 10,
+   "vertical": "Cuadros · Navidad y Reyes",
+   "items": [
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "Hay colores que piden foto",
+     "pieza": "04-historias-organicas/061_foto_hay-colores-que-piden-foto.jpg",
+     "nota": ""
+    },
+    {
+     "tipo": "Venta",
+     "hora": "17:00",
+     "titulo": "Seguimiento de presupuestos y leads",
+     "pieza": "09-ESTUDIO/clientes.md",
+     "nota": "Todo presupuesto sin respuesta hace 2+ días recibe un mensaje."
+    },
+    {
+     "tipo": "Posteo",
+     "hora": "19:30",
+     "titulo": "Rocas, mar y nada más",
+     "pieza": "09-posteos-portfolio/26_rocas-mar-y-nada-mas.jpg",
+     "nota": "Foto de portfolio, con el llamado a WhatsApp en el pie."
+    }
+   ]
+  },
+  {
+   "fecha": "2026-12-26",
+   "dia": "Sábado",
+   "semana": 10,
+   "vertical": "Cuadros · Navidad y Reyes",
+   "items": [
+    {
+     "tipo": "Tus fotos en el mundo",
+     "hora": "11:00",
+     "titulo": "Lo primero que ves al llegar.",
+     "pieza": "08-tus-fotos-en-el-mundo/05_aeropuerto.jpg",
+     "nota": "Aeropuerto · llegadas. Es un montaje: decilo en el pie."
+    },
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "La bandeja sale ahora",
+     "pieza": "04-historias-organicas/062_detras_la-bandeja-sale-ahora.jpg",
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "fecha": "2026-12-27",
+   "dia": "Domingo",
+   "semana": 10,
+   "vertical": "Cuadros · Navidad y Reyes",
+   "items": [
+    {
+     "tipo": "Posteo",
+     "hora": "11:00",
+     "titulo": "Los abrazos no se repiten",
+     "pieza": "09-posteos-portfolio/05_los-abrazos-no-se-repiten.jpg",
+     "nota": "Foto de portfolio, con el llamado a WhatsApp en el pie."
+    },
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "La carta de verano se fotografía antes del verano",
+     "pieza": "04-historias-organicas/063_dato_la-carta-de-verano-se-fotografia-antes-del-v.jpg",
+     "nota": ""
+    },
+    {
+     "tipo": "Equipo",
+     "hora": "18:00",
+     "titulo": "Luz arma la semana que viene y Lupa la revisa",
+     "pieza": "09-ESTUDIO/EQUIPO.md",
+     "nota": "El lunes a las 10 te llegan a Telegram las piezas para aprobar."
+    }
+   ]
+  },
+  {
+   "fecha": "2026-12-28",
+   "dia": "Lunes",
+   "semana": 11,
+   "vertical": "Eventos de verano",
+   "items": [
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "Hasta el catering sale en la foto",
+     "pieza": "04-historias-organicas/064_foto_hasta-el-catering-sale-en-la-foto.jpg",
+     "nota": ""
+    },
+    {
+     "tipo": "Carrusel collage",
+     "hora": "19:30",
+     "titulo": "El verano se festeja afuera",
+     "pieza": "06-carruseles-collage/11-eventos-el-verano-se-festeja",
+     "nota": "Entre fiestas, la gente arma los cumpleaños y casamientos chicos de enero y febrero."
+    },
+    {
+     "tipo": "Historia (a mano)",
+     "hora": "20:00",
+     "titulo": "Nuevo carrusel: compartilo en historias",
+     "pieza": "06-carruseles-collage/11-eventos-el-verano-se-festeja/01.jpg",
+     "nota": "Desde la app, con sticker de enlace a WhatsApp (la API no pone stickers)."
+    }
+   ]
+  },
+  {
+   "fecha": "2026-12-29",
+   "dia": "Martes",
+   "semana": 11,
+   "vertical": "Eventos de verano",
+   "items": [
+    {
+     "tipo": "Venta",
+     "hora": "10:00",
+     "titulo": "Foco de la semana: Eventos de verano",
+     "pieza": "",
+     "nota": "Mensaje a clientes de eventos 2025 (reactivación) y a 10 chacras y salones de jardín para alianzas."
+    },
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "Vacaciones con la cámara encima",
+     "pieza": "04-historias-organicas/065_foto_vacaciones-con-la-camara-encima.jpg",
+     "nota": ""
+    },
+    {
+     "tipo": "Posteo",
+     "hora": "13:00",
+     "titulo": "La mesa, antes de que llegue la gente",
+     "pieza": "09-posteos-portfolio/06_la-mesa-antes-de-que-llegue-la-gente.jpg",
+     "nota": "Foto de portfolio, con el llamado a WhatsApp en el pie."
+    }
+   ]
+  },
+  {
+   "fecha": "2026-12-30",
+   "dia": "Miércoles",
+   "semana": 11,
+   "vertical": "Eventos de verano",
+   "items": [
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "Paciencia, mucha paciencia",
+     "pieza": "04-historias-organicas/066_foto_paciencia-mucha-paciencia.jpg",
+     "nota": ""
+    },
+    {
+     "tipo": "Posteo",
+     "hora": "19:30",
+     "titulo": "Fin de año, con los chicos",
+     "pieza": "09-posteos-portfolio/07_fin-de-ano-con-los-chicos.jpg",
+     "nota": "Foto de portfolio, con el llamado a WhatsApp en el pie."
+    }
+   ]
+  },
+  {
+   "fecha": "2026-12-31",
+   "dia": "Jueves",
+   "semana": 11,
+   "vertical": "Eventos de verano",
+   "items": [
+    {
+     "tipo": "Automatización",
+     "hora": "10:00",
+     "titulo": "Radar: segunda semana de calentamiento; contestar el entrenamiento en el Centro",
+     "pieza": "11-AUTOMATIZACION/README.md",
+     "nota": ""
+    },
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "Tu lote, en plena temporada",
+     "pieza": "04-historias-organicas/067_dato_tu-lote-en-plena-temporada.jpg",
+     "nota": ""
+    },
+    {
+     "tipo": "Reel",
+     "hora": "19:30",
+     "titulo": "Reel del carrusel: El verano se festeja afuera",
+     "pieza": "07-reels-collage/11-eventos-el-verano-se-festeja.mp4",
+     "nota": "Sale con el audio del archivo; si le querés poner un tema tuyo, subilo a mano."
+    }
+   ]
+  },
+  {
+   "fecha": "2027-01-01",
+   "dia": "Viernes",
+   "semana": 11,
+   "vertical": "Eventos de verano",
+   "items": [
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "Poca luz, mucha cara",
+     "pieza": "04-historias-organicas/068_foto_poca-luz-mucha-cara.jpg",
+     "nota": ""
+    },
+    {
+     "tipo": "Venta",
+     "hora": "17:00",
+     "titulo": "Seguimiento de presupuestos y leads",
+     "pieza": "09-ESTUDIO/clientes.md",
+     "nota": "Todo presupuesto sin respuesta hace 2+ días recibe un mensaje."
+    },
+    {
+     "tipo": "Posteo",
+     "hora": "19:30",
+     "titulo": "Las velas se prenden una vez",
+     "pieza": "09-posteos-portfolio/08_las-velas-se-prenden-una-vez.jpg",
+     "nota": "Foto de portfolio, con el llamado a WhatsApp en el pie."
+    }
+   ]
+  },
+  {
+   "fecha": "2027-01-02",
+   "dia": "Sábado",
+   "semana": 11,
+   "vertical": "Eventos de verano",
+   "items": [
+    {
+     "tipo": "Tus fotos en el mundo",
+     "hora": "11:00",
+     "titulo": "La fiesta, pegada en la pared de la ciudad.",
+     "pieza": "08-tus-fotos-en-el-mundo/14_afiche_montevideo.jpg",
+     "nota": "Montevideo · Ciudad Vieja. Es un montaje: decilo en el pie."
+    },
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "En la fiesta de empresa también se juega",
+     "pieza": "04-historias-organicas/069_detras_en-la-fiesta-de-empresa-tambien-se-juega.jpg",
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "fecha": "2027-01-03",
+   "dia": "Domingo",
+   "semana": 11,
+   "vertical": "Eventos de verano",
+   "items": [
+    {
+     "tipo": "Posteo",
+     "hora": "11:00",
+     "titulo": "Quince, de noche",
+     "pieza": "09-posteos-portfolio/22_quince-de-noche.jpg",
+     "nota": "Foto de portfolio, con el llamado a WhatsApp en el pie."
+    },
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "Enero en modo lento",
+     "pieza": "04-historias-organicas/070_foto_enero-en-modo-lento.jpg",
+     "nota": ""
+    },
+    {
+     "tipo": "Equipo",
+     "hora": "18:00",
+     "titulo": "Luz arma la semana que viene y Lupa la revisa",
+     "pieza": "09-ESTUDIO/EQUIPO.md",
+     "nota": "El lunes a las 10 te llegan a Telegram las piezas para aprobar."
+    }
+   ]
+  },
+  {
+   "fecha": "2027-01-04",
+   "dia": "Lunes",
+   "semana": 12,
+   "vertical": "Gastronomía de temporada",
+   "items": [
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "Antes de que se prendan las luces",
+     "pieza": "04-historias-organicas/071_foto_antes-de-que-se-prendan-las-luces.jpg",
+     "nota": ""
+    },
+    {
+     "tipo": "Carrusel collage",
+     "hora": "19:30",
+     "titulo": "Tu carta de verano entra por los ojos",
+     "pieza": "06-carruseles-collage/12-gastronomia-carta-de-verano",
+     "nota": "Plena temporada en Punta del Este y José Ignacio: los paradores necesitan fotos ya."
+    },
+    {
+     "tipo": "Historia (a mano)",
+     "hora": "20:00",
+     "titulo": "Nuevo carrusel: compartilo en historias",
+     "pieza": "06-carruseles-collage/12-gastronomia-carta-de-verano/01.jpg",
+     "nota": "Desde la app, con sticker de enlace a WhatsApp (la API no pone stickers)."
+    }
+   ]
+  },
+  {
+   "fecha": "2027-01-05",
+   "dia": "Martes",
+   "semana": 12,
+   "vertical": "Gastronomía de temporada",
+   "items": [
+    {
+     "tipo": "Venta",
+     "hora": "10:00",
+     "titulo": "Foco de la semana: Gastronomía de temporada",
+     "pieza": "",
+     "nota": "DMs a paradores y restaurantes de la costa con la carta vieja o sin fotos propias; ofrecer jornada en la semana."
+    },
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "Fotos de equipo, sin cartón",
+     "pieza": "04-historias-organicas/072_foto_fotos-de-equipo-sin-carton.jpg",
+     "nota": ""
+    },
+    {
+     "tipo": "Posteo",
+     "hora": "13:00",
+     "titulo": "Recién salidas",
+     "pieza": "09-posteos-portfolio/09_recien-salidas.jpg",
+     "nota": "Foto de portfolio, con el llamado a WhatsApp en el pie."
+    }
+   ]
+  },
+  {
+   "fecha": "2027-01-06",
+   "dia": "Miércoles",
+   "semana": 12,
+   "vertical": "Gastronomía de temporada",
+   "items": [
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "Logo, colores, letras y plantillas",
+     "pieza": "04-historias-organicas/073_dato_logo-colores-letras-y-plantillas.jpg",
+     "nota": ""
+    },
+    {
+     "tipo": "Posteo",
+     "hora": "19:30",
+     "titulo": "Un bocado por cuchara",
+     "pieza": "09-posteos-portfolio/10_un-bocado-por-cuchara.jpg",
+     "nota": "Foto de portfolio, con el llamado a WhatsApp en el pie."
+    }
+   ]
+  },
+  {
+   "fecha": "2027-01-07",
+   "dia": "Jueves",
+   "semana": 12,
+   "vertical": "Gastronomía de temporada",
+   "items": [
+    {
+     "tipo": "Automatización",
+     "hora": "10:00",
+     "titulo": "Radar arranca: 10 mails por día con las ofertas aprobadas",
+     "pieza": "11-AUTOMATIZACION/README.md",
+     "nota": ""
+    },
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "Los chicos no posan: juegan",
+     "pieza": "04-historias-organicas/074_foto_los-chicos-no-posan-juegan.jpg",
+     "nota": ""
+    },
+    {
+     "tipo": "Reel",
+     "hora": "19:30",
+     "titulo": "Reel del carrusel: Tu carta de verano entra por los ojos",
+     "pieza": "07-reels-collage/12-gastronomia-carta-de-verano.mp4",
+     "nota": "Sale con el audio del archivo; si le querés poner un tema tuyo, subilo a mano."
+    }
+   ]
+  },
+  {
+   "fecha": "2027-01-08",
+   "dia": "Viernes",
+   "semana": 12,
+   "vertical": "Gastronomía de temporada",
+   "items": [
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "La foto es del que espera",
+     "pieza": "04-historias-organicas/075_foto_la-foto-es-del-que-espera.jpg",
+     "nota": ""
+    },
+    {
+     "tipo": "Venta",
+     "hora": "17:00",
+     "titulo": "Seguimiento de presupuestos y leads",
+     "pieza": "09-ESTUDIO/clientes.md",
+     "nota": "Todo presupuesto sin respuesta hace 2+ días recibe un mensaje."
+    },
+    {
+     "tipo": "Posteo",
+     "hora": "19:30",
+     "titulo": "El corte, antes del fuego",
+     "pieza": "09-posteos-portfolio/11_el-corte-antes-del-fuego.jpg",
+     "nota": "Foto de portfolio, con el llamado a WhatsApp en el pie."
+    }
+   ]
+  },
+  {
+   "fecha": "2027-01-09",
+   "dia": "Sábado",
+   "semana": 12,
+   "vertical": "Gastronomía de temporada",
+   "items": [
+    {
+     "tipo": "Tus fotos en el mundo",
+     "hora": "11:00",
+     "titulo": "La parrilla, a la vista de toda la Rambla.",
+     "pieza": "08-tus-fotos-en-el-mundo/13_parada_rambla.jpg",
+     "nota": "Montevideo · Rambla. Es un montaje: decilo en el pie."
+    },
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "Campo abierto",
+     "pieza": "04-historias-organicas/076_foto_campo-abierto.jpg",
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "fecha": "2027-01-10",
+   "dia": "Domingo",
+   "semana": 12,
+   "vertical": "Gastronomía de temporada",
+   "items": [
+    {
+     "tipo": "Posteo",
+     "hora": "11:00",
+     "titulo": "Lo que se come con la mano",
+     "pieza": "09-posteos-portfolio/12_lo-que-se-come-con-la-mano.jpg",
+     "nota": "Foto de portfolio, con el llamado a WhatsApp en el pie."
+    },
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "Retrato sin palabras",
+     "pieza": "04-historias-organicas/077_foto_retrato-sin-palabras.jpg",
+     "nota": ""
+    },
+    {
+     "tipo": "Equipo",
+     "hora": "18:00",
+     "titulo": "Luz arma la semana que viene y Lupa la revisa",
+     "pieza": "09-ESTUDIO/EQUIPO.md",
+     "nota": "El lunes a las 10 te llegan a Telegram las piezas para aprobar."
+    }
+   ]
+  },
+  {
+   "fecha": "2027-01-11",
+   "dia": "Lunes",
+   "semana": 13,
+   "vertical": "Bodas otoño 2027",
+   "items": [
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "Lejos de todo",
+     "pieza": "04-historias-organicas/078_foto_lejos-de-todo.jpg",
+     "nota": ""
+    },
+    {
+     "tipo": "Carrusel collage",
+     "hora": "19:30",
+     "titulo": "Entre el sí y la fiesta pasa todo",
+     "pieza": "06-carruseles-collage/13-bodas-entre-el-si-y-la-fiesta",
+     "nota": "Las parejas que se casan en otoño 2027 eligen fotógrafo en el verano."
+    },
+    {
+     "tipo": "Historia (a mano)",
+     "hora": "20:00",
+     "titulo": "Nuevo carrusel: compartilo en historias",
+     "pieza": "06-carruseles-collage/13-bodas-entre-el-si-y-la-fiesta/01.jpg",
+     "nota": "Desde la app, con sticker de enlace a WhatsApp (la API no pone stickers)."
+    }
+   ]
+  },
+  {
+   "fecha": "2027-01-12",
+   "dia": "Martes",
+   "semana": 13,
+   "vertical": "Bodas otoño 2027",
+   "items": [
+    {
+     "tipo": "Venta",
+     "hora": "10:00",
+     "titulo": "Foco de la semana: Bodas otoño 2027",
+     "pieza": "",
+     "nota": "Escribir a 10 salones y wedding planners con el carrusel; responder toda consulta de fecha en menos de 1 h."
+    },
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "Trabajar con música",
+     "pieza": "04-historias-organicas/079_foto_trabajar-con-musica.jpg",
+     "nota": ""
+    },
+    {
+     "tipo": "Posteo",
+     "hora": "13:00",
+     "titulo": "Cada mesa tiene su centro",
+     "pieza": "09-posteos-portfolio/13_cada-mesa-tiene-su-centro.jpg",
+     "nota": "Foto de portfolio, con el llamado a WhatsApp en el pie."
+    }
+   ]
+  },
+  {
+   "fecha": "2027-01-13",
+   "dia": "Miércoles",
+   "semana": 13,
+   "vertical": "Bodas otoño 2027",
+   "items": [
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "Todo pasa rápido",
+     "pieza": "04-historias-organicas/080_foto_todo-pasa-rapido.jpg",
+     "nota": ""
+    },
+    {
+     "tipo": "Posteo",
+     "hora": "19:30",
+     "titulo": "El jardín, de noche",
+     "pieza": "09-posteos-portfolio/14_el-jardin-de-noche.jpg",
+     "nota": "Foto de portfolio, con el llamado a WhatsApp en el pie."
+    }
+   ]
+  },
+  {
+   "fecha": "2027-01-14",
+   "dia": "Jueves",
+   "semana": 13,
+   "vertical": "Bodas otoño 2027",
+   "items": [
+    {
+     "tipo": "Automatización",
+     "hora": "10:00",
+     "titulo": "Radar: 20 por día; leer el primer reporte semanal y ajustar ofertas",
+     "pieza": "11-AUTOMATIZACION/README.md",
+     "nota": ""
+    },
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "Nublado también sirve",
+     "pieza": "04-historias-organicas/081_foto_nublado-tambien-sirve.jpg",
+     "nota": ""
+    },
+    {
+     "tipo": "Reel",
+     "hora": "19:30",
+     "titulo": "Reel del carrusel: Entre el sí y la fiesta pasa todo",
+     "pieza": "07-reels-collage/13-bodas-entre-el-si-y-la-fiesta.mp4",
+     "nota": "Sale con el audio del archivo; si le querés poner un tema tuyo, subilo a mano."
+    }
+   ]
+  },
+  {
+   "fecha": "2027-01-15",
+   "dia": "Viernes",
+   "semana": 13,
+   "vertical": "Bodas otoño 2027",
+   "items": [
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "Nadie le dijo que posara",
+     "pieza": "04-historias-organicas/082_foto_nadie-le-dijo-que-posara.jpg",
+     "nota": ""
+    },
+    {
+     "tipo": "Venta",
+     "hora": "17:00",
+     "titulo": "Seguimiento de presupuestos y leads",
+     "pieza": "09-ESTUDIO/clientes.md",
+     "nota": "Todo presupuesto sin respuesta hace 2+ días recibe un mensaje."
+    },
+    {
+     "tipo": "Posteo",
+     "hora": "19:30",
+     "titulo": "Un salón listo para la fiesta",
+     "pieza": "09-posteos-portfolio/15_un-salon-listo-para-la-fiesta.jpg",
+     "nota": "Foto de portfolio, con el llamado a WhatsApp en el pie."
+    }
+   ]
+  },
+  {
+   "fecha": "2027-01-16",
+   "dia": "Sábado",
+   "semana": 13,
+   "vertical": "Bodas otoño 2027",
+   "items": [
+    {
+     "tipo": "Tus fotos en el mundo",
+     "hora": "11:00",
+     "titulo": "Una boda que pide papel.",
+     "pieza": "08-tus-fotos-en-el-mundo/09_revista.jpg",
+     "nota": "Doble página. Es un montaje: decilo en el pie."
+    },
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "Sonido de sala",
+     "pieza": "04-historias-organicas/083_foto_sonido-de-sala.jpg",
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "fecha": "2027-01-17",
+   "dia": "Domingo",
+   "semana": 13,
+   "vertical": "Bodas otoño 2027",
+   "items": [
+    {
+     "tipo": "Posteo",
+     "hora": "11:00",
+     "titulo": "Una foto que se parece a vos",
+     "pieza": "09-posteos-portfolio/16_una-foto-que-se-parece-a-vos.jpg",
+     "nota": "Foto de portfolio, con el llamado a WhatsApp en el pie."
+    },
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "Luz de tarde",
+     "pieza": "04-historias-organicas/084_foto_luz-de-tarde.jpg",
+     "nota": ""
+    },
+    {
+     "tipo": "Equipo",
+     "hora": "18:00",
+     "titulo": "Luz arma la semana que viene y Lupa la revisa",
+     "pieza": "09-ESTUDIO/EQUIPO.md",
+     "nota": "El lunes a las 10 te llegan a Telegram las piezas para aprobar."
+    }
+   ]
+  },
+  {
+   "fecha": "2027-01-18",
+   "dia": "Lunes",
+   "semana": 14,
+   "vertical": "Edición Lightroom",
+   "items": [
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "Otra ciudad desde arriba",
+     "pieza": "04-historias-organicas/085_foto_otra-ciudad-desde-arriba.jpg",
+     "nota": ""
+    },
+    {
+     "tipo": "Carrusel collage",
+     "hora": "19:30",
+     "titulo": "En enero no se duerme",
+     "pieza": "06-carruseles-collage/14-edicion-en-enero-no-se-duerme",
+     "nota": "Temporada alta de bodas en el hemisferio sur: los fotógrafos están tapados de edición."
+    },
+    {
+     "tipo": "Historia (a mano)",
+     "hora": "20:00",
+     "titulo": "Nuevo carrusel: compartilo en historias",
+     "pieza": "06-carruseles-collage/14-edicion-en-enero-no-se-duerme/01.jpg",
+     "nota": "Desde la app, con sticker de enlace a WhatsApp (la API no pone stickers)."
+    }
+   ]
+  },
+  {
+   "fecha": "2027-01-19",
+   "dia": "Martes",
+   "semana": 14,
+   "vertical": "Edición Lightroom",
+   "items": [
+    {
+     "tipo": "Venta",
+     "hora": "10:00",
+     "titulo": "Foco de la semana: Edición Lightroom",
+     "pieza": "",
+     "nota": "Radar con foco en fotógrafos de bodas (Argentina, México, EE.UU.); ofrecer lote de prueba chico pago."
+    },
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "A toda velocidad",
+     "pieza": "04-historias-organicas/086_foto_a-toda-velocidad.jpg",
+     "nota": ""
+    },
+    {
+     "tipo": "Posteo",
+     "hora": "13:00",
+     "titulo": "En tu lugar, con tu luz",
+     "pieza": "09-posteos-portfolio/17_en-tu-lugar-con-tu-luz.jpg",
+     "nota": "Foto de portfolio, con el llamado a WhatsApp en el pie."
+    }
+   ]
+  },
+  {
+   "fecha": "2027-01-20",
+   "dia": "Miércoles",
+   "semana": 14,
+   "vertical": "Edición Lightroom",
+   "items": [
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "Mirá quién llegó",
+     "pieza": "04-historias-organicas/087_foto_mira-quien-llego.jpg",
+     "nota": ""
+    },
+    {
+     "tipo": "Posteo",
+     "hora": "19:30",
+     "titulo": "Blanco y negro, sin vueltas",
+     "pieza": "09-posteos-portfolio/18_blanco-y-negro-sin-vueltas.jpg",
+     "nota": "Foto de portfolio, con el llamado a WhatsApp en el pie."
+    }
+   ]
+  },
+  {
+   "fecha": "2027-01-21",
+   "dia": "Jueves",
+   "semana": 14,
+   "vertical": "Edición Lightroom",
+   "items": [
+    {
+     "tipo": "Automatización",
+     "hora": "10:00",
+     "titulo": "Radar: 35 por día; sumar búsquedas de fotógrafos si quedan pocos leads",
+     "pieza": "11-AUTOMATIZACION/README.md",
+     "nota": ""
+    },
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "Con el agua de fondo",
+     "pieza": "04-historias-organicas/088_foto_con-el-agua-de-fondo.jpg",
+     "nota": ""
+    },
+    {
+     "tipo": "Reel",
+     "hora": "19:30",
+     "titulo": "Reel del carrusel: En enero no se duerme",
+     "pieza": "07-reels-collage/14-edicion-en-enero-no-se-duerme.mp4",
+     "nota": "Sale con el audio del archivo; si le querés poner un tema tuyo, subilo a mano."
+    }
+   ]
+  },
+  {
+   "fecha": "2027-01-22",
+   "dia": "Viernes",
+   "semana": 14,
+   "vertical": "Edición Lightroom",
+   "items": [
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "Tarde gris, foto linda",
+     "pieza": "04-historias-organicas/089_foto_tarde-gris-foto-linda.jpg",
+     "nota": ""
+    },
+    {
+     "tipo": "Venta",
+     "hora": "17:00",
+     "titulo": "Seguimiento de presupuestos y leads",
+     "pieza": "09-ESTUDIO/clientes.md",
+     "nota": "Todo presupuesto sin respuesta hace 2+ días recibe un mensaje."
+    },
+    {
+     "tipo": "Posteo",
+     "hora": "19:30",
+     "titulo": "Al aire libre",
+     "pieza": "09-posteos-portfolio/19_al-aire-libre.jpg",
+     "nota": "Foto de portfolio, con el llamado a WhatsApp en el pie."
+    }
+   ]
+  },
+  {
+   "fecha": "2027-01-23",
+   "dia": "Sábado",
+   "semana": 14,
+   "vertical": "Edición Lightroom",
+   "items": [
+    {
+     "tipo": "Tus fotos en el mundo",
+     "hora": "11:00",
+     "titulo": "Un lote revelado parejo aguanta cualquier tamaño.",
+     "pieza": "08-tus-fotos-en-el-mundo/15_los_angeles_cartel.jpg",
+     "nota": "Los Ángeles. Es un montaje: decilo en el pie."
+    },
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "Mandame el lote y seguí disparando",
+     "pieza": "04-historias-organicas/090_dato_mandame-el-lote-y-segui-disparando.jpg",
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "fecha": "2027-01-24",
+   "dia": "Domingo",
+   "semana": 14,
+   "vertical": "Edición Lightroom",
+   "items": [
+    {
+     "tipo": "Posteo",
+     "hora": "11:00",
+     "titulo": "Cómodo en su lugar",
+     "pieza": "09-posteos-portfolio/20_comodo-en-su-lugar.jpg",
+     "nota": "Foto de portfolio, con el llamado a WhatsApp en el pie."
+    },
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "El mar, de frente",
+     "pieza": "04-historias-organicas/091_foto_el-mar-de-frente.jpg",
+     "nota": ""
+    },
+    {
+     "tipo": "Equipo",
+     "hora": "18:00",
+     "titulo": "Luz arma la semana que viene y Lupa la revisa",
+     "pieza": "09-ESTUDIO/EQUIPO.md",
+     "nota": "El lunes a las 10 te llegan a Telegram las piezas para aprobar."
+    }
+   ]
+  },
+  {
+   "fecha": "2027-01-25",
+   "dia": "Lunes",
+   "semana": 15,
+   "vertical": "Marca 360 y web",
+   "items": [
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "Música a cielo abierto",
+     "pieza": "04-historias-organicas/092_foto_musica-a-cielo-abierto.jpg",
+     "nota": ""
+    },
+    {
+     "tipo": "Carrusel collage",
+     "hora": "19:30",
+     "titulo": "Una marca se ve igual en todos lados",
+     "pieza": "06-carruseles-collage/15-marca-360-una-marca-entera",
+     "nota": "Fin de temporada: los negocios piensan en marzo y en cómo se ven el año que viene."
+    },
+    {
+     "tipo": "Historia (a mano)",
+     "hora": "20:00",
+     "titulo": "Nuevo carrusel: compartilo en historias",
+     "pieza": "06-carruseles-collage/15-marca-360-una-marca-entera/01.jpg",
+     "nota": "Desde la app, con sticker de enlace a WhatsApp (la API no pone stickers)."
+    }
+   ]
+  },
+  {
+   "fecha": "2027-01-26",
+   "dia": "Martes",
+   "semana": 15,
+   "vertical": "Marca 360 y web",
+   "items": [
+    {
+     "tipo": "Venta",
+     "hora": "10:00",
+     "titulo": "Foco de la semana: Marca 360 y web",
+     "pieza": "",
+     "nota": "Ofrecer marca 360 + web a los clientes de gastronomía y eventos del verano; Radar con foco en marcas chicas."
+    },
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "Tu web, pensada primero para el celular",
+     "pieza": "04-historias-organicas/093_dato_tu-web-pensada-primero-para-el-celular.jpg",
+     "nota": ""
+    },
+    {
+     "tipo": "Posteo",
+     "hora": "13:00",
+     "titulo": "La ciudad atrás",
+     "pieza": "09-posteos-portfolio/21_la-ciudad-atras.jpg",
+     "nota": "Foto de portfolio, con el llamado a WhatsApp en el pie."
+    }
+   ]
+  },
+  {
+   "fecha": "2027-01-27",
+   "dia": "Miércoles",
+   "semana": 15,
+   "vertical": "Marca 360 y web",
+   "items": [
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "La marca también sale en la foto",
+     "pieza": "04-historias-organicas/094_foto_la-marca-tambien-sale-en-la-foto.jpg",
+     "nota": ""
+    },
+    {
+     "tipo": "Posteo",
+     "hora": "19:30",
+     "titulo": "La fiesta, entre árboles",
+     "pieza": "09-posteos-portfolio/23_la-fiesta-entre-arboles.jpg",
+     "nota": "Foto de portfolio, con el llamado a WhatsApp en el pie."
+    }
+   ]
+  },
+  {
+   "fecha": "2027-01-28",
+   "dia": "Jueves",
+   "semana": 15,
+   "vertical": "Marca 360 y web",
+   "items": [
+    {
+     "tipo": "Automatización",
+     "hora": "10:00",
+     "titulo": "Radar: 50 por día; qué país y qué rubro respondió mejor (APRENDIZAJES.md)",
+     "pieza": "11-AUTOMATIZACION/README.md",
+     "nota": ""
+    },
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "Colores que no se inventan",
+     "pieza": "04-historias-organicas/095_foto_colores-que-no-se-inventan.jpg",
+     "nota": ""
+    },
+    {
+     "tipo": "Reel",
+     "hora": "19:30",
+     "titulo": "Reel del carrusel: Una marca se ve igual en todos lados",
+     "pieza": "07-reels-collage/15-marca-360-una-marca-entera.mp4",
+     "nota": "Sale con el audio del archivo; si le querés poner un tema tuyo, subilo a mano."
+    }
+   ]
+  },
+  {
+   "fecha": "2027-01-29",
+   "dia": "Viernes",
+   "semana": 15,
+   "vertical": "Marca 360 y web",
+   "items": [
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "Un manual para que tu marca no cambie de cara",
+     "pieza": "04-historias-organicas/096_dato_un-manual-para-que-tu-marca-no-cambie-de-car.jpg",
+     "nota": ""
+    },
+    {
+     "tipo": "Venta",
+     "hora": "17:00",
+     "titulo": "Seguimiento de presupuestos y leads",
+     "pieza": "09-ESTUDIO/clientes.md",
+     "nota": "Todo presupuesto sin respuesta hace 2+ días recibe un mensaje."
+    },
+    {
+     "tipo": "Posteo",
+     "hora": "19:30",
+     "titulo": "Una bandeja, cien manos",
+     "pieza": "09-posteos-portfolio/24_una-bandeja-cien-manos.jpg",
+     "nota": "Foto de portfolio, con el llamado a WhatsApp en el pie."
+    }
+   ]
+  },
+  {
+   "fecha": "2027-01-30",
+   "dia": "Sábado",
+   "semana": 15,
+   "vertical": "Marca 360 y web",
+   "items": [
+    {
+     "tipo": "Tus fotos en el mundo",
+     "hora": "11:00",
+     "titulo": "Blanco y negro, como tiene que ser.",
+     "pieza": "08-tus-fotos-en-el-mundo/07_paris_columna.jpg",
+     "nota": "París. Es un montaje: decilo en el pie."
+    },
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "Leer al sol",
+     "pieza": "04-historias-organicas/097_foto_leer-al-sol.jpg",
+     "nota": ""
+    }
+   ]
+  },
+  {
+   "fecha": "2027-01-31",
+   "dia": "Domingo",
+   "semana": 15,
+   "vertical": "Marca 360 y web",
+   "items": [
+    {
+     "tipo": "Posteo",
+     "hora": "11:00",
+     "titulo": "Del árbol a la mesa",
+     "pieza": "09-posteos-portfolio/25_del-arbol-a-la-mesa.jpg",
+     "nota": "Foto de portfolio, con el llamado a WhatsApp en el pie."
+    },
+    {
+     "tipo": "Historia",
+     "hora": "12:30",
+     "titulo": "Debajo del muelle",
+     "pieza": "04-historias-organicas/098_foto_debajo-del-muelle.jpg",
+     "nota": ""
     },
     {
      "tipo": "Equipo",

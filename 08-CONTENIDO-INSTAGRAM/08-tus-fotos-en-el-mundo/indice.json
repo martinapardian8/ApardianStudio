@@ -94,5 +94,29 @@
   "foto": "captura/d_hero.png",
   "lugar": "Tu web",
   "frase": "Tu trabajo, en tu propia página."
+ },
+ {
+  "n": 13,
+  "archivo": "13_parada_rambla.jpg",
+  "escena": "parada_rambla.jpg",
+  "foto": "gastronomia/sergio__IMG_7211.jpg",
+  "lugar": "Montevideo · Rambla",
+  "frase": "La parrilla, a la vista de toda la Rambla."
+ },
+ {
+  "n": 14,
+  "archivo": "14_afiche_montevideo.jpg",
+  "escena": "afiche_montevideo.jpg",
+  "foto": "eventos/leticia40__IMG_7731.jpg",
+  "lugar": "Montevideo · Ciudad Vieja",
+  "frase": "La fiesta, pegada en la pared de la ciudad."
+ },
+ {
+  "n": 15,
+  "archivo": "15_los_angeles_cartel.jpg",
+  "escena": "los_angeles_cartel.jpg",
+  "foto": "eventos/caro60__IMG_9862.jpg",
+  "lugar": "Los Ángeles",
+  "frase": "Un lote revelado parejo aguanta cualquier tamaño."
  }
 ]

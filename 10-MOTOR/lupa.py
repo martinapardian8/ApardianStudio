@@ -186,6 +186,7 @@ def _misma(a, b, umbral=60, cubre=0.15):
     geometría y que cubren buena parte de la imagen (si solo coinciden la
     etiqueta, los botones o el logo de la plantilla, cubren menos del 6 %)."""
     import cv2, numpy as np
+    cv2.setRNGSeed(0)                 # FLANN arma arboles al azar: misma semilla, misma respuesta
     da, db = _descriptores(a), _descriptores(b)
     if not da or not db or da[1] is None or db[1] is None or len(da[0]) < 8 or len(db[0]) < 8:
         return False

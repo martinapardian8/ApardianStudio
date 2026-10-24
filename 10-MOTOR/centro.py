@@ -131,6 +131,8 @@ def piezas(cal):
             bajar = [{"src": "ig/" + x, "nombre": base + ("-%02d" % k if len(hojas) > 1 else "") + os.path.splitext(x)[1]}
                      for k, x in enumerate(hojas, 1)]
             bajar += [{"src": "ig/" + x, "nombre": base + "-tapa.jpg"} for x in archivos if x.endswith("_portada.jpg")]
+            if not en_ventana(d["fecha"]):
+                bajar = []
             out.append({"id": f["id"], "cal": d["fecha"] + "-" + str(i), "fecha": d["fecha"], "hora": f["hora"], "bajar": bajar,
                         "tipo": f["tipo"], "titulo": f["titulo"], "pie": f["pie"],
                         "comentario": f["primer_comentario"], "hojas": len([a for a in archivos if not a.endswith("_portada.jpg")]),
@@ -142,6 +144,17 @@ def piezas(cal):
         if x not in vigentes:
             os.remove(os.path.join(dst, x))
     return out
+
+
+# La app tiene un tope de archivos: los de bajar (fotos y videos en tamaño
+# real) se publican solo para los días de esta ventana. Se corre cada semana.
+VENTANA_DIAS = 42
+DESDE = os.environ.get("CENTRO_DESDE") or dt.date.today().isoformat()
+
+
+def en_ventana(fecha):
+    d0 = dt.date.fromisoformat(DESDE)
+    return d0 - dt.timedelta(days=1) <= dt.date.fromisoformat(fecha) <= d0 + dt.timedelta(days=VENTANA_DIAS)
 
 
 DIAS_ES = ["lunes", "martes", "miércoles", "jueves", "viernes", "sábado", "domingo"]
@@ -170,6 +183,8 @@ def archivos_por_dia(cal):
     base_mundo = hoja.pie_mundo_base()
     out = {}
     for d in cal["dias"]:
+        if not en_ventana(d["fecha"]):
+            continue
         filas = [f for it in d["items"] for f in [hoja.fila(it, d["fecha"], collage, campanas, mundo, base_mundo)] if f]
         if not filas:
             continue

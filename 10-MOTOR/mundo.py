@@ -48,6 +48,13 @@ ESCENAS = [
      ("naturaleza", "nw__IMG_1996.jpg"), "En tu casa", "El mar, colgado en el living."),
     ("notebook.jpg", None,
      ("captura", "d_hero.png"), "Tu web", "Tu trabajo, en tu propia página."),
+    # verano 26/27: las mismas escenas con otras fotos (sin gastar creditos)
+    ("parada_rambla.jpg", [(391, 279), (604, 279), (604, 590), (391, 590)],
+     ("gastronomia", "sergio__IMG_7211.jpg"), "Montevideo · Rambla", "La parrilla, a la vista de toda la Rambla."),
+    ("afiche_montevideo.jpg", [(233, 221), (979, 223), (981, 1270), (233, 1271)],
+     ("eventos", "leticia40__IMG_7731.jpg"), "Montevideo · Ciudad Vieja", "La fiesta, pegada en la pared de la ciudad."),
+    ("los_angeles_cartel.jpg", [(681, 223), (1375, 112), (1380, 382), (679, 427)],
+     ("eventos", "caro60__IMG_9862.jpg"), "Los Ángeles", "Un lote revelado parejo aguanta cualquier tamaño."),
 ]
 
 
