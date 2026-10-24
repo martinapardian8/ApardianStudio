@@ -220,6 +220,246 @@
    "es": "Sitio a medida, de punta a punta.",
    "en": "Custom site, end to end.",
    "pt": "Site sob medida, de ponta a ponta."
+  },
+  "m36001": {
+   "es": "Marca 360",
+   "en": "Brand 360",
+   "pt": "Marca 360"
+  },
+  "m36002": {
+   "es": "Que te reconozcan en todos lados.",
+   "en": "Recognized everywhere.",
+   "pt": "Reconhecida em todo lugar."
+  },
+  "m36004": {
+   "es": "Tu identidad completa, de punta a punta: logo o ajuste del que tenés, paleta, tipografías, manual de marca y plantillas para redes. Se hace online, para cualquier país. El caso que ves es nuestra propia marca.",
+   "en": "Your complete identity, end to end: a logo or a refresh of yours, palette, typefaces, brand guidelines and social media templates. Done online, for any country. The case you see is our own brand.",
+   "pt": "Sua identidade completa, de ponta a ponta: logo ou ajuste do seu, paleta, tipografias, manual de marca e modelos para redes. Feito online, para qualquer país. O caso que você vê é a nossa própria marca."
+  },
+  "m36005": {
+   "es": "Logo",
+   "en": "Logo",
+   "pt": "Logo"
+  },
+  "m36006": {
+   "es": "Paleta",
+   "en": "Palette",
+   "pt": "Paleta"
+  },
+  "m36007": {
+   "es": "Tipografías",
+   "en": "Typefaces",
+   "pt": "Tipografias"
+  },
+  "m36008": {
+   "es": "Manual de marca",
+   "en": "Brand guidelines",
+   "pt": "Manual de marca"
+  },
+  "m36009": {
+   "es": "Plantillas para redes",
+   "en": "Social templates",
+   "pt": "Modelos para redes"
+  },
+  "m36010": {
+   "es": "Pedir una propuesta <span class=\"red\">&rarr;</span>",
+   "en": "Ask for a proposal <span class=\"red\">&rarr;</span>",
+   "pt": "Pedir uma proposta <span class=\"red\">&rarr;</span>"
+  },
+  "prptitle": {
+   "es": "Una propuesta para tu negocio — Apardian Studio",
+   "en": "A proposal for your business — Apardian Studio",
+   "pt": "Uma proposta para o seu negócio — Apardian Studio"
+  },
+  "prpdesc": {
+   "es": "Contame qué hacés y qué te falta. En 48 horas te mando una propuesta concreta: páginas web, edición en Lightroom, identidad de marca y producción musical, online para cualquier país.",
+   "en": "Tell me what you do and what is missing. Within 48 hours I send you a concrete proposal: websites, Lightroom editing, brand identity and music production, online for any country.",
+   "pt": "Conte o que você faz e o que falta. Em 48 horas eu envio uma proposta concreta: sites, edição no Lightroom, identidade de marca e produção musical, online para qualquer país."
+  },
+  "prp001": {
+   "es": "Pedir mi propuesta",
+   "en": "Get my proposal",
+   "pt": "Pedir minha proposta"
+  },
+  "prp002": {
+   "es": "Propuesta · Apardian Studio",
+   "en": "Proposal · Apardian Studio",
+   "pt": "Proposta · Apardian Studio"
+  },
+  "prp003": {
+   "es": "Te armo una propuesta para <span class=\"red\">tu negocio.</span>",
+   "en": "A proposal built for <span class=\"red\">your business.</span>",
+   "pt": "Uma proposta feita para <span class=\"red\">o seu negócio.</span>"
+  },
+  "prp004": {
+   "es": "Contame qué hacés y qué te falta. En 48 horas te mando una propuesta concreta: qué haría, cuánto tarda y cuánto cuesta. Sin compromiso.",
+   "en": "Tell me what you do and what is missing. Within 48 hours I send you a concrete proposal: what I would do, how long it takes and what it costs. No strings attached.",
+   "pt": "Conte o que você faz e o que falta. Em 48 horas eu envio uma proposta concreta: o que eu faria, quanto tempo leva e quanto custa. Sem compromisso."
+  },
+  "prp005": {
+   "es": "Contame de tu negocio",
+   "en": "Tell me about your business",
+   "pt": "Conte sobre o seu negócio"
+  },
+  "prp006": {
+   "es": "Online, para cualquier país",
+   "en": "Online, for any country",
+   "pt": "Online, para qualquer país"
+  },
+  "prp007": {
+   "es": "Páginas web",
+   "en": "Websites",
+   "pt": "Sites"
+  },
+  "prp008": {
+   "es": "Diseño propio, no plantilla. Rápida, pensada para el celular, con WhatsApp directo y un editor para que cambies textos y fotos sin llamarme.",
+   "en": "Custom design, not a template. Fast, built for phones, with direct WhatsApp and an editor so you can change text and photos without calling me.",
+   "pt": "Design próprio, não modelo. Rápido, pensado para o celular, com WhatsApp direto e um editor para você mudar textos e fotos sem me chamar."
+  },
+  "prp009": {
+   "es": "Edición en Lightroom",
+   "en": "Lightroom editing",
+   "pt": "Edição no Lightroom"
+  },
+  "prp010": {
+   "es": "Para fotógrafos: me mandás el lote y te lo devuelvo seleccionado, revelado con tu estilo y parejo de principio a fin. Lote listo en 72 horas.",
+   "en": "For photographers: send me the set and I return it culled, edited in your style and consistent from start to finish. Ready in 72 hours.",
+   "pt": "Para fotógrafos: você me manda o lote e eu devolvo selecionado, revelado no seu estilo e uniforme do começo ao fim. Pronto em 72 horas."
+  },
+  "prp011": {
+   "es": "Marca 360",
+   "en": "Brand 360",
+   "pt": "Marca 360"
+  },
+  "prp012": {
+   "es": "Tu identidad completa: logo o ajuste del que tenés, paleta, tipografías, manual de marca y plantillas para redes.",
+   "en": "Your complete identity: a logo or a refresh of yours, palette, typefaces, brand guidelines and social media templates.",
+   "pt": "Sua identidade completa: logo ou ajuste do seu, paleta, tipografias, manual de marca e modelos para redes."
+  },
+  "prp013": {
+   "es": "Producción musical",
+   "en": "Music production",
+   "pt": "Produção musical"
+  },
+  "prp014": {
+   "es": "Composición, mezcla y mastering a distancia, y música para tu marca o tus videos. Trabajo en Ableton.",
+   "en": "Remote composition, mixing and mastering, plus music for your brand or your videos. I work in Ableton.",
+   "pt": "Composição, mixagem e masterização a distância, e música para a sua marca ou os seus vídeos. Trabalho no Ableton."
+  },
+  "prp015": {
+   "es": "En Uruguay",
+   "en": "In Uruguay",
+   "pt": "No Uruguai"
+  },
+  "prp016": {
+   "es": "también voy al lugar: fotografía y video de eventos, gastronomía, empresas, producto y retratos.",
+   "en": "I also come to you: photo and video for events, food, companies, products and portraits.",
+   "pt": "também vou até o local: fotografia e vídeo de eventos, gastronomia, empresas, produto e retratos."
+  },
+  "prp017": {
+   "es": "Cómo trabajamos",
+   "en": "How we work",
+   "pt": "Como trabalhamos"
+  },
+  "prp018": {
+   "es": "Me contás",
+   "en": "You tell me",
+   "pt": "Você me conta"
+  },
+  "prp019": {
+   "es": "Qué hacés, qué te falta y para cuándo. Con el formulario de abajo alcanza.",
+   "en": "What you do, what is missing and by when. The form below is enough.",
+   "pt": "O que você faz, o que falta e para quando. O formulário abaixo basta."
+  },
+  "prp020": {
+   "es": "Te mando la propuesta",
+   "en": "I send the proposal",
+   "pt": "Eu envio a proposta"
+  },
+  "prp021": {
+   "es": "En 48 horas: qué haría por tu negocio, en cuánto tiempo y cuánto cuesta.",
+   "en": "Within 48 hours: what I would do for your business, how long it takes and what it costs.",
+   "pt": "Em 48 horas: o que eu faria pelo seu negócio, em quanto tempo e quanto custa."
+  },
+  "prp022": {
+   "es": "Arrancamos",
+   "en": "We start",
+   "pt": "Começamos"
+  },
+  "prp023": {
+   "es": "Si te cierra, empezamos. Todo online, con avances para que veas cómo va.",
+   "en": "If it works for you, we start. All online, with updates so you can see the progress.",
+   "pt": "Se fizer sentido, começamos. Tudo online, com prévias para você acompanhar."
+  },
+  "prp024": {
+   "es": "Pedí tu propuesta",
+   "en": "Get your proposal",
+   "pt": "Peça sua proposta"
+  },
+  "prp025": {
+   "es": "Contame de <span class=\"red\">tu negocio.</span>",
+   "en": "Tell me about <span class=\"red\">your business.</span>",
+   "pt": "Conte sobre <span class=\"red\">o seu negócio.</span>"
+  },
+  "prp026": {
+   "es": "Tu nombre",
+   "en": "Your name",
+   "pt": "Seu nome"
+  },
+  "prp027": {
+   "es": "Tu negocio",
+   "en": "Your business",
+   "pt": "Seu negócio"
+  },
+  "prp028": {
+   "es": "Tu web o tu Instagram",
+   "en": "Your website or Instagram",
+   "pt": "Seu site ou Instagram"
+  },
+  "prp029": {
+   "es": "Qué te interesa",
+   "en": "What you are interested in",
+   "pt": "O que te interessa"
+  },
+  "prp030": {
+   "es": "Foto o video en Uruguay",
+   "en": "Photo or video in Uruguay",
+   "pt": "Foto ou vídeo no Uruguai"
+  },
+  "prp031": {
+   "es": "Todavía no sé",
+   "en": "Not sure yet",
+   "pt": "Ainda não sei"
+  },
+  "prp032": {
+   "es": "Qué necesitás",
+   "en": "What you need",
+   "pt": "O que você precisa"
+  },
+  "prp033": {
+   "es": "Mandar por WhatsApp",
+   "en": "Send via WhatsApp",
+   "pt": "Enviar pelo WhatsApp"
+  },
+  "prp034": {
+   "es": "Poné tu nombre y contame qué necesitás.",
+   "en": "Add your name and tell me what you need.",
+   "pt": "Coloque seu nome e conte o que precisa."
+  },
+  "prp035": {
+   "es": "Se abre WhatsApp con tu mensaje listo para mandar.",
+   "en": "WhatsApp opens with your message ready to send.",
+   "pt": "O WhatsApp abre com a sua mensagem pronta."
+  },
+  "prp036": {
+   "es": "Foto, video, web y música · Montevideo, Uruguay",
+   "en": "Photo, video, web and music · Montevideo, Uruguay",
+   "pt": "Foto, vídeo, web e música · Montevidéu, Uruguai"
+  },
+  "prp037": {
+   "es": "Ver el sitio &rarr;",
+   "en": "See the site &rarr;",
+   "pt": "Ver o site &rarr;"
   }
  },
  "whatsapp": {
