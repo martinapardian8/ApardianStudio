@@ -177,7 +177,17 @@ window.APARDIAN_I18N = {
   "mus135": "Load the Spotify player",
   "nav101": "Music",
   "nav102": "Music",
-  "idx130": "Six photos, six different edits"
+  "idx130": "Six photos, six different edits",
+  "web140": "Work",
+  "web141": "Websites I built",
+  "web142": "Some clients prefer not to be named. I show them as Lorem Ipsum: the work is real, the name isn't.",
+  "web143": "Portfolio · Uruguay",
+  "web144": "This very site. In three languages, with its own editor to change text and photos without touching code.",
+  "web145": "Restaurant · Barcelona",
+  "web146": "Custom site for a restaurant in Barcelona.",
+  "web147": "Confidential client",
+  "web148": "Business site",
+  "web149": "Custom site, end to end."
  },
  "pt": {
   "nav001": "Trabalhos",
@@ -356,7 +366,17 @@ window.APARDIAN_I18N = {
   "mus135": "Carregar o player do Spotify",
   "nav101": "Música",
   "nav102": "Música",
-  "idx130": "Seis fotos, seis revelações diferentes"
+  "idx130": "Seis fotos, seis revelações diferentes",
+  "web140": "Trabalhos",
+  "web141": "Sites que fiz",
+  "web142": "Alguns clientes preferem não aparecer com o nome. Mostro como Lorem Ipsum: o trabalho é real, o nome não.",
+  "web143": "Portfólio · Uruguai",
+  "web144": "Este mesmo site. Em três idiomas, com um editor próprio para trocar textos e fotos sem mexer no código.",
+  "web145": "Restaurante · Barcelona",
+  "web146": "Site sob medida para um restaurante em Barcelona.",
+  "web147": "Cliente confidencial",
+  "web148": "Site de negócio",
+  "web149": "Site sob medida, de ponta a ponta."
  }
 };
 window.APARDIAN_I18N_GEN = {

@@ -21,7 +21,7 @@ letra en contraste), "logo" (bloque gris con la palabra LOGO) o "blur"
 muestra el dominio real de un cliente confidencial.
 
     python3 10-MOTOR/webs_portfolio.py            # todas
-    python3 10-MOTOR/webs_portfolio.py lobster    # una
+    python3 10-MOTOR/webs_portfolio.py confidencial-1    # una
 """
 import os, sys, json, glob, subprocess, time
 from PIL import Image, ImageDraw, ImageFont, ImageFilter, ImageStat

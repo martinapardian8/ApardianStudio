@@ -1,0 +1,27 @@
+{
+ "_nota": "Webs que hizo Martin. Lo lee 10-MOTOR/webs_portfolio.py. Los confidenciales nunca muestran nombre, logo ni dominio: en la web van como 'Lorem Ipsum' con el rubro. Para cada uno, poner las capturas reales en 06-NOTAS/webs-fuentes/<slug>/escritorio.png (no se publica ni va a GitHub) y celular.png y marcar en 'tapar' las zonas con el nombre o el logo (x, y, ancho, alto, 'LOREM IPSUM' | 'logo' | 'blur').",
+ "proyectos": [
+  {
+   "slug": "apardian",
+   "titulo": "Apardian Studio",
+   "rubro": "Portfolio",
+   "confidencial": false,
+   "url": "local",
+   "dominio": "apardianstudio.com"
+  },
+  {
+   "slug": "confidencial-1",
+   "titulo": "Lorem Ipsum",
+   "rubro": "Restaurante · Barcelona",
+   "confidencial": true,
+   "tapar": {"pc": [], "cel": []}
+  },
+  {
+   "slug": "confidencial-2",
+   "titulo": "Lorem Ipsum",
+   "rubro": "Sitio de negocio",
+   "confidencial": true,
+   "tapar": {"pc": [], "cel": []}
+  }
+ ]
+}
