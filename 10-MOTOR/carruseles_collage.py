@@ -419,9 +419,211 @@ def musica():
     return L.guardar("09-musica-de-la-idea-al-master")
 
 
+# =================================================================== 10 viajes / cuadros
+def viajes():
+    """Navidad: fotos de viajes de Martin, impresas y enmarcadas."""
+    L = Lienzo(6, "hueso")
+    L.etiqueta("Cuadros · Navidad y Reyes", M, 90)
+    L.titulo("Un viaje que se cuelga.", M, 130, 900, 140, max_lineas=2)
+    L.texto("Fotos de mis viajes, impresas en papel de archivo y enmarcadas.",
+            M, 470, 600, 38, NEGRO, "Medium")
+    a = L.marco(F("naturaleza", "nw__IMG_1999.jpg"), X(0, .62), 930, 330, 440, grosor=20, paspartu=40)
+    L.deslizar(0, claro=False)
+    b = L.marco(F("naturaleza", "v__33.jpg"), X(1, .30), 520, 330, 440, grosor=20, paspartu=40)
+    c = L.marco(F("naturaleza", "v__45.jpg"), X(1, .78), 840, 360, 360, grosor=20, paspartu=40)
+    L.papel(X(1, .26), 1110, 400, 200, 0, "El mar", k=1, px=56, sub="de algún viaje mío")
+    d = L.marco(F("naturaleza", "v__50.jpg"), X(2, .42), 560, 520, 346, grosor=20, paspartu=40)
+    L.papel(X(2, .36), 1020, 420, 200, 0, "Papel de archivo", k=2, px=48, sub="no se pone amarillo")
+    e = L.marco(F("naturaleza", "v__38.jpg"), X(3, .02), 980, 520, 346, grosor=20, paspartu=40)
+    f = L.marco(F("naturaleza", "v__63.jpg"), X(3, .62), 470, 330, 440, grosor=20, paspartu=40)
+    L.papel(X(3, .64), 1040, 380, 200, 0, "Marco de madera", k=3, px=48)
+    g = L.marco(F("naturaleza", "nw__IMG_3805.jpg"), X(4, .40), 520, 560, 373, grosor=20, paspartu=40)
+    x4 = X(4) + M
+    L.texto("Para el que tiene todo: un lugar donde quiere volver.", x4, 900, 820, 44, NEGRO, "Medium")
+    L.papel(X(4, .30), 1180, 380, 200, 0, "Lista para colgar", k=1, px=46)
+    cierre(L, 5, "Navidad · Reyes", "Si no llega para Navidad, llega para Reyes.",
+           "Elegís la foto, el tamaño y el marco. Te paso las opciones por WhatsApp.",
+           px=96, y_tel=820)
+    return L.guardar("10-cuadros-un-viaje-que-se-cuelga")
+
+
+# =================================================================== 11 verano se festeja
+def verano_fiestas():
+    L = Lienzo(6, "carbon")
+    L.etiqueta("Eventos · verano", M, 90)
+    L.titulo("El verano se festeja afuera.", M, 130, 900, 120, max_lineas=2, color=HUESO)
+    a = L.foto(F("eventos", "15-sol__IMG_8107.jpg"), X(0, .5), 860, LAM - 2 * M, 600)
+    L.deslizar(0, y=ALTO - 80)
+    b = L.foto(F("eventos", "15-sol__IMG_8179.jpg"), X(1, .36), 560, 520, 693)
+    L.papel(X(1, .78), 420, 300, 200, 0, "La previa", k=1, px=58, sub="21:00")
+    c = L.foto(F("eventos", "ivanna-santiago__IMG_4794.jpg"), X(1, .70), 1090, 520, 347)
+    d = L.foto(F("eventos", "ivanna-santiago__IMG_4840.jpg"), X(2, .55), 500, 600, 400)
+    L.papel(X(2, .30), 920, 420, 200, 0, "En el jardín", k=2, px=58, sub="la torta, al aire libre")
+    f = L.foto(F("eventos", "v__5.jpg"), X(2, .78), 1000, 380, 507)
+    L.papel(X(3, .36), 470, 520, 200, 0, "Fiestas de empresa", k=3, px=50, sub="con los chicos incluidos")
+    e = L.foto(F("eventos", "v__13.jpg"), X(3, .5), 960, 760, 507)
+    g = L.foto(F("eventos", "leticia40__IMG_8323.jpg"), X(4, .40), 480, 600, 400)
+    x4 = X(4) + M
+    L.texto("Cumpleaños, casamientos chicos y fiestas de fin de año en chacras y jardines.",
+            x4, 860, 820, 42, HUESO, "Medium")
+    fin = cierre(L, 5, "Enero y febrero también", "Toda la fiesta, sin tope de fotos.",
+                 "Galería para los invitados y entrega en 10 días. Contame la fecha y el lugar.",
+                 px=104)
+    chinchar(L, [fin])
+    return L.guardar("11-eventos-el-verano-se-festeja")
+
+
+# =================================================================== 12 gastronomia de temporada
+def carta_verano():
+    L = Lienzo(6, "hueso")
+    L.etiqueta("Gastronomía · temporada", M, 90)
+    L.titulo("Tu carta de verano entra por los ojos.", M, 130, 900, 104, max_lineas=3)
+    L.palabra_foto("Brasa", F("gastronomia", "sergio__IMG_7274.jpg"), M - 10, 520, 420)
+    L.texto("Restaurantes y paradores: la temporada se juega en las fotos.", M, 1060, 640, 38, NEGRO, "Medium")
+    L.deslizar(0, claro=False)
+    a = L.foto(F("gastronomia", "sergio__IMG_7503.jpg"), X(1, .48), 620, 560, 747)
+    L.papel(X(1, .26), 1150, 380, 200, 0, "El fuego", k=1, px=58, sub="lo que se huele")
+    b = L.foto(F("gastronomia", "v__69.jpg"), X(2, .30), 620, 480, 640)
+    c = L.foto(F("gastronomia", "lokotas__IMG_7590.jpg"), X(2, .76), 420, 440, 587)
+    L.papel(X(2, .28), 1120, 400, 200, 0, "Para compartir", k=2, px=52, sub="lo que se pide de a dos")
+    d = L.foto(F("gastronomia", "v__70.jpg"), X(3, .02), 980, 640, 427)
+    e = L.foto(F("gastronomia", "sergio__IMG_7234.jpg"), X(3, .62), 460, 520, 693)
+    L.papel(X(3, .66), 1060, 380, 200, 0, "Lo fresco", k=3, px=58)
+    f = L.foto(F("gastronomia", "la-estacion__IMG_8060.jpg"), X(4, .45), 470, 760, 507)
+    x4 = X(4) + M
+    L.texto("Y el lugar lleno, que es lo que hace que entren los que pasan.", x4, 860, 820, 42, NEGRO, "Medium")
+    fin = cierre(L, 5, "Punta del Este · José Ignacio · Montevideo", "Antes de que llegue la gente.",
+                 "Una jornada en tu restaurante o parador: platos, proceso y lugar. Entrega en 7 días.",
+                 px=104)
+    chinchar(L, [fin])
+    return L.guardar("12-gastronomia-carta-de-verano")
+
+
+# =================================================================== 13 bodas del verano
+def bodas_verano():
+    L = Lienzo(6, "carbon")
+    q = L.montar_en_copias("mano_foto_negro.jpg", [F("bodas", "portfolio__IMG_8769.jpg")],
+                           0, 0, LAM, ALTO)[0]
+    L.etiqueta("Bodas · verano y otoño 2027", M, 74)
+    L.titulo("Entre el sí y la fiesta pasa todo.", M, 112, LAM - 2 * M, 96, max_lineas=2, color=HUESO)
+    L.deslizar(0, y=ALTO - 96)
+    a = L.foto(F("bodas", "portfolio__IMG_9594.jpg"), X(1, .40), 520, 700, 467)
+    L.papel(X(1, .30), 1000, 400, 200, 0, "El altar", k=1, px=58, sub="la iglesia en silencio")
+    b = L.foto(F("bodas", "nw__IMG_4672.jpg"), X(2, .30), 600, 440, 587)
+    c = L.foto(F("salones", "golf-b__IMG_0346.jpg"), X(2, .74), 470, 390, 520)
+    L.papel(X(2, .26), 1130, 400, 200, 0, "La llegada", k=2, px=58, sub="los faroles del jardín")
+    d = L.foto(F("bodas", "golf-a__IMG_4679.jpg"), X(3, .02), 980, 700, 467)
+    e = L.foto(F("bodas", "v__5.jpg"), X(3, .64), 470, 440, 587)
+    L.papel(X(3, .66), 1060, 380, 200, 0, "Los detalles", k=3, px=56, sub="mesa diez")
+    f = L.foto(F("salones", "golf-b__IMG_0366.jpg"), X(4, .45), 480, 700, 467)
+    x4 = X(4) + M
+    L.texto("Lo que nadie mira durante la fiesta es lo que más se mira después.",
+            x4, 860, 820, 42, HUESO, "Medium")
+    fin = cierre(L, 5, "Fechas de otoño 2027", "Todas las fotos. Sin tope.",
+                 "Ceremonia, salón y fiesta, editadas una por una. Entrega en 10 días. Contame tu fecha.",
+                 px=110)
+    chinchar(L, [fin])
+    return L.guardar("13-bodas-entre-el-si-y-la-fiesta")
+
+
+# =================================================================== 14 edicion en temporada alta
+LOTE2 = [("eventos", "caro60__IMG_0033.jpg"), ("eventos", "caro60__IMG_0054.jpg"),
+         ("eventos", "caro60__IMG_0096.jpg"), ("eventos", "caro60__IMG_0206.jpg"),
+         ("eventos", "caro60__IMG_0248.jpg"), ("eventos", "caro60__IMG_9671.jpg"),
+         ("eventos", "caro60__IMG_9702.jpg"), ("eventos", "caro60__IMG_9862.jpg"),
+         ("eventos", "caro60__IMG_9933.jpg")]
+
+
+def edicion_enero():
+    """Un lote real de Martin (un mismo cumpleaños), ya editado. Sin 'antes'."""
+    L = Lienzo(6, "carbon")
+    L.etiqueta("Para fotógrafos · temporada alta", M, 90)
+    L.titulo("En enero no se duerme.", M, 130, 900, 150, max_lineas=2, color=HUESO)
+    L.texto("Vos seguí disparando. El lote me lo mandás a mí.", M, 470, 560, 40, HUESO, "Medium")
+    a = L.foto(F(*LOTE2[3]), X(0, .5), 1000, LAM - 2 * M, 470)
+    L.deslizar(0, y=ALTO - 80)
+    L.papel(X(1, .30), 230, 440, 200, 0, "Un cumpleaños", k=1, px=56, sub="un solo lote, editado parejo")
+    cw, ch = 280, 187
+    for k, par in enumerate(LOTE2[:6]):
+        cx = X(1, .08) + (k % 3) * (cw + 24) + cw // 2 + 6
+        cy = 470 + (k // 3) * (ch + 24) + ch // 2
+        L.foto(F(*par), cx, cy, cw, ch)
+        if k in (0, 2, 3, 5):
+            marca_elegida(L, cx + cw // 2 - 18, cy - ch // 2 + 18)
+    L.texto("Me quedo con las que valen y las revelo con tu estilo.", X(1) + M, 960, 820, 40, HUESO, "Medium")
+    pz = []
+    for k, par in enumerate([LOTE2[6], LOTE2[1], LOTE2[8], LOTE2[0]]):
+        cx = (X(2, .27), X(2, .73), X(3, .27), X(3, .73))[k]
+        pz.append(L.foto(F(*par), cx, 560 + (k % 2) * 60, 470, 313))
+    L.papel(X(2, .30), 1060, 460, 200, 0, "La misma mirada", k=2, px=50, sub="de la primera a la última")
+    L.papel(X(3, .62), 1060, 460, 200, 0, "Tu preset", k=3, px=56, sub="no el mío")
+    x4 = X(4) + M
+    L.etiqueta("Cómo funciona", x4, 150)
+    L.titulo("Me mandás el lote. Te lo devuelvo listo.", x4, 192, 880, 104, max_lineas=3)
+    y = 600
+    for n, t in (("01", "Subís el lote a tu nube, sea cual sea."),
+                 ("02", "Culling y revelado con tu estilo."),
+                 ("03", "Catálogo listo para exportar en 72 horas.")):
+        L.numero(n, x4, y, 60)
+        L.texto(t, x4 + 110, y + 14, 720, 36, HUESO, "Medium")
+        y += 130
+    fin = cierre(L, 5, "Desde cualquier país", "Tu lote en 72 horas.",
+                 "Decime cuántas fotos son y te paso precio en el día.",
+                 px=118)
+    chinchar(L, [fin])
+    return L.guardar("14-edicion-en-enero-no-se-duerme")
+
+
+# =================================================================== 15 marca 360
+def marca_360():
+    """Marca 360 con la marca de Martin como caso: es la que hizo él."""
+    L = Lienzo(6, "hueso")
+    L.etiqueta("Marca 360 · identidad completa", M, 90)
+    L.titulo("Una marca se ve igual en todos lados.", M, 130, 900, 110, max_lineas=3)
+    L.texto("Esta es la mía. La armé de punta a punta.", M, 520, 600, 40, NEGRO, "Medium")
+    d = L.d
+    escribir(d, (M, 760), "APARDIAN", display(190), NEGRO)
+    w_logo = ancho(d, "APARDIAN", display(190))
+    d.rectangle([M + w_logo + 10, 760 + 150, M + w_logo + 46, 760 + 186], fill=ROJO)
+    L.deslizar(0, claro=False)
+    # 2 · paleta
+    x1 = X(1) + M
+    L.etiqueta("01 · Paleta", x1, 150)
+    L.titulo("Tres colores. Nada más.", x1, 192, 880, 104, max_lineas=2)
+    for k, (nom, col, hexa) in enumerate((("Hueso", HUESO, "#F8F7F6"), ("Negro", NEGRO, "#171717"), ("Rojo", ROJO, "#FF0033"))):
+        y = 480 + k * 250
+        d.rectangle([x1, y, x1 + 300, y + 200], fill=col, outline=(200, 197, 192) if col == HUESO else None, width=2)
+        escribir(d, (x1 + 340, y + 60), nom.upper(), display(64), NEGRO)
+        escribir(d, (x1 + 340, y + 140), hexa, work(30, "Medium"), TINTA_SUAVE, 2)
+    # 3 · tipografias
+    x2 = X(2) + M
+    L.etiqueta("02 · Tipografías", x2, 150)
+    escribir(d, (x2, 220), "Aa", display(330), NEGRO)
+    escribir(d, (x2 + 420, 330), "ANTON", display(80), NEGRO)
+    L.texto("Para títulos: alta, angosta, que se lee de lejos.", x2 + 420, 440, 480, 32, TINTA_SUAVE, "Regular")
+    escribir(d, (x2, 760), "Aa", work(260, "Regular"), NEGRO)
+    escribir(d, (x2 + 420, 840), "WORK SANS", display(80), NEGRO)
+    L.texto("Para textos: clara, tranquila, que no cansa.", x2 + 420, 950, 480, 32, TINTA_SUAVE, "Regular")
+    # 4 · aplicaciones: web
+    a = L.navegador(os.path.join(CAP, "d_hero.png"), X(3, .5), 560, 900)
+    L.papel(X(3, .30), 1060, 420, 200, 0, "03 · Web", k=1, px=56, sub="la misma voz, en grande")
+    # 5 · aplicaciones: celular y redes
+    b = L.telefono(os.path.join(CAP, "m_hero.png"), X(4, .30), 640, 860)
+    x4 = X(4, .52)
+    L.etiqueta("04 · Manual y plantillas", x4, 330)
+    L.texto("Cómo se usa el logo, los colores y las letras, y las plantillas para que tus posteos salgan siempre iguales.",
+            x4, 380, 420, 34, NEGRO, "Medium")
+    cierre(L, 5, "Online · desde cualquier país", "Tu marca, de punta a punta.",
+           "Identidad, manual de marca y plantillas para redes listas para usar.",
+           px=110, y_tel=820)
+    return L.guardar("15-marca-360-una-marca-entera")
+
+
 CARRUSELES = {"bodas": bodas, "gastronomia": gastronomia, "marca": marca_personal,
               "findeanio": fin_de_anio, "producto": producto, "edicion": edicion,
-              "web": web, "cuadros": cuadros, "musica": musica}
+              "web": web, "cuadros": cuadros, "musica": musica,
+              "viajes": viajes, "verano": verano_fiestas, "carta": carta_verano,
+              "bodas2": bodas_verano, "edicion2": edicion_enero, "marca360": marca_360}
 
 
 def main(nombres):

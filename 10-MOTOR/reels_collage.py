@@ -5,7 +5,7 @@ El carrusel entero (las seis laminas pegadas) se recorre de izquierda a
 derecha con una camara suave, y al final queda quieto en el pedido.
 Sale sin musica: en Instagram se le pone un tema (idealmente, uno tuyo).
 
-python3 10-MOTOR/reels_collage.py            # los nueve
+python3 10-MOTOR/reels_collage.py            # todos
 python3 10-MOTOR/reels_collage.py 01 04      # algunos
 """
 import os, sys, glob, subprocess, tempfile
@@ -21,7 +21,7 @@ ALTO_TIRA = 1100
 Y_TIRA = 470
 DUR, PAN0, PAN1 = 15.0, 1.2, 12.6       # segundos: total, empieza y termina el paseo
 
-OSCUROS = ("02", "04", "06", "09")
+OSCUROS = ("02", "04", "06", "09", "11", "13", "14")
 TITULOS = {"01": ("Bodas · temporada 26/27", "Un sí dura un segundo."),
            "02": ("Gastronomía", "La gente come con los ojos."),
            "03": ("Marca personal", "No entra en una selfie."),
@@ -30,7 +30,13 @@ TITULOS = {"01": ("Bodas · temporada 26/27", "Un sí dura un segundo."),
            "06": ("Para fotógrafos", "Vos disparás. Yo edito."),
            "07": ("Páginas web", "Tu Instagram no es tu página web."),
            "08": ("Cuadros", "Regalá un lugar."),
-           "09": ("Producción musical", "De la idea al master.")}
+           "09": ("Producción musical", "De la idea al master."),
+           "10": ("Cuadros · Navidad y Reyes", "Un viaje que se cuelga."),
+           "11": ("Eventos · verano", "El verano se festeja afuera."),
+           "12": ("Gastronomía · temporada", "Tu carta de verano entra por los ojos."),
+           "13": ("Bodas", "Entre el sí y la fiesta pasa todo."),
+           "14": ("Para fotógrafos", "En enero no se duerme."),
+           "15": ("Marca 360", "Una marca se ve igual en todos lados.")}
 
 
 def fondo(num):
