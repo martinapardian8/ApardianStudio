@@ -248,7 +248,14 @@ def disparadores(fl, regla):
 def f01():
     fl = Flujo("APARDIAN 01 · Prospector (Radar)")
     a, b = disparadores(fl, {"field": "days", "triggerAtHour": 7})
-    v = dict(CONFIG_BASE); v["BUSQUEDAS_POR_DIA"] = (12, "number")
+    v = dict(CONFIG_BASE)
+    v.update({
+        "BUSQUEDAS_POR_DIA": (12, "number"),
+        # Solo negocios con buena reputación en Google: son los que más pierden
+        # con una web floja o sin web (decisión de Martin, 25/10/2026).
+        "RATING_MINIMO": (4.5, "number"),
+        "RESENAS_MINIMAS": (15, "number"),
+    })
     cfg = config(fl, "Config", v)
     busq = leer_hoja(fl, "Leer Búsquedas", cfg, "Busquedas")
     elegir = codigo(fl, "Elegir búsquedas", JS_FECHA + r"""
@@ -272,7 +279,7 @@ return $input.all().map(r => r.json)
         "headerParameters": {"parameters": [{
             "name": "X-Goog-FieldMask",
             "value": "places.id,places.displayName,places.websiteUri,places.formattedAddress,"
-                     "places.rating,places.userRatingCount,places.nationalPhoneNumber,places.googleMapsUri",
+                     "places.rating,places.userRatingCount,places.nationalPhoneNumber,places.internationalPhoneNumber,places.googleMapsUri",
         }]},
         "sendBody": True,
         "specifyBody": "json",
@@ -291,7 +298,7 @@ $input.all().forEach((it, i) => {
       id: p.id,
       nombre: (p.displayName && p.displayName.text) || '',
       web: p.websiteUri || '',
-      telefono: p.nationalPhoneNumber || '',
+      telefono: p.internationalPhoneNumber || p.nationalPhoneNumber || '',
       direccion: p.formattedAddress || '',
       rating: p.rating || '',
       reseñas: p.userRatingCount || 0,
@@ -305,7 +312,10 @@ return out;
 """)
     leads = leer_hoja(fl, "Leer Leads", cfg, "Leads")
     dedupe = codigo(fl, "Solo nuevos", JS_FECHA + r"""
-// Saca los que ya están en la planilla (por id de Google o por web).
+// Saca los que ya están en la planilla (por id de Google o por web) y los que
+// no tienen buena reputación: rating y cantidad de reseñas mínimos (Config).
+const c = $('Config').first().json;
+const rMin = Number(c.RATING_MINIMO) || 0, nMin = Number(c.RESENAS_MINIMAS) || 0;
 const ya = new Set(), webs = new Set();
 for (const r of $('Leer Leads').all()) {
   if (r.json.id) ya.add(String(r.json.id));
@@ -316,6 +326,7 @@ for (const it of $('Aplanar').all()) {
   const p = it.json;
   const w = p.web.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '');
   if (!p.id || ya.has(p.id) || vistos.has(p.id) || (w && webs.has(w))) continue;
+  if ((Number(p.rating) || 0) < rMin || (Number(p['reseñas']) || 0) < nMin) continue;
   vistos.add(p.id);
   out.push({ json: {
     id: p.id, fecha: hoy(), rubro: p.rubro, nombre: p.nombre, web: p.web,
@@ -326,6 +337,7 @@ for (const it of $('Aplanar').all()) {
     notas: [p.direccion, p.rating ? ('rating ' + p.rating + ' (' + p['reseñas'] + ' reseñas)') : '', p.maps].filter(Boolean).join(' · '),
     pais: p.pais, idioma: p.idioma, mercado: p.mercado, zona: p.zona, oferta_id: '',
     ultimo_envio: '', seg_asunto: '', seg_cuerpo: '',
+    rating: p.rating, resenas: p['reseñas'], wa_mensaje: '',
   } });
 }
 return out;
@@ -348,6 +360,8 @@ def f02():
     # para sostener 50 mails por día hacen falta ~90 auditorías: la mitad no
     # publica mail o no tiene una oportunidad clara
     v = dict(CONFIG_BASE); v["LIMITE_DIARIO"] = (90, "number")
+    # borradores de WhatsApp por día para los que no tienen web o mail
+    v["LIMITE_WHATSAPP"] = (15, "number")
     cfg = config(fl, "Config", v)
     leads = leer_hoja(fl, "Leer Leads", cfg, "Leads")
     elegir = codigo(fl, "Elegir nuevos", r"""
@@ -442,8 +456,45 @@ return { json: {
 } };
 """, por_item=True)
     guardar = escribir_hoja(fl, "Guardar auditoría", cfg, "Leads")
+
+    # ---- sin web o sin mail publicado: un WhatsApp para que Martin lo mande a mano
+    y = 400
+    elegir_wa = codigo(fl, "Elegir para WhatsApp", JS_WA + r"""
+const lim = Number($('Config').first().json.LIMITE_WHATSAPP) || 15;
+return $('Leer Leads').all().map(r => r.json)
+  .filter(l => l.id && (l.estado === 'sin_web' || (l.estado === 'sin_email' && Number(l.score) >= 60)))
+  .filter(l => celular(l.telefono, l.pais))
+  .sort((x, y) => (Number(y.rating) || 0) * Math.log10(10 + (Number(y.resenas) || 0)) - (Number(x.rating) || 0) * Math.log10(10 + (Number(x.resenas) || 0)))
+  .slice(0, lim)
+  .map(l => ({ json: l }));
+""", pos=(480, y))
+    prep_wa = codigo(fl, "Prompt WhatsApp", JS_CLAUDE + r"""
+const SYSTEM = %s;
+const l = $json;
+// sin_web trae la ficha de Google en notas; sin_email, el JSON de la auditoría
+let audit = null, ficha = l.notas || '';
+try { const n = JSON.parse(l.notas || '{}'); audit = n.auditoria || null; ficha = n.ficha || ''; } catch (e) {}
+const usuario = 'MERCADO: ' + (l.mercado || 'uy') + '\nPaís: ' + (l.pais || 'Uruguay') +
+  '\nNegocio: ' + l.nombre + '\nRubro: ' + l.rubro + '\nBúsqueda: ' + l.ciudad +
+  '\nRating en Google: ' + (l.rating || 'sin dato') + ' (' + (l.resenas || 0) + ' reseñas)' +
+  '\nWeb: ' + (l.web || 'NO TIENE WEB') + (l.instagram ? '\nInstagram: ' + l.instagram : '') +
+  '\nFicha de Google: ' + ficha +
+  (audit ? '\n\nAuditoría de su web:\n' + JSON.stringify(audit, null, 2) : '');
+return { json: { lead: l, claude_body: cuerpoClaude(SYSTEM, usuario, 3000, 'medium') } };
+""" % json.dumps(prompt("whatsapp"), ensure_ascii=False), por_item=True, pos=(720, y))
+    cl_wa = claude(fl, "Claude · WhatsApp", pos=(960, y))
+    leer_wa = codigo(fl, "Leer WhatsApp", JS_LEER + r"""
+const l = $('Prompt WhatsApp').item.json.lead;
+const r = leerClaude($json);
+if (!r.ok) return { json: { id: l.id, estado: l.estado, notas: l.notas } };
+if (r.data.omitir || !r.data.mensaje) return { json: { id: l.id, estado: 'sin_contacto' } };
+return { json: { id: l.id, estado: 'wa_borrador', wa_mensaje: String(r.data.mensaje).slice(0, 1500) } };
+""", por_item=True, pos=(1200, y))
+    g_wa = escribir_hoja(fl, "Guardar WhatsApp", cfg, "Leads", pos=(1440, y))
     fl.unir(a, cfg); fl.unir(b, cfg)
     fl.cadena(cfg, leads, elegir, bajar, senales, prep, cl, leer, guardar)
+    fl.unir(leads, elegir_wa)
+    fl.cadena(elegir_wa, prep_wa, cl_wa, leer_wa, g_wa)
     return fl
 
 
@@ -460,35 +511,41 @@ const mailsHoy = leads => leads.filter(l => String(l.ultimo_envio || '') === hoy
 """
 
 
+JS_WA = r"""
+// ¿El teléfono parece un celular con WhatsApp? Uruguay: +598 9…; Argentina:
+// +54 9…; el resto se deja pasar (Martin lo ve antes de mandarlo).
+const digitos = t => String(t || '').replace(/[^\d]/g, '');
+const celular = (t, pais) => {
+  const d = digitos(t);
+  if (d.length < 8) return false;
+  if (d.startsWith('598')) return d[3] === '9';
+  if (d.startsWith('54')) return d[2] === '9';
+  if (!String(t).trim().startsWith('+')) return String(pais || 'Uruguay') === 'Uruguay' && /^09/.test(d);
+  return true;
+};
+const waNumero = (t, pais) => { let d = digitos(t); if (/^09/.test(d) && String(pais || 'Uruguay') === 'Uruguay') d = '598' + d.slice(1); return d; };
+"""
+
 # ================================================================== 03
 def f03():
-    fl = Flujo("APARDIAN 03 · Radar: redactor y envío")
-    # cada hora de 9 a 17 (Montevideo), de lunes a viernes: los mails salen de a
-    # pocos durante el día, nunca en ráfaga
-    a, b = disparadores(fl, {"field": "cronExpression", "expression": "0 9-17 * * 1-5"})
+    """Escribe los primeros mails y los deja como borrador. No manda nada:
+    Martin los aprueba (o edita) en la bandeja (flujo 11) y sale el 12."""
+    fl = Flujo("APARDIAN 03 · Radar: redactor")
+    a, b = disparadores(fl, {"field": "cronExpression", "expression": "0 8 * * 1-5"})
     v = dict(CONFIG_BASE)
     v.update({
-        # Sale desde contacto@apardianstudio.com por el SMTP de Hostinger
-        # (decisión de Martin, 25/10/2026).
-        "MI_EMAIL": ("Martin Apardian <contacto@apardianstudio.com>", "string"),
         "SCORE_MINIMO": (60, "number"),
-        # Envío automático (decisión de Martin, 24/10/2026): salen solos, con las
-        # ofertas que aprobó en el Centro. Con false vuelve a pedir aprobación
-        # por Telegram mail por mail (MAX_POR_DIA, a las 10).
-        "AUTO_ENVIO": (True, "boolean"),
-        "MAX_POR_DIA": (20, "number"),
-        "SCORE_AUTO": (0, "number"),
-        # Calentamiento: cupo de mails NUEVOS por día según la semana desde
-        # FECHA_INICIO (AAAA-MM-DD). Sin fecha, usa el de la semana 1.
+        # Calentamiento: borradores nuevos por día según la semana desde
+        # FECHA_INICIO (AAAA-MM-DD). Con el tope de 90 mails por día de la
+        # casilla, 30 nuevos dejan lugar para sus dos seguimientos.
         "FECHA_INICIO": ("PEGAR_FECHA_DE_ARRANQUE", "string"),
-        "CUPOS_POR_SEMANA": ("10,20,35,50", "string"),
-        # Tope de la casilla: TODOS los mails del día (nuevos + seguimientos).
-        # Correo gratis de Hostinger: 100 por día → 90. Business Starter: 1.000 → 900.
-        "LIMITE_TOTAL_DIA": (90, "number"),
+        "CUPOS_POR_SEMANA": ("10,20,30", "string"),
+        # Si en la bandeja ya hay esta cantidad esperando, no escribe más.
+        "MAX_PENDIENTES": (60, "number"),
         # Obligatoria para escribir a EE.UU. (ley CAN-SPAM). Sin ella, Radar no les escribe.
         "DIRECCION_POSTAL": ("", "string"),
-        "URL_APROBAR": ("https://TU-INSTANCIA.app.n8n.cloud/webhook/apardian-aprobar", "string"),
-        "TOKEN": ("CAMBIAR-POR-UNA-CLAVE-LARGA", "string"),
+        "URL_BANDEJA": ("https://TU-INSTANCIA.app.n8n.cloud/webhook/apardian-bandeja", "string"),
+        "TOKEN": ("CAMBIAR-POR-UNA-CLAVE-LARGA-DE-RADAR", "string"),
     })
     cfg = config(fl, "Config", v)
     leads = leer_hoja(fl, "Leer Leads", cfg, "Leads")
@@ -503,34 +560,20 @@ for (const r of $('Leer Bajas').all()) {
   if (r.json.dominio) bd.add(String(r.json.dominio).toLowerCase());
 }
 const todos = $('Leer Leads').all().map(r => r.json).filter(l => l.id);
-// lo que todavía entra hoy en la casilla, contando los seguimientos
-const libreCasilla = Math.max(0, (Number(c.LIMITE_TOTAL_DIA) || 90) - mailsHoy(todos));
-let tanda;
-if (c.AUTO_ENVIO) {
-  // Cupo de nuevos según la semana de calentamiento, repartido en las horas que quedan.
-  const cupos = String(c.CUPOS_POR_SEMANA || '10,20,35,50').split(',').map(Number).filter(n => n > 0);
-  const ini = /^\d{4}-\d{2}-\d{2}$/.test(String(c.FECHA_INICIO || '')) ? c.FECHA_INICIO : '';
-  const semana = ini ? Math.max(0, Math.floor(diasDesde(ini) / 7)) : 0;
-  const cupo = cupos[Math.min(semana, cupos.length - 1)] || 10;
-  const nuevosHoy = todos.filter(l => String(l.fecha_envio || '') === hoyUY()).length;
-  const restante = Math.min(Math.max(0, cupo - nuevosHoy), libreCasilla);
-  const horas = Math.max(1, 18 - horaEn('America/Montevideo'));
-  tanda = Math.ceil(restante / horas);
-} else {
-  // Modo con aprobación: una vez por día, a las 10, deja borradores en la planilla.
-  if (horaEn('America/Montevideo') !== 10) return [];
-  tanda = Math.min(c.MAX_POR_DIA || 20, libreCasilla);
-}
-if (!tanda) return [];
+const cupos = String(c.CUPOS_POR_SEMANA || '10,20,30').split(',').map(Number).filter(n => n > 0);
+const ini = /^\d{4}-\d{2}-\d{2}$/.test(String(c.FECHA_INICIO || '')) ? c.FECHA_INICIO : '';
+const semana = ini ? Math.max(0, Math.floor(diasDesde(ini) / 7)) : 0;
+const cupo = cupos[Math.min(semana, cupos.length - 1)] || 10;
+const pendientes = todos.filter(l => ['borrador', 'aprobado'].includes(l.estado)).length;
+const n = Math.max(0, Math.min(cupo, (Number(c.MAX_PENDIENTES) || 60) - pendientes));
+const rep = l => (Number(l.rating) || 0) * Math.log10(10 + (Number(l.resenas) || 0));
 return todos
   .filter(l => l.estado === 'auditado' && Number(l.score) >= (c.SCORE_MINIMO || 60) && l.email)
   .filter(l => { const e = String(l.email).toLowerCase(); return !bm.has(e) && !bd.has(e.split('@')[1]); })
   // a EE.UU. solo con dirección postal en la firma (CAN-SPAM)
   .filter(l => String(l.pais || '') !== 'Estados Unidos' || String(c.DIRECCION_POSTAL || '').trim())
-  // en horario de oficina del destinatario: de lunes a viernes, de 9 a 17
-  .filter(l => horarioDeOficina(l.zona || 'America/Montevideo'))
-  .sort((x, y) => Number(y.score) - Number(x.score))
-  .slice(0, tanda)
+  .sort((x, y) => (Number(y.score) - Number(x.score)) || (rep(y) - rep(x)))
+  .slice(0, n)
   .map(l => ({ json: l }));
 """)
     prep = codigo(fl, "Prompt redactor", JS_CLAUDE + JS_FECHA + r"""
@@ -552,6 +595,7 @@ const entrenamiento = $('Leer Entrenamiento').all().map(r => r.json)
 const usuario = 'MERCADO: ' + mercado + '\nPaís: ' + ($json.pais || 'Uruguay') + '\nIdioma: ' + ($json.idioma || 'es') +
   '\nNegocio: ' + $json.nombre + '\nRubro: ' + $json.rubro + '\nBúsqueda: ' + $json.ciudad +
   '\nWeb: ' + $json.web + ($json.instagram ? '\nInstagram: ' + $json.instagram : '') +
+  ($json.rating ? '\nRating en Google: ' + $json.rating + ' (' + ($json.resenas || 0) + ' reseñas)' : '') +
   (String($json.pais || '') === 'Estados Unidos' ? '\nDIRECCION_POSTAL (va en la firma): ' + c.DIRECCION_POSTAL : '') +
   '\n\nAuditoría:\n' + JSON.stringify(audit, null, 2) +
   '\n\nOfertas aprobadas por Martin para este mercado:\n' + (ofertas.length ? JSON.stringify(ofertas, null, 2) : '(ninguna: no menciones ofertas ni precios)') +
@@ -560,148 +604,63 @@ return { json: { lead: $json, claude_body: cuerpoClaude(SYSTEM, usuario, 6000, '
 """ % json.dumps(prompt("redactor"), ensure_ascii=False), por_item=True)
     cl = claude(fl, "Claude · redactor")
     leer = codigo(fl, "Leer mail", JS_LEER + r"""
-const c = $('Config').first().json;
 const lead = $('Prompt redactor').item.json.lead;
 const r = leerClaude($json);
-if (!r.ok || r.data.omitir) {
-  return { json: { omitir: true, fila: { id: lead.id, estado: r.ok ? 'descartado' : 'error_redaccion', notas: lead.notas } } };
-}
+if (!r.ok) return { json: { id: lead.id, estado: 'error_redaccion', notas: lead.notas } };
+if (r.data.omitir) return { json: { id: lead.id, estado: 'descartado' } };
 const m = r.data;
-return { json: { omitir: false, lead, para: lead.email, asunto: m.asunto, cuerpo: m.cuerpo, oferta_id: m.oferta_id || '',
-  auto: !!c.AUTO_ENVIO && Number(lead.score) >= (Number(c.SCORE_AUTO) || 0) } };
+return { json: { id: lead.id, estado: 'borrador', asunto: String(m.asunto || '').slice(0, 200),
+  borrador: String(m.cuerpo || ''), oferta_id: m.oferta_id || '' } };
 """, por_item=True)
-    hay = si(fl, "¿Hay mail?", "!$json.omitir")
-    descarte = codigo(fl, "Fila descartada", "return { json: $json.fila };", por_item=True, pos=(fl.x, 220))
-    g_desc = escribir_hoja(fl, "Marcar descartado", cfg, "Leads", pos=(fl.x + 240, 220))
-    auto = si(fl, "¿Auto-envío?", "$json.auto")
-    env = enviar_mail(fl, "Enviar (contacto@)", "Config")
-    fila_auto = codigo(fl, "Fila enviada", JS_RADAR + r"""
-const x = $('Leer mail').item.json;
-const ok = !$json.error && !(Array.isArray($json.rejected) && $json.rejected.length);
-return { json: { id: x.lead.id, estado: ok ? 'enviado' : 'error_envio', fecha_envio: ok ? hoyUY() : '',
-  ultimo_envio: ok ? hoyUY() : '', asunto: x.asunto, borrador: x.cuerpo, oferta_id: x.oferta_id, seguimientos: 0,
-  respuesta: ok ? '' : ('envío: ' + String(($json.error && ($json.error.message || $json.error)) || 'rechazado').slice(0, 200)) } };
-""", por_item=True)
-    g_auto = escribir_hoja(fl, "Guardar envío", cfg, "Leads")
-    datos = codigo(fl, "Borrador para aprobar", JS_HTML + r"""
+    g = escribir_hoja(fl, "Guardar borrador", cfg, "Leads")
+    aviso = codigo(fl, "Aviso de la bandeja", JS_HTML + r"""
 const c = $('Config').first().json;
-const x = $json;
-const link = acc => c.URL_APROBAR + '?id=' + encodeURIComponent(x.lead.id) + '&k=inicial&a=' + acc + '&t=' + encodeURIComponent(c.TOKEN);
-return { json: {
-  fila: { id: x.lead.id, estado: 'borrador', asunto: x.asunto, borrador: x.cuerpo, oferta_id: x.oferta_id },
-  telegram_text: '<b>Mail listo para ' + esc(x.lead.nombre) + '</b> (' + esc(x.lead.rubro) + ', ' + esc(x.lead.pais || 'Uruguay') + ', score ' + esc(x.lead.score) + ')\n' +
-    esc(x.lead.web) + '\n\n<b>' + esc(x.asunto) + '</b>\n' + esc(x.cuerpo) +
-    '\n\nSi querés cambiar algo, editá asunto y borrador en la planilla antes de aprobar.\n' +
-    '<a href="' + esc(link('enviar')) + '">✅ Enviar</a>   <a href="' + esc(link('descartar')) + '">✖️ Descartar</a>',
-} };
-""", por_item=True, pos=(fl.x - 240, 240))
-    f_borr = codigo(fl, "Fila borrador", "return { json: $json.fila };", por_item=True, pos=(fl.x, 240))
-    g_borr = escribir_hoja(fl, "Guardar borrador", cfg, "Leads", pos=(fl.x + 240, 240))
-    tg = telegram(fl, "Pedir aprobación", cfg, pos=(fl.x + 480, 240),
-                  texto="$('Borrador para aprobar').item.json.telegram_text")
+const nuevos = $('Leer mail').all().filter(r => r.json.estado === 'borrador').length;
+const L = $('Leer Leads').all().map(r => r.json);
+const segs = L.filter(l => /^borrador_seg/.test(l.estado || '')).length;
+const was = L.filter(l => l.estado === 'wa_borrador').length;
+const antes = L.filter(l => l.estado === 'borrador').length;
+const link = c.URL_BANDEJA + '?t=' + encodeURIComponent(c.TOKEN);
+return [{ json: { telegram_text: '<b>Radar · para aprobar</b>\n' +
+  (nuevos + antes) + ' mails nuevos · ' + segs + ' seguimientos · ' + was + ' WhatsApp\n' +
+  'Nada sale sin tu OK. <a href="' + esc(link) + '">Abrir la bandeja</a> (también desde el Centro → Radar).' } }];
+""")
+    tg = telegram(fl, "Avisar a Martin", cfg)
     fl.unir(a, cfg); fl.unir(b, cfg)
-    fl.cadena(cfg, leads, bajas, ofertas, entren, elegir, prep, cl, leer, hay)
-    fl.unir(hay, auto, 0)
-    fl.unir(hay, descarte, 1)
-    fl.unir(descarte, g_desc)
-    fl.unir(auto, env, 0)
-    fl.unir(auto, datos, 1)
-    fl.cadena(env, fila_auto, g_auto)
-    fl.cadena(datos, f_borr, g_borr, tg)
-
-    # ---- segunda entrada: Martin toca "Enviar" o "Descartar" en Telegram
-    y = 900
-    wh = webhook(fl, "Aprobación (link de Telegram)", "apardian-aprobar", pos=(0, y))
-    cfg2 = config(fl, "Config aprobación", {
-        "SHEET_ID": CONFIG_BASE["SHEET_ID"],
-        "TELEGRAM_CHAT_ID": CONFIG_BASE["TELEGRAM_CHAT_ID"],
-        "MI_EMAIL": ("Martin Apardian <contacto@apardianstudio.com>", "string"),
-        "TOKEN": ("CAMBIAR-POR-UNA-CLAVE-LARGA", "string"),
-    }, pos=(240, y))
-    leads2 = leer_hoja(fl, "Leer Leads (aprobación)", cfg2, "Leads", pos=(480, y))
-    buscar = codigo(fl, "Buscar lead", r"""
-const c = $('Config aprobación').first().json;
-const q = $('Aprobación (link de Telegram)').first().json.query || {};
-if (!q.t || q.t !== c.TOKEN) throw new Error('Token inválido');
-const l = $input.all().map(r => r.json).find(r => String(r.id) === String(q.id));
-if (!l) throw new Error('Lead no encontrado: ' + q.id);
-// Solo se manda lo que todavía es borrador: si respondió entretanto, no se envía.
-if (!/^borrador/.test(l.estado || '')) throw new Error('El lead ya no está en borrador: ' + l.estado);
-const k = q.k || 'inicial';
-const seg = k !== 'inicial';
-return [{ json: { lead: l, k, enviar: q.a === 'enviar', para: l.email,
-  asunto: seg ? l.seg_asunto : l.asunto, cuerpo: seg ? l.seg_cuerpo : l.borrador } }];
-""", pos=(720, y))
-    decide = si(fl, "¿Enviar?", "$json.enviar", pos=(960, y))
-    env2 = enviar_mail(fl, "Enviar aprobado (contacto@)", "Config aprobación", pos=(1200, y - 100))
-    fila_env = codigo(fl, "Estado enviado", JS_FECHA + JS_HTML + JS_RADAR + r"""
-const x = $('Buscar lead').first().json;
-const l = x.lead, ok = !$json.error && !(Array.isArray($json.rejected) && $json.rejected.length);
-const f = { id: l.id };
-if (!ok) f.estado = 'error_envio';
-else if (x.k === 'seg1') { f.estado = 'seguimiento_1'; f.seguimientos = 1; f.ultimo_envio = hoyUY(); }
-else if (x.k === 'seg2') { f.estado = 'seguimiento_2'; f.seguimientos = 2; f.ultimo_envio = hoyUY(); }
-else { f.estado = 'enviado'; f.fecha_envio = hoyUY(); f.ultimo_envio = hoyUY(); f.seguimientos = 0; }
-return [{ json: { fila: f, telegram_text: (ok ? '✅ Enviado a ' : '⚠️ No se pudo enviar a ') + esc(l.nombre) } }];
-""", pos=(1440, y - 100))
-    f_env = codigo(fl, "Fila enviado", "return [{ json: $input.first().json.fila }];", pos=(1680, y - 100))
-    g_env = escribir_hoja(fl, "Guardar enviado", cfg2, "Leads", pos=(1920, y - 100))
-    tg_env = telegram(fl, "Confirmar envío", cfg2, pos=(2160, y - 100),
-                      texto="$('Estado enviado').first().json.telegram_text")
-    fila_desc = codigo(fl, "Estado descartado", JS_HTML + r"""
-const x = $('Buscar lead').first().json;
-// Un seguimiento descartado vuelve al estado anterior; un primer mail, se descarta.
-const estado = x.k === 'seg1' ? 'enviado' : x.k === 'seg2' ? 'seguimiento_1' : 'descartado';
-return [{ json: { fila: { id: x.lead.id, estado }, telegram_text: '✖️ Descartado: ' + esc(x.lead.nombre) } }];
-""", pos=(1200, y + 100))
-    f_desc = codigo(fl, "Fila descarte", "return [{ json: $input.first().json.fila }];", pos=(1440, y + 100))
-    g_desc2 = escribir_hoja(fl, "Guardar descarte", cfg2, "Leads", pos=(1680, y + 100))
-    tg_desc = telegram(fl, "Confirmar descarte", cfg2, pos=(1920, y + 100),
-                       texto="$('Estado descartado').first().json.telegram_text")
-    fl.cadena(wh, cfg2, leads2, buscar, decide)
-    fl.unir(decide, env2, 0)
-    fl.unir(decide, fila_desc, 1)
-    fl.cadena(env2, fila_env, f_env, g_env, tg_env)
-    fl.cadena(fila_desc, f_desc, g_desc2, tg_desc)
+    fl.cadena(cfg, leads, bajas, ofertas, entren, elegir, prep, cl, leer, g, aviso, tg)
     return fl
 
 
 # ================================================================== 04
 def f04():
+    """Escribe los seguimientos (día 4 y día 9) como borrador para la bandeja
+    y cierra a quien no respondió en 14 días. No manda nada."""
     fl = Flujo("APARDIAN 04 · Radar: seguimiento")
-    a, b = disparadores(fl, {"field": "cronExpression", "expression": "30 9-17 * * 1-5"})
+    # 7:45, antes del redactor: el aviso de las 8 ya los cuenta
+    a, b = disparadores(fl, {"field": "cronExpression", "expression": "45 7 * * 1-5"})
     v = dict(CONFIG_BASE)
     v.update({
-        "MI_EMAIL": ("Martin Apardian <contacto@apardianstudio.com>", "string"),
-        # igual que en el 03: con true los seguimientos salen solos
-        "AUTO_ENVIO": (True, "boolean"),
-        "LIMITE_TOTAL_DIA": (90, "number"),
+        "MAX_POR_DIA": (40, "number"),
         "DIRECCION_POSTAL": ("", "string"),
-        "URL_APROBAR": ("https://TU-INSTANCIA.app.n8n.cloud/webhook/apardian-aprobar", "string"),
-        "TOKEN": ("CAMBIAR-POR-UNA-CLAVE-LARGA", "string"),
     })
     cfg = config(fl, "Config", v)
     leads = leer_hoja(fl, "Leer Leads", cfg, "Leads")
     bajas = leer_hoja(fl, "Leer Bajas", cfg, "Bajas")
-    toca = codigo(fl, "¿A quién le toca?", JS_FECHA + JS_RADAR + r"""
-// Día 4 sin respuesta: seguimiento 1. Día 9: seguimiento 2. Día 14: se cierra.
-// Quien respondió ya cambió de estado (flujo 05) y no entra acá. Corre cada
-// hora, solo toma a quien está en horario de oficina en su país y nunca pasa
-// el tope diario de la casilla.
+    toca = codigo(fl, "¿A quién le toca?", JS_FECHA + r"""
+// Día 4 sin respuesta: seguimiento 1. Día 9: seguimiento 2 (y al menos 4 días
+// después del anterior). Día 14: se cierra. Quien respondió ya cambió de
+// estado (flujo 05) y no entra acá.
 const c = $('Config').first().json;
-const todos = $('Leer Leads').all().map(r => r.json).filter(l => l.id);
-let libre = Math.max(0, (Number(c.LIMITE_TOTAL_DIA) || 90) - mailsHoy(todos));
-const horas = Math.max(1, 18 - horaEn('America/Montevideo'));
-libre = Math.ceil(libre / horas);
 const bm = new Set($('Leer Bajas').all().map(r => String(r.json.email || '').toLowerCase()));
 const out = [];
-for (const l of todos) {
-  const d = diasDesde(l.fecha_envio);
+let lim = Number(c.MAX_POR_DIA) || 40;
+for (const l of $('Leer Leads').all().map(r => r.json).filter(x => x.id)) {
+  const d = diasDesde(l.fecha_envio), u = l.ultimo_envio ? diasDesde(l.ultimo_envio) : d;
   if (!l.fecha_envio || !l.email || bm.has(String(l.email).toLowerCase())) continue;
-  if (l.estado === 'seguimiento_2' && d >= 14) { out.push({ json: { lead: l, n: 0, cerrar: true } }); continue; }
-  if (!horarioDeOficina(l.zona || 'America/Montevideo') || String(l.ultimo_envio || '') === hoyUY()) continue;
-  if (l.estado === 'enviado' && d >= 4 && libre > 0) { out.push({ json: { lead: l, n: 1, cerrar: false } }); libre--; }
-  else if (l.estado === 'seguimiento_1' && d >= 9 && libre > 0) { out.push({ json: { lead: l, n: 2, cerrar: false } }); libre--; }
+  if (['seguimiento_2', 'sin_seguimiento'].includes(l.estado) && d >= 14) { out.push({ json: { lead: l, n: 0, cerrar: true } }); continue; }
+  if (lim <= 0 || u < 4) continue;
+  if (l.estado === 'enviado' && d >= 4) { out.push({ json: { lead: l, n: 1, cerrar: false } }); lim--; }
+  else if (l.estado === 'seguimiento_1' && d >= 9) { out.push({ json: { lead: l, n: 2, cerrar: false } }); lim--; }
 }
 return out;
 """)
@@ -724,47 +683,19 @@ return { json: { ...x, claude_body: cuerpoClaude(SYSTEM, usuario, 4000, 'medium'
 """ % json.dumps(prompt("seguimiento"), ensure_ascii=False), por_item=True)
     cl = claude(fl, "Claude · seguimiento")
     leer = codigo(fl, "Leer seguimiento", JS_LEER + r"""
-const c = $('Config').first().json;
 const x = $('Prompt seguimiento').item.json;
 const r = leerClaude($json);
-if (!r.ok) throw new Error('Seguimiento de ' + x.lead.nombre + ': ' + r.motivo);
-const asunto = r.data.asunto || ('Re: ' + x.lead.asunto);
-return { json: { lead: x.lead, n: x.n, para: x.lead.email, asunto, cuerpo: r.data.cuerpo, auto: !!c.AUTO_ENVIO } };
+if (!r.ok) return { json: { id: x.lead.id, estado: x.lead.estado, respuesta: 'seguimiento ' + x.n + ' sin escribir: ' + r.motivo } };
+return { json: { id: x.lead.id, estado: 'borrador_seg' + x.n,
+  seg_asunto: String(r.data.asunto || ('Re: ' + x.lead.asunto)).slice(0, 200), seg_cuerpo: String(r.data.cuerpo || '') } };
 """, por_item=True)
-    auto = si(fl, "¿Auto-envío?", "$json.auto")
-    env = enviar_mail(fl, "Enviar seguimiento (contacto@)", "Config")
-    fila_env = codigo(fl, "Fila seguimiento enviado", JS_RADAR + r"""
-const x = $('Leer seguimiento').item.json;
-const ok = !$json.error && !(Array.isArray($json.rejected) && $json.rejected.length);
-return { json: ok ? { id: x.lead.id, estado: 'seguimiento_' + x.n, seguimientos: x.n, ultimo_envio: hoyUY() }
-                  : { id: x.lead.id, estado: 'error_envio', respuesta: 'seguimiento ' + x.n + ': ' + String(($json.error && ($json.error.message || $json.error)) || 'rechazado').slice(0, 200) } };
-""", por_item=True)
-    g_env = escribir_hoja(fl, "Guardar seguimiento enviado", cfg, "Leads")
-    datos = codigo(fl, "Seguimiento para aprobar", JS_HTML + r"""
-const c = $('Config').first().json;
-const x = $json;
-const k = x.n === 1 ? 'seg1' : 'seg2';
-const link = acc => c.URL_APROBAR + '?id=' + encodeURIComponent(x.lead.id) + '&k=' + k + '&a=' + acc + '&t=' + encodeURIComponent(c.TOKEN);
-return { json: {
-  fila: { id: x.lead.id, estado: 'borrador_seg' + x.n, seg_asunto: x.asunto, seg_cuerpo: x.cuerpo },
-  telegram_text: '<b>Seguimiento ' + x.n + ' para ' + esc(x.lead.nombre) + '</b>\n\n<b>' + esc(x.asunto) + '</b>\n' +
-    esc(x.cuerpo) + '\n\n<a href="' + esc(link('enviar')) + '">✅ Enviar</a>   <a href="' + esc(link('descartar')) + '">✖️ Descartar</a>',
-} };
-""", por_item=True, pos=(fl.x - 240, 240))
-    f_b = codigo(fl, "Fila seguimiento borrador", "return { json: $json.fila };", por_item=True, pos=(fl.x, 240))
-    g_b = escribir_hoja(fl, "Guardar borrador seguimiento", cfg, "Leads", pos=(fl.x + 240, 240))
-    tg = telegram(fl, "Pedir aprobación", cfg, pos=(fl.x + 480, 240),
-                  texto="$('Seguimiento para aprobar').item.json.telegram_text")
+    g = escribir_hoja(fl, "Guardar borrador seguimiento", cfg, "Leads")
     fl.unir(a, cfg); fl.unir(b, cfg)
     fl.cadena(cfg, leads, bajas, toca, cerrar)
     fl.unir(cerrar, fila_c, 0)
     fl.unir(fila_c, g_c)
     fl.unir(cerrar, prep, 1)
-    fl.cadena(prep, cl, leer, auto)
-    fl.unir(auto, env, 0)
-    fl.unir(auto, datos, 1)
-    fl.cadena(env, fila_env, g_env)
-    fl.cadena(datos, f_b, g_b, tg)
+    fl.cadena(prep, cl, leer, g)
     return fl
 
 
@@ -790,7 +721,7 @@ def f05():
 // (mailer-daemon) se unen por la dirección que aparece en el texto. Si el lead
 // ya no está esperando respuesta, el mail se ignora: así un mismo mail no se
 // procesa dos veces.
-const abiertos = ['enviado', 'seguimiento_1', 'seguimiento_2', 'borrador_seg1', 'borrador_seg2'];
+const abiertos = ['enviado', 'seguimiento_1', 'seguimiento_2', 'borrador_seg1', 'borrador_seg2', 'aprobado_seg1', 'aprobado_seg2', 'sin_seguimiento'];
 const genericos = /^(gmail|googlemail|hotmail|outlook|live|yahoo|icloud|me|aol|proton|protonmail)\./i;
 const L = $('Leer Leads').all().map(r => r.json).filter(l => l.id && l.email && abiertos.includes(l.estado));
 const porMail = new Map(L.map(l => [String(l.email).toLowerCase(), l]));
@@ -897,10 +828,10 @@ const ahoraISO = () => new Date().toISOString();
 """
 
 
-def webhook_respuesta(fl, nombre, ruta, pos):
-    """Webhook que contesta con una pagina corta (el boton de Telegram abre el navegador)."""
+def webhook_respuesta(fl, nombre, ruta, pos, metodo="GET"):
+    """Webhook que contesta con una pagina (el boton de Telegram o del Centro abre el navegador)."""
     return fl.nodo(nombre, "n8n-nodes-base.webhook", 2,
-                   {"httpMethod": "GET", "path": ruta, "responseMode": "responseNode",
+                   {"httpMethod": metodo, "path": ruta, "responseMode": "responseNode",
                     "options": {}}, pos,
                    {"webhookId": str(uuid.uuid5(uuid.NAMESPACE_URL, "apardian-wh/" + ruta))})
 
@@ -1265,13 +1196,234 @@ return [{ json: { ok: false, html: pagina('Pedido desconocido', String(q.tipo ||
     return fl
 
 
+# ================================================================== 11
+JS_PAGINA = r"""
+// Página con la estética del Centro. n8n la sirve dentro de un sandbox: los
+// links van con target="_top" y el formulario con dirección absoluta.
+const pagina = (titulo, cuerpo) => '<!doctype html><html lang="es"><head><meta charset="utf-8">' +
+  '<meta name="viewport" content="width=device-width,initial-scale=1"><title>' + esc(titulo) + '</title>' +
+  '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Work+Sans:wght@400;500;600&display=swap">' +
+  '<style>:root{--bg:#0B0B0B;--panel:#141414;--panel-2:#1C1C1C;--fg:#F8F7F6;--muted:#9A9592;--line:rgba(248,247,246,.12);' +
+  '--red:#FF0033;--ok:#3DDC84;--display:"Anton",Impact,sans-serif;--body:"Work Sans",-apple-system,Arial,sans-serif}' +
+  '*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.5 var(--body)}' +
+  'main{max-width:860px;margin:0 auto;padding:28px 16px 120px}.eye{letter-spacing:.2em;font-size:11px;color:var(--red);text-transform:uppercase}' +
+  'h1{font:400 clamp(34px,7vw,56px)/1 var(--display);text-transform:uppercase;margin:6px 0 10px}h2{font:400 26px/1.1 var(--display);text-transform:uppercase;margin:36px 0 12px}' +
+  'p,.muted{color:var(--muted)}a{color:var(--fg)}.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;margin:0 0 14px}' +
+  '.meta{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:baseline}.meta b{font-size:17px}.meta span{color:var(--muted);font-size:13px}.meta .rep{color:var(--fg)}' +
+  '.tag{display:inline-block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--red);margin-bottom:4px}' +
+  '.links{font-size:13px;color:var(--muted);margin:4px 0 8px;word-break:break-word}details{margin:6px 0 10px;font-size:13px;color:var(--muted)}summary{cursor:pointer}' +
+  'label.lbl{display:block;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:10px 0 4px}' +
+  'input[type=text],textarea{width:100%;background:var(--panel-2);color:var(--fg);border:1px solid var(--line);border-radius:10px;padding:10px;font:15px/1.5 var(--body);margin-top:4px}' +
+  'textarea{min-height:200px;resize:vertical}.dec{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}' +
+  '.dec label{display:flex;gap:8px;align-items:center;border:1px solid var(--line);border-radius:999px;padding:8px 14px;cursor:pointer}' +
+  '.dec label:has(input:checked){border-color:var(--fg);background:var(--panel-2)}.dec input{accent-color:var(--red)}' +
+  '.btn{display:inline-block;border:1px solid var(--fg);background:none;color:var(--fg);border-radius:999px;padding:10px 18px;font:600 14px var(--body);cursor:pointer;text-decoration:none}' +
+  '.btn.rojo{background:var(--red);border-color:var(--red);color:#fff}.barra{position:fixed;left:0;right:0;bottom:0;background:rgba(11,11,11,.94);border-top:1px solid var(--line);padding:12px 16px}' +
+  '.barra div{max-width:860px;margin:0 auto;display:flex;gap:10px;align-items:center;justify-content:space-between}.barra .btn{padding:10px 14px;white-space:nowrap}.ok{color:var(--ok)}' +
+  '</style></head><body><main>' + cuerpo + '</main></body></html>';
+"""
+
+
+def f11():
+    """La bandeja: Martin ve cada mail, seguimiento y WhatsApp que escribió
+    Radar, lo edita si quiere y lo aprueba o lo descarta. Se abre desde el
+    Centro (Radar → Bandeja) o desde el aviso de Telegram."""
+    fl = Flujo("APARDIAN 11 · Radar: bandeja de aprobación")
+    wh = webhook_respuesta(fl, "Abrir bandeja", "apardian-bandeja", (0, 0))
+    fl.x = 240
+    cfg = config(fl, "Config", {
+        "SHEET_ID": CONFIG_BASE["SHEET_ID"],
+        "TOKEN": ("CAMBIAR-POR-UNA-CLAVE-LARGA-DE-RADAR", "string"),
+        # Vacío: se arma solo con la dirección de esta misma instancia.
+        "URL_GUARDAR": ("", "string"),
+        "MAX_EN_PANTALLA": (60, "number"),
+    })
+    leads = leer_hoja(fl, "Leer Leads", cfg, "Leads")
+    armar = codigo(fl, "Armar bandeja", JS_HTML + JS_WA + JS_PAGINA + r"""
+const c = $('Config').first().json;
+const w = $('Abrir bandeja').first().json;
+const q = w.query || {};
+if (!q.t || q.t !== c.TOKEN) return [{ json: { html: pagina('Link no válido', '<p class="eye">APARDIAN · Radar</p><h1>Link no válido</h1><p>La clave no coincide con la de n8n. Abrí la bandeja desde el Centro → Radar.</p>') } }];
+const h = w.headers || {};
+const guardar = c.URL_GUARDAR || ('https://' + (h['x-forwarded-host'] || h.host) + '/webhook/apardian-bandeja-guardar');
+const L = $('Leer Leads').all().map(r => r.json).filter(l => l.id);
+const max = Number(c.MAX_EN_PANTALLA) || 60;
+const mails = L.filter(l => l.estado === 'borrador');
+const segs = L.filter(l => /^borrador_seg[12]$/.test(l.estado || ''));
+const was = L.filter(l => l.estado === 'wa_borrador');
+const enCola = L.filter(l => /^aprobado/.test(l.estado || '')).length;
+const url = x => /^https?:\/\//.test(x) ? x : 'https://' + x;
+const rep = l => l.rating ? '★ ' + String(l.rating).replace('.', ',') + (l.resenas ? ' · ' + l.resenas + ' reseñas' : '') : '';
+const ficha = l => '<div class="meta"><b>' + esc(l.nombre) + '</b><span>' + esc([l.rubro, l.pais || 'Uruguay'].filter(Boolean).join(' · ')) + '</span>' +
+  (rep(l) ? '<span class="rep">' + esc(rep(l)) + '</span>' : '') + (l.score ? '<span>score ' + esc(l.score) + '</span>' : '') + '</div>' +
+  '<div class="links">' + (l.web ? '<a target="_top" href="' + esc(url(l.web)) + '">' + esc(String(l.web).replace(/^https?:\/\/(www\.)?/, '')) + '</a>' : 'sin web') +
+  (l.instagram ? ' · <a target="_top" href="' + esc(url(l.instagram)) + '">Instagram</a>' : '') +
+  (l.email ? ' · ' + esc(l.email) : '') + (l.telefono ? ' · ' + esc(l.telefono) : '') + '</div>' +
+  (l.problemas ? '<details><summary>Qué vio Radar</summary><p>' + esc(l.problemas).replace(/\n/g, '<br>') + '</p></details>' : '');
+const decision = (id, ops) => '<div class="dec">' + ops.map(([v, t]) =>
+  '<label><input type="radio" name="d_' + esc(id) + '" value="' + v + '"> ' + t + '</label>').join('') + '</div>';
+const tarjeta = (tipo, l, tag, asunto, cuerpo) => '<article class="card" data-tipo="' + tipo + '"><span class="tag">' + tag + '</span>' + ficha(l) +
+  (tipo === 'seg' ? '<details><summary>Primer mail: ' + esc(l.asunto) + '</summary><p>' + esc(l.borrador).replace(/\n/g, '<br>') + '</p></details>' : '') +
+  '<label class="lbl">Asunto<input type="text" name="a_' + esc(l.id) + '" value="' + esc(asunto) + '" maxlength="200"></label>' +
+  '<label class="lbl">Mail (para ' + esc(l.email) + ')<textarea name="c_' + esc(l.id) + '">' + esc(cuerpo) + '</textarea></label>' +
+  decision(l.id, [['aprobar', 'Aprobar'], ['descartar', 'Descartar']]) + '</article>';
+const tarjetaWa = l => { const n = waNumero(l.telefono, l.pais);
+  return '<article class="card" data-tipo="wa"><span class="tag">WhatsApp · lo mandás vos</span>' + ficha(l) +
+  '<label class="lbl">Mensaje<textarea data-wa="' + esc(l.id) + '" name="w_' + esc(l.id) + '">' + esc(l.wa_mensaje) + '</textarea></label>' +
+  '<p><a class="btn" target="_top" id="wa_' + esc(l.id) + '" data-tel="' + esc(n) + '" href="https://wa.me/' + esc(n) + '?text=' + encodeURIComponent(l.wa_mensaje || '') + '">Abrir en WhatsApp</a></p>' +
+  '<p class="muted">Guardá antes de abrir WhatsApp: el link sale de esta página.</p>' +
+  decision(l.id, [['mandado', 'Ya lo mandé'], ['descartar', 'Descartar']]) + '</article>'; };
+const seccion = (titulo, lista, f) => lista.length ? '<h2>' + titulo + ' · ' + lista.length + '</h2>' +
+  (lista.length > max ? '<p>Se muestran ' + max + '. Guardá y volvé a abrir para ver el resto.</p>' : '') + lista.slice(0, max).map(f).join('') : '';
+const total = mails.length + segs.length + was.length;
+const cuerpo = '<p class="eye">APARDIAN · Radar</p><h1>Bandeja</h1>' +
+  '<p>Nada sale sin tu OK. Lo que aprobás sale desde contacto@ en el horario de oficina de cada país, hasta 90 por día. ' +
+  'Lo que no marques queda para después; los cambios en un texto se guardan al aprobarlo.</p>' +
+  (enCola ? '<p class="ok">' + (enCola === 1 ? '1 aprobado espera' : enCola + ' aprobados esperan') + ' su horario.</p>' : '') +
+  (total ? '' : '<div class="card"><p>No hay nada para aprobar. Radar escribe de lunes a viernes a las 8.</p></div>') +
+  '<form method="post" action="' + esc(guardar) + '" accept-charset="utf-8">' +
+  '<input type="hidden" name="t" value="' + esc(c.TOKEN) + '">' +
+  seccion('Mails nuevos', mails, l => tarjeta('mail', l, 'Primer mail', l.asunto, l.borrador)) +
+  seccion('Seguimientos', segs, l => tarjeta('seg', l, 'Seguimiento ' + String(l.estado).slice(-1), l.seg_asunto, l.seg_cuerpo)) +
+  seccion('WhatsApp a mano', was, tarjetaWa) +
+  (total ? '<div class="barra"><div><button type="button" class="btn" id="todos">Aprobar todos los mails</button>' +
+    '<button type="submit" class="btn rojo" id="guardar">Guardar</button></div></div>' : '') +
+  '</form><script>' +
+  'document.querySelectorAll("textarea[data-wa]").forEach(function(t){t.addEventListener("input",function(){var a=document.getElementById("wa_"+t.dataset.wa);a.href="https://wa.me/"+a.dataset.tel+"?text="+encodeURIComponent(t.value);});});' +
+  'var b=document.getElementById("todos");if(b)b.onclick=function(){document.querySelectorAll("[data-tipo=mail] input[value=aprobar],[data-tipo=seg] input[value=aprobar]").forEach(function(r){r.checked=true;});cuenta();};' +
+  'function cuenta(){var n=document.querySelectorAll(".dec input:checked").length,g=document.getElementById("guardar");if(g)g.textContent=n?"Guardar "+n+(n===1?" decisión":" decisiones"):"Guardar";}' +
+  'document.addEventListener("change",cuenta);' +
+  '</script>';
+return [{ json: { html: pagina('Bandeja · Radar', cuerpo) } }];
+""")
+    r = responder(fl, "Mostrar bandeja", "$json.html", None)
+    fl.cadena(wh, cfg, leads, armar, r)
+
+    # ---- segunda entrada: el botón Guardar de la bandeja
+    y = 500
+    wh2 = webhook_respuesta(fl, "Guardar bandeja", "apardian-bandeja-guardar", (0, y), metodo="POST")
+    cfg2 = config(fl, "Config guardar", {
+        "SHEET_ID": CONFIG_BASE["SHEET_ID"],
+        "TOKEN": ("CAMBIAR-POR-UNA-CLAVE-LARGA-DE-RADAR", "string"),
+    }, pos=(240, y))
+    leads2 = leer_hoja(fl, "Leer Leads (guardar)", cfg2, "Leads", pos=(480, y))
+    aplicar = codigo(fl, "Aplicar decisiones", JS_HTML + JS_PAGINA + JS_RADAR + r"""
+// Solo cambia lo que sigue esperando aprobación: si un lead respondió o ya se
+// decidió en otra pestaña, se deja como está.
+const c = $('Config guardar').first().json;
+const b = $('Guardar bandeja').first().json.body || {};
+const h = $('Guardar bandeja').first().json.headers || {};
+const volver = '<p><a class="btn" target="_top" href="' + esc('https://' + (h['x-forwarded-host'] || h.host) +
+  '/webhook/apardian-bandeja?t=' + encodeURIComponent(c.TOKEN)) + '">Volver a la bandeja</a></p>';
+if (!b.t || b.t !== c.TOKEN) return [{ json: { filas: [], html: pagina('Clave incorrecta', '<p class="eye">APARDIAN · Radar</p><h1>No se guardó</h1><p>La clave no coincide. Abrí la bandeja desde el Centro.</p>') } }];
+const L = new Map($('Leer Leads (guardar)').all().map(r => [String(r.json.id), r.json]));
+const txt = (x, max) => String(x == null ? '' : x).replace(/\r\n/g, '\n').trim().slice(0, max);
+const filas = [], cuenta = { aprobados: 0, descartados: 0, whatsapp: 0, saltados: 0 };
+for (const k of Object.keys(b)) {
+  if (!k.startsWith('d_')) continue;
+  const id = k.slice(2), d = b[k], l = L.get(id);
+  if (!l) { cuenta.saltados++; continue; }
+  const e = String(l.estado || '');
+  if (e === 'borrador' && d === 'aprobar') {
+    filas.push({ id, estado: 'aprobado', asunto: txt(b['a_' + id], 200) || l.asunto, borrador: txt(b['c_' + id], 6000) || l.borrador }); cuenta.aprobados++;
+  } else if (e === 'borrador' && d === 'descartar') {
+    filas.push({ id, estado: 'descartado' }); cuenta.descartados++;
+  } else if (/^borrador_seg[12]$/.test(e) && d === 'aprobar') {
+    filas.push({ id, estado: 'aprobado_seg' + e.slice(-1), seg_asunto: txt(b['a_' + id], 200) || l.seg_asunto, seg_cuerpo: txt(b['c_' + id], 6000) || l.seg_cuerpo }); cuenta.aprobados++;
+  } else if (/^borrador_seg[12]$/.test(e) && d === 'descartar') {
+    // sin más seguimientos, pero si responde igual se lo atiende
+    filas.push({ id, estado: 'sin_seguimiento', seg_asunto: '', seg_cuerpo: '' }); cuenta.descartados++;
+  } else if (e === 'wa_borrador' && d === 'mandado') {
+    filas.push({ id, estado: 'wa_enviado', wa_mensaje: txt(b['w_' + id], 1500) || l.wa_mensaje, respuesta: 'WhatsApp mandado a mano · ' + hoyUY() }); cuenta.whatsapp++;
+  } else if (e === 'wa_borrador' && d === 'descartar') {
+    filas.push({ id, estado: 'descartado' }); cuenta.descartados++;
+  } else cuenta.saltados++;
+}
+const html = pagina('Guardado · Radar', '<p class="eye">APARDIAN · Radar</p><h1>Guardado</h1>' +
+  '<div class="card"><p class="ok">' + cuenta.aprobados + (cuenta.aprobados === 1 ? ' aprobado' : ' aprobados') + '</p><p>Salen desde contacto@ en el horario de oficina de cada país, hasta 90 por día.</p>' +
+  '<p>' + cuenta.descartados + (cuenta.descartados === 1 ? ' descartado · ' : ' descartados · ') + cuenta.whatsapp + ' WhatsApp marcados como mandados' +
+  (cuenta.saltados ? ' · ' + cuenta.saltados + ' sin cambios (ya no estaban esperando)' : '') + '</p></div>' + volver);
+return [{ json: { filas, html } }];
+""", pos=(720, y))
+    hay = si(fl, "¿Hay cambios?", "$json.filas.length > 0", pos=(960, y))
+    filas = codigo(fl, "Filas", "return $input.first().json.filas.map(f => ({ json: f }));", pos=(1200, y - 100))
+    g = escribir_hoja(fl, "Guardar decisiones", cfg2, "Leads", pos=(1440, y - 100))
+    r1 = responder(fl, "Página: guardado", "$('Aplicar decisiones').first().json.html", (1680, y - 100))
+    r2 = responder(fl, "Página: sin cambios", "$('Aplicar decisiones').first().json.html", (1200, y + 100))
+    fl.cadena(wh2, cfg2, leads2, aplicar, hay)
+    fl.unir(hay, filas, 0)
+    fl.unir(hay, r2, 1)
+    fl.cadena(filas, g, r1)
+    return fl
+
+
+# ================================================================== 12
+def f12():
+    """Manda lo que Martin aprobó en la bandeja: cada hora de 9 a 17, en el
+    horario de oficina del destinatario y nunca por encima del tope diario."""
+    fl = Flujo("APARDIAN 12 · Radar: envío de lo aprobado")
+    a, b = disparadores(fl, {"field": "cronExpression", "expression": "0 9-17 * * 1-5"})
+    v = dict(CONFIG_BASE)
+    v.update({
+        # Desde contacto@apardianstudio.com por el SMTP de Hostinger (25/10/2026).
+        "MI_EMAIL": ("Martin Apardian <contacto@apardianstudio.com>", "string"),
+        # Correo gratis de Hostinger: 100 por día por casilla. 90 deja lugar
+        # para lo que Martin conteste a mano desde contacto@.
+        "LIMITE_TOTAL_DIA": (90, "number"),
+        "DIRECCION_POSTAL": ("", "string"),
+    })
+    cfg = config(fl, "Config", v)
+    leads = leer_hoja(fl, "Leer Leads", cfg, "Leads")
+    bajas = leer_hoja(fl, "Leer Bajas", cfg, "Bajas")
+    elegir = codigo(fl, "Elegir aprobados", JS_RADAR + r"""
+const c = $('Config').first().json;
+const bm = new Set(), bd = new Set();
+for (const r of $('Leer Bajas').all()) {
+  if (r.json.email) bm.add(String(r.json.email).toLowerCase());
+  if (r.json.dominio) bd.add(String(r.json.dominio).toLowerCase());
+}
+const todos = $('Leer Leads').all().map(r => r.json).filter(l => l.id);
+const libre = Math.max(0, (Number(c.LIMITE_TOTAL_DIA) || 90) - mailsHoy(todos));
+const horas = Math.max(1, 18 - horaEn('America/Montevideo'));
+const tanda = Math.ceil(libre / horas);
+if (!tanda) return [];
+const orden = e => e === 'aprobado' ? 1 : 0;   // los seguimientos primero
+return todos
+  .filter(l => /^aprobado(_seg[12])?$/.test(l.estado || '') && l.email)
+  .filter(l => { const e = String(l.email).toLowerCase(); return !bm.has(e) && !bd.has(e.split('@')[1]); })
+  .filter(l => String(l.pais || '') !== 'Estados Unidos' || String(c.DIRECCION_POSTAL || '').trim())
+  .filter(l => horarioDeOficina(l.zona || 'America/Montevideo') && String(l.ultimo_envio || '') !== hoyUY())
+  .sort((x, y) => orden(x.estado) - orden(y.estado) || Number(y.score) - Number(x.score))
+  .slice(0, tanda)
+  .map(l => { const seg = l.estado !== 'aprobado';
+    return { json: { lead: l, n: seg ? Number(l.estado.slice(-1)) : 0, para: l.email,
+      asunto: seg ? l.seg_asunto : l.asunto, cuerpo: seg ? l.seg_cuerpo : l.borrador } }; })
+  .filter(x => String(x.json.asunto || '').trim() && String(x.json.cuerpo || '').trim());
+""")
+    env = enviar_mail(fl, "Enviar (contacto@)", "Config")
+    fila = codigo(fl, "Fila enviada", JS_RADAR + r"""
+const x = $('Elegir aprobados').item.json;
+const ok = !$json.error && !(Array.isArray($json.rejected) && $json.rejected.length);
+if (!ok) return { json: { id: x.lead.id, estado: 'error_envio',
+  respuesta: 'envío: ' + String(($json.error && ($json.error.message || $json.error)) || 'rechazado').slice(0, 200) } };
+if (!x.n) return { json: { id: x.lead.id, estado: 'enviado', fecha_envio: hoyUY(), ultimo_envio: hoyUY(), seguimientos: 0 } };
+return { json: { id: x.lead.id, estado: 'seguimiento_' + x.n, seguimientos: x.n, ultimo_envio: hoyUY() } };
+""", por_item=True)
+    g = escribir_hoja(fl, "Guardar envío", cfg, "Leads")
+    fl.unir(a, cfg); fl.unir(b, cfg)
+    fl.cadena(cfg, leads, bajas, elegir, env, fila, g)
+    return fl
+
+
 # ================================================================== 10
 def f10():
     fl = Flujo("APARDIAN 10 · Radar: reporte del día")
     a, b = disparadores(fl, {"field": "cronExpression", "expression": "0 18 * * 1-5"})
     v = dict(CONFIG_BASE)
     v.update({"FECHA_INICIO": ("PEGAR_FECHA_DE_ARRANQUE", "string"),
-              "CUPOS_POR_SEMANA": ("10,20,35,50", "string")})
+              "CUPOS_POR_SEMANA": ("10,20,30", "string"),
+              "URL_BANDEJA": ("https://TU-INSTANCIA.app.n8n.cloud/webhook/apardian-bandeja", "string"),
+              "TOKEN": ("CAMBIAR-POR-UNA-CLAVE-LARGA-DE-RADAR", "string")})
     cfg = config(fl, "Config", v)
     leads = leer_hoja(fl, "Leer Leads", cfg, "Leads")
     resumen = codigo(fl, "Resumen", JS_HTML + JS_FECHA + JS_RADAR + r"""
@@ -1280,7 +1432,7 @@ const c = $('Config').first().json;
 const L = $('Leer Leads').all().map(r => r.json).filter(l => l.id);
 const h = hoyUY();
 const n = f => L.filter(f).length;
-const cupos = String(c.CUPOS_POR_SEMANA || '10,20,35,50').split(',').map(Number).filter(x => x > 0);
+const cupos = String(c.CUPOS_POR_SEMANA || '10,20,30').split(',').map(Number).filter(x => x > 0);
 const ini = /^\d{4}-\d{2}-\d{2}$/.test(String(c.FECHA_INICIO || '')) ? c.FECHA_INICIO : '';
 const semana = ini ? Math.max(0, Math.floor((diasDesde(ini) + 1) / 7)) : 0;
 const cupoManana = cupos[Math.min(semana, cupos.length - 1)] || 10;
@@ -1292,14 +1444,18 @@ const stock = n(l => l.estado === 'auditado' && l.email);
 const porPais = {};
 for (const l of hoyEnv) porPais[l.pais || 'Uruguay'] = (porPais[l.pais || 'Uruguay'] || 0) + 1;
 const avisos = [];
-if (enviados >= 40 && rebotes / enviados > 0.05) avisos.push('⚠️ Rebotan ' + Math.round(100 * rebotes / enviados) + '% de los mails. Pausá el envío (AUTO_ENVIO en false en el flujo 03) y revisá las direcciones: un dominio con muchos rebotes termina en spam.');
+if (enviados >= 40 && rebotes / enviados > 0.05) avisos.push('⚠️ Rebotan ' + Math.round(100 * rebotes / enviados) + '% de los mails. Pausá el envío (apagá el flujo 12) y revisá las direcciones: un dominio con muchos rebotes termina en spam.');
 if (stock < cupoManana * 2) avisos.push('Quedan ' + stock + ' leads listos para escribir. Subí BUSQUEDAS_POR_DIA en el flujo 01 o agregá búsquedas en la hoja Busquedas.');
 if (!ini) avisos.push('Falta FECHA_INICIO en los flujos 03 y 10: Radar está en el cupo de la semana 1.');
+const pend = n(l => l.estado === 'borrador' || /^borrador_seg/.test(l.estado || '')), was = n(l => l.estado === 'wa_borrador');
+const cola = n(l => /^aprobado/.test(l.estado || ''));
 const lineas = [
   '<b>Radar · ' + esc(h) + '</b>',
   'Mails nuevos hoy: <b>' + hoyEnv.length + '</b>' + (Object.keys(porPais).length ? ' (' + Object.entries(porPais).map(([p, k]) => esc(p) + ' ' + k).join(', ') + ')' : ''),
   'En total: ' + enviados + ' enviados · ' + interes.length + ' con interés · ' + n(l => l.estado === 'baja') + ' bajas · ' + rebotes + ' rebotes',
   'Mañana: cupo de ' + cupoManana + ' · ' + stock + ' leads listos · ' + n(l => l.estado === 'nuevo') + ' por auditar',
+  'Para aprobar: ' + pend + ' mails · ' + was + ' WhatsApp · ' + cola + ' aprobados esperando horario',
+  '<a href="' + esc(c.URL_BANDEJA + '?t=' + encodeURIComponent(c.TOKEN)) + '">Abrir la bandeja</a>',
 ];
 const nuevosInteres = interes.slice(-5).map(l => '• ' + esc(l.nombre) + ' (' + esc(l.pais || 'Uruguay') + ', ' + esc(l.servicio || '') + '): ' + esc(String(l.respuesta || '').slice(0, 120)));
 if (nuevosInteres.length) lineas.push('', '<b>Para contestar vos</b>', ...nuevosInteres);
@@ -1315,10 +1471,11 @@ return [{ json: { telegram_text: lineas.join('\n') } }];
 if __name__ == "__main__":
     os.makedirs(DEST, exist_ok=True)
     for f, archivo in ((f01, "01_prospector.json"), (f02, "02_auditor.json"),
-                       (f03, "03_redactor_envio.json"), (f04, "04_seguimiento.json"),
+                       (f03, "03_redactor.json"), (f04, "04_seguimiento.json"),
                        (f05, "05_respuestas.json"), (f06, "06_bienvenida_whatsapp.json"),
                        (f07, "07_aprobacion_instagram.json"), (f08, "08_publicador_instagram.json"),
-                       (f09, "09_radar_conexion_centro.json"), (f10, "10_radar_reporte.json")):
+                       (f09, "09_radar_conexion_centro.json"), (f10, "10_radar_reporte.json"),
+                       (f11, "11_radar_bandeja.json"), (f12, "12_radar_envio.json")):
         fl = f()
         nombres = {n["name"] for n in fl.nodos}
         for a, salidas in fl.con.items():

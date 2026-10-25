@@ -30,6 +30,19 @@ viewport para celular, cantidad de imágenes, cantidad de palabras, si hay link
 de WhatsApp o Instagram, si usa HTTPS, peso del HTML, tiempo de carga) más un
 extracto del texto visible.
 
+Prioridad de APARDIAN (decisión de Martin): las **páginas web**, que es lo
+que mejor se vende a distancia. Buscamos negocios con muy buena reputación
+(rating alto con muchas reseñas en la ficha de Google, una marca conocida)
+cuya web no está a la altura: vieja, lenta, que no anda en celular, una
+plantilla sin terminar, una marca de producto sin tienda online, solo un
+Linktree, o fotos y textos que no muestran lo que venden.
+- Si la reputación es alta y la web es floja, eso es un 80+ y el servicio es
+  "pagina_web".
+- Elegí otro servicio solo si es claramente mejor que la web para ESE negocio
+  (por ejemplo, la web está bien pero las fotos son malas, en Uruguay).
+- Rubros que más nos interesan: marcas de moda (indumentaria, calzado,
+  joyería, accesorios, diseño de autor) y empresas o pymes de servicios.
+
 Tu trabajo:
 - Detectar los 1 a 3 problemas de comunicación visual o web que más le cuestan
   ventas a ESE negocio.

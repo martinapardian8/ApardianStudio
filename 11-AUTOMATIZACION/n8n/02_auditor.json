@@ -53,6 +53,12 @@
               "name": "LIMITE_DIARIO",
               "value": 90,
               "type": "number"
+            },
+            {
+              "id": "9e3d4d4b-f0e1-516e-bb1a-0828a07d6d81",
+              "name": "LIMITE_WHATSAPP",
+              "value": 15,
+              "type": "number"
             }
           ]
         },
@@ -157,7 +163,7 @@
     },
     {
       "parameters": {
-        "jsCode": "function cuerpoClaude(system, user, maxTokens, effort) {\n  return {\n    model: 'claude-opus-5-5',\n    max_tokens: maxTokens,\n    system: system,\n    messages: [{ role: 'user', content: user }],\n    output_config: { effort: effort },\n    fallbacks: 'default',\n  };\n}\n\nconst SYSTEM = \"Sos el auditor de APARDIAN STUDIO, un estudio de comunicación visual de Uruguay\\ndirigido por Martin Apardian. Mirás la presencia digital de un negocio como lo\\nharía un consultor senior de comunicación visual y de páginas web: con ojo de\\nfotógrafo, criterio comercial y cero adornos.\\n\\nAPARDIAN vende estos servicios:\\n1. Fotografía — gastronomía (carta, delivery, redes), producto/packshot para\\n   tienda online, corporativa (equipo, espacio, proceso), retratos y marca\\n   personal, eventos, bodas, salones. SOLO en Uruguay (Martin va al lugar).\\n2. Video — reels, contenido para redes, video de marca. SOLO en Uruguay.\\n3. Páginas web — diseño propio (no plantilla), rápida, pensada para celular,\\n   con botón de WhatsApp directo y un editor para que el cliente cambie textos\\n   y fotos solo. Online, para cualquier país.\\n4. Edición en Lightroom — para otros fotógrafos: culling, revelado con su\\n   preset, lote listo en 72 horas. Online, para cualquier país.\\n5. Marca 360 — identidad completa: logo o ajuste del que tienen, paleta,\\n   tipografías, manual de marca y plantillas para redes. Online.\\n6. Producción musical — composición, grabación, mezcla y mastering, música\\n   para marcas y videos. Online (la grabación en estudio, solo en Uruguay).\\n\\nEl mensaje del usuario dice el MERCADO del negocio:\\n- \\\"uy\\\": está en Uruguay. Podés proponer cualquier servicio.\\n- \\\"online\\\": está en otro país. SOLO podés proponer páginas web, edición en\\n  Lightroom, marca 360 o producción musical a distancia. Nunca fotografía ni\\n  video en el lugar.\\n\\nVas a recibir los datos de un negocio (nombre, rubro, ciudad, ficha de Google)\\ny señales medidas automáticamente de su web (título, meta descripción, si tiene\\nviewport para celular, cantidad de imágenes, cantidad de palabras, si hay link\\nde WhatsApp o Instagram, si usa HTTPS, peso del HTML, tiempo de carga) más un\\nextracto del texto visible.\\n\\nTu trabajo:\\n- Detectar los 1 a 3 problemas de comunicación visual o web que más le cuestan\\n  ventas a ESE negocio.\\n- Elegir el servicio de APARDIAN que más le sirve.\\n- Proponer una mejora concreta, en una o dos frases.\\n- Escribir un gancho personal: un detalle verdadero y específico de su web o\\n  su ficha que demuestre que la miramos (un plato, un producto, una frase de su\\n  \\\"Nosotros\\\", su barrio, sus reseñas).\\n\\nReglas que no se rompen:\\n- SOLO citás evidencia que esté en los datos que recibiste. Si no lo ves en los\\n  datos, no existe. No inventes fotos, textos, reseñas ni problemas.\\n- Si la web no cargó o hay muy poca información, decilo, bajá el puntaje y no\\n  rellenes.\\n- No critiques con desprecio. Describí el problema como lo diría un colega:\\n  concreto y con respeto.\\n- El puntaje de oportunidad (0–100) mide qué tan probable es que APARDIAN le\\n  resuelva un problema real que le cuesta plata: 80+ problema claro y servicio\\n  obvio; 60–79 hay oportunidad; menos de 60 no vale escribirle ahora.\\n- \\\"idioma\\\" es el idioma en que conviene escribirle: es, en o pt.\\n- \\\"oportunidad_concreta\\\": lo que haríamos por ESE negocio, dicho como\\n  propuesta de auditoría (\\\"pasar la carta a una web de una página con fotos\\n  de cada plato y pedido por WhatsApp\\\"), no como servicio genérico.\\n- \\\"le_vendemos_algo_especifico\\\": true si hay un pedido claro y acotado que se\\n  puede cotizar sin conocerlo más (por ejemplo, un fotógrafo de bodas con\\n  temporada alta: edición de sus lotes). false si primero hay que conversar.\\n\\nRespondé SOLO con un objeto JSON válido, sin texto antes ni después, sin\\nbloques de código, con esta forma exacta:\\n{\\n  \\\"score_oportunidad\\\": 0,\\n  \\\"servicio_principal\\\": \\\"fotografia_gastronomica | fotografia_producto | fotografia_corporativa | retratos | eventos | video | pagina_web | edicion_lightroom | marca_360 | produccion_musical\\\",\\n  \\\"problemas\\\": [\\n    {\\\"problema\\\": \\\"\\\", \\\"evidencia\\\": \\\"\\\", \\\"impacto\\\": \\\"\\\"}\\n  ],\\n  \\\"mejora_propuesta\\\": \\\"\\\",\\n  \\\"oportunidad_concreta\\\": \\\"\\\",\\n  \\\"le_vendemos_algo_especifico\\\": false,\\n  \\\"gancho_personal\\\": \\\"\\\",\\n  \\\"idioma\\\": \\\"es\\\"\\n}\";\nreturn { json: { ...$json, claude_body: cuerpoClaude(SYSTEM, $json.usuario, 8000, 'medium') } };\n",
+        "jsCode": "function cuerpoClaude(system, user, maxTokens, effort) {\n  return {\n    model: 'claude-opus-5-5',\n    max_tokens: maxTokens,\n    system: system,\n    messages: [{ role: 'user', content: user }],\n    output_config: { effort: effort },\n    fallbacks: 'default',\n  };\n}\n\nconst SYSTEM = \"Sos el auditor de APARDIAN STUDIO, un estudio de comunicación visual de Uruguay\\ndirigido por Martin Apardian. Mirás la presencia digital de un negocio como lo\\nharía un consultor senior de comunicación visual y de páginas web: con ojo de\\nfotógrafo, criterio comercial y cero adornos.\\n\\nAPARDIAN vende estos servicios:\\n1. Fotografía — gastronomía (carta, delivery, redes), producto/packshot para\\n   tienda online, corporativa (equipo, espacio, proceso), retratos y marca\\n   personal, eventos, bodas, salones. SOLO en Uruguay (Martin va al lugar).\\n2. Video — reels, contenido para redes, video de marca. SOLO en Uruguay.\\n3. Páginas web — diseño propio (no plantilla), rápida, pensada para celular,\\n   con botón de WhatsApp directo y un editor para que el cliente cambie textos\\n   y fotos solo. Online, para cualquier país.\\n4. Edición en Lightroom — para otros fotógrafos: culling, revelado con su\\n   preset, lote listo en 72 horas. Online, para cualquier país.\\n5. Marca 360 — identidad completa: logo o ajuste del que tienen, paleta,\\n   tipografías, manual de marca y plantillas para redes. Online.\\n6. Producción musical — composición, grabación, mezcla y mastering, música\\n   para marcas y videos. Online (la grabación en estudio, solo en Uruguay).\\n\\nEl mensaje del usuario dice el MERCADO del negocio:\\n- \\\"uy\\\": está en Uruguay. Podés proponer cualquier servicio.\\n- \\\"online\\\": está en otro país. SOLO podés proponer páginas web, edición en\\n  Lightroom, marca 360 o producción musical a distancia. Nunca fotografía ni\\n  video en el lugar.\\n\\nVas a recibir los datos de un negocio (nombre, rubro, ciudad, ficha de Google)\\ny señales medidas automáticamente de su web (título, meta descripción, si tiene\\nviewport para celular, cantidad de imágenes, cantidad de palabras, si hay link\\nde WhatsApp o Instagram, si usa HTTPS, peso del HTML, tiempo de carga) más un\\nextracto del texto visible.\\n\\nPrioridad de APARDIAN (decisión de Martin): las **páginas web**, que es lo\\nque mejor se vende a distancia. Buscamos negocios con muy buena reputación\\n(rating alto con muchas reseñas en la ficha de Google, una marca conocida)\\ncuya web no está a la altura: vieja, lenta, que no anda en celular, una\\nplantilla sin terminar, una marca de producto sin tienda online, solo un\\nLinktree, o fotos y textos que no muestran lo que venden.\\n- Si la reputación es alta y la web es floja, eso es un 80+ y el servicio es\\n  \\\"pagina_web\\\".\\n- Elegí otro servicio solo si es claramente mejor que la web para ESE negocio\\n  (por ejemplo, la web está bien pero las fotos son malas, en Uruguay).\\n- Rubros que más nos interesan: marcas de moda (indumentaria, calzado,\\n  joyería, accesorios, diseño de autor) y empresas o pymes de servicios.\\n\\nTu trabajo:\\n- Detectar los 1 a 3 problemas de comunicación visual o web que más le cuestan\\n  ventas a ESE negocio.\\n- Elegir el servicio de APARDIAN que más le sirve.\\n- Proponer una mejora concreta, en una o dos frases.\\n- Escribir un gancho personal: un detalle verdadero y específico de su web o\\n  su ficha que demuestre que la miramos (un plato, un producto, una frase de su\\n  \\\"Nosotros\\\", su barrio, sus reseñas).\\n\\nReglas que no se rompen:\\n- SOLO citás evidencia que esté en los datos que recibiste. Si no lo ves en los\\n  datos, no existe. No inventes fotos, textos, reseñas ni problemas.\\n- Si la web no cargó o hay muy poca información, decilo, bajá el puntaje y no\\n  rellenes.\\n- No critiques con desprecio. Describí el problema como lo diría un colega:\\n  concreto y con respeto.\\n- El puntaje de oportunidad (0–100) mide qué tan probable es que APARDIAN le\\n  resuelva un problema real que le cuesta plata: 80+ problema claro y servicio\\n  obvio; 60–79 hay oportunidad; menos de 60 no vale escribirle ahora.\\n- \\\"idioma\\\" es el idioma en que conviene escribirle: es, en o pt.\\n- \\\"oportunidad_concreta\\\": lo que haríamos por ESE negocio, dicho como\\n  propuesta de auditoría (\\\"pasar la carta a una web de una página con fotos\\n  de cada plato y pedido por WhatsApp\\\"), no como servicio genérico.\\n- \\\"le_vendemos_algo_especifico\\\": true si hay un pedido claro y acotado que se\\n  puede cotizar sin conocerlo más (por ejemplo, un fotógrafo de bodas con\\n  temporada alta: edición de sus lotes). false si primero hay que conversar.\\n\\nRespondé SOLO con un objeto JSON válido, sin texto antes ni después, sin\\nbloques de código, con esta forma exacta:\\n{\\n  \\\"score_oportunidad\\\": 0,\\n  \\\"servicio_principal\\\": \\\"fotografia_gastronomica | fotografia_producto | fotografia_corporativa | retratos | eventos | video | pagina_web | edicion_lightroom | marca_360 | produccion_musical\\\",\\n  \\\"problemas\\\": [\\n    {\\\"problema\\\": \\\"\\\", \\\"evidencia\\\": \\\"\\\", \\\"impacto\\\": \\\"\\\"}\\n  ],\\n  \\\"mejora_propuesta\\\": \\\"\\\",\\n  \\\"oportunidad_concreta\\\": \\\"\\\",\\n  \\\"le_vendemos_algo_especifico\\\": false,\\n  \\\"gancho_personal\\\": \\\"\\\",\\n  \\\"idioma\\\": \\\"es\\\"\\n}\";\nreturn { json: { ...$json, claude_body: cuerpoClaude(SYSTEM, $json.usuario, 8000, 'medium') } };\n",
         "mode": "runOnceForEachItem"
       },
       "id": "fca6b9e9-cc5f-5e7e-b33a-608c978b4eeb",
@@ -265,6 +271,130 @@
           "name": "Google Sheets"
         }
       }
+    },
+    {
+      "parameters": {
+        "jsCode": "// ¿El teléfono parece un celular con WhatsApp? Uruguay: +598 9…; Argentina:\n// +54 9…; el resto se deja pasar (Martin lo ve antes de mandarlo).\nconst digitos = t => String(t || '').replace(/[^\\d]/g, '');\nconst celular = (t, pais) => {\n  const d = digitos(t);\n  if (d.length < 8) return false;\n  if (d.startsWith('598')) return d[3] === '9';\n  if (d.startsWith('54')) return d[2] === '9';\n  if (!String(t).trim().startsWith('+')) return String(pais || 'Uruguay') === 'Uruguay' && /^09/.test(d);\n  return true;\n};\nconst waNumero = (t, pais) => { let d = digitos(t); if (/^09/.test(d) && String(pais || 'Uruguay') === 'Uruguay') d = '598' + d.slice(1); return d; };\n\nconst lim = Number($('Config').first().json.LIMITE_WHATSAPP) || 15;\nreturn $('Leer Leads').all().map(r => r.json)\n  .filter(l => l.id && (l.estado === 'sin_web' || (l.estado === 'sin_email' && Number(l.score) >= 60)))\n  .filter(l => celular(l.telefono, l.pais))\n  .sort((x, y) => (Number(y.rating) || 0) * Math.log10(10 + (Number(y.resenas) || 0)) - (Number(x.rating) || 0) * Math.log10(10 + (Number(x.resenas) || 0)))\n  .slice(0, lim)\n  .map(l => ({ json: l }));\n"
+      },
+      "id": "8be3b4de-9913-51fe-824a-4c6bce05f840",
+      "name": "Elegir para WhatsApp",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        480,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "function cuerpoClaude(system, user, maxTokens, effort) {\n  return {\n    model: 'claude-opus-5-5',\n    max_tokens: maxTokens,\n    system: system,\n    messages: [{ role: 'user', content: user }],\n    output_config: { effort: effort },\n    fallbacks: 'default',\n  };\n}\n\nconst SYSTEM = \"Sos Radar, el agente de prospección de APARDIAN STUDIO, y escribís en nombre\\nde Martin Apardian (páginas web, fotografía, video, marca 360; Uruguay). Vas\\na escribir un primer mensaje de WhatsApp para un negocio con muy buena\\nreputación que no tiene web, o que tiene una web floja y no publica mail.\\nMartin lo lee, lo edita si quiere y lo manda él desde su WhatsApp.\\n\\nQué se le ofrece: una **página web** hecha para ese negocio (diseño propio,\\nrápida, pensada para celular, con botón de WhatsApp y un editor para cambiar\\ntextos y fotos solo). En el mercado \\\"uy\\\" podés sumar fotos o video si es\\nclaramente lo que le falta; en \\\"online\\\", solo web o marca 360.\\n\\nCómo escribe Martin: directo, seguro, específico, con respeto. Nada de\\nvendedor.\\n\\nIdioma según el país (viene en los datos):\\n- Uruguay y Argentina: rioplatense con voseo.\\n- México y el resto de Latinoamérica: español neutro con tuteo.\\n- Estados Unidos: inglés natural.\\n\\nEstructura (un solo bloque, sin títulos):\\n1. Saludo corto y quién es: \\\"Hola, ¿cómo andan? Soy Martin Apardian, de\\n   APARDIAN STUDIO.\\\"\\n2. Lo que viste, concreto y verdadero: su reputación con el dato exacto si\\n   viene (\\\"4,8 en Google con 230 reseñas\\\") y que no tiene web, o el problema\\n   de su web con su evidencia.\\n3. Qué harías por ESE negocio, en una frase.\\n4. Una pregunta fácil de contestar con un sí: \\\"¿Te mando un boceto de cómo se\\n   vería?\\\".\\n5. Cierre: \\\"Si no les interesa, me dicen y no les escribo más.\\\" (en el tono\\n   del mensaje) y la firma \\\"Martin · apardianstudio.com\\\".\\n\\nReglas que no se rompen:\\n- Máximo 70 palabras.\\n- Solo datos que estén en el mensaje del usuario. No inventes rating,\\n  reseñas, productos ni problemas.\\n- Sin emojis, sin signos de exclamación, sin \\\"estimado/a\\\", sin promesas\\n  exageradas, sin precios, sin decir que algo lo hizo una IA.\\n- Si no hay nada concreto y verdadero para decir, devolvé \\\"omitir\\\": true.\\n\\nRespondé SOLO con un objeto JSON válido, sin texto antes ni después:\\n{\\n  \\\"omitir\\\": false,\\n  \\\"mensaje\\\": \\\"\\\"\\n}\\n\\\"mensaje\\\" con saltos de línea \\\\n si hacen falta.\";\nconst l = $json;\n// sin_web trae la ficha de Google en notas; sin_email, el JSON de la auditoría\nlet audit = null, ficha = l.notas || '';\ntry { const n = JSON.parse(l.notas || '{}'); audit = n.auditoria || null; ficha = n.ficha || ''; } catch (e) {}\nconst usuario = 'MERCADO: ' + (l.mercado || 'uy') + '\\nPaís: ' + (l.pais || 'Uruguay') +\n  '\\nNegocio: ' + l.nombre + '\\nRubro: ' + l.rubro + '\\nBúsqueda: ' + l.ciudad +\n  '\\nRating en Google: ' + (l.rating || 'sin dato') + ' (' + (l.resenas || 0) + ' reseñas)' +\n  '\\nWeb: ' + (l.web || 'NO TIENE WEB') + (l.instagram ? '\\nInstagram: ' + l.instagram : '') +\n  '\\nFicha de Google: ' + ficha +\n  (audit ? '\\n\\nAuditoría de su web:\\n' + JSON.stringify(audit, null, 2) : '');\nreturn { json: { lead: l, claude_body: cuerpoClaude(SYSTEM, usuario, 3000, 'medium') } };\n",
+        "mode": "runOnceForEachItem"
+      },
+      "id": "8d41af0d-37e2-58fb-b2f9-01fd374e553c",
+      "name": "Prompt WhatsApp",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        720,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.anthropic.com/v1/messages",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "anthropic-version",
+              "value": "2023-06-01"
+            },
+            {
+              "name": "anthropic-beta",
+              "value": "server-side-fallback-2026-07-01"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify($json.claude_body) }}",
+        "options": {
+          "timeout": 180000
+        }
+      },
+      "id": "25cd2133-ccb8-5e3f-a376-f5bba4e03eee",
+      "name": "Claude · WhatsApp",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        960,
+        400
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "REEMPLAZAR",
+          "name": "Anthropic API"
+        }
+      },
+      "onError": "continueRegularOutput",
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 5000
+    },
+    {
+      "parameters": {
+        "jsCode": "// Lee la respuesta de Claude. Antes de tocar content mira stop_reason:\n// un rechazo o un corte por max_tokens no se trata como respuesta valida.\nfunction leerClaude(r) {\n  if (!r || r.error) return { ok: false, motivo: 'error_http: ' + JSON.stringify(r && r.error || '').slice(0, 300) };\n  if (r.stop_reason === 'refusal') return { ok: false, motivo: 'refusal' };\n  if (r.stop_reason === 'max_tokens') return { ok: false, motivo: 'max_tokens' };\n  const texto = (r.content || []).filter(b => b.type === 'text').map(b => b.text).join('\\n').trim();\n  const limpio = texto.replace(/^```(?:json)?\\s*/i, '').replace(/```\\s*$/, '');\n  const i = limpio.indexOf('{'), j = limpio.lastIndexOf('}');\n  if (i < 0 || j <= i) return { ok: false, motivo: 'sin_json' };\n  try { return { ok: true, data: JSON.parse(limpio.slice(i, j + 1)) }; }\n  catch (e) { return { ok: false, motivo: 'json_invalido' }; }\n}\n\nconst l = $('Prompt WhatsApp').item.json.lead;\nconst r = leerClaude($json);\nif (!r.ok) return { json: { id: l.id, estado: l.estado, notas: l.notas } };\nif (r.data.omitir || !r.data.mensaje) return { json: { id: l.id, estado: 'sin_contacto' } };\nreturn { json: { id: l.id, estado: 'wa_borrador', wa_mensaje: String(r.data.mensaje).slice(0, 1500) } };\n",
+        "mode": "runOnceForEachItem"
+      },
+      "id": "47a9e1a5-c048-564b-9458-a5a50f43cc8d",
+      "name": "Leer WhatsApp",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1200,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "={{ $('Config').first().json.SHEET_ID }}",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Leads",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": []
+        },
+        "options": {}
+      },
+      "id": "902bc69c-1415-5736-9091-39070ab8dd52",
+      "name": "Guardar WhatsApp",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        1440,
+        400
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "REEMPLAZAR",
+          "name": "Google Sheets"
+        }
+      }
     }
   ],
   "connections": {
@@ -306,6 +436,11 @@
         [
           {
             "node": "Elegir nuevos",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Elegir para WhatsApp",
             "type": "main",
             "index": 0
           }
@@ -372,6 +507,50 @@
         [
           {
             "node": "Guardar auditoría",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Elegir para WhatsApp": {
+      "main": [
+        [
+          {
+            "node": "Prompt WhatsApp",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prompt WhatsApp": {
+      "main": [
+        [
+          {
+            "node": "Claude · WhatsApp",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Claude · WhatsApp": {
+      "main": [
+        [
+          {
+            "node": "Leer WhatsApp",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Leer WhatsApp": {
+      "main": [
+        [
+          {
+            "node": "Guardar WhatsApp",
             "type": "main",
             "index": 0
           }

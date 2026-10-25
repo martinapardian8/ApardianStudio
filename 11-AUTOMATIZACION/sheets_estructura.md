@@ -34,8 +34,11 @@ también puede editar a mano (por ejemplo, poner `descartado` a un lead).
 | `zona` | Zona horaria del negocio: el mail sale en su horario de oficina | 01 |
 | `oferta_id` | Oferta aprobada que usó el mail, si usó alguna | 03 |
 | `ultimo_envio` | Último día que le salió un mail (primero o seguimiento). Con esto se cuenta el tope diario de la casilla | 03 / 04 |
-| `seg_asunto` | Asunto del seguimiento que espera aprobación (solo con `AUTO_ENVIO` en `false`) | 04 |
-| `seg_cuerpo` | Cuerpo de ese seguimiento | 04 |
+| `seg_asunto` | Asunto del seguimiento (Martin lo aprueba o edita en la bandeja) | 04 / 11 |
+| `seg_cuerpo` | Cuerpo de ese seguimiento | 04 / 11 |
+| `rating` | Rating en Google (solo entran los de 4,5 o más) | 01 |
+| `resenas` | Cantidad de reseñas en Google (mínimo 15) | 01 |
+| `wa_mensaje` | WhatsApp que Martin manda a mano a quien no tiene web o mail | 02 / 11 |
 
 El auditor reemplaza `notas` por un JSON con la auditoría completa y la ficha
 de Google: lo usan el redactor y el seguimiento 1. Si Martin quiere anotar algo,
@@ -43,17 +46,25 @@ mejor al final de `respuesta` o en una columna extra.
 
 ### Estados
 
+Nada sale sin que Martin lo apruebe en la bandeja (flujo 11, se abre desde el
+Centro → Radar). El flujo 12 manda lo aprobado.
+
 ```
-nuevo → auditado → borrador → enviado → borrador_seg1 → seguimiento_1 → borrador_seg2 → seguimiento_2 → cerrado_sin_respuesta
-      ↘ descartado (score < 60) · sin_email · error_auditoria
-enviado / seguimiento_* → interesado | pide_precio | no_ahora | baja | rebote
+nuevo → auditado → borrador ─(Martin aprueba)→ aprobado ─(12)→ enviado
+enviado → borrador_seg1 → aprobado_seg1 → seguimiento_1 → borrador_seg2 → aprobado_seg2 → seguimiento_2 → cerrado_sin_respuesta
+borrador ─(Martin descarta)→ descartado · borrador_segN ─(descarta)→ sin_seguimiento
+nuevo ↘ descartado (score < 60) · sin_email · error_auditoria
+sin_web / sin_email con celular → wa_borrador ─(Martin lo manda a mano)→ wa_enviado
+enviado / seguimiento_* / sin_seguimiento → interesado | pide_precio | no_ahora | baja | rebote
 interesado / pide_precio → (pasa a 09-ESTUDIO/clientes.md como "conversando")
 ```
 
-- `sin_web`: no tiene sitio. Igual puede ser buen prospecto para **página web**:
-  queda para contacto manual por Instagram o WhatsApp.
-- `sin_email`: tiene web pero no publica mail. Contacto manual por formulario,
-  Instagram o teléfono.
+- `sin_web`: no tiene sitio. Es el mejor prospecto para **página web**. Si la
+  ficha trae un celular, Radar le escribe un WhatsApp (`wa_borrador`) que
+  Martin manda a mano desde la bandeja; si no, queda para contacto manual.
+- `sin_email`: tiene web pero no publica mail. Igual que arriba: WhatsApp si
+  hay celular y el puntaje es 60 o más.
+- `sin_contacto`: Radar no encontró nada concreto para decirle por WhatsApp.
 
 ## Hoja `Bajas`
 

@@ -7,7 +7,7 @@
           "interval": [
             {
               "field": "cronExpression",
-              "expression": "30 9-17 * * 1-5"
+              "expression": "45 7 * * 1-5"
             }
           ]
         }
@@ -49,39 +49,15 @@
               "type": "string"
             },
             {
-              "id": "4f2139af-8613-50b4-9cd3-61ada64c52fd",
-              "name": "MI_EMAIL",
-              "value": "Martin Apardian <contacto@apardianstudio.com>",
-              "type": "string"
-            },
-            {
-              "id": "98651c7b-c5ec-5247-aa12-a039f636fe48",
-              "name": "AUTO_ENVIO",
-              "value": true,
-              "type": "boolean"
-            },
-            {
-              "id": "3cbd2564-e57d-50d9-a3e5-3b4b5579d4f8",
-              "name": "LIMITE_TOTAL_DIA",
-              "value": 90,
+              "id": "b9c19327-e9c0-5f1e-9d3d-96104682bffb",
+              "name": "MAX_POR_DIA",
+              "value": 40,
               "type": "number"
             },
             {
               "id": "865f970a-1ccd-5cd9-a111-9cc213b3e7c0",
               "name": "DIRECCION_POSTAL",
               "value": "",
-              "type": "string"
-            },
-            {
-              "id": "35783d23-1613-5dd0-a6e9-f44540df40d4",
-              "name": "URL_APROBAR",
-              "value": "https://TU-INSTANCIA.app.n8n.cloud/webhook/apardian-aprobar",
-              "type": "string"
-            },
-            {
-              "id": "0433ab51-b6e2-5148-ad1c-78c20a737816",
-              "name": "TOKEN",
-              "value": "CAMBIAR-POR-UNA-CLAVE-LARGA",
               "type": "string"
             }
           ]
@@ -163,7 +139,7 @@
     },
     {
       "parameters": {
-        "jsCode": "const hoy = () => new Date().toISOString().slice(0, 10);\nconst diasDesde = f => f ? Math.floor((Date.now() - new Date(f + 'T12:00:00').getTime()) / 86400000) : -1;\n\n// Hora y día en la zona horaria del destinatario (Intl viene con Node).\nconst horaEn = z => { try { return Number(new Intl.DateTimeFormat('en-US', { timeZone: z, hour: 'numeric', hourCycle: 'h23' }).format(new Date())); } catch (e) { return 12; } };\nconst diaEn = z => { try { return new Intl.DateTimeFormat('en-US', { timeZone: z, weekday: 'short' }).format(new Date()); } catch (e) { return 'Mon'; } };\nconst horarioDeOficina = z => { const h = horaEn(z), d = diaEn(z); return d !== 'Sat' && d !== 'Sun' && h >= 9 && h < 17; };\nconst hoyUY = () => new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Montevideo' }).format(new Date());\n// Cuántos mails salieron hoy desde la casilla (primeros y seguimientos): cada\n// lead recibe como mucho uno por día, así que alcanza con contar ultimo_envio.\nconst mailsHoy = leads => leads.filter(l => String(l.ultimo_envio || '') === hoyUY()).length;\n\n// Día 4 sin respuesta: seguimiento 1. Día 9: seguimiento 2. Día 14: se cierra.\n// Quien respondió ya cambió de estado (flujo 05) y no entra acá. Corre cada\n// hora, solo toma a quien está en horario de oficina en su país y nunca pasa\n// el tope diario de la casilla.\nconst c = $('Config').first().json;\nconst todos = $('Leer Leads').all().map(r => r.json).filter(l => l.id);\nlet libre = Math.max(0, (Number(c.LIMITE_TOTAL_DIA) || 90) - mailsHoy(todos));\nconst horas = Math.max(1, 18 - horaEn('America/Montevideo'));\nlibre = Math.ceil(libre / horas);\nconst bm = new Set($('Leer Bajas').all().map(r => String(r.json.email || '').toLowerCase()));\nconst out = [];\nfor (const l of todos) {\n  const d = diasDesde(l.fecha_envio);\n  if (!l.fecha_envio || !l.email || bm.has(String(l.email).toLowerCase())) continue;\n  if (l.estado === 'seguimiento_2' && d >= 14) { out.push({ json: { lead: l, n: 0, cerrar: true } }); continue; }\n  if (!horarioDeOficina(l.zona || 'America/Montevideo') || String(l.ultimo_envio || '') === hoyUY()) continue;\n  if (l.estado === 'enviado' && d >= 4 && libre > 0) { out.push({ json: { lead: l, n: 1, cerrar: false } }); libre--; }\n  else if (l.estado === 'seguimiento_1' && d >= 9 && libre > 0) { out.push({ json: { lead: l, n: 2, cerrar: false } }); libre--; }\n}\nreturn out;\n"
+        "jsCode": "const hoy = () => new Date().toISOString().slice(0, 10);\nconst diasDesde = f => f ? Math.floor((Date.now() - new Date(f + 'T12:00:00').getTime()) / 86400000) : -1;\n\n// Día 4 sin respuesta: seguimiento 1. Día 9: seguimiento 2 (y al menos 4 días\n// después del anterior). Día 14: se cierra. Quien respondió ya cambió de\n// estado (flujo 05) y no entra acá.\nconst c = $('Config').first().json;\nconst bm = new Set($('Leer Bajas').all().map(r => String(r.json.email || '').toLowerCase()));\nconst out = [];\nlet lim = Number(c.MAX_POR_DIA) || 40;\nfor (const l of $('Leer Leads').all().map(r => r.json).filter(x => x.id)) {\n  const d = diasDesde(l.fecha_envio), u = l.ultimo_envio ? diasDesde(l.ultimo_envio) : d;\n  if (!l.fecha_envio || !l.email || bm.has(String(l.email).toLowerCase())) continue;\n  if (['seguimiento_2', 'sin_seguimiento'].includes(l.estado) && d >= 14) { out.push({ json: { lead: l, n: 0, cerrar: true } }); continue; }\n  if (lim <= 0 || u < 4) continue;\n  if (l.estado === 'enviado' && d >= 4) { out.push({ json: { lead: l, n: 1, cerrar: false } }); lim--; }\n  else if (l.estado === 'seguimiento_1' && d >= 9) { out.push({ json: { lead: l, n: 2, cerrar: false } }); lim--; }\n}\nreturn out;\n"
       },
       "id": "6465740e-8347-5899-87fe-bc5761d11024",
       "name": "¿A quién le toca?",
@@ -261,7 +237,7 @@
     },
     {
       "parameters": {
-        "jsCode": "function cuerpoClaude(system, user, maxTokens, effort) {\n  return {\n    model: 'claude-opus-5-5',\n    max_tokens: maxTokens,\n    system: system,\n    messages: [{ role: 'user', content: user }],\n    output_config: { effort: effort },\n    fallbacks: 'default',\n  };\n}\n\nconst SYSTEM = \"Sos Martin Apardian (APARDIAN STUDIO). Escribís un seguimiento a un negocio al\\nque ya le mandaste un primer mail y no contestó. Recibís el mail original, la\\nauditoría y el número de seguimiento (1 o 2).\\n\\nSeguimiento 1 (día 4) — aporta algo:\\n- No repitas el primer mail ni preguntes \\\"¿viste mi mail?\\\".\\n- Dale una idea concreta y usable que salga de la auditoría (ej.: \\\"la foto de la\\n  milanesa que tenés en portada, con luz lateral y fondo oscuro, se vería como\\n  el plato que es\\\"). Que sirva aunque nunca te contrate.\\n- Cerrá con la misma pregunta fácil del primer mail, reformulada.\\n- Máximo 70 palabras.\\n\\nSeguimiento 2 (día 9) — cierre elegante:\\n- Breve, sin culpa, sin presión. Dejás la puerta abierta y te despedís.\\n- Ejemplo de tono: \\\"No te escribo más por esto. Si en algún momento querés\\n  renovar las fotos de la carta, ya sabés dónde estoy.\\\"\\n- Máximo 50 palabras.\\n\\nSiempre: el mismo idioma y el mismo trato que el primer mail (vos en Uruguay\\ny Argentina, tú en México, Latinoamérica y España, inglés en EE.UU.), frases\\ncortas, sin emojis, sin \\\"estimado/a\\\", sin signos de exclamación. Este mail sale\\nsolo, sin que Martin lo lea: no inventes nada que no esté en los datos. Firma\\ncorta:\\nMartin · apardianstudio.com · +598 91 962 962\\n(y la DIRECCION_POSTAL debajo, si viene en los datos)\\nY la línea: \\\"Si no te interesa, respondé 'no' y no te escribo más.\\\"\\n\\nEl asunto es el mismo del primer mail con \\\"Re: \\\" adelante.\\n\\nRespondé SOLO con un objeto JSON válido:\\n{\\n  \\\"asunto\\\": \\\"\\\",\\n  \\\"cuerpo\\\": \\\"\\\"\\n}\";\nconst c = $('Config').first().json;\nconst x = $json;\nlet audit = {};\ntry { audit = JSON.parse(x.lead.notas || '{}').auditoria || {}; } catch (e) {}\nconst usuario = 'Seguimiento número: ' + x.n + '\\nNegocio: ' + x.lead.nombre +\n  '\\nPaís: ' + (x.lead.pais || 'Uruguay') + '\\nIdioma: ' + (x.lead.idioma || 'es') +\n  (String(x.lead.pais || '') === 'Estados Unidos' ? '\\nDIRECCION_POSTAL: ' + c.DIRECCION_POSTAL : '') +\n  '\\n\\nPrimer mail (asunto): ' + x.lead.asunto + '\\nPrimer mail (cuerpo):\\n' + x.lead.borrador +\n  '\\n\\nAuditoría:\\n' + JSON.stringify(audit, null, 2);\nreturn { json: { ...x, claude_body: cuerpoClaude(SYSTEM, usuario, 4000, 'medium') } };\n",
+        "jsCode": "function cuerpoClaude(system, user, maxTokens, effort) {\n  return {\n    model: 'claude-opus-5-5',\n    max_tokens: maxTokens,\n    system: system,\n    messages: [{ role: 'user', content: user }],\n    output_config: { effort: effort },\n    fallbacks: 'default',\n  };\n}\n\nconst SYSTEM = \"Sos Martin Apardian (APARDIAN STUDIO). Escribís un seguimiento a un negocio al\\nque ya le mandaste un primer mail y no contestó. Recibís el mail original, la\\nauditoría y el número de seguimiento (1 o 2).\\n\\nSeguimiento 1 (día 4) — aporta algo:\\n- No repitas el primer mail ni preguntes \\\"¿viste mi mail?\\\".\\n- Dale una idea concreta y usable que salga de la auditoría (ej.: \\\"la foto de la\\n  milanesa que tenés en portada, con luz lateral y fondo oscuro, se vería como\\n  el plato que es\\\"). Que sirva aunque nunca te contrate.\\n- Cerrá con la misma pregunta fácil del primer mail, reformulada.\\n- Máximo 70 palabras.\\n\\nSeguimiento 2 (día 9) — cierre elegante:\\n- Breve, sin culpa, sin presión. Dejás la puerta abierta y te despedís.\\n- Ejemplo de tono: \\\"No te escribo más por esto. Si en algún momento querés\\n  renovar las fotos de la carta, ya sabés dónde estoy.\\\"\\n- Máximo 50 palabras.\\n\\nSiempre: el mismo idioma y el mismo trato que el primer mail (vos en Uruguay\\ny Argentina, tú en México, Latinoamérica y España, inglés en EE.UU.), frases\\ncortas, sin emojis, sin \\\"estimado/a\\\", sin signos de exclamación. Martin lo lee\\nantes de que salga, pero escribilo listo para mandar: no inventes nada que no\\nesté en los datos. Firma\\ncorta:\\nMartin · apardianstudio.com · +598 91 962 962\\n(y la DIRECCION_POSTAL debajo, si viene en los datos)\\nY la línea: \\\"Si no te interesa, respondé 'no' y no te escribo más.\\\"\\n\\nEl asunto es el mismo del primer mail con \\\"Re: \\\" adelante.\\n\\nRespondé SOLO con un objeto JSON válido:\\n{\\n  \\\"asunto\\\": \\\"\\\",\\n  \\\"cuerpo\\\": \\\"\\\"\\n}\";\nconst c = $('Config').first().json;\nconst x = $json;\nlet audit = {};\ntry { audit = JSON.parse(x.lead.notas || '{}').auditoria || {}; } catch (e) {}\nconst usuario = 'Seguimiento número: ' + x.n + '\\nNegocio: ' + x.lead.nombre +\n  '\\nPaís: ' + (x.lead.pais || 'Uruguay') + '\\nIdioma: ' + (x.lead.idioma || 'es') +\n  (String(x.lead.pais || '') === 'Estados Unidos' ? '\\nDIRECCION_POSTAL: ' + c.DIRECCION_POSTAL : '') +\n  '\\n\\nPrimer mail (asunto): ' + x.lead.asunto + '\\nPrimer mail (cuerpo):\\n' + x.lead.borrador +\n  '\\n\\nAuditoría:\\n' + JSON.stringify(audit, null, 2);\nreturn { json: { ...x, claude_body: cuerpoClaude(SYSTEM, usuario, 4000, 'medium') } };\n",
         "mode": "runOnceForEachItem"
       },
       "id": "032d57e9-b985-542f-bfa3-195ea6675845",
@@ -320,7 +296,7 @@
     },
     {
       "parameters": {
-        "jsCode": "// Lee la respuesta de Claude. Antes de tocar content mira stop_reason:\n// un rechazo o un corte por max_tokens no se trata como respuesta valida.\nfunction leerClaude(r) {\n  if (!r || r.error) return { ok: false, motivo: 'error_http: ' + JSON.stringify(r && r.error || '').slice(0, 300) };\n  if (r.stop_reason === 'refusal') return { ok: false, motivo: 'refusal' };\n  if (r.stop_reason === 'max_tokens') return { ok: false, motivo: 'max_tokens' };\n  const texto = (r.content || []).filter(b => b.type === 'text').map(b => b.text).join('\\n').trim();\n  const limpio = texto.replace(/^```(?:json)?\\s*/i, '').replace(/```\\s*$/, '');\n  const i = limpio.indexOf('{'), j = limpio.lastIndexOf('}');\n  if (i < 0 || j <= i) return { ok: false, motivo: 'sin_json' };\n  try { return { ok: true, data: JSON.parse(limpio.slice(i, j + 1)) }; }\n  catch (e) { return { ok: false, motivo: 'json_invalido' }; }\n}\n\nconst c = $('Config').first().json;\nconst x = $('Prompt seguimiento').item.json;\nconst r = leerClaude($json);\nif (!r.ok) throw new Error('Seguimiento de ' + x.lead.nombre + ': ' + r.motivo);\nconst asunto = r.data.asunto || ('Re: ' + x.lead.asunto);\nreturn { json: { lead: x.lead, n: x.n, para: x.lead.email, asunto, cuerpo: r.data.cuerpo, auto: !!c.AUTO_ENVIO } };\n",
+        "jsCode": "// Lee la respuesta de Claude. Antes de tocar content mira stop_reason:\n// un rechazo o un corte por max_tokens no se trata como respuesta valida.\nfunction leerClaude(r) {\n  if (!r || r.error) return { ok: false, motivo: 'error_http: ' + JSON.stringify(r && r.error || '').slice(0, 300) };\n  if (r.stop_reason === 'refusal') return { ok: false, motivo: 'refusal' };\n  if (r.stop_reason === 'max_tokens') return { ok: false, motivo: 'max_tokens' };\n  const texto = (r.content || []).filter(b => b.type === 'text').map(b => b.text).join('\\n').trim();\n  const limpio = texto.replace(/^```(?:json)?\\s*/i, '').replace(/```\\s*$/, '');\n  const i = limpio.indexOf('{'), j = limpio.lastIndexOf('}');\n  if (i < 0 || j <= i) return { ok: false, motivo: 'sin_json' };\n  try { return { ok: true, data: JSON.parse(limpio.slice(i, j + 1)) }; }\n  catch (e) { return { ok: false, motivo: 'json_invalido' }; }\n}\n\nconst x = $('Prompt seguimiento').item.json;\nconst r = leerClaude($json);\nif (!r.ok) return { json: { id: x.lead.id, estado: x.lead.estado, respuesta: 'seguimiento ' + x.n + ' sin escribir: ' + r.motivo } };\nreturn { json: { id: x.lead.id, estado: 'borrador_seg' + x.n,\n  seg_asunto: String(r.data.asunto || ('Re: ' + x.lead.asunto)).slice(0, 200), seg_cuerpo: String(r.data.cuerpo || '') } };\n",
         "mode": "runOnceForEachItem"
       },
       "id": "1af8e488-0ca5-5522-a3c0-80407e938a1c",
@@ -330,146 +306,6 @@
       "position": [
         1920,
         0
-      ]
-    },
-    {
-      "parameters": {
-        "conditions": {
-          "options": {
-            "caseSensitive": true,
-            "leftValue": "",
-            "typeValidation": "loose"
-          },
-          "conditions": [
-            {
-              "id": "c26dccda-ee82-5683-8cad-06623325d4b4",
-              "leftValue": "={{ $json.auto }}",
-              "rightValue": "",
-              "operator": {
-                "type": "boolean",
-                "operation": "true",
-                "singleValue": true
-              }
-            }
-          ],
-          "combinator": "and"
-        },
-        "options": {}
-      },
-      "id": "f40db498-16e4-51b2-9651-ec224360a3dd",
-      "name": "¿Auto-envío?",
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 2,
-      "position": [
-        2160,
-        0
-      ]
-    },
-    {
-      "parameters": {
-        "fromEmail": "={{ $('Config').first().json.MI_EMAIL }}",
-        "toEmail": "={{ $json.para }}",
-        "subject": "={{ $json.asunto }}",
-        "emailFormat": "text",
-        "text": "={{ $json.cuerpo }}",
-        "options": {
-          "appendAttribution": false
-        }
-      },
-      "id": "fbb66de5-5382-5ccd-b278-a5c2dc408076",
-      "name": "Enviar seguimiento (contacto@)",
-      "type": "n8n-nodes-base.emailSend",
-      "typeVersion": 2.1,
-      "position": [
-        2400,
-        0
-      ],
-      "credentials": {
-        "smtp": {
-          "id": "REEMPLAZAR",
-          "name": "Hostinger SMTP (contacto@)"
-        }
-      },
-      "onError": "continueRegularOutput"
-    },
-    {
-      "parameters": {
-        "jsCode": "// Hora y día en la zona horaria del destinatario (Intl viene con Node).\nconst horaEn = z => { try { return Number(new Intl.DateTimeFormat('en-US', { timeZone: z, hour: 'numeric', hourCycle: 'h23' }).format(new Date())); } catch (e) { return 12; } };\nconst diaEn = z => { try { return new Intl.DateTimeFormat('en-US', { timeZone: z, weekday: 'short' }).format(new Date()); } catch (e) { return 'Mon'; } };\nconst horarioDeOficina = z => { const h = horaEn(z), d = diaEn(z); return d !== 'Sat' && d !== 'Sun' && h >= 9 && h < 17; };\nconst hoyUY = () => new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Montevideo' }).format(new Date());\n// Cuántos mails salieron hoy desde la casilla (primeros y seguimientos): cada\n// lead recibe como mucho uno por día, así que alcanza con contar ultimo_envio.\nconst mailsHoy = leads => leads.filter(l => String(l.ultimo_envio || '') === hoyUY()).length;\n\nconst x = $('Leer seguimiento').item.json;\nconst ok = !$json.error && !(Array.isArray($json.rejected) && $json.rejected.length);\nreturn { json: ok ? { id: x.lead.id, estado: 'seguimiento_' + x.n, seguimientos: x.n, ultimo_envio: hoyUY() }\n                  : { id: x.lead.id, estado: 'error_envio', respuesta: 'seguimiento ' + x.n + ': ' + String(($json.error && ($json.error.message || $json.error)) || 'rechazado').slice(0, 200) } };\n",
-        "mode": "runOnceForEachItem"
-      },
-      "id": "3a9ef8e1-5912-5339-a04b-ab4eaf9b8f0f",
-      "name": "Fila seguimiento enviado",
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        2640,
-        0
-      ]
-    },
-    {
-      "parameters": {
-        "operation": "update",
-        "documentId": {
-          "__rl": true,
-          "value": "={{ $('Config').first().json.SHEET_ID }}",
-          "mode": "id"
-        },
-        "sheetName": {
-          "__rl": true,
-          "value": "Leads",
-          "mode": "name"
-        },
-        "columns": {
-          "mappingMode": "autoMapInputData",
-          "value": {},
-          "matchingColumns": [
-            "id"
-          ],
-          "schema": []
-        },
-        "options": {}
-      },
-      "id": "b175f5c6-bb44-5e3e-bea6-352cb710b117",
-      "name": "Guardar seguimiento enviado",
-      "type": "n8n-nodes-base.googleSheets",
-      "typeVersion": 4.5,
-      "position": [
-        2880,
-        0
-      ],
-      "credentials": {
-        "googleSheetsOAuth2Api": {
-          "id": "REEMPLAZAR",
-          "name": "Google Sheets"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "jsCode": "const esc = s => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');\n\nconst c = $('Config').first().json;\nconst x = $json;\nconst k = x.n === 1 ? 'seg1' : 'seg2';\nconst link = acc => c.URL_APROBAR + '?id=' + encodeURIComponent(x.lead.id) + '&k=' + k + '&a=' + acc + '&t=' + encodeURIComponent(c.TOKEN);\nreturn { json: {\n  fila: { id: x.lead.id, estado: 'borrador_seg' + x.n, seg_asunto: x.asunto, seg_cuerpo: x.cuerpo },\n  telegram_text: '<b>Seguimiento ' + x.n + ' para ' + esc(x.lead.nombre) + '</b>\\n\\n<b>' + esc(x.asunto) + '</b>\\n' +\n    esc(x.cuerpo) + '\\n\\n<a href=\"' + esc(link('enviar')) + '\">✅ Enviar</a>   <a href=\"' + esc(link('descartar')) + '\">✖️ Descartar</a>',\n} };\n",
-        "mode": "runOnceForEachItem"
-      },
-      "id": "da6df6e1-7ffd-58bd-91bb-dbd327f226be",
-      "name": "Seguimiento para aprobar",
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        2880,
-        240
-      ]
-    },
-    {
-      "parameters": {
-        "jsCode": "return { json: $json.fila };\n",
-        "mode": "runOnceForEachItem"
-      },
-      "id": "405f53ce-c7b8-5e59-b8dc-103e4ddbfc4a",
-      "name": "Fila seguimiento borrador",
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        3120,
-        240
       ]
     },
     {
@@ -500,38 +336,13 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.5,
       "position": [
-        3360,
-        240
+        2160,
+        0
       ],
       "credentials": {
         "googleSheetsOAuth2Api": {
           "id": "REEMPLAZAR",
           "name": "Google Sheets"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "chatId": "={{ $('Config').first().json.TELEGRAM_CHAT_ID }}",
-        "text": "={{ $('Seguimiento para aprobar').item.json.telegram_text }}",
-        "additionalFields": {
-          "appendAttribution": false,
-          "parse_mode": "HTML",
-          "disable_web_page_preview": true
-        }
-      },
-      "id": "69ac23eb-9a46-52d9-80bb-8adc790dc00f",
-      "name": "Pedir aprobación",
-      "type": "n8n-nodes-base.telegram",
-      "typeVersion": 1.2,
-      "position": [
-        3600,
-        240
-      ],
-      "credentials": {
-        "telegramApi": {
-          "id": "REEMPLAZAR",
-          "name": "Telegram Apardian"
         }
       }
     }
@@ -658,80 +469,7 @@
       "main": [
         [
           {
-            "node": "¿Auto-envío?",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "¿Auto-envío?": {
-      "main": [
-        [
-          {
-            "node": "Enviar seguimiento (contacto@)",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Seguimiento para aprobar",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Enviar seguimiento (contacto@)": {
-      "main": [
-        [
-          {
-            "node": "Fila seguimiento enviado",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Fila seguimiento enviado": {
-      "main": [
-        [
-          {
-            "node": "Guardar seguimiento enviado",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Seguimiento para aprobar": {
-      "main": [
-        [
-          {
-            "node": "Fila seguimiento borrador",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Fila seguimiento borrador": {
-      "main": [
-        [
-          {
             "node": "Guardar borrador seguimiento",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Guardar borrador seguimiento": {
-      "main": [
-        [
-          {
-            "node": "Pedir aprobación",
             "type": "main",
             "index": 0
           }

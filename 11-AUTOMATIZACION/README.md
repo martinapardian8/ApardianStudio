@@ -45,10 +45,10 @@ Cinco agentes, cada uno hace una sola cosa. Ninguno manda nada sin que Martin lo
 
 ```
  ┌──────────────┐   ┌──────────────┐   ┌──────────────┐   ┌───────────────────┐
- │ 01 PROSPECTOR│──▶│ 02 AUDITOR   │──▶│ 03 REDACTOR  │──▶│ APROBACIÓN MARTIN │
- │ Google Places│   │ mira la web, │   │ escribe el   │   │ sale de contacto@ │
- │ rubro×ciudad │   │ puntúa 0-100 │   │ mail (≤120   │   │ (o pide OK por    │
- │ → Leads      │   │ y detecta el │   │ palabras)    │   │ Telegram)         │
+ │ 01 PROSPECTOR│──▶│ 02 AUDITOR   │──▶│ 03 REDACTOR  │──▶│ 11 BANDEJA        │
+ │ Google Places│   │ mira la web, │   │ escribe el   │   │ Martin aprueba o  │
+ │ rating ≥ 4,5 │   │ puntúa 0-100 │   │ mail (≤120   │   │ edita; el 12 lo   │
+ │ → Leads      │   │ y detecta el │   │ palabras)    │   │ manda (contacto@) │
  └──────────────┘   │ problema real│   └──────────────┘   └─────────┬─────────┘
                     └──────────────┘                                │ enviado
                                                                     ▼
@@ -65,24 +65,28 @@ Cinco agentes, cada uno hace una sola cosa. Ninguno manda nada sin que Martin lo
 
 En palabras:
 
-1. **Prospector** (`n8n/01_prospector.json`). Cada lunes busca en Google Maps
-   negocios por rubro y ciudad ("restaurantes en Pocitos", "salones de eventos en
-   Canelones", "inmobiliarias en Punta del Este"). Guarda los que tienen web y no
-   están ya en la planilla.
+1. **Prospector** (`n8n/01_prospector.json`). Todos los días busca en Google
+   Maps negocios por rubro y ciudad, con foco en marcas de moda, empresas y
+   pymes ("tiendas de ropa de mujer en Montevideo", "estudios contables en
+   Montevideo"). Guarda solo los que tienen **buena reputación** (rating 4,5 o
+   más con 15 reseñas o más) y no están ya en la planilla, tengan web o no.
 2. **Auditor** (`n8n/02_auditor.json`). Entra a cada web, mide cosas concretas
    (título, si anda en celular, cuántas fotos hay, si tiene botón de WhatsApp, si
    carga lento, si tiene HTTPS) y Claude la evalúa como un consultor de
    comunicación visual. Devuelve un puntaje de oportunidad, el servicio de
-   Apardian que más le sirve y **el problema con su evidencia**. Si no hay
-   evidencia, no hay problema: el prompt le prohíbe inventar.
-3. **Redactor** (`n8n/03_redactor_envio.json`). Para los leads con puntaje ≥ 60,
+   Apardian que más le sirve (casi siempre la **página web**) y **el problema
+   con su evidencia**. Si no hay evidencia, no hay problema: el prompt le
+   prohíbe inventar. A los que no tienen web, o no publican mail, les escribe
+   un WhatsApp para que Martin lo mande a mano.
+3. **Redactor** (`n8n/03_redactor.json`). Para los leads con puntaje ≥ 60,
    escribe un mail corto: qué vimos, qué problema tiene, cómo lo resolvemos, una
-   prueba y una pregunta fácil de contestar. Sale desde
-   **contacto@apardianstudio.com** (SMTP de Hostinger); con `AUTO_ENVIO` en
-   `false` queda en la planilla y se aprueba por Telegram.
+   prueba y una pregunta fácil de contestar. Lo deja en la **bandeja**
+   (`n8n/11_radar_bandeja.json`): Martin lo lee, lo edita si quiere y lo
+   aprueba. El **envío** (`n8n/12_radar_envio.json`) lo manda desde
+   **contacto@apardianstudio.com** en el horario de oficina del destinatario.
 4. **Seguimiento** (`n8n/04_seguimiento.json`). Si a los 4 días no contestó, un
    segundo mail que aporta algo (una idea concreta). A los 9 días, uno de cierre
-   elegante. Después, se deja tranquilo.
+   elegante. Después, se deja tranquilo. También pasan por la bandeja.
 5. **Respuestas** (`n8n/05_respuestas.json`). Lee la bandeja de contacto@ por
    IMAP (solo los mails de negocios a los que Radar les escribió; las consultas
    de la web quedan intactas, sin marcar como leídas), las clasifica
@@ -92,25 +96,19 @@ En palabras:
 Los textos que manejan a cada agente están en `prompts/` y se editan sin tocar
 n8n. Ejemplos escritos a mano por rubro en `prompts/plantillas_mail.md`.
 
-### La regla de la casa, y su excepción
+### La regla de la casa
 
 > Antes de mandar cualquier mensaje a un cliente real, se lo muestra a Martin.
 
-Excepción decidida por Martin el 24/10/2026: los mails en frío de **Radar**
-salen solos (`AUTO_ENVIO` en `true` en los flujos 03 y 04), hasta 50 nuevos
-por día con calentamiento de 10 → 20 → 35 → 50, y solo con las ofertas y el
-entrenamiento que Martin aprueba en el Centro (pestaña Radar, flujo 09). Las
-respuestas de los clientes las contesta Martin. Todo el detalle, incluidos los
-mercados de afuera y la parte legal por país, en `RADAR_PASO_A_PASO.md`.
-
-Con `AUTO_ENVIO` en `false` vuelve el modo anterior: cada mail queda como
-borrador y se aprueba por Telegram.
-
-**Cómo se aprueba:** el mensaje de Telegram trae dos links, *Enviar* y
-*Descartar*. Si querés cambiar algo, editás `asunto` y `borrador` (o
-`seg_asunto` y `seg_cuerpo`, en un seguimiento) en la hoja `Leads` y después
-tocás *Enviar*: se manda la versión editada. Si el lead
-respondió mientras tanto, el link ya no envía nada.
+Sin excepciones (decisión de Martin, 25/10/2026, que reemplaza la del 24/10):
+los mails de **Radar** también pasan por su aprobación. Radar escribe de lunes
+a viernes a las 8 y le avisa por Telegram; Martin abre la **bandeja** desde el
+Centro → Radar (o desde el aviso), lee cada mail con lo que vio Radar, lo edita
+si quiere y lo aprueba o lo descarta. Lo aprobado sale desde contacto@ en el
+horario de oficina del destinatario, hasta 90 por día. Los WhatsApp los manda
+Martin a mano desde la misma bandeja. Las respuestas de los clientes las
+contesta Martin. Todo el detalle, incluidos los mercados de afuera y la parte
+legal por país, en `RADAR_PASO_A_PASO.md`.
 
 ---
 
@@ -124,10 +122,9 @@ respondió mientras tanto, el link ya no envía nada.
   Por eso Radar tiene un **tope total por día** (`LIMITE_TOTAL_DIA`, nuevos +
   seguimientos) y el reporte avisa si rebota más del 5 %.
 - **El plan de correo de Hostinger pone el techo**: el gratis manda 100 mails
-  por día por casilla; Business Starter, 1.000; Standard y Premium, 3.000
-  (ventana de 24 horas). A 50 nuevos por día más los seguimientos se pasan
-  los 100: con el gratis, `LIMITE_TOTAL_DIA` queda en 90 y Radar llega a unos
-  30 nuevos por día; con Starter, ponelo en 900.
+  por día por casilla (ventana de 24 horas). Martin eligió quedarse ahí:
+  `LIMITE_TOTAL_DIA` en 90 deja 10 para lo que conteste a mano, y Radar
+  escribe hasta 30 nuevos por día para que entren sus seguimientos.
 - **SPF, DKIM y DMARC** en el DNS de `apardianstudio.com` (Hostinger →
   Emails → Configuración de DNS). Sin esto, todo va a spam.
 - **Calentamiento:** 2 semanas mandando poco (5–10 por día, mejor a gente que
@@ -171,24 +168,24 @@ las buscan con estos nombres exactos:
 - [ ] `Google Sheets` — tipo Google Sheets OAuth2.
 - [ ] `Hostinger SMTP (contacto@)` — tipo **SMTP**: host `smtp.hostinger.com`,
       puerto `465`, SSL/TLS activado, usuario `contacto@apardianstudio.com` y
-      su contraseña. La usan el 03 y el 04.
+      su contraseña. La usa el 12.
 - [ ] `Hostinger IMAP (contacto@)` — tipo **IMAP**: host `imap.hostinger.com`,
       puerto `993`, SSL/TLS activado, el mismo usuario y contraseña. La usa el 05.
 - [ ] `Telegram Apardian` — token de un bot creado con @BotFather. Mandarle un
       mensaje al bot y anotar tu `chat_id`.
 
-**Datos a completar** en el nodo `Config` de cada flujo (y en `Config aprobación`
-del 03):
+**Datos a completar** en el nodo `Config` de cada flujo (y en `Config guardar`
+del 11):
 
 - `SHEET_ID` — el ID de la planilla (lo que va entre `/d/` y `/edit` en la URL).
 - `TELEGRAM_CHAT_ID` — el chat de Martin.
 - `MI_EMAIL` — ya viene `Martin Apardian <contacto@apardianstudio.com>`.
-- `LIMITE_TOTAL_DIA` (03 y 04) — 90 con el correo gratis de Hostinger, 900 con Business Starter.
-- `URL_APROBAR` — la URL de producción del webhook `apardian-aprobar` (se ve al
-  abrir el nodo *Aprobación* del flujo 03). Va en los flujos 03 y 04.
-- `TOKEN` — una clave larga inventada por vos, **la misma** en los nodos
-  `Config` y `Config aprobación` del 03 y en el `Config` del 04. Evita que
-  cualquiera que adivine el link pueda mandar mails.
+- `LIMITE_TOTAL_DIA` (12) — 90 con el correo gratis de Hostinger.
+- `URL_BANDEJA` (03 y 10) — la URL de producción del webhook `apardian-bandeja`
+  (se ve al abrir el nodo *Abrir bandeja* del flujo 11).
+- `TOKEN` — una clave larga inventada por vos, **la misma** en el 03, el 09,
+  el 10 y los dos `Config` del 11, y en el Centro → Radar → Conexión. Evita
+  que cualquiera que adivine el link pueda abrir la bandeja o aprobar mails.
 
 **Si cambiás un prompt** (`prompts/*.md`), corré
 `python3 11-AUTOMATIZACION/armar_flujos.py` y reimportá el flujo. También
@@ -202,7 +199,7 @@ Después de importar, abrir cada nodo con credencial y elegirla en el desplegabl
 (n8n a veces no la enlaza sola por nombre).
 
 **Probar en este orden:** 01 con un solo rubro y ciudad → 02 con 3 leads → 03 con 1
-lead y mirar el mail → 05 respondiéndote a vos mismo. Recién entonces, activar
+lead, mirar el mail en la bandeja y aprobarlo → 12 con un mail a vos mismo → 05 respondiéndote a vos mismo. Recién entonces, activar
 los disparadores programados.
 
 ---
@@ -214,7 +211,7 @@ los disparadores programados.
 | n8n Cloud Starter | ~US$ 24 |
 | Claude (Opus 5.5: US$ 4 / US$ 20 por millón de tokens). Auditoría ≈ 6.000 tokens de entrada + 1.000 de salida ≈ US$ 0,045. Mail ≈ US$ 0,03. Clasificación ≈ US$ 0,01 | 300 leads/mes ≈ **US$ 25** |
 | Google Places Text Search (New) | 200 búsquedas/mes ≈ US$ 7 (Google da crédito mensual que suele cubrirlo) |
-| Correo de Hostinger (contacto@) | incluido en tu plan; Business Starter si querés llegar a 50 por día |
+| Correo de Hostinger (contacto@) | incluido en tu plan (gratis: 100 por día) |
 | **Total** | **~US$ 55–65/mes** con 300 leads auditados |
 
 Para bajar costo cuando el sistema esté probado: pasar la clasificación de
@@ -229,12 +226,18 @@ conviene dejarlas en Opus: son las que venden.
 |---|---|
 | `n8n/01_prospector.json` | Busca negocios en Google Places y los carga como leads |
 | `n8n/02_auditor.json` | Audita la web de cada lead con Claude |
-| `n8n/03_redactor_envio.json` | Escribe el mail y lo manda desde contacto@ (SMTP de Hostinger), con tope diario |
-| `n8n/04_seguimiento.json` | Seguimientos a los 4 y 9 días |
+| `n8n/03_redactor.json` | Escribe el primer mail y lo deja en la bandeja |
+| `n8n/04_seguimiento.json` | Seguimientos a los 4 y 9 días, también a la bandeja |
 | `n8n/05_respuestas.json` | Lee contacto@ por IMAP, clasifica respuestas y rebotes, avisa a Martin |
 | `n8n/06_bienvenida_whatsapp.json` | Recibe una consulta y propone respuesta (P1) |
 | `n8n/07_aprobacion_instagram.json` | Pide aprobación por Telegram de lo que sale en las próximas 36 h (P7) |
 | `n8n/08_publicador_instagram.json` | Publica en Instagram lo aprobado, a su hora (P7) |
+| `n8n/09_radar_conexion_centro.json` | Recibe del Centro las ofertas y el entrenamiento de Radar |
+| `n8n/10_radar_reporte.json` | El reporte de Radar de las 18:00 |
+| `n8n/11_radar_bandeja.json` | La bandeja: Martin aprueba, edita o descarta mails y WhatsApp |
+| `n8n/12_radar_envio.json` | Manda lo aprobado desde contacto@, en horario y con tope de 90 por día |
+| `prompts/whatsapp.md` | El WhatsApp para los que no tienen web o mail |
+| `radar_busquedas.csv` | Plan de búsquedas: moda, empresas y pymes primero |
 | `calendario_instagram.csv` | La hoja `Calendario` lista para importar (sale de `10-MOTOR/calendario_sheet.py`) |
 | `INSTAGRAM_APROBACION.md` | Cómo se arma y se usa la publicación con aprobación |
 | `prompts/*.md` | Los textos que guían a cada agente. Editables |

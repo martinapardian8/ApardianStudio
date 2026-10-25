@@ -53,6 +53,18 @@
               "name": "BUSQUEDAS_POR_DIA",
               "value": 12,
               "type": "number"
+            },
+            {
+              "id": "83448f54-d98b-5ea9-8ace-c21650f18929",
+              "name": "RATING_MINIMO",
+              "value": 4.5,
+              "type": "number"
+            },
+            {
+              "id": "48cd8516-22cc-5bf6-ad53-e238883b8ae5",
+              "name": "RESENAS_MINIMAS",
+              "value": 15,
+              "type": "number"
             }
           ]
         },
@@ -123,7 +135,7 @@
           "parameters": [
             {
               "name": "X-Goog-FieldMask",
-              "value": "places.id,places.displayName,places.websiteUri,places.formattedAddress,places.rating,places.userRatingCount,places.nationalPhoneNumber,places.googleMapsUri"
+              "value": "places.id,places.displayName,places.websiteUri,places.formattedAddress,places.rating,places.userRatingCount,places.nationalPhoneNumber,places.internationalPhoneNumber,places.googleMapsUri"
             }
           ]
         },
@@ -152,7 +164,7 @@
     },
     {
       "parameters": {
-        "jsCode": "// Una fila por negocio, con el país, idioma, mercado y zona horaria de su búsqueda.\nconst busq = $('Elegir búsquedas').all();\nconst out = [];\n$input.all().forEach((it, i) => {\n  const b = busq[i] ? busq[i].json : {};\n  for (const p of (it.json.places || [])) {\n    out.push({ json: {\n      id: p.id,\n      nombre: (p.displayName && p.displayName.text) || '',\n      web: p.websiteUri || '',\n      telefono: p.nationalPhoneNumber || '',\n      direccion: p.formattedAddress || '',\n      rating: p.rating || '',\n      reseñas: p.userRatingCount || 0,\n      maps: p.googleMapsUri || '',\n      rubro: b.rubro, ciudad: b.query, pais: b.pais || 'Uruguay', idioma: b.idioma || 'es',\n      mercado: b.mercado || 'uy', zona: b.zona || 'America/Montevideo', servicio_objetivo: b.servicio_objetivo || '',\n    } });\n  }\n});\nreturn out;\n"
+        "jsCode": "// Una fila por negocio, con el país, idioma, mercado y zona horaria de su búsqueda.\nconst busq = $('Elegir búsquedas').all();\nconst out = [];\n$input.all().forEach((it, i) => {\n  const b = busq[i] ? busq[i].json : {};\n  for (const p of (it.json.places || [])) {\n    out.push({ json: {\n      id: p.id,\n      nombre: (p.displayName && p.displayName.text) || '',\n      web: p.websiteUri || '',\n      telefono: p.internationalPhoneNumber || p.nationalPhoneNumber || '',\n      direccion: p.formattedAddress || '',\n      rating: p.rating || '',\n      reseñas: p.userRatingCount || 0,\n      maps: p.googleMapsUri || '',\n      rubro: b.rubro, ciudad: b.query, pais: b.pais || 'Uruguay', idioma: b.idioma || 'es',\n      mercado: b.mercado || 'uy', zona: b.zona || 'America/Montevideo', servicio_objetivo: b.servicio_objetivo || '',\n    } });\n  }\n});\nreturn out;\n"
       },
       "id": "6e8aa00b-af94-5c03-a98e-06ca5b5607c7",
       "name": "Aplanar",
@@ -197,7 +209,7 @@
     },
     {
       "parameters": {
-        "jsCode": "const hoy = () => new Date().toISOString().slice(0, 10);\nconst diasDesde = f => f ? Math.floor((Date.now() - new Date(f + 'T12:00:00').getTime()) / 86400000) : -1;\n\n// Saca los que ya están en la planilla (por id de Google o por web).\nconst ya = new Set(), webs = new Set();\nfor (const r of $('Leer Leads').all()) {\n  if (r.json.id) ya.add(String(r.json.id));\n  if (r.json.web) webs.add(String(r.json.web).replace(/^https?:\\/\\/(www\\.)?/, '').replace(/\\/$/, ''));\n}\nconst vistos = new Set(), out = [];\nfor (const it of $('Aplanar').all()) {\n  const p = it.json;\n  const w = p.web.replace(/^https?:\\/\\/(www\\.)?/, '').replace(/\\/$/, '');\n  if (!p.id || ya.has(p.id) || vistos.has(p.id) || (w && webs.has(w))) continue;\n  vistos.add(p.id);\n  out.push({ json: {\n    id: p.id, fecha: hoy(), rubro: p.rubro, nombre: p.nombre, web: p.web,\n    instagram: '', email: '', telefono: p.telefono, ciudad: p.ciudad,\n    fuente: 'google_places', score: '', servicio: p.servicio_objetivo, problemas: '',\n    estado: p.web ? 'nuevo' : 'sin_web', asunto: '', borrador: '', fecha_envio: '',\n    seguimientos: 0, respuesta: '',\n    notas: [p.direccion, p.rating ? ('rating ' + p.rating + ' (' + p['reseñas'] + ' reseñas)') : '', p.maps].filter(Boolean).join(' · '),\n    draft_id: '', thread_id: '', mensaje_id: '',\n    pais: p.pais, idioma: p.idioma, mercado: p.mercado, zona: p.zona, oferta_id: '',\n  } });\n}\nreturn out;\n"
+        "jsCode": "const hoy = () => new Date().toISOString().slice(0, 10);\nconst diasDesde = f => f ? Math.floor((Date.now() - new Date(f + 'T12:00:00').getTime()) / 86400000) : -1;\n\n// Saca los que ya están en la planilla (por id de Google o por web) y los que\n// no tienen buena reputación: rating y cantidad de reseñas mínimos (Config).\nconst c = $('Config').first().json;\nconst rMin = Number(c.RATING_MINIMO) || 0, nMin = Number(c.RESENAS_MINIMAS) || 0;\nconst ya = new Set(), webs = new Set();\nfor (const r of $('Leer Leads').all()) {\n  if (r.json.id) ya.add(String(r.json.id));\n  if (r.json.web) webs.add(String(r.json.web).replace(/^https?:\\/\\/(www\\.)?/, '').replace(/\\/$/, ''));\n}\nconst vistos = new Set(), out = [];\nfor (const it of $('Aplanar').all()) {\n  const p = it.json;\n  const w = p.web.replace(/^https?:\\/\\/(www\\.)?/, '').replace(/\\/$/, '');\n  if (!p.id || ya.has(p.id) || vistos.has(p.id) || (w && webs.has(w))) continue;\n  if ((Number(p.rating) || 0) < rMin || (Number(p['reseñas']) || 0) < nMin) continue;\n  vistos.add(p.id);\n  out.push({ json: {\n    id: p.id, fecha: hoy(), rubro: p.rubro, nombre: p.nombre, web: p.web,\n    instagram: '', email: '', telefono: p.telefono, ciudad: p.ciudad,\n    fuente: 'google_places', score: '', servicio: p.servicio_objetivo, problemas: '',\n    estado: p.web ? 'nuevo' : 'sin_web', asunto: '', borrador: '', fecha_envio: '',\n    seguimientos: 0, respuesta: '',\n    notas: [p.direccion, p.rating ? ('rating ' + p.rating + ' (' + p['reseñas'] + ' reseñas)') : '', p.maps].filter(Boolean).join(' · '),\n    pais: p.pais, idioma: p.idioma, mercado: p.mercado, zona: p.zona, oferta_id: '',\n    ultimo_envio: '', seg_asunto: '', seg_cuerpo: '',\n    rating: p.rating, resenas: p['reseñas'], wa_mensaje: '',\n  } });\n}\nreturn out;\n"
       },
       "id": "82b701f1-fdb1-50ec-a2dd-b5869edf5c13",
       "name": "Solo nuevos",

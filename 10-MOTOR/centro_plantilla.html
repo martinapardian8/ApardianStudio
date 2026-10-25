@@ -208,7 +208,7 @@ form.alta .ancho{grid-column:1/-1}
 .grupo-est h3 small{font:500 12px var(--body);color:var(--muted)}
 
 /* ---------- radar ---------- */
-.rampa{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.rampa{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
 .rampa div{background:var(--bg);padding:16px;display:grid;gap:8px;align-content:end;min-height:150px}
 .rampa i{display:block;background:var(--red);opacity:.85}
 .rampa b{font-family:var(--display);font-weight:400;font-size:40px;line-height:1}
@@ -239,7 +239,7 @@ a.b[aria-disabled="true"]{opacity:.4;pointer-events:none}
   .equipo{grid-template-columns:repeat(2,minmax(0,1fr))}
   .paso:nth-child(odd){padding-left:0;border-left:0}
   .paso:nth-child(even){padding-left:20px;border-left:1px solid var(--line)}
-  .rampa{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .rampa div{padding:12px}
   .mesa,.detalle{grid-template-columns:minmax(0,1fr)}
   .detalle img{max-width:320px}
   .agentes{grid-template-columns:minmax(0,1fr)}
@@ -416,13 +416,19 @@ a.b[aria-disabled="true"]{opacity:.4;pointer-events:none}
     <div class="cab">
       <span class="ceja mono">08 — Prospección</span>
       <h1>Radar</h1>
-      <p class="bajada">Busca negocios en Uruguay, Argentina, México y Latinoamérica, España y EE.UU., audita su web y les escribe una propuesta hecha para ellos. En Uruguay ofrece todo; afuera, solo lo que se hace online. Los mails salen solos, hasta 50 por día. Lo que no sale sin vos: las ofertas, los paquetes y los precios, que aprobás acá.</p>
+      <p class="bajada">Busca marcas de moda, empresas y pymes con muy buena reputación y una web floja o sin web, en Uruguay, Argentina, México y más, y les escribe una propuesta de página web hecha para ellos. Nada sale sin vos: cada mail, seguimiento y WhatsApp lo aprobás en la bandeja. Las ofertas, los paquetes y los precios también los aprobás acá.</p>
+    </div>
+
+    <div class="bloque">
+      <div class="bloque-cab"><h2>Bandeja</h2><span class="mono muted">Lunes a viernes, 8:00</span></div>
+      <p class="muted" style="margin:0;max-width:80ch">Todos los días hábiles a las 8 Radar deja los mails nuevos, los seguimientos y los WhatsApp para que los leas. Editá lo que quieras, aprobá o descartá y tocá Guardar. Lo aprobado sale desde contacto@ en el horario de oficina de cada país, hasta 90 por día. Los WhatsApp los mandás vos desde la misma bandeja.</p>
+      <div class="fila" id="rd-bandeja"></div>
     </div>
 
     <div class="bloque">
       <div class="bloque-cab"><h2>La cuenta</h2><span class="mono muted" id="rd-semana"></span></div>
       <div class="rampa" id="rd-rampa"></div>
-      <p class="muted" style="margin:0;max-width:80ch">Una casilla que manda 50 mails en frío el primer día termina en spam. Por eso sube de a poco: 10, 20, 35 y desde la cuarta semana 50 por día, de lunes a viernes, en el horario de oficina de cada país. A 50 por día son unos 1.100 mails por mes. Si responde entre el 1 y el 3 %, que es lo habitual en mail en frío bien hecho, son de 11 a 33 conversaciones por mes. Es una estimación: el reporte de las 18:00 te da los números reales. Ojo con el techo de la casilla: el correo gratis de Hostinger manda 100 mails por día en total (nuevos y seguimientos); para llegar a 50 nuevos por día hace falta Business Starter (1.000 por día).</p>
+      <p class="muted" style="margin:0;max-width:80ch">Una casilla que manda muchos mails en frío el primer día termina en spam. Por eso sube de a poco: 10, 20 y desde la tercera semana 30 mails nuevos por día para aprobar. Con sus dos seguimientos, la casilla queda cerca de 90 por día, dentro de los 100 del correo gratis de Hostinger. A 30 por día son unos 650 mails por mes. Si responde entre el 1 y el 3 %, que es lo habitual en mail en frío bien hecho, son de 6 a 20 conversaciones por mes, más lo que traigan los WhatsApp. Es una estimación: el reporte de las 18:00 te da los números reales.</p>
     </div>
 
     <div class="bloque">
@@ -777,7 +783,7 @@ const AG = {
       ["Reporte de la semana", "Con lo que hay cargado", "Armame el reporte semanal de ventas con la plantilla del playbook, usando los datos del pipeline. Si falta un dato, decilo; no lo inventes."],
       ["Prospección", "Cinco mensajes a cuentas objetivo", "Proponé 5 tipos de cuentas para prospectar esta semana según el foco de venta, y el DM de primer contacto para cada uno, con un hueco para citar algo real de su perfil."],
     ]},
-  radar: {nom:"Radar", rol:"Prospección", hace:"Busca negocios en Uruguay y afuera, audita su web y les manda una propuesta hecha para ellos: hasta 50 mails por día, solos, con las ofertas que aprobaste.", nunca:"Inventar una oferta, un precio o un cliente, o escribirle a quien pidió la baja.",
+  radar: {nom:"Radar", rol:"Prospección", hace:"Busca marcas y empresas con muy buena reputación y una web floja o sin web, y les escribe una propuesta de página web hecha para ellos. Nada sale sin que lo apruebes en la bandeja.", nunca:"Inventar una oferta, un precio o un cliente, o escribirle a quien pidió la baja.",
     acciones:[
       ["Probá un mail", "Pegá la web o la descripción de un negocio", "Escribime el primer mail que le mandarías a este negocio, como saldría solo desde n8n. Decime también qué viste, qué servicio le ofrecés y por qué:\n\n"],
       ["Ideas de paquetes", "Para un país y un servicio", "Proponé 3 paquetes o promos de temporada que se puedan vender por mail en "],
@@ -1137,7 +1143,7 @@ const RD_PREGUNTAS = [
 ];
 const RD_PASOS = [
   ["casilla", "Crear contacto@apardianstudio.com", "En Hostinger → Emails. Es la casilla desde la que manda Radar y a la que llegan las respuestas."],
-  ["plan", "Mirar el plan de correo de Hostinger", "El gratis manda 100 mails por día (LIMITE_TOTAL_DIA = 90, unos 30 nuevos por día). Para los 50 por día hace falta Business Starter: 1.000 por día (LIMITE_TOTAL_DIA = 900)."],
+  ["plan", "El plan de correo gratis alcanza", "Manda 100 mails por día. Radar usa hasta 90 (LIMITE_TOTAL_DIA) y deja 10 para lo que contestes vos desde contacto@."],
   ["dns", "SPF, DKIM y DMARC en verde", "Hostinger → Emails → Configuración de DNS. Si falta DMARC: registro TXT _dmarc con v=DMARC1; p=none. Probalo en mail-tester.com: 9/10 o más."],
   ["firma", "Foto y firma en contacto@", "En el webmail de Hostinger, la misma firma que llevan los mails de Radar."],
   ["calentar", "Calentar la casilla dos semanas", "Mandá 5 a 10 mails reales por día desde contacto@ a gente que te conoce y te contesta. Recién después se prende Radar."],
@@ -1146,10 +1152,10 @@ const RD_PASOS = [
   ["anthropic", "Clave de Claude (Anthropic)", "console.anthropic.com → API keys. Poné un límite de gasto mensual."],
   ["telegram", "Bot de Telegram", "Con @BotFather creás el bot; te llega el reporte diario y los avisos de clientes interesados."],
   ["planilla", "Planilla en Google Sheets", "Una planilla con las hojas Leads, Bajas, Busquedas, Ofertas y Entrenamiento (las plantillas están en 11-AUTOMATIZACION)."],
-  ["importar", "Importar los flujos 01 a 05, 09 y 10", "En n8n: Import from file. En cada Config pegás el ID de la planilla, tu chat de Telegram, el tope diario, la clave y la fecha de arranque. Las credenciales SMTP e IMAP de contacto@ se crean en n8n, nunca en la planilla."],
+  ["importar", "Importar los flujos 01 a 05 y 09 a 12", "En n8n: Import from file. En cada Config pegás el ID de la planilla, tu chat de Telegram, la clave, la dirección de la bandeja y la fecha de arranque. Las credenciales SMTP e IMAP de contacto@ se crean en n8n, nunca en la planilla."],
   ["conectar", "Conectar el Centro con n8n", "Abajo, en Conexión con n8n: la dirección del webhook del flujo 09 y su clave."],
   ["entrenar", "Contestar el entrenamiento y aprobar las primeras ofertas", "Con eso Radar ya sabe cómo hablar y qué ofrecer."],
-  ["prender", "Prender los flujos", "Activá 01, 02, 03, 04, 05, 09 y 10. El primer reporte llega a las 18:00."],
+  ["prender", "Prender los flujos", "Activá 01 a 05 y 09 a 12. Al día siguiente, a las 8, llega el primer aviso de la bandeja."],
 ];
 let rdEntren = {}, rdPasos = {}, rdCx = {}, rdUid = null, rdOfEdit = {};
 const b64u = txt => { const by = new TextEncoder().encode(txt); let bin = ""; by.forEach(b => bin += String.fromCharCode(b)); return btoa(bin).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, ""); };
@@ -1163,15 +1169,26 @@ function semanaRadar(){
   return Math.max(0, Math.floor((new Date(hoyISO() + "T12:00") - new Date(rdCx.inicio + "T12:00")) / (7 * 86400000)));
 }
 function renderRadar(){
-  const sem = semanaRadar(), cupos = [10, 20, 35, 50];
+  const sem = semanaRadar(), cupos = [10, 20, 30];
   $("#rd-semana").textContent = rdCx.inicio ? (hoyISO() < rdCx.inicio ? "Arranca el " + fechaLinda(rdCx.inicio) : "Semana " + (sem + 1) + " desde el " + fechaLinda(rdCx.inicio)) : "Sin fecha de arranque";
   $("#rd-rampa").replaceChildren(...cupos.map((c, i) => {
-    const barra = el("i"); barra.style.height = Math.round(c * 1.6) + "px";
-    const actual = rdCx.inicio && hoyISO() >= rdCx.inicio && Math.min(sem, 3) === i;
-    return el("div", {class: (rdCx.inicio && Math.min(sem, 3) > i) ? "ya" : null, style: actual ? "background:var(--panel)" : null},
-      barra, el("b", {text: String(c)}), el("span", {text: (i < 3 ? "Semana " + (i + 1) : "Desde la semana 4") + " · mails por día" + (actual ? " · ahora" : "")}));
+    const barra = el("i"); barra.style.height = Math.round(c * 2.4) + "px";
+    const actual = rdCx.inicio && hoyISO() >= rdCx.inicio && Math.min(sem, 2) === i;
+    return el("div", {class: (rdCx.inicio && Math.min(sem, 2) > i) ? "ya" : null, style: actual ? "background:var(--panel)" : null},
+      barra, el("b", {text: String(c)}), el("span", {text: (i < 2 ? "Semana " + (i + 1) : "Desde la semana 3") + " · mails nuevos por día" + (actual ? " · ahora" : "")}));
   }));
-  renderOfertas(); renderPreguntas(); renderPasos(); renderCx();
+  renderBandeja(); renderOfertas(); renderPreguntas(); renderPasos(); renderCx();
+}
+// La bandeja vive en n8n (flujo 11): misma instancia y misma clave que el 09.
+function urlBandeja(){
+  if (!rdCx.url || !rdCx.token) return null;
+  return rdCx.url.replace(/[?#].*$/, "").replace(/\/apardian-radar\/?$/, "/apardian-bandeja") + "?t=" + encodeURIComponent(rdCx.token);
+}
+function renderBandeja(){
+  const u = urlBandeja(), c = $("#rd-bandeja");
+  c.replaceChildren(u
+    ? el("a", {class:"b r", href: u, target:"_blank", rel:"noopener", text:"Abrir la bandeja"})
+    : el("span", {class:"muted", text:"Para abrir la bandeja, completá abajo la Conexión con n8n."}));
 }
 function opcionesServ(sel, val){ sel.replaceChildren(...RD_SERVICIOS.map(([v, t]) => el("option", {value: v, text: t}))); if (val) sel.value = val; }
 

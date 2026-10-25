@@ -1,0 +1,495 @@
+{
+  "name": "APARDIAN 11 · Radar: bandeja de aprobación",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "GET",
+        "path": "apardian-bandeja",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "eac26910-e91d-5268-b39f-2d38d605f70b",
+      "name": "Abrir bandeja",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        0,
+        0
+      ],
+      "webhookId": "93e55161-5f80-5cb1-a79c-b52ab7eea0a1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "af65b75e-b120-5107-bb67-1468a7260092",
+              "name": "SHEET_ID",
+              "value": "PEGAR_ID_DE_LA_PLANILLA",
+              "type": "string"
+            },
+            {
+              "id": "e363d2a5-c320-5214-87e0-0dcb054c88bb",
+              "name": "TOKEN",
+              "value": "CAMBIAR-POR-UNA-CLAVE-LARGA-DE-RADAR",
+              "type": "string"
+            },
+            {
+              "id": "daf5101d-477a-549f-9505-e68c9a6b4880",
+              "name": "URL_GUARDAR",
+              "value": "",
+              "type": "string"
+            },
+            {
+              "id": "a5235d42-d7e6-537a-a209-78c37d6a75b3",
+              "name": "MAX_EN_PANTALLA",
+              "value": 60,
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "4ff2e62e-b24c-50b2-a6af-76c6d075053a",
+      "name": "Config",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        240,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "read",
+        "documentId": {
+          "__rl": true,
+          "value": "={{ $('Config').first().json.SHEET_ID }}",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Leads",
+          "mode": "name"
+        },
+        "options": {}
+      },
+      "id": "bec0544e-d02a-59ab-a5aa-ba5031d0b5ec",
+      "name": "Leer Leads",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        480,
+        0
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "REEMPLAZAR",
+          "name": "Google Sheets"
+        }
+      },
+      "executeOnce": true,
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "jsCode": "const esc = s => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');\n\n// ¿El teléfono parece un celular con WhatsApp? Uruguay: +598 9…; Argentina:\n// +54 9…; el resto se deja pasar (Martin lo ve antes de mandarlo).\nconst digitos = t => String(t || '').replace(/[^\\d]/g, '');\nconst celular = (t, pais) => {\n  const d = digitos(t);\n  if (d.length < 8) return false;\n  if (d.startsWith('598')) return d[3] === '9';\n  if (d.startsWith('54')) return d[2] === '9';\n  if (!String(t).trim().startsWith('+')) return String(pais || 'Uruguay') === 'Uruguay' && /^09/.test(d);\n  return true;\n};\nconst waNumero = (t, pais) => { let d = digitos(t); if (/^09/.test(d) && String(pais || 'Uruguay') === 'Uruguay') d = '598' + d.slice(1); return d; };\n\n// Página con la estética del Centro. n8n la sirve dentro de un sandbox: los\n// links van con target=\"_top\" y el formulario con dirección absoluta.\nconst pagina = (titulo, cuerpo) => '<!doctype html><html lang=\"es\"><head><meta charset=\"utf-8\">' +\n  '<meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><title>' + esc(titulo) + '</title>' +\n  '<link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css2?family=Anton&family=Work+Sans:wght@400;500;600&display=swap\">' +\n  '<style>:root{--bg:#0B0B0B;--panel:#141414;--panel-2:#1C1C1C;--fg:#F8F7F6;--muted:#9A9592;--line:rgba(248,247,246,.12);' +\n  '--red:#FF0033;--ok:#3DDC84;--display:\"Anton\",Impact,sans-serif;--body:\"Work Sans\",-apple-system,Arial,sans-serif}' +\n  '*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.5 var(--body)}' +\n  'main{max-width:860px;margin:0 auto;padding:28px 16px 120px}.eye{letter-spacing:.2em;font-size:11px;color:var(--red);text-transform:uppercase}' +\n  'h1{font:400 clamp(34px,7vw,56px)/1 var(--display);text-transform:uppercase;margin:6px 0 10px}h2{font:400 26px/1.1 var(--display);text-transform:uppercase;margin:36px 0 12px}' +\n  'p,.muted{color:var(--muted)}a{color:var(--fg)}.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;margin:0 0 14px}' +\n  '.meta{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:baseline}.meta b{font-size:17px}.meta span{color:var(--muted);font-size:13px}.meta .rep{color:var(--fg)}' +\n  '.tag{display:inline-block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--red);margin-bottom:4px}' +\n  '.links{font-size:13px;color:var(--muted);margin:4px 0 8px;word-break:break-word}details{margin:6px 0 10px;font-size:13px;color:var(--muted)}summary{cursor:pointer}' +\n  'label.lbl{display:block;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:10px 0 4px}' +\n  'input[type=text],textarea{width:100%;background:var(--panel-2);color:var(--fg);border:1px solid var(--line);border-radius:10px;padding:10px;font:15px/1.5 var(--body);margin-top:4px}' +\n  'textarea{min-height:200px;resize:vertical}.dec{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}' +\n  '.dec label{display:flex;gap:8px;align-items:center;border:1px solid var(--line);border-radius:999px;padding:8px 14px;cursor:pointer}' +\n  '.dec label:has(input:checked){border-color:var(--fg);background:var(--panel-2)}.dec input{accent-color:var(--red)}' +\n  '.btn{display:inline-block;border:1px solid var(--fg);background:none;color:var(--fg);border-radius:999px;padding:10px 18px;font:600 14px var(--body);cursor:pointer;text-decoration:none}' +\n  '.btn.rojo{background:var(--red);border-color:var(--red);color:#fff}.barra{position:fixed;left:0;right:0;bottom:0;background:rgba(11,11,11,.94);border-top:1px solid var(--line);padding:12px 16px}' +\n  '.barra div{max-width:860px;margin:0 auto;display:flex;gap:10px;align-items:center;justify-content:space-between}.barra .btn{padding:10px 14px;white-space:nowrap}.ok{color:var(--ok)}' +\n  '</style></head><body><main>' + cuerpo + '</main></body></html>';\n\nconst c = $('Config').first().json;\nconst w = $('Abrir bandeja').first().json;\nconst q = w.query || {};\nif (!q.t || q.t !== c.TOKEN) return [{ json: { html: pagina('Link no válido', '<p class=\"eye\">APARDIAN · Radar</p><h1>Link no válido</h1><p>La clave no coincide con la de n8n. Abrí la bandeja desde el Centro → Radar.</p>') } }];\nconst h = w.headers || {};\nconst guardar = c.URL_GUARDAR || ('https://' + (h['x-forwarded-host'] || h.host) + '/webhook/apardian-bandeja-guardar');\nconst L = $('Leer Leads').all().map(r => r.json).filter(l => l.id);\nconst max = Number(c.MAX_EN_PANTALLA) || 60;\nconst mails = L.filter(l => l.estado === 'borrador');\nconst segs = L.filter(l => /^borrador_seg[12]$/.test(l.estado || ''));\nconst was = L.filter(l => l.estado === 'wa_borrador');\nconst enCola = L.filter(l => /^aprobado/.test(l.estado || '')).length;\nconst url = x => /^https?:\\/\\//.test(x) ? x : 'https://' + x;\nconst rep = l => l.rating ? '★ ' + String(l.rating).replace('.', ',') + (l.resenas ? ' · ' + l.resenas + ' reseñas' : '') : '';\nconst ficha = l => '<div class=\"meta\"><b>' + esc(l.nombre) + '</b><span>' + esc([l.rubro, l.pais || 'Uruguay'].filter(Boolean).join(' · ')) + '</span>' +\n  (rep(l) ? '<span class=\"rep\">' + esc(rep(l)) + '</span>' : '') + (l.score ? '<span>score ' + esc(l.score) + '</span>' : '') + '</div>' +\n  '<div class=\"links\">' + (l.web ? '<a target=\"_top\" href=\"' + esc(url(l.web)) + '\">' + esc(String(l.web).replace(/^https?:\\/\\/(www\\.)?/, '')) + '</a>' : 'sin web') +\n  (l.instagram ? ' · <a target=\"_top\" href=\"' + esc(url(l.instagram)) + '\">Instagram</a>' : '') +\n  (l.email ? ' · ' + esc(l.email) : '') + (l.telefono ? ' · ' + esc(l.telefono) : '') + '</div>' +\n  (l.problemas ? '<details><summary>Qué vio Radar</summary><p>' + esc(l.problemas).replace(/\\n/g, '<br>') + '</p></details>' : '');\nconst decision = (id, ops) => '<div class=\"dec\">' + ops.map(([v, t]) =>\n  '<label><input type=\"radio\" name=\"d_' + esc(id) + '\" value=\"' + v + '\"> ' + t + '</label>').join('') + '</div>';\nconst tarjeta = (tipo, l, tag, asunto, cuerpo) => '<article class=\"card\" data-tipo=\"' + tipo + '\"><span class=\"tag\">' + tag + '</span>' + ficha(l) +\n  (tipo === 'seg' ? '<details><summary>Primer mail: ' + esc(l.asunto) + '</summary><p>' + esc(l.borrador).replace(/\\n/g, '<br>') + '</p></details>' : '') +\n  '<label class=\"lbl\">Asunto<input type=\"text\" name=\"a_' + esc(l.id) + '\" value=\"' + esc(asunto) + '\" maxlength=\"200\"></label>' +\n  '<label class=\"lbl\">Mail (para ' + esc(l.email) + ')<textarea name=\"c_' + esc(l.id) + '\">' + esc(cuerpo) + '</textarea></label>' +\n  decision(l.id, [['aprobar', 'Aprobar'], ['descartar', 'Descartar']]) + '</article>';\nconst tarjetaWa = l => { const n = waNumero(l.telefono, l.pais);\n  return '<article class=\"card\" data-tipo=\"wa\"><span class=\"tag\">WhatsApp · lo mandás vos</span>' + ficha(l) +\n  '<label class=\"lbl\">Mensaje<textarea data-wa=\"' + esc(l.id) + '\" name=\"w_' + esc(l.id) + '\">' + esc(l.wa_mensaje) + '</textarea></label>' +\n  '<p><a class=\"btn\" target=\"_top\" id=\"wa_' + esc(l.id) + '\" data-tel=\"' + esc(n) + '\" href=\"https://wa.me/' + esc(n) + '?text=' + encodeURIComponent(l.wa_mensaje || '') + '\">Abrir en WhatsApp</a></p>' +\n  '<p class=\"muted\">Guardá antes de abrir WhatsApp: el link sale de esta página.</p>' +\n  decision(l.id, [['mandado', 'Ya lo mandé'], ['descartar', 'Descartar']]) + '</article>'; };\nconst seccion = (titulo, lista, f) => lista.length ? '<h2>' + titulo + ' · ' + lista.length + '</h2>' +\n  (lista.length > max ? '<p>Se muestran ' + max + '. Guardá y volvé a abrir para ver el resto.</p>' : '') + lista.slice(0, max).map(f).join('') : '';\nconst total = mails.length + segs.length + was.length;\nconst cuerpo = '<p class=\"eye\">APARDIAN · Radar</p><h1>Bandeja</h1>' +\n  '<p>Nada sale sin tu OK. Lo que aprobás sale desde contacto@ en el horario de oficina de cada país, hasta 90 por día. ' +\n  'Lo que no marques queda para después; los cambios en un texto se guardan al aprobarlo.</p>' +\n  (enCola ? '<p class=\"ok\">' + (enCola === 1 ? '1 aprobado espera' : enCola + ' aprobados esperan') + ' su horario.</p>' : '') +\n  (total ? '' : '<div class=\"card\"><p>No hay nada para aprobar. Radar escribe de lunes a viernes a las 8.</p></div>') +\n  '<form method=\"post\" action=\"' + esc(guardar) + '\" accept-charset=\"utf-8\">' +\n  '<input type=\"hidden\" name=\"t\" value=\"' + esc(c.TOKEN) + '\">' +\n  seccion('Mails nuevos', mails, l => tarjeta('mail', l, 'Primer mail', l.asunto, l.borrador)) +\n  seccion('Seguimientos', segs, l => tarjeta('seg', l, 'Seguimiento ' + String(l.estado).slice(-1), l.seg_asunto, l.seg_cuerpo)) +\n  seccion('WhatsApp a mano', was, tarjetaWa) +\n  (total ? '<div class=\"barra\"><div><button type=\"button\" class=\"btn\" id=\"todos\">Aprobar todos los mails</button>' +\n    '<button type=\"submit\" class=\"btn rojo\" id=\"guardar\">Guardar</button></div></div>' : '') +\n  '</form><script>' +\n  'document.querySelectorAll(\"textarea[data-wa]\").forEach(function(t){t.addEventListener(\"input\",function(){var a=document.getElementById(\"wa_\"+t.dataset.wa);a.href=\"https://wa.me/\"+a.dataset.tel+\"?text=\"+encodeURIComponent(t.value);});});' +\n  'var b=document.getElementById(\"todos\");if(b)b.onclick=function(){document.querySelectorAll(\"[data-tipo=mail] input[value=aprobar],[data-tipo=seg] input[value=aprobar]\").forEach(function(r){r.checked=true;});cuenta();};' +\n  'function cuenta(){var n=document.querySelectorAll(\".dec input:checked\").length,g=document.getElementById(\"guardar\");if(g)g.textContent=n?\"Guardar \"+n+(n===1?\" decisión\":\" decisiones\"):\"Guardar\";}' +\n  'document.addEventListener(\"change\",cuenta);' +\n  '</script>';\nreturn [{ json: { html: pagina('Bandeja · Radar', cuerpo) } }];\n"
+      },
+      "id": "382b0a97-81a3-5dc6-8002-7924fb7da631",
+      "name": "Armar bandeja",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        720,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "={{ $json.html }}",
+        "options": {
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Content-Type",
+                "value": "text/html; charset=utf-8"
+              }
+            ]
+          }
+        }
+      },
+      "id": "306998b6-6467-5ba6-a507-a020f6a909ce",
+      "name": "Mostrar bandeja",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        960,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "apardian-bandeja-guardar",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "60798ff7-c614-522c-8b90-49c772fb6445",
+      "name": "Guardar bandeja",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        0,
+        500
+      ],
+      "webhookId": "7b2107fc-bc77-5ced-977d-ed6c7b2722e5"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "86e12704-2792-50ff-a68f-3ee9f046b30b",
+              "name": "SHEET_ID",
+              "value": "PEGAR_ID_DE_LA_PLANILLA",
+              "type": "string"
+            },
+            {
+              "id": "fe7d992e-3088-5765-b10b-ffa88afa8460",
+              "name": "TOKEN",
+              "value": "CAMBIAR-POR-UNA-CLAVE-LARGA-DE-RADAR",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "a13ab9e3-7071-54b8-8b89-d903d5fa6c88",
+      "name": "Config guardar",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        240,
+        500
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "read",
+        "documentId": {
+          "__rl": true,
+          "value": "={{ $('Config guardar').first().json.SHEET_ID }}",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Leads",
+          "mode": "name"
+        },
+        "options": {}
+      },
+      "id": "a452b2ca-eeaa-5388-a8f8-cf3b78d38f3b",
+      "name": "Leer Leads (guardar)",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        480,
+        500
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "REEMPLAZAR",
+          "name": "Google Sheets"
+        }
+      },
+      "executeOnce": true,
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "jsCode": "const esc = s => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');\n\n// Página con la estética del Centro. n8n la sirve dentro de un sandbox: los\n// links van con target=\"_top\" y el formulario con dirección absoluta.\nconst pagina = (titulo, cuerpo) => '<!doctype html><html lang=\"es\"><head><meta charset=\"utf-8\">' +\n  '<meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><title>' + esc(titulo) + '</title>' +\n  '<link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css2?family=Anton&family=Work+Sans:wght@400;500;600&display=swap\">' +\n  '<style>:root{--bg:#0B0B0B;--panel:#141414;--panel-2:#1C1C1C;--fg:#F8F7F6;--muted:#9A9592;--line:rgba(248,247,246,.12);' +\n  '--red:#FF0033;--ok:#3DDC84;--display:\"Anton\",Impact,sans-serif;--body:\"Work Sans\",-apple-system,Arial,sans-serif}' +\n  '*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.5 var(--body)}' +\n  'main{max-width:860px;margin:0 auto;padding:28px 16px 120px}.eye{letter-spacing:.2em;font-size:11px;color:var(--red);text-transform:uppercase}' +\n  'h1{font:400 clamp(34px,7vw,56px)/1 var(--display);text-transform:uppercase;margin:6px 0 10px}h2{font:400 26px/1.1 var(--display);text-transform:uppercase;margin:36px 0 12px}' +\n  'p,.muted{color:var(--muted)}a{color:var(--fg)}.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;margin:0 0 14px}' +\n  '.meta{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:baseline}.meta b{font-size:17px}.meta span{color:var(--muted);font-size:13px}.meta .rep{color:var(--fg)}' +\n  '.tag{display:inline-block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--red);margin-bottom:4px}' +\n  '.links{font-size:13px;color:var(--muted);margin:4px 0 8px;word-break:break-word}details{margin:6px 0 10px;font-size:13px;color:var(--muted)}summary{cursor:pointer}' +\n  'label.lbl{display:block;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:10px 0 4px}' +\n  'input[type=text],textarea{width:100%;background:var(--panel-2);color:var(--fg);border:1px solid var(--line);border-radius:10px;padding:10px;font:15px/1.5 var(--body);margin-top:4px}' +\n  'textarea{min-height:200px;resize:vertical}.dec{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}' +\n  '.dec label{display:flex;gap:8px;align-items:center;border:1px solid var(--line);border-radius:999px;padding:8px 14px;cursor:pointer}' +\n  '.dec label:has(input:checked){border-color:var(--fg);background:var(--panel-2)}.dec input{accent-color:var(--red)}' +\n  '.btn{display:inline-block;border:1px solid var(--fg);background:none;color:var(--fg);border-radius:999px;padding:10px 18px;font:600 14px var(--body);cursor:pointer;text-decoration:none}' +\n  '.btn.rojo{background:var(--red);border-color:var(--red);color:#fff}.barra{position:fixed;left:0;right:0;bottom:0;background:rgba(11,11,11,.94);border-top:1px solid var(--line);padding:12px 16px}' +\n  '.barra div{max-width:860px;margin:0 auto;display:flex;gap:10px;align-items:center;justify-content:space-between}.barra .btn{padding:10px 14px;white-space:nowrap}.ok{color:var(--ok)}' +\n  '</style></head><body><main>' + cuerpo + '</main></body></html>';\n\n// Hora y día en la zona horaria del destinatario (Intl viene con Node).\nconst horaEn = z => { try { return Number(new Intl.DateTimeFormat('en-US', { timeZone: z, hour: 'numeric', hourCycle: 'h23' }).format(new Date())); } catch (e) { return 12; } };\nconst diaEn = z => { try { return new Intl.DateTimeFormat('en-US', { timeZone: z, weekday: 'short' }).format(new Date()); } catch (e) { return 'Mon'; } };\nconst horarioDeOficina = z => { const h = horaEn(z), d = diaEn(z); return d !== 'Sat' && d !== 'Sun' && h >= 9 && h < 17; };\nconst hoyUY = () => new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Montevideo' }).format(new Date());\n// Cuántos mails salieron hoy desde la casilla (primeros y seguimientos): cada\n// lead recibe como mucho uno por día, así que alcanza con contar ultimo_envio.\nconst mailsHoy = leads => leads.filter(l => String(l.ultimo_envio || '') === hoyUY()).length;\n\n// Solo cambia lo que sigue esperando aprobación: si un lead respondió o ya se\n// decidió en otra pestaña, se deja como está.\nconst c = $('Config guardar').first().json;\nconst b = $('Guardar bandeja').first().json.body || {};\nconst h = $('Guardar bandeja').first().json.headers || {};\nconst volver = '<p><a class=\"btn\" target=\"_top\" href=\"' + esc('https://' + (h['x-forwarded-host'] || h.host) +\n  '/webhook/apardian-bandeja?t=' + encodeURIComponent(c.TOKEN)) + '\">Volver a la bandeja</a></p>';\nif (!b.t || b.t !== c.TOKEN) return [{ json: { filas: [], html: pagina('Clave incorrecta', '<p class=\"eye\">APARDIAN · Radar</p><h1>No se guardó</h1><p>La clave no coincide. Abrí la bandeja desde el Centro.</p>') } }];\nconst L = new Map($('Leer Leads (guardar)').all().map(r => [String(r.json.id), r.json]));\nconst txt = (x, max) => String(x == null ? '' : x).replace(/\\r\\n/g, '\\n').trim().slice(0, max);\nconst filas = [], cuenta = { aprobados: 0, descartados: 0, whatsapp: 0, saltados: 0 };\nfor (const k of Object.keys(b)) {\n  if (!k.startsWith('d_')) continue;\n  const id = k.slice(2), d = b[k], l = L.get(id);\n  if (!l) { cuenta.saltados++; continue; }\n  const e = String(l.estado || '');\n  if (e === 'borrador' && d === 'aprobar') {\n    filas.push({ id, estado: 'aprobado', asunto: txt(b['a_' + id], 200) || l.asunto, borrador: txt(b['c_' + id], 6000) || l.borrador }); cuenta.aprobados++;\n  } else if (e === 'borrador' && d === 'descartar') {\n    filas.push({ id, estado: 'descartado' }); cuenta.descartados++;\n  } else if (/^borrador_seg[12]$/.test(e) && d === 'aprobar') {\n    filas.push({ id, estado: 'aprobado_seg' + e.slice(-1), seg_asunto: txt(b['a_' + id], 200) || l.seg_asunto, seg_cuerpo: txt(b['c_' + id], 6000) || l.seg_cuerpo }); cuenta.aprobados++;\n  } else if (/^borrador_seg[12]$/.test(e) && d === 'descartar') {\n    // sin más seguimientos, pero si responde igual se lo atiende\n    filas.push({ id, estado: 'sin_seguimiento', seg_asunto: '', seg_cuerpo: '' }); cuenta.descartados++;\n  } else if (e === 'wa_borrador' && d === 'mandado') {\n    filas.push({ id, estado: 'wa_enviado', wa_mensaje: txt(b['w_' + id], 1500) || l.wa_mensaje, respuesta: 'WhatsApp mandado a mano · ' + hoyUY() }); cuenta.whatsapp++;\n  } else if (e === 'wa_borrador' && d === 'descartar') {\n    filas.push({ id, estado: 'descartado' }); cuenta.descartados++;\n  } else cuenta.saltados++;\n}\nconst html = pagina('Guardado · Radar', '<p class=\"eye\">APARDIAN · Radar</p><h1>Guardado</h1>' +\n  '<div class=\"card\"><p class=\"ok\">' + cuenta.aprobados + (cuenta.aprobados === 1 ? ' aprobado' : ' aprobados') + '</p><p>Salen desde contacto@ en el horario de oficina de cada país, hasta 90 por día.</p>' +\n  '<p>' + cuenta.descartados + (cuenta.descartados === 1 ? ' descartado · ' : ' descartados · ') + cuenta.whatsapp + ' WhatsApp marcados como mandados' +\n  (cuenta.saltados ? ' · ' + cuenta.saltados + ' sin cambios (ya no estaban esperando)' : '') + '</p></div>' + volver);\nreturn [{ json: { filas, html } }];\n"
+      },
+      "id": "9300b292-463d-5ec7-a97f-245064fad29b",
+      "name": "Aplicar decisiones",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        720,
+        500
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose"
+          },
+          "conditions": [
+            {
+              "id": "0a08b183-b467-5fee-85a0-eeae60cac242",
+              "leftValue": "={{ $json.filas.length > 0 }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "9bfc3795-1c0e-57de-97bf-30ca69c0fb83",
+      "name": "¿Hay cambios?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        960,
+        500
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "return $input.first().json.filas.map(f => ({ json: f }));\n"
+      },
+      "id": "394011eb-fe9d-5515-ade0-ac3f7aca5974",
+      "name": "Filas",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1200,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "={{ $('Config guardar').first().json.SHEET_ID }}",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Leads",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": []
+        },
+        "options": {}
+      },
+      "id": "deabca8a-0fdb-586c-8a74-cba3b98bf0a2",
+      "name": "Guardar decisiones",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        1440,
+        400
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "REEMPLAZAR",
+          "name": "Google Sheets"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "={{ $('Aplicar decisiones').first().json.html }}",
+        "options": {
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Content-Type",
+                "value": "text/html; charset=utf-8"
+              }
+            ]
+          }
+        }
+      },
+      "id": "9f85105f-ad03-5a5f-a7d7-836660cd3845",
+      "name": "Página: guardado",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        1680,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "={{ $('Aplicar decisiones').first().json.html }}",
+        "options": {
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Content-Type",
+                "value": "text/html; charset=utf-8"
+              }
+            ]
+          }
+        }
+      },
+      "id": "ec845a51-0ce4-5fac-8d09-4b506807f363",
+      "name": "Página: sin cambios",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        1200,
+        600
+      ]
+    }
+  ],
+  "connections": {
+    "Abrir bandeja": {
+      "main": [
+        [
+          {
+            "node": "Config",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Config": {
+      "main": [
+        [
+          {
+            "node": "Leer Leads",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Leer Leads": {
+      "main": [
+        [
+          {
+            "node": "Armar bandeja",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Armar bandeja": {
+      "main": [
+        [
+          {
+            "node": "Mostrar bandeja",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Guardar bandeja": {
+      "main": [
+        [
+          {
+            "node": "Config guardar",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Config guardar": {
+      "main": [
+        [
+          {
+            "node": "Leer Leads (guardar)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Leer Leads (guardar)": {
+      "main": [
+        [
+          {
+            "node": "Aplicar decisiones",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aplicar decisiones": {
+      "main": [
+        [
+          {
+            "node": "¿Hay cambios?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "¿Hay cambios?": {
+      "main": [
+        [
+          {
+            "node": "Filas",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Página: sin cambios",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filas": {
+      "main": [
+        [
+          {
+            "node": "Guardar decisiones",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Guardar decisiones": {
+      "main": [
+        [
+          {
+            "node": "Página: guardado",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "America/Montevideo"
+  },
+  "meta": {
+    "templateCredsSetupCompleted": false
+  },
+  "tags": []
+}

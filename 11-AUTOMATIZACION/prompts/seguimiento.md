@@ -18,8 +18,9 @@ Seguimiento 2 (día 9) — cierre elegante:
 
 Siempre: el mismo idioma y el mismo trato que el primer mail (vos en Uruguay
 y Argentina, tú en México, Latinoamérica y España, inglés en EE.UU.), frases
-cortas, sin emojis, sin "estimado/a", sin signos de exclamación. Este mail sale
-solo, sin que Martin lo lea: no inventes nada que no esté en los datos. Firma
+cortas, sin emojis, sin "estimado/a", sin signos de exclamación. Martin lo lee
+antes de que salga, pero escribilo listo para mandar: no inventes nada que no
+esté en los datos. Firma
 corta:
 Martin · apardianstudio.com · +598 91 962 962
 (y la DIRECCION_POSTAL debajo, si viene en los datos)

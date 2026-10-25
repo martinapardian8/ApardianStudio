@@ -9,13 +9,12 @@ musical). Uruguay. WhatsApp +598 91 962 962.
 - Nada de antes/después ni "sin editar": no tenemos los originales.
 - Estilo editorial: sin chinches, hilo rojo, cinta ni papel roto. Los montajes
   dicen que son montajes.
-- Ningún mensaje a un cliente real sale sin que Martin lo vea. Única excepción
-  (decisión de Martin, 24/10/2026): los mails en frío de Radar y sus dos
-  seguimientos salen solos, hasta 50 nuevos por día, pero solo con ofertas y
-  entrenamiento que Martin aprobó en el Centro. Las respuestas de clientes
-  siempre las contesta Martin. Salen desde contacto@apardianstudio.com por
-  Hostinger (decisión de Martin, 25/10/2026), nunca por encima del
-  `LIMITE_TOTAL_DIA` de su plan de correo.
+- Ningún mensaje a un cliente real sale sin que Martin lo vea. Sin
+  excepciones: desde el 25/10/2026 los mails de Radar también pasan por su
+  aprobación (la bandeja, flujo 11, que se abre desde el Centro → Radar).
+  Salen desde contacto@apardianstudio.com por Hostinger, hasta 90 por día
+  (`LIMITE_TOTAL_DIA`; el plan gratis permite 100). Los WhatsApp de Radar los
+  manda Martin a mano. Las respuestas de clientes siempre las contesta Martin.
 - No se publica la web ni se empuja a `hostinger` sin su OK.
 
 ## El equipo
