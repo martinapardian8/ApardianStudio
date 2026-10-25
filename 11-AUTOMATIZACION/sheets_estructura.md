@@ -28,14 +28,14 @@ también puede editar a mano (por ejemplo, poner `descartado` a un lead).
 | `seguimientos` | 0, 1 o 2 | 04 Seguimiento |
 | `respuesta` | Categoría de la respuesta + resumen | 05 Respuestas |
 | `notas` | Ficha de Google y, después de auditar, la auditoría completa en JSON | 01 / 02 / Martin |
-| `draft_id` | ID del borrador pendiente en Gmail | 03 / 04 |
-| `thread_id` | Hilo de Gmail del primer mail (para seguimientos y respuestas) | 03 |
-| `mensaje_id` | ID del primer mail enviado | 03 |
 | `pais` | País del negocio (de su búsqueda) | 01 |
 | `idioma` | `es` o `en` (el auditor puede corregirlo) | 01 / 02 |
 | `mercado` | `uy` (se ofrece todo, presencial incluido) u `online` (solo lo que se hace a distancia) | 01 |
 | `zona` | Zona horaria del negocio: el mail sale en su horario de oficina | 01 |
 | `oferta_id` | Oferta aprobada que usó el mail, si usó alguna | 03 |
+| `ultimo_envio` | Último día que le salió un mail (primero o seguimiento). Con esto se cuenta el tope diario de la casilla | 03 / 04 |
+| `seg_asunto` | Asunto del seguimiento que espera aprobación (solo con `AUTO_ENVIO` en `false`) | 04 |
+| `seg_cuerpo` | Cuerpo de ese seguimiento | 04 |
 
 El auditor reemplaza `notas` por un JSON con la auditoría completa y la ficha
 de Google: lo usan el redactor y el seguimiento 1. Si Martin quiere anotar algo,

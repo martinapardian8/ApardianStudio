@@ -35,21 +35,33 @@ tildándolos.
 
 ### Semana 1 — la casilla
 
-1. **Comprá el dominio para los mails.** Un dominio hermano, no el de tu web:
-   por ejemplo `apardian.studio` o `apardianstudio.co` (en Hostinger, donde ya
-   tenés la web). Si un día los mails en frío caen en spam, se quema ese, no
-   `apardianstudio.com` ni tu mail principal.
-2. **Creá la casilla en Google Workspace**: `martin@` el dominio nuevo. El plan
-   Business Starter alcanza. Poné tu foto de perfil y la firma:
+Radar manda desde **contacto@apardianstudio.com**, la casilla de Hostinger que
+ya creaste (decisión tuya del 25/10/2026). Es el mismo dominio de la web y de
+`martin@`: si los mails en frío caen en spam, lo sienten todos. Por eso Radar
+sube de a poco, tiene un tope por día y el reporte te avisa si rebota más del 5 %.
+
+1. **Mirá qué plan de correo tenés** (Hostinger → Emails). Ese plan pone el
+   techo de mails por día de la casilla, contando nuevos y seguimientos:
+   | Plan de correo de Hostinger | Mails por día | `LIMITE_TOTAL_DIA` |
+   |---|---|---|
+   | Gratis (viene con el hosting) | 100 | 90 → Radar llega a unos 30 nuevos por día |
+   | Business Starter | 1.000 | 900 → los 50 nuevos por día con sus seguimientos |
+   | Business Standard o Premium | 3.000 | 900 alcanza de sobra |
+   Para los 50 por día hace falta Business Starter (o superior).
+2. **SPF, DKIM y DMARC.** Hostinger → Emails → apardianstudio.com →
+   Configuración de DNS (o Autenticación): los tres tienen que estar en verde.
+   Si DMARC falta, agregá en Hostinger → Dominios → DNS un registro TXT con
+   nombre `_dmarc` y valor
+   `v=DMARC1; p=none; rua=mailto:contacto@apardianstudio.com`. Probalo en
+   mail-tester.com mandando un mail desde contacto@: tiene que dar 9/10 o más.
+3. **Foto y firma en contacto@** (webmail de Hostinger → Configuración):
    `Martin Apardian · APARDIAN STUDIO · apardianstudio.com · WhatsApp +598 91 962 962`.
-3. **SPF, DKIM y DMARC.** Google Workspace te muestra los tres registros; se
-   pegan en Hostinger → Dominios → DNS. Empezá DMARC con `p=none`. Sin esto,
-   todo va a spam. Probalo en mail-tester.com: tiene que dar 9/10 o más.
-4. **Redirigí el dominio nuevo a apardianstudio.com** (Hostinger →
-   Redirecciones), para que quien lo escriba te encuentre.
-5. **Calentá la casilla dos semanas**: 5 a 10 mails reales por día a gente que
-   te conoce y te contesta (clientes, colegas, amigos). Que respondan es lo que
-   le enseña a Gmail que sos de confianza.
+4. **Calentá la casilla dos semanas**: 5 a 10 mails reales por día desde
+   contacto@ a gente que te conoce y te contesta (clientes, colegas, amigos).
+   Que respondan es lo que les enseña a Gmail y a Outlook que sos de confianza.
+5. **Las respuestas llegan a contacto@.** Radar lee esa bandeja, te avisa por
+   Telegram cuando alguien se interesa y no toca nada más: las consultas que
+   lleguen desde la web siguen ahí, sin marcar como leídas.
 
 ### Semana 1 — las cuentas
 
@@ -76,12 +88,19 @@ tildándolos.
     `n8n/` (Import from file). En cada nodo **Config**:
     - `SHEET_ID`: el ID de la planilla (lo que está entre `/d/` y `/edit` en su link).
     - `TELEGRAM_CHAT_ID`: tu chat.
-    - `MI_EMAIL` (03 y 04): `Martin Apardian <martin@tu-dominio-nuevo>`.
+    - `MI_EMAIL` (03 y 04): ya viene `Martin Apardian <contacto@apardianstudio.com>`.
+    - `LIMITE_TOTAL_DIA` (03 y 04): 90 con el correo gratis, 900 con Business Starter.
     - `FECHA_INICIO` (03 y 10): el primer día de envío, `AAAA-MM-DD`.
     - `DIRECCION_POSTAL` (03 y 04): si querés escribirle a EE.UU. (ver la parte legal).
     - `TOKEN` (09): una clave larga inventada por vos.
-    - Elegí las credenciales (Google Sheets, Gmail de la casilla nueva,
-      Telegram, Google Places y Anthropic) donde dice `REEMPLAZAR`.
+    - Elegí las credenciales (Google Sheets, Telegram, Google Places,
+      Anthropic y las dos de contacto@) donde dice `REEMPLAZAR`. Las de
+      contacto@ se crean en n8n → Credentials:
+      - **SMTP** `Hostinger SMTP (contacto@)`: `smtp.hostinger.com`, puerto
+        `465`, SSL activado, usuario `contacto@apardianstudio.com` y su contraseña.
+      - **IMAP** `Hostinger IMAP (contacto@)`: `imap.hostinger.com`, puerto
+        `993`, SSL activado, el mismo usuario y contraseña.
+      La contraseña va solo ahí, nunca en la planilla.
 12. **Conectá el Centro**: Centro → Radar → Conexión con n8n. Pegá la dirección
     de producción del webhook del flujo 09 (termina en
     `/webhook/apardian-radar`), la misma clave del paso 11 y la fecha de
@@ -122,7 +141,8 @@ tildándolos.
 
 Salen de lunes a viernes, de a pocos cada hora, y solo en horario de oficina
 **del país del destinatario** (de 9 a 17 allá). Los seguimientos van aparte y
-no cuentan en el cupo. Si querés otro ritmo, cambiá `CUPOS_POR_SEMANA` en los
+no cuentan en ese cupo, pero sí en el tope de la casilla (`LIMITE_TOTAL_DIA`):
+si se llega al tope, ese día no sale nada más. Si querés otro ritmo, cambiá `CUPOS_POR_SEMANA` en los
 flujos 03 y 10 (por ejemplo `10,20,35,50,60`).
 
 A 50 por día son unos 1.100 mails por mes. Con 1 a 3 % de respuestas, lo
@@ -135,6 +155,8 @@ estimación: los números reales los da el reporte.
   Telegram, mail por mail).
 - Quien responde "no" o "baja" va a la hoja `Bajas` y nunca más recibe nada.
 - Quien responde deja de recibir seguimientos.
+- Nunca más de `LIMITE_TOTAL_DIA` mails por día desde contacto@, sumando
+  nuevos y seguimientos, ni más de uno por día al mismo negocio.
 
 ---
 

@@ -422,7 +422,7 @@ a.b[aria-disabled="true"]{opacity:.4;pointer-events:none}
     <div class="bloque">
       <div class="bloque-cab"><h2>La cuenta</h2><span class="mono muted" id="rd-semana"></span></div>
       <div class="rampa" id="rd-rampa"></div>
-      <p class="muted" style="margin:0;max-width:80ch">Un dominio nuevo que manda 50 mails el primer día termina en spam. Por eso sube de a poco: 10, 20, 35 y desde la cuarta semana 50 por día, de lunes a viernes, en el horario de oficina de cada país. A 50 por día son unos 1.100 mails por mes. Si responde entre el 1 y el 3 %, que es lo habitual en mail en frío bien hecho, son de 11 a 33 conversaciones por mes. Es una estimación: el reporte de las 18:00 te da los números reales.</p>
+      <p class="muted" style="margin:0;max-width:80ch">Una casilla que manda 50 mails en frío el primer día termina en spam. Por eso sube de a poco: 10, 20, 35 y desde la cuarta semana 50 por día, de lunes a viernes, en el horario de oficina de cada país. A 50 por día son unos 1.100 mails por mes. Si responde entre el 1 y el 3 %, que es lo habitual en mail en frío bien hecho, son de 11 a 33 conversaciones por mes. Es una estimación: el reporte de las 18:00 te da los números reales. Ojo con el techo de la casilla: el correo gratis de Hostinger manda 100 mails por día en total (nuevos y seguimientos); para llegar a 50 nuevos por día hace falta Business Starter (1.000 por día).</p>
     </div>
 
     <div class="bloque">
@@ -1136,17 +1136,17 @@ const RD_PREGUNTAS = [
   ]],
 ];
 const RD_PASOS = [
-  ["dominio", "Comprar el dominio para los mails", "Un dominio hermano de apardianstudio.com (por ejemplo apardian.studio o apardianstudio.co) en Hostinger o Google. Así, si algo sale mal con los mails en frío, tu web y tu mail principal no se tocan."],
-  ["workspace", "Crear la casilla en Google Workspace", "martin@ el dominio nuevo. Plan Business Starter alcanza. Agregá tu foto de perfil y una firma igual a la de los mails."],
-  ["dns", "Configurar SPF, DKIM y DMARC", "Google Workspace te guía paso a paso; los registros se pegan en el DNS del dominio. Sin esto, todo va a spam."],
-  ["redirigir", "Que el dominio nuevo lleve a tu web", "Redirigí el dominio nuevo a apardianstudio.com, para que quien lo escriba en el navegador te encuentre."],
-  ["calentar", "Calentar la casilla dos semanas", "Mandá 5 a 10 mails reales por día desde la casilla nueva a gente que te conoce y te contesta. Recién después se prende Radar."],
+  ["casilla", "Crear contacto@apardianstudio.com", "En Hostinger → Emails. Es la casilla desde la que manda Radar y a la que llegan las respuestas."],
+  ["plan", "Mirar el plan de correo de Hostinger", "El gratis manda 100 mails por día (LIMITE_TOTAL_DIA = 90, unos 30 nuevos por día). Para los 50 por día hace falta Business Starter: 1.000 por día (LIMITE_TOTAL_DIA = 900)."],
+  ["dns", "SPF, DKIM y DMARC en verde", "Hostinger → Emails → Configuración de DNS. Si falta DMARC: registro TXT _dmarc con v=DMARC1; p=none. Probalo en mail-tester.com: 9/10 o más."],
+  ["firma", "Foto y firma en contacto@", "En el webmail de Hostinger, la misma firma que llevan los mails de Radar."],
+  ["calentar", "Calentar la casilla dos semanas", "Mandá 5 a 10 mails reales por día desde contacto@ a gente que te conoce y te contesta. Recién después se prende Radar."],
   ["n8n", "Crear la cuenta de n8n", "n8n.io → plan Starter. Ahí corren todos los flujos."],
   ["places", "Clave de Google Places", "En Google Cloud: crear un proyecto, activar Places API (New), crear una clave y ponerle un tope de gasto mensual."],
   ["anthropic", "Clave de Claude (Anthropic)", "console.anthropic.com → API keys. Poné un límite de gasto mensual."],
   ["telegram", "Bot de Telegram", "Con @BotFather creás el bot; te llega el reporte diario y los avisos de clientes interesados."],
   ["planilla", "Planilla en Google Sheets", "Una planilla con las hojas Leads, Bajas, Busquedas, Ofertas y Entrenamiento (las plantillas están en 11-AUTOMATIZACION)."],
-  ["importar", "Importar los flujos 01 a 05, 09 y 10", "En n8n: Import from file. En cada Config pegás el ID de la planilla, tu chat de Telegram, la casilla nueva, la clave y la fecha de arranque."],
+  ["importar", "Importar los flujos 01 a 05, 09 y 10", "En n8n: Import from file. En cada Config pegás el ID de la planilla, tu chat de Telegram, el tope diario, la clave y la fecha de arranque. Las credenciales SMTP e IMAP de contacto@ se crean en n8n, nunca en la planilla."],
   ["conectar", "Conectar el Centro con n8n", "Abajo, en Conexión con n8n: la dirección del webhook del flujo 09 y su clave."],
   ["entrenar", "Contestar el entrenamiento y aprobar las primeras ofertas", "Con eso Radar ya sabe cómo hablar y qué ofrecer."],
   ["prender", "Prender los flujos", "Activá 01, 02, 03, 04, 05, 09 y 10. El primer reporte llega a las 18:00."],

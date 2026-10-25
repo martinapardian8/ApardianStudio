@@ -46,9 +46,9 @@ Cinco agentes, cada uno hace una sola cosa. Ninguno manda nada sin que Martin lo
 ```
  ┌──────────────┐   ┌──────────────┐   ┌──────────────┐   ┌───────────────────┐
  │ 01 PROSPECTOR│──▶│ 02 AUDITOR   │──▶│ 03 REDACTOR  │──▶│ APROBACIÓN MARTIN │
- │ Google Places│   │ mira la web, │   │ escribe el   │   │ borrador en Gmail │
- │ rubro×ciudad │   │ puntúa 0-100 │   │ mail (≤120   │   │ + aviso Telegram  │
- │ → Leads      │   │ y detecta el │   │ palabras)    │   │ "Enviar" / "No"   │
+ │ Google Places│   │ mira la web, │   │ escribe el   │   │ sale de contacto@ │
+ │ rubro×ciudad │   │ puntúa 0-100 │   │ mail (≤120   │   │ (o pide OK por    │
+ │ → Leads      │   │ y detecta el │   │ palabras)    │   │ Telegram)         │
  └──────────────┘   │ problema real│   └──────────────┘   └─────────┬─────────┘
                     └──────────────┘                                │ enviado
                                                                     ▼
@@ -77,12 +77,15 @@ En palabras:
    evidencia, no hay problema: el prompt le prohíbe inventar.
 3. **Redactor** (`n8n/03_redactor_envio.json`). Para los leads con puntaje ≥ 60,
    escribe un mail corto: qué vimos, qué problema tiene, cómo lo resolvemos, una
-   prueba y una pregunta fácil de contestar. Lo deja como **borrador en Gmail** y
-   le avisa a Martin por Telegram.
+   prueba y una pregunta fácil de contestar. Sale desde
+   **contacto@apardianstudio.com** (SMTP de Hostinger); con `AUTO_ENVIO` en
+   `false` queda en la planilla y se aprueba por Telegram.
 4. **Seguimiento** (`n8n/04_seguimiento.json`). Si a los 4 días no contestó, un
    segundo mail que aporta algo (una idea concreta). A los 9 días, uno de cierre
    elegante. Después, se deja tranquilo.
-5. **Respuestas** (`n8n/05_respuestas.json`). Lee las respuestas, las clasifica
+5. **Respuestas** (`n8n/05_respuestas.json`). Lee la bandeja de contacto@ por
+   IMAP (solo los mails de negocios a los que Radar les escribió; las consultas
+   de la web quedan intactas, sin marcar como leídas), las clasifica
    y avisa a Martin solo cuando hay interés. Las bajas van a una lista negra que
    todos los flujos consultan.
 
@@ -104,8 +107,9 @@ Con `AUTO_ENVIO` en `false` vuelve el modo anterior: cada mail queda como
 borrador y se aprueba por Telegram.
 
 **Cómo se aprueba:** el mensaje de Telegram trae dos links, *Enviar* y
-*Descartar*. Si querés cambiar algo, editás el borrador en Gmail (carpeta
-Borradores) y después tocás *Enviar*: se manda la versión editada. Si el lead
+*Descartar*. Si querés cambiar algo, editás `asunto` y `borrador` (o
+`seg_asunto` y `seg_cuerpo`, en un seguimiento) en la hoja `Leads` y después
+tocás *Enviar*: se manda la versión editada. Si el lead
 respondió mientras tanto, el link ya no envía nada.
 
 ---
@@ -114,12 +118,18 @@ respondió mientras tanto, el link ya no envía nada.
 
 ### Que los mails lleguen (entregabilidad)
 
-- **Dominio de envío separado.** No mandar en frío desde tu Gmail personal
-  ni desde el dominio principal. Comprar un dominio hermano (por ejemplo
-  `apardian.studio` o `apardianstudio.co`) y usar `martin@` ese dominio con
-  Google Workspace. Si algo sale mal, se quema ese dominio, no la web.
-- **SPF, DKIM y DMARC** configurados en el DNS del dominio de envío (Google
-  Workspace lo guía paso a paso). Sin esto, todo va a spam.
+- **La casilla de envío** es `contacto@apardianstudio.com`, en Hostinger
+  (decisión de Martin, 25/10/2026). Es el dominio de la web: si los mails en
+  frío caen en spam, lo sufre todo `apardianstudio.com`, también `martin@`.
+  Por eso Radar tiene un **tope total por día** (`LIMITE_TOTAL_DIA`, nuevos +
+  seguimientos) y el reporte avisa si rebota más del 5 %.
+- **El plan de correo de Hostinger pone el techo**: el gratis manda 100 mails
+  por día por casilla; Business Starter, 1.000; Standard y Premium, 3.000
+  (ventana de 24 horas). A 50 nuevos por día más los seguimientos se pasan
+  los 100: con el gratis, `LIMITE_TOTAL_DIA` queda en 90 y Radar llega a unos
+  30 nuevos por día; con Starter, ponelo en 900.
+- **SPF, DKIM y DMARC** en el DNS de `apardianstudio.com` (Hostinger →
+  Emails → Configuración de DNS). Sin esto, todo va a spam.
 - **Calentamiento:** 2 semanas mandando poco (5–10 por día, mejor a gente que
   responde). Recién después, **20–40 mails por día como máximo**. Nunca 200 de golpe.
 - **Nunca comprar listas.** Solo negocios encontrados por el prospector, con datos
@@ -159,7 +169,11 @@ las buscan con estos nombres exactos:
 - [ ] `Google Places API` — tipo **Header Auth**: name `X-Goog-Api-Key`, value una
       API key de Google Cloud con **Places API (New)** habilitada.
 - [ ] `Google Sheets` — tipo Google Sheets OAuth2.
-- [ ] `Gmail Apardian` — tipo Gmail OAuth2, con la cuenta del dominio de envío.
+- [ ] `Hostinger SMTP (contacto@)` — tipo **SMTP**: host `smtp.hostinger.com`,
+      puerto `465`, SSL/TLS activado, usuario `contacto@apardianstudio.com` y
+      su contraseña. La usan el 03 y el 04.
+- [ ] `Hostinger IMAP (contacto@)` — tipo **IMAP**: host `imap.hostinger.com`,
+      puerto `993`, SSL/TLS activado, el mismo usuario y contraseña. La usa el 05.
 - [ ] `Telegram Apardian` — token de un bot creado con @BotFather. Mandarle un
       mensaje al bot y anotar tu `chat_id`.
 
@@ -168,7 +182,8 @@ del 03):
 
 - `SHEET_ID` — el ID de la planilla (lo que va entre `/d/` y `/edit` en la URL).
 - `TELEGRAM_CHAT_ID` — el chat de Martin.
-- `MI_EMAIL` / `MI_DIRECCION` — la casilla del dominio de envío.
+- `MI_EMAIL` — ya viene `Martin Apardian <contacto@apardianstudio.com>`.
+- `LIMITE_TOTAL_DIA` (03 y 04) — 90 con el correo gratis de Hostinger, 900 con Business Starter.
 - `URL_APROBAR` — la URL de producción del webhook `apardian-aprobar` (se ve al
   abrir el nodo *Aprobación* del flujo 03). Va en los flujos 03 y 04.
 - `TOKEN` — una clave larga inventada por vos, **la misma** en los nodos
@@ -187,7 +202,7 @@ Después de importar, abrir cada nodo con credencial y elegirla en el desplegabl
 (n8n a veces no la enlaza sola por nombre).
 
 **Probar en este orden:** 01 con un solo rubro y ciudad → 02 con 3 leads → 03 con 1
-lead y mirar el borrador → 05 respondiéndote a vos mismo. Recién entonces, activar
+lead y mirar el mail → 05 respondiéndote a vos mismo. Recién entonces, activar
 los disparadores programados.
 
 ---
@@ -199,7 +214,7 @@ los disparadores programados.
 | n8n Cloud Starter | ~US$ 24 |
 | Claude (Opus 5.5: US$ 4 / US$ 20 por millón de tokens). Auditoría ≈ 6.000 tokens de entrada + 1.000 de salida ≈ US$ 0,045. Mail ≈ US$ 0,03. Clasificación ≈ US$ 0,01 | 300 leads/mes ≈ **US$ 25** |
 | Google Places Text Search (New) | 200 búsquedas/mes ≈ US$ 7 (Google da crédito mensual que suele cubrirlo) |
-| Dominio de envío + Google Workspace | ~US$ 1 + US$ 7 |
+| Correo de Hostinger (contacto@) | incluido en tu plan; Business Starter si querés llegar a 50 por día |
 | **Total** | **~US$ 55–65/mes** con 300 leads auditados |
 
 Para bajar costo cuando el sistema esté probado: pasar la clasificación de
@@ -214,9 +229,9 @@ conviene dejarlas en Opus: son las que venden.
 |---|---|
 | `n8n/01_prospector.json` | Busca negocios en Google Places y los carga como leads |
 | `n8n/02_auditor.json` | Audita la web de cada lead con Claude |
-| `n8n/03_redactor_envio.json` | Escribe el mail, crea borrador y pide aprobación |
+| `n8n/03_redactor_envio.json` | Escribe el mail y lo manda desde contacto@ (SMTP de Hostinger), con tope diario |
 | `n8n/04_seguimiento.json` | Seguimientos a los 4 y 9 días |
-| `n8n/05_respuestas.json` | Clasifica respuestas y avisa a Martin |
+| `n8n/05_respuestas.json` | Lee contacto@ por IMAP, clasifica respuestas y rebotes, avisa a Martin |
 | `n8n/06_bienvenida_whatsapp.json` | Recibe una consulta y propone respuesta (P1) |
 | `n8n/07_aprobacion_instagram.json` | Pide aprobación por Telegram de lo que sale en las próximas 36 h (P7) |
 | `n8n/08_publicador_instagram.json` | Publica en Instagram lo aprobado, a su hora (P7) |
