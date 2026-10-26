@@ -25,7 +25,7 @@ Ritmo: **un posteo y una historia todos los días.** Feed: **lunes** carrusel co
 | Viernes 23/10 | 17:00 | Venta: Seguimiento de presupuestos y leads | `09-ESTUDIO/clientes.md` |
 | Viernes 23/10 | 19:30 | Carrusel de 8 fotos: Casamientos | `00-SUBIR-EN-ORDEN/04` |
 | Sábado 24/10 | 11:00 | Tus fotos en el mundo: Un sí, entre miles que pasan. | `08-tus-fotos-en-el-mundo/02_estacion_central.jpg` |
-| Sábado 24/10 | 12:30 | Historia: Esta la saqué desde el piso | `04-historias-organicas/002_foto_esta-la-saque-desde-el-piso.jpg` |
+| Sábado 24/10 | 12:30 | Historia: La entrada que todos esperaban | `04-historias-organicas/002_foto_esta-la-saque-desde-el-piso.jpg` |
 | Domingo 25/10 | 11:00 | Posteo: Tu carta se vende sola cuando la foto acompaña | `01-posteos-pauta/011_gastronomia_tu-carta-se-vende-sola-cuando-la-foto-acompana.jpg` |
 | Domingo 25/10 | 12:30 | Historia: Le dije dos cosas y me callé | `04-historias-organicas/005_foto_le-dije-dos-cosas-y-me-calle.jpg` |
 | Domingo 25/10 | 18:00 | Equipo: Luz arma la semana que viene y Lupa la revisa | `09-ESTUDIO/EQUIPO.md` |
@@ -127,7 +127,7 @@ Ritmo: **un posteo y una historia todos los días.** Feed: **lunes** carrusel co
 | Lunes 16/11 | 19:30 | Carrusel collage: Tu marca personal no entra en una selfie | `06-carruseles-collage/03-marca-personal-cinco-usos` |
 | Lunes 16/11 | 20:00 | Historia (a mano): Nuevo carrusel: compartilo en historias | `06-carruseles-collage/03-marca-personal-cinco-usos/01.jpg` |
 | Martes 17/11 | 10:00 | Venta: Foco de la semana: Retrato / marca personal | — |
-| Martes 17/11 | 12:30 | Historia: Odiaba las fotos mías hasta esta sesión | `02-historias-pauta/040_retratos_odiaba-las-fotos-mias-hasta-esta-sesion.jpg` |
+| Martes 17/11 | 12:30 | Historia: Para los que odian salir en fotos | `02-historias-pauta/040_retratos_odiaba-las-fotos-mias-hasta-esta-sesion.jpg` |
 | Martes 17/11 | 13:00 | Posteo: Si vendés vos, la cara importa | `01-posteos-pauta/038_retratos_si-vendes-vos-la-cara-importa.jpg` |
 | Miércoles 18/11 | 12:30 | Historia: Lo que entra por los ojos antes que por la boca | `04-historias-organicas/032_dato_lo-que-entra-por-los-ojos-antes-que-por-la-b.jpg` |
 | Miércoles 18/11 | 19:30 | Video de 6 segundos: Una foto tuya que no te da vergüenza mandar | `00-SUBIR-EN-ORDEN/11` |
@@ -150,7 +150,7 @@ Ritmo: **un posteo y una historia todos los días.** Feed: **lunes** carrusel co
 
 | Día | Hora | Qué | Pieza |
 |---|---|---|---|
-| Lunes 23/11 | 12:30 | Historia: Uruguay también es esto | `04-historias-organicas/036_foto_uruguay-tambien-es-esto.jpg` |
+| Lunes 23/11 | 12:30 | Historia: Lugares que no salen en la guía | `04-historias-organicas/036_foto_uruguay-tambien-es-esto.jpg` |
 | Lunes 23/11 | 19:30 | Carrusel collage: Tu Instagram no es tu página web | `06-carruseles-collage/07-web-tu-instagram-no-es-tu-web` |
 | Lunes 23/11 | 20:00 | Historia (a mano): Nuevo carrusel: compartilo en historias | `06-carruseles-collage/07-web-tu-instagram-no-es-tu-web/01.jpg` |
 | Martes 24/11 | 10:00 | Venta: Foco de la semana: Páginas web | — |
@@ -161,7 +161,7 @@ Ritmo: **un posteo y una historia todos los días.** Feed: **lunes** carrusel co
 | Jueves 26/11 | 10:00 | Automatización: P3 en marcha: revisar puntajes y respuestas de la semana | `11-AUTOMATIZACION/README.md` |
 | Jueves 26/11 | 12:30 | Historia: Me miró y se fue | `04-historias-organicas/038_foto_me-miro-y-se-fue.jpg` |
 | Jueves 26/11 | 19:30 | Reel: Reel del carrusel: Tu Instagram no es tu página web | `07-reels-collage/07-web-tu-instagram-no-es-tu-web.mp4` |
-| Viernes 27/11 | 12:30 | Historia: Le mandé el logo un lunes y el viernes ya estaba online | `02-historias-pauta/035_web_le-mande-el-logo-un-lunes-y-el-viernes-ya-esta.jpg` |
+| Viernes 27/11 | 12:30 | Historia: Tu web, hecha a medida y lista para vender | `02-historias-pauta/035_web_le-mande-el-logo-un-lunes-y-el-viernes-ya-esta.jpg` |
 | Viernes 27/11 | 17:00 | Venta: Seguimiento de presupuestos y leads | `09-ESTUDIO/clientes.md` |
 | Viernes 27/11 | 19:30 | Posteo: Las fotos y el lugar donde se muestran | `01-posteos-pauta/034_web_las-fotos-y-el-lugar-donde-se-muestran.jpg` |
 | Sábado 28/11 | 11:00 | Tus fotos en el mundo: Tu trabajo, en tu propia página. | `08-tus-fotos-en-el-mundo/12_notebook.jpg` |
@@ -177,20 +177,20 @@ Ritmo: **un posteo y una historia todos los días.** Feed: **lunes** carrusel co
 
 | Día | Hora | Qué | Pieza |
 |---|---|---|---|
-| Lunes 30/11 | 12:30 | Historia: Producto uruguayo, foto uruguaya | `04-historias-organicas/041_foto_producto-uruguayo-foto-uruguaya.jpg` |
+| Lunes 30/11 | 12:30 | Historia: Se ve como se come | `04-historias-organicas/041_foto_producto-uruguayo-foto-uruguaya.jpg` |
 | Lunes 30/11 | 19:30 | Carrusel collage: Regalá un lugar | `06-carruseles-collage/08-cuadros-regala-un-lugar` |
 | Lunes 30/11 | 20:00 | Historia (a mano): Nuevo carrusel: compartilo en historias | `06-carruseles-collage/08-cuadros-regala-un-lugar/01.jpg` |
 | Martes 01/12 | 10:00 | Venta: Foco de la semana: Cuadros | — |
 | Martes 01/12 | 12:30 | Historia: Colgá tu mejor foto | `02-historias-pauta/046_cuadros_colga-tu-mejor-foto.jpg` |
 | Martes 01/12 | 13:00 | Reel de 6 segundos: Una foto en el teléfono no decora nada | `05-videos/047_cuadros_una-foto-en-el-telefono-no-decora-nada_feed.mp4` |
 | Miércoles 02/12 | 12:30 | Historia: Se casaron con viento a favor | `04-historias-organicas/042_foto_se-casaron-con-viento-a-favor.jpg` |
-| Miércoles 02/12 | 19:30 | Posteo: Paisajes de Uruguay, impresos en grande | `01-posteos-pauta/048_cuadros_paisajes-de-uruguay-impresos-en-grande.jpg` |
+| Miércoles 02/12 | 19:30 | Posteo: Paisajes de mis viajes, impresos en grande | `01-posteos-pauta/048_cuadros_paisajes-de-uruguay-impresos-en-grande.jpg` |
 | Jueves 03/12 | 10:00 | Automatización: P4 prospección de fotógrafos en EN/PT | `11-AUTOMATIZACION/README.md` |
 | Jueves 03/12 | 12:30 | Historia: Quince años, cero poses | `04-historias-organicas/043_foto_quince-anos-cero-poses.jpg` |
 | Jueves 03/12 | 19:30 | Reel: Reel del carrusel: Regalá un lugar | `07-reels-collage/08-cuadros-regala-un-lugar.mp4` |
 | Viernes 04/12 | 12:30 | Historia: Tu producto, como se merece | `02-historias-pauta/016_gastronomia_tu-producto-como-se-merece.jpg` |
 | Viernes 04/12 | 17:00 | Venta: Seguimiento de presupuestos y leads | `09-ESTUDIO/clientes.md` |
-| Viernes 04/12 | 19:30 | Posteo: Nos entregó todas las fotos en diez días y quedamos mudos | `01-posteos-pauta/008_bodas_nos-entrego-todas-las-fotos-en-diez-dias-y-que.jpg` |
+| Viernes 04/12 | 19:30 | Posteo: Todas tus fotos, editadas, en diez días | `01-posteos-pauta/008_bodas_nos-entrego-todas-las-fotos-en-diez-dias-y-que.jpg` |
 | Sábado 05/12 | 11:00 | Tus fotos en el mundo: El mar, colgado en el living. | `08-tus-fotos-en-el-mundo/11_cuadro_living.jpg` |
 | Sábado 05/12 | 12:30 | Historia: Tres canciones y se acabó la luz | `04-historias-organicas/044_foto_tres-canciones-y-se-acabo-la-luz.jpg` |
 | Domingo 06/12 | 11:00 | Posteo: Quedan pocas fechas para el verano | `01-posteos-pauta/007_bodas_quedan-pocas-fechas-para-el-verano.jpg` |
