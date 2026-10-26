@@ -90,16 +90,22 @@ def slug(t):
 
 
 def main():
-    idx = [x for x in json.load(open(INDICE, encoding="utf-8")) if x["n"] < PRIMERA]
+    todo = json.load(open(INDICE, encoding="utf-8"))
+    idx = [x for x in todo if x["n"] < PRIMERA]
+    # el archivo conserva su nombre aunque cambie el texto: el calendario lo usa
+    viejos = {x["n"]: x["archivo"] for x in todo if x["n"] >= PRIMERA}
     for x in os.listdir(DEST):
-        if re.match(r"^\d{3}_", x) and int(x[:3]) >= PRIMERA:
+        if re.match(r"^\d{3}_", x) and int(x[:3]) >= PRIMERA and x not in viejos.values():
             os.remove(os.path.join(DEST, x))
     for k, (tipo, ruta, c) in enumerate(HISTORIAS):
         n = PRIMERA + k
-        im = H.dato(c) if tipo == "dato" else {"foto": H.foto_frase, "detras": H.detras}[tipo](ruta, c)
-        nom = "%03d_%s_%s.jpg" % (n, tipo, slug(c["titular"]))
+        if tipo == "dato":
+            ruta = H.foto_para_dato(c)
+        im = H.dato(c, ruta) if tipo == "dato" else {"foto": H.foto_frase, "detras": H.detras}[tipo](ruta, c)
+        nom = viejos.get(n) or "%03d_%s_%s.jpg" % (n, tipo, slug(c["titular"]))
         im.save(os.path.join(DEST, nom), "JPEG", quality=90, optimize=True)
-        idx.append({"n": n, "tipo": tipo, "titular": c["titular"], "archivo": nom})
+        idx.append({"n": n, "tipo": tipo, "titular": c["titular"], "archivo": nom,
+                    "foto": os.path.relpath(ruta, RAIZ), "texto": H.texto_de(c)})
     json.dump(idx, open(INDICE, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     print(len(HISTORIAS), "historias nuevas")
 

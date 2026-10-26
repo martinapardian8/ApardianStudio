@@ -6,21 +6,11 @@ Sale todo numerado para que Martin lo suba en orden.
 """
 import os, re, unicodedata, json
 from motor_ads import *
-import plantillas_ads as P
 from campanas import TODO
 
-DEST = "/Users/martinapardian/Desktop/WEB APARDIANSTUDIO/08-CONTENIDO-INSTAGRAM"
+DEST = os.path.join(RAIZ, "08-CONTENIDO-INSTAGRAM")
 D_POST  = os.path.join(DEST, "01-posteos-pauta")
 D_STORY = os.path.join(DEST, "02-historias-pauta")
-
-# plantillas que en vertical funcionan mejor cambiadas
-CAMBIO_STORY = {
-    "grilla_cuatro": "dos_fotos",     # cuatro fotos en 9:16 quedan diminutas
-    "marco_hueso":   "mitad_color",   # el marco no respira en vertical
-}
-# cuantas fotos necesita cada plantilla
-MULTI = {"grilla_cuatro": 4, "dos_fotos": 2}
-
 
 def slug(t):
     t = unicodedata.normalize("NFKD", t).encode("ascii", "ignore").decode()
@@ -28,60 +18,49 @@ def slug(t):
     return t[:46]
 
 
-def rutas_para(plant, cat, idx):
-    """Una sola foto, o varias que no cuenten lo mismo.
-
-    Antes se tomaban indices salteados y salian cuatro mesas montadas casi
-    iguales. Ahora el selector exige variedad de tema: gente, luz y color.
-    """
+def rutas_para(cat, idx):
+    """La foto de la pieza. Tiene que encuadrar bien en los DOS formatos (la
+    misma foto va en posteo y en historia). En gastronomía, solo comida."""
     import similitud as S
-    # La misma foto se usa en posteo y en historia, asi que tiene que encuadrar
-    # bien en los DOS formatos. Antes solo se controlaba el 4:5 y en vertical
-    # quedaban rostros cortados.
     malas = S._vetadas(POST) | S._vetadas(STORY)
-    n = MULTI.get(plant, 1)
-    if n == 1:
-        r = foto(cat, idx)
-        if r in malas:
-            for k in range(1, 20):
-                alt = foto(cat, idx + k)
-                if alt not in malas:
-                    return alt
-        return r
-    from motor_ads import pool
-    cands = pool().get(cat) or []
-    cands = [p for p in cands if p not in malas] or cands
-    return S.variadas(cands, n, arranque=idx, size=POST)
+    que = COMIDA if cat == "gastronomia" else None
+    for k in range(20):
+        r = foto_de(cat, idx + k, que)
+        if r not in malas:
+            return r
+    return foto_de(cat, idx, que)
 
 
-def render(c, size, story):
-    plant = c["_plant"]
-    if story:
-        plant = CAMBIO_STORY.get(plant, plant)
-    fn = getattr(P, plant)
-    cc = {k: v for k, v in c.items() if not k.startswith("_")}
-    if plant == "mitad_color" and "fondo" not in cc:
-        cc["fondo"] = "negro"
-    if plant in ("lista_servicio",) and "items" not in cc:
-        plant = "barra_inferior"; fn = getattr(P, plant)
-    if plant in ("oferta_numero", "prueba_social") and "numero" not in cc:
-        plant = "titular_sobre_foto"; fn = getattr(P, plant)
-    return fn(size, story, rutas_para(plant, c["_cat"], c["_idx"]), cc)
+def render(c, size, story, ruta):
+    """Todas las piezas con la misma idea: la foto de Martin manda, el texto
+    va al pie (pieza_foto). Pedido de Martin del 26/10/2026. Las listas de lo
+    que incluye cada servicio van en el pie de foto, no en la imagen."""
+    cc = {k: v for k, v in c.items() if not k.startswith("_") and k not in ("items", "fondo")}
+    return pieza_foto(ruta, size, story, cc)[0]
+
+
+def texto_de(c):
+    return " · ".join(str(c[k]) for k in ("numero", "kicker", "titular", "sub") if c.get(k))
 
 
 def main():
     os.makedirs(D_POST, exist_ok=True)
     os.makedirs(D_STORY, exist_ok=True)
     indice = []
+    IDX = os.path.join(DEST, "indice_pauta.json")
+    viejo = {x["n"]: x["archivo"] for x in json.load(open(IDX, encoding="utf-8"))} if os.path.exists(IDX) else {}
     for i, c in enumerate(TODO, 1):
-        nom = f"{i:03d}_{c['_camp']}_{slug(c['titular'])}.jpg"
+        # el archivo conserva su nombre aunque cambie el texto: el calendario lo usa
+        nom = viejo.get(i) or f"{i:03d}_{c['_camp']}_{slug(c['titular'])}.jpg"
         try:
-            render(c, POST, False).save(os.path.join(D_POST, nom), "JPEG",
-                                        quality=90, optimize=True)
-            render(c, STORY, True).save(os.path.join(D_STORY, nom), "JPEG",
-                                        quality=90, optimize=True)
+            ruta = rutas_para(c["_cat"], c["_idx"])
+            render(c, POST, False, ruta).save(os.path.join(D_POST, nom), "JPEG",
+                                              quality=90, optimize=True)
+            render(c, STORY, True, ruta).save(os.path.join(D_STORY, nom), "JPEG",
+                                              quality=90, optimize=True)
             indice.append({"n": i, "campana": c["_camp"], "titular": c["titular"],
-                           "cta": c["cta"], "archivo": nom})
+                           "cta": c["cta"], "archivo": nom,
+                           "foto": os.path.relpath(ruta, RAIZ), "texto": texto_de(c)})
         except Exception as e:
             print(f"  FALLO {i:03d} {c['_camp']}: {type(e).__name__}: {e}")
     json.dump(indice, open(os.path.join(DEST, "indice_pauta.json"), "w"),

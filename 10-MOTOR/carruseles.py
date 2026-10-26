@@ -12,7 +12,7 @@ from PIL import Image, ImageDraw
 from motor_ads import *
 import plantillas_ads as PL
 
-DEST = "/Users/martinapardian/Desktop/WEB APARDIANSTUDIO/08-CONTENIDO-INSTAGRAM/03-carruseles"
+DEST = os.path.join(RAIZ, "08-CONTENIDO-INSTAGRAM", "03-carruseles")
 M = 76
 
 
@@ -34,14 +34,7 @@ def tapa(ruta, c, total):
     bloque(d, M, y0, y_tope, W - 2*M, cc, HUESO, HUESO,
            px_titular=124, con_regla=True, color_kicker=HUESO)
 
-    # senal de deslizar y firma, siempre en el mismo lugar
-    f = work(27, "SemiBold")
-    escribir(d, (M, H - 108), "DESLIZÁ", f, HUESO, 5)
-    w = ancho(d, "DESLIZÁ", f, 5)
-    d.line([(M + w + 22, H - 96), (M + w + 78, H - 96)], fill=ROJO, width=4)
-    for k in range(4):
-        d.line([(M + w + 62 + k, H - 108 + k), (M + w + 78, H - 96)], fill=ROJO, width=3)
-        d.line([(M + w + 62 + k, H - 84 - k), (M + w + 78, H - 96)], fill=ROJO, width=3)
+    # sin "DESLIZÁ" (Martin, 26/10/2026): Instagram ya muestra los puntitos
     firma(d, M, H - 168, 0.95, True)
     return im
 
@@ -133,7 +126,7 @@ def C(slug, kicker, titular, sub, cat, cierre_t, sub_cierre, cta, idxs,
 
 
 CARRUSELES = [
- C("01-una-boda-entera", "Bodas · Uruguay",
+ C("01-una-boda-entera", "Bodas",
    "Casamientos",
    "Ceremonia, salón y fiesta. Todo lo que pasa en un día que dura uno solo.",
    ["bodas", "salones"], "Tu fecha todavía está libre",
@@ -154,8 +147,8 @@ CARRUSELES = [
    "Edición por lote para fotógrafos. Tu lote listo en 72 horas.",
    "MANDAME TUS FOTOS", [9, 21, 4, 17, 28, 33, 12, 3], modo="antes", reutiliza=True),
 
- C("04-marcas-uruguayas", "Marcas · Uruguay",
-   "Marcas uruguayas que fotografié",
+ C("04-marcas-uruguayas", "Marcas",
+   "Marcas que fotografié",
    "Aceite de oliva, empanadas, alfajores y kamados. Producto real.",
    ["marcas"], "Tu producto es el que falta",
    "Packshot limpio, listo para tienda online, catálogo y redes.",
@@ -179,7 +172,7 @@ CARRUSELES = [
    "RESERVÁ TU FECHA", [6, 33, 48, 2, 19, 41, 27, 12]),
 
  C("07-salones-uruguay", "Salones y estancias",
-   "Salones de Uruguay",
+   "Salones que fotografié",
    "Cada lugar pide una luz distinta. Estas son las que encontré.",
    "salones", "¿Tenés un salón?",
    "Fotos del espacio montado, para tu web y para vender fechas.",
@@ -193,7 +186,7 @@ CARRUSELES = [
    "ESCRIBIME POR WHATSAPP", [1, 6, 11, 3, 17, 9, 20, 14]),
 
  C("09-uruguay-punta-a-punta", "Naturaleza y viajes",
-   "Uruguay de punta a punta",
+   "Lo que veo de viaje",
    "Lo que veo cuando dejo de trabajar. Todo impreso queda mejor.",
    "naturaleza", "Colgá una en tu casa",
    "Copias numeradas, papel de archivo y marco de madera.",

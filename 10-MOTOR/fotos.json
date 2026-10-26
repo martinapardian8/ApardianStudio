@@ -1,0 +1,171 @@
+{
+ "_que_es": "Lo que se sabe de cada foto de 05-WEB/img/<carpeta>/web. 'lugar' solo se completa con lo que confirmó Martin (confirmado: true): ninguna pieza nombra un lugar que no esté acá. 'contenido' dice qué muestra la foto: una pieza que habla de carta, platos o comida usa solo 'plato' o 'preparacion'. Lupa lo revisa (lupa.py) y Luz lo consulta antes de elegir una foto o escribir un texto.",
+ "contenidos": {
+  "plato": "comida terminada, lista para mostrar",
+  "preparacion": "manos cocinando o armando",
+  "fuego": "parrilla, horno o fuego sin plato a la vista",
+  "equipo": "parrilla o kamado sin comida",
+  "local": "salón, gente comiendo, ambiente",
+  "origen": "campo, aceite, materia prima"
+ },
+ "fotos": {
+  "gastronomia/alfajor__IMG_5423.jpg": {
+   "contenido": "plato"
+  },
+  "gastronomia/alfajor__IMG_5427.jpg": {
+   "contenido": "plato"
+  },
+  "gastronomia/alfajor__IMG_5429.jpg": {
+   "contenido": "plato"
+  },
+  "gastronomia/alfajor__IMG_5430.jpg": {
+   "contenido": "plato"
+  },
+  "gastronomia/lokotas__IMG_7556.jpg": {
+   "contenido": "plato"
+  },
+  "gastronomia/lokotas__IMG_7562.jpg": {
+   "contenido": "plato"
+  },
+  "gastronomia/lokotas__IMG_7567.jpg": {
+   "contenido": "plato"
+  },
+  "gastronomia/lokotas__IMG_7574.jpg": {
+   "contenido": "plato"
+  },
+  "gastronomia/lokotas__IMG_7590.jpg": {
+   "contenido": "plato"
+  },
+  "gastronomia/lokotas__IMG_7595.jpg": {
+   "contenido": "plato"
+  },
+  "gastronomia/lokotas__IMG_7600.jpg": {
+   "contenido": "plato"
+  },
+  "gastronomia/lokotas__IMG_7622.jpg": {
+   "contenido": "plato"
+  },
+  "gastronomia/sergio__IMG_7234.jpg": {
+   "contenido": "plato"
+  },
+  "gastronomia/sergio__IMG_7258.jpg": {
+   "contenido": "plato"
+  },
+  "gastronomia/sergio__IMG_7391.jpg": {
+   "contenido": "plato"
+  },
+  "gastronomia/sergio__IMG_7420.jpg": {
+   "contenido": "plato"
+  },
+  "gastronomia/sergio__IMG_7488.jpg": {
+   "contenido": "plato"
+  },
+  "gastronomia/sergio__IMG_7503.jpg": {
+   "contenido": "plato"
+  },
+  "gastronomia/v__69.jpg": {
+   "contenido": "plato"
+  },
+  "gastronomia/v__70.jpg": {
+   "contenido": "plato"
+  },
+  "gastronomia/v__71.jpg": {
+   "contenido": "plato"
+  },
+  "gastronomia/v__73.jpg": {
+   "contenido": "plato"
+  },
+  "gastronomia/alfajor__IMG_5373.jpg": {
+   "contenido": "preparacion"
+  },
+  "gastronomia/alfajor__IMG_5376.jpg": {
+   "contenido": "preparacion"
+  },
+  "gastronomia/alfajor__IMG_5378.jpg": {
+   "contenido": "preparacion"
+  },
+  "gastronomia/nw__IMG_7064.jpg": {
+   "contenido": "preparacion"
+  },
+  "gastronomia/nw__IMG_7086.jpg": {
+   "contenido": "preparacion"
+  },
+  "gastronomia/sergio__IMG_7060.jpg": {
+   "contenido": "preparacion"
+  },
+  "gastronomia/sergio__IMG_7377.jpg": {
+   "contenido": "preparacion"
+  },
+  "gastronomia/v__72.jpg": {
+   "contenido": "preparacion"
+  },
+  "gastronomia/ivanna-santiago__IMG_4815.jpg": {
+   "contenido": "fuego"
+  },
+  "gastronomia/nicol__IMG_5766.jpg": {
+   "contenido": "fuego"
+  },
+  "gastronomia/sergio__IMG_7211.jpg": {
+   "contenido": "fuego"
+  },
+  "gastronomia/sergio__IMG_7274.jpg": {
+   "contenido": "fuego"
+  },
+  "gastronomia/sergio__IMG_7441.jpg": {
+   "contenido": "fuego"
+  },
+  "gastronomia/nw__IMG_7027.jpg": {
+   "contenido": "equipo"
+  },
+  "gastronomia/sergio__IMG_7027.jpg": {
+   "contenido": "equipo"
+  },
+  "gastronomia/la-estacion__IMG_8060.jpg": {
+   "contenido": "local"
+  },
+  "gastronomia/la-estacion__IMG_8063.jpg": {
+   "contenido": "local"
+  },
+  "gastronomia/la-estacion__IMG_8064.jpg": {
+   "contenido": "local"
+  },
+  "gastronomia/nicol__IMG_5880.jpg": {
+   "contenido": "local"
+  },
+  "gastronomia/nicol__IMG_5895.jpg": {
+   "contenido": "local"
+  },
+  "gastronomia/v__74.jpg": {
+   "contenido": "origen"
+  },
+  "gastronomia/v__75.jpg": {
+   "contenido": "origen"
+  },
+  "gastronomia/v__77.jpg": {
+   "contenido": "origen"
+  },
+  "gastronomia/v__78.jpg": {
+   "contenido": "origen"
+  },
+  "gastronomia/v__80.jpg": {
+   "contenido": "origen"
+  },
+  "gastronomia/v__81.jpg": {
+   "contenido": "origen"
+  },
+  "gastronomia/v__82.jpg": {
+   "contenido": "origen"
+  },
+  "gastronomia/v__83.jpg": {
+   "contenido": "origen"
+  },
+  "gastronomia/v__84.jpg": {
+   "contenido": "origen"
+  },
+  "naturaleza/v__45.jpg": {
+   "lugar": "Palma de Mallorca, España",
+   "confirmado": true,
+   "fuente": "Martin, orden del Centro 26/10/2026"
+  }
+ }
+}

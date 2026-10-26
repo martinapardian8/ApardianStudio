@@ -24,7 +24,7 @@ OUT = os.path.join(RAIZ, "12-CENTRO")
 PLANTILLA = os.path.join(os.path.dirname(os.path.abspath(__file__)), "centro_plantilla.html")
 
 
-def carruseles():
+def carruseles(publicados=frozenset()):
     copys = open(os.path.join(COL, "00_COPYS.md")).read()
     bloques = re.split(r"\n## ", copys)[1:]
     por_num = {}
@@ -47,13 +47,27 @@ def carruseles():
         slug = os.path.basename(d)
         info = por_num.get(slug[:2], {})
         dst = os.path.join(OUT, "car", slug)
-        os.makedirs(dst, exist_ok=True)
         lams = sorted(glob.glob(os.path.join(d, "[0-9][0-9].jpg")))
+        srcs = []
         for p in lams:
+            # si la lámina ya se publica para bajar (ig/), se muestra esa: no
+            # gasta un archivo más del tope de la app
+            ig = "ig/06-carruseles-collage/%s/%s" % (slug, os.path.basename(p))
+            if ig in publicados:
+                srcs.append(ig); continue
+            os.makedirs(dst, exist_ok=True)
             im = Image.open(p).convert("RGB")
             im.thumbnail((432, 540), Image.LANCZOS)
             im.save(os.path.join(dst, os.path.basename(p)), quality=74, optimize=True)
-        out.append({"slug": slug, "laminas": len(lams), **info})
+            srcs.append("car/%s/%s" % (slug, os.path.basename(p)))
+        out.append({"slug": slug, "laminas": len(lams), "srcs": srcs, **info})
+    # las miniaturas que ya no hacen falta se borran
+    usados = {x for c in out for x in c["srcs"] if x.startswith("car/")}
+    for raiz, _, fs in os.walk(os.path.join(OUT, "car")):
+        for f in fs:
+            r = os.path.relpath(os.path.join(raiz, f), OUT).replace(os.sep, "/")
+            if r not in usados:
+                os.remove(os.path.join(raiz, f))
     return out
 
 
@@ -123,8 +137,15 @@ def piezas(cal):
             archivos = f["archivos"].split("|")
             principal = archivos[0]
             nombre = f["id"] + ".jpg"
-            if not os.path.exists(os.path.join(dst, nombre)):
-                miniatura(principal, os.path.join(dst, nombre), 240 if f["tipo"] == "STORY" else 360)
+            # en la ventana, la miniatura es la misma foto que se baja (ig/):
+            # así no se gasta un archivo más del tope de la app
+            foto = next((x for x in archivos if x.lower().endswith((".jpg", ".jpeg"))), None)
+            if en_ventana(d["fecha"]) and foto:
+                img = "ig/" + foto
+            else:
+                img = "pz/" + nombre
+                if not os.path.exists(os.path.join(dst, nombre)):
+                    miniatura(principal, os.path.join(dst, nombre), 240 if f["tipo"] == "STORY" else 360)
             # los archivos en el orden en que se suben, para guardarlos de a uno en el celular
             hojas = [x for x in archivos if not x.endswith("_portada.jpg")]
             base = "apardian-%s-%s" % (d["fecha"][8:10] + d["fecha"][5:7], "historia" if f["tipo"] == "STORY" else "posteo")
@@ -137,18 +158,22 @@ def piezas(cal):
                         "tipo": f["tipo"], "titulo": f["titulo"], "pie": f["pie"],
                         "comentario": f["primer_comentario"], "hojas": len([a for a in archivos if not a.endswith("_portada.jpg")]),
                         "pieza": it["pieza"], "nota": it.get("nota", ""),
-                        "revision": revision.get(f["id"], ""), "img": "pz/" + nombre})
-    # las miniaturas de piezas que ya no estan en el calendario se borran
-    vigentes = {os.path.basename(p["img"]) for p in out}
+                        "revision": revision.get(f["id"], ""), "img": img})
+    # las miniaturas de piezas que ya no estan en el calendario (o que ya se
+    # muestran con la foto de ig/) se borran
+    vigentes = {os.path.basename(p["img"]) for p in out if p["img"].startswith("pz/")}
     for x in os.listdir(dst):
         if x not in vigentes:
             os.remove(os.path.join(dst, x))
     return out
 
 
-# La app tiene un tope de archivos: los de bajar (fotos y videos en tamaño
-# real) se publican solo para los días de esta ventana. Se corre cada semana.
-VENTANA_DIAS = 42
+# La app tiene un tope de 511 archivos. Los de bajar (fotos y videos en tamaño
+# real) se publican para todos los días que vienen: la ventana arranca ayer y
+# llega hasta el final del calendario. Si un día no entra todo, main() la
+# achica de a una semana hasta que entre (TOPE_ARCHIVOS).
+VENTANA_DIAS = int(os.environ.get("CENTRO_VENTANA") or 400)
+TOPE_ARCHIVOS = 490
 DESDE = os.environ.get("CENTRO_DESDE") or dt.date.today().isoformat()
 
 
@@ -246,16 +271,26 @@ def agentes():
 
 def main():
     os.makedirs(OUT, exist_ok=True)
+    global VENTANA_DIAS
     cal = json.load(open(os.path.join(IG, "calendario.json")))
-    dias = archivos_por_dia(cal)
-    datos = {"calendario": cal, "piezas": piezas(cal), "zips": dias,
-             "carruseles": carruseles(), "guiones": guiones(),
+    while True:
+        dias = archivos_por_dia(cal)
+        ig = archivos_ig(dias)
+        pzs, cars = piezas(cal), carruseles(frozenset(ig))
+        total = len(ig) + sum(p["img"].startswith("pz/") for p in pzs) + \
+            sum(x.startswith("car/") for c in cars for x in c["srcs"]) + 1
+        if total <= TOPE_ARCHIVOS or VENTANA_DIAS <= 14:
+            break
+        VENTANA_DIAS -= 7
+    print("archivos de la app:", total, "· ventana de", VENTANA_DIAS, "días")
+    datos = {"calendario": cal, "piezas": pzs, "zips": dias,
+             "carruseles": cars, "guiones": guiones(),
              "agentes": agentes(), "whatsapp": "+598 91 962 962"}
     html = open(PLANTILLA).read().replace("/*__DATOS__*/null",
                                           json.dumps(datos, ensure_ascii=False))
     open(os.path.join(OUT, "index.html"), "w").write(html)
     # lo que hay que publicar junto a la página para que se puedan bajar los días
-    json.dump(archivos_ig(dias), open(os.path.join(OUT, "archivos_ig.json"), "w"), ensure_ascii=False, indent=0)
+    json.dump(ig, open(os.path.join(OUT, "archivos_ig.json"), "w"), ensure_ascii=False, indent=0)
     n = sum(len(g["items"]) for g in datos["guiones"])
     print(json.dumps({"carruseles": len(datos["carruseles"]), "guiones": n,
                       "dias": len(datos["calendario"]["dias"]), "piezas": len(datos["piezas"]),

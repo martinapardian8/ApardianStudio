@@ -10,108 +10,63 @@ from PIL import Image, ImageDraw
 from motor_ads import *
 import plantillas_ads as PL
 
-DEST = "/Users/martinapardian/Desktop/WEB APARDIANSTUDIO/08-CONTENIDO-INSTAGRAM/04-historias-organicas"
+DEST = os.path.join(RAIZ, "08-CONTENIDO-INSTAGRAM", "04-historias-organicas")
 M = 76
 W, H = STORY
 TOP, BOT = SAFE_STORY_TOP, H - SAFE_STORY_BOT
 
 
 # ------------------------------------------------------------------ plantillas
+# Todas con la foto de Martin como protagonista (pieza_foto, en motor_ads): a
+# sangre si la proporción da, entera sobre negro si no. Pedido de Martin del
+# 26/10/2026. Nada de antes/después: no tenemos los originales.
 def foto_frase(ruta, c):
-    """Foto a sangre y una sola linea. La mas usada y la que menos molesta."""
-    im = cargar(ruta, STORY, foco=0.42)
-    im = velo_banda(im, BOT - 420, H, objetivo=50, pluma=260, piso=0.38)
-    d = ImageDraw.Draw(im)
-    y = BOT - 360
-    if c.get("kicker"):
-        kicker(d, M, y, c["kicker"], HUESO); y += 26 + 18
-    y += titular(d, c["titular"], M, y, W - 2*M, 104, HUESO) + 24
-    if c.get("sub"):
-        parrafo(d, c["sub"], M, y, W - 2*M - 60, 31, (220, 218, 215))
-    firma(d, M, BOT - 40, 1.0, True)
-    return im
-
-
-def dato(c):
-    """Fondo plano y un dato. Corta el ritmo entre fotos."""
-    fondo = c.get("fondo", "negro")
-    col = {"negro": CARBON, "rojo": ROJO, "hueso": HUESO}[fondo]
-    im = Image.new("RGB", STORY, col)
-    d = ImageDraw.Draw(im)
-    tinta = NEGRO if fondo == "hueso" else HUESO
-    acento = ROJO if fondo == "hueso" else HUESO
-    y = TOP + 180
-    if c.get("numero"):
-        y += numeral(d, c["numero"], M, y, 260, tinta) + 26
-    if c.get("kicker"):
-        kicker(d, M, y, c["kicker"], acento); y += 26 + 22
-    y += titular(d, c["titular"], M, y, W - 2*M, 112, tinta) + 28
-    if c.get("sub"):
-        parrafo(d, c["sub"], M, y, W - 2*M - 50, 32,
-                (72, 70, 68) if fondo == "hueso" else (216, 214, 211))
-    firma(d, M, BOT - 40, 1.0, fondo != "hueso")
-    return im
-
-
-def pregunta(ruta, c):
-    """Foto arriba y dos opciones abajo. Para poner la encuesta encima."""
-    im = Image.new("RGB", STORY, CARBON)
-    hf = int(H * 0.46)
-    im.paste(cargar(ruta, (W, hf), foco=0.42), (0, TOP - 40))
-    d = ImageDraw.Draw(im)
-    y = TOP - 40 + hf + 60
-    y += titular(d, c["titular"], M, y, W - 2*M, 96, HUESO) + 40
-    for op in c["opciones"][:2]:
-        d.rounded_rectangle([M, y, W - M, y + 108], radius=54,
-                            fill=None, outline=HUESO, width=3)
-        escribir(d, (W//2, y + 34), op, work(34, "SemiBold"), HUESO, 1.5, "c")
-        y += 128
-    if c.get("sub"):
-        parrafo(d, c["sub"], M, y + 12, W - 2*M - 40, 29, (178, 176, 173))
-    firma(d, M, BOT - 40, 1.0, True)
-    return im
+    """Foto y una sola línea. La más usada y la que menos molesta."""
+    return pieza_foto(ruta, STORY, True, c)[0]
 
 
 def detras(ruta, c):
-    """Marco hueso con la foto adentro. Se lee como una polaroid editorial."""
-    im = Image.new("RGB", STORY, HUESO)
-    d = ImageDraw.Draw(im)
-    mm = 88
-    fw = W - 2*mm
-    fh = int(fw * 1.16)
-    yf = TOP + 40
-    im.paste(cargar(ruta, (fw, fh), foco=0.45), (mm, yf))
-    y = yf + fh + 46
-    kicker(d, mm, y, c.get("kicker", "Detrás de escena"), ROJO); y += 26 + 16
-    y += titular(d, c["titular"], mm, y, fw, 84, NEGRO) + 22
-    if c.get("sub"):
-        parrafo(d, c["sub"], mm, y, fw, 29, (78, 76, 74))
-    firma(d, W - mm, BOT - 40, 1.0, False, "r")
-    return im
+    """Detrás de escena: la foto y qué pasaba cuando se sacó."""
+    c = dict(c); c.setdefault("kicker", "Detrás de escena")
+    return pieza_foto(ruta, STORY, True, c)[0]
 
 
 def antes_historia(ruta, c):
-    """Antes y despues en vertical, para el servicio de edicion."""
-    im = Image.new("RGB", STORY, CARBON)
-    alto = int(H * 0.56)
-    base = cargar(ruta, (W, alto), foco=0.45)
-    mix = Image.new("RGB", (W, alto))
-    mix.paste(aplanar(base).crop((0, 0, W//2, alto)), (0, 0))
-    mix.paste(realzar(base).crop((W//2, 0, W, alto)), (W//2, 0))
-    yf = TOP - 30
-    im.paste(mix, (0, yf))
+    """Antes eran un antes/después; ahora la foto terminada y la explicación."""
+    return pieza_foto(ruta, STORY, True, c)[0]
+
+
+# Los datos también llevan una foto: el tema del dato elige la carpeta.
+TEMA_DATO = [("cuadro", "naturaleza"), ("viaje", "naturaleza"), ("restaurante", "gastronomia"),
+             ("carta", "gastronomia"), ("gastronom", "gastronomia"), ("evento", "eventos"),
+             ("fiesta", "eventos"), ("boda", "bodas"), ("casa", "bodas"), ("retrato", "retratos"),
+             ("animal", "animales"), ("marca", "marcas"), ("web", "empresas"), ("edici", "bodas"),
+             ("lote", "bodas"), ("fotógraf", "bodas"), ("empresa", "empresas"), ("servicio", "retratos")]
+
+
+def foto_para_dato(c):
+    t = " ".join(str(c.get(k, "")) for k in ("kicker", "titular", "sub")).lower()
+    cat = next((v for k, v in TEMA_DATO if k in t), "retratos")
+    n = sum(ord(x) for x in c["titular"])
+    return foto_de(cat, n, COMIDA if cat == "gastronomia" else None)
+
+
+def dato(c, ruta=None):
+    """Un dato o una frase, sobre una foto de Martin del mismo tema."""
+    return pieza_foto(ruta or foto_para_dato(c), STORY, True, c)[0]
+
+
+def pregunta(ruta, c):
+    """La foto, la pregunta y dos opciones abajo (la encuesta se pone a mano)."""
+    ops = c["opciones"][:2]
+    im, fin = pieza_foto(ruta, STORY, True, {k: v for k, v in c.items() if k != "opciones"},
+                         extra_abajo=len(ops) * 120 + 10)
     d = ImageDraw.Draw(im)
-    d.rectangle([W//2 - 2, yf, W//2 + 2, yf + alto], fill=ROJO)
-    et = work(24, "SemiBold")
-    for txt, cx in (("ANTES", W//4), ("DESPUÉS", 3*W//4)):
-        w = ancho(d, txt, et, 5) + 44
-        d.rectangle([cx - w//2, yf + alto - 62, cx + w//2, yf + alto - 16], fill=CARBON)
-        escribir(d, (cx, yf + alto - 54), txt, et, HUESO, 5, "c")
-    y = yf + alto + 52
-    y += titular(d, c["titular"], M, y, W - 2*M, 92, HUESO) + 24
-    if c.get("sub"):
-        parrafo(d, c["sub"], M, y, W - 2*M - 50, 30, (214, 212, 209))
-    firma(d, M, BOT - 40, 1.0, True)
+    y = fin + 4
+    for op in ops:
+        d.rounded_rectangle([M, y, W - M, y + 100], radius=50, fill=None, outline=HUESO, width=3)
+        escribir(d, (W//2, y + 31), op, work(32, "SemiBold"), HUESO, 1.5, "c")
+        y += 120
     return im
 
 
@@ -124,9 +79,9 @@ def h(tipo, cat, idx, **c):
 HISTORIAS = [
  # --- oficio y trabajo reciente ---------------------------------------
  h("foto", "bodas", 3, kicker="Sábado pasado", titular="Todavía tengo arroz en la cámara",
-   sub="Casamiento en Colonia. Ya está la galería."),
- h("foto", "bodas", 11, kicker="Ceremonia", titular="Esta la saqué desde el piso",
-   sub="A veces el mejor lugar es el peor lugar."),
+   sub="Ya está la galería."),
+ h("foto", "bodas", 12, kicker="Ceremonia", titular="La entrada que todos esperaban",
+   sub="Un segundo que no se repite."),
  h("foto", "gastronomia", 5, kicker="Hoy", titular="Ocho horas para veinte platos",
    sub="Vale cada minuto cuando ves la carta terminada."),
  h("foto", "eventos", 33, kicker="Anoche", titular="La fiesta recién empieza a las dos",
@@ -134,12 +89,12 @@ HISTORIAS = [
  h("foto", "retratos", 18, kicker="Retrato", titular="Le dije dos cosas y me callé",
    sub="El resto lo hizo la luz de la ventana."),
  h("foto", "marcas", 7, kicker="Producto", titular="Cuarenta tomas para elegir una",
-   sub="Así se hace un packshot que aguanta el zoom."),
+   sub="Las aceitunas caen una sola vez."),
  h("foto", "musica", 4, kicker="En vivo", titular="Poca luz y una sola pasada",
    sub="No podés pedirle a la banda que repita el tema."),
  h("foto", "animales", 6, kicker="Animales", titular="Este no entendió nada y salió mejor que yo"),
  h("foto", "naturaleza", 21, kicker="Fin de semana", titular="Salí a caminar y volví con esto",
-   sub="Uruguay tiene lugares que no aparecen en ninguna guía."),
+   sub="Palma de Mallorca."),
  h("foto", "salones", 9, kicker="Salón", titular="Vacío a las cinco, lleno a las nueve",
    sub="Fotografiar un salón montado es otro laburo."),
 
@@ -206,12 +161,12 @@ HISTORIAS = [
    sub="Bodas.", fondo="negro"),
 
  # --- foto suelta con frase corta ---------------------------------------
- h("foto", "naturaleza", 3, titular="Uruguay también es esto"),
+ h("foto", "naturaleza", 3, titular="Lugares que no salen en la guía"),
  h("foto", "naturaleza", 35, titular="Nadie en kilómetros"),
  h("foto", "animales", 14, titular="Me miró y se fue"),
  h("foto", "animales", 20, titular="No se movió en veinte minutos"),
  h("foto", "gastronomia", 40, titular="Esto salió del horno hace un minuto"),
- h("foto", "gastronomia", 17, titular="Producto uruguayo, foto uruguaya"),
+ h("foto", "gastronomia", 17, titular="Se ve como se come"),
  h("foto", "bodas", 5, titular="Se casaron con viento a favor"),
  h("foto", "eventos", 48, titular="Quince años, cero poses"),
  h("foto", "musica", 9, titular="Tres canciones y se acabó la luz"),
@@ -233,32 +188,43 @@ def slug_ok(t):
     return re.sub(r"[^a-zA-Z0-9]+", "-", t).strip("-").lower()[:44]
 
 
+def texto_de(c):
+    return " · ".join(str(c[k]) for k in ("kicker", "titular", "sub") if c.get(k)) + \
+        ("" if not c.get("opciones") else " · " + " / ".join(c["opciones"]))
+
+
 def main():
     os.makedirs(DEST, exist_ok=True)
+    INDICE = os.path.join(os.path.dirname(DEST), "indice_historias.json")
+    viejo = {x["n"]: x for x in json.load(open(INDICE, encoding="utf-8"))} if os.path.exists(INDICE) else {}
     idx = []
     for i, c in enumerate(HISTORIAS, 1):
         t = c["_t"]
         cc = {k: v for k, v in c.items() if not k.startswith("_")}
         try:
             if t == "dato":
-                im = dato(cc)
+                r = foto_para_dato(cc)
+                im = dato(cc, r)
             else:
                 import similitud as S
-                r = foto(c["_cat"], c["_i"])
+                r = foto_de(c["_cat"], c["_i"], COMIDA if c["_cat"] == "gastronomia" else None)
                 if r in S._vetadas(STORY):
                     for k in range(1, 20):
-                        alt = foto(c["_cat"], c["_i"] + k)
+                        alt = foto_de(c["_cat"], c["_i"] + k, COMIDA if c["_cat"] == "gastronomia" else None)
                         if alt not in S._vetadas(STORY):
                             r = alt; break
                 im = {"foto": foto_frase, "pregunta": pregunta,
                       "detras": detras, "antes": antes_historia}[t](r, cc)
-            nom = f"{i:03d}_{t}_{slug_ok(c['titular'])}.jpg"
+            # el archivo conserva su nombre aunque cambie el texto: el calendario lo usa
+            nom = viejo[i]["archivo"] if i in viejo else f"{i:03d}_{t}_{slug_ok(c['titular'])}.jpg"
             im.save(os.path.join(DEST, nom), "JPEG", quality=90, optimize=True)
-            idx.append({"n": i, "tipo": t, "titular": c["titular"], "archivo": nom})
+            idx.append({"n": i, "tipo": t, "titular": c["titular"], "archivo": nom,
+                        "foto": os.path.relpath(r, RAIZ), "texto": texto_de(cc)})
         except Exception as e:
             print(f"  FALLO {i:03d} {t}: {type(e).__name__}: {e}")
-    json.dump(idx, open(os.path.join(os.path.dirname(DEST), "indice_historias.json"), "w"),
-              ensure_ascii=False, indent=1)
+    # las historias del verano (51 en adelante) las arma historias_verano.py
+    idx += [x for n, x in sorted(viejo.items()) if n > len(HISTORIAS)]
+    json.dump(idx, open(INDICE, "w"), ensure_ascii=False, indent=1)
     print(json.dumps({"historias": len(os.listdir(DEST))}, ensure_ascii=False))
 
 

@@ -14,7 +14,13 @@ trabajos). El equipo y las reglas están en `09-ESTUDIO/EQUIPO.md`.
 Antes de hacer cualquier cosa, leé:
 - `09-ESTUDIO/EQUIPO.md` — quién hace qué, el ciclo semanal, la escalera de confianza.
 - `09-ESTUDIO/MARCA.md` y `09-ESTUDIO/NEGOCIO.md` — la marca y lo que vende Martin.
-- `09-ESTUDIO/APRENDIZAJES.md` — qué funcionó y qué no. Manda sobre tu gusto.
+- `09-ESTUDIO/APRENDIZAJES.md` — qué funcionó y qué no, y **las correcciones
+  de Martin**, que son reglas: la foto protagonista, no recortar mal, no
+  inventar lugares, que la foto muestre lo que dice el texto, sin "DESLIZÁ".
+  Manda sobre tu gusto.
+- `10-MOTOR/fotos.json` — dónde es cada foto (solo lo que confirmó Martin) y
+  qué muestra. Si un texto necesita el lugar y no está, preguntale a Martin
+  antes de escribirlo.
 - `08-CONTENIDO-INSTAGRAM/CALENDARIO.md` — lo que ya está programado.
 - `06-NOTAS/lupa/REVISION.md` — lo último que frenó Lupa.
 
@@ -43,8 +49,13 @@ nuevas con lo que ya existe, sin gastar créditos si se puede:
 - **Reels:** `10-MOTOR/reels_collage.py` sobre cualquier carrusel.
 - **Historias:** detrás de escena, una foto con una frase corta, una pregunta,
   un dato de plazo o de precio que Martin haya confirmado.
+- **Historias y posteos nuevos:** con `pieza_foto()` (`10-MOTOR/motor_ads.py`):
+  la foto de Martin protagonista, entera si recortarla perdería más del 22 %.
 - Higgsfield solo para materiales, escenas y movimiento. Antes de gastar
-  créditos, decí cuántos y para qué.
+  créditos, decí cuántos y para qué. En cada pedido a Higgsfield aplicá las
+  correcciones de Martin (APRENDIZAJES.md): su foto entera y bien encuadrada,
+  la escena coherente con el lugar real de la foto (o sin lugar reconocible),
+  sin flechas de "deslizá".
 
 ## Reglas que no se rompen
 

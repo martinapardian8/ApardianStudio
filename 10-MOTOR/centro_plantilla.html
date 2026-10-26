@@ -576,8 +576,25 @@ function mensajeGuardar(e){
   return c === "declined" ? "No se guardó." : c === "rate_limited" ? "Esperá unos segundos y tocá de nuevo." : c === "no_file" ? "No encontré el archivo." :
     c === "sin_bajadas" ? "Abrí el Centro desde claude.ai para guardar." : "No se puede guardar desde esta vista.";
 }
+// En iPhone, la hoja de compartir con todos los archivos juntos tiene
+// "Guardar N imágenes": van directo a Fotos, en orden. Si el navegador no la
+// deja usar acá, se guarda de a uno con la pantalla de guardar.
+async function archivosDe(lista){
+  return Promise.all(lista.map(async a => {
+    const r = await fetch(a.src); if (!r.ok) throw {code:"no_file"};
+    const b = await r.blob();
+    return new File([b], a.nombre, {type: b.type || (/\.mp4$/i.test(a.nombre) ? "video/mp4" : "image/jpeg")});
+  }));
+}
+async function compartirEnFotos(files){
+  if (!files || !navigator.canShare || !navigator.canShare({files})) return false;
+  try { await navigator.share({files}); return true; }
+  catch(e){ if (e && e.name === "AbortError") throw {code:"declined"}; return false; }
+}
 function panelCelu(p){
   const lista = p.bajar || []; if (!lista.length) return null;
+  // se preparan apenas se abre la pieza: la hoja de compartir tiene que abrirse al toque
+  let listos = null; archivosDe(lista).then(f => listos = f).catch(() => {});
   const msj = el("span", {class:"adj", role:"status"});
   const grid = el("div", {class:"celu-grid"});
   const botones = [];
@@ -589,9 +606,11 @@ function panelCelu(p){
     botones.push(b);
     grid.append(el("div", {class:"celu-item" + (esStory(p) ? " h" : "")}, media, b, el("span", {text: a.nombre})));
   });
-  const todo = el("button", {class:"b r", type:"button", text: lista.length > 1 ? "Guardar las " + lista.length + " en el celular" : "Guardar en el celular"});
+  const todo = el("button", {class:"b r", type:"button", text: lista.length > 1 ? "Guardar las " + lista.length + " en Fotos" : "Guardar en Fotos"});
   todo.addEventListener("click", async () => {
     todo.disabled = true;
+    try { if (await compartirEnFotos(listos)){ msj.textContent = "Listo: elegí \"Guardar\" y quedan en Fotos, en orden."; todo.disabled = false; return; } }
+    catch(e){ msj.textContent = mensajeGuardar(e); todo.disabled = false; return; }
     for (let i = 0; i < lista.length; i++){
       if (botones[i].classList.contains("ok")) continue;
       msj.textContent = "Guardando " + (i + 1) + " de " + lista.length + "…";
@@ -603,7 +622,7 @@ function panelCelu(p){
   });
   return el("div", {class:"celu"},
     el("div", {class:"celu-cab"}, el("span", {class:"mono", style:"color:var(--red)", text:"Para subir desde el celular"}), todo),
-    el("p", {class:"muted", style:"margin:0;font-size:13px", text: "En iPhone, cuando aparezca la pantalla, tocá \"Guardar imagen\" (o \"Guardar video\") y va a Fotos. Se guardan en el orden en que se suben" + (lista.length > 1 ? ": 1, 2, 3…" : ".") + " También podés mantener apretada una foto y guardarla."}),
+    el("p", {class:"muted", style:"margin:0;font-size:13px", text: "En iPhone, abrí el Centro en la app de Claude: al tocar el botón aparece la pantalla de compartir y \"Guardar imagen\" (o \"Guardar video\") lo manda directo a Fotos, en el orden en que se suben" + (lista.length > 1 ? ": 1, 2, 3…" : ".") + " También podés mantener apretada una foto y tocar \"Agregar a Fotos\"."}),
     grid, msj);
 }
 
@@ -745,7 +764,7 @@ function renderDetalle(){
   env.addEventListener("click", async () => {
     const t = ta.value.trim(); if (!t) { ta.focus(); return; }
     const ok = await nuevaOrden("luz", t + " (pieza " + p.id + ")", p.id);
-    msj.textContent = ok ? "Orden guardada para Luz." : "No se pudo guardar la orden: revisá la conexión.";
+    msj.textContent = ok ? "Orden guardada: Luz la hace en las próximas 2 horas y te deja la respuesta en Agentes → Luz." : "No se pudo guardar la orden: revisá la conexión.";
     if (ok) ta.value = "";
   });
   const notaLupa = textoLupa(p.revision);
@@ -757,7 +776,7 @@ function renderDetalle(){
       el("div", {class:"fila"}, el("span", {class:"sello", text: TIPO[p.tipo] + (p.hojas > 1 ? " · " + p.hojas + " hojas" : "")}), sello(p.revision), pub ? el("span", {class:"sello pub", text:"Publicado"}) : null),
       notaLupa ? el("p", {class:"muted", style:"margin:0", text:"Lupa: " + notaLupa}) : null,
       p.nota ? el("p", {class:"muted", style:"margin:0", text: p.nota}) : null,
-      pie, acc, panelCelu(p) || el("p", {class:"muted", style:"margin:0;font-size:13px", text: p.fecha < hoyISO() ? "Esta pieza ya pasó: sus archivos ya no están para bajar." : "Los archivos para bajar se habilitan unas semanas antes de que salga la pieza."}),
+      pie, acc, panelCelu(p) || el("p", {class:"muted", style:"margin:0;font-size:13px", text: p.fecha < hoyISO() ? "Esta pieza ya pasó: sus archivos ya no están para bajar." : "Esta pieza no tiene archivos para bajar."}),
       el("div", {class:"orden-mini"}, el("label", {class:"campo", for:"det-orden"}, el("span", {text:"Pedir un cambio"}), ta), el("div", {class:"fila"}, env, msj)))));
 }
 
@@ -987,12 +1006,17 @@ function renderOrdenes(){
   $("#ord-tit").textContent = "Órdenes para " + AG[agSel].nom;
   $("#ord-n").textContent = pend ? pend + " pendientes" : "";
   const c = $("#ord-lista"); c.replaceChildren();
-  if (!lista.length){ c.append(el("p", {class:"vacio", text: db ? "Sin órdenes. Lo que dejes acá lo hace " + AG[agSel].nom + " en tu próxima sesión de Claude Code: decile \"hacé las órdenes del Centro\"." : "Las órdenes necesitan la base del Centro, y no hay conexión."})); return; }
+  if (!lista.length){ c.append(el("p", {class:"vacio", text: db ? "Sin órdenes. Lo que dejes acá lo hace " + AG[agSel].nom + " sola: Claude revisa las órdenes cada 2 horas, de 9 a 21, y te deja la respuesta acá." : "Las órdenes necesitan la base del Centro, y no hay conexión."})); return; }
   for (const o of lista.slice(0, 12)){
-    const hecha = o.estado === "hecha";
-    const b = el("button", {class:"b l", type:"button", text: hecha ? "Borrar" : "Hecha"});
-    b.addEventListener("click", () => cambiarOrden(o.id, hecha ? null : {estado:"hecha", hecha_en: new Date().toISOString()}));
-    c.append(el("div", {class:"ord" + (hecha ? " hecha" : "")}, el("div", {}, el("p", {text: o.texto}), el("small", {text: (o.creada ? fechaLinda(o.creada.slice(0,10)) : "") + (hecha ? " · hecha" : " · pendiente")})), b));
+    // Solo el agente marca una orden como hecha (y deja qué cambió). Desde acá
+    // se puede cancelar una pendiente o borrar una hecha.
+    const hecha = o.estado === "hecha", pregunta = o.estado === "pregunta";
+    const b = el("button", {class:"b l", type:"button", text: hecha ? "Borrar" : "Cancelar"});
+    b.addEventListener("click", () => cambiarOrden(o.id, null));
+    const estado = hecha ? " · hecha" : pregunta ? " · " + AG[agSel].nom + " te pregunta algo" : " · pendiente: la hace " + AG[agSel].nom + " en las próximas 2 horas";
+    c.append(el("div", {class:"ord" + (hecha ? " hecha" : "")}, el("div", {}, el("p", {text: o.texto}),
+      o.respuesta ? el("p", {class:"muted", style:"margin:4px 0 0", text: AG[agSel].nom + ": " + o.respuesta}) : null,
+      el("small", {text: (o.creada ? fechaLinda(o.creada.slice(0,10)) : "") + estado})), b));
   }
 }
 $("#ord-form").addEventListener("submit", async ev => {
@@ -1016,7 +1040,11 @@ function renderCal(){
     c.append(el("div", {class:"bloque-cab", style:"margin-top:52px"}, el("div", {style:"display:grid;gap:8px"}, el("span", {class:"ceja mono", text:"Semana " + s.n + " · " + fechaLinda(s.lunes)}), el("h2", {text: s.vertical})), el("span", {class:"mono muted", text: ok + " de " + tot.length + " hechas"})));
     for (const d of D.calendario.dias.filter(d => d.semana === s.n)){
       const its = d.items.filter(pasa); if (!its.length) continue;
-      c.append(el("div", {class:"dia-cab"}, el("h3", {text: d.dia + " " + fechaLinda(d.fecha)}), el("span", {text: d.fecha === hoy ? "Hoy" : ""})));
+      const bd = d.fecha >= hoy ? botonDia(d.fecha, "Bajar el día") : null;
+      const ver = PZ.some(p => p.fecha === d.fecha && (p.bajar || []).length) ? el("button", {class:"b l", type:"button", text:"Guardar en el celu"}) : null;
+      if (ver) ver.addEventListener("click", () => { semSel = semanaDe(d.fecha).n; piezaSel = (PZ.find(p => p.fecha === d.fecha && !esStory(p)) || PZ.find(p => p.fecha === d.fecha)).id; location.hash = "semana"; });
+      c.append(el("div", {class:"dia-cab"}, el("h3", {text: d.dia + " " + fechaLinda(d.fecha)}),
+        el("div", {class:"fila"}, el("span", {text: d.fecha === hoy ? "Hoy" : ""}), ver, bd)));
       const l = el("div", {class:"lista"}); its.forEach(it => l.append(tarea({...it, fecha: d.fecha}))); c.append(l);
     }
   }
@@ -1029,8 +1057,8 @@ function renderCars(){
     const it = TODAS.find(t => (t.pieza || "") === "06-carruseles-collage/" + car.slug);
     const pub = it && hecho[it.id];
     const tira = el("div", {class:"tira", tabindex:"0", "aria-label":"Láminas de " + car.titulo});
-    for (let k = 1; k <= car.laminas; k++){ const n = String(k).padStart(2, "0");
-      tira.append(el("img", {src:"car/" + car.slug + "/" + n + ".jpg", alt:"Lámina " + n + " de " + car.laminas, loading:"lazy", width:"432", height:"540"})); }
+    (car.srcs || []).forEach((src, k) =>
+      tira.append(el("img", {src, alt:"Lámina " + (k + 1) + " de " + car.laminas, loading:"lazy", width:"432", height:"540"})));
     const pie = el("pre", {class:"pie", text: car.pie});
     const bPie = el("button", {class:"b", type:"button", text:"Copiar pie"}); bPie.addEventListener("click", () => copiar(car.pie, bPie, pie));
     const acc = el("div", {class:"fila"}, bPie);
@@ -1040,7 +1068,8 @@ function renderCars(){
       el("div", {class:"car-cab"},
         el("div", {style:"display:grid;gap:8px"}, el("span", {class:"ceja mono", text: car.slug.slice(0,2) + " — " + car.vertical}), el("h2", {text: car.titulo}), el("span", {class:"muted", text: "Para: " + car.para})),
         el("span", {class:"sello" + (pub ? " pub" : ""), text: pub ? "Publicado" : (it ? "Sale el " + fechaLinda(it.fecha) : "Sin fecha")})),
-      tira, pie, car.nota ? el("p", {class:"muted", style:"margin:0", text: car.nota}) : null, acc));
+      tira, pie, car.nota ? el("p", {class:"muted", style:"margin:0", text: car.nota}) : null, acc,
+      (() => { const pz = PZ.find(p => (p.pieza || "") === "06-carruseles-collage/" + car.slug); return pz ? panelCelu(pz) : null; })()));
   }
 }
 

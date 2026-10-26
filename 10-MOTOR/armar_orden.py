@@ -7,7 +7,9 @@ Martin abre la carpeta 01, sube lo que hay adentro, y listo.
 """
 import os, json, shutil, glob
 
-BASE = "/Users/martinapardian/Desktop/WEB APARDIANSTUDIO/08-CONTENIDO-INSTAGRAM"
+RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+BASE = os.path.join(RAIZ, "08-CONTENIDO-INSTAGRAM")
 DEST = os.path.join(BASE, "00-SUBIR-EN-ORDEN")
 
 CARR = os.path.join(BASE, "03-carruseles")

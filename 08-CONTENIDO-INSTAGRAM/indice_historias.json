@@ -3,588 +3,784 @@
   "n": 1,
   "tipo": "foto",
   "titular": "Todavía tengo arroz en la cámara",
-  "archivo": "001_foto_todavia-tengo-arroz-en-la-camara.jpg"
+  "archivo": "001_foto_todavia-tengo-arroz-en-la-camara.jpg",
+  "foto": "05-WEB/img/bodas/web/nw__IMG_4675.jpg",
+  "texto": "Sábado pasado · Todavía tengo arroz en la cámara · Ya está la galería."
  },
  {
   "n": 2,
   "tipo": "foto",
-  "titular": "Esta la saqué desde el piso",
-  "archivo": "002_foto_esta-la-saque-desde-el-piso.jpg"
+  "titular": "La entrada que todos esperaban",
+  "archivo": "002_foto_esta-la-saque-desde-el-piso.jpg",
+  "foto": "05-WEB/img/bodas/web/portfolio__IMG_9601.jpg",
+  "texto": "Ceremonia · La entrada que todos esperaban · Un segundo que no se repite."
  },
  {
   "n": 3,
   "tipo": "foto",
   "titular": "Ocho horas para veinte platos",
-  "archivo": "003_foto_ocho-horas-para-veinte-platos.jpg"
+  "archivo": "003_foto_ocho-horas-para-veinte-platos.jpg",
+  "foto": "05-WEB/img/gastronomia/web/alfajor__IMG_5429.jpg",
+  "texto": "Hoy · Ocho horas para veinte platos · Vale cada minuto cuando ves la carta terminada."
  },
  {
   "n": 4,
   "tipo": "foto",
   "titular": "La fiesta recién empieza a las dos",
-  "archivo": "004_foto_la-fiesta-recien-empieza-a-las-dos.jpg"
+  "archivo": "004_foto_la-fiesta-recien-empieza-a-las-dos.jpg",
+  "foto": "05-WEB/img/eventos/web/nicol__IMG_5766.jpg",
+  "texto": "Anoche · La fiesta recién empieza a las dos · Y ahí es cuando salen las mejores."
  },
  {
   "n": 5,
   "tipo": "foto",
   "titular": "Le dije dos cosas y me callé",
-  "archivo": "005_foto_le-dije-dos-cosas-y-me-calle.jpg"
+  "archivo": "005_foto_le-dije-dos-cosas-y-me-calle.jpg",
+  "foto": "05-WEB/img/retratos/web/juan-luz__IMG_2669.jpg",
+  "texto": "Retrato · Le dije dos cosas y me callé · El resto lo hizo la luz de la ventana."
  },
  {
   "n": 6,
   "tipo": "foto",
   "titular": "Cuarenta tomas para elegir una",
-  "archivo": "006_foto_cuarenta-tomas-para-elegir-una.jpg"
+  "archivo": "006_foto_cuarenta-tomas-para-elegir-una.jpg",
+  "foto": "05-WEB/img/marcas/web/v__75.jpg",
+  "texto": "Producto · Cuarenta tomas para elegir una · Las aceitunas caen una sola vez."
  },
  {
   "n": 7,
   "tipo": "foto",
   "titular": "Poca luz y una sola pasada",
-  "archivo": "007_foto_poca-luz-y-una-sola-pasada.jpg"
+  "archivo": "007_foto_poca-luz-y-una-sola-pasada.jpg",
+  "foto": "05-WEB/img/musica/web/la-estacion__IMG_8052.jpg",
+  "texto": "En vivo · Poca luz y una sola pasada · No podés pedirle a la banda que repita el tema."
  },
  {
   "n": 8,
   "tipo": "foto",
   "titular": "Este no entendió nada y salió mejor que yo",
-  "archivo": "008_foto_este-no-entendio-nada-y-salio-mejor-que-yo.jpg"
+  "archivo": "008_foto_este-no-entendio-nada-y-salio-mejor-que-yo.jpg",
+  "foto": "05-WEB/img/animales/web/v__103.jpg",
+  "texto": "Animales · Este no entendió nada y salió mejor que yo"
  },
  {
   "n": 9,
   "tipo": "foto",
   "titular": "Salí a caminar y volví con esto",
-  "archivo": "009_foto_sali-a-caminar-y-volvi-con-esto.jpg"
+  "archivo": "009_foto_sali-a-caminar-y-volvi-con-esto.jpg",
+  "foto": "05-WEB/img/naturaleza/web/v__45.jpg",
+  "texto": "Fin de semana · Salí a caminar y volví con esto · Palma de Mallorca."
  },
  {
   "n": 10,
   "tipo": "foto",
   "titular": "Vacío a las cinco, lleno a las nueve",
-  "archivo": "010_foto_vacio-a-las-cinco-lleno-a-las-nueve.jpg"
+  "archivo": "010_foto_vacio-a-las-cinco-lleno-a-las-nueve.jpg",
+  "foto": "05-WEB/img/salones/web/golf-b__IMG_0339.jpg",
+  "texto": "Salón · Vacío a las cinco, lleno a las nueve · Fotografiar un salón montado es otro laburo."
  },
  {
   "n": 11,
   "tipo": "dato",
   "titular": "Ochenta y sigo contando",
-  "archivo": "011_dato_ochenta-y-sigo-contando.jpg"
+  "archivo": "011_dato_ochenta-y-sigo-contando.jpg",
+  "foto": "05-WEB/img/eventos/web/nw__IMG_4682.jpg",
+  "texto": "Proyectos entregados · Ochenta y sigo contando · Bodas, fiestas, marcas y páginas web."
  },
  {
   "n": 12,
   "tipo": "dato",
   "titular": "Ese es mi plazo de entrega",
-  "archivo": "012_dato_ese-es-mi-plazo-de-entrega.jpg"
+  "archivo": "012_dato_ese-es-mi-plazo-de-entrega.jpg",
+  "foto": "05-WEB/img/retratos/web/juan-luz__IMG_2712.jpg",
+  "texto": "Días · Ese es mi plazo de entrega · Sin excepciones y sin tope de cantidad de fotos."
  },
  {
   "n": 13,
   "tipo": "dato",
   "titular": "Foto, video, web y edición",
-  "archivo": "013_dato_foto-video-web-y-edicion.jpg"
+  "archivo": "013_dato_foto-video-web-y-edicion.jpg",
+  "foto": "05-WEB/img/empresas/web/odontovita__IMG_5142.jpg",
+  "texto": "Servicios · Foto, video, web y edición · Todo lo hago yo. No tercerizo."
  },
  {
   "n": 14,
   "tipo": "dato",
   "titular": "El 70% te va a mirar desde el celular",
-  "archivo": "014_dato_el-70-te-va-a-mirar-desde-el-celular.jpg"
+  "archivo": "014_dato_el-70-te-va-a-mirar-desde-el-celular.jpg",
+  "foto": "05-WEB/img/retratos/web/juan-luz__IMG_2661.jpg",
+  "texto": "Dato · El 70% te va a mirar desde el celular · Por eso todo lo que entrego está pensado en vertical también."
  },
  {
   "n": 15,
   "tipo": "dato",
   "titular": "Lo que tardo en editar un lote",
-  "archivo": "015_dato_lo-que-tardo-en-editar-un-lote.jpg"
+  "archivo": "015_dato_lo-que-tardo-en-editar-un-lote.jpg",
+  "foto": "05-WEB/img/bodas/web/golf-a__IMG_4679.jpg",
+  "texto": "Horas · Lo que tardo en editar un lote · Para fotógrafos que no llegan con la entrega."
  },
  {
   "n": 16,
   "tipo": "antes",
   "titular": "Esto es revelado, no filtro",
-  "archivo": "016_antes_esto-es-revelado-no-filtro.jpg"
+  "archivo": "016_antes_esto-es-revelado-no-filtro.jpg",
+  "foto": "05-WEB/img/naturaleza/web/v__28.jpg",
+  "texto": "Esto es revelado, no filtro · Se trabaja cada zona por separado. No hay un botón que lo haga."
  },
  {
   "n": 17,
   "tipo": "antes",
   "titular": "La comida se edita distinto",
-  "archivo": "017_antes_la-comida-se-edita-distinto.jpg"
+  "archivo": "017_antes_la-comida-se-edita-distinto.jpg",
+  "foto": "05-WEB/img/gastronomia/web/lokotas__IMG_7595.jpg",
+  "texto": "La comida se edita distinto · Si te pasás de saturación, deja de dar hambre."
  },
  {
   "n": 18,
   "tipo": "antes",
   "titular": "La piel no se plancha",
-  "archivo": "018_antes_la-piel-no-se-plancha.jpg"
+  "archivo": "018_antes_la-piel-no-se-plancha.jpg",
+  "foto": "05-WEB/img/retratos/web/horacio__IMG_6904.jpg",
+  "texto": "La piel no se plancha · Se corrige el tono y se deja la textura. Si no, parece plástico."
  },
  {
   "n": 19,
   "tipo": "antes",
   "titular": "Poca luz no es excusa",
-  "archivo": "019_antes_poca-luz-no-es-excusa.jpg"
+  "archivo": "019_antes_poca-luz-no-es-excusa.jpg",
+  "foto": "05-WEB/img/eventos/web/nw__IMG_4682.jpg",
+  "texto": "Poca luz no es excusa · El ruido se trabaja, no se tapa."
  },
  {
   "n": 20,
   "tipo": "antes",
   "titular": "Fondo blanco de verdad",
-  "archivo": "020_antes_fondo-blanco-de-verdad.jpg"
+  "archivo": "020_antes_fondo-blanco-de-verdad.jpg",
+  "foto": "05-WEB/img/marcas/web/v__81.jpg",
+  "texto": "Fondo blanco de verdad · Blanco puro, sin gris ni celeste. Es lo que pide una tienda online."
  },
  {
   "n": 21,
   "tipo": "pregunta",
   "titular": "¿Ceremonia de día o de noche?",
-  "archivo": "021_pregunta_ceremonia-de-dia-o-de-noche.jpg"
+  "archivo": "021_pregunta_ceremonia-de-dia-o-de-noche.jpg",
+  "foto": "05-WEB/img/bodas/web/nw__IMG_9726.jpg",
+  "texto": "¿Ceremonia de día o de noche? · Contestá acá arriba, tengo curiosidad. · DE DÍA / DE NOCHE"
  },
  {
   "n": 22,
   "tipo": "pregunta",
   "titular": "¿Qué foto te da más hambre?",
-  "archivo": "022_pregunta_que-foto-te-da-mas-hambre.jpg"
+  "archivo": "022_pregunta_que-foto-te-da-mas-hambre.jpg",
+  "foto": "05-WEB/img/gastronomia/web/sergio__IMG_7391.jpg",
+  "texto": "¿Qué foto te da más hambre? · LA DE LA IZQUIERDA / LA DE LA DERECHA"
  },
  {
   "n": 23,
   "tipo": "pregunta",
   "titular": "¿Color o blanco y negro?",
-  "archivo": "023_pregunta_color-o-blanco-y-negro.jpg"
+  "archivo": "023_pregunta_color-o-blanco-y-negro.jpg",
+  "foto": "05-WEB/img/naturaleza/web/v__57.jpg",
+  "texto": "¿Color o blanco y negro? · Es la discusión eterna. · COLOR / BLANCO Y NEGRO"
  },
  {
   "n": 24,
   "tipo": "pregunta",
   "titular": "¿Posás o te da vergüenza?",
-  "archivo": "024_pregunta_posas-o-te-da-verguenza.jpg"
+  "archivo": "024_pregunta_posas-o-te-da-verguenza.jpg",
+  "foto": "05-WEB/img/retratos/web/juan-luz__IMG_2712.jpg",
+  "texto": "¿Posás o te da vergüenza? · Si elegiste la segunda, esa es mi especialidad. · POSO SIN PROBLEMA / ME MUERO DE VERGÜENZA"
  },
  {
   "n": 25,
   "tipo": "pregunta",
   "titular": "¿Foto o video en tu fiesta?",
-  "archivo": "025_pregunta_foto-o-video-en-tu-fiesta.jpg"
+  "archivo": "025_pregunta_foto-o-video-en-tu-fiesta.jpg",
+  "foto": "05-WEB/img/eventos/web/ivanna-santiago__IMG_4744.jpg",
+  "texto": "¿Foto o video en tu fiesta? · FOTO / LAS DOS COSAS"
  },
  {
   "n": 26,
   "tipo": "detras",
   "titular": "Dos cámaras y ningún plan B",
-  "archivo": "026_detras_dos-camaras-y-ningun-plan-b.jpg"
+  "archivo": "026_detras_dos-camaras-y-ningun-plan-b.jpg",
+  "foto": "05-WEB/img/bodas/web/v__4.jpg",
+  "texto": "Detrás de escena · Dos cámaras y ningún plan B · Por eso siempre llevo dos cuerpos y cuatro baterías."
  },
  {
   "n": 27,
   "tipo": "detras",
   "titular": "El plato se enfría en tres minutos",
-  "archivo": "027_detras_el-plato-se-enfria-en-tres-minutos.jpg"
+  "archivo": "027_detras_el-plato-se-enfria-en-tres-minutos.jpg",
+  "foto": "05-WEB/img/gastronomia/web/alfajor__IMG_5373.jpg",
+  "texto": "Detrás de escena · El plato se enfría en tres minutos · Hay que tener la luz armada antes de que salga de la cocina."
  },
  {
   "n": 28,
   "tipo": "detras",
   "titular": "El fondo blanco no es una pared blanca",
-  "archivo": "028_detras_el-fondo-blanco-no-es-una-pared-blanca.jpg"
+  "archivo": "028_detras_el-fondo-blanco-no-es-una-pared-blanca.jpg",
+  "foto": "05-WEB/img/marcas/web/alfajor__IMG_5429.jpg",
+  "texto": "Detrás de escena · El fondo blanco no es una pared blanca · Es papel, dos luces y mucha paciencia."
  },
  {
   "n": 29,
   "tipo": "detras",
   "titular": "Trabajo casi siempre con luz de ventana",
-  "archivo": "029_detras_trabajo-casi-siempre-con-luz-de-ventana.jpg"
+  "archivo": "029_detras_trabajo-casi-siempre-con-luz-de-ventana.jpg",
+  "foto": "05-WEB/img/retratos/web/horacio__IMG_6614-2.jpg",
+  "texto": "Detrás de escena · Trabajo casi siempre con luz de ventana · Es gratis y es la mejor que hay."
  },
  {
   "n": 30,
   "tipo": "detras",
   "titular": "Me muevo rápido y en silencio",
-  "archivo": "030_detras_me-muevo-rapido-y-en-silencio.jpg"
+  "archivo": "030_detras_me-muevo-rapido-y-en-silencio.jpg",
+  "foto": "05-WEB/img/eventos/web/leticia40__IMG_7766.jpg",
+  "texto": "Detrás de escena · Me muevo rápido y en silencio · Si me notás, algo hice mal."
  },
  {
   "n": 31,
   "tipo": "dato",
   "titular": "El instante que no se repite",
-  "archivo": "031_dato_el-instante-que-no-se-repite.jpg"
+  "archivo": "031_dato_el-instante-que-no-se-repite.jpg",
+  "foto": "05-WEB/img/retratos/web/horacio__IMG_6499.jpg",
+  "texto": "El instante que no se repite · Es literal. Por eso llego temprano y me voy último."
  },
  {
   "n": 32,
   "tipo": "dato",
   "titular": "Lo que entra por los ojos antes que por la boca",
-  "archivo": "032_dato_lo-que-entra-por-los-ojos-antes-que-por-la-b.jpg"
+  "archivo": "032_dato_lo-que-entra-por-los-ojos-antes-que-por-la-b.jpg",
+  "foto": "05-WEB/img/gastronomia/web/sergio__IMG_7060.jpg",
+  "texto": "Lo que entra por los ojos antes que por la boca · Gastronomía."
  },
  {
   "n": 33,
   "tipo": "dato",
   "titular": "Una persona, sin pose y sin apuro",
-  "archivo": "033_dato_una-persona-sin-pose-y-sin-apuro.jpg"
+  "archivo": "033_dato_una-persona-sin-pose-y-sin-apuro.jpg",
+  "foto": "05-WEB/img/retratos/web/v__120.jpg",
+  "texto": "Una persona, sin pose y sin apuro · Retratos."
  },
  {
   "n": 34,
   "tipo": "dato",
   "titular": "Los que nunca posan y siempre miran",
-  "archivo": "034_dato_los-que-nunca-posan-y-siempre-miran.jpg"
+  "archivo": "034_dato_los-que-nunca-posan-y-siempre-miran.jpg",
+  "foto": "05-WEB/img/animales/web/v__101.jpg",
+  "texto": "Los que nunca posan y siempre miran · Animales."
  },
  {
   "n": 35,
   "tipo": "dato",
   "titular": "Dos personas y todo el resto de la vida esperando",
-  "archivo": "035_dato_dos-personas-y-todo-el-resto-de-la-vida-espe.jpg"
+  "archivo": "035_dato_dos-personas-y-todo-el-resto-de-la-vida-espe.jpg",
+  "foto": "05-WEB/img/bodas/web/portfolio__IMG_8771.jpg",
+  "texto": "Dos personas y todo el resto de la vida esperando · Bodas."
  },
  {
   "n": 36,
   "tipo": "foto",
-  "titular": "Uruguay también es esto",
-  "archivo": "036_foto_uruguay-tambien-es-esto.jpg"
+  "titular": "Lugares que no salen en la guía",
+  "archivo": "036_foto_uruguay-tambien-es-esto.jpg",
+  "foto": "05-WEB/img/naturaleza/web/nw__IMG_1996.jpg",
+  "texto": "Lugares que no salen en la guía"
  },
  {
   "n": 37,
   "tipo": "foto",
   "titular": "Nadie en kilómetros",
-  "archivo": "037_foto_nadie-en-kilometros.jpg"
+  "archivo": "037_foto_nadie-en-kilometros.jpg",
+  "foto": "05-WEB/img/naturaleza/web/v__65.jpg",
+  "texto": "Nadie en kilómetros"
  },
  {
   "n": 38,
   "tipo": "foto",
   "titular": "Me miró y se fue",
-  "archivo": "038_foto_me-miro-y-se-fue.jpg"
+  "archivo": "038_foto_me-miro-y-se-fue.jpg",
+  "foto": "05-WEB/img/animales/web/v__112.jpg",
+  "texto": "Me miró y se fue"
  },
  {
   "n": 39,
   "tipo": "foto",
   "titular": "No se movió en veinte minutos",
-  "archivo": "039_foto_no-se-movio-en-veinte-minutos.jpg"
+  "archivo": "039_foto_no-se-movio-en-veinte-minutos.jpg",
+  "foto": "05-WEB/img/animales/web/v__97.jpg",
+  "texto": "No se movió en veinte minutos"
  },
  {
   "n": 40,
   "tipo": "foto",
   "titular": "Esto salió del horno hace un minuto",
-  "archivo": "040_foto_esto-salio-del-horno-hace-un-minuto.jpg"
+  "archivo": "040_foto_esto-salio-del-horno-hace-un-minuto.jpg",
+  "foto": "05-WEB/img/gastronomia/web/lokotas__IMG_7574.jpg",
+  "texto": "Esto salió del horno hace un minuto"
  },
  {
   "n": 41,
   "tipo": "foto",
-  "titular": "Producto uruguayo, foto uruguaya",
-  "archivo": "041_foto_producto-uruguayo-foto-uruguaya.jpg"
+  "titular": "Se ve como se come",
+  "archivo": "041_foto_producto-uruguayo-foto-uruguaya.jpg",
+  "foto": "05-WEB/img/gastronomia/web/sergio__IMG_7060.jpg",
+  "texto": "Se ve como se come"
  },
  {
   "n": 42,
   "tipo": "foto",
   "titular": "Se casaron con viento a favor",
-  "archivo": "042_foto_se-casaron-con-viento-a-favor.jpg"
+  "archivo": "042_foto_se-casaron-con-viento-a-favor.jpg",
+  "foto": "05-WEB/img/bodas/web/nw__IMG_8368.jpg",
+  "texto": "Se casaron con viento a favor"
  },
  {
   "n": 43,
   "tipo": "foto",
   "titular": "Quince años, cero poses",
-  "archivo": "043_foto_quince-anos-cero-poses.jpg"
+  "archivo": "043_foto_quince-anos-cero-poses.jpg",
+  "foto": "05-WEB/img/eventos/web/v__15.jpg",
+  "texto": "Quince años, cero poses"
  },
  {
   "n": 44,
   "tipo": "foto",
   "titular": "Tres canciones y se acabó la luz",
-  "archivo": "044_foto_tres-canciones-y-se-acabo-la-luz.jpg"
+  "archivo": "044_foto_tres-canciones-y-se-acabo-la-luz.jpg",
+  "foto": "05-WEB/img/musica/web/nw__IMG_7233.jpg",
+  "texto": "Tres canciones y se acabó la luz"
  },
  {
   "n": 45,
   "tipo": "foto",
   "titular": "Mañana esto va a estar lleno",
-  "archivo": "045_foto_manana-esto-va-a-estar-lleno.jpg"
+  "archivo": "045_foto_manana-esto-va-a-estar-lleno.jpg",
+  "foto": "05-WEB/img/salones/web/golf-a__IMG_4679.jpg",
+  "texto": "Mañana esto va a estar lleno"
  },
  {
   "n": 46,
   "tipo": "foto",
   "titular": "No hay segunda toma",
-  "archivo": "046_foto_no-hay-segunda-toma.jpg"
+  "archivo": "046_foto_no-hay-segunda-toma.jpg",
+  "foto": "05-WEB/img/deportes/web/v__87.jpg",
+  "texto": "No hay segunda toma"
  },
  {
   "n": 47,
   "tipo": "foto",
   "titular": "Una foto que sí se puede mandar",
-  "archivo": "047_foto_una-foto-que-si-se-puede-mandar.jpg"
+  "archivo": "047_foto_una-foto-que-si-se-puede-mandar.jpg",
+  "foto": "05-WEB/img/retratos/web/v__116.jpg",
+  "texto": "Una foto que sí se puede mandar"
  },
  {
   "n": 48,
   "tipo": "foto",
   "titular": "Fotos de equipo que no dan vergüenza",
-  "archivo": "048_foto_fotos-de-equipo-que-no-dan-verguenza.jpg"
+  "archivo": "048_foto_fotos-de-equipo-que-no-dan-verguenza.jpg",
+  "foto": "05-WEB/img/empresas/web/lokotas__IMG_7661.jpg",
+  "texto": "Fotos de equipo que no dan vergüenza"
  },
  {
   "n": 49,
   "tipo": "dato",
   "titular": "Quedan fechas para diciembre",
-  "archivo": "049_dato_quedan-fechas-para-diciembre.jpg"
+  "archivo": "049_dato_quedan-fechas-para-diciembre.jpg",
+  "foto": "05-WEB/img/retratos/web/juan-luz__IMG_2689.jpg",
+  "texto": "Agenda · Quedan fechas para diciembre · Escribime y te paso disponibilidad en el día."
  },
  {
   "n": 50,
   "tipo": "dato",
   "titular": "Tengo lugar para editar dos lotes esta semana",
-  "archivo": "050_dato_tengo-lugar-para-editar-dos-lotes-esta-seman.jpg"
+  "archivo": "050_dato_tengo-lugar-para-editar-dos-lotes-esta-seman.jpg",
+  "foto": "05-WEB/img/bodas/web/nw__IMG_4697.jpg",
+  "texto": "Para fotógrafos · Tengo lugar para editar dos lotes esta semana · Si venís atrasado con una entrega, escribime."
  },
  {
   "n": 51,
   "tipo": "foto",
   "titular": "Hasta el faro y volver",
-  "archivo": "051_foto_hasta-el-faro-y-volver.jpg"
+  "archivo": "051_foto_hasta-el-faro-y-volver.jpg",
+  "foto": "05-WEB/img/naturaleza/web/nw__IMG_2011_2.jpg",
+  "texto": "Fin de semana · Hasta el faro y volver"
  },
  {
   "n": 52,
   "tipo": "foto",
   "titular": "Otra ciudad, la misma luz",
-  "archivo": "052_foto_otra-ciudad-la-misma-luz.jpg"
+  "archivo": "052_foto_otra-ciudad-la-misma-luz.jpg",
+  "foto": "05-WEB/img/naturaleza/web/v__28.jpg",
+  "texto": "Otra ciudad, la misma luz"
  },
  {
   "n": 53,
   "tipo": "dato",
   "titular": "Si no llega para Navidad, llega para Reyes",
-  "archivo": "053_dato_si-no-llega-para-navidad-llega-para-reyes.jpg"
+  "archivo": "053_dato_si-no-llega-para-navidad-llega-para-reyes.jpg",
+  "foto": "05-WEB/img/naturaleza/web/nw__IMG_1999.jpg",
+  "texto": "Cuadros · Si no llega para Navidad, llega para Reyes · Fotos de mis viajes, impresas y enmarcadas. Escribime."
  },
  {
   "n": 54,
   "tipo": "foto",
   "titular": "Posó mejor que muchos",
-  "archivo": "054_foto_poso-mejor-que-muchos.jpg"
+  "archivo": "054_foto_poso-mejor-que-muchos.jpg",
+  "foto": "05-WEB/img/animales/web/v__100.jpg",
+  "texto": "Posó mejor que muchos"
  },
  {
   "n": 55,
   "tipo": "foto",
   "titular": "Una gorra, el sol y nada más",
-  "archivo": "055_foto_una-gorra-el-sol-y-nada-mas.jpg"
+  "archivo": "055_foto_una-gorra-el-sol-y-nada-mas.jpg",
+  "foto": "05-WEB/img/retratos/web/juan-luz__IMG_2669.jpg",
+  "texto": "Retrato · Una gorra, el sol y nada más"
  },
  {
   "n": 56,
   "tipo": "detras",
   "titular": "Fin de año: los chicos primero",
-  "archivo": "056_detras_fin-de-ano-los-chicos-primero.jpg"
+  "archivo": "056_detras_fin-de-ano-los-chicos-primero.jpg",
+  "foto": "05-WEB/img/eventos/web/v__11.jpg",
+  "texto": "Detrás de escena · Fin de año: los chicos primero · Me pongo a su altura y espero."
  },
  {
   "n": 57,
   "tipo": "foto",
   "titular": "Agua quieta, verano largo",
-  "archivo": "057_foto_agua-quieta-verano-largo.jpg"
+  "archivo": "057_foto_agua-quieta-verano-largo.jpg",
+  "foto": "05-WEB/img/naturaleza/web/v__53.jpg",
+  "texto": "Agua quieta, verano largo"
  },
  {
   "n": 58,
   "tipo": "dato",
   "titular": "¿Tenés fiesta en enero o febrero?",
-  "archivo": "058_dato_tenes-fiesta-en-enero-o-febrero.jpg"
+  "archivo": "058_dato_tenes-fiesta-en-enero-o-febrero.jpg",
+  "foto": "05-WEB/img/eventos/web/15-sol__IMG_8517.jpg",
+  "texto": "Eventos · ¿Tenés fiesta en enero o febrero? · Escribime y te paso disponibilidad en el día."
  },
  {
   "n": 59,
   "tipo": "foto",
   "titular": "Un segundo antes",
-  "archivo": "059_foto_un-segundo-antes.jpg"
+  "archivo": "059_foto_un-segundo-antes.jpg",
+  "foto": "05-WEB/img/deportes/web/v__86.jpg",
+  "texto": "Un segundo antes"
  },
  {
   "n": 60,
   "tipo": "foto",
   "titular": "El sonido también se ve",
-  "archivo": "060_foto_el-sonido-tambien-se-ve.jpg"
+  "archivo": "060_foto_el-sonido-tambien-se-ve.jpg",
+  "foto": "05-WEB/img/musica/web/la-estacion__IMG_8039.jpg",
+  "texto": "En vivo · El sonido también se ve"
  },
  {
   "n": 61,
   "tipo": "foto",
   "titular": "Hay colores que piden foto",
-  "archivo": "061_foto_hay-colores-que-piden-foto.jpg"
+  "archivo": "061_foto_hay-colores-que-piden-foto.jpg",
+  "foto": "05-WEB/img/naturaleza/web/v__55.jpg",
+  "texto": "Hay colores que piden foto"
  },
  {
   "n": 62,
   "tipo": "detras",
   "titular": "La bandeja sale ahora",
-  "archivo": "062_detras_la-bandeja-sale-ahora.jpg"
+  "archivo": "062_detras_la-bandeja-sale-ahora.jpg",
+  "foto": "05-WEB/img/gastronomia/web/lokotas__IMG_7600.jpg",
+  "texto": "Detrás de escena · La bandeja sale ahora · Hay diez segundos antes de que alguien la toque."
  },
  {
   "n": 63,
   "tipo": "dato",
   "titular": "La carta de verano se fotografía antes del verano",
-  "archivo": "063_dato_la-carta-de-verano-se-fotografia-antes-del-v.jpg"
+  "archivo": "063_dato_la-carta-de-verano-se-fotografia-antes-del-v.jpg",
+  "foto": "05-WEB/img/gastronomia/web/v__73.jpg",
+  "texto": "Restaurantes · La carta de verano se fotografía antes del verano · Una jornada en tu local. Entrega en 7 días."
  },
  {
   "n": 64,
   "tipo": "foto",
   "titular": "Hasta el catering sale en la foto",
-  "archivo": "064_foto_hasta-el-catering-sale-en-la-foto.jpg"
+  "archivo": "064_foto_hasta-el-catering-sale-en-la-foto.jpg",
+  "foto": "05-WEB/img/empresas/web/odontovita__IMG_4928.jpg",
+  "texto": "Empresas · Hasta el catering sale en la foto"
  },
  {
   "n": 65,
   "tipo": "foto",
   "titular": "Vacaciones con la cámara encima",
-  "archivo": "065_foto_vacaciones-con-la-camara-encima.jpg"
+  "archivo": "065_foto_vacaciones-con-la-camara-encima.jpg",
+  "foto": "05-WEB/img/naturaleza/web/v__61.jpg",
+  "texto": "Vacaciones con la cámara encima"
  },
  {
   "n": 66,
   "tipo": "foto",
   "titular": "Paciencia, mucha paciencia",
-  "archivo": "066_foto_paciencia-mucha-paciencia.jpg"
+  "archivo": "066_foto_paciencia-mucha-paciencia.jpg",
+  "foto": "05-WEB/img/animales/web/v__105.jpg",
+  "texto": "Paciencia, mucha paciencia"
  },
  {
   "n": 67,
   "tipo": "dato",
   "titular": "Tu lote, en plena temporada",
-  "archivo": "067_dato_tu-lote-en-plena-temporada.jpg"
+  "archivo": "067_dato_tu-lote-en-plena-temporada.jpg",
+  "foto": "05-WEB/img/bodas/web/v__4.jpg",
+  "texto": "Horas · Tu lote, en plena temporada · Para fotógrafos que no llegan con la edición."
  },
  {
   "n": 68,
   "tipo": "foto",
   "titular": "Poca luz, mucha cara",
-  "archivo": "068_foto_poca-luz-mucha-cara.jpg"
+  "archivo": "068_foto_poca-luz-mucha-cara.jpg",
+  "foto": "05-WEB/img/retratos/web/v__115.jpg",
+  "texto": "Poca luz, mucha cara"
  },
  {
   "n": 69,
   "tipo": "detras",
   "titular": "En la fiesta de empresa también se juega",
-  "archivo": "069_detras_en-la-fiesta-de-empresa-tambien-se-juega.jpg"
+  "archivo": "069_detras_en-la-fiesta-de-empresa-tambien-se-juega.jpg",
+  "foto": "05-WEB/img/eventos/web/v__7.jpg",
+  "texto": "Detrás de escena · En la fiesta de empresa también se juega · Las mejores fotos salen cuando nadie posa."
  },
  {
   "n": 70,
   "tipo": "foto",
   "titular": "Enero en modo lento",
-  "archivo": "070_foto_enero-en-modo-lento.jpg"
+  "archivo": "070_foto_enero-en-modo-lento.jpg",
+  "foto": "05-WEB/img/naturaleza/web/v__66.jpg",
+  "texto": "Enero en modo lento"
  },
  {
   "n": 71,
   "tipo": "foto",
   "titular": "Antes de que se prendan las luces",
-  "archivo": "071_foto_antes-de-que-se-prendan-las-luces.jpg"
+  "archivo": "071_foto_antes-de-que-se-prendan-las-luces.jpg",
+  "foto": "05-WEB/img/musica/web/la-estacion__IMG_8079.jpg",
+  "texto": "Ensayo · Antes de que se prendan las luces"
  },
  {
   "n": 72,
   "tipo": "foto",
   "titular": "Fotos de equipo, sin cartón",
-  "archivo": "072_foto_fotos-de-equipo-sin-carton.jpg"
+  "archivo": "072_foto_fotos-de-equipo-sin-carton.jpg",
+  "foto": "05-WEB/img/empresas/web/odontovita__IMG_5155.jpg",
+  "texto": "Empresas · Fotos de equipo, sin cartón"
  },
  {
   "n": 73,
   "tipo": "dato",
   "titular": "Logo, colores, letras y plantillas",
-  "archivo": "073_dato_logo-colores-letras-y-plantillas.jpg"
+  "archivo": "073_dato_logo-colores-letras-y-plantillas.jpg",
+  "foto": "05-WEB/img/marcas/web/v__84.jpg",
+  "texto": "Marca 360 · Logo, colores, letras y plantillas · Tu marca, igual en todos lados."
  },
  {
   "n": 74,
   "tipo": "foto",
   "titular": "Los chicos no posan: juegan",
-  "archivo": "074_foto_los-chicos-no-posan-juegan.jpg"
+  "archivo": "074_foto_los-chicos-no-posan-juegan.jpg",
+  "foto": "05-WEB/img/retratos/web/v__119.jpg",
+  "texto": "Los chicos no posan: juegan"
  },
  {
   "n": 75,
   "tipo": "foto",
   "titular": "La foto es del que espera",
-  "archivo": "075_foto_la-foto-es-del-que-espera.jpg"
+  "archivo": "075_foto_la-foto-es-del-que-espera.jpg",
+  "foto": "05-WEB/img/deportes/web/v__89.jpg",
+  "texto": "La foto es del que espera"
  },
  {
   "n": 76,
   "tipo": "foto",
   "titular": "Campo abierto",
-  "archivo": "076_foto_campo-abierto.jpg"
+  "archivo": "076_foto_campo-abierto.jpg",
+  "foto": "05-WEB/img/animales/web/v__109.jpg",
+  "texto": "Campo abierto"
  },
  {
   "n": 77,
   "tipo": "foto",
   "titular": "Retrato sin palabras",
-  "archivo": "077_foto_retrato-sin-palabras.jpg"
+  "archivo": "077_foto_retrato-sin-palabras.jpg",
+  "foto": "05-WEB/img/animales/web/nw__IMG_0653.jpg",
+  "texto": "Retrato sin palabras"
  },
  {
   "n": 78,
   "tipo": "foto",
   "titular": "Lejos de todo",
-  "archivo": "078_foto_lejos-de-todo.jpg"
+  "archivo": "078_foto_lejos-de-todo.jpg",
+  "foto": "05-WEB/img/naturaleza/web/v__29.jpg",
+  "texto": "Lejos de todo"
  },
  {
   "n": 79,
   "tipo": "foto",
   "titular": "Trabajar con música",
-  "archivo": "079_foto_trabajar-con-musica.jpg"
+  "archivo": "079_foto_trabajar-con-musica.jpg",
+  "foto": "05-WEB/img/retratos/web/horacio__IMG_6406.jpg",
+  "texto": "Retrato · Trabajar con música"
  },
  {
   "n": 80,
   "tipo": "foto",
   "titular": "Todo pasa rápido",
-  "archivo": "080_foto_todo-pasa-rapido.jpg"
+  "archivo": "080_foto_todo-pasa-rapido.jpg",
+  "foto": "05-WEB/img/deportes/web/v__87.jpg",
+  "texto": "Todo pasa rápido"
  },
  {
   "n": 81,
   "tipo": "foto",
   "titular": "Nublado también sirve",
-  "archivo": "081_foto_nublado-tambien-sirve.jpg"
+  "archivo": "081_foto_nublado-tambien-sirve.jpg",
+  "foto": "05-WEB/img/naturaleza/web/v__41.jpg",
+  "texto": "Nublado también sirve"
  },
  {
   "n": 82,
   "tipo": "foto",
   "titular": "Nadie le dijo que posara",
-  "archivo": "082_foto_nadie-le-dijo-que-posara.jpg"
+  "archivo": "082_foto_nadie-le-dijo-que-posara.jpg",
+  "foto": "05-WEB/img/animales/web/v__102.jpg",
+  "texto": "Nadie le dijo que posara"
  },
  {
   "n": 83,
   "tipo": "foto",
   "titular": "Sonido de sala",
-  "archivo": "083_foto_sonido-de-sala.jpg"
+  "archivo": "083_foto_sonido-de-sala.jpg",
+  "foto": "05-WEB/img/musica/web/la-estacion__IMG_8052.jpg",
+  "texto": "Ensayo · Sonido de sala"
  },
  {
   "n": 84,
   "tipo": "foto",
   "titular": "Luz de tarde",
-  "archivo": "084_foto_luz-de-tarde.jpg"
+  "archivo": "084_foto_luz-de-tarde.jpg",
+  "foto": "05-WEB/img/retratos/web/v__116.jpg",
+  "texto": "Luz de tarde"
  },
  {
   "n": 85,
   "tipo": "foto",
   "titular": "Otra ciudad desde arriba",
-  "archivo": "085_foto_otra-ciudad-desde-arriba.jpg"
+  "archivo": "085_foto_otra-ciudad-desde-arriba.jpg",
+  "foto": "05-WEB/img/naturaleza/web/v__62.jpg",
+  "texto": "Otra ciudad desde arriba"
  },
  {
   "n": 86,
   "tipo": "foto",
   "titular": "A toda velocidad",
-  "archivo": "086_foto_a-toda-velocidad.jpg"
+  "archivo": "086_foto_a-toda-velocidad.jpg",
+  "foto": "05-WEB/img/deportes/web/v__90.jpg",
+  "texto": "A toda velocidad"
  },
  {
   "n": 87,
   "tipo": "foto",
   "titular": "Mirá quién llegó",
-  "archivo": "087_foto_mira-quien-llego.jpg"
+  "archivo": "087_foto_mira-quien-llego.jpg",
+  "foto": "05-WEB/img/animales/web/v__107.jpg",
+  "texto": "Mirá quién llegó"
  },
  {
   "n": 88,
   "tipo": "foto",
   "titular": "Con el agua de fondo",
-  "archivo": "088_foto_con-el-agua-de-fondo.jpg"
+  "archivo": "088_foto_con-el-agua-de-fondo.jpg",
+  "foto": "05-WEB/img/retratos/web/juan-luz__IMG_2686.jpg",
+  "texto": "Retrato · Con el agua de fondo"
  },
  {
   "n": 89,
   "tipo": "foto",
   "titular": "Tarde gris, foto linda",
-  "archivo": "089_foto_tarde-gris-foto-linda.jpg"
+  "archivo": "089_foto_tarde-gris-foto-linda.jpg",
+  "foto": "05-WEB/img/naturaleza/web/v__56.jpg",
+  "texto": "Tarde gris, foto linda"
  },
  {
   "n": 90,
   "tipo": "dato",
   "titular": "Mandame el lote y seguí disparando",
-  "archivo": "090_dato_mandame-el-lote-y-segui-disparando.jpg"
+  "archivo": "090_dato_mandame-el-lote-y-segui-disparando.jpg",
+  "foto": "05-WEB/img/bodas/web/nw__IMG_9726.jpg",
+  "texto": "Edición en Lightroom · Mandame el lote y seguí disparando · Para fotógrafos en plena temporada. Escribime."
  },
  {
   "n": 91,
   "tipo": "foto",
   "titular": "El mar, de frente",
-  "archivo": "091_foto_el-mar-de-frente.jpg"
+  "archivo": "091_foto_el-mar-de-frente.jpg",
+  "foto": "05-WEB/img/naturaleza/web/v__48.jpg",
+  "texto": "El mar, de frente"
  },
  {
   "n": 92,
   "tipo": "foto",
   "titular": "Música a cielo abierto",
-  "archivo": "092_foto_musica-a-cielo-abierto.jpg"
+  "archivo": "092_foto_musica-a-cielo-abierto.jpg",
+  "foto": "05-WEB/img/musica/web/la-estacion__IMG_8073.jpg",
+  "texto": "En la calle · Música a cielo abierto"
  },
  {
   "n": 93,
   "tipo": "dato",
   "titular": "Tu web, pensada primero para el celular",
-  "archivo": "093_dato_tu-web-pensada-primero-para-el-celular.jpg"
+  "archivo": "093_dato_tu-web-pensada-primero-para-el-celular.jpg",
+  "foto": "05-WEB/img/empresas/web/lokotas__IMG_7552.jpg",
+  "texto": "Páginas web · Tu web, pensada primero para el celular · Para negocios que abren en temporada. Escribime."
  },
  {
   "n": 94,
   "tipo": "foto",
   "titular": "La marca también sale en la foto",
-  "archivo": "094_foto_la-marca-tambien-sale-en-la-foto.jpg"
+  "archivo": "094_foto_la-marca-tambien-sale-en-la-foto.jpg",
+  "foto": "05-WEB/img/empresas/web/odontovita__IMG_5182.jpg",
+  "texto": "Empresas · La marca también sale en la foto"
  },
  {
   "n": 95,
   "tipo": "foto",
   "titular": "Colores que no se inventan",
-  "archivo": "095_foto_colores-que-no-se-inventan.jpg"
+  "archivo": "095_foto_colores-que-no-se-inventan.jpg",
+  "foto": "05-WEB/img/animales/web/v__104.jpg",
+  "texto": "Colores que no se inventan"
  },
  {
   "n": 96,
   "tipo": "dato",
   "titular": "Un manual para que tu marca no cambie de cara",
-  "archivo": "096_dato_un-manual-para-que-tu-marca-no-cambie-de-car.jpg"
+  "archivo": "096_dato_un-manual-para-que-tu-marca-no-cambie-de-car.jpg",
+  "foto": "05-WEB/img/marcas/web/v__78.jpg",
+  "texto": "Marca 360 · Un manual para que tu marca no cambie de cara · Logo, colores, letras y plantillas, en un solo lugar."
  },
  {
   "n": 97,
   "tipo": "foto",
   "titular": "Leer al sol",
-  "archivo": "097_foto_leer-al-sol.jpg"
+  "archivo": "097_foto_leer-al-sol.jpg",
+  "foto": "05-WEB/img/retratos/web/horacio__IMG_6496.jpg",
+  "texto": "Retrato · Leer al sol"
  },
  {
   "n": 98,
   "tipo": "foto",
   "titular": "Debajo del muelle",
-  "archivo": "098_foto_debajo-del-muelle.jpg"
+  "archivo": "098_foto_debajo-del-muelle.jpg",
+  "foto": "05-WEB/img/deportes/web/v__88.jpg",
+  "texto": "Debajo del muelle"
  }
 ]

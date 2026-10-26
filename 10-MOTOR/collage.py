@@ -383,7 +383,9 @@ class Lienzo:
         return m.size
 
     def deslizar(self, i, y=None, claro=None):
-        """Señal de deslizar, abajo a la derecha de la lamina i."""
+        """Antes ponía "DESLIZÁ →" abajo a la derecha. Martin no lo quiere en
+        las piezas nuevas (26/10/2026): Instagram ya muestra los puntitos."""
+        return
         claro = self.oscuro if claro is None else claro
         col = HUESO if claro else NEGRO
         y = y or ALTO - 100

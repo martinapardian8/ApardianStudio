@@ -35,6 +35,52 @@ PROHIBIDO = [
 ]
 CTA = re.compile(r"\+?598\s?9\d|whats ?app|wa\.me|escribime|link en (la )?bio", re.I)
 
+# Lo que Martin enseñó (09-ESTUDIO/APRENDIZAJES.md, 24 y 26/10/2026): el texto
+# de una pieza no nombra un lugar que no esté confirmado para ESA foto
+# (10-MOTOR/fotos.json), y si habla de carta, platos o comida, la foto muestra
+# comida, no un kamado ni un fuego.
+LUGARES = re.compile(r"\b(uruguay\w*|montevideo|colonia|punta del este|jos[eé] ignacio|la barra|rambla|"
+                     r"ciudad vieja|pocitos|carrasco|punta carretas|maldonado|rocha|canelones|pir[ií][aá]polis|"
+                     r"cabo polonio|mallorca|palma|espa[ñn]a|barcelona|madrid|estambul|istanbul|turqu[ií]a|"
+                     r"los [aá]ngeles|california|hollywood|buenos aires|argentina)\b", re.I)
+COMIDA_TXT = re.compile(r"\b(carta|men[uú]|platos?|comida|delivery|se come|hambre)\b", re.I)
+_IDX = None
+
+
+def _indice_piezas():
+    """archivo publicado → {foto, texto} que escriben historias.py y generar_ads.py."""
+    global _IDX
+    if _IDX is None:
+        _IDX = {}
+        for nombre, carpetas in (("indice_historias.json", ["04-historias-organicas"]),
+                                 ("indice_pauta.json", ["01-posteos-pauta", "02-historias-pauta"])):
+            r = os.path.join(IG, nombre)
+            if os.path.exists(r):
+                for x in json.load(open(r, encoding="utf-8")):
+                    for c in carpetas:
+                        _IDX[c + "/" + x["archivo"]] = x
+    return _IDX
+
+
+def lugar_y_tema(archivos):
+    """Frenos por lugar no confirmado o por foto que no muestra lo que dice el texto."""
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    from motor_ads import ficha, COMIDA
+    frenos = []
+    for a in archivos:
+        x = _indice_piezas().get(a)
+        if not x or not x.get("foto"):
+            continue
+        fi, texto, foto = ficha(x["foto"]), x.get("texto", ""), os.path.basename(x["foto"])
+        for m in dict.fromkeys(m.group(0) for m in LUGARES.finditer(texto)):
+            if not (fi.get("confirmado") and m.lower()[:5] in fi.get("lugar", "").lower()):
+                frenos.append(f'el texto dice "{m}" y la foto {foto} es de '
+                              + (fi.get("lugar") or "un lugar sin confirmar") + ": preguntale a Martin dónde es")
+        if COMIDA_TXT.search(texto) and fi.get("contenido") not in COMIDA:
+            frenos.append(f"el texto habla de comida y la foto {foto} no muestra un plato"
+                          + (f" (es {fi['contenido']})" if fi.get("contenido") else ""))
+    return frenos
+
 
 def _video(ruta):
     """(ancho, alto, segundos) con OpenCV; None si no se puede leer."""
@@ -126,6 +172,7 @@ def revisar(f, vistos=None, cercanas=None):
     for patron, motivo in PROHIBIDO:
         if re.search(patron, pie + " " + f.get("titulo", ""), re.I):
             frenos.append(motivo)
+    frenos += lugar_y_tema(archivos)
 
     if vistos is not None and f["archivos"]:
         if f["archivos"] in vistos and vistos[f["archivos"]] != f["id"]:

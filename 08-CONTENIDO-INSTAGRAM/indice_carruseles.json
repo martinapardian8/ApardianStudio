@@ -14,12 +14,12 @@
  {
   "carrusel": "03-antes-y-despues",
   "titular": "Antes y después",
-  "laminas": 5,
+  "laminas": 6,
   "cta": "MANDAME TUS FOTOS"
  },
  {
   "carrusel": "04-marcas-uruguayas",
-  "titular": "Marcas uruguayas que fotografié",
+  "titular": "Marcas que fotografié",
   "laminas": 8,
   "cta": "PEDIME UN PRESUPUESTO"
  },
@@ -37,20 +37,20 @@
  },
  {
   "carrusel": "07-salones-uruguay",
-  "titular": "Salones de Uruguay",
+  "titular": "Salones que fotografié",
   "laminas": 6,
   "cta": "PEDIME UN PRESUPUESTO"
  },
  {
   "carrusel": "08-los-que-no-posan",
   "titular": "Los que nunca posan",
-  "laminas": 5,
+  "laminas": 6,
   "cta": "ESCRIBIME POR WHATSAPP"
  },
  {
   "carrusel": "09-uruguay-punta-a-punta",
-  "titular": "Uruguay de punta a punta",
-  "laminas": 5,
+  "titular": "Lo que veo de viaje",
+  "laminas": 6,
   "cta": "QUIERO UN CUADRO"
  },
  {

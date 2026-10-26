@@ -7,7 +7,7 @@ Koulen para titulares, Work Sans para el resto, y solo tres colores.
 
 No usa IA: la foto es de el, el diseno lo pone este archivo.
 """
-import os, glob, random, hashlib
+import os, glob, random, hashlib, json
 from PIL import Image, ImageDraw, ImageFont, ImageFilter, ImageEnhance, ImageOps
 
 # rutas relativas al repositorio: funciona igual en la Mac y en cualquier copia
@@ -402,3 +402,100 @@ def velo_caja(im, caja, objetivo=56, pluma=90, piso=0.28):
     ImageDraw.Draw(cap).rectangle([x0, y0, x1, y1], fill=int(255 * f))
     cap = cap.filter(ImageFilter.GaussianBlur(pluma / 2.2))
     return Image.composite(Image.new("RGB", (W, H), CARBON), im, cap)
+
+
+# ---------------------------------------------------------------- foto primero
+# Pedido de Martin (26/10/2026): en cada posteo e historia la protagonista es su
+# fotografía, con la estética de la web. El texto va chico y abajo, y la foto
+# no se recorta de más: si para llenar el cuadro hay que perder más de
+# PERDIDA_MAX de la foto, se muestra entera, de lado a lado, sobre negro.
+PERDIDA_MAX = 0.22
+
+
+def perdida_recorte(ruta, size):
+    """Qué parte de la foto se pierde si se la recorta para llenar `size`."""
+    w, h = Image.open(ruta).size
+    a, b = w / h, size[0] / size[1]
+    return 1 - min(a, b) / max(a, b)
+
+
+def _alto_bloque(size, c, max_w, px_titular, px_sub):
+    prueba = Image.new("RGB", size)
+    return bloque(ImageDraw.Draw(prueba), 0, 0, size[1], max_w, c, HUESO, ROJO,
+                  px_titular=px_titular, px_sub=px_sub, con_firma=False)
+
+
+def pieza_foto(ruta, size, story, c, extra_abajo=0):
+    """La foto de Martin como protagonista y el texto al pie.
+
+    c: kicker, titular, sub, cta (y numero, que va adelante del kicker).
+    extra_abajo: alto reservado debajo del texto (las opciones de una pregunta).
+    Devuelve (imagen, y donde termina el texto)."""
+    W, H = size
+    m = 76
+    top = SAFE_STORY_TOP if story else m
+    bot = H - (SAFE_STORY_BOT if story else m) - extra_abajo
+    c = dict(c)
+    if c.get("numero"):
+        c["kicker"] = (str(c.pop("numero")) + " · " + c.get("kicker", "")).strip(" ·")
+    px_t, px_s = (72, 30) if story else (60, 28)
+    max_w = W - 2 * m
+    alto = _alto_bloque(size, c, max_w, px_t, px_s)
+
+    if perdida_recorte(ruta, size) <= PERDIDA_MAX:
+        # a sangre: la foto llena el cuadro y solo se oscurece detrás del texto
+        im = cargar(ruta, size)
+        y0 = bot - alto
+        im = velo_banda(im, y0 - 40, H, objetivo=46, pluma=320, piso=0.30)
+    else:
+        # entera: de lado a lado (o de arriba abajo), sin recortar nada
+        # se recorta como mucho PERDIDA_MAX (con el encuadre que cuida rostros
+        # y sujeto) para que la foto ocupe más, y el resto se muestra entero
+        im = Image.new("RGB", size, CARBON)
+        w0, h0 = Image.open(ruta).size
+        ar = w0 / h0
+        ar2 = ar * (1 - PERDIDA_MAX) if ar > W / H else ar / (1 - PERDIDA_MAX)
+        hueco = bot - alto - 56 - (0 if not story else 40)
+        fw = W if ar2 >= W / max(1, hueco) else int(hueco * ar2)
+        fh = int(fw / ar2)
+        if fh > hueco:
+            fh = hueco; fw = int(fh * ar2)
+        f = cargar(ruta, (fw, fh))
+        # foto y texto juntos, como una lámina, centrados en el cuadro
+        total = fh + 56 + alto
+        yf = max(0, min((H - total) // 2, bot - total))
+        im.paste(f, ((W - fw) // 2, yf))
+        y0 = yf + fh + 56
+    d = ImageDraw.Draw(im)
+    fin = bloque(d, m, y0, H, max_w, c, HUESO, ROJO, px_titular=px_t, px_sub=px_s,
+                 firma_x=W - m, color_kicker=ROJO if perdida_recorte(ruta, size) > PERDIDA_MAX else HUESO)
+    if not c.get("cta"):
+        firma(d, W - m, y0 - 6 if c.get("kicker") else y0 - 46, 0.9, True, "r")
+    return im, fin
+
+
+# ---------------------------------------------------------------- lo que se sabe de cada foto
+_FOTOS = None
+def ficha(ruta):
+    """{lugar, confirmado, contenido} de una foto (fotos.json). Vacío si no se sabe."""
+    global _FOTOS
+    if _FOTOS is None:
+        _FOTOS = json.load(open(os.path.join(S, "fotos.json"), encoding="utf-8"))["fotos"]
+    partes = ruta.replace("\\", "/").split("/")
+    return _FOTOS.get(partes[-3] + "/" + partes[-1], {}) if len(partes) >= 3 else {}
+
+
+# Comida: cuando la pieza habla de carta, platos o comida, la foto tiene que
+# mostrar comida (Martin, 24/10/2026: "si hablamos de una carta, la foto en vez
+# de un kamado debería ser comida").
+COMIDA = ("plato", "preparacion")
+
+
+def foto_de(cat, i=0, contenido=None):
+    """Como foto(), pero solo entre las que muestran `contenido` (fotos.json)."""
+    fs = pool().get(cat) or []
+    if contenido:
+        ok = [f for f in fs if ficha(f).get("contenido") in contenido]
+        if ok:
+            return ok[i % len(ok)]
+    return foto(cat, i)
