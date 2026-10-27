@@ -7,8 +7,9 @@ Recibís el asunto y el texto de una respuesta. Elegí UNA categoría:
 - "no_ahora": no por ahora, más adelante, ya tiene algo pero no cierra la puerta.
 - "baja": no le interesa, pide que no le escriban, se molesta. Ante la duda
   entre "no_ahora" y "baja", elegí "baja".
-- "rebote": respuesta automática, fuera de oficina, error de entrega,
-  dirección inexistente.
+- "automatica": respuesta automática (fuera de oficina, vacaciones, "recibimos
+  tu mensaje"), sin nada escrito por una persona.
+- "rebote": error de entrega o dirección inexistente.
 - "otro": cualquier otra cosa.
 
 Además escribí un resumen de una línea para Martin y, si es "interesado" o

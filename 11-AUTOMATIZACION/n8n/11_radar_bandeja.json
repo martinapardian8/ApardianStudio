@@ -61,6 +61,52 @@
     },
     {
       "parameters": {
+        "jsCode": "const esc = s => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')\n  .replace(/\"/g, '&quot;').replace(/'/g, '&#39;');\n// La clave de Radar: tiene que estar cambiada (no la de ejemplo) y ser larga.\nconst claveOk = (t, clave) => !!t && !!clave && String(clave).length >= 24 && !/^CAMBIAR/.test(String(clave)) && String(t) === String(clave);\n\n// Página con la estética del Centro. n8n la sirve dentro de un sandbox: los\n// links externos van con target=\"_blank\" (abre otra pestaña y no se pierde lo\n// que no se guardó), \"Volver\" con target=\"_top\" y el formulario con dirección absoluta.\nconst pagina = (titulo, cuerpo) => '<!doctype html><html lang=\"es\"><head><meta charset=\"utf-8\">' +\n  '<meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><title>' + esc(titulo) + '</title>' +\n  '<link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css2?family=Anton&family=Work+Sans:wght@400;500;600&display=swap\">' +\n  '<style>:root{--bg:#0B0B0B;--panel:#141414;--panel-2:#1C1C1C;--fg:#F8F7F6;--muted:#9A9592;--line:rgba(248,247,246,.12);' +\n  '--red:#FF0033;--ok:#3DDC84;--display:\"Anton\",Impact,sans-serif;--body:\"Work Sans\",-apple-system,Arial,sans-serif}' +\n  '*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.5 var(--body)}' +\n  'main{max-width:860px;margin:0 auto;padding:28px 16px 120px}.eye{letter-spacing:.2em;font-size:11px;color:var(--red);text-transform:uppercase}' +\n  'h1{font:400 clamp(34px,7vw,56px)/1 var(--display);text-transform:uppercase;margin:6px 0 10px}h2{font:400 26px/1.1 var(--display);text-transform:uppercase;margin:36px 0 12px}' +\n  'p,.muted{color:var(--muted)}a{color:var(--fg)}.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;margin:0 0 14px}' +\n  '.meta{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:baseline}.meta b{font-size:17px}.meta span{color:var(--muted);font-size:13px}.meta .rep{color:var(--fg)}' +\n  '.tag{display:inline-block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--red);margin-bottom:4px}' +\n  '.links{font-size:13px;color:var(--muted);margin:4px 0 8px;word-break:break-word}details{margin:6px 0 10px;font-size:13px;color:var(--muted)}summary{cursor:pointer}' +\n  'label.lbl{display:block;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:10px 0 4px}' +\n  'input[type=text],textarea{width:100%;background:var(--panel-2);color:var(--fg);border:1px solid var(--line);border-radius:10px;padding:10px;font:15px/1.5 var(--body);margin-top:4px}' +\n  'textarea{min-height:200px;resize:vertical}.dec{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}' +\n  '.dec label{display:flex;gap:8px;align-items:center;border:1px solid var(--line);border-radius:999px;padding:8px 14px;cursor:pointer}' +\n  '.dec label:has(input:checked){border-color:var(--fg);background:var(--panel-2)}.dec input{accent-color:var(--red)}' +\n  '.btn{display:inline-block;border:1px solid var(--fg);background:none;color:var(--fg);border-radius:999px;padding:10px 18px;font:600 14px var(--body);cursor:pointer;text-decoration:none}' +\n  '.btn.rojo{background:var(--red);border-color:var(--red);color:#fff}.barra{position:fixed;left:0;right:0;bottom:0;background:rgba(11,11,11,.94);border-top:1px solid var(--line);padding:12px 16px}' +\n  '.barra div{max-width:860px;margin:0 auto;display:flex;gap:10px;align-items:center;justify-content:space-between}.barra .btn{padding:10px 14px;white-space:nowrap}.ok{color:var(--ok)}' +\n  '</style></head><body><main>' + cuerpo + '</main></body></html>';\n\nconst q = $('Abrir bandeja').first().json.query || {};\nreturn [{ json: { ok: claveOk(q.t, $('Config').first().json.TOKEN),\n  html: pagina('Link no válido', '<p class=\"eye\">APARDIAN · Radar</p><h1>Link no válido</h1><p>La clave no coincide con la de n8n. Abrí la bandeja desde el Centro → Radar.</p>') } }];\n"
+      },
+      "id": "0649b352-5358-512a-8c1b-11e0815ea7e0",
+      "name": "Clave",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        480,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose"
+          },
+          "conditions": [
+            {
+              "id": "e26025b9-d1da-57f3-9704-2907add8bbe0",
+              "leftValue": "={{ $json.ok }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "5a617d6d-2e8f-58e7-8de4-8d1a23c2aca7",
+      "name": "¿Clave válida?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        720,
+        0
+      ]
+    },
+    {
+      "parameters": {
         "operation": "read",
         "documentId": {
           "__rl": true,
@@ -79,7 +125,7 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.5,
       "position": [
-        480,
+        960,
         0
       ],
       "credentials": {
@@ -93,14 +139,14 @@
     },
     {
       "parameters": {
-        "jsCode": "const esc = s => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');\n\n// ¿El teléfono parece un celular con WhatsApp? Uruguay: +598 9…; Argentina:\n// +54 9…; el resto se deja pasar (Martin lo ve antes de mandarlo).\nconst digitos = t => String(t || '').replace(/[^\\d]/g, '');\nconst celular = (t, pais) => {\n  const d = digitos(t);\n  if (d.length < 8) return false;\n  if (d.startsWith('598')) return d[3] === '9';\n  if (d.startsWith('54')) return d[2] === '9';\n  if (!String(t).trim().startsWith('+')) return String(pais || 'Uruguay') === 'Uruguay' && /^09/.test(d);\n  return true;\n};\nconst waNumero = (t, pais) => { let d = digitos(t); if (/^09/.test(d) && String(pais || 'Uruguay') === 'Uruguay') d = '598' + d.slice(1); return d; };\n\n// Página con la estética del Centro. n8n la sirve dentro de un sandbox: los\n// links van con target=\"_top\" y el formulario con dirección absoluta.\nconst pagina = (titulo, cuerpo) => '<!doctype html><html lang=\"es\"><head><meta charset=\"utf-8\">' +\n  '<meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><title>' + esc(titulo) + '</title>' +\n  '<link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css2?family=Anton&family=Work+Sans:wght@400;500;600&display=swap\">' +\n  '<style>:root{--bg:#0B0B0B;--panel:#141414;--panel-2:#1C1C1C;--fg:#F8F7F6;--muted:#9A9592;--line:rgba(248,247,246,.12);' +\n  '--red:#FF0033;--ok:#3DDC84;--display:\"Anton\",Impact,sans-serif;--body:\"Work Sans\",-apple-system,Arial,sans-serif}' +\n  '*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.5 var(--body)}' +\n  'main{max-width:860px;margin:0 auto;padding:28px 16px 120px}.eye{letter-spacing:.2em;font-size:11px;color:var(--red);text-transform:uppercase}' +\n  'h1{font:400 clamp(34px,7vw,56px)/1 var(--display);text-transform:uppercase;margin:6px 0 10px}h2{font:400 26px/1.1 var(--display);text-transform:uppercase;margin:36px 0 12px}' +\n  'p,.muted{color:var(--muted)}a{color:var(--fg)}.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;margin:0 0 14px}' +\n  '.meta{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:baseline}.meta b{font-size:17px}.meta span{color:var(--muted);font-size:13px}.meta .rep{color:var(--fg)}' +\n  '.tag{display:inline-block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--red);margin-bottom:4px}' +\n  '.links{font-size:13px;color:var(--muted);margin:4px 0 8px;word-break:break-word}details{margin:6px 0 10px;font-size:13px;color:var(--muted)}summary{cursor:pointer}' +\n  'label.lbl{display:block;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:10px 0 4px}' +\n  'input[type=text],textarea{width:100%;background:var(--panel-2);color:var(--fg);border:1px solid var(--line);border-radius:10px;padding:10px;font:15px/1.5 var(--body);margin-top:4px}' +\n  'textarea{min-height:200px;resize:vertical}.dec{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}' +\n  '.dec label{display:flex;gap:8px;align-items:center;border:1px solid var(--line);border-radius:999px;padding:8px 14px;cursor:pointer}' +\n  '.dec label:has(input:checked){border-color:var(--fg);background:var(--panel-2)}.dec input{accent-color:var(--red)}' +\n  '.btn{display:inline-block;border:1px solid var(--fg);background:none;color:var(--fg);border-radius:999px;padding:10px 18px;font:600 14px var(--body);cursor:pointer;text-decoration:none}' +\n  '.btn.rojo{background:var(--red);border-color:var(--red);color:#fff}.barra{position:fixed;left:0;right:0;bottom:0;background:rgba(11,11,11,.94);border-top:1px solid var(--line);padding:12px 16px}' +\n  '.barra div{max-width:860px;margin:0 auto;display:flex;gap:10px;align-items:center;justify-content:space-between}.barra .btn{padding:10px 14px;white-space:nowrap}.ok{color:var(--ok)}' +\n  '</style></head><body><main>' + cuerpo + '</main></body></html>';\n\nconst c = $('Config').first().json;\nconst w = $('Abrir bandeja').first().json;\nconst q = w.query || {};\nif (!q.t || q.t !== c.TOKEN) return [{ json: { html: pagina('Link no válido', '<p class=\"eye\">APARDIAN · Radar</p><h1>Link no válido</h1><p>La clave no coincide con la de n8n. Abrí la bandeja desde el Centro → Radar.</p>') } }];\nconst h = w.headers || {};\nconst guardar = c.URL_GUARDAR || ('https://' + (h['x-forwarded-host'] || h.host) + '/webhook/apardian-bandeja-guardar');\nconst L = $('Leer Leads').all().map(r => r.json).filter(l => l.id);\nconst max = Number(c.MAX_EN_PANTALLA) || 60;\nconst mails = L.filter(l => l.estado === 'borrador');\nconst segs = L.filter(l => /^borrador_seg[12]$/.test(l.estado || ''));\nconst was = L.filter(l => l.estado === 'wa_borrador');\nconst enCola = L.filter(l => /^aprobado/.test(l.estado || '')).length;\nconst url = x => /^https?:\\/\\//.test(x) ? x : 'https://' + x;\nconst rep = l => l.rating ? '★ ' + String(l.rating).replace('.', ',') + (l.resenas ? ' · ' + l.resenas + ' reseñas' : '') : '';\nconst ficha = l => '<div class=\"meta\"><b>' + esc(l.nombre) + '</b><span>' + esc([l.rubro, l.pais || 'Uruguay'].filter(Boolean).join(' · ')) + '</span>' +\n  (rep(l) ? '<span class=\"rep\">' + esc(rep(l)) + '</span>' : '') + (l.score ? '<span>score ' + esc(l.score) + '</span>' : '') + '</div>' +\n  '<div class=\"links\">' + (l.web ? '<a target=\"_top\" href=\"' + esc(url(l.web)) + '\">' + esc(String(l.web).replace(/^https?:\\/\\/(www\\.)?/, '')) + '</a>' : 'sin web') +\n  (l.instagram ? ' · <a target=\"_top\" href=\"' + esc(url(l.instagram)) + '\">Instagram</a>' : '') +\n  (l.email ? ' · ' + esc(l.email) : '') + (l.telefono ? ' · ' + esc(l.telefono) : '') + '</div>' +\n  (l.problemas ? '<details><summary>Qué vio Radar</summary><p>' + esc(l.problemas).replace(/\\n/g, '<br>') + '</p></details>' : '');\nconst decision = (id, ops) => '<div class=\"dec\">' + ops.map(([v, t]) =>\n  '<label><input type=\"radio\" name=\"d_' + esc(id) + '\" value=\"' + v + '\"> ' + t + '</label>').join('') + '</div>';\nconst tarjeta = (tipo, l, tag, asunto, cuerpo) => '<article class=\"card\" data-tipo=\"' + tipo + '\"><span class=\"tag\">' + tag + '</span>' + ficha(l) +\n  (tipo === 'seg' ? '<details><summary>Primer mail: ' + esc(l.asunto) + '</summary><p>' + esc(l.borrador).replace(/\\n/g, '<br>') + '</p></details>' : '') +\n  '<label class=\"lbl\">Asunto<input type=\"text\" name=\"a_' + esc(l.id) + '\" value=\"' + esc(asunto) + '\" maxlength=\"200\"></label>' +\n  '<label class=\"lbl\">Mail (para ' + esc(l.email) + ')<textarea name=\"c_' + esc(l.id) + '\">' + esc(cuerpo) + '</textarea></label>' +\n  decision(l.id, [['aprobar', 'Aprobar'], ['descartar', 'Descartar']]) + '</article>';\nconst tarjetaWa = l => { const n = waNumero(l.telefono, l.pais);\n  return '<article class=\"card\" data-tipo=\"wa\"><span class=\"tag\">WhatsApp · lo mandás vos</span>' + ficha(l) +\n  '<label class=\"lbl\">Mensaje<textarea data-wa=\"' + esc(l.id) + '\" name=\"w_' + esc(l.id) + '\">' + esc(l.wa_mensaje) + '</textarea></label>' +\n  '<p><a class=\"btn\" target=\"_top\" id=\"wa_' + esc(l.id) + '\" data-tel=\"' + esc(n) + '\" href=\"https://wa.me/' + esc(n) + '?text=' + encodeURIComponent(l.wa_mensaje || '') + '\">Abrir en WhatsApp</a></p>' +\n  '<p class=\"muted\">Guardá antes de abrir WhatsApp: el link sale de esta página.</p>' +\n  decision(l.id, [['mandado', 'Ya lo mandé'], ['descartar', 'Descartar']]) + '</article>'; };\nconst seccion = (titulo, lista, f) => lista.length ? '<h2>' + titulo + ' · ' + lista.length + '</h2>' +\n  (lista.length > max ? '<p>Se muestran ' + max + '. Guardá y volvé a abrir para ver el resto.</p>' : '') + lista.slice(0, max).map(f).join('') : '';\nconst total = mails.length + segs.length + was.length;\nconst cuerpo = '<p class=\"eye\">APARDIAN · Radar</p><h1>Bandeja</h1>' +\n  '<p>Nada sale sin tu OK. Lo que aprobás sale desde contacto@ en el horario de oficina de cada país, hasta 90 por día. ' +\n  'Lo que no marques queda para después; los cambios en un texto se guardan al aprobarlo.</p>' +\n  (enCola ? '<p class=\"ok\">' + (enCola === 1 ? '1 aprobado espera' : enCola + ' aprobados esperan') + ' su horario.</p>' : '') +\n  (total ? '' : '<div class=\"card\"><p>No hay nada para aprobar. Radar escribe de lunes a viernes a las 8.</p></div>') +\n  '<form method=\"post\" action=\"' + esc(guardar) + '\" accept-charset=\"utf-8\">' +\n  '<input type=\"hidden\" name=\"t\" value=\"' + esc(c.TOKEN) + '\">' +\n  seccion('Mails nuevos', mails, l => tarjeta('mail', l, 'Primer mail', l.asunto, l.borrador)) +\n  seccion('Seguimientos', segs, l => tarjeta('seg', l, 'Seguimiento ' + String(l.estado).slice(-1), l.seg_asunto, l.seg_cuerpo)) +\n  seccion('WhatsApp a mano', was, tarjetaWa) +\n  (total ? '<div class=\"barra\"><div><button type=\"button\" class=\"btn\" id=\"todos\">Aprobar todos los mails</button>' +\n    '<button type=\"submit\" class=\"btn rojo\" id=\"guardar\">Guardar</button></div></div>' : '') +\n  '</form><script>' +\n  'document.querySelectorAll(\"textarea[data-wa]\").forEach(function(t){t.addEventListener(\"input\",function(){var a=document.getElementById(\"wa_\"+t.dataset.wa);a.href=\"https://wa.me/\"+a.dataset.tel+\"?text=\"+encodeURIComponent(t.value);});});' +\n  'var b=document.getElementById(\"todos\");if(b)b.onclick=function(){document.querySelectorAll(\"[data-tipo=mail] input[value=aprobar],[data-tipo=seg] input[value=aprobar]\").forEach(function(r){r.checked=true;});cuenta();};' +\n  'function cuenta(){var n=document.querySelectorAll(\".dec input:checked\").length,g=document.getElementById(\"guardar\");if(g)g.textContent=n?\"Guardar \"+n+(n===1?\" decisión\":\" decisiones\"):\"Guardar\";}' +\n  'document.addEventListener(\"change\",cuenta);' +\n  '</script>';\nreturn [{ json: { html: pagina('Bandeja · Radar', cuerpo) } }];\n"
+        "jsCode": "const esc = s => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')\n  .replace(/\"/g, '&quot;').replace(/'/g, '&#39;');\n// La clave de Radar: tiene que estar cambiada (no la de ejemplo) y ser larga.\nconst claveOk = (t, clave) => !!t && !!clave && String(clave).length >= 24 && !/^CAMBIAR/.test(String(clave)) && String(t) === String(clave);\n\n// ¿El teléfono parece un celular con WhatsApp? Uruguay: +598 9…; Argentina:\n// +54 9…; el resto se deja pasar (Martin lo ve antes de mandarlo).\nconst digitos = t => String(t || '').replace(/[^\\d]/g, '');\nconst celular = (t, pais) => {\n  const d = digitos(t);\n  if (d.length < 8) return false;\n  if (d.startsWith('598')) return d[3] === '9';\n  if (d.startsWith('54')) return d[2] === '9';\n  if (!String(t).trim().startsWith('+')) return String(pais || 'Uruguay') === 'Uruguay' && /^09/.test(d);\n  return true;\n};\nconst waNumero = (t, pais) => { let d = digitos(t); if (/^09/.test(d) && String(pais || 'Uruguay') === 'Uruguay') d = '598' + d.slice(1); return d; };\n\n// Página con la estética del Centro. n8n la sirve dentro de un sandbox: los\n// links externos van con target=\"_blank\" (abre otra pestaña y no se pierde lo\n// que no se guardó), \"Volver\" con target=\"_top\" y el formulario con dirección absoluta.\nconst pagina = (titulo, cuerpo) => '<!doctype html><html lang=\"es\"><head><meta charset=\"utf-8\">' +\n  '<meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><title>' + esc(titulo) + '</title>' +\n  '<link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css2?family=Anton&family=Work+Sans:wght@400;500;600&display=swap\">' +\n  '<style>:root{--bg:#0B0B0B;--panel:#141414;--panel-2:#1C1C1C;--fg:#F8F7F6;--muted:#9A9592;--line:rgba(248,247,246,.12);' +\n  '--red:#FF0033;--ok:#3DDC84;--display:\"Anton\",Impact,sans-serif;--body:\"Work Sans\",-apple-system,Arial,sans-serif}' +\n  '*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.5 var(--body)}' +\n  'main{max-width:860px;margin:0 auto;padding:28px 16px 120px}.eye{letter-spacing:.2em;font-size:11px;color:var(--red);text-transform:uppercase}' +\n  'h1{font:400 clamp(34px,7vw,56px)/1 var(--display);text-transform:uppercase;margin:6px 0 10px}h2{font:400 26px/1.1 var(--display);text-transform:uppercase;margin:36px 0 12px}' +\n  'p,.muted{color:var(--muted)}a{color:var(--fg)}.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;margin:0 0 14px}' +\n  '.meta{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:baseline}.meta b{font-size:17px}.meta span{color:var(--muted);font-size:13px}.meta .rep{color:var(--fg)}' +\n  '.tag{display:inline-block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--red);margin-bottom:4px}' +\n  '.links{font-size:13px;color:var(--muted);margin:4px 0 8px;word-break:break-word}details{margin:6px 0 10px;font-size:13px;color:var(--muted)}summary{cursor:pointer}' +\n  'label.lbl{display:block;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:10px 0 4px}' +\n  'input[type=text],textarea{width:100%;background:var(--panel-2);color:var(--fg);border:1px solid var(--line);border-radius:10px;padding:10px;font:15px/1.5 var(--body);margin-top:4px}' +\n  'textarea{min-height:200px;resize:vertical}.dec{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}' +\n  '.dec label{display:flex;gap:8px;align-items:center;border:1px solid var(--line);border-radius:999px;padding:8px 14px;cursor:pointer}' +\n  '.dec label:has(input:checked){border-color:var(--fg);background:var(--panel-2)}.dec input{accent-color:var(--red)}' +\n  '.btn{display:inline-block;border:1px solid var(--fg);background:none;color:var(--fg);border-radius:999px;padding:10px 18px;font:600 14px var(--body);cursor:pointer;text-decoration:none}' +\n  '.btn.rojo{background:var(--red);border-color:var(--red);color:#fff}.barra{position:fixed;left:0;right:0;bottom:0;background:rgba(11,11,11,.94);border-top:1px solid var(--line);padding:12px 16px}' +\n  '.barra div{max-width:860px;margin:0 auto;display:flex;gap:10px;align-items:center;justify-content:space-between}.barra .btn{padding:10px 14px;white-space:nowrap}.ok{color:var(--ok)}' +\n  '</style></head><body><main>' + cuerpo + '</main></body></html>';\n\nconst c = $('Config').first().json;\nconst w = $('Abrir bandeja').first().json;\nconst q = w.query || {};\nconst h = w.headers || {};\nconst guardar = c.URL_GUARDAR || ('https://' + (h['x-forwarded-host'] || h.host) + '/webhook/apardian-bandeja-guardar');\nconst L = $('Leer Leads').all().map(r => r.json).filter(l => l.id);\nconst max = Number(c.MAX_EN_PANTALLA) || 60;\nconst mails = L.filter(l => l.estado === 'borrador');\nconst segs = L.filter(l => /^borrador_seg[12]$/.test(l.estado || ''));\nconst was = L.filter(l => l.estado === 'wa_borrador');\nconst enCola = L.filter(l => /^aprobado/.test(l.estado || '')).length;\nconst url = x => /^https?:\\/\\//.test(x) ? x : 'https://' + x;\nconst rep = l => l.rating ? '★ ' + String(l.rating).replace('.', ',') + (l.resenas ? ' · ' + l.resenas + ' reseñas' : '') : '';\nconst ficha = l => '<div class=\"meta\"><b>' + esc(l.nombre) + '</b><span>' + esc([l.rubro, l.pais || 'Uruguay'].filter(Boolean).join(' · ')) + '</span>' +\n  (rep(l) ? '<span class=\"rep\">' + esc(rep(l)) + '</span>' : '') + (l.score ? '<span>score ' + esc(l.score) + '</span>' : '') + '</div>' +\n  '<div class=\"links\">' + (l.web ? '<a target=\"_blank\" rel=\"noopener\" href=\"' + esc(url(l.web)) + '\">' + esc(String(l.web).replace(/^https?:\\/\\/(www\\.)?/, '')) + '</a>' : 'sin web') +\n  (l.instagram ? ' · <a target=\"_blank\" rel=\"noopener\" href=\"' + esc(url(l.instagram)) + '\">Instagram</a>' : '') +\n  (l.email ? ' · ' + esc(l.email) : '') + (l.telefono ? ' · ' + esc(l.telefono) : '') + '</div>' +\n  (l.problemas ? '<details><summary>Qué vio Radar</summary><p>' + esc(l.problemas).replace(/\\n/g, '<br>') + '</p></details>' : '');\nconst decision = (id, ops) => '<div class=\"dec\">' + ops.map(([v, t]) =>\n  '<label><input type=\"radio\" name=\"d_' + esc(id) + '\" value=\"' + v + '\"> ' + t + '</label>').join('') + '</div>';\nconst tarjeta = (tipo, l, tag, asunto, cuerpo) => '<article class=\"card\" data-tipo=\"' + tipo + '\"><span class=\"tag\">' + tag + '</span>' + ficha(l) +\n  (tipo === 'seg' ? '<details><summary>Primer mail: ' + esc(l.asunto) + '</summary><p>' + esc(l.borrador).replace(/\\n/g, '<br>') + '</p></details>' : '') +\n  '<label class=\"lbl\">Asunto<input type=\"text\" name=\"a_' + esc(l.id) + '\" value=\"' + esc(asunto) + '\" maxlength=\"200\"></label>' +\n  '<label class=\"lbl\">Mail (para ' + esc(l.email) + ')<textarea name=\"c_' + esc(l.id) + '\">' + esc(cuerpo) + '</textarea></label>' +\n  decision(l.id, [['aprobar', 'Aprobar'], ['descartar', 'Descartar']]) + '</article>';\nconst tarjetaWa = l => { const n = waNumero(l.telefono, l.pais);\n  return '<article class=\"card\" data-tipo=\"wa\"><span class=\"tag\">WhatsApp · lo mandás vos</span>' + ficha(l) +\n  '<label class=\"lbl\">Mensaje<textarea data-wa=\"' + esc(l.id) + '\" name=\"w_' + esc(l.id) + '\">' + esc(l.wa_mensaje) + '</textarea></label>' +\n  '<p><a class=\"btn\" target=\"_blank\" rel=\"noopener\" id=\"wa_' + esc(l.id) + '\" data-tel=\"' + esc(n) + '\" href=\"https://wa.me/' + esc(n) + '?text=' + encodeURIComponent(l.wa_mensaje || '') + '\">Abrir en WhatsApp</a></p>' +\n  '<p class=\"muted\">WhatsApp se abre aparte; después marcá \"Ya lo mandé\" y guardá.</p>' +\n  decision(l.id, [['mandado', 'Ya lo mandé'], ['descartar', 'Descartar']]) + '</article>'; };\nconst seccion = (titulo, lista, f) => lista.length ? '<h2>' + titulo + ' · ' + lista.length + '</h2>' +\n  (lista.length > max ? '<p>Se muestran ' + max + '. Guardá y volvé a abrir para ver el resto.</p>' : '') + lista.slice(0, max).map(f).join('') : '';\nconst total = mails.length + segs.length + was.length;\nconst cuerpo = '<p class=\"eye\">APARDIAN · Radar</p><h1>Bandeja</h1>' +\n  '<p>Nada sale sin tu OK. Lo que aprobás sale desde contacto@ en el horario de oficina de cada país, hasta 90 por día. ' +\n  'Lo que no marques queda para después; los cambios en un texto se guardan al aprobarlo.</p>' +\n  (enCola ? '<p class=\"ok\">' + (enCola === 1 ? '1 aprobado espera' : enCola + ' aprobados esperan') + ' su horario.</p>' : '') +\n  (total ? '' : '<div class=\"card\"><p>No hay nada para aprobar. Radar escribe de lunes a viernes a las 8.</p></div>') +\n  '<form method=\"post\" action=\"' + esc(guardar) + '\" accept-charset=\"utf-8\">' +\n  '<input type=\"hidden\" name=\"t\" value=\"' + esc(c.TOKEN) + '\">' +\n  seccion('Mails nuevos', mails, l => tarjeta('mail', l, 'Primer mail', l.asunto, l.borrador)) +\n  seccion('Seguimientos', segs, l => tarjeta('seg', l, 'Seguimiento ' + String(l.estado).slice(-1), l.seg_asunto, l.seg_cuerpo)) +\n  seccion('WhatsApp a mano', was, tarjetaWa) +\n  (total ? '<div class=\"barra\"><div><button type=\"button\" class=\"btn\" id=\"todos\">Aprobar los que faltan</button>' +\n    '<button type=\"submit\" class=\"btn rojo\" id=\"guardar\">Guardar</button></div></div>' : '') +\n  '</form><script>' +\n  'document.querySelectorAll(\"textarea[data-wa]\").forEach(function(t){t.addEventListener(\"input\",function(){var a=document.getElementById(\"wa_\"+t.dataset.wa);a.href=\"https://wa.me/\"+a.dataset.tel+\"?text=\"+encodeURIComponent(t.value);});});' +\n  'var b=document.getElementById(\"todos\");if(b)b.onclick=function(){document.querySelectorAll(\"[data-tipo=mail],[data-tipo=seg]\").forEach(function(c){if(!c.querySelector(\".dec input:checked\"))c.querySelector(\"input[value=aprobar]\").checked=true;});cuenta();};' +\n  'function cuenta(){var n=document.querySelectorAll(\".dec input:checked\").length,g=document.getElementById(\"guardar\");if(g)g.textContent=n?\"Guardar \"+n+(n===1?\" decisión\":\" decisiones\"):\"Guardar\";}' +\n  'document.addEventListener(\"change\",cuenta);' +\n  '</script>';\nreturn [{ json: { html: pagina('Bandeja · Radar', cuerpo) } }];\n"
       },
       "id": "382b0a97-81a3-5dc6-8002-7924fb7da631",
       "name": "Armar bandeja",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        720,
+        1200,
         0
       ]
     },
@@ -124,8 +170,32 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.1,
       "position": [
-        960,
+        1440,
         0
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "={{ $('Clave').first().json.html }}",
+        "options": {
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Content-Type",
+                "value": "text/html; charset=utf-8"
+              }
+            ]
+          }
+        }
+      },
+      "id": "0d37dfda-8f0f-53c5-b56d-50f943d5e794",
+      "name": "Página: clave mal",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        720,
+        200
       ]
     },
     {
@@ -176,6 +246,76 @@
     },
     {
       "parameters": {
+        "jsCode": "const esc = s => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')\n  .replace(/\"/g, '&quot;').replace(/'/g, '&#39;');\n// La clave de Radar: tiene que estar cambiada (no la de ejemplo) y ser larga.\nconst claveOk = (t, clave) => !!t && !!clave && String(clave).length >= 24 && !/^CAMBIAR/.test(String(clave)) && String(t) === String(clave);\n\n// Página con la estética del Centro. n8n la sirve dentro de un sandbox: los\n// links externos van con target=\"_blank\" (abre otra pestaña y no se pierde lo\n// que no se guardó), \"Volver\" con target=\"_top\" y el formulario con dirección absoluta.\nconst pagina = (titulo, cuerpo) => '<!doctype html><html lang=\"es\"><head><meta charset=\"utf-8\">' +\n  '<meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><title>' + esc(titulo) + '</title>' +\n  '<link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css2?family=Anton&family=Work+Sans:wght@400;500;600&display=swap\">' +\n  '<style>:root{--bg:#0B0B0B;--panel:#141414;--panel-2:#1C1C1C;--fg:#F8F7F6;--muted:#9A9592;--line:rgba(248,247,246,.12);' +\n  '--red:#FF0033;--ok:#3DDC84;--display:\"Anton\",Impact,sans-serif;--body:\"Work Sans\",-apple-system,Arial,sans-serif}' +\n  '*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.5 var(--body)}' +\n  'main{max-width:860px;margin:0 auto;padding:28px 16px 120px}.eye{letter-spacing:.2em;font-size:11px;color:var(--red);text-transform:uppercase}' +\n  'h1{font:400 clamp(34px,7vw,56px)/1 var(--display);text-transform:uppercase;margin:6px 0 10px}h2{font:400 26px/1.1 var(--display);text-transform:uppercase;margin:36px 0 12px}' +\n  'p,.muted{color:var(--muted)}a{color:var(--fg)}.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;margin:0 0 14px}' +\n  '.meta{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:baseline}.meta b{font-size:17px}.meta span{color:var(--muted);font-size:13px}.meta .rep{color:var(--fg)}' +\n  '.tag{display:inline-block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--red);margin-bottom:4px}' +\n  '.links{font-size:13px;color:var(--muted);margin:4px 0 8px;word-break:break-word}details{margin:6px 0 10px;font-size:13px;color:var(--muted)}summary{cursor:pointer}' +\n  'label.lbl{display:block;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:10px 0 4px}' +\n  'input[type=text],textarea{width:100%;background:var(--panel-2);color:var(--fg);border:1px solid var(--line);border-radius:10px;padding:10px;font:15px/1.5 var(--body);margin-top:4px}' +\n  'textarea{min-height:200px;resize:vertical}.dec{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}' +\n  '.dec label{display:flex;gap:8px;align-items:center;border:1px solid var(--line);border-radius:999px;padding:8px 14px;cursor:pointer}' +\n  '.dec label:has(input:checked){border-color:var(--fg);background:var(--panel-2)}.dec input{accent-color:var(--red)}' +\n  '.btn{display:inline-block;border:1px solid var(--fg);background:none;color:var(--fg);border-radius:999px;padding:10px 18px;font:600 14px var(--body);cursor:pointer;text-decoration:none}' +\n  '.btn.rojo{background:var(--red);border-color:var(--red);color:#fff}.barra{position:fixed;left:0;right:0;bottom:0;background:rgba(11,11,11,.94);border-top:1px solid var(--line);padding:12px 16px}' +\n  '.barra div{max-width:860px;margin:0 auto;display:flex;gap:10px;align-items:center;justify-content:space-between}.barra .btn{padding:10px 14px;white-space:nowrap}.ok{color:var(--ok)}' +\n  '</style></head><body><main>' + cuerpo + '</main></body></html>';\n\nconst b = $('Guardar bandeja').first().json.body || {};\nreturn [{ json: { ok: claveOk(b.t, $('Config guardar').first().json.TOKEN),\n  html: pagina('Clave incorrecta', '<p class=\"eye\">APARDIAN · Radar</p><h1>No se guardó</h1><p>La clave no coincide. Abrí la bandeja desde el Centro.</p>') } }];\n"
+      },
+      "id": "8323b60a-e574-5b36-9d17-4e0630ff8d96",
+      "name": "Clave guardar",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        480,
+        720
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose"
+          },
+          "conditions": [
+            {
+              "id": "0f95a73e-f133-5235-95c8-ab8d90b66c86",
+              "leftValue": "={{ $json.ok }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "f73565f4-7e06-5074-9d76-0cf731eddb9b",
+      "name": "¿Clave válida? (guardar)",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        720,
+        720
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "={{ $('Clave guardar').first().json.html }}",
+        "options": {
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Content-Type",
+                "value": "text/html; charset=utf-8"
+              }
+            ]
+          }
+        }
+      },
+      "id": "ab0c007b-9ca7-555e-8c6d-ce18f10773fa",
+      "name": "Página: clave mal (guardar)",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        960,
+        820
+      ]
+    },
+    {
+      "parameters": {
         "operation": "read",
         "documentId": {
           "__rl": true,
@@ -208,7 +348,7 @@
     },
     {
       "parameters": {
-        "jsCode": "const esc = s => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');\n\n// Página con la estética del Centro. n8n la sirve dentro de un sandbox: los\n// links van con target=\"_top\" y el formulario con dirección absoluta.\nconst pagina = (titulo, cuerpo) => '<!doctype html><html lang=\"es\"><head><meta charset=\"utf-8\">' +\n  '<meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><title>' + esc(titulo) + '</title>' +\n  '<link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css2?family=Anton&family=Work+Sans:wght@400;500;600&display=swap\">' +\n  '<style>:root{--bg:#0B0B0B;--panel:#141414;--panel-2:#1C1C1C;--fg:#F8F7F6;--muted:#9A9592;--line:rgba(248,247,246,.12);' +\n  '--red:#FF0033;--ok:#3DDC84;--display:\"Anton\",Impact,sans-serif;--body:\"Work Sans\",-apple-system,Arial,sans-serif}' +\n  '*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.5 var(--body)}' +\n  'main{max-width:860px;margin:0 auto;padding:28px 16px 120px}.eye{letter-spacing:.2em;font-size:11px;color:var(--red);text-transform:uppercase}' +\n  'h1{font:400 clamp(34px,7vw,56px)/1 var(--display);text-transform:uppercase;margin:6px 0 10px}h2{font:400 26px/1.1 var(--display);text-transform:uppercase;margin:36px 0 12px}' +\n  'p,.muted{color:var(--muted)}a{color:var(--fg)}.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;margin:0 0 14px}' +\n  '.meta{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:baseline}.meta b{font-size:17px}.meta span{color:var(--muted);font-size:13px}.meta .rep{color:var(--fg)}' +\n  '.tag{display:inline-block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--red);margin-bottom:4px}' +\n  '.links{font-size:13px;color:var(--muted);margin:4px 0 8px;word-break:break-word}details{margin:6px 0 10px;font-size:13px;color:var(--muted)}summary{cursor:pointer}' +\n  'label.lbl{display:block;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:10px 0 4px}' +\n  'input[type=text],textarea{width:100%;background:var(--panel-2);color:var(--fg);border:1px solid var(--line);border-radius:10px;padding:10px;font:15px/1.5 var(--body);margin-top:4px}' +\n  'textarea{min-height:200px;resize:vertical}.dec{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}' +\n  '.dec label{display:flex;gap:8px;align-items:center;border:1px solid var(--line);border-radius:999px;padding:8px 14px;cursor:pointer}' +\n  '.dec label:has(input:checked){border-color:var(--fg);background:var(--panel-2)}.dec input{accent-color:var(--red)}' +\n  '.btn{display:inline-block;border:1px solid var(--fg);background:none;color:var(--fg);border-radius:999px;padding:10px 18px;font:600 14px var(--body);cursor:pointer;text-decoration:none}' +\n  '.btn.rojo{background:var(--red);border-color:var(--red);color:#fff}.barra{position:fixed;left:0;right:0;bottom:0;background:rgba(11,11,11,.94);border-top:1px solid var(--line);padding:12px 16px}' +\n  '.barra div{max-width:860px;margin:0 auto;display:flex;gap:10px;align-items:center;justify-content:space-between}.barra .btn{padding:10px 14px;white-space:nowrap}.ok{color:var(--ok)}' +\n  '</style></head><body><main>' + cuerpo + '</main></body></html>';\n\n// Hora y día en la zona horaria del destinatario (Intl viene con Node).\nconst horaEn = z => { try { return Number(new Intl.DateTimeFormat('en-US', { timeZone: z, hour: 'numeric', hourCycle: 'h23' }).format(new Date())); } catch (e) { return 12; } };\nconst diaEn = z => { try { return new Intl.DateTimeFormat('en-US', { timeZone: z, weekday: 'short' }).format(new Date()); } catch (e) { return 'Mon'; } };\nconst horarioDeOficina = z => { const h = horaEn(z), d = diaEn(z); return d !== 'Sat' && d !== 'Sun' && h >= 9 && h < 17; };\nconst hoyUY = () => new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Montevideo' }).format(new Date());\n// Cuántos mails salieron hoy desde la casilla (primeros y seguimientos): cada\n// lead recibe como mucho uno por día, así que alcanza con contar ultimo_envio.\nconst mailsHoy = leads => leads.filter(l => String(l.ultimo_envio || '') === hoyUY()).length;\n\n// Solo cambia lo que sigue esperando aprobación: si un lead respondió o ya se\n// decidió en otra pestaña, se deja como está.\nconst c = $('Config guardar').first().json;\nconst b = $('Guardar bandeja').first().json.body || {};\nconst h = $('Guardar bandeja').first().json.headers || {};\nconst volver = '<p><a class=\"btn\" target=\"_top\" href=\"' + esc('https://' + (h['x-forwarded-host'] || h.host) +\n  '/webhook/apardian-bandeja?t=' + encodeURIComponent(c.TOKEN)) + '\">Volver a la bandeja</a></p>';\nif (!b.t || b.t !== c.TOKEN) return [{ json: { filas: [], html: pagina('Clave incorrecta', '<p class=\"eye\">APARDIAN · Radar</p><h1>No se guardó</h1><p>La clave no coincide. Abrí la bandeja desde el Centro.</p>') } }];\nconst L = new Map($('Leer Leads (guardar)').all().map(r => [String(r.json.id), r.json]));\nconst txt = (x, max) => String(x == null ? '' : x).replace(/\\r\\n/g, '\\n').trim().slice(0, max);\nconst filas = [], cuenta = { aprobados: 0, descartados: 0, whatsapp: 0, saltados: 0 };\nfor (const k of Object.keys(b)) {\n  if (!k.startsWith('d_')) continue;\n  const id = k.slice(2), d = b[k], l = L.get(id);\n  if (!l) { cuenta.saltados++; continue; }\n  const e = String(l.estado || '');\n  if (e === 'borrador' && d === 'aprobar') {\n    filas.push({ id, estado: 'aprobado', asunto: txt(b['a_' + id], 200) || l.asunto, borrador: txt(b['c_' + id], 6000) || l.borrador }); cuenta.aprobados++;\n  } else if (e === 'borrador' && d === 'descartar') {\n    filas.push({ id, estado: 'descartado' }); cuenta.descartados++;\n  } else if (/^borrador_seg[12]$/.test(e) && d === 'aprobar') {\n    filas.push({ id, estado: 'aprobado_seg' + e.slice(-1), seg_asunto: txt(b['a_' + id], 200) || l.seg_asunto, seg_cuerpo: txt(b['c_' + id], 6000) || l.seg_cuerpo }); cuenta.aprobados++;\n  } else if (/^borrador_seg[12]$/.test(e) && d === 'descartar') {\n    // sin más seguimientos, pero si responde igual se lo atiende\n    filas.push({ id, estado: 'sin_seguimiento', seg_asunto: '', seg_cuerpo: '' }); cuenta.descartados++;\n  } else if (e === 'wa_borrador' && d === 'mandado') {\n    filas.push({ id, estado: 'wa_enviado', wa_mensaje: txt(b['w_' + id], 1500) || l.wa_mensaje, respuesta: 'WhatsApp mandado a mano · ' + hoyUY() }); cuenta.whatsapp++;\n  } else if (e === 'wa_borrador' && d === 'descartar') {\n    filas.push({ id, estado: 'descartado' }); cuenta.descartados++;\n  } else cuenta.saltados++;\n}\nconst html = pagina('Guardado · Radar', '<p class=\"eye\">APARDIAN · Radar</p><h1>Guardado</h1>' +\n  '<div class=\"card\"><p class=\"ok\">' + cuenta.aprobados + (cuenta.aprobados === 1 ? ' aprobado' : ' aprobados') + '</p><p>Salen desde contacto@ en el horario de oficina de cada país, hasta 90 por día.</p>' +\n  '<p>' + cuenta.descartados + (cuenta.descartados === 1 ? ' descartado · ' : ' descartados · ') + cuenta.whatsapp + ' WhatsApp marcados como mandados' +\n  (cuenta.saltados ? ' · ' + cuenta.saltados + ' sin cambios (ya no estaban esperando)' : '') + '</p></div>' + volver);\nreturn [{ json: { filas, html } }];\n"
+        "jsCode": "const esc = s => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')\n  .replace(/\"/g, '&quot;').replace(/'/g, '&#39;');\n// La clave de Radar: tiene que estar cambiada (no la de ejemplo) y ser larga.\nconst claveOk = (t, clave) => !!t && !!clave && String(clave).length >= 24 && !/^CAMBIAR/.test(String(clave)) && String(t) === String(clave);\n\n// Página con la estética del Centro. n8n la sirve dentro de un sandbox: los\n// links externos van con target=\"_blank\" (abre otra pestaña y no se pierde lo\n// que no se guardó), \"Volver\" con target=\"_top\" y el formulario con dirección absoluta.\nconst pagina = (titulo, cuerpo) => '<!doctype html><html lang=\"es\"><head><meta charset=\"utf-8\">' +\n  '<meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><title>' + esc(titulo) + '</title>' +\n  '<link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css2?family=Anton&family=Work+Sans:wght@400;500;600&display=swap\">' +\n  '<style>:root{--bg:#0B0B0B;--panel:#141414;--panel-2:#1C1C1C;--fg:#F8F7F6;--muted:#9A9592;--line:rgba(248,247,246,.12);' +\n  '--red:#FF0033;--ok:#3DDC84;--display:\"Anton\",Impact,sans-serif;--body:\"Work Sans\",-apple-system,Arial,sans-serif}' +\n  '*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.5 var(--body)}' +\n  'main{max-width:860px;margin:0 auto;padding:28px 16px 120px}.eye{letter-spacing:.2em;font-size:11px;color:var(--red);text-transform:uppercase}' +\n  'h1{font:400 clamp(34px,7vw,56px)/1 var(--display);text-transform:uppercase;margin:6px 0 10px}h2{font:400 26px/1.1 var(--display);text-transform:uppercase;margin:36px 0 12px}' +\n  'p,.muted{color:var(--muted)}a{color:var(--fg)}.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;margin:0 0 14px}' +\n  '.meta{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:baseline}.meta b{font-size:17px}.meta span{color:var(--muted);font-size:13px}.meta .rep{color:var(--fg)}' +\n  '.tag{display:inline-block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--red);margin-bottom:4px}' +\n  '.links{font-size:13px;color:var(--muted);margin:4px 0 8px;word-break:break-word}details{margin:6px 0 10px;font-size:13px;color:var(--muted)}summary{cursor:pointer}' +\n  'label.lbl{display:block;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:10px 0 4px}' +\n  'input[type=text],textarea{width:100%;background:var(--panel-2);color:var(--fg);border:1px solid var(--line);border-radius:10px;padding:10px;font:15px/1.5 var(--body);margin-top:4px}' +\n  'textarea{min-height:200px;resize:vertical}.dec{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}' +\n  '.dec label{display:flex;gap:8px;align-items:center;border:1px solid var(--line);border-radius:999px;padding:8px 14px;cursor:pointer}' +\n  '.dec label:has(input:checked){border-color:var(--fg);background:var(--panel-2)}.dec input{accent-color:var(--red)}' +\n  '.btn{display:inline-block;border:1px solid var(--fg);background:none;color:var(--fg);border-radius:999px;padding:10px 18px;font:600 14px var(--body);cursor:pointer;text-decoration:none}' +\n  '.btn.rojo{background:var(--red);border-color:var(--red);color:#fff}.barra{position:fixed;left:0;right:0;bottom:0;background:rgba(11,11,11,.94);border-top:1px solid var(--line);padding:12px 16px}' +\n  '.barra div{max-width:860px;margin:0 auto;display:flex;gap:10px;align-items:center;justify-content:space-between}.barra .btn{padding:10px 14px;white-space:nowrap}.ok{color:var(--ok)}' +\n  '</style></head><body><main>' + cuerpo + '</main></body></html>';\n\n// Hora y día en la zona horaria del destinatario (Intl viene con Node).\n// Una zona mal escrita da -1 / 'Sun': ese lead no sale hasta corregirla.\nconst horaEn = z => { try { return Number(new Intl.DateTimeFormat('en-US', { timeZone: String(z).trim(), hour: 'numeric', hourCycle: 'h23' }).format(new Date())); } catch (e) { return -1; } };\nconst diaEn = z => { try { return new Intl.DateTimeFormat('en-US', { timeZone: String(z).trim(), weekday: 'short' }).format(new Date()); } catch (e) { return 'Sun'; } };\nconst horarioDeOficina = z => { const h = horaEn(z), d = diaEn(z); return d !== 'Sat' && d !== 'Sun' && h >= 9 && h < 17; };\nconst hoyUY = () => new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Montevideo' }).format(new Date());\n// Cuántos mails salieron hoy desde la casilla (primeros y seguimientos): cada\n// lead recibe como mucho uno por día, así que alcanza con contar ultimo_envio.\nconst mailsHoy = leads => leads.filter(l => String(l.ultimo_envio || '') === hoyUY()).length;\n// Casillas de correo gratis o de proveedores: no identifican a una empresa,\n// así que nunca se comparan ni se bloquean por dominio.\nconst genericos = /^(gmail|googlemail|hotmail|outlook|live|msn|yahoo|ymail|icloud|me|mac|aol|proton|protonmail|gmx|zoho|yandex|mail|adinet|vera|montevideo|internet|netgate|fibertel|arnet|speedy|ciudad|uol|bol|terra|telefonica|movistar|prodigy|infinitummail)\\./i;\nconst dominioDe = mail => String(mail || '').toLowerCase().split('@')[1] || '';\nconst dominioPropio = mail => { const d = dominioDe(mail); return d && !genericos.test(d) ? d : ''; };\n\n// Solo cambia lo que sigue esperando aprobación: si un lead respondió o ya se\n// decidió en otra pestaña, se deja como está.\nconst c = $('Config guardar').first().json;\nconst b = $('Guardar bandeja').first().json.body || {};\nconst h = $('Guardar bandeja').first().json.headers || {};\nconst volver = '<p><a class=\"btn\" target=\"_top\" href=\"' + esc('https://' + (h['x-forwarded-host'] || h.host) +\n  '/webhook/apardian-bandeja?t=' + encodeURIComponent(c.TOKEN)) + '\">Volver a la bandeja</a></p>';\nif (!claveOk(b.t, c.TOKEN)) return [{ json: { filas: [], html: pagina('Clave incorrecta', '<p class=\"eye\">APARDIAN · Radar</p><h1>No se guardó</h1><p>La clave no coincide. Abrí la bandeja desde el Centro.</p>') } }];\nconst L = new Map($('Leer Leads (guardar)').all().map(r => [String(r.json.id), r.json]));\nconst txt = (x, max) => String(x == null ? '' : x).replace(/\\r\\n/g, '\\n').trim().slice(0, max);\nconst filas = [], cuenta = { aprobados: 0, descartados: 0, whatsapp: 0, saltados: 0 };\nfor (const k of Object.keys(b)) {\n  if (!k.startsWith('d_')) continue;\n  const id = k.slice(2), d = b[k], l = L.get(id);\n  if (!l) { cuenta.saltados++; continue; }\n  const e = String(l.estado || '');\n  if (e === 'borrador' && d === 'aprobar') {\n    filas.push({ id, estado: 'aprobado', asunto: txt(b['a_' + id], 200) || l.asunto, borrador: txt(b['c_' + id], 6000) || l.borrador }); cuenta.aprobados++;\n  } else if (e === 'borrador' && d === 'descartar') {\n    filas.push({ id, estado: 'descartado' }); cuenta.descartados++;\n  } else if (/^borrador_seg[12]$/.test(e) && d === 'aprobar') {\n    filas.push({ id, estado: 'aprobado_seg' + e.slice(-1), seg_asunto: txt(b['a_' + id], 200) || l.seg_asunto, seg_cuerpo: txt(b['c_' + id], 6000) || l.seg_cuerpo }); cuenta.aprobados++;\n  } else if (/^borrador_seg[12]$/.test(e) && d === 'descartar') {\n    // sin más seguimientos, pero si responde igual se lo atiende\n    filas.push({ id, estado: 'sin_seguimiento', seg_asunto: '', seg_cuerpo: '' }); cuenta.descartados++;\n  } else if (e === 'wa_borrador' && d === 'mandado') {\n    filas.push({ id, estado: 'wa_enviado', wa_mensaje: txt(b['w_' + id], 1500) || l.wa_mensaje, respuesta: 'WhatsApp mandado a mano · ' + hoyUY() }); cuenta.whatsapp++;\n  } else if (e === 'wa_borrador' && d === 'descartar') {\n    filas.push({ id, estado: 'descartado' }); cuenta.descartados++;\n  } else cuenta.saltados++;\n}\nconst html = pagina('Guardado · Radar', '<p class=\"eye\">APARDIAN · Radar</p><h1>Guardado</h1>' +\n  '<div class=\"card\"><p class=\"ok\">' + cuenta.aprobados + (cuenta.aprobados === 1 ? ' aprobado' : ' aprobados') + '</p><p>Salen desde contacto@ en el horario de oficina de cada país, hasta 90 por día.</p>' +\n  '<p>' + cuenta.descartados + (cuenta.descartados === 1 ? ' descartado · ' : ' descartados · ') + cuenta.whatsapp + ' WhatsApp marcados como mandados' +\n  (cuenta.saltados ? ' · ' + cuenta.saltados + ' sin cambios (ya no estaban esperando)' : '') + '</p></div>' + volver);\nreturn [{ json: { filas, html } }];\n"
       },
       "id": "9300b292-463d-5ec7-a97f-245064fad29b",
       "name": "Aplicar decisiones",
@@ -286,7 +426,9 @@
           ],
           "schema": []
         },
-        "options": {}
+        "options": {
+          "cellFormat": "RAW"
+        }
       },
       "id": "deabca8a-0fdb-586c-8a74-cba3b98bf0a2",
       "name": "Guardar decisiones",
@@ -301,7 +443,10 @@
           "id": "REEMPLAZAR",
           "name": "Google Sheets"
         }
-      }
+      },
+      "retryOnFail": true,
+      "maxTries": 4,
+      "waitBetweenTries": 5000
     },
     {
       "parameters": {
@@ -368,7 +513,36 @@
       "main": [
         [
           {
+            "node": "Clave",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Clave": {
+      "main": [
+        [
+          {
+            "node": "¿Clave válida?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "¿Clave válida?": {
+      "main": [
+        [
+          {
             "node": "Leer Leads",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Página: clave mal",
             "type": "main",
             "index": 0
           }
@@ -412,7 +586,36 @@
       "main": [
         [
           {
+            "node": "Clave guardar",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Clave guardar": {
+      "main": [
+        [
+          {
+            "node": "¿Clave válida? (guardar)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "¿Clave válida? (guardar)": {
+      "main": [
+        [
+          {
             "node": "Leer Leads (guardar)",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Página: clave mal (guardar)",
             "type": "main",
             "index": 0
           }

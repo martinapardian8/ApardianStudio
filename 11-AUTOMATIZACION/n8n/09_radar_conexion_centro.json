@@ -49,7 +49,7 @@
     },
     {
       "parameters": {
-        "jsCode": "const esc = s => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');\n\n// Hora y día en la zona horaria del destinatario (Intl viene con Node).\nconst horaEn = z => { try { return Number(new Intl.DateTimeFormat('en-US', { timeZone: z, hour: 'numeric', hourCycle: 'h23' }).format(new Date())); } catch (e) { return 12; } };\nconst diaEn = z => { try { return new Intl.DateTimeFormat('en-US', { timeZone: z, weekday: 'short' }).format(new Date()); } catch (e) { return 'Mon'; } };\nconst horarioDeOficina = z => { const h = horaEn(z), d = diaEn(z); return d !== 'Sat' && d !== 'Sun' && h >= 9 && h < 17; };\nconst hoyUY = () => new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Montevideo' }).format(new Date());\n// Cuántos mails salieron hoy desde la casilla (primeros y seguimientos): cada\n// lead recibe como mucho uno por día, así que alcanza con contar ultimo_envio.\nconst mailsHoy = leads => leads.filter(l => String(l.ultimo_envio || '') === hoyUY()).length;\n\nconst c = $('Config').first().json;\nconst q = $('Link del Centro').first().json.query || {};\nconst pagina = (titulo, txt) => '<!doctype html><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">' +\n  '<body style=\"font-family:system-ui;background:#0B0B0B;color:#F8F7F6;padding:40px\"><p style=\"letter-spacing:.2em;font-size:11px;color:#FF0033\">APARDIAN · RADAR</p>' +\n  '<h2 style=\"margin:8px 0\">' + esc(titulo) + '</h2><p style=\"color:#9A9592\">' + esc(txt) + '</p></body>';\nif (!q.t || q.t !== c.TOKEN) return [{ json: { ok: false, html: pagina('Link no válido', 'La clave no coincide con la de n8n. Revisala en el Centro → Radar → Conexión.') } }];\nlet d;\ntry { d = JSON.parse(Buffer.from(String(q.d || '').replace(/-/g, '+').replace(/_/g, '/'), 'base64').toString('utf8')); }\ncatch (e) { return [{ json: { ok: false, html: pagina('No pude leer los datos', 'Volvé a tocar el botón en el Centro.') } }]; }\nconst ahora = new Date().toISOString();\nif (q.tipo === 'oferta') {\n  const campos = ['id','estado','mercado','servicio','nombre','para_quien','que_incluye','plazo','precio_desde','moneda','vigencia_hasta','angulo'];\n  const f = {}; for (const k of campos) f[k] = String(d[k] == null ? '' : d[k]).slice(0, 1500);\n  if (!f.id || !['activa','pausada'].includes(f.estado)) return [{ json: { ok: false, html: pagina('Oferta incompleta', 'Falta el id o el estado.') } }];\n  f.actualizado = ahora;\n  return [{ json: { ok: true, tipo: 'oferta', filas: [f], html: pagina(f.estado === 'activa' ? 'Oferta activada ✓' : 'Oferta pausada',\n    f.nombre + (f.estado === 'activa' ? ': Radar ya la puede usar en los mails.' : ': Radar deja de usarla.') + ' Podés cerrar esta pestaña.') } }];\n}\nif (q.tipo === 'entrenamiento') {\n  const filas = (Array.isArray(d) ? d : []).filter(x => x && x.clave)\n    .map(x => ({ clave: String(x.clave).slice(0, 60), pregunta: String(x.pregunta || '').slice(0, 300), respuesta: String(x.respuesta || '').slice(0, 2000), actualizado: ahora }));\n  if (!filas.length) return [{ json: { ok: false, html: pagina('Nada para guardar', 'No llegaron respuestas.') } }];\n  return [{ json: { ok: true, tipo: 'entrenamiento', filas, html: pagina('Radar aprendió ✓', filas.length + ' respuestas guardadas. Desde el próximo mail las usa. Podés cerrar esta pestaña.') } }];\n}\nreturn [{ json: { ok: false, html: pagina('Pedido desconocido', String(q.tipo || '')) } }];\n"
+        "jsCode": "const esc = s => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')\n  .replace(/\"/g, '&quot;').replace(/'/g, '&#39;');\n// La clave de Radar: tiene que estar cambiada (no la de ejemplo) y ser larga.\nconst claveOk = (t, clave) => !!t && !!clave && String(clave).length >= 24 && !/^CAMBIAR/.test(String(clave)) && String(t) === String(clave);\n\n// Hora y día en la zona horaria del destinatario (Intl viene con Node).\n// Una zona mal escrita da -1 / 'Sun': ese lead no sale hasta corregirla.\nconst horaEn = z => { try { return Number(new Intl.DateTimeFormat('en-US', { timeZone: String(z).trim(), hour: 'numeric', hourCycle: 'h23' }).format(new Date())); } catch (e) { return -1; } };\nconst diaEn = z => { try { return new Intl.DateTimeFormat('en-US', { timeZone: String(z).trim(), weekday: 'short' }).format(new Date()); } catch (e) { return 'Sun'; } };\nconst horarioDeOficina = z => { const h = horaEn(z), d = diaEn(z); return d !== 'Sat' && d !== 'Sun' && h >= 9 && h < 17; };\nconst hoyUY = () => new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Montevideo' }).format(new Date());\n// Cuántos mails salieron hoy desde la casilla (primeros y seguimientos): cada\n// lead recibe como mucho uno por día, así que alcanza con contar ultimo_envio.\nconst mailsHoy = leads => leads.filter(l => String(l.ultimo_envio || '') === hoyUY()).length;\n// Casillas de correo gratis o de proveedores: no identifican a una empresa,\n// así que nunca se comparan ni se bloquean por dominio.\nconst genericos = /^(gmail|googlemail|hotmail|outlook|live|msn|yahoo|ymail|icloud|me|mac|aol|proton|protonmail|gmx|zoho|yandex|mail|adinet|vera|montevideo|internet|netgate|fibertel|arnet|speedy|ciudad|uol|bol|terra|telefonica|movistar|prodigy|infinitummail)\\./i;\nconst dominioDe = mail => String(mail || '').toLowerCase().split('@')[1] || '';\nconst dominioPropio = mail => { const d = dominioDe(mail); return d && !genericos.test(d) ? d : ''; };\n\nconst c = $('Config').first().json;\nconst q = $('Link del Centro').first().json.query || {};\nconst pagina = (titulo, txt) => '<!doctype html><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">' +\n  '<body style=\"font-family:system-ui;background:#0B0B0B;color:#F8F7F6;padding:40px\"><p style=\"letter-spacing:.2em;font-size:11px;color:#FF0033\">APARDIAN · RADAR</p>' +\n  '<h2 style=\"margin:8px 0\">' + esc(titulo) + '</h2><p style=\"color:#9A9592\">' + esc(txt) + '</p></body>';\nif (!claveOk(q.t, c.TOKEN)) return [{ json: { ok: false, html: pagina('Link no válido', 'La clave no coincide con la de n8n (o todavía es la de ejemplo). Revisala en el Centro → Radar → Conexión.') } }];\nlet d;\ntry { d = JSON.parse(Buffer.from(String(q.d || '').replace(/-/g, '+').replace(/_/g, '/'), 'base64').toString('utf8')); }\ncatch (e) { return [{ json: { ok: false, html: pagina('No pude leer los datos', 'Volvé a tocar el botón en el Centro.') } }]; }\nconst ahora = new Date().toISOString();\nif (q.tipo === 'oferta') {\n  const campos = ['id','estado','mercado','servicio','nombre','para_quien','que_incluye','plazo','precio_desde','moneda','vigencia_hasta','angulo'];\n  const f = {}; for (const k of campos) f[k] = String(d[k] == null ? '' : d[k]).slice(0, 1500);\n  if (!f.id || !['activa','pausada'].includes(f.estado)) return [{ json: { ok: false, html: pagina('Oferta incompleta', 'Falta el id o el estado.') } }];\n  f.actualizado = ahora;\n  return [{ json: { ok: true, tipo: 'oferta', filas: [f], html: pagina(f.estado === 'activa' ? 'Oferta activada ✓' : 'Oferta pausada',\n    f.nombre + (f.estado === 'activa' ? ': Radar ya la puede usar en los mails.' : ': Radar deja de usarla.') + ' Podés cerrar esta pestaña.') } }];\n}\nif (q.tipo === 'entrenamiento') {\n  const filas = (Array.isArray(d) ? d : []).filter(x => x && x.clave)\n    .map(x => ({ clave: String(x.clave).slice(0, 60), pregunta: String(x.pregunta || '').slice(0, 300), respuesta: String(x.respuesta || '').slice(0, 2000), actualizado: ahora }));\n  if (!filas.length) return [{ json: { ok: false, html: pagina('Nada para guardar', 'No llegaron respuestas.') } }];\n  return [{ json: { ok: true, tipo: 'entrenamiento', filas, html: pagina('Radar aprendió ✓', filas.length + ' respuestas guardadas. Desde el próximo mail las usa. Podés cerrar esta pestaña.') } }];\n}\nreturn [{ json: { ok: false, html: pagina('Pedido desconocido', String(q.tipo || '')) } }];\n"
       },
       "id": "d7890ff4-6e40-5f12-a240-6c18373eac69",
       "name": "Validar",
@@ -160,7 +160,9 @@
           ],
           "schema": []
         },
-        "options": {}
+        "options": {
+          "cellFormat": "RAW"
+        }
       },
       "id": "94bc9f76-ce0e-571f-a1eb-dea589033919",
       "name": "Guardar oferta",
@@ -175,7 +177,10 @@
           "id": "REEMPLAZAR",
           "name": "Google Sheets"
         }
-      }
+      },
+      "retryOnFail": true,
+      "maxTries": 4,
+      "waitBetweenTries": 5000
     },
     {
       "parameters": {
@@ -211,7 +216,9 @@
           ],
           "schema": []
         },
-        "options": {}
+        "options": {
+          "cellFormat": "RAW"
+        }
       },
       "id": "5b4c0dca-081f-5cc7-91da-35c8d7d323d0",
       "name": "Guardar entrenamiento",
@@ -226,7 +233,10 @@
           "id": "REEMPLAZAR",
           "name": "Google Sheets"
         }
-      }
+      },
+      "retryOnFail": true,
+      "maxTries": 4,
+      "waitBetweenTries": 5000
     },
     {
       "parameters": {

@@ -50,12 +50,14 @@ Nada sale sin que Martin lo apruebe en la bandeja (flujo 11, se abre desde el
 Centro → Radar). El flujo 12 manda lo aprobado.
 
 ```
-nuevo → auditado → borrador ─(Martin aprueba)→ aprobado ─(12)→ enviado
-enviado → borrador_seg1 → aprobado_seg1 → seguimiento_1 → borrador_seg2 → aprobado_seg2 → seguimiento_2 → cerrado_sin_respuesta
+nuevo → auditado → borrador ─(Martin aprueba)→ aprobado ─(12)→ enviando → enviado
+enviado → borrador_seg1 → aprobado_seg1 → enviando_seg1 → seguimiento_1 → borrador_seg2 → aprobado_seg2 → enviando_seg2 → seguimiento_2 → cerrado_sin_respuesta
 borrador ─(Martin descarta)→ descartado · borrador_segN ─(descarta)→ sin_seguimiento
 nuevo ↘ descartado (score < 60) · sin_email · error_auditoria
 sin_web / sin_email con celular → wa_borrador ─(Martin lo manda a mano)→ wa_enviado
-enviado / seguimiento_* / sin_seguimiento → interesado | pide_precio | no_ahora | baja | rebote
+enviado / seguimiento_* / sin_seguimiento / no_ahora / respondio / cerrado_sin_respuesta → interesado | pide_precio | no_ahora | baja | respondio
+la casilla del lead no existe → rebote · respuesta automática (fuera de oficina) → no cambia nada
+dado de baja (por mail o por dominio propio) mientras está en curso → baja
 interesado / pide_precio → (pasa a 09-ESTUDIO/clientes.md como "conversando")
 ```
 
@@ -65,6 +67,14 @@ interesado / pide_precio → (pasa a 09-ESTUDIO/clientes.md como "conversando")
 - `sin_email`: tiene web pero no publica mail. Igual que arriba: WhatsApp si
   hay celular y el puntaje es 60 o más.
 - `sin_contacto`: Radar no encontró nada concreto para decirle por WhatsApp.
+- `enviando` / `enviando_segN`: el flujo 12 lo marca justo antes de mandar,
+  para que un mismo mail nunca salga dos veces. Si queda así de un día para
+  otro, la ejecución se cortó a la mitad: el reporte lo avisa y hay que mirar
+  en contacto@ → Enviados si salió (si salió, poné `enviado`; si no, `aprobado`).
+- `error_auditoria` / `error_redaccion`: Claude devolvió algo inservible. Si la
+  API se cae (429, 529), en cambio, el lead queda como estaba y se reintenta.
+- Los dominios de la hoja `Bajas` solo se cargan cuando son propios de una
+  empresa: una baja desde gmail, hotmail, adinet, etc. bloquea solo esa casilla.
 
 ## Hoja `Bajas`
 

@@ -139,7 +139,7 @@
     },
     {
       "parameters": {
-        "jsCode": "const hoy = () => new Date().toISOString().slice(0, 10);\nconst diasDesde = f => f ? Math.floor((Date.now() - new Date(f + 'T12:00:00').getTime()) / 86400000) : -1;\n// FECHA_FIN (AAAA-MM-DD): último día de la prueba. Vacía = sin fin.\nconst terminoPrueba = c => /^\\d{4}-\\d{2}-\\d{2}$/.test(String(c.FECHA_FIN || '')) \n  && new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Montevideo' }).format(new Date()) > c.FECHA_FIN;\n\n// Día 4 sin respuesta: seguimiento 1. Día 9: seguimiento 2 (y al menos 4 días\n// después del anterior). Día 14: se cierra. Quien respondió ya cambió de\n// estado (flujo 05) y no entra acá.\nconst c = $('Config').first().json;\nconst bm = new Set($('Leer Bajas').all().map(r => String(r.json.email || '').toLowerCase()));\nconst out = [];\nlet lim = Number(c.MAX_POR_DIA) || 40;\nfor (const l of $('Leer Leads').all().map(r => r.json).filter(x => x.id)) {\n  const d = diasDesde(l.fecha_envio), u = l.ultimo_envio ? diasDesde(l.ultimo_envio) : d;\n  if (!l.fecha_envio || !l.email || bm.has(String(l.email).toLowerCase())) continue;\n  if (['seguimiento_2', 'sin_seguimiento'].includes(l.estado) && d >= 14) { out.push({ json: { lead: l, n: 0, cerrar: true } }); continue; }\n  if (lim <= 0 || u < 4) continue;\n  if (l.estado === 'enviado' && d >= 4) { out.push({ json: { lead: l, n: 1, cerrar: false } }); lim--; }\n  else if (l.estado === 'seguimiento_1' && d >= 9) { out.push({ json: { lead: l, n: 2, cerrar: false } }); lim--; }\n}\nreturn out;\n"
+        "jsCode": "// Fechas en Montevideo (AAAA-MM-DD), no en UTC.\nconst hoy = () => new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Montevideo' }).format(new Date());\n// Acepta AAAA-MM-DD y también DD/MM/AAAA (si alguien escribe una fecha a mano).\nconst aISO = f => { const t = String(f || '').trim(), m = t.match(/^(\\d{1,2})\\/(\\d{1,2})\\/(\\d{4})/);\n  return m ? m[3] + '-' + m[2].padStart(2, '0') + '-' + m[1].padStart(2, '0') : t.slice(0, 10); };\n// Días enteros entre esa fecha y hoy. Sin fecha o ilegible: -1.\nconst diasDesde = f => { const d = Date.parse(aISO(f)); return f && !isNaN(d) ? Math.round((Date.parse(hoy()) - d) / 864e5) : -1; };\n// FECHA_FIN (AAAA-MM-DD): último día de la prueba. Vacía = sin fin.\nconst terminoPrueba = c => /^\\d{4}-\\d{2}-\\d{2}$/.test(String(c.FECHA_FIN || '')) && hoy() > c.FECHA_FIN;\n\n// Hora y día en la zona horaria del destinatario (Intl viene con Node).\n// Una zona mal escrita da -1 / 'Sun': ese lead no sale hasta corregirla.\nconst horaEn = z => { try { return Number(new Intl.DateTimeFormat('en-US', { timeZone: String(z).trim(), hour: 'numeric', hourCycle: 'h23' }).format(new Date())); } catch (e) { return -1; } };\nconst diaEn = z => { try { return new Intl.DateTimeFormat('en-US', { timeZone: String(z).trim(), weekday: 'short' }).format(new Date()); } catch (e) { return 'Sun'; } };\nconst horarioDeOficina = z => { const h = horaEn(z), d = diaEn(z); return d !== 'Sat' && d !== 'Sun' && h >= 9 && h < 17; };\nconst hoyUY = () => new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Montevideo' }).format(new Date());\n// Cuántos mails salieron hoy desde la casilla (primeros y seguimientos): cada\n// lead recibe como mucho uno por día, así que alcanza con contar ultimo_envio.\nconst mailsHoy = leads => leads.filter(l => String(l.ultimo_envio || '') === hoyUY()).length;\n// Casillas de correo gratis o de proveedores: no identifican a una empresa,\n// así que nunca se comparan ni se bloquean por dominio.\nconst genericos = /^(gmail|googlemail|hotmail|outlook|live|msn|yahoo|ymail|icloud|me|mac|aol|proton|protonmail|gmx|zoho|yandex|mail|adinet|vera|montevideo|internet|netgate|fibertel|arnet|speedy|ciudad|uol|bol|terra|telefonica|movistar|prodigy|infinitummail)\\./i;\nconst dominioDe = mail => String(mail || '').toLowerCase().split('@')[1] || '';\nconst dominioPropio = mail => { const d = dominioDe(mail); return d && !genericos.test(d) ? d : ''; };\n\n// Día 4 sin respuesta: seguimiento 1. Día 9: seguimiento 2 (y al menos 4 días\n// después del anterior). Día 14: se cierra. Quien respondió ya cambió de\n// estado (flujo 05) y no entra acá.\nconst c = $('Config').first().json;\nconst bm = new Set(), bd = new Set();\nfor (const r of $('Leer Bajas').all()) {\n  if (r.json.email) bm.add(String(r.json.email).toLowerCase());\n  if (r.json.dominio) bd.add(String(r.json.dominio).toLowerCase());\n}\nconst enCurso = ['enviado', 'seguimiento_1', 'seguimiento_2', 'sin_seguimiento', 'borrador_seg1', 'borrador_seg2', 'aprobado_seg1', 'aprobado_seg2'];\nconst out = [];\nlet lim = Number(c.MAX_POR_DIA) || 40;\nfor (const l of $('Leer Leads').all().map(r => r.json).filter(x => x.id)) {\n  const d = diasDesde(l.fecha_envio), u = l.ultimo_envio ? diasDesde(l.ultimo_envio) : d;\n  if (!l.fecha_envio || !l.email) continue;\n  const e = String(l.email).toLowerCase();\n  // dado de baja (por mail o por su dominio): se cierra y no recibe más\n  if (bm.has(e) || bd.has(dominioPropio(e))) { if (enCurso.includes(l.estado)) out.push({ json: { lead: l, n: 0, cerrar: true, estado: 'baja' } }); continue; }\n  if (['seguimiento_2', 'sin_seguimiento'].includes(l.estado) && d >= 14) { out.push({ json: { lead: l, n: 0, cerrar: true } }); continue; }\n  if (lim <= 0 || u < 4) continue;\n  if (l.estado === 'enviado' && d >= 4) { out.push({ json: { lead: l, n: 1, cerrar: false } }); lim--; }\n  else if (l.estado === 'seguimiento_1' && d >= 9) { out.push({ json: { lead: l, n: 2, cerrar: false } }); lim--; }\n}\nreturn out;\n"
       },
       "id": "6465740e-8347-5899-87fe-bc5761d11024",
       "name": "¿A quién le toca?",
@@ -185,7 +185,7 @@
     },
     {
       "parameters": {
-        "jsCode": "return { json: { id: $json.lead.id, estado: 'cerrado_sin_respuesta' } };\n",
+        "jsCode": "return { json: { id: $json.lead.id, estado: $json.estado || 'cerrado_sin_respuesta' } };\n",
         "mode": "runOnceForEachItem"
       },
       "id": "d4e42a1f-de26-558b-be3f-9014f064bdfa",
@@ -218,7 +218,9 @@
           ],
           "schema": []
         },
-        "options": {}
+        "options": {
+          "cellFormat": "RAW"
+        }
       },
       "id": "029d6270-22d4-50f1-af59-d0749693537b",
       "name": "Guardar cierre",
@@ -233,7 +235,10 @@
           "id": "REEMPLAZAR",
           "name": "Google Sheets"
         }
-      }
+      },
+      "retryOnFail": true,
+      "maxTries": 4,
+      "waitBetweenTries": 5000
     },
     {
       "parameters": {
@@ -272,7 +277,13 @@
         "specifyBody": "json",
         "jsonBody": "={{ JSON.stringify($json.claude_body) }}",
         "options": {
-          "timeout": 180000
+          "timeout": 180000,
+          "batching": {
+            "batch": {
+              "batchSize": 3,
+              "batchInterval": 5000
+            }
+          }
         }
       },
       "id": "2e326b20-4589-522f-af4c-2ded85e758d4",
@@ -296,7 +307,7 @@
     },
     {
       "parameters": {
-        "jsCode": "// Lee la respuesta de Claude. Antes de tocar content mira stop_reason:\n// un rechazo o un corte por max_tokens no se trata como respuesta valida.\nfunction leerClaude(r) {\n  if (!r || r.error) return { ok: false, motivo: 'error_http: ' + JSON.stringify(r && r.error || '').slice(0, 300) };\n  if (r.stop_reason === 'refusal') return { ok: false, motivo: 'refusal' };\n  if (r.stop_reason === 'max_tokens') return { ok: false, motivo: 'max_tokens' };\n  const texto = (r.content || []).filter(b => b.type === 'text').map(b => b.text).join('\\n').trim();\n  const limpio = texto.replace(/^```(?:json)?\\s*/i, '').replace(/```\\s*$/, '');\n  const i = limpio.indexOf('{'), j = limpio.lastIndexOf('}');\n  if (i < 0 || j <= i) return { ok: false, motivo: 'sin_json' };\n  try { return { ok: true, data: JSON.parse(limpio.slice(i, j + 1)) }; }\n  catch (e) { return { ok: false, motivo: 'json_invalido' }; }\n}\n\nconst x = $('Prompt seguimiento').item.json;\nconst r = leerClaude($json);\nif (!r.ok) return { json: { id: x.lead.id, estado: x.lead.estado, respuesta: 'seguimiento ' + x.n + ' sin escribir: ' + r.motivo } };\nreturn { json: { id: x.lead.id, estado: 'borrador_seg' + x.n,\n  seg_asunto: String(r.data.asunto || ('Re: ' + x.lead.asunto)).slice(0, 200), seg_cuerpo: String(r.data.cuerpo || '') } };\n",
+        "jsCode": "// Lee la respuesta de Claude. Antes de tocar content mira stop_reason:\n// un rechazo o un corte por max_tokens no se trata como respuesta valida.\n// temporal = falla de red o de la API (429, 529, caída): se reintenta otro día.\nfunction leerClaude(r) {\n  if (!r || r.error) return { ok: false, temporal: true, motivo: 'error_http: ' + JSON.stringify(r && r.error || '').slice(0, 300) };\n  if (r.stop_reason === 'refusal') return { ok: false, motivo: 'refusal' };\n  if (r.stop_reason === 'max_tokens') return { ok: false, motivo: 'max_tokens' };\n  const texto = (r.content || []).filter(b => b.type === 'text').map(b => b.text).join('\\n').trim();\n  const limpio = texto.replace(/^```(?:json)?\\s*/i, '').replace(/```\\s*$/, '');\n  const i = limpio.indexOf('{'), j = limpio.lastIndexOf('}');\n  if (i < 0 || j <= i) return { ok: false, motivo: 'sin_json' };\n  try { return { ok: true, data: JSON.parse(limpio.slice(i, j + 1)) }; }\n  catch (e) { return { ok: false, motivo: 'json_invalido' }; }\n}\n\nconst x = $('Prompt seguimiento').item.json;\nconst r = leerClaude($json);\nif (!r.ok || !String(r.data.cuerpo || '').trim())\n  return { json: { id: x.lead.id, _antes: x.lead.estado, estado: x.lead.estado, respuesta: 'seguimiento ' + x.n + ' sin escribir: ' + (r.ok ? 'vacío' : r.motivo).slice(0, 200) } };\nreturn { json: { id: x.lead.id, _antes: x.lead.estado, estado: 'borrador_seg' + x.n,\n  seg_asunto: String(r.data.asunto || ('Re: ' + x.lead.asunto)).slice(0, 200), seg_cuerpo: String(r.data.cuerpo || '') } };\n",
         "mode": "runOnceForEachItem"
       },
       "id": "1af8e488-0ca5-5522-a3c0-80407e938a1c",
@@ -305,6 +316,51 @@
       "typeVersion": 2,
       "position": [
         1920,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "read",
+        "documentId": {
+          "__rl": true,
+          "value": "={{ $('Config').first().json.SHEET_ID }}",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Leads",
+          "mode": "name"
+        },
+        "options": {}
+      },
+      "id": "eea206f2-af7d-5ee8-8ab6-623968f841bd",
+      "name": "Releer Leads",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        2160,
+        0
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "REEMPLAZAR",
+          "name": "Google Sheets"
+        }
+      },
+      "executeOnce": true,
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "jsCode": "const ahora = new Map($('Releer Leads').all().map(r => [String(r.json.id), String(r.json.estado || '')]));\nreturn $('Leer seguimiento').all()\n  .filter(it => ahora.get(String(it.json.id)) === String(it.json._antes))\n  .map(it => { const { _antes, ...fila } = it.json; return { json: fila }; });\n"
+      },
+      "id": "963f3acd-6049-58b8-a199-b870eb888d15",
+      "name": "Solo si no respondió",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2400,
         0
       ]
     },
@@ -329,14 +385,16 @@
           ],
           "schema": []
         },
-        "options": {}
+        "options": {
+          "cellFormat": "RAW"
+        }
       },
       "id": "01635951-3934-50d3-bbcf-a0250e55341d",
       "name": "Guardar borrador seguimiento",
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.5,
       "position": [
-        2160,
+        2640,
         0
       ],
       "credentials": {
@@ -344,7 +402,10 @@
           "id": "REEMPLAZAR",
           "name": "Google Sheets"
         }
-      }
+      },
+      "retryOnFail": true,
+      "maxTries": 4,
+      "waitBetweenTries": 5000
     }
   ],
   "connections": {
@@ -466,6 +527,28 @@
       ]
     },
     "Leer seguimiento": {
+      "main": [
+        [
+          {
+            "node": "Releer Leads",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Releer Leads": {
+      "main": [
+        [
+          {
+            "node": "Solo si no respondió",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Solo si no respondió": {
       "main": [
         [
           {

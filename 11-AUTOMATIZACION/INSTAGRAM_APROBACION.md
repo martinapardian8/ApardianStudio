@@ -18,7 +18,7 @@ calendario. Lo que no tocás, no sale.
                                                      │
         ┌────────────────────────────────────────────┴───────────────┐
         ▼                                                            ▼
- 07 · APROBACIÓN (todos los días 10:00)                08 · PUBLICADOR (cada 15 min)
+ 07 · APROBACIÓN (todos los días 10:00)                08 · PUBLICADOR (11, 11:30, 12, 12:30, 13, 13:30, 19, 19:30, 20, 20:30)
  Busca lo "pendiente" que Lupa dejó "ok"            Busca lo "aprobado" cuya hora llegó
  de las próximas 36 h y te lo manda a Telegram       Revisa el cupo diario de Instagram
         │                                            Publica UNA por vuelta (Graph API)
@@ -113,6 +113,8 @@ una): JPEG de menos de 8 MB, proporción entre 4:5 y 1,91:1 (las nuestras son
 2. *Archivo → Importar → Subir* `11-AUTOMATIZACION/calendario_instagram.csv`
    → *Reemplazar la hoja actual*.
 3. Podés editar a mano el `pie`, la `fecha` o la `hora` de cualquier fila.
+   El publicador pasa a las 11, 12, 13, 19 y 20 (en punto y y media): una
+   hora fuera de esas franjas sale en la pasada siguiente.
    Si cambiás el calendario, volvé a correr `calendario_sheet.py` e importá de
    nuevo solo las filas nuevas (las aprobadas o publicadas no las pises).
 
@@ -152,7 +154,7 @@ una): JPEG de menos de 8 MB, proporción entre 4:5 y 1,91:1 (las nuestras son
 |---|---|---|
 | ⚠️ *No se pudo publicar… (código 190)* | El token venció o se revocó | Generá uno nuevo (paso 3) y pegalo en el `Config` del 08 |
 | ⚠️ *…image_url… / código 9004* | Instagram no pudo bajar la imagen | Abrí la URL en el navegador; si da 404, faltó el paso 4 |
-| ⏳ *sigue procesando* | Un reel tardó más de 3 minutos en procesarse | Nada: queda aprobado y se reintenta en 15 minutos |
+| ⏳ *sigue procesando* | Un reel tardó más de 3 minutos en procesarse | Nada: queda aprobado y se reintenta en la próxima pasada (media hora) |
 | ⏸️ *Cupo casi lleno* | Llegaste al límite diario de publicaciones por API (hoy 50 cada 24 h) | Sale en la próxima vuelta con cupo |
 | ⚠️ *Quedó aprobada pero sin publicar más de 48 h* | n8n estuvo apagado o el token caído | Cambiá la fecha y volvé a poner `aprobado` |
 | No llega nada a las 10 | El 07 está inactivo o el `SHEET_ID` está mal | Abrí la ejecución en n8n y mirá el error |

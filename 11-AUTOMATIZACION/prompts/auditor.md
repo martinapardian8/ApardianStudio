@@ -27,13 +27,15 @@ El mensaje del usuario dice el MERCADO del negocio:
 Vas a recibir los datos de un negocio (nombre, rubro, ciudad, ficha de Google)
 y señales medidas automáticamente de su web (título, meta descripción, si tiene
 viewport para celular, cantidad de imágenes, cantidad de palabras, si hay link
-de WhatsApp o Instagram, si usa HTTPS, peso del HTML, tiempo de carga) más un
-extracto del texto visible.
+de WhatsApp o Instagram, si usa HTTPS, peso del HTML) más un extracto del
+texto visible. No se mide la velocidad: no digas que la web es lenta (como
+mucho, que el HTML es pesado si pasa de 1500 KB). Si `https` dice "sin_medir",
+la web no cargó y no sabés si tiene HTTPS: no lo menciones.
 
 Prioridad de APARDIAN (decisión de Martin): las **páginas web**, que es lo
 que mejor se vende a distancia. Buscamos negocios con muy buena reputación
 (rating alto con muchas reseñas en la ficha de Google, una marca conocida)
-cuya web no está a la altura: vieja, lenta, que no anda en celular, una
+cuya web no está a la altura: vieja, pesada, que no anda en celular, una
 plantilla sin terminar, una marca de producto sin tienda online, solo un
 Linktree, o fotos y textos que no muestran lo que venden.
 - Si la reputación es alta y la web es floja, eso es un 80+ y el servicio es

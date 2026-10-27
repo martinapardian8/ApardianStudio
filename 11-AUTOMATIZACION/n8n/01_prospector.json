@@ -119,7 +119,7 @@
     },
     {
       "parameters": {
-        "jsCode": "const hoy = () => new Date().toISOString().slice(0, 10);\nconst diasDesde = f => f ? Math.floor((Date.now() - new Date(f + 'T12:00:00').getTime()) / 86400000) : -1;\n// FECHA_FIN (AAAA-MM-DD): último día de la prueba. Vacía = sin fin.\nconst terminoPrueba = c => /^\\d{4}-\\d{2}-\\d{2}$/.test(String(c.FECHA_FIN || '')) \n  && new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Montevideo' }).format(new Date()) > c.FECHA_FIN;\n\n// La hoja \"Busquedas\" es el plan de Radar: país, idioma, rubro, búsqueda en\n// Google Maps y servicio que se le ofrece. Cada día toma las que hace más\n// tiempo que no corren (las nunca usadas primero). Cada búsqueda trae hasta 20\n// negocios: 12 por día alcanzan para sostener 50 mails diarios.\nconst n = Number($('Config').first().json.BUSQUEDAS_POR_DIA) || 12;\nif (terminoPrueba($('Config').first().json)) return [];\nreturn $input.all().map(r => r.json)\n  .filter(b => b.id && String(b.activo || '').trim().toLowerCase() === 'si' && b.query)\n  .sort((x, y) => String(x.ultima_vez || '').localeCompare(String(y.ultima_vez || '')))\n  .slice(0, n)\n  .map(b => ({ json: b }));\n"
+        "jsCode": "// Fechas en Montevideo (AAAA-MM-DD), no en UTC.\nconst hoy = () => new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Montevideo' }).format(new Date());\n// Acepta AAAA-MM-DD y también DD/MM/AAAA (si alguien escribe una fecha a mano).\nconst aISO = f => { const t = String(f || '').trim(), m = t.match(/^(\\d{1,2})\\/(\\d{1,2})\\/(\\d{4})/);\n  return m ? m[3] + '-' + m[2].padStart(2, '0') + '-' + m[1].padStart(2, '0') : t.slice(0, 10); };\n// Días enteros entre esa fecha y hoy. Sin fecha o ilegible: -1.\nconst diasDesde = f => { const d = Date.parse(aISO(f)); return f && !isNaN(d) ? Math.round((Date.parse(hoy()) - d) / 864e5) : -1; };\n// FECHA_FIN (AAAA-MM-DD): último día de la prueba. Vacía = sin fin.\nconst terminoPrueba = c => /^\\d{4}-\\d{2}-\\d{2}$/.test(String(c.FECHA_FIN || '')) && hoy() > c.FECHA_FIN;\n\n// La hoja \"Busquedas\" es el plan de Radar: país, idioma, rubro, búsqueda en\n// Google Maps y servicio que se le ofrece. Cada día toma las que hace más\n// tiempo que no corren (las nunca usadas primero). Cada búsqueda trae hasta 20\n// negocios: 12 por día alcanzan para sostener 50 mails diarios.\nconst n = Number($('Config').first().json.BUSQUEDAS_POR_DIA) || 12;\nif (terminoPrueba($('Config').first().json)) return [];\nreturn $input.all().map(r => r.json)\n  .filter(b => b.id && String(b.activo || '').trim().toLowerCase() === 'si' && b.query)\n  .sort((x, y) => String(x.ultima_vez || '').localeCompare(String(y.ultima_vez || '')))\n  .slice(0, n)\n  .map(b => ({ json: b }));\n"
       },
       "id": "efdc189c-282d-58d8-866d-9740e35d6c02",
       "name": "Elegir búsquedas",
@@ -215,7 +215,7 @@
     },
     {
       "parameters": {
-        "jsCode": "const hoy = () => new Date().toISOString().slice(0, 10);\nconst diasDesde = f => f ? Math.floor((Date.now() - new Date(f + 'T12:00:00').getTime()) / 86400000) : -1;\n// FECHA_FIN (AAAA-MM-DD): último día de la prueba. Vacía = sin fin.\nconst terminoPrueba = c => /^\\d{4}-\\d{2}-\\d{2}$/.test(String(c.FECHA_FIN || '')) \n  && new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Montevideo' }).format(new Date()) > c.FECHA_FIN;\n\n// Saca los que ya están en la planilla (por id de Google o por web) y los que\n// no tienen buena reputación: rating y cantidad de reseñas mínimos (Config).\nconst c = $('Config').first().json;\nconst rMin = Number(c.RATING_MINIMO) || 0, nMin = Number(c.RESENAS_MINIMAS) || 0;\nconst ya = new Set(), webs = new Set();\nfor (const r of $('Leer Leads').all()) {\n  if (r.json.id) ya.add(String(r.json.id));\n  if (r.json.web) webs.add(String(r.json.web).replace(/^https?:\\/\\/(www\\.)?/, '').replace(/\\/$/, ''));\n}\nconst vistos = new Set(), out = [];\nfor (const it of $('Aplanar').all()) {\n  const p = it.json;\n  const w = p.web.replace(/^https?:\\/\\/(www\\.)?/, '').replace(/\\/$/, '');\n  if (!p.id || ya.has(p.id) || vistos.has(p.id) || (w && webs.has(w))) continue;\n  if ((Number(p.rating) || 0) < rMin || (Number(p['reseñas']) || 0) < nMin) continue;\n  vistos.add(p.id);\n  out.push({ json: {\n    id: p.id, fecha: hoy(), rubro: p.rubro, nombre: p.nombre, web: p.web,\n    instagram: '', email: '', telefono: p.telefono, ciudad: p.ciudad,\n    fuente: 'google_places', score: '', servicio: p.servicio_objetivo, problemas: '',\n    estado: p.web ? 'nuevo' : 'sin_web', asunto: '', borrador: '', fecha_envio: '',\n    seguimientos: 0, respuesta: '',\n    notas: [p.direccion, p.rating ? ('rating ' + p.rating + ' (' + p['reseñas'] + ' reseñas)') : '', p.maps].filter(Boolean).join(' · '),\n    pais: p.pais, idioma: p.idioma, mercado: p.mercado, zona: p.zona, oferta_id: '',\n    ultimo_envio: '', seg_asunto: '', seg_cuerpo: '',\n    rating: p.rating, resenas: p['reseñas'], wa_mensaje: '',\n  } });\n}\nreturn out;\n"
+        "jsCode": "// Fechas en Montevideo (AAAA-MM-DD), no en UTC.\nconst hoy = () => new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Montevideo' }).format(new Date());\n// Acepta AAAA-MM-DD y también DD/MM/AAAA (si alguien escribe una fecha a mano).\nconst aISO = f => { const t = String(f || '').trim(), m = t.match(/^(\\d{1,2})\\/(\\d{1,2})\\/(\\d{4})/);\n  return m ? m[3] + '-' + m[2].padStart(2, '0') + '-' + m[1].padStart(2, '0') : t.slice(0, 10); };\n// Días enteros entre esa fecha y hoy. Sin fecha o ilegible: -1.\nconst diasDesde = f => { const d = Date.parse(aISO(f)); return f && !isNaN(d) ? Math.round((Date.parse(hoy()) - d) / 864e5) : -1; };\n// FECHA_FIN (AAAA-MM-DD): último día de la prueba. Vacía = sin fin.\nconst terminoPrueba = c => /^\\d{4}-\\d{2}-\\d{2}$/.test(String(c.FECHA_FIN || '')) && hoy() > c.FECHA_FIN;\n\n// Saca los que ya están en la planilla (por id de Google o por web) y los que\n// no tienen buena reputación: rating y cantidad de reseñas mínimos (Config).\nconst c = $('Config').first().json;\nconst rMin = Number(c.RATING_MINIMO) || 0, nMin = Number(c.RESENAS_MINIMAS) || 0;\n// La web se compara sin protocolo, www, parámetros (?utm…) ni barra final:\n// varias sucursales con la misma web son un solo lead.\nconst limpiar = u => String(u || '').toLowerCase().replace(/^https?:\\/\\/(www\\.)?/, '').replace(/[?#].*$/, '').replace(/\\/+$/, '');\nconst ya = new Set(), webs = new Set();\nfor (const r of $('Leer Leads').all()) {\n  if (r.json.id) ya.add(String(r.json.id));\n  if (r.json.web) webs.add(limpiar(r.json.web));\n}\nconst vistos = new Set(), out = [];\nfor (const it of $('Aplanar').all()) {\n  const p = it.json;\n  const w = limpiar(p.web);\n  if (!p.id || ya.has(p.id) || vistos.has(p.id) || (w && webs.has(w))) continue;\n  if ((Number(p.rating) || 0) < rMin || (Number(p['reseñas']) || 0) < nMin) continue;\n  vistos.add(p.id);\n  if (w) webs.add(w);\n  out.push({ json: {\n    id: p.id, fecha: hoy(), rubro: p.rubro, nombre: p.nombre, web: p.web,\n    instagram: '', email: '', telefono: p.telefono, ciudad: p.ciudad,\n    fuente: 'google_places', score: '', servicio: p.servicio_objetivo, problemas: '',\n    estado: p.web ? 'nuevo' : 'sin_web', asunto: '', borrador: '', fecha_envio: '',\n    seguimientos: 0, respuesta: '',\n    notas: [p.direccion, p.rating ? ('rating ' + p.rating + ' (' + p['reseñas'] + ' reseñas)') : '', p.maps].filter(Boolean).join(' · '),\n    pais: p.pais, idioma: p.idioma, mercado: p.mercado, zona: p.zona, oferta_id: '',\n    ultimo_envio: '', seg_asunto: '', seg_cuerpo: '',\n    rating: p.rating, resenas: p['reseñas'], wa_mensaje: '',\n  } });\n}\nreturn out;\n"
       },
       "id": "82b701f1-fdb1-50ec-a2dd-b5869edf5c13",
       "name": "Solo nuevos",
@@ -245,7 +245,9 @@
           "matchingColumns": [],
           "schema": []
         },
-        "options": {}
+        "options": {
+          "cellFormat": "RAW"
+        }
       },
       "id": "d31ca56c-02ec-5c5d-999f-805d08de4d53",
       "name": "Agregar a Leads",
@@ -264,14 +266,14 @@
     },
     {
       "parameters": {
-        "jsCode": "const hoy = () => new Date().toISOString().slice(0, 10);\nconst diasDesde = f => f ? Math.floor((Date.now() - new Date(f + 'T12:00:00').getTime()) / 86400000) : -1;\n// FECHA_FIN (AAAA-MM-DD): último día de la prueba. Vacía = sin fin.\nconst terminoPrueba = c => /^\\d{4}-\\d{2}-\\d{2}$/.test(String(c.FECHA_FIN || '')) \n  && new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Montevideo' }).format(new Date()) > c.FECHA_FIN;\n\nreturn $('Elegir búsquedas').all().map(r => ({ json: { id: r.json.id, ultima_vez: hoy() } }));\n"
+        "jsCode": "// Fechas en Montevideo (AAAA-MM-DD), no en UTC.\nconst hoy = () => new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Montevideo' }).format(new Date());\n// Acepta AAAA-MM-DD y también DD/MM/AAAA (si alguien escribe una fecha a mano).\nconst aISO = f => { const t = String(f || '').trim(), m = t.match(/^(\\d{1,2})\\/(\\d{1,2})\\/(\\d{4})/);\n  return m ? m[3] + '-' + m[2].padStart(2, '0') + '-' + m[1].padStart(2, '0') : t.slice(0, 10); };\n// Días enteros entre esa fecha y hoy. Sin fecha o ilegible: -1.\nconst diasDesde = f => { const d = Date.parse(aISO(f)); return f && !isNaN(d) ? Math.round((Date.parse(hoy()) - d) / 864e5) : -1; };\n// FECHA_FIN (AAAA-MM-DD): último día de la prueba. Vacía = sin fin.\nconst terminoPrueba = c => /^\\d{4}-\\d{2}-\\d{2}$/.test(String(c.FECHA_FIN || '')) && hoy() > c.FECHA_FIN;\n\nconst busq = $('Elegir búsquedas').all();\nreturn $('Google Places').all()\n  .map((it, i) => ({ ok: !it.json.error, id: busq[i] && busq[i].json.id }))\n  .filter(x => x.ok && x.id)\n  .map(x => ({ json: { id: x.id, ultima_vez: hoy() } }));\n"
       },
       "id": "d814a8a8-c743-5b6d-ba44-4d31242ff95a",
       "name": "Marcar búsquedas",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1200,
+        960,
         240
       ]
     },
@@ -296,20 +298,63 @@
           ],
           "schema": []
         },
-        "options": {}
+        "options": {
+          "cellFormat": "RAW"
+        }
       },
       "id": "5bee62a0-1905-5bdc-a9a5-673668726449",
       "name": "Guardar búsquedas",
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.5,
       "position": [
-        1440,
+        1200,
         240
       ],
       "credentials": {
         "googleSheetsOAuth2Api": {
           "id": "REEMPLAZAR",
           "name": "Google Sheets"
+        }
+      },
+      "retryOnFail": true,
+      "maxTries": 4,
+      "waitBetweenTries": 5000
+    },
+    {
+      "parameters": {
+        "jsCode": "const esc = s => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')\n  .replace(/\"/g, '&quot;').replace(/'/g, '&#39;');\n// La clave de Radar: tiene que estar cambiada (no la de ejemplo) y ser larga.\nconst claveOk = (t, clave) => !!t && !!clave && String(clave).length >= 24 && !/^CAMBIAR/.test(String(clave)) && String(t) === String(clave);\n\nconst r = $('Google Places').all();\nif (!r.length || r.some(it => !it.json.error)) return [];\nconst e = JSON.stringify(r[0].json.error || '').slice(0, 300);\nreturn [{ json: { telegram_text: '<b>Radar · Google Places no contesta</b>\\nNinguna de las ' + r.length +\n  ' búsquedas de hoy funcionó, así que no se marcaron. Revisá la clave y la facturación en Google Cloud.\\n<i>' + esc(e) + '</i>' } }];\n"
+      },
+      "id": "b4608e59-8537-574a-a04a-97fd0f0d8eb1",
+      "name": "¿Falló Google?",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        960,
+        440
+      ]
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Config').first().json.TELEGRAM_CHAT_ID }}",
+        "text": "={{ $json.telegram_text }}",
+        "additionalFields": {
+          "appendAttribution": false,
+          "parse_mode": "HTML",
+          "disable_web_page_preview": true
+        }
+      },
+      "id": "3e7f5b49-069d-56ab-a295-585dd441d0a2",
+      "name": "Avisar falla",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1200,
+        440
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "REEMPLAZAR",
+          "name": "Telegram Apardian"
         }
       }
     }
@@ -366,11 +411,6 @@
             "node": "Google Places",
             "type": "main",
             "index": 0
-          },
-          {
-            "node": "Marcar búsquedas",
-            "type": "main",
-            "index": 0
           }
         ]
       ]
@@ -380,6 +420,16 @@
         [
           {
             "node": "Aplanar",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Marcar búsquedas",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "¿Falló Google?",
             "type": "main",
             "index": 0
           }
@@ -424,6 +474,17 @@
         [
           {
             "node": "Guardar búsquedas",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "¿Falló Google?": {
+      "main": [
+        [
+          {
+            "node": "Avisar falla",
             "type": "main",
             "index": 0
           }
