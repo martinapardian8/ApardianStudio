@@ -12,7 +12,11 @@ import json, os, uuid
 
 AQUI = os.path.dirname(os.path.abspath(__file__))
 DEST = os.path.join(AQUI, "n8n")
-MODELO = "claude-opus-5-5"
+# Modelos de la API de Claude (decisión de Martin, 27/10/2026): Haiku para lo
+# simple y de mucho volumen (auditar webs, clasificar respuestas), Sonnet para
+# lo que lee el cliente (mails, seguimientos, WhatsApp).
+MODELO_RAPIDO = "claude-haiku-5-5"
+MODELO_ESCRITURA = "claude-sonnet-5-5"
 
 
 def prompt(nombre):
@@ -22,17 +26,21 @@ def prompt(nombre):
 
 # ------------------------------------------------------------------ JS comun
 JS_CLAUDE = r"""
-function cuerpoClaude(system, user, maxTokens, effort) {
-  return {
-    model: '%s',
+function cuerpoClaude(system, user, maxTokens, effort, modelo) {
+  const b = {
+    model: modelo || '%s',
     max_tokens: maxTokens,
     system: system,
     messages: [{ role: 'user', content: user }],
     output_config: { effort: effort },
-    fallbacks: 'default',
   };
+  // Si un filtro de seguridad rechaza el pedido, Sonnet y Opus lo reintentan
+  // solos con otro modelo; Haiku no tiene ese respaldo.
+  if (!/haiku/.test(b.model)) b.fallbacks = 'default';
+  return b;
 }
-""" % MODELO
+const RAPIDO = '%s';
+""" % (MODELO_ESCRITURA, MODELO_RAPIDO)
 
 JS_LEER = r"""
 // Lee la respuesta de Claude. Antes de tocar content mira stop_reason:
@@ -433,7 +441,7 @@ return { json: { lead, senales: s, usuario } };
 """, por_item=True)
     prep = codigo(fl, "Prompt auditor", JS_CLAUDE + r"""
 const SYSTEM = %s;
-return { json: { ...$json, claude_body: cuerpoClaude(SYSTEM, $json.usuario, 8000, 'medium') } };
+return { json: { ...$json, claude_body: cuerpoClaude(SYSTEM, $json.usuario, 8000, 'medium', RAPIDO) } };
 """ % json.dumps(prompt("auditor"), ensure_ascii=False), por_item=True)
     cl = claude(fl, "Claude · auditor")
     leer = codigo(fl, "Leer auditoría", JS_LEER + r"""
@@ -748,7 +756,7 @@ return out;
     prep = codigo(fl, "Prompt clasificador", JS_CLAUDE + r"""
 const SYSTEM = %s;
 const usuario = 'De: ' + $json.de + '\nAsunto: ' + $json.asunto + '\n\nRespuesta:\n' + $json.texto;
-return { json: { ...$json, claude_body: cuerpoClaude(SYSTEM, usuario, 2000, 'low') } };
+return { json: { ...$json, claude_body: cuerpoClaude(SYSTEM, usuario, 2000, 'low', RAPIDO) } };
 """ % json.dumps(prompt("clasificador"), ensure_ascii=False), por_item=True)
     cl = claude(fl, "Claude · clasificador")
     leer = codigo(fl, "Leer clasificación", JS_LEER + JS_HTML + JS_FECHA + r"""

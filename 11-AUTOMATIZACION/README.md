@@ -209,14 +209,15 @@ los disparadores programados.
 | Ítem | Costo |
 |---|---|
 | n8n Cloud Starter | ~US$ 24 |
-| Claude (Opus 5.5: US$ 4 / US$ 20 por millón de tokens). Auditoría ≈ 6.000 tokens de entrada + 1.000 de salida ≈ US$ 0,045. Mail ≈ US$ 0,03. Clasificación ≈ US$ 0,01 | 300 leads/mes ≈ **US$ 25** |
+| API de Claude (aparte de la suscripción de Martin). Haiku 5.5 (US$ 0,10 / 0,50 por millón de tokens) audita y clasifica; Sonnet 5.5 (US$ 2 / 10) escribe mails, seguimientos y WhatsApp | Estimado **US$ 15–25/mes** con 30 mails por día (el real, en console.anthropic.com) |
 | Google Places Text Search (New) | 200 búsquedas/mes ≈ US$ 7 (Google da crédito mensual que suele cubrirlo) |
 | Correo de Hostinger (contacto@) | incluido en tu plan (gratis: 100 por día) |
 | **Total** | **~US$ 55–65/mes** con 300 leads auditados |
 
-Para bajar costo cuando el sistema esté probado: pasar la clasificación de
-respuestas a `claude-haiku-5-5` (es una tarea simple). La auditoría y la redacción
-conviene dejarlas en Opus: son las que venden.
+Los modelos se cambian en `armar_flujos.py` (`MODELO_RAPIDO`, `MODELO_ESCRITURA`).
+Decisión de Martin (27/10/2026): la API de Claude se paga aparte de su
+suscripción, así que lo de mucho volumen va en Haiku y lo que lee el cliente en
+Sonnet.
 
 ---
 
