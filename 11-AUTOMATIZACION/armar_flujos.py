@@ -65,6 +65,9 @@ const esc = s => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g,
 JS_FECHA = r"""
 const hoy = () => new Date().toISOString().slice(0, 10);
 const diasDesde = f => f ? Math.floor((Date.now() - new Date(f + 'T12:00:00').getTime()) / 86400000) : -1;
+// FECHA_FIN (AAAA-MM-DD): último día de la prueba. Vacía = sin fin.
+const terminoPrueba = c => /^\d{4}-\d{2}-\d{2}$/.test(String(c.FECHA_FIN || '')) 
+  && new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Montevideo' }).format(new Date()) > c.FECHA_FIN;
 """
 
 
@@ -263,6 +266,8 @@ def f01():
         # con una web floja o sin web (decisión de Martin, 25/10/2026).
         "RATING_MINIMO": (4.5, "number"),
         "RESENAS_MINIMAS": (15, "number"),
+        # Prueba de un mes: después de esta fecha no busca más negocios.
+        "FECHA_FIN": ("", "string"),
     })
     cfg = config(fl, "Config", v)
     busq = leer_hoja(fl, "Leer Búsquedas", cfg, "Busquedas")
@@ -272,6 +277,7 @@ def f01():
 // tiempo que no corren (las nunca usadas primero). Cada búsqueda trae hasta 20
 // negocios: 12 por día alcanzan para sostener 50 mails diarios.
 const n = Number($('Config').first().json.BUSQUEDAS_POR_DIA) || 12;
+if (terminoPrueba($('Config').first().json)) return [];
 return $input.all().map(r => r.json)
   .filter(b => b.id && String(b.activo || '').trim().toLowerCase() === 'si' && b.query)
   .sort((x, y) => String(x.ultima_vez || '').localeCompare(String(y.ultima_vez || '')))
@@ -548,6 +554,9 @@ def f03():
         # casilla, 30 nuevos dejan lugar para sus dos seguimientos.
         "FECHA_INICIO": ("PEGAR_FECHA_DE_ARRANQUE", "string"),
         "CUPOS_POR_SEMANA": ("10,20,30", "string"),
+        # Prueba de un mes: después de esta fecha no escribe primeros mails
+        # (los seguimientos y las respuestas siguen hasta que se apaguen).
+        "FECHA_FIN": ("", "string"),
         # Si en la bandeja ya hay esta cantidad esperando, no escribe más.
         "MAX_PENDIENTES": (60, "number"),
         # Obligatoria para escribir a EE.UU. (ley CAN-SPAM). Sin ella, Radar no les escribe.
@@ -573,7 +582,7 @@ const ini = /^\d{4}-\d{2}-\d{2}$/.test(String(c.FECHA_INICIO || '')) ? c.FECHA_I
 const semana = ini ? Math.max(0, Math.floor(diasDesde(ini) / 7)) : 0;
 const cupo = cupos[Math.min(semana, cupos.length - 1)] || 10;
 const pendientes = todos.filter(l => ['borrador', 'aprobado'].includes(l.estado)).length;
-const n = Math.max(0, Math.min(cupo, (Number(c.MAX_PENDIENTES) || 60) - pendientes));
+const n = terminoPrueba(c) ? 0 : Math.max(0, Math.min(cupo, (Number(c.MAX_PENDIENTES) || 60) - pendientes));
 const rep = l => (Number(l.rating) || 0) * Math.log10(10 + (Number(l.resenas) || 0));
 return todos
   .filter(l => l.estado === 'auditado' && Number(l.score) >= (c.SCORE_MINIMO || 60) && l.email)
@@ -1429,6 +1438,7 @@ def f10():
     a, b = disparadores(fl, {"field": "cronExpression", "expression": "0 18 * * 1-5"})
     v = dict(CONFIG_BASE)
     v.update({"FECHA_INICIO": ("PEGAR_FECHA_DE_ARRANQUE", "string"),
+              "FECHA_FIN": ("", "string"),
               "CUPOS_POR_SEMANA": ("10,20,30", "string"),
               "URL_BANDEJA": ("https://TU-INSTANCIA.app.n8n.cloud/webhook/apardian-bandeja", "string"),
               "TOKEN": ("CAMBIAR-POR-UNA-CLAVE-LARGA-DE-RADAR", "string")})
@@ -1455,10 +1465,13 @@ const avisos = [];
 if (enviados >= 40 && rebotes / enviados > 0.05) avisos.push('⚠️ Rebotan ' + Math.round(100 * rebotes / enviados) + '% de los mails. Pausá el envío (apagá el flujo 12) y revisá las direcciones: un dominio con muchos rebotes termina en spam.');
 if (stock < cupoManana * 2) avisos.push('Quedan ' + stock + ' leads listos para escribir. Subí BUSQUEDAS_POR_DIA en el flujo 01 o agregá búsquedas en la hoja Busquedas.');
 if (!ini) avisos.push('Falta FECHA_INICIO en los flujos 03 y 10: Radar está en el cupo de la semana 1.');
+const fin = /^\d{4}-\d{2}-\d{2}$/.test(String(c.FECHA_FIN || '')) ? c.FECHA_FIN : '';
+if (fin && h === fin) avisos.push('Hoy termina la prueba. Desde mañana Radar no busca ni escribe mails nuevos; los seguimientos y las respuestas siguen mientras los flujos estén prendidos.');
+else if (terminoPrueba(c)) avisos.push('La prueba terminó el ' + fin + ': no hay mails nuevos. Cuando no queden seguimientos, apagá los flujos o poné otra FECHA_FIN.');
 const pend = n(l => l.estado === 'borrador' || /^borrador_seg/.test(l.estado || '')), was = n(l => l.estado === 'wa_borrador');
 const cola = n(l => /^aprobado/.test(l.estado || ''));
 const lineas = [
-  '<b>Radar · ' + esc(h) + '</b>',
+  '<b>Radar · ' + esc(h) + '</b>' + (ini && fin && !terminoPrueba(c) ? ' · prueba: día ' + (diasDesde(ini) + 1) + ' de ' + (diasDesde(ini) - diasDesde(fin) + 1) : ''),
   'Mails nuevos hoy: <b>' + hoyEnv.length + '</b>' + (Object.keys(porPais).length ? ' (' + Object.entries(porPais).map(([p, k]) => esc(p) + ' ' + k).join(', ') + ')' : ''),
   'En total: ' + enviados + ' enviados · ' + interes.length + ' con interés · ' + n(l => l.estado === 'baja') + ' bajas · ' + rebotes + ' rebotes',
   'Mañana: cupo de ' + cupoManana + ' · ' + stock + ' leads listos · ' + n(l => l.estado === 'nuevo') + ' por auditar',

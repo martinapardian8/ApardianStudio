@@ -96,6 +96,10 @@ sube de a poco, tiene un tope por día y el reporte te avisa si rebota más del 
     - `MI_EMAIL` (12): ya viene `Martin Apardian <contacto@apardianstudio.com>`.
     - `LIMITE_TOTAL_DIA` (12): ya viene en 90.
     - `FECHA_INICIO` (03 y 10): el primer día de envío, `AAAA-MM-DD`.
+    - `FECHA_FIN` (01, 03 y 10): el último día de la prueba, `AAAA-MM-DD`.
+      Después de esa fecha Radar no busca negocios ni escribe primeros mails;
+      los seguimientos y las respuestas siguen mientras los flujos estén
+      prendidos. Vacía = sin fin.
     - `DIRECCION_POSTAL` (03, 04 y 12): si querés escribirle a EE.UU. (ver la parte legal).
     - `TOKEN` (03, 09, 10 y los dos Config del 11): la misma clave larga
       inventada por vos.
@@ -179,6 +183,17 @@ reporte.
 - Quien responde deja de recibir seguimientos.
 - Nunca más de `LIMITE_TOTAL_DIA` mails por día desde contacto@, sumando
   nuevos y seguimientos, ni más de uno por día al mismo negocio.
+
+### La prueba de noviembre de 2026
+
+Martin decidió probar Radar un mes: `FECHA_INICIO` 2026-11-02 y `FECHA_FIN`
+2026-11-30. Son 21 días hábiles: 5 a 10 por día, 5 a 20 y 11 a 30, o sea
+hasta unos 480 primeros mails si hay leads con mail y Martin los aprueba.
+El reporte de las 18:00 muestra en qué día de la prueba va. Para la prueba
+hace falta el plan Starter de n8n (la prueba gratis de 14 días termina antes
+del 30/11; Radar usa unas 600 ejecuciones por mes) y unos US$15 a 25 de la
+API de Claude. Google Places: 12 búsquedas por día, unas 360 en el mes.
+El 1/12 se miran los números y se decide si sigue.
 
 ---
 

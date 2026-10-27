@@ -8,7 +8,8 @@ carpeta que se indique, lista para importar en n8n.
     python3 11-AUTOMATIZACION/configurar.py datos.json carpeta_de_salida/
 
 datos.json: {"SHEET_ID": "...", "TELEGRAM_CHAT_ID": "...", "TOKEN": "...",
-             "N8N": "https://xxx.app.n8n.cloud", "FECHA_INICIO": "AAAA-MM-DD"}
+             "N8N": "https://xxx.app.n8n.cloud", "FECHA_INICIO": "AAAA-MM-DD",
+             "FECHA_FIN": "AAAA-MM-DD"}  (FECHA_FIN es opcional: fin de la prueba)
 """
 import json, os, sys, glob
 
@@ -22,6 +23,7 @@ def configurar(flujo, d):
         "SHEET_ID": d.get("SHEET_ID"),
         "TELEGRAM_CHAT_ID": d.get("TELEGRAM_CHAT_ID"),
         "FECHA_INICIO": d.get("FECHA_INICIO"),
+        "FECHA_FIN": d.get("FECHA_FIN"),
         "URL_BANDEJA": n8n and n8n + "/webhook/apardian-bandeja",
         "URL_APROBAR_IG": n8n and n8n + "/webhook/apardian-ig-aprobar",
     }
