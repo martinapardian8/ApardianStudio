@@ -63,7 +63,7 @@ function leerClaude(r) {
 # la firma, la línea de baja y la página de la propuesta (Martin, 28/10/2026).
 JS_IDIOMA = r"""
 const IDIOMA_PAIS = { 'Brasil': 'pt', 'Portugal': 'pt', 'Estados Unidos': 'en', 'Reino Unido': 'en',
-  'Canadá': 'en', 'Australia': 'en', 'Irlanda': 'en' };
+  'Canadá': 'en', 'Australia': 'en', 'Irlanda': 'en', 'Países Bajos': 'en', 'Malta': 'en' };
 const idiomaDe = l => { const i = String(l.idioma || '').trim().slice(0, 2).toLowerCase();
   return ['es', 'en', 'pt'].includes(i) ? i : (IDIOMA_PAIS[String(l.pais || '').trim()] || 'es'); };
 const NOMBRE_IDIOMA = { es: 'español', en: 'inglés', pt: 'portugués' };

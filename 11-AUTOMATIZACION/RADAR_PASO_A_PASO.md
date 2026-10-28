@@ -216,6 +216,14 @@ una consulta con un abogado.
   **una dirección postal física** en el mail (puede ser una casilla de correo
   o un servicio de dirección virtual) y la baja en menos de 10 días. Sin
   `DIRECCION_POSTAL` en los flujos 03 y 04, Radar no le escribe a EE.UU.
+- **Portugal, Irlanda, Países Bajos y Malta** (el foco desde el 28/10/2026:
+  Martin quiere clientes que paguen en euros): el mail comercial a empresas
+  se permite si va a la dirección que la empresa publica, con identificación
+  y baja fácil en cada mensaje (opt-out). A personas particulares, no.
+  Portugal además tiene una lista oficial de empresas que no quieren
+  publicidad (la lleva la Direção-Geral do Consumidor): si alguna contesta que
+  está anotada, se la da de baja en el momento. Alemania, Austria, Italia y
+  Francia piden consentimiento previo o escribir en su idioma: quedan afuera.
 - **España (LSSI, art. 21):** **es la más estricta**: prohíbe mandar
   publicidad por mail a quien no la pidió, también a empresas, y la AEPD
   multa. Por eso las búsquedas de España arrancan **apagadas** (`activo = no`
