@@ -52,6 +52,10 @@ que no la cumple.
   apardianstudio.com/ig sin pedirle permiso cada vez: se actualiza la rama
   `hostinger` copiando SOLO la carpeta `ig/` (con `10-MOTOR/preparar_ig.sh`).
   El resto del sitio sigue necesitando su "publicá la web".
+- **Sin marcas de clientes sin permiso** (28/10/2026). Martin pidió sacar la
+  foto con el cartel de OdontoVita del carrusel de fin de año. Una foto donde
+  se ve el nombre, el logo o el cartel de un cliente no va en el contenido
+  salvo que Martin confirme que tiene permiso.
 - **Nada de testimonios inventados.** Una cita con nombre de cliente solo si
   el cliente la dijo y Martin lo confirma.
 
