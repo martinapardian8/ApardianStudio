@@ -5,9 +5,10 @@ Una sola fuente: arma 08-CONTENIDO-INSTAGRAM/calendario.json (lo leen la app
 centro de mando y el PDF) y 08-CONTENIDO-INSTAGRAM/CALENDARIO.md (para leer).
 
 Ritmo: un posteo de feed y una historia TODOS los dias. Lunes carrusel
-collage (lo mas fuerte), jueves su reel, sabado "Tus fotos en el mundo";
-martes, miercoles, viernes y domingo salen de la cola (00-SUBIR-EN-ORDEN y
-las piezas de la campaña de la semana). Cada semana, un foco de venta.
+(lo mas fuerte), jueves su reel, sabado "Tus fotos en el mundo". Desde el
+2/11 (ESTETICA_IG.md: de cada 3 posteos, 2 fotos puras) martes, viernes y
+domingo van fotos puras (10-fotos) y el miercoles una pieza armada
+(00-SUBIR-EN-ORDEN o la campaña). Cada semana, un foco de venta.
 """
 import os, sys, json, datetime as dt
 
@@ -135,8 +136,13 @@ def main():
                            "titulo": p["titular"],
                            "pieza": f"05-videos/{v}" if v else f"01-posteos-pauta/{f}",
                            "nota": "Video animado de un aviso." if v else "Pieza de la campaña, con CTA."})
+    # desde el 2/11, de cada 3 posteos al menos 2 son fotos puras (ESTETICA_IG.md):
+    # martes, viernes y domingo van fotos de 10-fotos; el miercoles, una pieza armada
+    DESDE_ESTETICA = "2026-11-02"
+    fotos_ruta = os.path.join(IG, "10-fotos", "indice.json")
+    cola_fotos = json.load(open(fotos_ruta, encoding="utf-8")) if os.path.exists(fotos_ruta) else []
     portfolio = os.path.join(IG, "09-posteos-portfolio", "indice.json")
-    if os.path.exists(portfolio):
+    if os.path.exists(portfolio) and not cola_fotos:
         for p in json.load(open(portfolio, encoding="utf-8")):
             cola_pauta.append({"campana": p["campana"], "n": p["id"], "desde": DESDE_NUEVO,
                                "tipo": "Posteo", "titulo": p["titulo"],
@@ -148,6 +154,21 @@ def main():
     # una pieza de campaña sale una vez: en el feed o en historia, no en los dos
     # (las de 00-SUBIR cuentan como usadas: son la misma pieza con otro nombre)
     usados = {a[:3] for a, p in pauta.items() if _norm(p["titular"]) in ya}
+
+    ultima_foto = {"campana": ""}
+
+    def sacar_foto(campanas, fecha, primera_de_la_semana):
+        # la primera de la semana acompaña el foco; las otras alternan temas
+        criterios = [lambda c: c["campana"] != ultima_foto["campana"] and not choca("10-fotos/" + c["archivo"], fecha),
+                     lambda c: not choca("10-fotos/" + c["archivo"], fecha), lambda c: True]
+        if primera_de_la_semana:
+            criterios.insert(0, lambda c: c["campana"] in campanas and not choca("10-fotos/" + c["archivo"], fecha))
+        for quiero in criterios:
+            for c in cola_fotos:
+                if quiero(c):
+                    cola_fotos.remove(c); ultima_foto["campana"] = c["campana"]
+                    return c
+        return None
 
     def sacar_pauta(campanas, fecha):
         for quiero in (lambda c: c["campana"] in campanas and c["n"] not in usados and not choca(c["pieza"], fecha),
@@ -225,7 +246,7 @@ def main():
             hoy = items                      # choca() mira tambien lo del mismo dia
             # ---------------------------------------------------- feed: 1 por dia
             if d == 0:
-                items.append({"tipo": "Carrusel collage", "hora": "19:30", "titulo": tit,
+                items.append({"tipo": "Carrusel", "hora": "19:30", "titulo": tit,
                               "pieza": f"{COLLAGE}/{slug}", "nota": porque})
             elif d == 3:
                 items.append({"tipo": "Reel", "hora": "19:30", "titulo": "Reel del carrusel: " + tit,
@@ -236,9 +257,14 @@ def main():
                 items.append({"tipo": "Tus fotos en el mundo", "hora": "11:00", "titulo": m["frase"],
                               "pieza": f"08-tus-fotos-en-el-mundo/{m['archivo']}",
                               "nota": m["lugar"] + ". Es un montaje: decilo en el pie."})
+            elif d in DIAS_COLA and f.isoformat() >= DESDE_ESTETICA and d != 2 and cola_fotos:
+                c = sacar_foto(CAMPANAS[s], f, d == 1)
+                items.append({"tipo": "Posteo", "hora": DIAS_COLA[d], "titulo": c["titulo"],
+                              "pieza": "10-fotos/" + c["archivo"],
+                              "nota": "Foto pura, sin texto encima: el llamado a WhatsApp va en el pie."})
             elif d in DIAS_COLA:
                 hora = DIAS_COLA[d]
-                if d in (2, 4) and k_orden < len(orden):
+                if (d in (2, 4) or f.isoformat() >= DESDE_ESTETICA) and k_orden < len(orden):
                     # si la que sigue repite una foto cercana, se adelanta la proxima
                     for j in range(k_orden, min(k_orden + 3, len(orden))):
                         if not choca(f"00-SUBIR-EN-ORDEN/{orden[j]['n']:02d}", f):
@@ -335,9 +361,9 @@ def main():
     md = ["# Calendario de contenido y ventas",
           f"Del {INICIO.strftime('%d/%m')} al {data['hasta'][8:10]}/{data['hasta'][5:7]} de 2026. "
           "Generado por `10-MOTOR/calendario.py` (no se edita a mano).", "",
-          "Ritmo: **un posteo y una historia todos los días.** Feed: **lunes** carrusel collage · "
-          "**jueves** su reel · **sábado** Tus fotos en el mundo · **martes, miércoles, viernes y domingo** "
-          "publicaciones ya armadas y piezas de la campaña de la semana. Historias a las 12:30 "
+          "Ritmo: **un posteo y una historia todos los días.** Feed: **lunes** carrusel · "
+          "**jueves** su reel · **sábado** Tus fotos en el mundo · **martes, viernes y domingo** "
+          "fotos puras · **miércoles** una pieza armada de la campaña. Historias a las 12:30 "
           "(martes y viernes, de campaña con CTA). Ventas: **martes** foco · **viernes** seguimiento. "
           "**Domingo** Luz arma la semana siguiente y Lupa la revisa.", ""]
     for sem in data["semanas"]:

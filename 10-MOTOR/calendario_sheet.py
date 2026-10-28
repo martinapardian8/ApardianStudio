@@ -55,6 +55,16 @@ def pies_collage():
     return out
 
 
+def pie_reel(pie_carrusel):
+    """El reel no repite el pie del carrusel (Lupa, 28/10): primera frase, la
+    invitación a ver el carrusel, el llamado y los hashtags."""
+    partes = [p for p in pie_carrusel.split("\n\n") if p.strip()]
+    if len(partes) < 3:
+        return pie_carrusel
+    return "\n\n".join([partes[0], "Todas las fotos, una por una, en el carrusel que está en el perfil.",
+                          partes[-2], partes[-1]])
+
+
 def pies_campana():
     """Pie base por campaña ('bodas', 'gastronomia'...) desde 00_PLAN.md."""
     md = leer(os.path.join(IG, "00_PLAN.md"))
@@ -75,11 +85,14 @@ _PORTFOLIO = None
 
 
 def _portfolio():
-    """{archivo: entrada} de 09-posteos-portfolio/indice.json (con su pie)."""
+    """{archivo: entrada} de 09-posteos-portfolio y 10-fotos (indice.json, con su pie)."""
     global _PORTFOLIO
     if _PORTFOLIO is None:
-        ruta = os.path.join(IG, "09-posteos-portfolio", "indice.json")
-        _PORTFOLIO = {p["archivo"]: p for p in json.load(open(ruta, encoding="utf-8"))} if os.path.exists(ruta) else {}
+        _PORTFOLIO = {}
+        for carpeta in ("09-posteos-portfolio", "10-fotos"):
+            ruta = os.path.join(IG, carpeta, "indice.json")
+            if os.path.exists(ruta):
+                _PORTFOLIO.update({carpeta + "/" + p["archivo"]: p for p in json.load(open(ruta, encoding="utf-8"))})
     return _PORTFOLIO
 
 
@@ -124,7 +137,7 @@ def fila(item, fecha, collage, campanas, mundo, base_mundo):
         if os.path.exists(os.path.join(IG, portada)):
             archivos.append(portada)          # el publicador la usa como cover_url
         c = collage.get(slug[:2], {})
-        pie, comentario = c.get("pie", ""), c.get("comentario", "")
+        pie, comentario = pie_reel(c.get("pie", "")), c.get("comentario", "")
     elif pieza.startswith("08-tus-fotos-en-el-mundo/"):
         archivos = [pieza]
         m = next((x for x in mundo if x["archivo"] == os.path.basename(pieza)), None)
@@ -134,9 +147,9 @@ def fila(item, fecha, collage, campanas, mundo, base_mundo):
         archivos = archivos_carpeta(pieza)
         cp = os.path.join(IG, pieza, "copy.txt")
         pie = leer(cp).strip() if os.path.exists(cp) else ""
-    elif pieza.startswith("09-posteos-portfolio/"):
+    elif pieza.startswith(("09-posteos-portfolio/", "10-fotos/")):
         archivos = [pieza]
-        p = _portfolio().get(os.path.basename(pieza), {})
+        p = _portfolio().get(pieza, {})
         pie = p.get("pie", "")
     elif pieza.startswith("05-videos/") or pieza.startswith("01-posteos-pauta/"):
         archivos = [pieza]
