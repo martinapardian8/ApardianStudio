@@ -1,0 +1,344 @@
+{
+  "name": "APARDIAN 13 · Instagram: métricas",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "30 7 * * *"
+            }
+          ]
+        }
+      },
+      "id": "249847de-88c3-5e4e-a8d0-438959f6a1b8",
+      "name": "Programado",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        -100
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "ea771d0e-5def-5cef-899a-f7c0f7a17577",
+      "name": "Probar a mano",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        100
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "4ff8b098-6d85-5a06-b5a7-10b76f3093ce",
+              "name": "SHEET_ID",
+              "value": "PEGAR_ID_DE_LA_PLANILLA",
+              "type": "string"
+            },
+            {
+              "id": "fb6fea09-7e8b-5cc6-a2bc-f77dddae8f6b",
+              "name": "TELEGRAM_CHAT_ID",
+              "value": "PEGAR_CHAT_ID",
+              "type": "string"
+            },
+            {
+              "id": "7c22dc2e-59ee-524e-bd7b-dea2c923488d",
+              "name": "IG_USER_ID",
+              "value": "PEGAR_IG_USER_ID",
+              "type": "string"
+            },
+            {
+              "id": "053c8e1c-0566-50c5-a3d4-7ce44e6c5ee6",
+              "name": "ACCESS_TOKEN",
+              "value": "PEGAR_TOKEN_DE_LARGA_DURACION",
+              "type": "string"
+            },
+            {
+              "id": "c3bf7608-93dd-5f7e-9450-b76ce50fa82c",
+              "name": "GRAPH_URL",
+              "value": "https://graph.facebook.com/v22.0",
+              "type": "string"
+            },
+            {
+              "id": "20104a9c-235b-5e1f-bff0-3e667140ba25",
+              "name": "DIAS",
+              "value": 30,
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "6a9ef40a-903b-5ad9-a236-c9639c2caa01",
+      "name": "Config",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        240,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "read",
+        "documentId": {
+          "__rl": true,
+          "value": "={{ $('Config').first().json.SHEET_ID }}",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Calendario",
+          "mode": "name"
+        },
+        "options": {}
+      },
+      "id": "170c847d-3a35-5cfa-abe0-cb7d6b8e0e4a",
+      "name": "Leer Calendario",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        480,
+        0
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "REEMPLAZAR",
+          "name": "Google Sheets"
+        }
+      },
+      "executeOnce": true,
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "jsCode": "const esc = s => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')\n  .replace(/\"/g, '&quot;').replace(/'/g, '&#39;');\n// La clave de Radar: tiene que estar cambiada (no la de ejemplo) y ser larga.\nconst claveOk = (t, clave) => !!t && !!clave && String(clave).length >= 24 && !/^CAMBIAR/.test(String(clave)) && String(t) === String(clave);\n\nconst c = $('Config').first().json;\nconst G = String(c.GRAPH_URL).replace(/\\/$/, ''), tok = c.ACCESS_TOKEN;\nasync function api(ruta, params) {\n  const r = await this.helpers.httpRequest({ method: 'GET', url: G + ruta,\n    qs: Object.assign({ access_token: tok }, params || {}), json: true });\n  return typeof r === 'string' ? JSON.parse(r) : r;\n}\nconst llamar = api.bind(this);\n// La pieza del calendario que corresponde a cada publicación (el flujo 08 guarda ig_media_id)\nconst porMedia = {};\nfor (const r of $('Leer Calendario').all()) if (r.json.ig_media_id) porMedia[String(r.json.ig_media_id)] = r.json;\nconst desde = Date.now() - Number(c.DIAS || 30) * 864e5;\nlet lista;\ntry {\n  lista = (await llamar('/' + c.IG_USER_ID + '/media', { limit: 60,\n    fields: 'id,caption,media_type,media_product_type,timestamp,permalink,like_count,comments_count' })).data || [];\n} catch (e) {\n  return [{ json: { _error: 'No pude leer las publicaciones: ' + String(e.message || e).slice(0, 300) } }];\n}\n// Instagram cambia qué métricas da según el tipo: se pide de más y, si rechaza, de menos.\nconst JUEGOS = ['reach,saved,shares,total_interactions,views,profile_visits,follows',\n                'reach,saved,shares,total_interactions,views', 'reach,saved,shares,total_interactions', 'reach'];\nconst hoy = new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Montevideo' }).format(new Date());\nconst out = [];\nfor (const m of lista) {\n  if (Date.parse(m.timestamp) < desde) continue;\n  const met = {};\n  for (const juego of JUEGOS) {\n    try {\n      const r = await llamar('/' + m.id + '/insights', { metric: juego });\n      for (const x of (r.data || [])) met[x.name] = (x.values && x.values[0] ? x.values[0].value : x.total_value && x.total_value.value) || 0;\n      break;\n    } catch (e) { /* prueba con menos métricas */ }\n  }\n  const p = porMedia[String(m.id)] || {};\n  out.push({ json: {\n    media_id: String(m.id), fecha: String(m.timestamp || '').slice(0, 10),\n    tipo: m.media_product_type === 'REELS' ? 'REEL' : m.media_product_type === 'STORY' ? 'STORY' : m.media_type,\n    pieza: p.id || '', titulo: p.titulo || String(m.caption || '').split('\\n')[0].slice(0, 80),\n    link: m.permalink || '', likes: m.like_count || 0, comentarios: m.comments_count || 0,\n    alcance: met.reach || 0, guardados: met.saved || 0, compartidos: met.shares || 0,\n    interacciones: met.total_interactions || 0, vistas: met.views || 0,\n    visitas_perfil: met.profile_visits || 0, seguidores: met.follows || 0, actualizado: hoy,\n  } });\n}\nreturn out.length ? out : [{ json: { _vacio: true } }];\n"
+      },
+      "id": "125aeb04-5d9c-5609-ae6d-c73a84a145e4",
+      "name": "Traer métricas",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        720,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose"
+          },
+          "conditions": [
+            {
+              "id": "289460cf-e3f1-5548-a022-19129520265b",
+              "leftValue": "={{ !$json._error && !$json._vacio }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "45e03078-1b02-5e29-b0b5-e49ac2742d68",
+      "name": "¿Hay datos?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        960,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "={{ $('Config').first().json.SHEET_ID }}",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Metricas",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [
+            "media_id"
+          ],
+          "schema": []
+        },
+        "options": {
+          "cellFormat": "RAW"
+        }
+      },
+      "id": "65e742df-886e-572a-ba0c-bb3a6838c6ce",
+      "name": "Guardar métricas",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        1200,
+        0
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "REEMPLAZAR",
+          "name": "Google Sheets"
+        }
+      },
+      "retryOnFail": true,
+      "maxTries": 4,
+      "waitBetweenTries": 5000
+    },
+    {
+      "parameters": {
+        "jsCode": "const esc = s => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')\n  .replace(/\"/g, '&quot;').replace(/'/g, '&#39;');\n// La clave de Radar: tiene que estar cambiada (no la de ejemplo) y ser larga.\nconst claveOk = (t, clave) => !!t && !!clave && String(clave).length >= 24 && !/^CAMBIAR/.test(String(clave)) && String(t) === String(clave);\n\nconst e = $input.first().json._error;\nreturn e ? [{ json: { telegram_text: '<b>Métricas de Instagram</b>\\n' + esc(e) + '\\nRevisá el token del flujo 13 (tiene que tener instagram_manage_insights).' } }] : [];\n"
+      },
+      "id": "68438859-d43d-5648-8ed4-afb4b5d98a60",
+      "name": "¿Falló?",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1200,
+        220
+      ]
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Config').first().json.TELEGRAM_CHAT_ID }}",
+        "text": "={{ $json.telegram_text }}",
+        "additionalFields": {
+          "appendAttribution": false,
+          "parse_mode": "HTML",
+          "disable_web_page_preview": true
+        }
+      },
+      "id": "92249ec4-6d3e-5c5c-a846-532ef5367ead",
+      "name": "Avisar falla",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1440,
+        220
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "REEMPLAZAR",
+          "name": "Telegram Apardian"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Programado": {
+      "main": [
+        [
+          {
+            "node": "Config",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Probar a mano": {
+      "main": [
+        [
+          {
+            "node": "Config",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Config": {
+      "main": [
+        [
+          {
+            "node": "Leer Calendario",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Leer Calendario": {
+      "main": [
+        [
+          {
+            "node": "Traer métricas",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Traer métricas": {
+      "main": [
+        [
+          {
+            "node": "¿Hay datos?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "¿Hay datos?": {
+      "main": [
+        [
+          {
+            "node": "Guardar métricas",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "¿Falló?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "¿Falló?": {
+      "main": [
+        [
+          {
+            "node": "Avisar falla",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "America/Montevideo"
+  },
+  "meta": {
+    "templateCredsSetupCompleted": false
+  },
+  "tags": []
+}

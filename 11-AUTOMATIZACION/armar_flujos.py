@@ -1701,6 +1701,87 @@ return [{ json: { telegram_text: lineas.join('\n') } }];
     return fl
 
 
+# ================================================================== 13
+def f13():
+    """Cómo le fue a cada publicación (Martin, 28/10/2026: que los agentes
+    aprendan qué contenido vende). Todos los días anota en la hoja Metricas el
+    alcance, los guardados, los compartidos, las visitas al perfil y los
+    seguidores que trajo cada pieza de los últimos 30 días. Luz lee esa hoja
+    cada semana para decidir qué se repite y qué se deja. Solo lee: no publica
+    ni cambia nada en Instagram."""
+    fl = Flujo("APARDIAN 13 · Instagram: métricas")
+    a, b = disparadores(fl, {"field": "cronExpression", "expression": "30 7 * * *"})
+    v = dict(CONFIG_BASE)
+    v.update({
+        "IG_USER_ID": ("PEGAR_IG_USER_ID", "string"),
+        "ACCESS_TOKEN": ("PEGAR_TOKEN_DE_LARGA_DURACION", "string"),
+        "GRAPH_URL": ("https://graph.facebook.com/v22.0", "string"),
+        "DIAS": (30, "number"),
+    })
+    cfg = config(fl, "Config", v)
+    cal = leer_hoja(fl, "Leer Calendario", cfg, "Calendario")
+    traer = codigo(fl, "Traer métricas", JS_HTML + r"""
+const c = $('Config').first().json;
+const G = String(c.GRAPH_URL).replace(/\/$/, ''), tok = c.ACCESS_TOKEN;
+async function api(ruta, params) {
+  const r = await this.helpers.httpRequest({ method: 'GET', url: G + ruta,
+    qs: Object.assign({ access_token: tok }, params || {}), json: true });
+  return typeof r === 'string' ? JSON.parse(r) : r;
+}
+const llamar = api.bind(this);
+// La pieza del calendario que corresponde a cada publicación (el flujo 08 guarda ig_media_id)
+const porMedia = {};
+for (const r of $('Leer Calendario').all()) if (r.json.ig_media_id) porMedia[String(r.json.ig_media_id)] = r.json;
+const desde = Date.now() - Number(c.DIAS || 30) * 864e5;
+let lista;
+try {
+  lista = (await llamar('/' + c.IG_USER_ID + '/media', { limit: 60,
+    fields: 'id,caption,media_type,media_product_type,timestamp,permalink,like_count,comments_count' })).data || [];
+} catch (e) {
+  return [{ json: { _error: 'No pude leer las publicaciones: ' + String(e.message || e).slice(0, 300) } }];
+}
+// Instagram cambia qué métricas da según el tipo: se pide de más y, si rechaza, de menos.
+const JUEGOS = ['reach,saved,shares,total_interactions,views,profile_visits,follows',
+                'reach,saved,shares,total_interactions,views', 'reach,saved,shares,total_interactions', 'reach'];
+const hoy = new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Montevideo' }).format(new Date());
+const out = [];
+for (const m of lista) {
+  if (Date.parse(m.timestamp) < desde) continue;
+  const met = {};
+  for (const juego of JUEGOS) {
+    try {
+      const r = await llamar('/' + m.id + '/insights', { metric: juego });
+      for (const x of (r.data || [])) met[x.name] = (x.values && x.values[0] ? x.values[0].value : x.total_value && x.total_value.value) || 0;
+      break;
+    } catch (e) { /* prueba con menos métricas */ }
+  }
+  const p = porMedia[String(m.id)] || {};
+  out.push({ json: {
+    media_id: String(m.id), fecha: String(m.timestamp || '').slice(0, 10),
+    tipo: m.media_product_type === 'REELS' ? 'REEL' : m.media_product_type === 'STORY' ? 'STORY' : m.media_type,
+    pieza: p.id || '', titulo: p.titulo || String(m.caption || '').split('\n')[0].slice(0, 80),
+    link: m.permalink || '', likes: m.like_count || 0, comentarios: m.comments_count || 0,
+    alcance: met.reach || 0, guardados: met.saved || 0, compartidos: met.shares || 0,
+    interacciones: met.total_interactions || 0, vistas: met.views || 0,
+    visitas_perfil: met.profile_visits || 0, seguidores: met.follows || 0, actualizado: hoy,
+  } });
+}
+return out.length ? out : [{ json: { _vacio: true } }];
+""")
+    ok = si(fl, "¿Hay datos?", "!$json._error && !$json._vacio")
+    g = escribir_hoja(fl, "Guardar métricas", cfg, "Metricas", "appendOrUpdate", clave="media_id")
+    error = codigo(fl, "¿Falló?", JS_HTML + r"""
+const e = $input.first().json._error;
+return e ? [{ json: { telegram_text: '<b>Métricas de Instagram</b>\n' + esc(e) + '\nRevisá el token del flujo 13 (tiene que tener instagram_manage_insights).' } }] : [];
+""", pos=(fl.x - 240, 220))
+    tg = telegram(fl, "Avisar falla", cfg, pos=(fl.x, 220))
+    fl.unir(a, cfg); fl.unir(b, cfg)
+    fl.cadena(cfg, cal, traer, ok, g)
+    fl.unir(ok, error, 1)
+    fl.unir(error, tg)
+    return fl
+
+
 if __name__ == "__main__":
     os.makedirs(DEST, exist_ok=True)
     for f, archivo in ((f01, "01_prospector.json"), (f02, "02_auditor.json"),
@@ -1708,7 +1789,7 @@ if __name__ == "__main__":
                        (f05, "05_respuestas.json"), (f06, "06_bienvenida_whatsapp.json"),
                        (f07, "07_aprobacion_instagram.json"), (f08, "08_publicador_instagram.json"),
                        (f09, "09_radar_conexion_centro.json"), (f10, "10_radar_reporte.json"),
-                       (f11, "11_radar_bandeja.json"), (f12, "12_radar_envio.json")):
+                       (f11, "11_radar_bandeja.json"), (f12, "12_radar_envio.json"), (f13, "13_instagram_metricas.json")):
         fl = f()
         nombres = {n["name"] for n in fl.nodos}
         for a, salidas in fl.con.items():

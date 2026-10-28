@@ -155,3 +155,12 @@ No se edita a mano. Columnas: `id`, `estado` (`activa` o `pausada`),
 Las respuestas de Martin a las preguntas de Radar en el Centro (flujo 09).
 Columnas: `clave`, `pregunta`, `respuesta`, `actualizado`. El redactor las lee
 antes de cada mail.
+
+## Hoja `Metricas` (Instagram, flujo 13)
+
+Una fila por publicación (`media_id`), se actualiza todos los días a las 7:30:
+`fecha, tipo, pieza, titulo, link, likes, comentarios, alcance, guardados,
+compartidos, interacciones, vistas, visitas_perfil, seguidores, actualizado`.
+Se crea importando `metricas_plantilla.csv` (solo la fila de títulos). La lee
+el aprendizaje semanal de contenido (`09-ESTUDIO/CRECIMIENTO.md`). El token de
+Instagram tiene que tener el permiso `instagram_manage_insights`.
