@@ -634,7 +634,7 @@ def _huella(ruta):
     return SIM.phash(ruta) if os.path.exists(ruta) else ruta
 
 
-def misma_foto(a, b, umbral=20):
+def misma_foto(a, b, umbral=10):
     """¿Son la misma foto (o dos tomas casi iguales), aunque cambie el nombre?"""
     import similitud as SIM
     if _clave(a) == _clave(b) or os.path.basename(a) == os.path.basename(b):
@@ -677,6 +677,9 @@ def vertical(ruta, sizes, excluir=(), contenido=None, evitar=()):
              and (not que or ficha(f).get("contenido") in que) and apta_en(f, sizes)]
     if not cands:
         return None
+    # las de menos de 1000 px de ancho se ven blandas a 1080: solo si no hay otra
+    nitidas = [f for f in cands if Image.open(f).size[0] >= 1000]
+    cands = nitidas or cands
     lugar = fi.get("lugar") if fi.get("confirmado") else None
     vistas = {}
     for x in evitar:
@@ -708,11 +711,17 @@ def fechas_calendario():
     return _CAL
 
 
+SOLO = set()      # --solo: rehacer solo estas piezas (rutas relativas a 08-CONTENIDO-INSTAGRAM)
+
+
 def se_puede_escribir(ruta, desde=None):
     """Lo que ya salió no se toca. Con `desde` (AAAA-MM-DD), solo se escriben
-    las piezas del calendario que salen ese día o después."""
+    las piezas del calendario que salen ese día o después. Con --solo, solo
+    las piezas nombradas (aunque salgan antes: las pide Martin a mano)."""
     import datetime as _dt
     rel = os.path.relpath(ruta, IG_DIR).replace("\\", "/")
+    if SOLO:
+        return rel in SOLO
     f = fechas_calendario().get(rel)
     if desde:
         return f is not None and f >= desde
@@ -720,7 +729,10 @@ def se_puede_escribir(ruta, desde=None):
 
 
 def opcion_desde(argv):
-    """--desde AAAA-MM-DD de la línea de comandos (o None)."""
+    """--desde AAAA-MM-DD de la línea de comandos (o None). Lee también
+    --solo pieza1,pieza2 (rutas relativas a 08-CONTENIDO-INSTAGRAM)."""
+    if "--solo" in argv:
+        SOLO.update(a.strip() for a in argv[argv.index("--solo") + 1].split(",") if a.strip())
     return argv[argv.index("--desde") + 1] if "--desde" in argv else None
 
 
@@ -741,7 +753,9 @@ def _fotos_por_pieza():
             for c in ("01-posteos-pauta/", "02-historias-pauta/"):
                 _USO[c + x["archivo"]] = [pauta[x["n"]]]
         for x in j("indice_videos.json"):
-            if x["n"] in pauta:
+            if x.get("foto"):
+                _USO["05-videos/" + x["archivo"]] = [os.path.join(RAIZ, x["foto"])]
+            elif x["n"] in pauta:
                 _USO["05-videos/" + x["archivo"]] = [pauta[x["n"]]]
         for x in j(os.path.join("08-tus-fotos-en-el-mundo", "indice.json")):
             if "/" in x.get("foto", ""):

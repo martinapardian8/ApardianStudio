@@ -206,7 +206,7 @@ def _f(cat, nombre):
 # lo muestre y llene el 9:16; la historia no se rehace y Lupa la frena hasta
 # que Martin decida (cambiar el texto o mandar una foto).
 VERTICAL = {
-    37: _f("naturaleza", "v__33.jpg"),           # Nadie en kilómetros: costa vacía
+    37: _f("naturaleza", "nw__FullSizeRender_6.jpg"),  # Nadie en kilómetros: costa vacía
     42: _f("bodas", "portfolio__IMG_8771.jpg"),  # Se casaron...: la única pareja vertical
     43: None,   # Quince años, cero poses: la única vertical de cumpleaños es posada y dice 16
     44: None,   # Tres canciones y se acabó la luz: no hay show en vivo vertical

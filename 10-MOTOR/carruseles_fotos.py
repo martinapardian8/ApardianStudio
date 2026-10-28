@@ -78,14 +78,15 @@ CARRUSELES = {
         fotos=[F("retratos", "horacio__IMG_6701.jpg"), F("retratos", "horacio__IMG_6475.jpg"),
                F("retratos", "horacio__IMG_6256.jpg"), F("retratos", "horacio__IMG_6499.jpg"),
                F("retratos", "nw__IMG_6981.jpg"), F("retratos", "horacio__IMG_6581.jpg")]),
-    # fiesta y eventos de empresa, solo verticales y sin marcas ni carteles de
+    # fiesta y eventos de empresa, solo verticales nítidas (v__4 y v__5 son de
+    # 533 px) y sin marcas ni carteles de
     # clientes a la vista (Martin, 28/10/2026: no va la del cartel de OdontoVita;
     # tampoco la del vaso con marca ni la de las cajas en la ventana)
     "04-fin-de-anio": dict(
         titulo="La fiesta de fin de año pasa una vez.",
         fotos=[F("eventos", "la-condesa__IMG_3167.jpg"), F("empresas", "lokotas__IMG_7661.jpg"),
-               F("eventos", "v__4.jpg"), F("eventos", "caro60__IMG_9671.jpg"),
-               F("eventos", "nw__IMG_4664.jpg"), F("eventos", "v__5.jpg")]),
+               F("eventos", "caro60__IMG_9671.jpg"), F("eventos", "nw__IMG_4664.jpg"),
+               F("eventos", "nw__IMG_4682.jpg")]),
     # Sin rehacer: todas las fotos del olivo y el aceite son horizontales y el
     # titular habla del olivo. Lupa lo frena hasta que Martin mande verticales
     # o cambie el carrusel.
@@ -112,8 +113,8 @@ CARRUSELES = {
                CAPT("m_hero.png", 1), CAPT("m_contacto.png", 0)]),
     "08-cuadros-regala-un-lugar": dict(
         titulo="Regalá un lugar.",
-        fotos=[F("naturaleza", "nw__IMG_1996.jpg"), F("naturaleza", "v__31.jpg"),
-               F("naturaleza", "v__54.jpg"), F("naturaleza", "v__30.jpg"),
+        fotos=[F("naturaleza", "nw__IMG_1996.jpg"), F("naturaleza", "nw__IMG_1985.jpg"),
+               F("naturaleza", "v__54.jpg"), F("naturaleza", "nw__IMG_2011_2.jpg"),
                F("naturaleza", "v__56.jpg"), F("naturaleza", "v__43.jpg")]),
     # shows y ensayos que fotografió Martin: el titular habla del servicio.
     # Música tiene dos fotos verticales: el carrusel queda de dos láminas.
@@ -124,7 +125,7 @@ CARRUSELES = {
         titulo="Un viaje que se cuelga.",
         fotos=[F("naturaleza", "nw__IMG_1986.jpg"), F("naturaleza", "v__59.jpg"),
                F("naturaleza", "nw__IMG_1999.jpg"), F("naturaleza", "v__53.jpg"),
-               F("naturaleza", "v__34.jpg"), F("naturaleza", "v__57.jpg")]),
+               F("naturaleza", "v__45.jpg"), F("naturaleza", "v__57.jpg")]),
     # afuera: el jardín del salón, de noche (las fotos de gente al aire libre
     # son horizontales)
     "11-eventos-el-verano-se-festeja": dict(
@@ -166,8 +167,8 @@ def es_captura(ruta):
 # solo llenan el 4:5 quedan afuera. Si quedan pocas, se suman otras verticales
 # del mismo tema (acá, elegidas para que no salgan esos mismos días).
 REEL_EXTRA = {
-    "08-cuadros-regala-un-lugar": [F("naturaleza", "nw__FullSizeRender_6.jpg"), F("naturaleza", "v__33.jpg")],
-    "10-cuadros-un-viaje-que-se-cuelga": [F("naturaleza", "v__33.jpg"), F("naturaleza", "v__54.jpg")],
+    "08-cuadros-regala-un-lugar": [F("naturaleza", "nw__FullSizeRender_6.jpg"), F("naturaleza", "v__53.jpg")],
+    "10-cuadros-un-viaje-que-se-cuelga": [F("naturaleza", "v__54.jpg"), F("naturaleza", "v__56.jpg")],
 }
 MIN_REEL = 4
 # Reels con otra selección que su carrusel (si hace falta): {slug: [fotos]}

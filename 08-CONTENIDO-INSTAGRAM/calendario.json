@@ -1419,8 +1419,8 @@
     {
      "tipo": "Historia",
      "hora": "12:30",
-     "titulo": "No se movió en veinte minutos",
-     "pieza": "04-historias-organicas/039_foto_no-se-movio-en-veinte-minutos.jpg",
+     "titulo": "Nadie en kilómetros",
+     "pieza": "04-historias-organicas/037_foto_nadie-en-kilometros.jpg",
      "nota": ""
     },
     {
@@ -1477,8 +1477,8 @@
     {
      "tipo": "Historia",
      "hora": "12:30",
-     "titulo": "Nadie en kilómetros",
-     "pieza": "04-historias-organicas/037_foto_nadie-en-kilometros.jpg",
+     "titulo": "No se movió en veinte minutos",
+     "pieza": "04-historias-organicas/039_foto_no-se-movio-en-veinte-minutos.jpg",
      "nota": ""
     }
    ]
@@ -1608,16 +1608,16 @@
     {
      "tipo": "Historia",
      "hora": "12:30",
-     "titulo": "Quince años, cero poses",
-     "pieza": "04-historias-organicas/043_foto_quince-anos-cero-poses.jpg",
+     "titulo": "Nadie le dijo que posara",
+     "pieza": "04-historias-organicas/082_foto_nadie-le-dijo-que-posara.jpg",
      "nota": ""
     },
     {
-     "tipo": "Reel",
+     "tipo": "Posteo",
      "hora": "19:30",
-     "titulo": "Reel del carrusel: La música también la hago",
-     "pieza": "07-reels-collage/09-musica-de-la-idea-al-master.mp4",
-     "nota": "Sale con el audio del archivo; si le querés poner un tema tuyo, subilo a mano."
+     "titulo": "Brazos cruzados y la luz del lugar",
+     "pieza": "10-fotos/40_brazos-cruzados-y-la-luz-del-lugar.jpg",
+     "nota": "Foto pura, sin texto encima: el llamado a WhatsApp va en el pie."
     }
    ]
   },
@@ -1666,8 +1666,8 @@
     {
      "tipo": "Historia",
      "hora": "12:30",
-     "titulo": "Tres canciones y se acabó la luz",
-     "pieza": "04-historias-organicas/044_foto_tres-canciones-y-se-acabo-la-luz.jpg",
+     "titulo": "Música a cielo abierto",
+     "pieza": "04-historias-organicas/092_foto_musica-a-cielo-abierto.jpg",
      "nota": ""
     }
    ]
@@ -1715,17 +1715,17 @@
      "nota": ""
     },
     {
-     "tipo": "Carrusel",
+     "tipo": "Posteo",
      "hora": "19:30",
-     "titulo": "Un producto tiene una historia entera",
-     "pieza": "06-carruseles-collage/05-producto-del-olivo-a-la-mesa",
-     "nota": "Las marcas planifican el contenido de verano y la tienda online de enero."
+     "titulo": "El alfajor, partido al medio",
+     "pieza": "10-fotos/41_el-alfajor-partido-al-medio.jpg",
+     "nota": "Foto pura, sin texto encima: el llamado a WhatsApp va en el pie."
     },
     {
      "tipo": "Historia (a mano)",
      "hora": "20:00",
-     "titulo": "Nuevo carrusel: compartilo en historias",
-     "pieza": "06-carruseles-collage/05-producto-del-olivo-a-la-mesa/01.jpg",
+     "titulo": "Nuevo posteo: compartilo en historias",
+     "pieza": "10-fotos/41_el-alfajor-partido-al-medio.jpg",
      "nota": "Desde la app, con sticker de enlace a WhatsApp (la API no pone stickers)."
     }
    ]
@@ -1802,11 +1802,11 @@
      "nota": ""
     },
     {
-     "tipo": "Reel",
+     "tipo": "Posteo",
      "hora": "19:30",
-     "titulo": "Reel del carrusel: Un producto tiene una historia entera",
-     "pieza": "07-reels-collage/05-producto-del-olivo-a-la-mesa.mp4",
-     "nota": "Sale con el audio del archivo; si le querés poner un tema tuyo, subilo a mano."
+     "titulo": "Con auriculares, frente a la computadora",
+     "pieza": "10-fotos/42_con-auriculares-frente-a-la-computadora.jpg",
+     "nota": "Foto pura, sin texto encima: el llamado a WhatsApp va en el pie."
     }
    ]
   },
@@ -1899,8 +1899,8 @@
     {
      "tipo": "Historia",
      "hora": "12:30",
-     "titulo": "Hasta el faro y volver",
-     "pieza": "04-historias-organicas/051_foto_hasta-el-faro-y-volver.jpg",
+     "titulo": "Tarde gris, foto linda",
+     "pieza": "04-historias-organicas/089_foto_tarde-gris-foto-linda.jpg",
      "nota": ""
     },
     {
@@ -1942,8 +1942,8 @@
     {
      "tipo": "Posteo",
      "hora": "13:00",
-     "titulo": "Tan clara que se ven las piedras del fondo",
-     "pieza": "10-fotos/30_tan-clara-que-se-ven-las-piedras-del-fon.jpg",
+     "titulo": "Recién hechas, sobre la tabla",
+     "pieza": "10-fotos/22_recien-hechas-sobre-la-tabla.jpg",
      "nota": "Foto pura, sin texto encima: el llamado a WhatsApp va en el pie."
     }
    ]
@@ -2022,8 +2022,8 @@
     {
      "tipo": "Posteo",
      "hora": "19:30",
-     "titulo": "Recién hechas, sobre la tabla",
-     "pieza": "10-fotos/22_recien-hechas-sobre-la-tabla.jpg",
+     "titulo": "Un sillón, un farol y flores amarillas",
+     "pieza": "10-fotos/23_un-sillon-un-farol-y-flores-amarillas.jpg",
      "nota": "Foto pura, sin texto encima: el llamado a WhatsApp va en el pie."
     }
    ]
@@ -2059,8 +2059,8 @@
     {
      "tipo": "Posteo",
      "hora": "11:00",
-     "titulo": "Un sillón, un farol y flores amarillas",
-     "pieza": "10-fotos/23_un-sillon-un-farol-y-flores-amarillas.jpg",
+     "titulo": "Una roca que cae derecho al mar",
+     "pieza": "10-fotos/24_una-roca-que-cae-derecho-al-mar.jpg",
      "nota": "Foto pura, sin texto encima: el llamado a WhatsApp va en el pie."
     },
     {
@@ -2088,8 +2088,8 @@
     {
      "tipo": "Historia",
      "hora": "12:30",
-     "titulo": "Fin de año: los chicos primero",
-     "pieza": "04-historias-organicas/056_detras_fin-de-ano-los-chicos-primero.jpg",
+     "titulo": "Leer al sol",
+     "pieza": "04-historias-organicas/097_foto_leer-al-sol.jpg",
      "nota": ""
     },
     {
@@ -2211,8 +2211,8 @@
     {
      "tipo": "Posteo",
      "hora": "19:30",
-     "titulo": "Una roca que cae derecho al mar",
-     "pieza": "10-fotos/24_una-roca-que-cae-derecho-al-mar.jpg",
+     "titulo": "Brazos abiertos en la terraza",
+     "pieza": "10-fotos/25_brazos-abiertos-en-la-terraza.jpg",
      "nota": "Foto pura, sin texto encima: el llamado a WhatsApp va en el pie."
     }
    ]
@@ -2248,15 +2248,15 @@
     {
      "tipo": "Posteo",
      "hora": "11:00",
-     "titulo": "Brazos abiertos en la terraza",
-     "pieza": "10-fotos/25_brazos-abiertos-en-la-terraza.jpg",
+     "titulo": "Las manos arman la pizza",
+     "pieza": "10-fotos/26_las-manos-arman-la-pizza.jpg",
      "nota": "Foto pura, sin texto encima: el llamado a WhatsApp va en el pie."
     },
     {
      "tipo": "Historia",
      "hora": "12:30",
-     "titulo": "El sonido también se ve",
-     "pieza": "04-historias-organicas/060_foto_el-sonido-tambien-se-ve.jpg",
+     "titulo": "Debajo del muelle",
+     "pieza": "04-historias-organicas/098_foto_debajo-del-muelle.jpg",
      "nota": ""
     },
     {
@@ -2320,8 +2320,8 @@
     {
      "tipo": "Posteo",
      "hora": "13:00",
-     "titulo": "Las manos arman la pizza",
-     "pieza": "10-fotos/26_las-manos-arman-la-pizza.jpg",
+     "titulo": "El cuchillo entra y el chocolate todavía brilla",
+     "pieza": "10-fotos/31_el-cuchillo-entra-y-el-chocolate-todavia.jpg",
      "nota": "Foto pura, sin texto encima: el llamado a WhatsApp va en el pie."
     }
    ]
@@ -2611,8 +2611,8 @@
     {
      "tipo": "Historia",
      "hora": "12:30",
-     "titulo": "En la fiesta de empresa también se juega",
-     "pieza": "04-historias-organicas/069_detras_en-la-fiesta-de-empresa-tambien-se-juega.jpg",
+     "titulo": "Colores que no se inventan",
+     "pieza": "04-historias-organicas/095_foto_colores-que-no-se-inventan.jpg",
      "nota": ""
     }
    ]
@@ -2626,8 +2626,8 @@
     {
      "tipo": "Posteo",
      "hora": "11:00",
-     "titulo": "El cuchillo entra y el chocolate todavía brilla",
-     "pieza": "10-fotos/31_el-cuchillo-entra-y-el-chocolate-todavia.jpg",
+     "titulo": "Tan clara que se ven las piedras del fondo",
+     "pieza": "10-fotos/30_tan-clara-que-se-ven-las-piedras-del-fon.jpg",
      "nota": "Foto pura, sin texto encima: el llamado a WhatsApp va en el pie."
     },
     {
@@ -2698,8 +2698,8 @@
     {
      "tipo": "Posteo",
      "hora": "13:00",
-     "titulo": "El río abajo, entre árboles y rocas",
-     "pieza": "10-fotos/33_el-rio-abajo-entre-arboles-y-rocas.jpg",
+     "titulo": "Una foto que se parece a vos",
+     "pieza": "10-fotos/34_una-foto-que-se-parece-a-vos.jpg",
      "nota": "Foto pura, sin texto encima: el llamado a WhatsApp va en el pie."
     }
    ]
@@ -2713,15 +2713,15 @@
     {
      "tipo": "Historia",
      "hora": "12:30",
-     "titulo": "Fotos de equipo, sin cartón",
-     "pieza": "04-historias-organicas/072_foto_fotos-de-equipo-sin-carton.jpg",
+     "titulo": "Tu web, pensada primero para el celular",
+     "pieza": "04-historias-organicas/093_dato_tu-web-pensada-primero-para-el-celular.jpg",
      "nota": ""
     },
     {
      "tipo": "Posteo",
      "hora": "19:30",
-     "titulo": "Una botella que se vende sola",
-     "pieza": "01-posteos-pauta/027_marcas_la-misma-botella-otra-marca.jpg",
+     "titulo": "Tu producto merece una foto que lo venda",
+     "pieza": "01-posteos-pauta/024_marcas_tu-producto-merece-una-foto-que-lo-venda.jpg",
      "nota": "Pieza de la campaña, con CTA."
     }
    ]
@@ -2778,8 +2778,8 @@
     {
      "tipo": "Posteo",
      "hora": "19:30",
-     "titulo": "Una foto que se parece a vos",
-     "pieza": "10-fotos/34_una-foto-que-se-parece-a-vos.jpg",
+     "titulo": "El río abajo, entre árboles y rocas",
+     "pieza": "10-fotos/33_el-rio-abajo-entre-arboles-y-rocas.jpg",
      "nota": "Foto pura, sin texto encima: el llamado a WhatsApp va en el pie."
     }
    ]
@@ -2800,8 +2800,8 @@
     {
      "tipo": "Historia",
      "hora": "12:30",
-     "titulo": "Los chicos no posan: juegan",
-     "pieza": "04-historias-organicas/074_foto_los-chicos-no-posan-juegan.jpg",
+     "titulo": "Mandame el lote y seguí disparando",
+     "pieza": "04-historias-organicas/090_dato_mandame-el-lote-y-segui-disparando.jpg",
      "nota": ""
     }
    ]
@@ -2815,8 +2815,8 @@
     {
      "tipo": "Posteo",
      "hora": "11:00",
-     "titulo": "Agua quieta, roca y nada más",
-     "pieza": "10-fotos/36_agua-quieta-roca-y-nada-mas.jpg",
+     "titulo": "Cortada en la tabla, lista para servir",
+     "pieza": "10-fotos/37_cortada-en-la-tabla-lista-para-servir.jpg",
      "nota": "Foto pura, sin texto encima: el llamado a WhatsApp va en el pie."
     },
     {
@@ -2936,11 +2936,11 @@
      "nota": ""
     },
     {
-     "tipo": "Reel",
+     "tipo": "Posteo",
      "hora": "19:30",
-     "titulo": "Reel del carrusel: Una marca se ve igual en todos lados",
-     "pieza": "07-reels-collage/15-marca-360-una-marca-entera.mp4",
-     "nota": "Sale con el audio del archivo; si le querés poner un tema tuyo, subilo a mano."
+     "titulo": "Una mesa lista, con flores blancas",
+     "pieza": "10-fotos/43_una-mesa-lista-con-flores-blancas.jpg",
+     "nota": "Foto pura, sin texto encima: el llamado a WhatsApp va en el pie."
     }
    ]
   },
@@ -2967,8 +2967,8 @@
     {
      "tipo": "Posteo",
      "hora": "19:30",
-     "titulo": "Cortada en la tabla, lista para servir",
-     "pieza": "10-fotos/37_cortada-en-la-tabla-lista-para-servir.jpg",
+     "titulo": "Agua quieta, roca y nada más",
+     "pieza": "10-fotos/36_agua-quieta-roca-y-nada-mas.jpg",
      "nota": "Foto pura, sin texto encima: el llamado a WhatsApp va en el pie."
     }
    ]

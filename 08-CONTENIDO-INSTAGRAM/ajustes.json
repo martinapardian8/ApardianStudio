@@ -1,1 +1,83 @@
-{"quitar": [], "reemplazos": {}}
+{
+ "quitar": [],
+ "reemplazos": {
+  "04-historias-organicas/043_foto_quince-anos-cero-poses.jpg": {
+   "pieza": "04-historias-organicas/082_foto_nadie-le-dijo-que-posara.jpg",
+   "titulo": "Nadie le dijo que posara",
+   "fecha": "2026-12-10"
+  },
+  "04-historias-organicas/044_foto_tres-canciones-y-se-acabo-la-luz.jpg": {
+   "pieza": "04-historias-organicas/092_foto_musica-a-cielo-abierto.jpg",
+   "titulo": "Música a cielo abierto",
+   "fecha": "2026-12-12"
+  },
+  "04-historias-organicas/051_foto_hasta-el-faro-y-volver.jpg": {
+   "pieza": "04-historias-organicas/089_foto_tarde-gris-foto-linda.jpg",
+   "titulo": "Tarde gris, foto linda",
+   "fecha": "2026-12-21"
+  },
+  "04-historias-organicas/056_detras_fin-de-ano-los-chicos-primero.jpg": {
+   "pieza": "04-historias-organicas/097_foto_leer-al-sol.jpg",
+   "titulo": "Leer al sol",
+   "fecha": "2026-12-28"
+  },
+  "04-historias-organicas/060_foto_el-sonido-tambien-se-ve.jpg": {
+   "pieza": "04-historias-organicas/098_foto_debajo-del-muelle.jpg",
+   "titulo": "Debajo del muelle",
+   "fecha": "2027-01-03"
+  },
+  "04-historias-organicas/069_detras_en-la-fiesta-de-empresa-tambien-se-juega.jpg": {
+   "pieza": "04-historias-organicas/095_foto_colores-que-no-se-inventan.jpg",
+   "titulo": "Colores que no se inventan",
+   "fecha": "2027-01-16"
+  },
+  "04-historias-organicas/072_foto_fotos-de-equipo-sin-carton.jpg": {
+   "pieza": "04-historias-organicas/093_dato_tu-web-pensada-primero-para-el-celular.jpg",
+   "titulo": "Tu web, pensada primero para el celular",
+   "fecha": "2027-01-20"
+  },
+  "04-historias-organicas/074_foto_los-chicos-no-posan-juegan.jpg": {
+   "pieza": "04-historias-organicas/090_dato_mandame-el-lote-y-segui-disparando.jpg",
+   "titulo": "Mandame el lote y seguí disparando",
+   "fecha": "2027-01-23"
+  },
+  "01-posteos-pauta/027_marcas_la-misma-botella-otra-marca.jpg": {
+   "pieza": "01-posteos-pauta/024_marcas_tu-producto-merece-una-foto-que-lo-venda.jpg",
+   "titulo": "Tu producto merece una foto que lo venda",
+   "fecha": "2027-01-20"
+  },
+  "06-carruseles-collage/05-producto-del-olivo-a-la-mesa": {
+   "pieza": "10-fotos/41_el-alfajor-partido-al-medio.jpg",
+   "titulo": "El alfajor, partido al medio",
+   "tipo": "Posteo",
+   "nota": "Foto pura, sin texto encima: el llamado a WhatsApp va en el pie.",
+   "fecha": "2026-12-14"
+  },
+  "06-carruseles-collage/05-producto-del-olivo-a-la-mesa/01.jpg": {
+   "pieza": "10-fotos/41_el-alfajor-partido-al-medio.jpg",
+   "titulo": "Nuevo posteo: compartilo en historias",
+   "fecha": "2026-12-14"
+  },
+  "07-reels-collage/05-producto-del-olivo-a-la-mesa.mp4": {
+   "pieza": "10-fotos/42_con-auriculares-frente-a-la-computadora.jpg",
+   "titulo": "Con auriculares, frente a la computadora",
+   "tipo": "Posteo",
+   "nota": "Foto pura, sin texto encima: el llamado a WhatsApp va en el pie.",
+   "fecha": "2026-12-17"
+  },
+  "07-reels-collage/09-musica-de-la-idea-al-master.mp4": {
+   "pieza": "10-fotos/40_brazos-cruzados-y-la-luz-del-lugar.jpg",
+   "titulo": "Brazos cruzados y la luz del lugar",
+   "tipo": "Posteo",
+   "nota": "Foto pura, sin texto encima: el llamado a WhatsApp va en el pie.",
+   "fecha": "2026-12-10"
+  },
+  "07-reels-collage/15-marca-360-una-marca-entera.mp4": {
+   "pieza": "10-fotos/43_una-mesa-lista-con-flores-blancas.jpg",
+   "titulo": "Una mesa lista, con flores blancas",
+   "tipo": "Posteo",
+   "nota": "Foto pura, sin texto encima: el llamado a WhatsApp va en el pie.",
+   "fecha": "2027-01-28"
+  }
+ }
+}

@@ -75,6 +75,11 @@ FOTOS = [
     ("retratos", "retratos/v__115.jpg", "Pensando, detrás del vidrio."),
     ("bodas", "salones/golf-a__IMG_4694.jpg", "Un rincón con velas."),
     ("retratos", "retratos/horacio__IMG_6904.jpg", "Brazos cruzados y la luz del lugar."),
+    # 28/10/2026: reemplazan a los carruseles y reels que no tienen fotos
+    # verticales (olivo, música, marca 360); ver 08-CONTENIDO-INSTAGRAM/ajustes.json
+    ("gastronomia", "gastronomia/alfajor__IMG_5430.jpg", "El alfajor, partido al medio."),
+    ("retratos", "retratos/nw__IMG_6420.jpg", "Con auriculares, frente a la computadora."),
+    ("bodas", "salones/golf-a__IMG_4682.jpg", "Una mesa lista, con flores blancas."),
 ]
 
 

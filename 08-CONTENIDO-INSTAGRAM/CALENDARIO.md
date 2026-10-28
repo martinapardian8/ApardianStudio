@@ -186,13 +186,13 @@ Ritmo: **un posteo y una historia todos los días.** Feed: **lunes** carrusel ·
 | Miércoles 02/12 | 12:30 | Historia: Me miró y se fue | `04-historias-organicas/038_foto_me-miro-y-se-fue.jpg` |
 | Miércoles 02/12 | 19:30 | Carrusel de 8 fotos: Cómo trabajo | `00-SUBIR-EN-ORDEN/12` |
 | Jueves 03/12 | 10:00 | Automatización: P4 prospección de fotógrafos en EN/PT | `11-AUTOMATIZACION/README.md` |
-| Jueves 03/12 | 12:30 | Historia: No se movió en veinte minutos | `04-historias-organicas/039_foto_no-se-movio-en-veinte-minutos.jpg` |
+| Jueves 03/12 | 12:30 | Historia: Nadie en kilómetros | `04-historias-organicas/037_foto_nadie-en-kilometros.jpg` |
 | Jueves 03/12 | 19:30 | Reel: Reel del carrusel: Regalá un lugar | `07-reels-collage/08-cuadros-regala-un-lugar.mp4` |
 | Viernes 04/12 | 12:30 | Historia: Una foto en el teléfono no decora nada | `02-historias-pauta/047_cuadros_una-foto-en-el-telefono-no-decora-nada.jpg` |
 | Viernes 04/12 | 17:00 | Venta: Seguimiento de presupuestos y leads | `09-ESTUDIO/clientes.md` |
 | Viernes 04/12 | 19:30 | Posteo: Rosas y velas, antes de que llegue la gente | `10-fotos/13_rosas-y-velas-antes-de-que-llegue-la-gen.jpg` |
 | Sábado 05/12 | 11:00 | Tus fotos en el mundo: El mar, colgado en el living. | `08-tus-fotos-en-el-mundo/11_cuadro_living.jpg` |
-| Sábado 05/12 | 12:30 | Historia: Nadie en kilómetros | `04-historias-organicas/037_foto_nadie-en-kilometros.jpg` |
+| Sábado 05/12 | 12:30 | Historia: No se movió en veinte minutos | `04-historias-organicas/039_foto_no-se-movio-en-veinte-minutos.jpg` |
 | Domingo 06/12 | 11:00 | Posteo: Mirar para abajo y que el agua sea así de clara | `10-fotos/14_mirar-para-abajo-y-que-el-agua-sea-asi-d.jpg` |
 | Domingo 06/12 | 12:30 | Historia: Esto salió del horno hace un minuto | `04-historias-organicas/040_foto_esto-salio-del-horno-hace-un-minuto.jpg` |
 | Domingo 06/12 | 18:00 | Equipo: Luz arma la semana que viene y Lupa la revisa | `09-ESTUDIO/EQUIPO.md` |
@@ -213,13 +213,13 @@ Ritmo: **un posteo y una historia todos los días.** Feed: **lunes** carrusel ·
 | Miércoles 09/12 | 12:30 | Historia: Se casaron con viento a favor | `04-historias-organicas/042_foto_se-casaron-con-viento-a-favor.jpg` |
 | Miércoles 09/12 | 19:30 | Posteo: Qué incluye | `01-posteos-pauta/045_eventos_que-incluye.jpg` |
 | Jueves 10/12 | 10:00 | Automatización: P8 reporte semanal de métricas (lunes 9:00) | `11-AUTOMATIZACION/README.md` |
-| Jueves 10/12 | 12:30 | Historia: Quince años, cero poses | `04-historias-organicas/043_foto_quince-anos-cero-poses.jpg` |
-| Jueves 10/12 | 19:30 | Reel: Reel del carrusel: La música también la hago | `07-reels-collage/09-musica-de-la-idea-al-master.mp4` |
+| Jueves 10/12 | 12:30 | Historia: Nadie le dijo que posara | `04-historias-organicas/082_foto_nadie-le-dijo-que-posara.jpg` |
+| Jueves 10/12 | 19:30 | Posteo: Brazos cruzados y la luz del lugar | `10-fotos/40_brazos-cruzados-y-la-luz-del-lugar.jpg` |
 | Viernes 11/12 | 12:30 | Historia: Paisajes de mis viajes, impresos en grande | `02-historias-pauta/048_cuadros_paisajes-de-uruguay-impresos-en-grande.jpg` |
 | Viernes 11/12 | 17:00 | Venta: Seguimiento de presupuestos y leads | `09-ESTUDIO/clientes.md` |
 | Viernes 11/12 | 19:30 | Posteo: Blanco y negro, sin vueltas | `10-fotos/15_blanco-y-negro-sin-vueltas.jpg` |
 | Sábado 12/12 | 11:00 | Tus fotos en el mundo: La banda que fotografié, en la pantalla más grande. | `08-tus-fotos-en-el-mundo/03_tokio_pantalla.jpg` |
-| Sábado 12/12 | 12:30 | Historia: Tres canciones y se acabó la luz | `04-historias-organicas/044_foto_tres-canciones-y-se-acabo-la-luz.jpg` |
+| Sábado 12/12 | 12:30 | Historia: Música a cielo abierto | `04-historias-organicas/092_foto_musica-a-cielo-abierto.jpg` |
 | Domingo 13/12 | 11:00 | Posteo: Flores, velas y copas esperando | `10-fotos/16_flores-velas-y-copas-esperando.jpg` |
 | Domingo 13/12 | 12:30 | Historia: Mañana esto va a estar lleno | `04-historias-organicas/045_foto_manana-esto-va-a-estar-lleno.jpg` |
 | Domingo 13/12 | 18:00 | Equipo: Luz arma la semana que viene y Lupa la revisa | `09-ESTUDIO/EQUIPO.md` |
@@ -232,8 +232,8 @@ Ritmo: **un posteo y una historia todos los días.** Feed: **lunes** carrusel ·
 | Día | Hora | Qué | Pieza |
 |---|---|---|---|
 | Lunes 14/12 | 12:30 | Historia: No hay segunda toma | `04-historias-organicas/046_foto_no-hay-segunda-toma.jpg` |
-| Lunes 14/12 | 19:30 | Carrusel: Un producto tiene una historia entera | `06-carruseles-collage/05-producto-del-olivo-a-la-mesa` |
-| Lunes 14/12 | 20:00 | Historia (a mano): Nuevo carrusel: compartilo en historias | `06-carruseles-collage/05-producto-del-olivo-a-la-mesa/01.jpg` |
+| Lunes 14/12 | 19:30 | Posteo: El alfajor, partido al medio | `10-fotos/41_el-alfajor-partido-al-medio.jpg` |
+| Lunes 14/12 | 20:00 | Historia (a mano): Nuevo posteo: compartilo en historias | `10-fotos/41_el-alfajor-partido-al-medio.jpg` |
 | Martes 15/12 | 10:00 | Venta: Foco de la semana: Producto / marcas | — |
 | Martes 15/12 | 12:30 | Historia: Tu producto merece una foto que lo venda | `02-historias-pauta/024_marcas_tu-producto-merece-una-foto-que-lo-venda.jpg` |
 | Martes 15/12 | 13:00 | Posteo: Un bocado por cuchara | `10-fotos/18_un-bocado-por-cuchara.jpg` |
@@ -241,7 +241,7 @@ Ritmo: **un posteo y una historia todos los días.** Feed: **lunes** carrusel ·
 | Miércoles 16/12 | 19:30 | Posteo: Aceite, dulces, empanadas y kamados | `01-posteos-pauta/026_marcas_aceite-dulces-empanadas-y-kamados.jpg` |
 | Jueves 17/12 | 10:00 | Automatización: Revisar todo el sistema: qué canal trajo más consultas (APRENDIZAJES.md) | `11-AUTOMATIZACION/README.md` |
 | Jueves 17/12 | 12:30 | Historia: Fotos de equipo que no dan vergüenza | `04-historias-organicas/048_foto_fotos-de-equipo-que-no-dan-verguenza.jpg` |
-| Jueves 17/12 | 19:30 | Reel: Reel del carrusel: Un producto tiene una historia entera | `07-reels-collage/05-producto-del-olivo-a-la-mesa.mp4` |
+| Jueves 17/12 | 19:30 | Posteo: Con auriculares, frente a la computadora | `10-fotos/42_con-auriculares-frente-a-la-computadora.jpg` |
 | Viernes 18/12 | 12:30 | Historia: Nadie compra lo que no se ve bien | `02-historias-pauta/025_marcas_nadie-compra-lo-que-no-se-ve-bien.jpg` |
 | Viernes 18/12 | 17:00 | Venta: Seguimiento de presupuestos y leads | `09-ESTUDIO/clientes.md` |
 | Viernes 18/12 | 19:30 | Posteo: Al teléfono, sobre el piso a cuadros | `10-fotos/19_al-telefono-sobre-el-piso-a-cuadros.jpg` |
@@ -258,12 +258,12 @@ Ritmo: **un posteo y una historia todos los días.** Feed: **lunes** carrusel ·
 
 | Día | Hora | Qué | Pieza |
 |---|---|---|---|
-| Lunes 21/12 | 12:30 | Historia: Hasta el faro y volver | `04-historias-organicas/051_foto_hasta-el-faro-y-volver.jpg` |
+| Lunes 21/12 | 12:30 | Historia: Tarde gris, foto linda | `04-historias-organicas/089_foto_tarde-gris-foto-linda.jpg` |
 | Lunes 21/12 | 19:30 | Carrusel: Un viaje que se cuelga | `06-carruseles-collage/10-cuadros-un-viaje-que-se-cuelga` |
 | Lunes 21/12 | 20:00 | Historia (a mano): Nuevo carrusel: compartilo en historias | `06-carruseles-collage/10-cuadros-un-viaje-que-se-cuelga/01.jpg` |
 | Martes 22/12 | 10:00 | Venta: Foco de la semana: Cuadros · Navidad y Reyes | — |
 | Martes 22/12 | 12:30 | Historia: Tu casamiento pasa una sola vez | `02-historias-pauta/001_bodas_tu-casamiento-pasa-una-sola-vez.jpg` |
-| Martes 22/12 | 13:00 | Posteo: Tan clara que se ven las piedras del fondo | `10-fotos/30_tan-clara-que-se-ven-las-piedras-del-fon.jpg` |
+| Martes 22/12 | 13:00 | Posteo: Recién hechas, sobre la tabla | `10-fotos/22_recien-hechas-sobre-la-tabla.jpg` |
 | Miércoles 23/12 | 12:30 | Historia: Otra ciudad, la misma luz | `04-historias-organicas/052_foto_otra-ciudad-la-misma-luz.jpg` |
 | Miércoles 23/12 | 19:30 | Posteo: Así se ve un casamiento bien fotografiado | `01-posteos-pauta/005_bodas_asi-se-ve-un-casamiento-bien-fotografiado.jpg` |
 | Jueves 24/12 | 10:00 | Automatización: Radar: comprar el dominio para los mails y empezar a calentar la casilla (semana 1 de 2) | `11-AUTOMATIZACION/README.md` |
@@ -271,10 +271,10 @@ Ritmo: **un posteo y una historia todos los días.** Feed: **lunes** carrusel ·
 | Jueves 24/12 | 19:30 | Reel: Reel del carrusel: Un viaje que se cuelga | `07-reels-collage/10-cuadros-un-viaje-que-se-cuelga.mp4` |
 | Viernes 25/12 | 12:30 | Historia: Quedan pocas fechas para el verano | `02-historias-pauta/007_bodas_quedan-pocas-fechas-para-el-verano.jpg` |
 | Viernes 25/12 | 17:00 | Venta: Seguimiento de presupuestos y leads | `09-ESTUDIO/clientes.md` |
-| Viernes 25/12 | 19:30 | Posteo: Recién hechas, sobre la tabla | `10-fotos/22_recien-hechas-sobre-la-tabla.jpg` |
+| Viernes 25/12 | 19:30 | Posteo: Un sillón, un farol y flores amarillas | `10-fotos/23_un-sillon-un-farol-y-flores-amarillas.jpg` |
 | Sábado 26/12 | 11:00 | Tus fotos en el mundo: Lo primero que ves al llegar. | `08-tus-fotos-en-el-mundo/05_aeropuerto.jpg` |
 | Sábado 26/12 | 12:30 | Historia: Posó mejor que muchos | `04-historias-organicas/054_foto_poso-mejor-que-muchos.jpg` |
-| Domingo 27/12 | 11:00 | Posteo: Un sillón, un farol y flores amarillas | `10-fotos/23_un-sillon-un-farol-y-flores-amarillas.jpg` |
+| Domingo 27/12 | 11:00 | Posteo: Una roca que cae derecho al mar | `10-fotos/24_una-roca-que-cae-derecho-al-mar.jpg` |
 | Domingo 27/12 | 12:30 | Historia: Una gorra, el sol y nada más | `04-historias-organicas/055_foto_una-gorra-el-sol-y-nada-mas.jpg` |
 | Domingo 27/12 | 18:00 | Equipo: Luz arma la semana que viene y Lupa la revisa | `09-ESTUDIO/EQUIPO.md` |
 
@@ -285,7 +285,7 @@ Ritmo: **un posteo y una historia todos los días.** Feed: **lunes** carrusel ·
 
 | Día | Hora | Qué | Pieza |
 |---|---|---|---|
-| Lunes 28/12 | 12:30 | Historia: Fin de año: los chicos primero | `04-historias-organicas/056_detras_fin-de-ano-los-chicos-primero.jpg` |
+| Lunes 28/12 | 12:30 | Historia: Leer al sol | `04-historias-organicas/097_foto_leer-al-sol.jpg` |
 | Lunes 28/12 | 19:30 | Carrusel: El verano se festeja afuera | `06-carruseles-collage/11-eventos-el-verano-se-festeja` |
 | Lunes 28/12 | 20:00 | Historia (a mano): Nuevo carrusel: compartilo en historias | `06-carruseles-collage/11-eventos-el-verano-se-festeja/01.jpg` |
 | Martes 29/12 | 10:00 | Venta: Foco de la semana: Eventos de verano | — |
@@ -298,11 +298,11 @@ Ritmo: **un posteo y una historia todos los días.** Feed: **lunes** carrusel ·
 | Jueves 31/12 | 19:30 | Reel: Reel del carrusel: El verano se festeja afuera | `07-reels-collage/11-eventos-el-verano-se-festeja.mp4` |
 | Viernes 01/01 | 12:30 | Historia: Un plato que se ve como se come | `02-historias-pauta/010_gastronomia_el-mismo-plato-otra-carta.jpg` |
 | Viernes 01/01 | 17:00 | Venta: Seguimiento de presupuestos y leads | `09-ESTUDIO/clientes.md` |
-| Viernes 01/01 | 19:30 | Posteo: Una roca que cae derecho al mar | `10-fotos/24_una-roca-que-cae-derecho-al-mar.jpg` |
+| Viernes 01/01 | 19:30 | Posteo: Brazos abiertos en la terraza | `10-fotos/25_brazos-abiertos-en-la-terraza.jpg` |
 | Sábado 02/01 | 11:00 | Tus fotos en el mundo: La fiesta, pegada en la pared de la ciudad. | `08-tus-fotos-en-el-mundo/14_afiche_montevideo.jpg` |
 | Sábado 02/01 | 12:30 | Historia: Un segundo antes | `04-historias-organicas/059_foto_un-segundo-antes.jpg` |
-| Domingo 03/01 | 11:00 | Posteo: Brazos abiertos en la terraza | `10-fotos/25_brazos-abiertos-en-la-terraza.jpg` |
-| Domingo 03/01 | 12:30 | Historia: El sonido también se ve | `04-historias-organicas/060_foto_el-sonido-tambien-se-ve.jpg` |
+| Domingo 03/01 | 11:00 | Posteo: Las manos arman la pizza | `10-fotos/26_las-manos-arman-la-pizza.jpg` |
+| Domingo 03/01 | 12:30 | Historia: Debajo del muelle | `04-historias-organicas/098_foto_debajo-del-muelle.jpg` |
 | Domingo 03/01 | 18:00 | Equipo: Luz arma la semana que viene y Lupa la revisa | `09-ESTUDIO/EQUIPO.md` |
 
 ## Semana 12 · 04/01 — Gastronomía de temporada
@@ -317,7 +317,7 @@ Ritmo: **un posteo y una historia todos los días.** Feed: **lunes** carrusel ·
 | Lunes 04/01 | 20:00 | Historia (a mano): Nuevo carrusel: compartilo en historias | `06-carruseles-collage/12-gastronomia-carta-de-verano/01.jpg` |
 | Martes 05/01 | 10:00 | Venta: Foco de la semana: Gastronomía de temporada | — |
 | Martes 05/01 | 12:30 | Historia: Tu producto, como se merece | `02-historias-pauta/016_gastronomia_tu-producto-como-se-merece.jpg` |
-| Martes 05/01 | 13:00 | Posteo: Las manos arman la pizza | `10-fotos/26_las-manos-arman-la-pizza.jpg` |
+| Martes 05/01 | 13:00 | Posteo: El cuchillo entra y el chocolate todavía brilla | `10-fotos/31_el-cuchillo-entra-y-el-chocolate-todavia.jpg` |
 | Miércoles 06/01 | 12:30 | Historia: La bandeja sale ahora | `04-historias-organicas/062_detras_la-bandeja-sale-ahora.jpg` |
 | Miércoles 06/01 | 19:30 | Posteo: Todas tus fotos, editadas, en diez días | `01-posteos-pauta/008_bodas_nos-entrego-todas-las-fotos-en-diez-dias-y-que.jpg` |
 | Jueves 07/01 | 10:00 | Automatización: Radar arranca: 10 mails por día con las ofertas aprobadas | `11-AUTOMATIZACION/README.md` |
@@ -354,8 +354,8 @@ Ritmo: **un posteo y una historia todos los días.** Feed: **lunes** carrusel ·
 | Viernes 15/01 | 17:00 | Venta: Seguimiento de presupuestos y leads | `09-ESTUDIO/clientes.md` |
 | Viernes 15/01 | 19:30 | Posteo: Sentada en el pasto, con la última luz | `10-fotos/29_sentada-en-el-pasto-con-la-ultima-luz.jpg` |
 | Sábado 16/01 | 11:00 | Tus fotos en el mundo: Una boda que pide papel. | `08-tus-fotos-en-el-mundo/09_revista.jpg` |
-| Sábado 16/01 | 12:30 | Historia: En la fiesta de empresa también se juega | `04-historias-organicas/069_detras_en-la-fiesta-de-empresa-tambien-se-juega.jpg` |
-| Domingo 17/01 | 11:00 | Posteo: El cuchillo entra y el chocolate todavía brilla | `10-fotos/31_el-cuchillo-entra-y-el-chocolate-todavia.jpg` |
+| Sábado 16/01 | 12:30 | Historia: Colores que no se inventan | `04-historias-organicas/095_foto_colores-que-no-se-inventan.jpg` |
+| Domingo 17/01 | 11:00 | Posteo: Tan clara que se ven las piedras del fondo | `10-fotos/30_tan-clara-que-se-ven-las-piedras-del-fon.jpg` |
 | Domingo 17/01 | 12:30 | Historia: Enero en modo lento | `04-historias-organicas/070_foto_enero-en-modo-lento.jpg` |
 | Domingo 17/01 | 18:00 | Equipo: Luz arma la semana que viene y Lupa la revisa | `09-ESTUDIO/EQUIPO.md` |
 
@@ -371,18 +371,18 @@ Ritmo: **un posteo y una historia todos los días.** Feed: **lunes** carrusel ·
 | Lunes 18/01 | 20:00 | Historia (a mano): Nuevo carrusel: compartilo en historias | `06-carruseles-collage/14-edicion-en-enero-no-se-duerme/01.jpg` |
 | Martes 19/01 | 10:00 | Venta: Foco de la semana: Edición Lightroom | — |
 | Martes 19/01 | 12:30 | Historia: La foto la sacaste bien. Ahora que se note. | `02-historias-pauta/023_edicion_la-foto-la-sacaste-bien-ahora-que-se-note.jpg` |
-| Martes 19/01 | 13:00 | Posteo: El río abajo, entre árboles y rocas | `10-fotos/33_el-rio-abajo-entre-arboles-y-rocas.jpg` |
-| Miércoles 20/01 | 12:30 | Historia: Fotos de equipo, sin cartón | `04-historias-organicas/072_foto_fotos-de-equipo-sin-carton.jpg` |
-| Miércoles 20/01 | 19:30 | Posteo: Una botella que se vende sola | `01-posteos-pauta/027_marcas_la-misma-botella-otra-marca.jpg` |
+| Martes 19/01 | 13:00 | Posteo: Una foto que se parece a vos | `10-fotos/34_una-foto-que-se-parece-a-vos.jpg` |
+| Miércoles 20/01 | 12:30 | Historia: Tu web, pensada primero para el celular | `04-historias-organicas/093_dato_tu-web-pensada-primero-para-el-celular.jpg` |
+| Miércoles 20/01 | 19:30 | Posteo: Tu producto merece una foto que lo venda | `01-posteos-pauta/024_marcas_tu-producto-merece-una-foto-que-lo-venda.jpg` |
 | Jueves 21/01 | 10:00 | Automatización: Radar: 35 por día; sumar búsquedas de fotógrafos si quedan pocos leads | `11-AUTOMATIZACION/README.md` |
 | Jueves 21/01 | 12:30 | Historia: Logo, colores, letras y plantillas | `04-historias-organicas/073_dato_logo-colores-letras-y-plantillas.jpg` |
 | Jueves 21/01 | 19:30 | Reel: Reel del carrusel: En enero no se duerme | `07-reels-collage/14-edicion-en-enero-no-se-duerme.mp4` |
 | Viernes 22/01 | 12:30 | Historia: Qué incluye | `02-historias-pauta/028_marcas_que-incluye.jpg` |
 | Viernes 22/01 | 17:00 | Venta: Seguimiento de presupuestos y leads | `09-ESTUDIO/clientes.md` |
-| Viernes 22/01 | 19:30 | Posteo: Una foto que se parece a vos | `10-fotos/34_una-foto-que-se-parece-a-vos.jpg` |
+| Viernes 22/01 | 19:30 | Posteo: El río abajo, entre árboles y rocas | `10-fotos/33_el-rio-abajo-entre-arboles-y-rocas.jpg` |
 | Sábado 23/01 | 11:00 | Tus fotos en el mundo: Un lote revelado parejo aguanta cualquier tamaño. | `08-tus-fotos-en-el-mundo/15_los_angeles_cartel.jpg` |
-| Sábado 23/01 | 12:30 | Historia: Los chicos no posan: juegan | `04-historias-organicas/074_foto_los-chicos-no-posan-juegan.jpg` |
-| Domingo 24/01 | 11:00 | Posteo: Agua quieta, roca y nada más | `10-fotos/36_agua-quieta-roca-y-nada-mas.jpg` |
+| Sábado 23/01 | 12:30 | Historia: Mandame el lote y seguí disparando | `04-historias-organicas/090_dato_mandame-el-lote-y-segui-disparando.jpg` |
+| Domingo 24/01 | 11:00 | Posteo: Cortada en la tabla, lista para servir | `10-fotos/37_cortada-en-la-tabla-lista-para-servir.jpg` |
 | Domingo 24/01 | 12:30 | Historia: La foto es del que espera | `04-historias-organicas/075_foto_la-foto-es-del-que-espera.jpg` |
 | Domingo 24/01 | 18:00 | Equipo: Luz arma la semana que viene y Lupa la revisa | `09-ESTUDIO/EQUIPO.md` |
 
@@ -403,10 +403,10 @@ Ritmo: **un posteo y una historia todos los días.** Feed: **lunes** carrusel ·
 | Miércoles 27/01 | 19:30 | Posteo: Tu web andando en una semana | `01-posteos-pauta/033_web_tu-web-andando-en-una-semana.jpg` |
 | Jueves 28/01 | 10:00 | Automatización: Radar: 50 por día; qué país y qué rubro respondió mejor (APRENDIZAJES.md) | `11-AUTOMATIZACION/README.md` |
 | Jueves 28/01 | 12:30 | Historia: Lejos de todo | `04-historias-organicas/078_foto_lejos-de-todo.jpg` |
-| Jueves 28/01 | 19:30 | Reel: Reel del carrusel: Una marca se ve igual en todos lados | `07-reels-collage/15-marca-360-una-marca-entera.mp4` |
+| Jueves 28/01 | 19:30 | Posteo: Una mesa lista, con flores blancas | `10-fotos/43_una-mesa-lista-con-flores-blancas.jpg` |
 | Viernes 29/01 | 12:30 | Historia: Las fotos y el lugar donde se muestran | `02-historias-pauta/034_web_las-fotos-y-el-lugar-donde-se-muestran.jpg` |
 | Viernes 29/01 | 17:00 | Venta: Seguimiento de presupuestos y leads | `09-ESTUDIO/clientes.md` |
-| Viernes 29/01 | 19:30 | Posteo: Cortada en la tabla, lista para servir | `10-fotos/37_cortada-en-la-tabla-lista-para-servir.jpg` |
+| Viernes 29/01 | 19:30 | Posteo: Agua quieta, roca y nada más | `10-fotos/36_agua-quieta-roca-y-nada-mas.jpg` |
 | Sábado 30/01 | 11:00 | Tus fotos en el mundo: Blanco y negro, como tiene que ser. | `08-tus-fotos-en-el-mundo/07_paris_columna.jpg` |
 | Sábado 30/01 | 12:30 | Historia: Trabajar con música | `04-historias-organicas/079_foto_trabajar-con-musica.jpg` |
 | Domingo 31/01 | 11:00 | Posteo: Un rincón con velas | `10-fotos/39_un-rincon-con-velas.jpg` |

@@ -35,8 +35,9 @@ def slug(t):
 def main(solo, desde=None):
     pauta = {x["n"]: x for x in json.load(open(os.path.join(IG, "indice_pauta.json"), encoding="utf-8"))}
     idx = os.path.join(IG, "indice_videos.json")
-    viejo = {(x["n"], x["formato"]): x["archivo"] for x in json.load(open(idx, encoding="utf-8"))} \
-        if os.path.exists(idx) else {}
+    previo = json.load(open(idx, encoding="utf-8")) if os.path.exists(idx) else []
+    viejo = {(x["n"], x["formato"]): x["archivo"] for x in previo}
+    fotos = {(x["n"], x["formato"]): x.get("foto") for x in previo}
     hechos = []
     for grupo, size, story, suf in ((FEED, POST, False, "feed"), (STORY_, STORY, True, "historia")):
         for n in grupo:
@@ -54,8 +55,11 @@ def main(solo, desde=None):
                 else:
                     V.render(nom, ruta, {"kicker": c.get("kicker"), "titular": c["titular"]}, size, story)
                     registrar(salida, [ruta])
+                    fotos[(n, suf)] = os.path.relpath(ruta, RAIZ)
                     print("  ok", nom, os.path.basename(ruta), flush=True)
             hechos.append({"n": n, "campana": c["_camp"], "formato": suf, "archivo": nom + ".mp4"})
+            if fotos.get((n, suf)):
+                hechos[-1]["foto"] = fotos[(n, suf)]      # la foto que muestra el video
     json.dump(hechos, open(idx, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     print(json.dumps({"videos": len(hechos)}, ensure_ascii=False))
 
