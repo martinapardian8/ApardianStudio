@@ -14,40 +14,56 @@ Options -Indexes -MultiViews
   #    salvo /.well-known/ (security.txt y validaciones de certificado).
   #    Si Hostinger clona el repo dentro de public_html, esto tapa /.git/.
   RewriteRule (^|/)\.(?!well-known/) - [F,L]
+
+  # 3) Archivos de trabajo: aunque se cuelen en public_html, devuelven 403.
+  #    (Lo mismo que el bloque 5, por si el servidor ignora "Require".)
+  RewriteRule (^|/)_qa_ - [F,L]
+  RewriteRule \.(json|log|md|sh|py|bak|old|orig|swp|tmp|env|ini|conf|cfg|yml|yaml|toml|lock|sql|zip|tar|gz|7z|rar|psd|lrcat|xmp)$ - [F,L,NC]
+  RewriteRule ~$ - [F,L]
 </IfModule>
 
-# 3) Cabeceras de seguridad
+# 4) Cabeceras de seguridad
+#    HSTS sin includeSubDomains ni preload: si algún día hay un subdominio
+#    sin certificado (un panel, n8n), no queda bloqueado en los navegadores.
+#    La CSP es la misma que la <meta> de index.html y propuesta.html, más
+#    frame-ancestors (que en <meta> no funciona). Si se suma un recurso de
+#    afuera (otro embed, una fuente), hay que agregarlo acá y en las <meta>.
 <IfModule mod_headers.c>
-  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+  Header always set Strict-Transport-Security "max-age=31536000"
   Header always set X-Content-Type-Options "nosniff"
-  Header always set X-Frame-Options "DENY"
+  Header always set X-Frame-Options "SAMEORIGIN"
   Header always set Referrer-Policy "strict-origin-when-cross-origin"
   Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()"
   Header always set Cross-Origin-Opener-Policy "same-origin"
-  Header always set Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob:; media-src 'self' blob:; frame-src https://open.spotify.com https://www.youtube-nocookie.com; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self' https://wa.me https://api.whatsapp.com; frame-ancestors 'none'; upgrade-insecure-requests"
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob:; media-src 'self' blob:; frame-src https://open.spotify.com; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'; upgrade-insecure-requests"
   Header always unset X-Powered-By
   Header unset X-Powered-By
+  # el html no se guarda en caché: cada publicación se ve enseguida
+  <FilesMatch "\.html?$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
 </IfModule>
 
-# 4) Archivos que nunca tienen que ser públicos
+# 5) Archivos que nunca tienen que ser públicos
 <FilesMatch "^\.">
   Require all denied
 </FilesMatch>
-<FilesMatch "\.(json|log|md|sh|py|bak|old|orig|swp|tmp|env|ini|conf|cfg|yml|yaml|toml|lock|sql|zip|tar|gz|7z|psd|lrcat|xmp)$">
+<FilesMatch "\.(json|log|md|sh|py|bak|old|orig|swp|tmp|env|ini|conf|cfg|yml|yaml|toml|lock|sql|zip|tar|gz|7z|rar|psd|lrcat|xmp)$">
   Require all denied
 </FilesMatch>
 <FilesMatch "^(_qa_.*|.*~)$">
   Require all denied
 </FilesMatch>
 
-# 5) Tipos correctos para las fuentes y el security.txt
+# 6) Tipos correctos para las fuentes y el security.txt
 <IfModule mod_mime.c>
   AddType font/woff2 .woff2
   AddType video/webm .webm
   AddType text/plain .txt
+  AddCharset utf-8 .html .css .js .txt .xml
 </IfModule>
 
-# 6) Caché: fotos, videos y fuentes un mes; css y js una semana (los ?v= ya
+# 7) Caché: fotos, videos y fuentes un mes; css y js una semana (los ?v= ya
 #    versionan); html sin caché para que cada cambio se vea al publicar
 <IfModule mod_expires.c>
   ExpiresActive On
@@ -60,5 +76,6 @@ Options -Indexes -MultiViews
   ExpiresByType font/woff2 "access plus 30 days"
   ExpiresByType text/css "access plus 7 days"
   ExpiresByType application/javascript "access plus 7 days"
+  ExpiresByType text/javascript "access plus 7 days"
   ExpiresByType text/html "access plus 0 seconds"
 </IfModule>
