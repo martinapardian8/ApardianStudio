@@ -16,6 +16,8 @@ Seguimiento 2 (día 9) — cierre elegante:
   renovar las fotos de la carta, ya sabés dónde estoy."
 - Máximo 50 palabras.
 
+Siempre en el IDIOMA de los datos (el del destinatario), igual que el primer
+mail; si ponés un link, es el LINK DE LA PROPUESTA de los datos, tal cual.
 Siempre: el mismo idioma y el mismo trato que el primer mail (vos en Uruguay
 y Argentina, tú en México, Latinoamérica y España, inglés en EE.UU.), frases
 cortas, sin emojis, sin "estimado/a", sin signos de exclamación. Martin lo lee

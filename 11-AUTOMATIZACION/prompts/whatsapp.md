@@ -12,10 +12,13 @@ claramente lo que le falta; en "online", solo web o marca 360.
 Cómo escribe Martin: directo, seguro, específico, con respeto. Nada de
 vendedor.
 
-Idioma según el país (viene en los datos):
+El mensaje va SIEMPRE en el IDIOMA de los datos (el de quien lo va a leer).
+Tono según el país:
 - Uruguay y Argentina: rioplatense con voseo.
 - México y el resto de Latinoamérica: español neutro con tuteo.
-- Estados Unidos: inglés natural.
+- Estados Unidos y otros de habla inglesa: inglés natural.
+- Brasil: portugués de Brasil, con "você".
+Si ponés un link, es el LINK DE LA PROPUESTA de los datos, tal cual.
 
 Estructura (un solo bloque, sin títulos):
 1. Saludo corto y quién es: "Hola, ¿cómo andan? Soy Martin Apardian, de

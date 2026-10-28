@@ -59,6 +59,21 @@ function leerClaude(r) {
 }
 """
 
+# El idioma del destinatario manda en todo lo que le llega: el mail, la oferta,
+# la firma, la línea de baja y la página de la propuesta (Martin, 28/10/2026).
+JS_IDIOMA = r"""
+const IDIOMA_PAIS = { 'Brasil': 'pt', 'Portugal': 'pt', 'Estados Unidos': 'en', 'Reino Unido': 'en',
+  'Canadá': 'en', 'Australia': 'en', 'Irlanda': 'en' };
+const idiomaDe = l => { const i = String(l.idioma || '').trim().slice(0, 2).toLowerCase();
+  return ['es', 'en', 'pt'].includes(i) ? i : (IDIOMA_PAIS[String(l.pais || '').trim()] || 'es'); };
+const NOMBRE_IDIOMA = { es: 'español', en: 'inglés', pt: 'portugués' };
+// la propuesta se abre en su idioma (propuesta.js lee ?lang=)
+const linkPropuesta = i => 'https://apardianstudio.com/propuesta.html' + (i === 'es' ? '' : '?lang=' + i);
+const lineaIdioma = l => { const i = idiomaDe(l);
+  return '\nIDIOMA: ' + NOMBRE_IDIOMA[i] + ' (' + i + '). Todo lo que escribas va en este idioma, aunque los datos estén en español.' +
+    '\nLINK DE LA PROPUESTA (usalo tal cual): ' + linkPropuesta(i); };
+"""
+
 # Una "web" que en realidad es Instagram, Facebook, Linktree o WhatsApp: no tiene web.
 JS_REDES = r"""
 const esRed = u => /(^|\/\/|\.)(instagram\.com|facebook\.com|fb\.com|fb\.me|linktr\.ee|wa\.me|api\.whatsapp\.com|tiktok\.com)(\/|$)/i.test(String(u || '').trim());
@@ -532,13 +547,13 @@ return $('Leer Leads').all().map(r => r.json)
   .slice(0, lim)
   .map(l => ({ json: l }));
 """, pos=(480, y))
-    prep_wa = codigo(fl, "Prompt WhatsApp", JS_CLAUDE + r"""
+    prep_wa = codigo(fl, "Prompt WhatsApp", JS_CLAUDE + JS_IDIOMA + r"""
 const SYSTEM = %s;
 const l = $json;
 // sin_web trae la ficha de Google en notas; sin_email, el JSON de la auditoría
 let audit = null, ficha = l.notas || '';
 try { const n = JSON.parse(l.notas || '{}'); audit = n.auditoria || null; ficha = n.ficha || ''; } catch (e) {}
-const usuario = 'MERCADO: ' + (l.mercado || 'uy') + '\nPaís: ' + (l.pais || 'Uruguay') +
+const usuario = 'MERCADO: ' + (l.mercado || 'uy') + '\nPaís: ' + (l.pais || 'Uruguay') + lineaIdioma(l) +
   '\nNegocio: ' + l.nombre + '\nRubro: ' + l.rubro + '\nBúsqueda: ' + l.ciudad +
   '\nRating en Google: ' + (l.rating || 'sin dato') + ' (' + (l.resenas || 0) + ' reseñas)' +
   '\nWeb: ' + (l.web || 'NO TIENE WEB') + (l.instagram ? '\nInstagram: ' + l.instagram : '') +
@@ -676,7 +691,7 @@ const elegidos = todos
 return elegidos.length ? elegidos : [{ json: { _vacio: true } }];
 """)
     hay = si(fl, "¿Hay para escribir?", "!$json._vacio")
-    prep = codigo(fl, "Prompt redactor", JS_CLAUDE + JS_FECHA + r"""
+    prep = codigo(fl, "Prompt redactor", JS_CLAUDE + JS_FECHA + JS_IDIOMA + r"""
 const SYSTEM = %s;
 const c = $('Config').first().json;
 let audit = {};
@@ -692,7 +707,7 @@ const ofertas = $('Leer Ofertas').all().map(r => r.json)
 const entrenamiento = $('Leer Entrenamiento').all().map(r => r.json)
   .filter(e => e.clave && String(e.respuesta || '').trim())
   .map(e => '- ' + (e.pregunta || e.clave) + '\n  ' + e.respuesta).join('\n');
-const usuario = 'MERCADO: ' + mercado + '\nPaís: ' + ($json.pais || 'Uruguay') + '\nIdioma: ' + ($json.idioma || 'es') +
+const usuario = 'MERCADO: ' + mercado + '\nPaís: ' + ($json.pais || 'Uruguay') + lineaIdioma($json) +
   '\nNegocio: ' + $json.nombre + '\nRubro: ' + $json.rubro + '\nBúsqueda: ' + $json.ciudad +
   '\nWeb: ' + $json.web + ($json.instagram ? '\nInstagram: ' + $json.instagram : '') +
   ($json.rating ? '\nRating en Google: ' + $json.rating + ' (' + ($json.resenas || 0) + ' reseñas)' : '') +
@@ -784,14 +799,14 @@ return out;
     fila_c = codigo(fl, "Fila cerrada", "return { json: { id: $json.lead.id, estado: $json.estado || 'cerrado_sin_respuesta' } };",
                     por_item=True, pos=(fl.x, -220))
     g_c = escribir_hoja(fl, "Guardar cierre", cfg, "Leads", pos=(fl.x + 240, -220))
-    prep = codigo(fl, "Prompt seguimiento", JS_CLAUDE + r"""
+    prep = codigo(fl, "Prompt seguimiento", JS_CLAUDE + JS_IDIOMA + r"""
 const SYSTEM = %s;
 const c = $('Config').first().json;
 const x = $json;
 let audit = {};
 try { audit = JSON.parse(x.lead.notas || '{}').auditoria || {}; } catch (e) {}
 const usuario = 'Seguimiento número: ' + x.n + '\nNegocio: ' + x.lead.nombre +
-  '\nPaís: ' + (x.lead.pais || 'Uruguay') + '\nIdioma: ' + (x.lead.idioma || 'es') +
+  '\nPaís: ' + (x.lead.pais || 'Uruguay') + lineaIdioma(x.lead) +
   (String(x.lead.pais || '') === 'Estados Unidos' ? '\nDIRECCION_POSTAL: ' + c.DIRECCION_POSTAL : '') +
   '\n\nPrimer mail (asunto): ' + x.lead.asunto + '\nPrimer mail (cuerpo):\n' + x.lead.borrador +
   '\n\nAuditoría:\n' + JSON.stringify(audit, null, 2);
@@ -1546,7 +1561,7 @@ def f12():
     cfg = config(fl, "Config", v)
     leads = leer_hoja(fl, "Leer Leads", cfg, "Leads")
     bajas = leer_hoja(fl, "Leer Bajas", cfg, "Bajas")
-    elegir = codigo(fl, "Elegir aprobados", JS_RADAR + r"""
+    elegir = codigo(fl, "Elegir aprobados", JS_RADAR + JS_IDIOMA + r"""
 const c = $('Config').first().json;
 const bm = new Set(), bd = new Set();
 for (const r of $('Leer Bajas').all()) {
@@ -1567,7 +1582,7 @@ const completar = (l, cuerpo) => {
   let t = String(cuerpo || '').trim();
   const dir = String(c.DIRECCION_POSTAL || '').trim();
   if (String(l.pais || '') === 'Estados Unidos' && dir && !t.includes(dir.slice(0, 15))) t += '\n\n' + dir;
-  if (!tieneBaja(t)) t += '\n\n' + (BAJA[String(l.idioma || 'es').slice(0, 2)] || BAJA.es);
+  if (!tieneBaja(t)) t += '\n\n' + BAJA[idiomaDe(l)];
   return t;
 };
 const horas = Math.max(1, 18 - horaEn('America/Montevideo'));
