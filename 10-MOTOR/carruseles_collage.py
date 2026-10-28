@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
-"""Los carruseles collage: cada uno es un lienzo continuo cortado en laminas.
+"""SIN USO desde el 28/10/2026: los carruseles salen de carruseles_fotos.py
+(una foto de Martin por lámina, sin cinta, papel ni collage). Este queda
+solo como referencia; si se corre, pisa los carruseles nuevos.
+
+Los carruseles collage: cada uno es un lienzo continuo cortado en laminas.
 
 python3 10-MOTOR/carruseles_collage.py            # todos
 python3 10-MOTOR/carruseles_collage.py bodas      # uno solo

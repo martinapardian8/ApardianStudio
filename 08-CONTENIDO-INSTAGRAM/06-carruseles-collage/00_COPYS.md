@@ -1,20 +1,21 @@
-# Carruseles continuos — textos para publicar
+# Carruseles de fotos — textos para publicar
 
-Quince carruseles de 6 láminas (4:5, 1080×1350), en estilo editorial: fotos
-derechas, mucho aire, Anton y el rojo como acento. Cada uno es un solo lienzo
-cortado en seis: las fotos y los títulos cruzan de una lámina a la otra, así
-que **se suben en orden, del 01 al 06, sin recortar**.
+Quince carruseles de 5 a 8 láminas (4:5, 1080×1350), con la estética de tu
+grilla (09-ESTUDIO/ESTETICA_IG.md, 28/10/2026): cada lámina es una foto tuya
+de lado a lado, sin marcos, sin cinta, sin papel y sin collage. La primera
+lleva un titular mínimo; las del medio son fotos puras; la última, la llamada
+chica a WhatsApp. Cuando recortar una foto horizontal perdería más del 22 %,
+va entera, sobre la misma foto desenfocada. **Se suben en orden: 01, 02, 03…**
 
-Todas las fotos son tuyas (galería publicada). La IA de Higgsfield solo puso
-el papel de fondo, la mano, el celular y las copias en blanco donde van tus
-fotos. Sin cinta, sin papel roto, sin chinches ni hilo: lo pediste así.
+Todas las fotos son tuyas (galería publicada). Excepciones: el 07 son
+capturas de tu web y el 15, tu manual de marca y mockups de la marca (el pie
+lo dice).
 
-`_panorama.jpg` en cada carpeta es solo para mirar el carrusel entero; no se sube.
+`_panorama.jpg` en cada carpeta y `00_TODOS.jpg` son solo para mirar; no se suben.
 
-Para regenerarlos: `python3 10-MOTOR/carruseles_collage.py` (o con el nombre:
-`bodas`, `gastronomia`, `marca`, `findeanio`, `producto`, `edicion`, `web`,
-`cuadros`, `musica`, y los del verano: `viajes`, `verano`, `carta`, `bodas2`,
-`edicion2`, `marca360`).
+Para regenerarlos: `python3 10-MOTOR/carruseles_fotos.py` (o con el número:
+`python3 10-MOTOR/carruseles_fotos.py 01 04`). Los reels de cada uno salen
+con `python3 10-MOTOR/reels_collage.py`.
 
 ---
 
@@ -34,7 +35,7 @@ Primer comentario (fijalo): `¿Ya tienen fecha? Escribime "FECHA" por WhatsApp y
 ## 02 · Gastronomía — "La gente come con los ojos"
 Para: dueños de restaurantes, parrillas y cafés, antes de la temporada.
 ```
-Las 4 fotos que necesita tu carta: el plato, el proceso, el lugar y la gente.
+Las fotos que necesita tu carta: el plato terminado y el proceso, en fotos que dan hambre.
 
 Voy a tu local en una jornada, no hace falta que cierres. Fotos para la carta, el delivery y las redes. Entrega en 7 días.
 
@@ -62,7 +63,7 @@ Para: empresas, RR. HH., cumpleaños y fiestas de diciembre.
 ```
 La fiesta de fin de año pasa una vez. Que no quede solo en el grupo de WhatsApp con fotos borrosas.
 
-Empresas, cumpleaños y fin de año: toda la fiesta, sin tope de fotos y galería para los invitados. Entrega en 10 días.
+Fiestas de fin de año y eventos de empresa: toda la fiesta, sin tope de fotos y galería para los invitados. Entrega en 10 días.
 
 Diciembre se llena rápido: +598 91 962 962
 
@@ -93,9 +94,10 @@ Decime cuántas fotos son y te paso precio en el día: +598 91 962 962
 
 #lightroom #edicionfotografica #fotografosuruguay #postproduccion #photoediting
 ```
-Todo lo que se ve es un lote real tuyo (un mismo evento), ya editado. No hay
-"antes": no tenemos el RAW y simularlo sería mentir. Si algún día exportás un
-RAW junto a su versión final, ese sí es un antes/después honesto.
+Lo que se ve son retratos y bodas tuyos, ya editados (edición va con
+retratos o bodas, no con fiestas). No hay "antes": no tenemos el RAW y
+simularlo sería mentir. Si algún día exportás un RAW junto a su versión final,
+ese sí es un antes/después honesto.
 
 ## 07 · Páginas web — "Tu Instagram no es tu página web"
 Para: negocios que hoy venden solo por Instagram.
@@ -171,7 +173,7 @@ Para: restaurantes y paradores de Punta del Este, José Ignacio y Montevideo.
 ```
 Tu carta de verano entra por los ojos.
 
-La temporada se juega en las fotos: el fuego, lo que se comparte, lo fresco y el lugar lleno. Voy a tu restaurante o parador en una jornada, sin que cierres. Entrega en 7 días.
+La temporada se juega en las fotos: lo que se comparte, lo fresco y lo que sale de la cocina. Voy a tu restaurante o parador en una jornada, sin que cierres. Entrega en 7 días.
 
 Antes de que llegue la gente: +598 91 962 962
 
@@ -184,7 +186,7 @@ Para: parejas que se casan en otoño 2027.
 ```
 Entre el sí y la fiesta pasa todo.
 
-El altar, la llegada, los detalles y lo que nadie mira durante la fiesta y todos miran después. Ceremonia, salón y fiesta: todas las fotos, editadas una por una. Entrega en 10 días.
+El altar, los detalles, el salón y lo que nadie mira durante la fiesta y todos miran después. Ceremonia, salón y fiesta: todas las fotos, editadas una por una. Entrega en 10 días.
 
 Contame tu fecha: +598 91 962 962
 
@@ -197,20 +199,20 @@ Para: fotógrafos de bodas y eventos en plena temporada, de cualquier país.
 ```
 En enero no se duerme. Vos seguí disparando: el lote me lo mandás a mí.
 
-Culling, revelado con tu estilo y catálogo listo para exportar, en 72 horas. Todo lo que ves es un lote real de un mismo cumpleaños, editado parejo de la primera a la última.
+Culling, revelado con tu estilo y catálogo listo para exportar, en 72 horas. Todo lo que ves son retratos que hice y edité yo, parejos de la primera a la última.
 
 Decime cuántas fotos son y te paso precio en el día: +598 91 962 962
 
 #lightroom #edicionfotografica #fotografosdebodas #postproduccion #photoediting
 ```
-Nota: el lote es real y ya editado. No hay "antes": no tenemos el RAW.
+Nota: son retratos tuyos, ya editados. No hay "antes": no tenemos el RAW.
 
 ## 15 · Marca 360 — "Una marca se ve igual en todos lados"
 Para: negocios y emprendedores que quieren ordenar su imagen.
 ```
 Una marca se ve igual en todos lados.
 
-Esta es la mía: un logo, tres colores, dos tipografías, la web, el celular y las redes, todo hablando igual. Marca 360 es eso: identidad, manual de marca y plantillas para redes listas para usar.
+Esta es la mía: un logo, tres colores, dos tipografías y todo hablando igual. (Las aplicaciones de las fotos son mockups.) Marca 360 es eso: identidad, manual de marca y plantillas para redes listas para usar.
 
 Online, desde cualquier país: +598 91 962 962
 
