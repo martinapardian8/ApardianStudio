@@ -11,7 +11,7 @@ de datos del artifact, no en este archivo.
 
 python3 10-MOTOR/centro.py
 """
-import os, re, csv, sys, json, glob, datetime as dt
+import hashlib, os, re, csv, sys, json, glob, datetime as dt
 from PIL import Image
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -154,7 +154,11 @@ def piezas(cal):
             bajar += [{"src": "ig/" + x, "nombre": base + "-tapa.jpg"} for x in archivos if x.endswith("_portada.jpg")]
             if not en_ventana(d["fecha"]):
                 bajar = []
+            # la versión cambia si Luz rehace la pieza (otros archivos, otro peso u otro pie):
+            # el Centro vuelve a pedir ✓ o ✗
+            firma = f["archivos"] + "|" + f["pie"] + "|" + "|".join(str(os.path.getsize(os.path.join(IG, a))) for a in archivos)
             out.append({"id": f["id"], "cal": d["fecha"] + "-" + str(i), "fecha": d["fecha"], "hora": f["hora"], "bajar": bajar,
+                        "archivos": f["archivos"], "urls": f["urls"], "ver": hashlib.sha1(firma.encode()).hexdigest()[:10],
                         "tipo": f["tipo"], "titulo": f["titulo"], "pie": f["pie"],
                         "comentario": f["primer_comentario"], "hojas": len([a for a in archivos if not a.endswith("_portada.jpg")]),
                         "pieza": it["pieza"], "nota": it.get("nota", ""),

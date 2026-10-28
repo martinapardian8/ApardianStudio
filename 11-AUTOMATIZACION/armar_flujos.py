@@ -1101,20 +1101,39 @@ const pagina = (titulo, txt) => '<!doctype html><meta name="viewport" content="w
 if (!claveOk(q.t, c.TOKEN)) {
   return [{ json: { ok: false, html: pagina('Link no válido', 'El token no coincide (o todavía es el de ejemplo). No se cambió nada.') } }];
 }
-const f = $input.all().map(r => r.json).find(r => String(r.id) === String(q.id));
+// Desde el Centro el link trae la pieza entera (d, base64url): así una pieza
+// que Luz rehízo o reemplazó entra a la hoja aunque todavía no esté, o con sus
+// archivos y su pie nuevos. Solo se aceptan archivos de apardianstudio.com/ig.
+let d = null;
+if (q.d) {
+  try { d = JSON.parse(Buffer.from(String(q.d).replace(/-/g, '+').replace(/_/g, '/'), 'base64').toString('utf8')); }
+  catch (e) { return [{ json: { ok: false, html: pagina('Link roto', 'No pude leer la pieza que mandó el Centro. No se cambió nada.') } }]; }
+  const urls = String(d.urls || '').split('|').filter(Boolean);
+  if (String(d.id || '') !== String(q.id) || !['IMAGE', 'CAROUSEL', 'REEL', 'STORY'].includes(d.tipo) ||
+      !urls.length || urls.some(u => !/^https:\/\/apardianstudio\.com\/ig\/[^\s"'<>]+$/.test(u)) ||
+      !/^\d{4}-\d{2}-\d{2}$/.test(String(d.fecha || '')) || !/^\d{2}:\d{2}$/.test(String(d.hora || ''))) {
+    return [{ json: { ok: false, html: pagina('Pieza no válida', 'Los datos que mandó el Centro no están completos. No se cambió nada.') } }];
+  }
+}
+const f = $input.all().map(r => r.json).find(r => String(r.id) === String(q.id)) || d;
 if (!f) return [{ json: { ok: false, html: pagina('No encontré esa publicación', String(q.id || '')) } }];
 if (f.publicado_en) return [{ json: { ok: false, html: pagina('Ya está publicada', f.titulo + ' · ' + f.publicado_en) } }];
 const aprobar = q.a === 'aprobar';
-const fila = { id: f.id, estado: aprobar ? 'aprobado' : 'rechazado',
-               aprobado_por: aprobar ? 'Martin (Telegram)' : '', aprobado_en: aprobar ? ahoraISO() : '', error: '' };
+const desde = d ? 'Centro' : 'Telegram';
+const fila = Object.assign(d && aprobar ? { fecha: d.fecha, hora: d.hora, tipo: d.tipo, titulo: String(d.titulo || ''),
+                                 archivos: String(d.archivos || ''), urls: d.urls, pie: String(d.pie || '').slice(0, 2200),
+                                 primer_comentario: String(d.primer_comentario || ''), revision: 'ok' } : {},
+  { id: String(q.id), estado: aprobar ? 'aprobado' : 'rechazado',
+    aprobado_por: aprobar ? 'Martin (' + desde + ')' : '', aprobado_en: aprobar ? ahoraISO() : '', error: '' });
 const cuando = enUY(f.fecha, f.hora).toLocaleString('es-UY', { timeZone: 'America/Montevideo', weekday: 'long', day: 'numeric', month: 'numeric', hour: '2-digit', minute: '2-digit', hour12: false });
 return [{ json: { ok: true, fila,
-  html: pagina(aprobar ? 'Aprobado ✓' : 'No se publica', aprobar ? f.titulo + ' sale el ' + cuando + '.' : f.titulo + ' quedó afuera del calendario.'),
+  html: pagina(aprobar ? 'Aprobado ✓' : 'No se publica', (aprobar ? f.titulo + ' sale el ' + cuando + '.' : f.titulo + ' no sale.') +
+               (d ? ' Ya podés cerrar esta pestaña y volver al Centro.' : '')),
   telegram_text: (aprobar ? '✅ Aprobado: ' : '✖️ No se publica: ') + '<b>' + esc(f.titulo) + '</b>' + (aprobar ? '\nSale el ' + esc(cuando) + '.' : '') } }];
 """, pos=(720, y))
     valido = si(fl, "¿Válido?", "$json.ok", pos=(960, y))
     fila = codigo(fl, "Fila aprobación", "return [{ json: $input.first().json.fila }];", pos=(1200, y - 100))
-    g = escribir_hoja(fl, "Guardar aprobación", cfg2, "Calendario", pos=(1440, y - 100))
+    g = escribir_hoja(fl, "Guardar aprobación", cfg2, "Calendario", "appendOrUpdate", pos=(1440, y - 100))
     tg = telegram(fl, "Confirmar en Telegram", cfg2, pos=(1680, y - 100),
                   texto="$('Validar y decidir').first().json.telegram_text")
     r_ok = responder(fl, "Página: listo", "$('Validar y decidir').first().json.html", (1920, y - 100))

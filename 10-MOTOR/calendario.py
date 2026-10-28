@@ -390,6 +390,27 @@ def main():
                 items.sort(key=lambda it: it["hora"])
                 dias.append({"fecha": f.isoformat(), "dia": DIAS[d], "semana": s + 1,
                              "vertical": vertical, "items": items})
+    # lo que Martin decidió con ✗ en el Centro y Luz resolvió (08-CONTENIDO-INSTAGRAM/ajustes.json):
+    # {"quitar": ["<pieza>"], "reemplazos": {"<pieza vieja>": {"pieza": "...", "titulo": "...", "tipo": "Posteo"}}}
+    # Una entrada vale para esa pieza en cualquier día; "fecha" la limita a un día.
+    ruta_aj = os.path.join(IG, "ajustes.json")
+    aj = json.load(open(ruta_aj, encoding="utf-8")) if os.path.exists(ruta_aj) else {}
+    quitar, reemp = aj.get("quitar", []), aj.get("reemplazos", {})
+    for d in dias:
+        if d["fecha"] < FIJO:
+            continue
+        nuevos = []
+        for it in d["items"]:
+            q = next((x for x in quitar if (x if isinstance(x, str) else x.get("pieza")) == it.get("pieza") and
+                      (isinstance(x, str) or x.get("fecha", d["fecha"]) == d["fecha"])), None)
+            if q is not None:
+                continue
+            r = reemp.get(it.get("pieza"))
+            if r and r.get("fecha", d["fecha"]) == d["fecha"]:
+                it = dict(it, **{k: v for k, v in r.items() if k in ("pieza", "titulo", "tipo", "nota", "hora")})
+            nuevos.append(it)
+        d["items"] = nuevos
+
     feed = sum(1 for d in dias for it in d["items"] if it["tipo"] not in ("Historia", "Historia (a mano)", "Venta", "Automatización", "Equipo"))
     hist_n = sum(1 for d in dias for it in d["items"] if it["tipo"] == "Historia")
     sin_feed = [d["fecha"] for d in dias if not any(it["tipo"] not in ("Historia", "Historia (a mano)", "Venta", "Automatización", "Equipo") for it in d["items"])]
