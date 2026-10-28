@@ -18,17 +18,17 @@
  {
   "n": 3,
   "tipo": "foto",
-  "titular": "Ocho horas para veinte platos",
+  "titular": "Toda la carta en una jornada",
   "archivo": "003_foto_ocho-horas-para-veinte-platos.jpg",
   "foto": "05-WEB/img/gastronomia/web/alfajor__IMG_5429.jpg",
-  "texto": "Hoy · Ocho horas para veinte platos · Vale cada minuto cuando ves la carta terminada."
+  "texto": "Hoy · Toda la carta en una jornada · Plato por plato, sin cerrar el local."
  },
  {
   "n": 4,
   "tipo": "foto",
   "titular": "La fiesta recién empieza a las dos",
   "archivo": "004_foto_la-fiesta-recien-empieza-a-las-dos.jpg",
-  "foto": "05-WEB/img/eventos/web/nicol__IMG_5766.jpg",
+  "foto": "05-WEB/img/eventos/web/leticia40__IMG_8126.jpg",
   "texto": "Anoche · La fiesta recién empieza a las dos · Y ahí es cuando salen las mejores."
  },
  {
@@ -92,8 +92,8 @@
   "tipo": "dato",
   "titular": "Ese es mi plazo de entrega",
   "archivo": "012_dato_ese-es-mi-plazo-de-entrega.jpg",
-  "foto": "05-WEB/img/retratos/web/juan-luz__IMG_2712.jpg",
-  "texto": "Días · Ese es mi plazo de entrega · Sin excepciones y sin tope de cantidad de fotos."
+  "foto": "05-WEB/img/eventos/web/caro60__IMG_0233.jpg",
+  "texto": "Días · Ese es mi plazo de entrega · En bodas y eventos, sin tope de cantidad de fotos."
  },
  {
   "n": 13,
@@ -106,10 +106,10 @@
  {
   "n": 14,
   "tipo": "dato",
-  "titular": "El 70% te va a mirar desde el celular",
+  "titular": "Casi todos te van a mirar desde el celular",
   "archivo": "014_dato_el-70-te-va-a-mirar-desde-el-celular.jpg",
-  "foto": "05-WEB/img/retratos/web/juan-luz__IMG_2661.jpg",
-  "texto": "Dato · El 70% te va a mirar desde el celular · Por eso todo lo que entrego está pensado en vertical también."
+  "foto": "05-WEB/img/retratos/web/v__120.jpg",
+  "texto": "Dato · Casi todos te van a mirar desde el celular · Por eso todo lo que entrego está pensado en vertical también."
  },
  {
   "n": 15,
@@ -165,15 +165,15 @@
   "titular": "¿Ceremonia de día o de noche?",
   "archivo": "021_pregunta_ceremonia-de-dia-o-de-noche.jpg",
   "foto": "05-WEB/img/bodas/web/nw__IMG_9726.jpg",
-  "texto": "¿Ceremonia de día o de noche? · Contestá acá arriba, tengo curiosidad. · DE DÍA / DE NOCHE"
+  "texto": "¿Ceremonia de día o de noche? · Votá en la encuesta, tengo curiosidad. · DE DÍA / DE NOCHE"
  },
  {
   "n": 22,
   "tipo": "pregunta",
-  "titular": "¿Qué foto te da más hambre?",
+  "titular": "¿Esto te da hambre?",
   "archivo": "022_pregunta_que-foto-te-da-mas-hambre.jpg",
   "foto": "05-WEB/img/gastronomia/web/sergio__IMG_7391.jpg",
-  "texto": "¿Qué foto te da más hambre? · LA DE LA IZQUIERDA / LA DE LA DERECHA"
+  "texto": "¿Esto te da hambre? · SÍ, YA / TODAVÍA NO"
  },
  {
   "n": 23,
@@ -197,15 +197,15 @@
   "titular": "¿Foto o video en tu fiesta?",
   "archivo": "025_pregunta_foto-o-video-en-tu-fiesta.jpg",
   "foto": "05-WEB/img/eventos/web/ivanna-santiago__IMG_4744.jpg",
-  "texto": "¿Foto o video en tu fiesta? · FOTO / LAS DOS COSAS"
+  "texto": "¿Foto o video en tu fiesta? · SOLO FOTO / FOTO Y VIDEO"
  },
  {
   "n": 26,
   "tipo": "detras",
-  "titular": "Dos cámaras y ningún plan B",
+  "titular": "Dos cámaras, por si una falla",
   "archivo": "026_detras_dos-camaras-y-ningun-plan-b.jpg",
   "foto": "05-WEB/img/bodas/web/v__4.jpg",
-  "texto": "Detrás de escena · Dos cámaras y ningún plan B · Por eso siempre llevo dos cuerpos y cuatro baterías."
+  "texto": "Detrás de escena · Dos cámaras, por si una falla · Siempre llevo dos cuerpos y cuatro baterías."
  },
  {
   "n": 27,
@@ -389,7 +389,7 @@
   "titular": "Quedan fechas para diciembre",
   "archivo": "049_dato_quedan-fechas-para-diciembre.jpg",
   "foto": "05-WEB/img/retratos/web/juan-luz__IMG_2689.jpg",
-  "texto": "Agenda · Quedan fechas para diciembre · Escribime y te paso disponibilidad en el día."
+  "texto": "Agenda · Quedan fechas para diciembre · Escribime al 091 962 962 y te paso disponibilidad en el día."
  },
  {
   "n": 50,
@@ -397,7 +397,7 @@
   "titular": "Tengo lugar para editar dos lotes esta semana",
   "archivo": "050_dato_tengo-lugar-para-editar-dos-lotes-esta-seman.jpg",
   "foto": "05-WEB/img/bodas/web/nw__IMG_4697.jpg",
-  "texto": "Para fotógrafos · Tengo lugar para editar dos lotes esta semana · Si venís atrasado con una entrega, escribime."
+  "texto": "Para fotógrafos · Tengo lugar para editar dos lotes esta semana · Si venís atrasado con una entrega, escribime al 091 962 962."
  },
  {
   "n": 51,

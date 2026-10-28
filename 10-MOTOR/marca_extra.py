@@ -48,7 +48,7 @@ POSTEOS = [
  # --- edicion -------------------------------------------------------------
  p("naturaleza","antes_despues","No es un filtro","Se trabaja cada zona por separado. No hay botón que lo haga.","edit","Edición en Lightroom"),
  p("retratos","titular_sobre_foto","Volviste con 900 fotos","Y no tenés la semana para editarlas.","edit","Para fotógrafos"),
- p("eventos","barra_inferior","Cobrá antes","Si entregás en tres días en vez de tres semanas, cobrás antes.","edit","Post producción"),
+ p("eventos","barra_inferior","Cobrá antes","Si entregás en tres días en vez de tres semanas, cobrás antes.","edit","Posproducción"),
  p("gastronomia","antes_despues","La comida se edita distinto","Si te pasás de saturación, deja de dar hambre.","edit","Edición"),
  p("retratos","antes_despues","La piel no se plancha","Se corrige el tono y se deja la textura.","edit","Retoque"),
  p("eventos","franja_roja","Tu lote en 72 horas","Bodas, eventos y sesiones de producto.","edit"),
@@ -114,7 +114,7 @@ HISTORIAS = [
  p("eventos","antes_despues","Poca luz no es excusa","El ruido se trabaja, no se tapa.","edit","Edición"),
  p("marcas","antes_despues","Fondo blanco de verdad","Es lo que pide una tienda online.","presu","Packshot"),
  p("retratos","titular_sobre_foto","Sacás 800 fotos por evento","Y las editás de a una. Pará.","edit","Para fotógrafos"),
- p("eventos","barra_inferior","Entregá en tres días","Te libero la semana de edición.","edit","Post producción"),
+ p("eventos","barra_inferior","Entregá en tres días","Te libero la semana de edición.","edit","Posproducción"),
  p("naturaleza","franja_roja","Tu lote en 72 horas","Para fotógrafos y para marcas.","edit"),
  p("marcas","marco_hueso","Tu producto merece esto","Packshot limpio, listo para vender.","presu","Producto"),
  p("marcas","titular_sobre_foto","Nadie compra lo que se ve mal","Aunque sea bueno.","presu","Marcas"),

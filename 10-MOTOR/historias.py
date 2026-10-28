@@ -82,9 +82,9 @@ HISTORIAS = [
    sub="Ya está la galería."),
  h("foto", "bodas", 12, kicker="Ceremonia", titular="La entrada que todos esperaban",
    sub="Un segundo que no se repite."),
- h("foto", "gastronomia", 5, kicker="Hoy", titular="Ocho horas para veinte platos",
-   sub="Vale cada minuto cuando ves la carta terminada."),
- h("foto", "eventos", 33, kicker="Anoche", titular="La fiesta recién empieza a las dos",
+ h("foto", "gastronomia", 5, kicker="Hoy", titular="Toda la carta en una jornada",
+   sub="Plato por plato, sin cerrar el local."),
+ h("foto", "eventos", 28, kicker="Anoche", titular="La fiesta recién empieza a las dos",
    sub="Y ahí es cuando salen las mejores."),
  h("foto", "retratos", 18, kicker="Retrato", titular="Le dije dos cosas y me callé",
    sub="El resto lo hizo la luz de la ventana."),
@@ -102,11 +102,11 @@ HISTORIAS = [
  h("dato", None, 0, numero="80", kicker="Proyectos entregados",
    titular="Ochenta y sigo contando", sub="Bodas, fiestas, marcas y páginas web.", fondo="negro"),
  h("dato", None, 0, numero="10", kicker="Días",
-   titular="Ese es mi plazo de entrega", sub="Sin excepciones y sin tope de cantidad de fotos.", fondo="negro"),
+   titular="Ese es mi plazo de entrega", sub="En bodas y eventos, sin tope de cantidad de fotos.", fondo="negro"),
  h("dato", None, 0, numero="4", kicker="Servicios",
    titular="Foto, video, web y edición", sub="Todo lo hago yo. No tercerizo.", fondo="rojo"),
  h("dato", None, 0, kicker="Dato",
-   titular="El 70% te va a mirar desde el celular",
+   titular="Casi todos te van a mirar desde el celular",
    sub="Por eso todo lo que entrego está pensado en vertical también.", fondo="hueso"),
  h("dato", None, 0, numero="72", kicker="Horas",
    titular="Lo que tardo en editar un lote", sub="Para fotógrafos que no llegan con la entrega.", fondo="negro"),
@@ -125,20 +125,20 @@ HISTORIAS = [
 
  # --- preguntas para que contesten --------------------------------------
  h("pregunta", "bodas", 7, titular="¿Ceremonia de día o de noche?",
-   opciones=["DE DÍA", "DE NOCHE"], sub="Contestá acá arriba, tengo curiosidad."),
- h("pregunta", "gastronomia", 21, titular="¿Qué foto te da más hambre?",
-   opciones=["LA DE LA IZQUIERDA", "LA DE LA DERECHA"]),
+   opciones=["DE DÍA", "DE NOCHE"], sub="Votá en la encuesta, tengo curiosidad."),
+ h("pregunta", "gastronomia", 21, titular="¿Esto te da hambre?",
+   opciones=["SÍ, YA", "TODAVÍA NO"]),
  h("pregunta", "naturaleza", 28, titular="¿Color o blanco y negro?",
    opciones=["COLOR", "BLANCO Y NEGRO"], sub="Es la discusión eterna."),
  h("pregunta", "retratos", 22, titular="¿Posás o te da vergüenza?",
    opciones=["POSO SIN PROBLEMA", "ME MUERO DE VERGÜENZA"],
    sub="Si elegiste la segunda, esa es mi especialidad."),
  h("pregunta", "eventos", 19, titular="¿Foto o video en tu fiesta?",
-   opciones=["FOTO", "LAS DOS COSAS"]),
+   opciones=["SOLO FOTO", "FOTO Y VIDEO"]),
 
  # --- detras de escena ---------------------------------------------------
- h("detras", "bodas", 16, kicker="Detrás de escena", titular="Dos cámaras y ningún plan B",
-   sub="Por eso siempre llevo dos cuerpos y cuatro baterías."),
+ h("detras", "bodas", 16, kicker="Detrás de escena", titular="Dos cámaras, por si una falla",
+   sub="Siempre llevo dos cuerpos y cuatro baterías."),
  h("detras", "gastronomia", 30, kicker="Detrás de escena", titular="El plato se enfría en tres minutos",
    sub="Hay que tener la luz armada antes de que salga de la cocina."),
  h("detras", "marcas", 2, kicker="Detrás de escena", titular="El fondo blanco no es una pared blanca",
@@ -177,9 +177,9 @@ HISTORIAS = [
 
  # --- avisos suaves de disponibilidad -----------------------------------
  h("dato", None, 0, kicker="Agenda", titular="Quedan fechas para diciembre",
-   sub="Escribime y te paso disponibilidad en el día.", fondo="rojo"),
+   sub="Escribime al 091 962 962 y te paso disponibilidad en el día.", fondo="rojo"),
  h("dato", None, 0, kicker="Para fotógrafos", titular="Tengo lugar para editar dos lotes esta semana",
-   sub="Si venís atrasado con una entrega, escribime.", fondo="negro"),
+   sub="Si venís atrasado con una entrega, escribime al 091 962 962.", fondo="negro"),
 ]
 
 

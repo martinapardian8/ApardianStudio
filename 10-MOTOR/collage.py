@@ -288,7 +288,7 @@ class Lienzo:
         self.im.paste(capa, (0, 0), m)
 
     # ---------------------------------------------------------------- texto
-    def titulo(self, txt, x, y, w, px, color=None, interlinea=0.9, max_lineas=4, alto_max=None):
+    def titulo(self, txt, x, y, w, px, color=None, interlinea=1.0, max_lineas=4, alto_max=None):
         return titular(self.d, txt, x, y, w, px, color or self.tinta,
                        interlinea=interlinea, max_lineas=max_lineas, alto_max=alto_max)
 

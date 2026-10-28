@@ -65,7 +65,7 @@ Si la foto del plato no da hambre, no vende. Da igual lo bien que cocines: nadie
 Voy a tu local una jornada, fotografío todos los platos de la carta y te los entrego en 7 días, listos para el menú, para Instagram y para las apps de delivery. No hace falta que cierres.
 
 ¿Cuánto hace que no cambiás las fotos de tu carta?""" + FIRMA,
- "hashtags": "#fotografiagastronomica #montevideo #restaurantesuruguay #foodphotography #cartadigital #parrilla"},
+ "hashtags": "#fotografiagastronomica #montevideo #restaurantesuruguay #foodphotography #cartadigital"},
 
 {"n": 3, "cuando": "Viernes", "tipo": "video", "ref": "017_edicion_fotografias-vos-edito-yo_feed.mp4",
  "historia": 16, "titulo": "Fotografiás vos. Edito yo.",
@@ -140,7 +140,7 @@ Si tu carta todavía tiene fotos de celular, hablemos.""" + FIRMA,
             "recordar que hay trayectoria detras.",
  "copy": """Más de 80 proyectos entregados.
 
-Bodas, quince años, fiestas de empresa, marcas y páginas web. Ocho años haciendo esto en Uruguay.
+Bodas, quince años, fiestas de empresa, marcas y páginas web.
 
 No es mi primera boda ni mi primera carta ni mi primera web. Y se nota justamente en las cosas que no vas a ver: que llegue temprano, que tenga dos cámaras, que no desaparezca después de cobrar.
 

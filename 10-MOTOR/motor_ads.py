@@ -7,7 +7,7 @@ Koulen para titulares, Work Sans para el resto, y solo tres colores.
 
 No usa IA: la foto es de el, el diseno lo pone este archivo.
 """
-import os, glob, random, hashlib, json
+import os, glob, random, hashlib, json, re
 from PIL import Image, ImageDraw, ImageFont, ImageFilter, ImageEnhance, ImageOps
 
 # rutas relativas al repositorio: funciona igual en la Mac y en cualquier copia
@@ -97,7 +97,7 @@ def _tinta_abajo(fnt, linea):
         return int(fnt.size * 1.05)
 
 
-def medir_titular(d, txt, max_w, px, interlinea=0.88, track=0, max_lineas=4):
+def medir_titular(d, txt, max_w, px, interlinea=1.0, track=0, max_lineas=4):
     """Devuelve (cuerpo_final, lineas, salto, alto_real) sin dibujar nada."""
     while px > 30:
         f = display(px)
@@ -107,12 +107,17 @@ def medir_titular(d, txt, max_w, px, interlinea=0.88, track=0, max_lineas=4):
         px -= 4
     f = display(px)
     ls = quebrar(d, txt, f, max_w, track)
+    # Anton: la mayúscula ocupa 0,88 del cuerpo, así que con menos de 1,0 de
+    # interlineado las líneas se tocan; la tilde de la segunda (DÍA, ÓMNIBUS,
+    # ASÍ) sube 0,23 más.
+    if any(re.search("[ÁÉÍÓÚÑÜ]", l) for l in ls[1:]):
+        interlinea = max(interlinea, 1.14)
     salto = int(px * interlinea)
     alto = (len(ls) - 1) * salto + _tinta_abajo(f, ls[-1] if ls else "")
     return px, ls, salto, alto
 
 
-def titular(d, txt, x, y, max_w, px, fill, interlinea=0.88, anchor_x="l", track=0,
+def titular(d, txt, x, y, max_w, px, fill, interlinea=1.0, anchor_x="l", track=0,
             max_lineas=4, alto_max=None, mayus=True):
     """Titular de display. Se achica hasta entrar en el ancho y, si se pide, en el alto.
     Devuelve el alto real de la tinta, no una estimacion.
@@ -305,7 +310,7 @@ def foto(cat, i=0, forma=None):
 def bloque(d, x, y_top, y_bot, max_w, c, tinta, acento,
            px_titular=110, px_sub=32, cta_oscura=False, anchor_x="l",
            con_regla=False, con_firma=True, firma_x=None, firma_clara=True,
-           color_kicker=None, mayus=True):
+           color_kicker=None, mayus=True, max_lineas=4):
     """Maqueta kicker + titular + (regla) + bajada + boton dentro de la caja dada.
 
     Mide todo primero y achica la tipografia hasta que entre de verdad.
@@ -319,7 +324,7 @@ def bloque(d, x, y_top, y_bot, max_w, c, tinta, acento,
     while True:
         alto = 0
         if c.get("kicker"): alto += int(25 * 1.05) + GAP_K
-        _, _, _, h_t = medir_titular(d, c["titular"].upper() if mayus else c["titular"], max_w, px_t)
+        _, _, _, h_t = medir_titular(d, c["titular"].upper() if mayus else c["titular"], max_w, px_t, max_lineas=max_lineas)
         alto += h_t + GAP_T
         if con_regla: alto += 5 + GAP_R
         h_s = 0
@@ -337,7 +342,7 @@ def bloque(d, x, y_top, y_bot, max_w, c, tinta, acento,
     if c.get("kicker"):
         kicker(d, x, y, c["kicker"], color_kicker or acento, 25, anchor_x)
         y += int(25 * 1.05) + GAP_K
-    y += titular(d, c["titular"], x, y, max_w, px_t, tinta, anchor_x=anchor_x, mayus=mayus) + GAP_T
+    y += titular(d, c["titular"], x, y, max_w, px_t, tinta, anchor_x=anchor_x, mayus=mayus, max_lineas=max_lineas) + GAP_T
     if con_regla:
         rx = x - 66 if anchor_x == "c" else x
         regla(d, rx, y, 132, acento); y += 5 + GAP_R
@@ -419,10 +424,21 @@ def perdida_recorte(ruta, size):
     return 1 - min(a, b) / max(a, b)
 
 
-def _alto_bloque(size, c, max_w, px_titular, px_sub):
+def _alto_bloque(size, c, max_w, px_titular, px_sub, max_lineas=4):
     prueba = Image.new("RGB", size)
     return bloque(ImageDraw.Draw(prueba), 0, 0, size[1], max_w, c, HUESO, ROJO,
-                  px_titular=px_titular, px_sub=px_sub, con_firma=False)
+                  px_titular=px_titular, px_sub=px_sub, con_firma=False, max_lineas=max_lineas)
+
+
+def _detalle(im, y0, y1):
+    """Cuánto pasa en una franja (bordes): el sujeto suele estar donde hay más.
+    Un cielo o un fondo desenfocado da poco; una cara, un plato o un perro, mucho."""
+    W, H = im.size
+    y0, y1 = int(max(0, y0)), int(min(H, y1))
+    if y1 - y0 < 8: return 1e9
+    r = im.crop((0, y0, W, y1)).convert("L").resize((120, max(8, (y1 - y0) * 120 // W)), Image.BILINEAR)
+    e = list(r.filter(ImageFilter.FIND_EDGES).getdata())
+    return sum(e) / len(e)
 
 
 def pieza_foto(ruta, size, story, c, extra_abajo=0):
@@ -438,20 +454,33 @@ def pieza_foto(ruta, size, story, c, extra_abajo=0):
     c = dict(c)
     if c.get("numero"):
         c["kicker"] = (str(c.pop("numero")) + " · " + c.get("kicker", "")).strip(" ·")
-    px_t, px_s = (72, 30) if story else (60, 28)
+    # Estética del IG de Martin (28/10/2026): el titular en dos líneas como
+    # máximo, chico, y donde no tape el motivo.
+    px_t, px_s = (64, 28) if story else (56, 26)
     max_w = W - 2 * m
-    alto = _alto_bloque(size, c, max_w, px_t, px_s)
+    alto = _alto_bloque(size, c, max_w, px_t, px_s, max_lineas=2)
 
     if perdida_recorte(ruta, size) <= PERDIDA_MAX:
-        # a sangre: la foto llena el cuadro y solo se oscurece detrás del texto
+        # a sangre: la foto llena el cuadro y solo se oscurece detrás del texto.
+        # El texto va arriba o abajo, donde la foto está más tranquila (cielo,
+        # fondo desenfocado): así no tapa la cara, el plato ni el producto.
         im = cargar(ruta, size)
-        y0 = bot - alto
-        im = velo_banda(im, y0 - 40, H, objetivo=46, pluma=320, piso=0.30)
+        arriba = (not extra_abajo and
+                  _detalle(im, top, top + alto + 40) < 0.75 * _detalle(im, bot - alto - 40, bot))
+        if arriba:
+            y0 = top
+            im = ImageOps.flip(velo_banda(ImageOps.flip(im), H - (y0 + alto + 40), H,
+                                          objetivo=46, pluma=320, piso=0.30))
+        else:
+            y0 = bot - alto
+            im = velo_banda(im, y0 - 40, H, objetivo=46, pluma=320, piso=0.30)
     else:
         # entera: de lado a lado (o de arriba abajo), sin recortar nada
         # se recorta como mucho PERDIDA_MAX (con el encuadre que cuida rostros
         # y sujeto) para que la foto ocupe más, y el resto se muestra entero
-        im = Image.new("RGB", size, CARBON)
+        # de fondo, la misma foto llenando el cuadro, desenfocada y oscura:
+        # nada de franjas negras vacías (Martin, 26 y 28/10/2026)
+        im = ImageEnhance.Brightness(cargar(ruta, size).filter(ImageFilter.GaussianBlur(48))).enhance(0.38)
         w0, h0 = Image.open(ruta).size
         ar = w0 / h0
         ar2 = ar * (1 - PERDIDA_MAX) if ar > W / H else ar / (1 - PERDIDA_MAX)
@@ -468,7 +497,8 @@ def pieza_foto(ruta, size, story, c, extra_abajo=0):
         y0 = yf + fh + 56
     d = ImageDraw.Draw(im)
     fin = bloque(d, m, y0, H, max_w, c, HUESO, ROJO, px_titular=px_t, px_sub=px_s,
-                 firma_x=W - m, color_kicker=ROJO if perdida_recorte(ruta, size) > PERDIDA_MAX else HUESO)
+                 firma_x=W - m, color_kicker=ROJO if perdida_recorte(ruta, size) > PERDIDA_MAX else HUESO,
+                 max_lineas=2)
     if not c.get("cta"):
         firma(d, W - m, y0 - 6 if c.get("kicker") else y0 - 46, 0.9, True, "r")
     return im, fin
