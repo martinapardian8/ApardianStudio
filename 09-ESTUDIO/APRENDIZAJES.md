@@ -28,6 +28,10 @@ que no la cumple.
 - **El tema manda la foto** (24 y 25/10/2026). Si el texto habla de carta,
   platos o comida, la foto muestra un plato o comida preparándose, no un
   kamado ni un fuego (`contenido` en `fotos.json`).
+- **Carta = plato servido** (28/10/2026). Una pieza que habla de "sesión de
+  carta" o de "tu carta" lleva un plato terminado (`contenido: plato`) o la
+  carta misma, nunca gente preparando (un alfajor bañándose en chocolate no es
+  una carta). En `campanas.py` se fija la foto con `_foto=` en la pieza.
 - **El texto dice lo que muestra la foto** (24/10/2026). "Esta la saqué desde
   el piso" sobre una foto sacada de pie: no. Si no sabés cómo se sacó, no lo
   cuentes.
