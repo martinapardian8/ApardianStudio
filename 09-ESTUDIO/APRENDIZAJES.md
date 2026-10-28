@@ -33,6 +33,20 @@ que no la cumple.
   cuentes.
 - **Sin "DESLIZÁ"** (26/10/2026). Ni flecha ni cartel de deslizar en los
   carruseles nuevos: Instagram ya muestra los puntitos.
+- **Nunca una foto horizontal en un lienzo vertical** (28/10/2026). "No me
+  gusta que pongas una foto horizontal en un canva vertical." Historias, reels
+  (9:16) y posteos o carruseles 4:5 llevan solo fotos verticales, a pantalla
+  completa. Nada de foto chica con fondo desenfocado, franjas ni marcos. Una
+  foto horizontal va en un posteo horizontal o no va. Lupa lo frena.
+- **Los textos, con la voz de Martin** (28/10/2026). "Los textos tampoco me
+  convencen, yo no escribo así. Quiero vender, pero con mi manera." Antes de
+  escribir un titular, un pie o una historia, Luz lee `09-ESTUDIO/VOZ_MARTIN.md`
+  (cómo escribe él, con ejemplos suyos) y escribe así. Cada texto que Martin
+  corrige desde el Centro entra ahí como ejemplo.
+- **Aprobación en el Centro** (28/10/2026). Cada posteo e historia del
+  calendario tiene ✓ y ✗. Si Martin marca ✗, antes de borrar nada se le
+  pregunta si quiere mejorar algo puntual, reemplazarla por otra mejor o
+  eliminarla, y Luz hace eso (orden del Centro).
 - **Nada de testimonios inventados.** Una cita con nombre de cliente solo si
   el cliente la dijo y Martin lo confirma.
 
