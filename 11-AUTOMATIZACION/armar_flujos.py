@@ -230,14 +230,15 @@ def claude(fl, nombre, pos=None):
 
 def enviar_mail(fl, nombre, cfg, pos=None):
     """Manda un mail de texto plano por el SMTP de Hostinger (contacto@).
-    Espera en el item: para, asunto, cuerpo."""
+    Espera en el item: para, asunto, cuerpo, y copia (vacía o la casilla a la
+    que va la copia oculta)."""
     return fl.nodo(nombre, "n8n-nodes-base.emailSend", 2.1, {
         "fromEmail": "={{ $('%s').first().json.MI_EMAIL }}" % cfg,
         "toEmail": "={{ $json.para }}",
         "subject": "={{ $json.asunto }}",
         "emailFormat": "text",
         "text": "={{ $json.cuerpo }}",
-        "options": {"appendAttribution": False},
+        "options": {"appendAttribution": False, "bccEmail": "={{ $json.copia || '' }}"},
     }, pos, {"credentials": cred("smtp", "Hostinger SMTP (contacto@)"),
              "onError": "continueRegularOutput"})
 
@@ -890,6 +891,8 @@ for (const it of $('Mail nuevo en contacto@').all()) {
     (String(m.from && m.from.text || m.from || '').match(/[\w.+-]+@[\w.-]+/) || [''])[0]).toLowerCase();
   const texto = String(m.text || m.textPlain || sinHtml(m.html || m.textHtml) || '');
   const rebote = /mailer-daemon|postmaster/i.test(de);
+  // La copia oculta de lo que manda el 12 (si el filtro del webmail todavía no la movió a Enviados)
+  if (/@apardianstudio\.com$/.test(de)) continue;
   if (!rebote && automatica(m)) continue;
   let lead = porMail.get(de) || porDominio.get(dominioPropio(de)) || (!rebote && porAsunto.get(limpioAsunto(m.subject)));
   if (!lead && rebote) lead = L.find(l => contiene(texto, l.email));
@@ -1576,6 +1579,11 @@ def f12():
         # para lo que Martin conteste a mano desde contacto@.
         "LIMITE_TOTAL_DIA": (90, "number"),
         "DIRECCION_POSTAL": ("", "string"),
+        # Martin quiere ver lo que sale en "Enviados" del webmail (28/10/2026).
+        # El SMTP no guarda copia: cada mail va con copia oculta a contacto@ y
+        # un filtro del webmail la pasa a Sent. La copia cuenta para el tope de
+        # Hostinger, así que con esto prendido salen la mitad por día.
+        "COPIA_EN_ENVIADOS": (True, "boolean"),
     })
     cfg = config(fl, "Config", v)
     leads = leer_hoja(fl, "Leer Leads", cfg, "Leads")
@@ -1588,7 +1596,9 @@ for (const r of $('Leer Bajas').all()) {
   if (r.json.dominio) bd.add(String(r.json.dominio).toLowerCase());
 }
 const todos = $('Leer Leads').all().map(r => r.json).filter(l => l.id);
-const libre = Math.max(0, (Number(c.LIMITE_TOTAL_DIA) || 90) - mailsHoy(todos));
+const copia = c.COPIA_EN_ENVIADOS ? (String(c.MI_EMAIL || '').match(/[\w.+-]+@[\w.-]+/) || [''])[0] : '';
+const tope = Math.floor((Number(c.LIMITE_TOTAL_DIA) || 90) / (copia ? 2 : 1));
+const libre = Math.max(0, tope - mailsHoy(todos));
 // Una casilla recibe como mucho un mail por día, aunque sean dos sucursales.
 const yaHoy = new Set(todos.filter(l => String(l.ultimo_envio || '') === hoyUY()).map(l => String(l.email || '').toLowerCase()));
 const unaPorCasilla = l => { const e = String(l.email).toLowerCase(); if (yaHoy.has(e)) return false; yaHoy.add(e); return true; };
@@ -1619,7 +1629,7 @@ return todos
   .filter(unaPorCasilla)
   .slice(0, tanda)
   .map(l => { const seg = l.estado !== 'aprobado';
-    return { json: { lead: l, n: seg ? Number(l.estado.slice(-1)) : 0, para: l.email,
+    return { json: { lead: l, n: seg ? Number(l.estado.slice(-1)) : 0, para: l.email, copia,
       asunto: String(seg ? l.seg_asunto : l.asunto).trim(), cuerpo: completar(l, seg ? l.seg_cuerpo : l.borrador) } }; });
 """)
     # Antes de mandar se marca "enviando" con la fecha de hoy: si después falla
