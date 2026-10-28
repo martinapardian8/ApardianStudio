@@ -24,6 +24,7 @@ def configurar(flujo, d):
         "TELEGRAM_CHAT_ID": d.get("TELEGRAM_CHAT_ID"),
         "FECHA_INICIO": d.get("FECHA_INICIO"),
         "FECHA_FIN": d.get("FECHA_FIN"),
+        "IG_USER_ID": d.get("IG_USER_ID"),
         "URL_BANDEJA": n8n and n8n + "/webhook/apardian-bandeja",
         "URL_APROBAR_IG": n8n and n8n + "/webhook/apardian-ig-aprobar",
     }
