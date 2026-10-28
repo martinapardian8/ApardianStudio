@@ -107,7 +107,7 @@
     },
     {
       "parameters": {
-        "jsCode": "const lim = $('Config').first().json.LIMITE_DIARIO || 90;\nreturn $input.all()\n  .filter(r => r.json.estado === 'nuevo' && r.json.web)\n  .slice(0, lim)\n  .map(r => {\n    // Se pide siempre por https: muchas fichas de Google guardan http:// y el\n    // sitio igual redirige a https.\n    let web = String(r.json.web).trim().replace(/^http:\\/\\//i, 'https://');\n    if (!/^https?:\\/\\//i.test(web)) web = 'https://' + web;\n    return { json: { ...r.json, web } };\n  });\n"
+        "jsCode": "const esRed = u => /(^|\\/\\/|\\.)(instagram\\.com|facebook\\.com|fb\\.com|fb\\.me|linktr\\.ee|wa\\.me|api\\.whatsapp\\.com|tiktok\\.com)(\\/|$)/i.test(String(u || '').trim());\n\nconst lim = $('Config').first().json.LIMITE_DIARIO || 90;\nreturn $input.all()\n  .filter(r => r.json.estado === 'nuevo' && r.json.web && !esRed(r.json.web))\n  .slice(0, lim)\n  .map(r => {\n    // Se pide siempre por https: muchas fichas de Google guardan http:// y el\n    // sitio igual redirige a https.\n    let web = String(r.json.web).trim().replace(/^http:\\/\\//i, 'https://');\n    if (!/^https?:\\/\\//i.test(web)) web = 'https://' + web;\n    return { json: { ...r.json, web } };\n  });\n"
       },
       "id": "464872fe-6dec-52c0-a307-5b29e942b973",
       "name": "Elegir nuevos",
@@ -285,7 +285,7 @@
     },
     {
       "parameters": {
-        "jsCode": "// ¿El teléfono parece un celular con WhatsApp? Uruguay: +598 9…; Argentina:\n// +54 9…; el resto se deja pasar (Martin lo ve antes de mandarlo).\nconst digitos = t => String(t || '').replace(/[^\\d]/g, '');\nconst celular = (t, pais) => {\n  const d = digitos(t);\n  if (d.length < 8) return false;\n  if (d.startsWith('598')) return d[3] === '9';\n  if (d.startsWith('54')) return d[2] === '9';\n  if (!String(t).trim().startsWith('+')) return String(pais || 'Uruguay') === 'Uruguay' && /^09/.test(d);\n  return true;\n};\nconst waNumero = (t, pais) => { let d = digitos(t); if (/^09/.test(d) && String(pais || 'Uruguay') === 'Uruguay') d = '598' + d.slice(1); return d; };\n\nconst lim = Number($('Config').first().json.LIMITE_WHATSAPP) || 15;\nreturn $('Leer Leads').all().map(r => r.json)\n  .filter(l => l.id && (l.estado === 'sin_web' || (l.estado === 'sin_email' && Number(l.score) >= 60)))\n  .filter(l => celular(l.telefono, l.pais))\n  .sort((x, y) => (Number(y.rating) || 0) * Math.log10(10 + (Number(y.resenas) || 0)) - (Number(x.rating) || 0) * Math.log10(10 + (Number(x.resenas) || 0)))\n  .slice(0, lim)\n  .map(l => ({ json: l }));\n"
+        "jsCode": "// ¿El teléfono parece un celular con WhatsApp? Uruguay: +598 9…; Argentina:\n// +54 9…; el resto se deja pasar (Martin lo ve antes de mandarlo).\nconst digitos = t => String(t || '').replace(/[^\\d]/g, '');\nconst celular = (t, pais) => {\n  const d = digitos(t);\n  if (d.length < 8) return false;\n  if (d.startsWith('598')) return d[3] === '9';\n  if (d.startsWith('54')) return d[2] === '9';\n  if (!String(t).trim().startsWith('+')) return String(pais || 'Uruguay') === 'Uruguay' && /^09/.test(d);\n  return true;\n};\nconst waNumero = (t, pais) => { let d = digitos(t); if (/^09/.test(d) && String(pais || 'Uruguay') === 'Uruguay') d = '598' + d.slice(1); return d; };\n\nconst lim = Number($('Config').first().json.LIMITE_WHATSAPP) || 15;\nreturn $('Leer Leads').all().map(r => r.json)\n  .filter(l => l.id && (l.estado === 'sin_web' || (l.estado === 'sin_email' && Number(l.score) >= 60)))\n  .filter(l => celular(l.telefono, l.pais))\n  // la planilla puede devolver el rating con coma (\"4,5\")\n  .sort((x, y) => { const n = v => Number(String(v == null ? '' : v).replace(',', '.')) || 0;\n    return n(y.rating) * Math.log10(10 + n(y.resenas)) - n(x.rating) * Math.log10(10 + n(x.resenas)); })\n  .slice(0, lim)\n  .map(l => ({ json: l }));\n"
       },
       "id": "8be3b4de-9913-51fe-824a-4c6bce05f840",
       "name": "Elegir para WhatsApp",
@@ -417,6 +417,62 @@
       "retryOnFail": true,
       "maxTries": 4,
       "waitBetweenTries": 5000
+    },
+    {
+      "parameters": {
+        "jsCode": "const esRed = u => /(^|\\/\\/|\\.)(instagram\\.com|facebook\\.com|fb\\.com|fb\\.me|linktr\\.ee|wa\\.me|api\\.whatsapp\\.com|tiktok\\.com)(\\/|$)/i.test(String(u || '').trim());\n\nreturn $('Leer Leads').all().map(r => r.json)\n  .filter(l => l.id && l.estado === 'nuevo' && esRed(l.web))\n  .map(l => ({ json: { id: l.id, estado: 'sin_web', web: '',\n    instagram: l.instagram || (/instagram\\.com/i.test(l.web) ? l.web : ''),\n    notas: [l.notas, 'en Google su web es ' + l.web].filter(Boolean).join(' · ') } }));\n"
+      },
+      "id": "107aa6ca-c1a8-5f04-a479-caed0cf45b0e",
+      "name": "Webs que son redes",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        480,
+        620
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "={{ $('Config').first().json.SHEET_ID }}",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Leads",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": []
+        },
+        "options": {
+          "cellFormat": "RAW"
+        }
+      },
+      "id": "4a677b14-d41f-57c7-949f-f54ebcf06384",
+      "name": "Guardar sin web",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        720,
+        620
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "REEMPLAZAR",
+          "name": "Google Sheets"
+        }
+      },
+      "retryOnFail": true,
+      "maxTries": 4,
+      "waitBetweenTries": 5000
     }
   ],
   "connections": {
@@ -463,6 +519,11 @@
           },
           {
             "node": "Elegir para WhatsApp",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Webs que son redes",
             "type": "main",
             "index": 0
           }
@@ -529,6 +590,17 @@
         [
           {
             "node": "Guardar auditoría",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webs que son redes": {
+      "main": [
+        [
+          {
+            "node": "Guardar sin web",
             "type": "main",
             "index": 0
           }

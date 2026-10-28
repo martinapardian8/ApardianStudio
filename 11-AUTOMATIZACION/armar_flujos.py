@@ -59,6 +59,11 @@ function leerClaude(r) {
 }
 """
 
+# Una "web" que en realidad es Instagram, Facebook, Linktree o WhatsApp: no tiene web.
+JS_REDES = r"""
+const esRed = u => /(^|\/\/|\.)(instagram\.com|facebook\.com|fb\.com|fb\.me|linktr\.ee|wa\.me|api\.whatsapp\.com|tiktok\.com)(\/|$)/i.test(String(u || '').trim());
+"""
+
 JS_HTML = r"""
 const esc = s => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
   .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
@@ -341,7 +346,7 @@ $input.all().forEach((it, i) => {
 return out;
 """)
     leads = leer_hoja(fl, "Leer Leads", cfg, "Leads")
-    dedupe = codigo(fl, "Solo nuevos", JS_FECHA + r"""
+    dedupe = codigo(fl, "Solo nuevos", JS_FECHA + JS_REDES + r"""
 // Saca los que ya están en la planilla (por id de Google o por web) y los que
 // no tienen buena reputación: rating y cantidad de reseñas mínimos (Config).
 const c = $('Config').first().json;
@@ -362,13 +367,15 @@ for (const it of $('Aplanar').all()) {
   if ((Number(p.rating) || 0) < rMin || (Number(p['reseñas']) || 0) < nMin) continue;
   vistos.add(p.id);
   if (w) webs.add(w);
+  // Si en Google su "web" es Instagram o Facebook, no tiene web: el mejor prospecto.
+  const red = esRed(p.web);
   out.push({ json: {
-    id: p.id, fecha: hoy(), rubro: p.rubro, nombre: p.nombre, web: p.web,
-    instagram: '', email: '', telefono: p.telefono, ciudad: p.ciudad,
+    id: p.id, fecha: hoy(), rubro: p.rubro, nombre: p.nombre, web: red ? '' : p.web,
+    instagram: /instagram\.com/i.test(p.web) ? p.web : '', email: '', telefono: p.telefono, ciudad: p.ciudad,
     fuente: 'google_places', score: '', servicio: p.servicio_objetivo, problemas: '',
-    estado: p.web ? 'nuevo' : 'sin_web', asunto: '', borrador: '', fecha_envio: '',
+    estado: p.web && !red ? 'nuevo' : 'sin_web', asunto: '', borrador: '', fecha_envio: '',
     seguimientos: 0, respuesta: '',
-    notas: [p.direccion, p.rating ? ('rating ' + p.rating + ' (' + p['reseñas'] + ' reseñas)') : '', p.maps].filter(Boolean).join(' · '),
+    notas: [p.direccion, p.rating ? ('rating ' + p.rating + ' (' + p['reseñas'] + ' reseñas)') : '', p.maps, red ? 'en Google su web es ' + p.web : ''].filter(Boolean).join(' · '),
     pais: p.pais, idioma: p.idioma, mercado: p.mercado, zona: p.zona, oferta_id: '',
     ultimo_envio: '', seg_asunto: '', seg_cuerpo: '',
     rating: p.rating, resenas: p['reseñas'], wa_mensaje: '',
@@ -413,10 +420,10 @@ def f02():
     v["LIMITE_WHATSAPP"] = (15, "number")
     cfg = config(fl, "Config", v)
     leads = leer_hoja(fl, "Leer Leads", cfg, "Leads")
-    elegir = codigo(fl, "Elegir nuevos", r"""
+    elegir = codigo(fl, "Elegir nuevos", JS_REDES + r"""
 const lim = $('Config').first().json.LIMITE_DIARIO || 90;
 return $input.all()
-  .filter(r => r.json.estado === 'nuevo' && r.json.web)
+  .filter(r => r.json.estado === 'nuevo' && r.json.web && !esRed(r.json.web))
   .slice(0, lim)
   .map(r => {
     // Se pide siempre por https: muchas fichas de Google guardan http:// y el
@@ -519,7 +526,9 @@ const lim = Number($('Config').first().json.LIMITE_WHATSAPP) || 15;
 return $('Leer Leads').all().map(r => r.json)
   .filter(l => l.id && (l.estado === 'sin_web' || (l.estado === 'sin_email' && Number(l.score) >= 60)))
   .filter(l => celular(l.telefono, l.pais))
-  .sort((x, y) => (Number(y.rating) || 0) * Math.log10(10 + (Number(y.resenas) || 0)) - (Number(x.rating) || 0) * Math.log10(10 + (Number(x.resenas) || 0)))
+  // la planilla puede devolver el rating con coma ("4,5")
+  .sort((x, y) => { const n = v => Number(String(v == null ? '' : v).replace(',', '.')) || 0;
+    return n(y.rating) * Math.log10(10 + n(y.resenas)) - n(x.rating) * Math.log10(10 + n(x.resenas)); })
   .slice(0, lim)
   .map(l => ({ json: l }));
 """, pos=(480, y))
@@ -547,9 +556,19 @@ if (r.data.omitir || !r.data.mensaje) return { json: { id: l.id, estado: 'sin_co
 return { json: { id: l.id, estado: 'wa_borrador', wa_mensaje: String(r.data.mensaje).slice(0, 1500) } };
 """, por_item=True, pos=(1200, y))
     g_wa = escribir_hoja(fl, "Guardar WhatsApp", cfg, "Leads", pos=(1440, y))
+    # ---- "webs" que son Instagram o Facebook: no se auditan, pasan a sin_web
+    redes = codigo(fl, "Webs que son redes", JS_REDES + r"""
+return $('Leer Leads').all().map(r => r.json)
+  .filter(l => l.id && l.estado === 'nuevo' && esRed(l.web))
+  .map(l => ({ json: { id: l.id, estado: 'sin_web', web: '',
+    instagram: l.instagram || (/instagram\.com/i.test(l.web) ? l.web : ''),
+    notas: [l.notas, 'en Google su web es ' + l.web].filter(Boolean).join(' · ') } }));
+""", pos=(480, y + 220))
+    g_redes = escribir_hoja(fl, "Guardar sin web", cfg, "Leads", pos=(720, y + 220))
     fl.unir(a, cfg); fl.unir(b, cfg)
     fl.cadena(cfg, leads, elegir, bajar, senales, prep, cl, leer, guardar)
     fl.unir(leads, elegir_wa)
+    fl.cadena(leads, redes, g_redes)
     fl.cadena(elegir_wa, prep_wa, cl_wa, leer_wa, g_wa)
     return fl
 
@@ -641,7 +660,9 @@ const semana = ini ? Math.max(0, Math.floor(diasDesde(ini) / 7)) : 0;
 const cupo = cupos[Math.min(semana, cupos.length - 1)] || 10;
 const pendientes = todos.filter(l => ['borrador', 'aprobado'].includes(l.estado)).length;
 const n = terminoPrueba(c) ? 0 : Math.max(0, Math.min(cupo, (Number(c.MAX_PENDIENTES) || 60) - pendientes));
-const rep = l => (Number(l.rating) || 0) * Math.log10(10 + (Number(l.resenas) || 0));
+// la planilla puede devolver el rating con coma ("4,5")
+const num = v => Number(String(v == null ? '' : v).replace(',', '.')) || 0;
+const rep = l => num(l.rating) * Math.log10(10 + num(l.resenas));
 const elegidos = todos
   .filter(l => l.estado === 'auditado' && Number(l.score) >= (c.SCORE_MINIMO || 60) && l.email)
   .filter(l => { const e = String(l.email).toLowerCase(); return !bm.has(e) && !bd.has(dominioPropio(e)); })
