@@ -5,9 +5,12 @@ Lo usan los carruseles (carruseles_fotos.py), sus reels (reels_collage.py) y
 los videos de pauta (video_ads.py). Reglas que aplica (09-ESTUDIO/ESTETICA_IG.md
 y APRENDIZAJES.md):
 
-- La foto llena el cuadro si para eso se pierde 22 % o menos. Si se perdería
-  más, va entera de lado a lado (o de arriba abajo) sobre la misma foto
-  desenfocada y oscurecida; nunca sobre negro ni con marco.
+- La foto llena el cuadro si para eso se pierde 22 % o menos. En un cuadro
+  vertical (4:5 o 9:16) solo entra una foto vertical que lo llene así (Martin,
+  28/10/2026: "nunca una foto horizontal en un lienzo vertical"); si no, Capa
+  da ValueError y el que arma la pieza elige otra. Solo en un cuadro
+  horizontal o cuadrado una foto que no entra va entera sobre la misma foto
+  desenfocada.
 - El recorte no parte caras (recorte.caja_recorte, caras.json).
 - El texto va en el tercio de arriba o de abajo, donde no hay caras y la foto
   está más tranquila, con un degradado suave solo detrás de él.
@@ -19,7 +22,7 @@ from PIL import Image, ImageDraw, ImageFilter, ImageEnhance, ImageOps
 
 from motor_ads import (HUESO, ROJO, CARBON, display, work, escribir, ancho,
                        medir_titular, titular, _tinta_abajo, luminancia,
-                       _mezcla_necesaria, PERDIDA_MAX)
+                       _mezcla_necesaria, PERDIDA_MAX, apta)
 from recorte import caras, caja_recorte
 
 WA = "+598 91 962 962"
@@ -50,13 +53,17 @@ class Capa:
     """La foto ya ubicada en un cuadro W x H.
 
     modo "sangre": la foto llena el cuadro (caja = todo el cuadro).
-    modo "entera": la foto va en `caja` sobre `fondo` (la misma foto
+    modo "entera" (solo en cuadros horizontales o cuadrados): la foto va en
+    `caja` sobre `fondo` (la misma foto
     desenfocada y oscura).
     `caras` quedan en coordenadas del cuadro, para no taparlas con texto."""
 
     def __init__(self, ruta, size, entera=False):
         self.ruta, self.size = ruta, size
         W, H = size
+        if H > W and (entera or not apta(ruta, size)):
+            raise ValueError("%s no llena un cuadro vertical de %dx%d (horizontal, pierde más "
+                             "del 22 %% o parte una cara): va otra foto vertical" % (os.path.basename(ruta), W, H))
         self.orig = Image.open(ruta).convert("RGB")
         sw, sh = self.orig.size
         if perdida(ruta, size) <= PERDIDA_MAX and not entera:

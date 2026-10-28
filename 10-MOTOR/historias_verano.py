@@ -5,11 +5,15 @@ Mismas plantillas que historias.py (foto con frase, detras de escena, dato),
 con fotos de Martin que no se usaron en las 50 primeras ni en los carruseles.
 Sin preguntas: esas llevan la encuesta a mano y no salen solas.
 
-python3 10-MOTOR/historias_verano.py
+python3 10-MOTOR/historias_verano.py                      # las que no salieron
+python3 10-MOTOR/historias_verano.py --desde 2026-11-02   # solo las del calendario desde ese día
+
+Solo fotos verticales a pantalla completa (Martin, 28/10/2026): si una de las
+de abajo es horizontal, sale otra vertical del mismo tema (historias.elegir_foto).
 """
 import os, re, json, unicodedata
 import historias as H
-from motor_ads import IMG, RAIZ
+from motor_ads import IMG, RAIZ, se_puede_escribir, registrar, opcion_desde
 
 IG = os.path.join(RAIZ, "08-CONTENIDO-INSTAGRAM")
 DEST = os.path.join(IG, "04-historias-organicas")
@@ -84,31 +88,69 @@ HISTORIAS = [
 ]
 
 
+# La foto de arriba es horizontal y la vertical que elegiría el motor no
+# muestra lo que dice el texto: la elige Luz a mano. None: no hay una foto
+# vertical de Martin que lo muestre y llene el 9:16; la historia no se rehace
+# y Lupa la frena hasta que Martin decida (Martin, 28/10/2026).
+VERTICAL = {
+    51: None,                            # Hasta el faro: la única del faro es 3:4 (pierde 25 %)
+    52: f("naturaleza", "v__55.jpg"),    # Otra ciudad: una calle, no el mar
+    56: None,                            # Los chicos primero: no hay chicos en vertical
+    60: None,                            # En vivo: no hay show en vivo vertical
+    69: None,                            # Fiesta de empresa, nadie posa: las verticales son posadas
+    70: f("naturaleza", "nw__FullSizeRender_6.jpg"),  # Enero en modo lento: mar quieto (la combi ya sale 3 veces)
+    72: None,                            # Fotos de equipo: no hay equipo en vertical 9:16
+    74: None,                            # Los chicos no posan: no hay chicos en vertical
+    76: f("animales", "v__108.jpg"),     # Campo abierto: el caballo en el campo
+    80: f("deportes", "v__90.jpg"),      # Todo pasa rápido: autos en derrape
+}
+H.VERTICAL.update(VERTICAL)
+
+
 def slug(t):
     t = unicodedata.normalize("NFKD", t).encode("ascii", "ignore").decode()
     return re.sub(r"[^a-zA-Z0-9]+", "-", t).strip("-").lower()[:44]
 
 
-def main():
+def main(desde=None):
+    """desde (AAAA-MM-DD): solo rehace las del calendario que salen ese día o
+    después. Lo que ya salió no se toca nunca."""
     todo = json.load(open(INDICE, encoding="utf-8"))
     idx = [x for x in todo if x["n"] < PRIMERA]
     # el archivo conserva su nombre aunque cambie el texto: el calendario lo usa
-    viejos = {x["n"]: x["archivo"] for x in todo if x["n"] >= PRIMERA}
+    viejos = {x["n"]: x for x in todo if x["n"] >= PRIMERA}
+    nombres = {x["archivo"] for x in viejos.values()}
     for x in os.listdir(DEST):
-        if re.match(r"^\d{3}_", x) and int(x[:3]) >= PRIMERA and x not in viejos.values():
+        if re.match(r"^\d{3}_", x) and int(x[:3]) >= PRIMERA and x not in nombres:
             os.remove(os.path.join(DEST, x))
+    hechas = 0
     for k, (tipo, ruta, c) in enumerate(HISTORIAS):
         n = PRIMERA + k
+        nom = viejos[n]["archivo"] if n in viejos else "%03d_%s_%s.jpg" % (n, tipo, slug(c["titular"]))
+        destino = os.path.join(DEST, nom)
+        if not se_puede_escribir(destino, desde):
+            if n in viejos:
+                idx.append(viejos[n])
+            continue
         if tipo == "dato":
             ruta = H.foto_para_dato(c)
-        im = H.dato(c, ruta) if tipo == "dato" else {"foto": H.foto_frase, "detras": H.detras}[tipo](ruta, c)
-        nom = viejos.get(n) or "%03d_%s_%s.jpg" % (n, tipo, slug(c["titular"]))
-        im.save(os.path.join(DEST, nom), "JPEG", quality=90, optimize=True)
+        # solo fotos verticales a pantalla completa (Martin, 28/10/2026)
+        r = H.elegir_foto(ruta, destino, n)
+        if r is None:
+            print("  SIN FOTO VERTICAL %03d (%s): no se rehace, Lupa la frena" % (n, c["titular"]))
+            if n in viejos:
+                idx.append(viejos[n])
+            continue
+        im = H.dato(c, r) if tipo == "dato" else {"foto": H.foto_frase, "detras": H.detras}[tipo](r, c)
+        im.save(destino, "JPEG", quality=90, optimize=True)
+        registrar(destino, [r])
+        hechas += 1
         idx.append({"n": n, "tipo": tipo, "titular": c["titular"], "archivo": nom,
-                    "foto": os.path.relpath(ruta, RAIZ), "texto": H.texto_de(c)})
+                    "foto": os.path.relpath(r, RAIZ), "texto": H.texto_de(c)})
     json.dump(idx, open(INDICE, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
-    print(len(HISTORIAS), "historias nuevas")
+    print(hechas, "historias rehechas")
 
 
 if __name__ == "__main__":
-    main()
+    import sys
+    main(opcion_desde(sys.argv))

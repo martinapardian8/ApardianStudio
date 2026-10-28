@@ -5,11 +5,17 @@ Un carrusel no es una pila de avisos: es una secuencia. La lamina 1 frena el
 scroll, las del medio muestran el trabajo casi sin gráfica encima (la foto ES
 el producto) y la ultima pide algo.
 
-15 carruseles de 8 laminas, todas en 4:5.
+15 carruseles de 8 laminas, todas en 4:5. Solo fotos verticales que llenen
+el 4:5 perdiendo 22 % como mucho y sin partir caras (Martin, 28/10/2026): si
+el tema no da para 8, el carrusel es más corto.
+
+python3 10-MOTOR/carruseles.py            # todos
+python3 10-MOTOR/carruseles.py 04 06 15   # solo escribe esos (elige igual que con todos)
 """
-import os, re, unicodedata, json
+import os, re, unicodedata, json, glob
 from PIL import Image, ImageDraw
 from motor_ads import *
+from motor_ads import _clave
 import plantillas_ads as PL
 
 DEST = os.path.join(RAIZ, "08-CONTENIDO-INSTAGRAM", "03-carruseles")
@@ -52,23 +58,14 @@ def foto_sola(ruta, n, total, pie=None):
 
 
 def cierre(ruta, c, total):
-    """Ultima lamina. La unica que pide algo."""
-    W, H = POST
-    im = Image.new("RGB", POST, CARBON)
-    hf = int(H * 0.42)
-    f = cargar(ruta, (W, hf), foco=0.4)
-    f = velo(f, 0.14, 0.62, 0.45)
-    im.paste(f, (0, 0))
-    d = ImageDraw.Draw(im)
+    """Ultima lamina. La unica que pide algo.
 
-    y = hf + 60
-    kicker(d, M, y, c.get("kicker_cierre", "Apardian Studio"), ROJO); y += 26 + 16
-    y += titular(d, c["cierre"], M, y, W - 2*M, 108, HUESO) + 28
-    if c.get("sub_cierre"):
-        y += parrafo(d, c["sub_cierre"], M, y, W - 2*M - 50, 32, (214, 212, 209)) + 34
-    cta_pastilla(d, M, min(y, H - 190), c["cta"])
-    firma(d, M, H - 110, 1.0, True)
-    return im
+    La foto llena la lámina (Martin, 26 y 28/10/2026: nada de media pantalla
+    negra con la foto chica arriba) y el texto va al pie o arriba, donde no
+    tapa el motivo: la misma pieza_foto de las historias y los avisos."""
+    return pieza_foto(ruta, POST, False, {"kicker": c.get("kicker_cierre", "Apardian Studio"),
+                                          "titular": c["cierre"], "sub": c.get("sub_cierre"),
+                                          "cta": c["cta"]})[0]
 
 
 def antes_despues_lamina(ruta, n, total, pie=None):
@@ -258,8 +255,23 @@ def slug_ok(t):
     return re.sub(r"[^a-zA-Z0-9]+", "-", t).strip("-").lower()[:40]
 
 
-def main():
+def _cerca_de(slug):
+    """Fotos de otras piezas que salen a menos de 3 días de la publicación de
+    00-SUBIR-EN-ORDEN que usa este carrusel."""
+    import armar_orden as AO
+    out = set()
+    for p in AO.PUBS:
+        if p["tipo"] == "carrusel" and slug.startswith(str(p["ref"])):
+            destino = os.path.join(RAIZ, "08-CONTENIDO-INSTAGRAM", "00-SUBIR-EN-ORDEN",
+                                   "%02d" % p["n"], "foto-1.jpg")
+            out |= {_clave(f) for f in fotos_cerca(destino)}
+    return out
+
+
+def main(nums=()):
     os.makedirs(DEST, exist_ok=True)
+    IDX = os.path.join(os.path.dirname(DEST), "indice_carruseles.json")
+    viejo = {x["carrusel"]: x for x in json.load(open(IDX, encoding="utf-8"))} if os.path.exists(IDX) else {}
     total_lam, indice = 0, []
     usadas = set()          # ninguna foto se repite entre carruseles
     for car in CARRUSELES:
@@ -273,7 +285,8 @@ def main():
                                      else [car["cat"]])
         cands = []
         for k in cats:
-            cands += pool().get(k) or []
+            # solo fotos verticales que llenen el 4:5 (Martin, 28/10/2026)
+            cands += [p for p in (pool().get(k) or []) if apta(p, POST)]
         # en los carruseles de gente, las personas van primero
         gente_primero = any(k in cats for k in ("bodas", "eventos", "retratos", "musica", "empresas"))
         if car.get("fijas"):
@@ -285,7 +298,11 @@ def main():
             usadas.update(rutas)
             indice_ok = True
         else:
-            rutas = S.una_por_escena(cands, n_lam, arranque=car["idxs"][0], size=POST,
+            # tampoco las que salen en otras piezas a menos de 3 días de su
+            # publicación en 00-SUBIR-EN-ORDEN (la misma foto no se repite)
+            cerca = {c for c in cands if _clave(c) in _cerca_de(car["slug"])}
+            rutas = S.una_por_escena([c for c in cands if c not in cerca], n_lam,
+                                     arranque=car["idxs"][0], size=POST,
                                      prefiere_gente=gente_primero,
                                      excluir=None if car.get("reutiliza") else usadas)
             if not car.get("reutiliza"):
@@ -296,6 +313,13 @@ def main():
             print(f"  {car['slug'][:2]}: solo {len(rutas)} laminas, el archivo no da para {n_lam}")
             n_lam = len(rutas)
         pies = car["pies"]
+        if nums and car["slug"][:2] not in nums:
+            # no se rehace: queda como estaba en el índice
+            indice.append(viejo.get(car["slug"]) or {"carrusel": car["slug"], "titular": car["titular"],
+                                                     "laminas": n_lam, "cta": car["cta"]})
+            continue
+        for f in glob.glob(os.path.join(d_car, "[0-9][0-9].jpg")):
+            os.remove(f)          # si el carrusel se acortó, que no queden láminas viejas
         for k in range(n_lam):
             n = k + 1
             if k == 0:
@@ -319,4 +343,5 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    import sys
+    main(sys.argv[1:])

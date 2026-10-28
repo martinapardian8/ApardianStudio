@@ -5,9 +5,10 @@ Rehecho el 28/10/2026 con los criterios de los reels (lo frenó Lupa: "LAS
 EDITAS" sin tilde, el titular que saltaba de lugar a los 2-3 s, líneas que se
 pisaban y sin audio):
 
-- la foto de Martin a cuadro completo (o entera sobre la misma foto
-  desenfocada, si recortarla perdería más del 22 %), con un acercamiento
-  lento de 1,00 a 1,06 en todo el video;
+- la foto de Martin a cuadro completo, siempre vertical y perdiendo 22 %
+  como mucho (Martin, 28/10/2026: nada de foto horizontal sobre la misma foto
+  desenfocada; lamina.Capa no lo permite), con un acercamiento lento de 1,00
+  a 1,06 en todo el video;
 - el texto se arma una sola vez y no se mueve: el antetítulo y el titular
   desde el primer cuadro, y al final aparece (sin moverse nada) la llamada
   "ESCRIBIME POR WHATSAPP / +598 91 962 962" en el lugar que ya estaba

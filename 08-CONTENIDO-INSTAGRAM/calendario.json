@@ -793,7 +793,7 @@
      "nota": ""
     },
     {
-     "tipo": "Carrusel de 8 fotos",
+     "tipo": "Carrusel de 4 fotos",
      "hora": "19:30",
      "titulo": "Marcas uruguayas que fotografié",
      "pieza": "00-SUBIR-EN-ORDEN/09",
@@ -1017,7 +1017,7 @@
      "nota": ""
     },
     {
-     "tipo": "Carrusel de 8 fotos",
+     "tipo": "Carrusel de 6 fotos",
      "hora": "19:30",
      "titulo": "Lo que pasa cuando se apagan las luces",
      "pieza": "00-SUBIR-EN-ORDEN/10",
@@ -1332,8 +1332,8 @@
     {
      "tipo": "Historia",
      "hora": "12:30",
-     "titulo": "Nadie en kilómetros",
-     "pieza": "04-historias-organicas/037_foto_nadie-en-kilometros.jpg",
+     "titulo": "Lugares que no salen en la guía",
+     "pieza": "04-historias-organicas/036_foto_uruguay-tambien-es-esto.jpg",
      "nota": ""
     },
     {
@@ -1368,8 +1368,8 @@
     {
      "tipo": "Historia",
      "hora": "12:30",
-     "titulo": "Una foto en el teléfono no decora nada",
-     "pieza": "02-historias-pauta/047_cuadros_una-foto-en-el-telefono-no-decora-nada.jpg",
+     "titulo": "Colgá tu mejor foto",
+     "pieza": "02-historias-pauta/046_cuadros_colga-tu-mejor-foto.jpg",
      "nota": "Historia de la campaña de la semana, con CTA a WhatsApp."
     },
     {
@@ -1441,8 +1441,8 @@
     {
      "tipo": "Historia",
      "hora": "12:30",
-     "titulo": "Paisajes de mis viajes, impresos en grande",
-     "pieza": "02-historias-pauta/048_cuadros_paisajes-de-uruguay-impresos-en-grande.jpg",
+     "titulo": "Una foto en el teléfono no decora nada",
+     "pieza": "02-historias-pauta/047_cuadros_una-foto-en-el-telefono-no-decora-nada.jpg",
      "nota": "Historia de la campaña de la semana, con CTA a WhatsApp."
     },
     {
@@ -1477,8 +1477,8 @@
     {
      "tipo": "Historia",
      "hora": "12:30",
-     "titulo": "Esto salió del horno hace un minuto",
-     "pieza": "04-historias-organicas/040_foto_esto-salio-del-horno-hace-un-minuto.jpg",
+     "titulo": "Nadie en kilómetros",
+     "pieza": "04-historias-organicas/037_foto_nadie-en-kilometros.jpg",
      "nota": ""
     }
    ]
@@ -1499,8 +1499,8 @@
     {
      "tipo": "Historia",
      "hora": "12:30",
-     "titulo": "Se ve como se come",
-     "pieza": "04-historias-organicas/041_foto_producto-uruguayo-foto-uruguaya.jpg",
+     "titulo": "Esto salió del horno hace un minuto",
+     "pieza": "04-historias-organicas/040_foto_esto-salio-del-horno-hace-un-minuto.jpg",
      "nota": ""
     },
     {
@@ -1521,8 +1521,8 @@
     {
      "tipo": "Historia",
      "hora": "12:30",
-     "titulo": "Se casaron con viento a favor",
-     "pieza": "04-historias-organicas/042_foto_se-casaron-con-viento-a-favor.jpg",
+     "titulo": "Se ve como se come",
+     "pieza": "04-historias-organicas/041_foto_producto-uruguayo-foto-uruguaya.jpg",
      "nota": ""
     },
     {
@@ -1579,8 +1579,8 @@
     {
      "tipo": "Historia",
      "hora": "12:30",
-     "titulo": "Lugares que no salen en la guía",
-     "pieza": "04-historias-organicas/036_foto_uruguay-tambien-es-esto.jpg",
+     "titulo": "Se casaron con viento a favor",
+     "pieza": "04-historias-organicas/042_foto_se-casaron-con-viento-a-favor.jpg",
      "nota": ""
     },
     {
@@ -1608,8 +1608,8 @@
     {
      "tipo": "Historia",
      "hora": "12:30",
-     "titulo": "Tres canciones y se acabó la luz",
-     "pieza": "04-historias-organicas/044_foto_tres-canciones-y-se-acabo-la-luz.jpg",
+     "titulo": "Quince años, cero poses",
+     "pieza": "04-historias-organicas/043_foto_quince-anos-cero-poses.jpg",
      "nota": ""
     },
     {
@@ -1630,8 +1630,8 @@
     {
      "tipo": "Historia",
      "hora": "12:30",
-     "titulo": "Fotos de tu equipo que no parecen de banco de imágenes",
-     "pieza": "02-historias-pauta/049_empresas_fotos-de-tu-equipo-que-no-parecen-de-banco-de-.jpg",
+     "titulo": "Paisajes de mis viajes, impresos en grande",
+     "pieza": "02-historias-pauta/048_cuadros_paisajes-de-uruguay-impresos-en-grande.jpg",
      "nota": "Historia de la campaña de la semana, con CTA a WhatsApp."
     },
     {
@@ -1666,8 +1666,8 @@
     {
      "tipo": "Historia",
      "hora": "12:30",
-     "titulo": "Quince años, cero poses",
-     "pieza": "04-historias-organicas/043_foto_quince-anos-cero-poses.jpg",
+     "titulo": "Tres canciones y se acabó la luz",
+     "pieza": "04-historias-organicas/044_foto_tres-canciones-y-se-acabo-la-luz.jpg",
      "nota": ""
     }
    ]
@@ -1935,8 +1935,8 @@
     {
      "tipo": "Historia",
      "hora": "12:30",
-     "titulo": "Colgá tu mejor foto",
-     "pieza": "02-historias-pauta/046_cuadros_colga-tu-mejor-foto.jpg",
+     "titulo": "Tu casamiento pasa una sola vez",
+     "pieza": "02-historias-pauta/001_bodas_tu-casamiento-pasa-una-sola-vez.jpg",
      "nota": "Historia de la campaña de la semana, con CTA a WhatsApp."
     },
     {
@@ -1962,11 +1962,11 @@
      "nota": ""
     },
     {
-     "tipo": "Reel de 6 segundos",
+     "tipo": "Posteo",
      "hora": "19:30",
-     "titulo": "Tu casamiento pasa una sola vez",
-     "pieza": "05-videos/001_bodas_tu-casamiento-pasa-una-sola-vez_feed.mp4",
-     "nota": "Video animado de un aviso."
+     "titulo": "Así se ve un casamiento bien fotografiado",
+     "pieza": "01-posteos-pauta/005_bodas_asi-se-ve-un-casamiento-bien-fotografiado.jpg",
+     "nota": "Pieza de la campaña, con CTA."
     }
    ]
   },
@@ -1986,8 +1986,8 @@
     {
      "tipo": "Historia",
      "hora": "12:30",
-     "titulo": "Posó mejor que muchos",
-     "pieza": "04-historias-organicas/054_foto_poso-mejor-que-muchos.jpg",
+     "titulo": "Si no llega para Navidad, llega para Reyes",
+     "pieza": "04-historias-organicas/053_dato_si-no-llega-para-navidad-llega-para-reyes.jpg",
      "nota": ""
     },
     {
@@ -2008,8 +2008,8 @@
     {
      "tipo": "Historia",
      "hora": "12:30",
-     "titulo": "Así se ve un casamiento bien fotografiado",
-     "pieza": "02-historias-pauta/005_bodas_asi-se-ve-un-casamiento-bien-fotografiado.jpg",
+     "titulo": "Quedan pocas fechas para el verano",
+     "pieza": "02-historias-pauta/007_bodas_quedan-pocas-fechas-para-el-verano.jpg",
      "nota": "Historia de la campaña de la semana, con CTA a WhatsApp."
     },
     {
@@ -2044,8 +2044,8 @@
     {
      "tipo": "Historia",
      "hora": "12:30",
-     "titulo": "Si no llega para Navidad, llega para Reyes",
-     "pieza": "04-historias-organicas/053_dato_si-no-llega-para-navidad-llega-para-reyes.jpg",
+     "titulo": "Posó mejor que muchos",
+     "pieza": "04-historias-organicas/054_foto_poso-mejor-que-muchos.jpg",
      "nota": ""
     }
    ]
@@ -2124,8 +2124,8 @@
     {
      "tipo": "Historia",
      "hora": "12:30",
-     "titulo": "Qué te llevás",
-     "pieza": "02-historias-pauta/050_empresas_que-te-llevas.jpg",
+     "titulo": "Fotos de tu equipo que no parecen de banco de imágenes",
+     "pieza": "02-historias-pauta/049_empresas_fotos-de-tu-equipo-que-no-parecen-de-banco-de-.jpg",
      "nota": "Historia de la campaña de la semana, con CTA a WhatsApp."
     },
     {
@@ -2151,11 +2151,11 @@
      "nota": ""
     },
     {
-     "tipo": "Posteo",
+     "tipo": "Reel de 6 segundos",
      "hora": "19:30",
-     "titulo": "Quedan pocas fechas para el verano",
-     "pieza": "01-posteos-pauta/007_bodas_quedan-pocas-fechas-para-el-verano.jpg",
-     "nota": "Pieza de la campaña, con CTA."
+     "titulo": "Qué te llevás",
+     "pieza": "05-videos/050_empresas_que-te-llevas_feed.mp4",
+     "nota": "Video animado de un aviso."
     }
    ]
   },

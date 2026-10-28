@@ -2,9 +2,12 @@
 """Reels 9:16 de los carruseles (carruseles_fotos.py), sin gastar créditos.
 
 Cada foto del carrusel a pantalla completa, de 1,5 a 2,5 s, con un
-acercamiento lento (1,00 → 1,06) y cortes secos. Si la foto es horizontal y
-llenar el 9:16 perdería más del 22 %, va entera sobre la misma foto
-desenfocada y oscura (nunca sobre negro).
+acercamiento lento (1,00 → 1,06) y cortes secos. Solo fotos verticales que
+llenen el 9:16 perdiendo 22 % como mucho (Martin, 28/10/2026: "nunca una foto
+horizontal en un lienzo vertical"): las del carrusel que no lo llenan quedan
+afuera y, si quedan pocas, se suman otras del mismo tema
+(carruseles_fotos.fotos_reel). Si no hay al menos tres, el reel no se rehace
+y Lupa lo frena.
 
 Texto solo dos veces y quieto: el titular en la primera foto y, en la última,
 "ESCRIBIME POR WHATSAPP / +598 91 962 962". Todo dentro de la zona segura de
@@ -46,7 +49,10 @@ def duraciones(n):
 
 def reel(slug):
     out = os.path.join(DEST, slug + ".mp4")
-    lams = C.laminas(slug, STORY, TOP, BOT, MARGEN)
+    fotos = C.fotos_reel(slug, STORY)
+    if not fotos:
+        raise ValueError("no hay tres fotos verticales del tema que llenen el 9:16")
+    lams = C.laminas(slug, STORY, TOP, BOT, MARGEN, fotos=fotos)
     ds = duraciones(len(lams))
     total = sum(int(round(d * L.FPS)) for d in ds) / L.FPS
     enc = L.Codificador(out, STORY, total)
@@ -64,11 +70,19 @@ def reel(slug):
 
 
 def main(nums):
+    from motor_ads import se_puede_escribir
     os.makedirs(DEST, exist_ok=True)
     for slug in C.CARRUSELES:
         if nums and slug[:2] not in nums:
             continue
-        out, total = reel(slug)
+        if not se_puede_escribir(os.path.join(DEST, slug + ".mp4")):
+            print("  ", slug, "ya salió: no se rehace")
+            continue
+        try:
+            out, total = reel(slug)
+        except ValueError as e:
+            print("  SIN REHACER", slug, "·", e, flush=True)
+            continue
         print(os.path.relpath(out, RAIZ), f"{total:.1f} s", flush=True)
 
 

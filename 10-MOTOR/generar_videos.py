@@ -8,11 +8,16 @@ nombre que ya tenían: el calendario los usa.
 
 python3 10-MOTOR/generar_videos.py            # todos
 python3 10-MOTOR/generar_videos.py 018 041    # algunos
+python3 10-MOTOR/generar_videos.py --desde 2026-11-02   # solo los del calendario desde ese día
+
+La foto es la de la pieza de pauta si llena el cuadro; si no (horizontal o
+pierde más del 22 %), otra vertical del mismo tema (Martin, 28/10/2026).
 """
 import os, sys, json, re, unicodedata
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import video_ads as V
-from motor_ads import POST, STORY, RAIZ
+from motor_ads import (POST, STORY, RAIZ, vertical, fotos_cerca, usos_cerca, registrar,
+                       se_puede_escribir, opcion_desde)
 from campanas import TODO
 
 IG = os.path.join(RAIZ, "08-CONTENIDO-INSTAGRAM")
@@ -27,7 +32,7 @@ def slug(t):
     return re.sub(r"[^a-zA-Z0-9]+", "-", t).strip("-").lower()[:40]
 
 
-def main(solo):
+def main(solo, desde=None):
     pauta = {x["n"]: x for x in json.load(open(os.path.join(IG, "indice_pauta.json"), encoding="utf-8"))}
     idx = os.path.join(IG, "indice_videos.json")
     viejo = {(x["n"], x["formato"]): x["archivo"] for x in json.load(open(idx, encoding="utf-8"))} \
@@ -38,14 +43,22 @@ def main(solo):
             c = TODO[n - 1]
             nom = viejo.get((n, suf)) or f"{n:03d}_{c['_camp']}_{slug(c['titular'])}_{suf}.mp4"
             nom = nom[:-4]
-            if not solo or f"{n:03d}" in solo:
+            salida = os.path.join(V.DEST, nom + ".mp4")
+            if (not solo or f"{n:03d}" in solo) and se_puede_escribir(salida, desde):
                 ruta = os.path.join(RAIZ, pauta[n]["foto"])
-                V.render(nom, ruta, {"kicker": c.get("kicker"), "titular": c["titular"]}, size, story)
-                print("  ok", nom, flush=True)
+                # solo una foto vertical que llene el cuadro (Martin, 28/10/2026)
+                ruta = (vertical(ruta, size, excluir=fotos_cerca(salida), evitar=usos_cerca(salida, 12))
+                        or vertical(ruta, size))
+                if ruta is None:
+                    print("  SIN REHACER", nom, "· no hay foto vertical del tema", flush=True)
+                else:
+                    V.render(nom, ruta, {"kicker": c.get("kicker"), "titular": c["titular"]}, size, story)
+                    registrar(salida, [ruta])
+                    print("  ok", nom, os.path.basename(ruta), flush=True)
             hechos.append({"n": n, "campana": c["_camp"], "formato": suf, "archivo": nom + ".mp4"})
     json.dump(hechos, open(idx, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     print(json.dumps({"videos": len(hechos)}, ensure_ascii=False))
 
 
 if __name__ == "__main__":
-    main(sys.argv[1:])
+    main([a for a in sys.argv[1:] if re.fullmatch(r"\d{3}", a)], opcion_desde(sys.argv))

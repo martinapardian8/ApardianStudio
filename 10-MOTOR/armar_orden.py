@@ -4,6 +4,9 @@
 Cada carpeta es una publicacion completa y lista: las imagenes en el orden en
 que se suben, el pie de foto para copiar y la historia que la acompaña.
 Martin abre la carpeta 01, sube lo que hay adentro, y listo.
+
+python3 10-MOTOR/armar_orden.py            # todo de cero
+python3 10-MOTOR/armar_orden.py 8 9 10 12  # solo esas publicaciones
 """
 import os, json, shutil, glob
 
@@ -200,16 +203,26 @@ El presupuesto que te paso es el que pagás. Sin costos escondidos y sin tope de
 ]
 
 
-def main():
-    if os.path.exists(DEST):
-        shutil.rmtree(DEST)
-    os.makedirs(DEST)
+def main(solo=None):
+    """solo: números de publicación a rehacer (las demás no se tocan; así no
+    se pisa lo que ya salió). Sin solo, rehace todo desde cero."""
+    if solo:
+        viejo = json.load(open(os.path.join(DEST, "orden.json"), encoding="utf-8"))
+    else:
+        if os.path.exists(DEST):
+            shutil.rmtree(DEST)
+        os.makedirs(DEST)
     resumen = []
 
     for p in PUBS:
+        if solo and p["n"] not in solo:
+            continue
         nom = f"{p['n']:02d}-{p['cuando'].split('·')[-1].strip().lower().replace(' ','-')}"
         d = os.path.join(DEST, f"{p['n']:02d}")
         os.makedirs(d, exist_ok=True)
+        if solo:
+            for q in glob.glob(os.path.join(d, "foto-*.jpg")) + glob.glob(os.path.join(d, "video.mp4")):
+                os.remove(q)
         archivos = []
 
         if p["tipo"] == "carrusel":
@@ -257,11 +270,15 @@ POR QUÉ ESTA Y NO OTRA
         resumen.append({"n": p["n"], "cuando": p["cuando"], "titulo": p["titulo"],
                         "tipo": tipo_txt, "archivos": len(archivos)})
 
+    if solo:
+        nuevos = {r["n"]: r for r in resumen}
+        resumen = [nuevos.get(r["n"], r) for r in viejo]
     json.dump(resumen, open(os.path.join(DEST, "orden.json"), "w"),
               ensure_ascii=False, indent=1)
-    print(json.dumps({"publicaciones": len(PUBS)}, ensure_ascii=False))
+    print(json.dumps({"publicaciones": len(resumen)}, ensure_ascii=False))
     return resumen
 
 
 if __name__ == "__main__":
-    main()
+    import sys
+    main([int(a) for a in sys.argv[1:]] or None)

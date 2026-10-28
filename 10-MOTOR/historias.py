@@ -4,6 +4,9 @@
 No son avisos: no piden nada de entrada. Sirven para sostener la cuenta entre
 campaña y campaña, mostrar oficio y dar pie a que la gente conteste.
 Todas en 9:16 con los margenes seguros de Instagram respetados.
+
+python3 10-MOTOR/historias.py                      # todas las que no salieron
+python3 10-MOTOR/historias.py --desde 2026-11-02   # solo las del calendario desde ese día
 """
 import os, re, unicodedata, json
 from PIL import Image, ImageDraw
@@ -17,9 +20,9 @@ TOP, BOT = SAFE_STORY_TOP, H - SAFE_STORY_BOT
 
 
 # ------------------------------------------------------------------ plantillas
-# Todas con la foto de Martin como protagonista (pieza_foto, en motor_ads): a
-# sangre si la proporción da, entera sobre negro si no. Pedido de Martin del
-# 26/10/2026. Nada de antes/después: no tenemos los originales.
+# Todas con la foto de Martin como protagonista (pieza_foto, en motor_ads), a
+# pantalla completa: solo fotos verticales que llenen el 9:16 (Martin, 26 y
+# 28/10/2026). Nada de antes/después: no tenemos los originales.
 def foto_frase(ruta, c):
     """Foto y una sola línea. La más usada y la que menos molesta."""
     return pieza_foto(ruta, STORY, True, c)[0]
@@ -193,7 +196,41 @@ def texto_de(c):
         ("" if not c.get("opciones") else " · " + " / ".join(c["opciones"]))
 
 
-def main():
+def _f(cat, nombre):
+    return os.path.join(IMG, cat, "web", nombre)
+
+
+# Historias cuya foto era horizontal y donde la vertical que elegiría el motor
+# no muestra lo que dice el texto (APRENDIZAJES: "El texto dice lo que muestra
+# la foto"): la elige Luz a mano. None: Martin no tiene una foto vertical que
+# lo muestre y llene el 9:16; la historia no se rehace y Lupa la frena hasta
+# que Martin decida (cambiar el texto o mandar una foto).
+VERTICAL = {
+    37: _f("naturaleza", "v__33.jpg"),           # Nadie en kilómetros: costa vacía
+    42: _f("bodas", "portfolio__IMG_8771.jpg"),  # Se casaron...: la única pareja vertical
+    43: None,   # Quince años, cero poses: la única vertical de cumpleaños es posada y dice 16
+    44: None,   # Tres canciones y se acabó la luz: no hay show en vivo vertical
+    46: _f("deportes", "v__91.jpg"),             # No hay segunda toma: un auto en derrape
+}
+
+
+def elegir_foto(r, destino, n=None):
+    """La foto de la historia, vertical y a pantalla completa (Martin,
+    28/10/2026): si la elegida es horizontal o pierde más del 22 % al llenar
+    el 9:16, otra vertical del mismo tema que no salga esos mismos días (y,
+    entre las que sirven, la que menos se vio esas semanas). n: número de la
+    historia, para las elegidas a mano (VERTICAL)."""
+    if apta(r, STORY):
+        return r
+    if n in VERTICAL:
+        return VERTICAL[n]
+    return (vertical(r, STORY, excluir=fotos_cerca(destino), evitar=usos_cerca(destino, 12))
+            or vertical(r, STORY))
+
+
+def main(desde=None):
+    """desde (AAAA-MM-DD): solo rehace las historias del calendario que salen
+    ese día o después. Lo que ya salió no se toca nunca."""
     os.makedirs(DEST, exist_ok=True)
     INDICE = os.path.join(os.path.dirname(DEST), "indice_historias.json")
     viejo = {x["n"]: x for x in json.load(open(INDICE, encoding="utf-8"))} if os.path.exists(INDICE) else {}
@@ -201,27 +238,31 @@ def main():
     for i, c in enumerate(HISTORIAS, 1):
         t = c["_t"]
         cc = {k: v for k, v in c.items() if not k.startswith("_")}
+        # el archivo conserva su nombre aunque cambie el texto: el calendario lo usa
+        nom = viejo[i]["archivo"] if i in viejo else f"{i:03d}_{t}_{slug_ok(c['titular'])}.jpg"
+        destino = os.path.join(DEST, nom)
+        if not se_puede_escribir(destino, desde):
+            if i in viejo:
+                idx.append(viejo[i])
+            continue
         try:
             if t == "dato":
                 r = foto_para_dato(cc)
-                im = dato(cc, r)
             else:
-                import similitud as S
                 r = foto_de(c["_cat"], c["_i"], COMIDA if c["_cat"] == "gastronomia" else None)
-                if r in S._vetadas(STORY):
-                    for k in range(1, 20):
-                        alt = foto_de(c["_cat"], c["_i"] + k, COMIDA if c["_cat"] == "gastronomia" else None)
-                        if alt not in S._vetadas(STORY):
-                            r = alt; break
-                im = {"foto": foto_frase, "pregunta": pregunta,
-                      "detras": detras, "antes": antes_historia}[t](r, cc)
-            # el archivo conserva su nombre aunque cambie el texto: el calendario lo usa
-            nom = viejo[i]["archivo"] if i in viejo else f"{i:03d}_{t}_{slug_ok(c['titular'])}.jpg"
-            im.save(os.path.join(DEST, nom), "JPEG", quality=90, optimize=True)
+            r = elegir_foto(r, destino, i)
+            if r is None:
+                raise ValueError("no hay una foto vertical de Martin que muestre lo que dice el texto")
+            im = dato(cc, r) if t == "dato" else \
+                {"foto": foto_frase, "pregunta": pregunta, "detras": detras, "antes": antes_historia}[t](r, cc)
+            im.save(destino, "JPEG", quality=90, optimize=True)
+            registrar(destino, [r])
             idx.append({"n": i, "tipo": t, "titular": c["titular"], "archivo": nom,
                         "foto": os.path.relpath(r, RAIZ), "texto": texto_de(cc)})
         except Exception as e:
             print(f"  FALLO {i:03d} {t}: {type(e).__name__}: {e}")
+            if i in viejo:
+                idx.append(viejo[i])
     # las historias del verano (51 en adelante) las arma historias_verano.py
     idx += [x for n, x in sorted(viejo.items()) if n > len(HISTORIAS)]
     json.dump(idx, open(INDICE, "w"), ensure_ascii=False, indent=1)
@@ -229,4 +270,5 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    import sys
+    main(opcion_desde(sys.argv))

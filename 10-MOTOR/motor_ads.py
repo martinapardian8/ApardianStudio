@@ -392,7 +392,11 @@ def velo_banda(im, y0, y1, objetivo=56, pluma=180, piso=0.30):
     px = cap.load()
     for y in range(H):
         if y < y0 - pluma:      v = 0.0
-        elif y < y0:            v = f * ((y - (y0 - pluma)) / pluma) ** 1.6
+        elif y < y0:
+            # entra suave y llega suave: sin un borde recto que parezca una
+            # franja sobre la foto (Martin, 28/10/2026)
+            t = (y - (y0 - pluma)) / pluma
+            v = f * t * t * (3 - 2 * t)
         else:                   v = f
         px[0, y] = int(255 * v)
     return Image.composite(Image.new("RGB", (W, H), CARBON), im, cap.resize((W, H)))
@@ -441,13 +445,51 @@ def _detalle(im, y0, y1):
     return sum(e) / len(e)
 
 
+def _caras_en_cuadro(ruta, size):
+    """Las caras de la foto en coordenadas del cuadro, con el mismo recorte que
+    hace cargar() (recorte.cargar_ok)."""
+    from recorte import caras, caja_recorte
+    W, H = size
+    sw, sh = Image.open(ruta).size
+    if sw / sh > W / H:
+        ch = sh; cw = int(round(ch * W / H))
+    else:
+        cw = sw; ch = int(round(cw * H / W))
+    cw, ch = min(cw, sw), min(ch, sh)
+    x0, y0 = caja_recorte(ruta, sw, sh, cw, ch)
+    x0 = max(0, min(sw - cw, x0)); y0 = max(0, min(sh - ch, y0))
+    k = W / cw
+    return [((fx - x0) * k, (fy - y0) * k, (fx + fw - x0) * k, (fy + fh - y0) * k)
+            for (fx, fy, fw, fh, conf) in caras(ruta) if conf >= 0.6]
+
+
+def _pisa_cara(caras_c, y0, y1):
+    """Cuánto de las caras cae en la franja y0..y1 (0 = ninguna)."""
+    t = 0.0
+    for (_, cy0, _, cy1) in caras_c:
+        ov = max(0.0, min(cy1, y1) - max(cy0, y0)) / max(1.0, cy1 - cy0)
+        t += ov
+    return t
+
+
 def pieza_foto(ruta, size, story, c, extra_abajo=0):
     """La foto de Martin como protagonista y el texto al pie.
 
     c: kicker, titular, sub, cta (y numero, que va adelante del kicker).
     extra_abajo: alto reservado debajo del texto (las opciones de una pregunta).
-    Devuelve (imagen, y donde termina el texto)."""
+    Devuelve (imagen, y donde termina el texto).
+
+    En un lienzo vertical solo entra una foto vertical que lo llene (Martin,
+    28/10/2026): si `ruta` no sirve, se cambia por otra vertical del mismo tema
+    (vertical()); si no hay ninguna, ValueError. La foto usada queda en
+    imagen.info["foto"]."""
     W, H = size
+    if lienzo_vertical(size) and not apta(ruta, size):
+        nueva = vertical(ruta, size)
+        if nueva is None:
+            raise ValueError("no hay una foto vertical de Martin del mismo tema que "
+                             + _clave(ruta) + " para un lienzo %dx%d" % size)
+        ruta = nueva
     m = 76
     top = SAFE_STORY_TOP if story else m
     bot = H - (SAFE_STORY_BOT if story else m) - extra_abajo
@@ -465,8 +507,11 @@ def pieza_foto(ruta, size, story, c, extra_abajo=0):
         # El texto va arriba o abajo, donde la foto está más tranquila (cielo,
         # fondo desenfocado): así no tapa la cara, el plato ni el producto.
         im = cargar(ruta, size)
-        arriba = (not extra_abajo and
-                  _detalle(im, top, top + alto + 40) < 0.75 * _detalle(im, bot - alto - 40, bot))
+        # el texto no tapa una cara (APRENDIZAJES: ni la cara ni el motivo)
+        cs = _caras_en_cuadro(ruta, size)
+        p_arr = _detalle(im, top, top + alto + 40) + 1000 * _pisa_cara(cs, top - 40, top + alto + 80)
+        p_aba = _detalle(im, bot - alto - 40, bot) + 1000 * _pisa_cara(cs, bot - alto - 80, H)
+        arriba = not extra_abajo and p_arr < 0.75 * p_aba
         if arriba:
             y0 = top
             im = ImageOps.flip(velo_banda(ImageOps.flip(im), H - (y0 + alto + 40), H,
@@ -475,6 +520,8 @@ def pieza_foto(ruta, size, story, c, extra_abajo=0):
             y0 = bot - alto
             im = velo_banda(im, y0 - 40, H, objetivo=46, pluma=320, piso=0.30)
     else:
+        # solo en lienzos horizontales o cuadrados (en los verticales la foto
+        # siempre llena el cuadro, ver arriba).
         # entera: de lado a lado (o de arriba abajo), sin recortar nada
         # se recorta como mucho PERDIDA_MAX (con el encuadre que cuida rostros
         # y sujeto) para que la foto ocupe más, y el resto se muestra entero
@@ -501,6 +548,7 @@ def pieza_foto(ruta, size, story, c, extra_abajo=0):
                  max_lineas=2)
     if not c.get("cta"):
         firma(d, W - m, y0 - 6 if c.get("kicker") else y0 - 46, 0.9, True, "r")
+    im.info["foto"] = ruta
     return im, fin
 
 
@@ -529,3 +577,217 @@ def foto_de(cat, i=0, contenido=None):
         if ok:
             return ok[i % len(ok)]
     return foto(cat, i)
+
+
+# ---------------------------------------------------------------- solo fotos verticales
+# Martin, 28/10/2026: "No me gusta que pongas una foto horizontal en un canva
+# vertical". En un lienzo vertical (posteo o carrusel 4:5, historia o reel
+# 9:16) va solo una foto vertical (alto > ancho) que lo llene de lado a lado,
+# con un recorte que pierda PERDIDA_MAX como mucho y que no parta caras
+# (recorte.py, caras.json, fotos_que_cortan.json). Nada de foto chica sobre la
+# misma foto desenfocada, ni franjas, ni marcos. Si la foto elegida no sirve,
+# se cambia por otra vertical de Martin de la misma carpeta (el mismo tema) y
+# con el mismo 'contenido' de fotos.json. Nunca se inventa una foto.
+def lienzo_vertical(size):
+    return size[1] > size[0]
+
+
+def _clave(ruta):
+    """'<carpeta>/web/<archivo>': la misma foto en la Mac y en cualquier copia."""
+    return "/".join(ruta.replace("\\", "/").split("/")[-3:])
+
+
+_VETO = None
+def _vetada(ruta, size):
+    """La foto está en fotos_que_cortan.json para ese formato (parte una cara)."""
+    global _VETO
+    if _VETO is None:
+        p = os.path.join(S, "fotos_que_cortan.json")
+        d = json.load(open(p, encoding="utf-8")) if os.path.exists(p) else {}
+        _VETO = {k: {_clave(x) for x in v} for k, v in d.items()}
+    clave = "4:5" if size[1] / size[0] < 1.5 else "9:16"
+    return _clave(ruta) in _VETO.get(clave, set())
+
+
+_APTA = {}
+def apta(ruta, size):
+    """¿La foto llena este lienzo vertical como pide Martin? (vertical, recorte
+    de PERDIDA_MAX como mucho y sin partir caras)."""
+    k = (_clave(ruta), tuple(size))
+    if k not in _APTA:
+        w, h = Image.open(ruta).size
+        ok = h > w and perdida_recorte(ruta, size) <= PERDIDA_MAX and not _vetada(ruta, size)
+        if ok:
+            from recorte import hay_cara_cortada
+            ok = not hay_cara_cortada(ruta, size)
+        _APTA[k] = ok
+    return _APTA[k]
+
+
+def apta_en(ruta, sizes):
+    return all(apta(ruta, s) for s in sizes if lienzo_vertical(s))
+
+
+def _huella(ruta):
+    """Hash perceptual de la foto (similitud.phash): igual en las dos carpetas."""
+    import similitud as SIM
+    return SIM.phash(ruta) if os.path.exists(ruta) else ruta
+
+
+def misma_foto(a, b, umbral=20):
+    """¿Son la misma foto (o dos tomas casi iguales), aunque cambie el nombre?"""
+    import similitud as SIM
+    if _clave(a) == _clave(b) or os.path.basename(a) == os.path.basename(b):
+        return True
+    if not (os.path.exists(a) and os.path.exists(b)):
+        return False
+    return SIM.distancia(SIM.phash(a), SIM.phash(b)) < umbral
+
+
+def _parecido(a, b):
+    """Cuánto se parecen dos fotos en lo que cuentan: misma gente (retrato,
+    grupo, nadie), misma luz, mismo color, misma sesión."""
+    import similitud as SIM
+    pa, pb = SIM.perfil(a), SIM.perfil(b)
+    return 3 * (pa[0] == pb[0]) + (pa[1] == pb[1]) + (pa[2] == pb[2]) + 0.5 * (pa[3] == pb[3])
+
+
+def vertical(ruta, sizes, excluir=(), contenido=None, evitar=()):
+    """La foto si llena el lienzo; si no, otra vertical de Martin del mismo tema.
+
+    sizes: un tamaño o una lista (la misma foto va en posteo e historia).
+    excluir: fotos que no se pueden usar (ya salen esos días).
+    contenido: 'contenido' que tiene que mostrar la foto (fotos.json); si no
+    se pasa, el de la foto original.
+    evitar: fotos que ya salen esas semanas (con repetición): entre dos que
+    sirven igual, gana la que menos se vio. Devuelve None si no hay ninguna."""
+    sizes = [sizes] if isinstance(sizes[0], int) else list(sizes)
+    fuera = {_clave(x) for x in excluir}
+    def afuera(f):
+        # la misma foto puede estar en dos carpetas, o casi igual con otro
+        # nombre (dos tomas seguidas): se compara lo que muestra, no el nombre
+        return _clave(f) in fuera or any(misma_foto(f, x) for x in excluir)
+    if apta_en(ruta, sizes) and not afuera(ruta):
+        return ruta
+    fi = ficha(ruta)
+    que = contenido or ((fi["contenido"],) if fi.get("contenido") else None)
+    cat = _clave(ruta).split("/")[0]
+    cands = [f for f in pool().get(cat, [])
+             if not afuera(f) and _clave(f) != _clave(ruta)
+             and (not que or ficha(f).get("contenido") in que) and apta_en(f, sizes)]
+    if not cands:
+        return None
+    lugar = fi.get("lugar") if fi.get("confirmado") else None
+    vistas = {}
+    for x in evitar:
+        vistas[_huella(x)] = vistas.get(_huella(x), 0) + 1
+
+    def puntaje(f):
+        g = ficha(f)
+        mismo_lugar = 4 if lugar and g.get("confirmado") and g.get("lugar") == lugar else 0
+        azar = int(hashlib.md5((_clave(ruta) + _clave(f)).encode()).hexdigest()[:6], 16) / 16 ** 6
+        return mismo_lugar + _parecido(ruta, f) + azar - 2.5 * vistas.get(_huella(f), 0)
+    return max(cands, key=puntaje)
+
+
+# ---------------------------------------------------------------- el calendario (solo lectura)
+CALENDARIO_CSV = os.path.join(RAIZ, "11-AUTOMATIZACION", "calendario_instagram.csv")
+IG_DIR = os.path.join(RAIZ, "08-CONTENIDO-INSTAGRAM")
+_CAL = None
+def fechas_calendario():
+    """{archivo relativo a 08-CONTENIDO-INSTAGRAM: primera fecha en que sale}."""
+    global _CAL
+    if _CAL is None:
+        import csv
+        _CAL = {}
+        if os.path.exists(CALENDARIO_CSV):
+            for f in csv.DictReader(open(CALENDARIO_CSV, encoding="utf-8")):
+                for a in (f.get("archivos") or "").split("|"):
+                    if a and (a not in _CAL or f["fecha"] < _CAL[a]):
+                        _CAL[a] = f["fecha"]
+    return _CAL
+
+
+def se_puede_escribir(ruta, desde=None):
+    """Lo que ya salió no se toca. Con `desde` (AAAA-MM-DD), solo se escriben
+    las piezas del calendario que salen ese día o después."""
+    import datetime as _dt
+    rel = os.path.relpath(ruta, IG_DIR).replace("\\", "/")
+    f = fechas_calendario().get(rel)
+    if desde:
+        return f is not None and f >= desde
+    return f is None or f >= _dt.date.today().isoformat()
+
+
+def opcion_desde(argv):
+    """--desde AAAA-MM-DD de la línea de comandos (o None)."""
+    return argv[argv.index("--desde") + 1] if "--desde" in argv else None
+
+
+_USO = None
+def _fotos_por_pieza():
+    """{archivo del calendario: [fotos de Martin que muestra]}, de los índices."""
+    global _USO
+    if _USO is None:
+        _USO = {}
+        def j(nombre):
+            p = os.path.join(IG_DIR, nombre)
+            return json.load(open(p, encoding="utf-8")) if os.path.exists(p) else []
+        for x in j("indice_historias.json"):
+            _USO["04-historias-organicas/" + x["archivo"]] = [os.path.join(RAIZ, x["foto"])]
+        pauta = {}
+        for x in j("indice_pauta.json"):
+            pauta[x["n"]] = os.path.join(RAIZ, x["foto"])
+            for c in ("01-posteos-pauta/", "02-historias-pauta/"):
+                _USO[c + x["archivo"]] = [pauta[x["n"]]]
+        for x in j("indice_videos.json"):
+            if x["n"] in pauta:
+                _USO["05-videos/" + x["archivo"]] = [pauta[x["n"]]]
+        for x in j(os.path.join("08-tus-fotos-en-el-mundo", "indice.json")):
+            if "/" in x.get("foto", ""):
+                cat, nom = x["foto"].split("/")
+                _USO["08-tus-fotos-en-el-mundo/" + x["archivo"]] = [os.path.join(IMG, cat, "web", nom)]
+        for x in j(os.path.join("10-fotos", "indice.json")):
+            cat, nom = x["foto"].split("/")
+            _USO["10-fotos/" + x["archivo"]] = [os.path.join(IMG, cat, "web", nom)]
+        try:
+            import carruseles_fotos as CF
+            for slug, c in CF.CARRUSELES.items():
+                for i, f in enumerate(c["fotos"]):
+                    _USO[f"06-carruseles-collage/{slug}/{i + 1:02d}.jpg"] = [f.partition("#")[0]]
+                _USO[f"07-reels-collage/{slug}.mp4"] = [f.partition("#")[0] for f in
+                                                        (CF.fotos_reel(slug) or c["fotos"])]
+                _USO[f"07-reels-collage/{slug}_portada.jpg"] = _USO[f"07-reels-collage/{slug}.mp4"][:1]
+        except Exception:
+            pass
+    return _USO
+
+
+def registrar(ruta_pieza, fotos):
+    """Anota qué fotos muestra una pieza recién hecha (para las que siguen)."""
+    rel = os.path.relpath(ruta_pieza, IG_DIR).replace("\\", "/")
+    _fotos_por_pieza()[rel] = list(fotos)
+
+
+def usos_cerca(ruta_pieza, dias=3):
+    """[fotos] que salen en otras piezas a menos de `dias` días de esta (una
+    vez por pieza que la usa)."""
+    import datetime as _dt
+    rel = os.path.relpath(ruta_pieza, IG_DIR).replace("\\", "/")
+    cal = fechas_calendario()
+    if rel not in cal:
+        return []
+    hoy = _dt.date.fromisoformat(cal[rel])
+    out = []
+    for a, fs in _fotos_por_pieza().items():
+        if a == rel or a not in cal:
+            continue
+        if abs((_dt.date.fromisoformat(cal[a]) - hoy).days) < dias:
+            out += fs
+    return out
+
+
+def fotos_cerca(ruta_pieza, dias=3):
+    """Fotos que salen en otras piezas a menos de `dias` días de esta: la
+    misma foto no sale dos veces en menos de 3 días (Lupa lo frena)."""
+    return set(usos_cerca(ruta_pieza, dias))
