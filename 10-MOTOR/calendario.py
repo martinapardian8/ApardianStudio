@@ -106,7 +106,14 @@ def _titulo_archivo(f):
 def main():
     orden = json.load(open(os.path.join(IG, "00-SUBIR-EN-ORDEN", "orden.json")))
     # las publicaciones que se sacaron (antes/despues simulado) ya no estan
-    orden = [o for o in orden if os.path.isdir(os.path.join(IG, "00-SUBIR-EN-ORDEN", f"{o['n']:02d}"))]
+    # (y las carpetas que quedaron vacias). La 07 ("Platos que se venden solos")
+    # no sale: Lupa la freno el 28/10 (repite el alfajor de tapa, dos fuegos y
+    # cuatro fotos de las mismas empanadas); los platos ya estan en 10-fotos.
+    SALTEAR = {7}
+    orden = [o for o in orden if o["n"] not in SALTEAR]
+    orden = [o for o in orden if os.path.isdir(os.path.join(IG, "00-SUBIR-EN-ORDEN", f"{o['n']:02d}"))
+             and any(a.startswith("foto-") or a == "video.mp4"
+                     for a in os.listdir(os.path.join(IG, "00-SUBIR-EN-ORDEN", f"{o['n']:02d}")))]
     hist = sorted(f for f in os.listdir(os.path.join(IG, "04-historias-organicas"))
                   if f.endswith(".jpg") and not f.startswith("00_"))
     titulos = {h["archivo"]: h["titular"] for h in
@@ -237,11 +244,48 @@ def main():
                     return True
         return False
 
+    # las semanas en curso no cambian: hasta FIJO se repite lo que ya decia
+    # calendario.json (Martin ya lo esta subiendo) y esas piezas salen de las colas
+    FIJO = DESDE_ESTETICA
+    ruta_cal = os.path.join(IG, "calendario.json")
+    viejo = ({x["fecha"]: x for x in json.load(open(ruta_cal, encoding="utf-8"))["dias"]}
+             if os.path.exists(ruta_cal) else {})
+
+    def consumir(pieza):
+        base = os.path.basename(pieza)
+        if pieza.startswith("00-SUBIR-EN-ORDEN/"):
+            n = int(pieza.split("/")[1])
+            for j in range(k_orden, len(orden)):
+                if orden[j]["n"] == n:
+                    orden.pop(j)
+                    break
+        elif pieza.startswith("04-historias-organicas/") and base in hist:
+            hist.remove(base)
+        elif pieza.startswith("02-historias-pauta/"):
+            if base in hist_pauta:
+                hist_pauta.remove(base)
+            usados.add(base[:3])
+        elif pieza.startswith(("01-posteos-pauta/", "05-videos/", "09-posteos-portfolio/")):
+            for c in [c for c in cola_pauta if c["pieza"] == pieza]:
+                cola_pauta.remove(c)
+            if not pieza.startswith("09-"):
+                usados.add(base[:3])
+        elif pieza.startswith("10-fotos/"):
+            for c in [c for c in cola_fotos if c["archivo"] == base]:
+                cola_fotos.remove(c)
+
     dias, k_orden, hoy = [], 0, []
     for s, (slug, tit, porque, vertical, venta, auto) in enumerate(SEMANAS):
         lunes = INICIO + dt.timedelta(weeks=s)
         for d in range(7):
             f = lunes + dt.timedelta(days=d)
+            if f.isoformat() < FIJO and f.isoformat() in viejo:
+                items = [dict(it) for it in viejo[f.isoformat()]["items"]]
+                for it in items:
+                    consumir(it.get("pieza") or "")
+                colocadas.extend((f, it["pieza"]) for it in items if it.get("pieza"))
+                dias.append(dict(viejo[f.isoformat()], items=items))
+                continue
             items, en_feed = [], set()
             hoy = items                      # choca() mira tambien lo del mismo dia
             # ---------------------------------------------------- feed: 1 por dia
