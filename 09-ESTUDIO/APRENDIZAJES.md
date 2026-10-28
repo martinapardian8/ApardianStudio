@@ -47,6 +47,11 @@ que no la cumple.
   calendario tiene ✓ y ✗. Si Martin marca ✗, antes de borrar nada se le
   pregunta si quiere mejorar algo puntual, reemplazarla por otra mejor o
   eliminarla, y Luz hace eso (orden del Centro).
+- **OK fijo de Martin para subir /ig** (28/10/2026, en el chat: "si a el OK
+  fijo"). Las piezas de Instagram nuevas o rehechas se pueden subir a
+  apardianstudio.com/ig sin pedirle permiso cada vez: se actualiza la rama
+  `hostinger` copiando SOLO la carpeta `ig/` (con `10-MOTOR/preparar_ig.sh`).
+  El resto del sitio sigue necesitando su "publicá la web".
 - **Nada de testimonios inventados.** Una cita con nombre de cliente solo si
   el cliente la dijo y Martin lo confirma.
 
