@@ -54,12 +54,50 @@ for root,_,files in os.walk(DST):
         im.convert("RGB").save(p, quality=(76 if lim==1800 else 70), optimize=True, progressive=True)
         n+=1
 print("imagenes recomprimidas:", n)
+
+# Metadatos fuera de TODAS las fotos (EXIF/XMP/IPTC: número de serie de la
+# cámara, fechas, ajustes de Lightroom). Se cortan los bloques sin volver a
+# comprimir, asi la foto queda igual. Se deja el perfil de color (APP2).
+# Si una foto depende de la orientación del EXIF, no se toca.
+def sin_metadatos(p):
+    b = open(p, "rb").read()
+    if b[:2] != b"\xff\xd8": return False
+    try:
+        o = Image.open(p).getexif().get(0x0112, 1)
+    except Exception:
+        return False
+    if o not in (0, 1): return False
+    out, i, saco = [b[:2]], 2, False
+    while i + 4 <= len(b) and b[i] == 0xFF:
+        m = b[i+1]
+        if m == 0xFF: i += 1; continue           # relleno entre marcadores
+        if m == 0xDA: break                     # empieza la imagen: el resto se copia
+        L = int.from_bytes(b[i+2:i+4], "big")
+        if m in (0xE1, 0xED, 0xFE): saco = True  # APP1 (EXIF/XMP), APP13 (IPTC), comentarios
+        else: out.append(b[i:i+2+L])
+        i += 2 + L
+    if not saco or i + 4 > len(b) or b[i] != 0xFF: return False
+    out.append(b[i:])
+    open(p, "wb").write(b"".join(out))
+    return True
+k = 0
+for root,_,files in os.walk(DST):
+    for f in files:
+        if f.lower().endswith((".jpg", ".jpeg")) and sin_metadatos(os.path.join(root, f)): k += 1
+print("fotos sin metadatos:", k)
 PY
 
 # 4) control: si algo privado se coló en el build, se frena aca
-if find "$DST" \( -name '_qa_*' -o -name '*.md' -o -name '*.py' -o -name '*.sh' -o -name '*.json' -o -name '.git' \) | grep -q .; then
+if find "$DST" \( -name '_qa_*' -o -name '*.md' -o -name '*.py' -o -name '*.sh' -o -name '*.json' \
+     -o -name '.git' -o -name '.env*' -o -name '*.log' -o -name '*.bak' -o -name '*~' \
+     -o -name '*.psd' -o -name '*.lrcat' -o -name '*.xmp' -o -name '*.zip' -o -name '* 2.*' \) | grep -q .; then
   echo "ERROR: hay archivos privados en $DST" | tee -a "$LOG"; exit 1
 fi
+# y lo que tiene que estar: sin el .htaccess el sitio sale sin las cabeceras
+# de seguridad y sin el bloqueo de archivos privados
+for f in .htaccess .well-known/security.txt robots.txt; do
+  [ -s "$DST/$f" ] || { echo "ERROR: falta $f en $DST" | tee -a "$LOG"; exit 1; }
+done
 
 echo "=== LISTO ===" >> "$LOG"
 du -sh "$DST" >> "$LOG"

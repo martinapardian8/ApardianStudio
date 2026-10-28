@@ -42,11 +42,27 @@
     });
   }
 
+  // Lo guardado (o un .json importado, o un texto pegado) vuelve a la página
+  // como HTML: se le sacan scripts, iframes, on*= y links javascript: antes.
+  var NO_VA = 'script,iframe,frame,object,embed,link,meta,base,style,form,input,button,textarea,select';
+  function limpio(html) {
+    var t = document.createElement('template');
+    t.innerHTML = String(html);
+    $$(NO_VA, t.content).forEach(function (n) { n.remove(); });
+    $$('*', t.content).forEach(function (n) {
+      Array.prototype.slice.call(n.attributes).forEach(function (a) {
+        var nom = a.name.toLowerCase(), val = a.value.replace(/[\s\x00-\x1f]/g, '').toLowerCase();
+        if (nom.indexOf('on') === 0 || nom === 'srcdoc' || /^(javascript|vbscript|data):/.test(val)) n.removeAttribute(a.name);
+      });
+    });
+    return t.innerHTML;
+  }
+
   function applyText() {
     $$('[data-ed]').forEach(function (el) {
       var k = el.dataset.ed;
       if (!el.dataset.base) el.dataset.base = el.innerHTML;
-      el.innerHTML = (k in OV.text) ? OV.text[k] : el.dataset.base;
+      el.innerHTML = (k in OV.text) ? limpio(OV.text[k]) : el.dataset.base;
     });
   }
 
