@@ -428,6 +428,73 @@ def perdida_recorte(ruta, size):
     return 1 - min(a, b) / max(a, b)
 
 
+def encuadrar(ruta, size, girar=0.0, centro=None, nombre=None):
+    """La foto de Martin enderezada y con el motivo en el medio (Martin, orden
+    del Centro 28/10/2026: "enderezarla y ajustar el centro de mesa", "centrá
+    el barco"). Devuelve la ruta de una copia del tamaño `size`, lista para
+    pieza_foto(), en una carpeta temporal (la foto original no se toca).
+
+    girar: grados, positivo = antihorario (una foto que sube a la derecha se
+    endereza con un valor negativo). centro: (x, y) del motivo en la foto
+    original, en píxeles; None = el medio. El recorte es el más grande que
+    entra dentro de la foto girada (sin esquinas vacías) con el motivo en el
+    centro horizontal; en vertical se elige la altura que deja más foto."""
+    import math, tempfile
+    im = Image.open(ruta).convert("RGB")
+    w, h = im.size
+    W, H = size
+    a = math.radians(girar)
+    ca, sa = math.cos(a), math.sin(a)
+    ox, oy = w / 2, h / 2
+    # PIL rota antihorario en pantalla (y hacia abajo): punto original -> girado
+    def ida(x, y):
+        dx, dy = x - ox, y - oy
+        return ox + dx * ca + dy * sa, oy - dx * sa + dy * ca
+    def vuelta(x, y):
+        dx, dy = x - ox, y - oy
+        return ox + dx * ca - dy * sa, oy + dx * sa + dy * ca
+    rot = im.rotate(girar, Image.BICUBIC, expand=False) if girar else im
+    cx, cy = ida(*(centro or (ox, oy)))
+    r = W / H
+
+    def entra(cx, cy, ch):
+        cw = ch * r
+        for sx in (-1, 1):
+            for sy in (-1, 1):
+                x, y = vuelta(cx + sx * cw / 2, cy + sy * ch / 2)
+                if not (-0.5 <= x <= w + 0.5 and -0.5 <= y <= h + 0.5):
+                    return False
+        return True
+
+    def mayor(cx, cy):
+        lo, hi = 0.0, float(h)
+        for _ in range(40):
+            m = (lo + hi) / 2
+            lo, hi = (m, hi) if entra(cx, cy, m) else (lo, m)
+        return lo
+    # el motivo al medio en horizontal; la altura, la que deja más foto
+    mejor = max(((mayor(cx, y), y) for y in [h * k / 80 for k in range(81)]), key=lambda t: t[0])
+    # si centrar exacto obliga a acercar demasiado (más del 22 % de la foto
+    # que entraría con el centro de la imagen), se corre el centro lo justo
+    tope = max(mayor(ox, y) for y in [h * k / 80 for k in range(81)])
+    t = 0.0
+    while mejor[0] < (1 - PERDIDA_MAX) * tope and t < 1:
+        t += 0.05
+        x = cx + (ox - cx) * t
+        mejor = max(((mayor(x, y), y) for y in [h * k / 80 for k in range(81)]), key=lambda q: q[0])
+    cx2 = cx + (ox - cx) * t
+    ch, cy = mejor
+    cw = ch * r
+    caja = (int(round(cx2 - cw / 2)), int(round(cy - ch / 2)),
+            int(round(cx2 + cw / 2)), int(round(cy + ch / 2)))
+    out = rot.crop(caja).resize((W, H), Image.LANCZOS)
+    d = os.path.join(tempfile.gettempdir(), "apardian_encuadres")
+    os.makedirs(d, exist_ok=True)
+    p = os.path.join(d, (nombre or os.path.splitext(os.path.basename(ruta))[0]) + "_%dx%d.jpg" % size)
+    out.save(p, "JPEG", quality=95)
+    return p
+
+
 def _alto_bloque(size, c, max_w, px_titular, px_sub, max_lineas=4):
     prueba = Image.new("RGB", size)
     return bloque(ImageDraw.Draw(prueba), 0, 0, size[1], max_w, c, HUESO, ROJO,

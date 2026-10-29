@@ -16,7 +16,7 @@ Ritmo: **un posteo y una historia todos los días.** Feed: **lunes** carrusel ·
 | Martes 20/10 | 10:00 | Venta: Foco de la semana: Bodas | — |
 | Martes 20/10 | 12:30 | Historia: Dentro de diez años, esto es lo que te va a quedar | `02-historias-pauta/002_bodas_dentro-de-diez-anos-esto-es-lo-que-te-va-a-que.jpg` |
 | Martes 20/10 | 13:00 | Posteo: Una boda completa | `01-posteos-pauta/003_bodas_una-boda-completa.jpg` |
-| Miércoles 21/10 | 12:30 | Historia: Ocho horas para veinte platos | `04-historias-organicas/003_foto_ocho-horas-para-veinte-platos.jpg` |
+| Miércoles 21/10 | 12:30 | Historia: Toda la carta en una jornada | `04-historias-organicas/003_foto_ocho-horas-para-veinte-platos.jpg` |
 | Miércoles 21/10 | 19:30 | Carrusel de 8 fotos: Nadie posó | `00-SUBIR-EN-ORDEN/01` |
 | Jueves 22/10 | 10:00 | Automatización: P1 respuesta rápida + P2 seguimiento de presupuestos (WhatsApp Business) | `11-AUTOMATIZACION/README.md` |
 | Jueves 22/10 | 12:30 | Historia: La fiesta recién empieza a las dos | `04-historias-organicas/004_foto_la-fiesta-recien-empieza-a-las-dos.jpg` |
@@ -46,13 +46,13 @@ Ritmo: **un posteo y una historia todos los días.** Feed: **lunes** carrusel ·
 | Miércoles 28/10 | 12:30 | Historia: Poca luz y una sola pasada | `04-historias-organicas/007_foto_poca-luz-y-una-sola-pasada.jpg` |
 | Miércoles 28/10 | 19:30 | Posteo de una foto: La gente pide con los ojos | `00-SUBIR-EN-ORDEN/02` |
 | Jueves 29/10 | 10:00 | Automatización: P3 prospección B2B: armar flujos 01–03, calentar el dominio de envío | `11-AUTOMATIZACION/README.md` |
-| Jueves 29/10 | 12:30 | Historia: Este no entendió nada y salió mejor que yo | `04-historias-organicas/008_foto_este-no-entendio-nada-y-salio-mejor-que-yo.jpg` |
+| Jueves 29/10 | 12:30 | Historia: Mirá qué pinta tiene | `04-historias-organicas/008_foto_este-no-entendio-nada-y-salio-mejor-que-yo.jpg` |
 | Jueves 29/10 | 19:30 | Reel: Reel del carrusel: La gente come con los ojos | `07-reels-collage/02-gastronomia-cuatro-fotos.mp4` |
 | Viernes 30/10 | 12:30 | Historia: Fotos de tu carta en una jornada | `02-historias-pauta/013_gastronomia_fotos-de-tu-carta-en-una-jornada.jpg` |
 | Viernes 30/10 | 17:00 | Venta: Seguimiento de presupuestos y leads | `09-ESTUDIO/clientes.md` |
 | Viernes 30/10 | 19:30 | Posteo de una foto: Tu Instagram no es tu página web | `00-SUBIR-EN-ORDEN/05` |
 | Sábado 31/10 | 11:00 | Tus fotos en el mundo: Un plato que se ve desde el ómnibus. | `08-tus-fotos-en-el-mundo/06_parada_rambla.jpg` |
-| Sábado 31/10 | 12:30 | Historia: Salí a caminar y volví con esto | `04-historias-organicas/009_foto_sali-a-caminar-y-volvi-con-esto.jpg` |
+| Sábado 31/10 | 12:30 | Historia: Así de azul es el mar en Mallorca | `04-historias-organicas/009_foto_sali-a-caminar-y-volvi-con-esto.jpg` |
 | Domingo 01/11 | 11:00 | Posteo: Nadie pide un plato que se ve mal | `01-posteos-pauta/015_gastronomia_nadie-pide-un-plato-que-se-ve-mal.jpg` |
 | Domingo 01/11 | 12:30 | Historia: Vacío a las cinco, lleno a las nueve | `04-historias-organicas/010_foto_vacio-a-las-cinco-lleno-a-las-nueve.jpg` |
 | Domingo 01/11 | 18:00 | Equipo: Luz arma la semana que viene y Lupa la revisa | `09-ESTUDIO/EQUIPO.md` |
@@ -132,7 +132,7 @@ Ritmo: **un posteo y una historia todos los días.** Feed: **lunes** carrusel ·
 | Miércoles 18/11 | 12:30 | Historia: El plato se enfría en tres minutos | `04-historias-organicas/027_detras_el-plato-se-enfria-en-tres-minutos.jpg` |
 | Miércoles 18/11 | 19:30 | Carrusel de 6 fotos: Lo que pasa cuando se apagan las luces | `00-SUBIR-EN-ORDEN/10` |
 | Jueves 19/11 | 10:00 | Automatización: P7 publicación programada (Meta Business Suite) | `11-AUTOMATIZACION/README.md` |
-| Jueves 19/11 | 12:30 | Historia: El fondo blanco no es una pared blanca | `04-historias-organicas/028_detras_el-fondo-blanco-no-es-una-pared-blanca.jpg` |
+| Jueves 19/11 | 12:30 | Historia: Feria del Alfajor, en el Latu | `04-historias-organicas/028_detras_el-fondo-blanco-no-es-una-pared-blanca.jpg` |
 | Jueves 19/11 | 19:30 | Reel: Reel del carrusel: Tu marca personal no entra en una selfie | `07-reels-collage/03-marca-personal-cinco-usos.mp4` |
 | Viernes 20/11 | 12:30 | Historia: Si vendés vos, la cara importa | `02-historias-pauta/038_retratos_si-vendes-vos-la-cara-importa.jpg` |
 | Viernes 20/11 | 17:00 | Venta: Seguimiento de presupuestos y leads | `09-ESTUDIO/clientes.md` |
@@ -366,7 +366,7 @@ Ritmo: **un posteo y una historia todos los días.** Feed: **lunes** carrusel ·
 
 | Día | Hora | Qué | Pieza |
 |---|---|---|---|
-| Lunes 18/01 | 12:30 | Historia: Antes de que se prendan las luces | `04-historias-organicas/071_foto_antes-de-que-se-prendan-las-luces.jpg` |
+| Lunes 18/01 | 12:30 | Historia: Todo listo, todavía no llegó nadie | `04-historias-organicas/099_foto_todo-listo-todavia-no-llego-nadie.jpg` |
 | Lunes 18/01 | 19:30 | Carrusel: En enero no se duerme | `06-carruseles-collage/14-edicion-en-enero-no-se-duerme` |
 | Lunes 18/01 | 20:00 | Historia (a mano): Nuevo carrusel: compartilo en historias | `06-carruseles-collage/14-edicion-en-enero-no-se-duerme/01.jpg` |
 | Martes 19/01 | 10:00 | Venta: Foco de la semana: Edición Lightroom | — |

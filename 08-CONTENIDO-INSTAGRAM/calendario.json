@@ -221,7 +221,7 @@
     {
      "tipo": "Historia",
      "hora": "12:30",
-     "titulo": "Ocho horas para veinte platos",
+     "titulo": "Toda la carta en una jornada",
      "pieza": "04-historias-organicas/003_foto_ocho-horas-para-veinte-platos.jpg",
      "nota": ""
     },
@@ -439,7 +439,7 @@
     {
      "tipo": "Historia",
      "hora": "12:30",
-     "titulo": "Este no entendió nada y salió mejor que yo",
+     "titulo": "Mirá qué pinta tiene",
      "pieza": "04-historias-organicas/008_foto_este-no-entendio-nada-y-salio-mejor-que-yo.jpg",
      "nota": ""
     },
@@ -497,7 +497,7 @@
     {
      "tipo": "Historia",
      "hora": "12:30",
-     "titulo": "Salí a caminar y volví con esto",
+     "titulo": "Así de azul es el mar en Mallorca",
      "pieza": "04-historias-organicas/009_foto_sali-a-caminar-y-volvi-con-esto.jpg",
      "nota": ""
     }
@@ -1041,7 +1041,7 @@
     {
      "tipo": "Historia",
      "hora": "12:30",
-     "titulo": "El fondo blanco no es una pared blanca",
+     "titulo": "Feria del Alfajor, en el Latu",
      "pieza": "04-historias-organicas/028_detras_el-fondo-blanco-no-es-una-pared-blanca.jpg",
      "nota": ""
     },
@@ -2655,9 +2655,9 @@
     {
      "tipo": "Historia",
      "hora": "12:30",
-     "titulo": "Antes de que se prendan las luces",
-     "pieza": "04-historias-organicas/071_foto_antes-de-que-se-prendan-las-luces.jpg",
-     "nota": ""
+     "titulo": "Todo listo, todavía no llegó nadie",
+     "pieza": "04-historias-organicas/099_foto_todo-listo-todavia-no-llego-nadie.jpg",
+     "nota": "Martin (✗ en el Centro, 28/10): reemplazá esta pieza por otra mejor."
     },
     {
      "tipo": "Carrusel",

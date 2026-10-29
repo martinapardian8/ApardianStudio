@@ -58,18 +58,18 @@
  {
   "n": 8,
   "tipo": "foto",
-  "titular": "Este no entendió nada y salió mejor que yo",
+  "titular": "Mirá qué pinta tiene",
   "archivo": "008_foto_este-no-entendio-nada-y-salio-mejor-que-yo.jpg",
-  "foto": "05-WEB/img/animales/web/v__103.jpg",
-  "texto": "Animales · Este no entendió nada y salió mejor que yo"
+  "foto": "05-WEB/img/animales/web/v__96.jpg",
+  "texto": "Animales · Mirá qué pinta tiene"
  },
  {
   "n": 9,
   "tipo": "foto",
-  "titular": "Salí a caminar y volví con esto",
+  "titular": "Así de azul es el mar en Mallorca",
   "archivo": "009_foto_sali-a-caminar-y-volvi-con-esto.jpg",
-  "foto": "05-WEB/img/naturaleza/web/v__45.jpg",
-  "texto": "Fin de semana · Salí a caminar y volví con esto · Palma de Mallorca."
+  "foto": "05-WEB/img/naturaleza/web/nw__FullSizeRender_6.jpg",
+  "texto": "Viaje · Así de azul es el mar en Mallorca"
  },
  {
   "n": 10,
@@ -217,11 +217,11 @@
  },
  {
   "n": 28,
-  "tipo": "detras",
-  "titular": "El fondo blanco no es una pared blanca",
+  "tipo": "foto",
+  "titular": "Feria del Alfajor, en el Latu",
   "archivo": "028_detras_el-fondo-blanco-no-es-una-pared-blanca.jpg",
   "foto": "05-WEB/img/marcas/web/alfajor__IMG_5429.jpg",
-  "texto": "Detrás de escena · El fondo blanco no es una pared blanca · Es papel, dos luces y mucha paciencia."
+  "texto": "Gastronomía · Feria del Alfajor, en el Latu · Uno partido al medio."
  },
  {
   "n": 29,
@@ -782,5 +782,13 @@
   "archivo": "098_foto_debajo-del-muelle.jpg",
   "foto": "05-WEB/img/deportes/web/v__88.jpg",
   "texto": "Debajo del muelle"
+ },
+ {
+  "n": 99,
+  "tipo": "foto",
+  "titular": "Todo listo, todavía no llegó nadie",
+  "archivo": "099_foto_todo-listo-todavia-no-llego-nadie.jpg",
+  "foto": "05-WEB/img/salones/web/golf-b__IMG_0346.jpg",
+  "texto": "Salón · Todo listo, todavía no llegó nadie"
  }
 ]

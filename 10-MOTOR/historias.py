@@ -95,9 +95,11 @@ HISTORIAS = [
    sub="Las aceitunas caen una sola vez."),
  h("foto", "musica", 4, kicker="En vivo", titular="Poca luz y una sola pasada",
    sub="No podés pedirle a la banda que repita el tema."),
- h("foto", "animales", 6, kicker="Animales", titular="Este no entendió nada y salió mejor que yo"),
- h("foto", "naturaleza", 21, kicker="Fin de semana", titular="Salí a caminar y volví con esto",
-   sub="Palma de Mallorca."),
+ # Martin, orden del Centro 28/10: "es una perra y no me gusta el titular"
+ # (a un animal no se le inventa lo que pensó): otra foto, un guacamayo.
+ h("foto", "animales", 6, kicker="Animales", titular="Mirá qué pinta tiene"),
+ # Martin, orden del Centro 28/10: "no me gusta el texto, algo mejor"
+ h("foto", "naturaleza", 21, kicker="Viaje", titular="Así de azul es el mar en Mallorca"),
  h("foto", "salones", 9, kicker="Salón", titular="Vacío a las cinco, lleno a las nueve",
    sub="Fotografiar un salón montado es otro laburo."),
 
@@ -144,8 +146,10 @@ HISTORIAS = [
    sub="Siempre llevo dos cuerpos y cuatro baterías."),
  h("detras", "gastronomia", 30, kicker="Detrás de escena", titular="El plato se enfría en tres minutos",
    sub="Hay que tener la luz armada antes de que salga de la cocina."),
- h("detras", "marcas", 2, kicker="Detrás de escena", titular="El fondo blanco no es una pared blanca",
-   sub="Es papel, dos luces y mucha paciencia."),
+ # Martin, orden del Centro 28/10: "no tiene sentido el texto en esta foto,
+ # eso fue la feria del alfajor en el Latu"
+ h("foto", "marcas", 2, kicker="Gastronomía", titular="Feria del Alfajor, en el Latu",
+   sub="Uno partido al medio."),
  h("detras", "retratos", 8, kicker="Detrás de escena", titular="Trabajo casi siempre con luz de ventana",
    sub="Es gratis y es la mejor que hay."),
  h("detras", "eventos", 27, kicker="Detrás de escena", titular="Me muevo rápido y en silencio",
@@ -214,6 +218,20 @@ VERTICAL = {
 }
 
 
+# Fotos elegidas a mano por una orden de Martin (pisan la que elegiría el motor).
+FIJA = {
+    8: _f("animales", "v__96.jpg"),               # guacamayo, no sale en otra pieza
+    9: _f("naturaleza", "nw__FullSizeRender_6.jpg"),  # mar de Mallorca (fotos.json), nítida
+    10: _f("salones", "golf-b__IMG_0358.jpg"),    # el centro de mesa, enderezado
+    28: _f("marcas", "alfajor__IMG_5429.jpg"),    # Feria del Alfajor, Latu (fotos.json)
+}
+# Fotos torcidas o con el motivo corrido (Martin, 28/10/2026): se enderezan
+# y se centra el motivo (motor_ads.encuadrar). girar en grados (antihorario).
+ENCUADRE = {
+    10: dict(girar=-4.5, centro=(610, 1000)),     # centro de mesa al medio
+}
+
+
 def elegir_foto(r, destino, n=None):
     """La foto de la historia, vertical y a pantalla completa (Martin,
     28/10/2026): si la elegida es horizontal o pierde más del 22 % al llenar
@@ -250,11 +268,12 @@ def main(desde=None):
                 r = foto_para_dato(cc)
             else:
                 r = foto_de(c["_cat"], c["_i"], COMIDA if c["_cat"] == "gastronomia" else None)
-            r = elegir_foto(r, destino, i)
+            r = FIJA.get(i) or elegir_foto(r, destino, i)
             if r is None:
                 raise ValueError("no hay una foto vertical de Martin que muestre lo que dice el texto")
-            im = dato(cc, r) if t == "dato" else \
-                {"foto": foto_frase, "pregunta": pregunta, "detras": detras, "antes": antes_historia}[t](r, cc)
+            rp = encuadrar(r, STORY, nombre="h%03d" % i, **ENCUADRE[i]) if i in ENCUADRE else r
+            im = dato(cc, rp) if t == "dato" else \
+                {"foto": foto_frase, "pregunta": pregunta, "detras": detras, "antes": antes_historia}[t](rp, cc)
             im.save(destino, "JPEG", quality=90, optimize=True)
             registrar(destino, [r])
             idx.append({"n": i, "tipo": t, "titular": c["titular"], "archivo": nom,

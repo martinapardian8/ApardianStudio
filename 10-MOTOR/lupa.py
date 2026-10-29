@@ -48,7 +48,7 @@ LUGARES = re.compile(r"\b(uruguay\w*|montevideo|colonia|punta del este|jos[eé] 
                      r"ciudad vieja|pocitos|carrasco|punta carretas|maldonado|rocha|canelones|pir[ií][aá]polis|"
                      r"cabo polonio|mallorca|palma|espa[ñn]a|barcelona|madrid|estambul|istanbul|turqu[ií]a|"
                      r"los [aá]ngeles|california|hollywood|venice|nueva york|new york|manhattan|central park|bear mountain|"
-                     r"nueva jersey|new jersey|drach|buenos aires|argentina)\b", re.I)
+                     r"nueva jersey|new jersey|drach|buenos aires|argentina|latu)\b", re.I)
 COMIDA_TXT = re.compile(r"\b(carta|men[uú]|platos?|comida|delivery|se come|hambre)\b", re.I)
 _IDX = None
 

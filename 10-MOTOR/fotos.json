@@ -16,7 +16,10 @@
    "contenido": "plato"
   },
   "gastronomia/alfajor__IMG_5429.jpg": {
-   "contenido": "plato"
+   "contenido": "plato",
+   "lugar": "Feria del Alfajor, Latu",
+   "confirmado": true,
+   "fuente": "Martin, orden del Centro 28/10/2026"
   },
   "gastronomia/alfajor__IMG_5430.jpg": {
    "contenido": "plato"
@@ -356,6 +359,12 @@
    "lugar": "",
    "confirmado": false,
    "fuente": "Martin, en el chat, 28/10/2026: \"no va\" (no es de un lugar para nombrar)"
+  },
+  "marcas/alfajor__IMG_5429.jpg": {
+   "contenido": "plato",
+   "lugar": "Feria del Alfajor, Latu",
+   "confirmado": true,
+   "fuente": "Martin, orden del Centro 28/10/2026"
   }
  }
 }

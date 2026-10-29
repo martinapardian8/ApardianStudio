@@ -1,7 +1,7 @@
 # Revisión de Lupa
-2026-10-28 · 210 piezas en la planilla.
+2026-10-29 · 210 piezas en la planilla.
 
-**Frenadas:** 13 · **Con nota:** 11 · **Listas para Martin:** 197
+**Frenadas:** 12 · **Con nota:** 11 · **Listas para Martin:** 198
 
 ## Frenadas (no llegan a Telegram hasta corregirlas)
 
@@ -17,7 +17,6 @@
 - `2026-10-26-1930-02-gastronomia-cuatro-fotos` La gente come con los ojos: 06.jpg: la foto v__70.jpg no llena el lienzo vertical (es horizontal, pierde más del 22 % o corta una cara); 06.jpg: la foto no llena el lienzo vertical, tiene franjas o fondo desenfocado arriba (11 %), abajo (11 %) (Martin: nunca una foto horizontal en un lienzo vertical)
 - `2026-10-27-1230-014-gastronomia-comida-que-se-ve-como-se` Comida que se ve como se come: 014_gastronomia_comida-que-se-ve-como-se-come.jpg: la foto alfajor__IMG_5376.jpg no llena el lienzo vertical (es horizontal, pierde más del 22 % o corta una cara)
 - `2026-10-28-1230-007-foto-poca-luz-y-una-sola-pasada` Poca luz y una sola pasada: 007_foto_poca-luz-y-una-sola-pasada.jpg: la foto la-estacion__IMG_8052.jpg no llena el lienzo vertical (es horizontal, pierde más del 22 % o corta una cara); 007_foto_poca-luz-y-una-sola-pasada.jpg: la foto no llena el lienzo vertical, tiene franjas o fondo desenfocado arriba (19 %), abajo (81 %) (Martin: nunca una foto horizontal en un lienzo vertical)
-- `2026-10-31-1230-009-foto-sali-a-caminar-y-volvi-con-esto` Salí a caminar y volví con esto: 009_foto_sali-a-caminar-y-volvi-con-esto.jpg: la foto v__45.jpg no llena el lienzo vertical (es horizontal, pierde más del 22 % o corta una cara); 009_foto_sali-a-caminar-y-volvi-con-esto.jpg: la foto no llena el lienzo vertical, tiene franjas o fondo desenfocado a la izquierda (15 %), a la derecha (15 %) (Martin: nunca una foto horizontal en un lienzo vertical)
 
 ## Pasan, con algo para mirar
 

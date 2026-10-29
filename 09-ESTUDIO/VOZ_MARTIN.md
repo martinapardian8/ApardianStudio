@@ -32,8 +32,21 @@ abajo, al lado de la que habíamos escrito, y se saca la regla.
 
 ## Ejemplos suyos (texto nuestro → cómo lo escribió él)
 
-- (vacío: se llena con sus correcciones)
+- "El fondo blanco no es una pared blanca" (alfajor partido) → él: "eso fue
+  la feria del alfajor en el Latu". Quedó: "Feria del Alfajor, en el Latu ·
+  Uno partido al medio." (orden del Centro, 28/10/2026)
+
+## Textos que rechazó (orden del Centro, 28/10/2026)
+
+- "Este no entendió nada y salió mejor que yo" (una perra): "es una perra y
+  no me gusta el titular".
+- "Salí a caminar y volví con esto · Palma de Mallorca": "no me gusta el
+  texto, algo mejor".
 
 ## Reglas que salen de sus correcciones
 
-- (vacío)
+- A un animal no se le inventa lo que pensó ni se adivina si es macho o
+  hembra. El texto dice lo que se ve.
+- Nada de frases de relleno tipo "salí a caminar y volví con esto": si la
+  foto es del mar de Mallorca, se dice eso, simple.
+- El texto tiene que ver con la foto. Si no sabés qué pasaba, no lo inventes.

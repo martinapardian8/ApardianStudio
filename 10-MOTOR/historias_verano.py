@@ -85,6 +85,9 @@ HISTORIAS = [
                         sub="Logo, colores, letras y plantillas, en un solo lugar.", fondo="rojo")),
     ("foto", f("retratos", "horacio__IMG_6496.jpg"), dict(kicker="Retrato", titular="Leer al sol")),
     ("foto", f("deportes", "v__88.jpg"), dict(titular="Debajo del muelle")),
+    # reemplazo de la 071 del 18/01 (Martin, orden del Centro 28/10/2026:
+    # "reemplazá esta pieza por otra mejor"): el jardín armado, sin gente
+    ("foto", f("salones", "golf-b__IMG_0346.jpg"), dict(kicker="Salón", titular="Todo listo, todavía no llegó nadie")),
 ]
 
 

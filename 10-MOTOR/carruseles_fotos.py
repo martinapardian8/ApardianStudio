@@ -172,7 +172,13 @@ REEL_EXTRA = {
 }
 MIN_REEL = 4
 # Reels con otra selección que su carrusel (si hace falta): {slug: [fotos]}
-REEL_FOTOS = {}
+REEL_FOTOS = {
+    # Martin, orden del Centro 28/10/2026: "quitar el alfajor del video"
+    # (el carrusel no se toca). Las otras verticales de plato son empanadas.
+    "02-gastronomia-cuatro-fotos": [F("gastronomia", "sergio__IMG_7391.jpg"),
+                                    F("gastronomia", "nw__IMG_7064.jpg"),
+                                    F("gastronomia", "sergio__IMG_7234.jpg")],
+}
 
 
 def llena(ruta, size):

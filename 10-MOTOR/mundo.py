@@ -12,7 +12,8 @@ import os, json
 import cv2
 import numpy as np
 from PIL import Image, ImageDraw
-from motor_ads import HUESO, NEGRO, ROJO, CARBON, IMG, RAIZ, display, work, escribir, titular, firma
+from motor_ads import (HUESO, NEGRO, ROJO, CARBON, IMG, RAIZ, display, work, escribir, titular, firma,
+                       medir_titular, velo_banda, se_puede_escribir, opcion_desde)
 from recorte import cargar_ok, guardar_cache
 
 ESC = os.path.join(RAIZ, "04-VIDEOS-IA", "higgsfield", "mundo")
@@ -38,8 +39,10 @@ ESCENAS = [
      ("gastronomia", "nw__IMG_7064.jpg"), "Montevideo · Rambla", "Un plato que se ve desde el ómnibus."),
     ("paris_columna.jpg", [(429, 399), (773, 399), (773, 966), (429, 966)],
      ("retratos", "v__117.jpg"), "París", "Blanco y negro, como tiene que ser."),
+    # Martin, orden del Centro 28/10/2026: "centrá la foto para que se vea la
+    # marca del aceite": el cartel muestra la etiqueta (foco, en fracción de la foto)
     ("los_angeles_cartel.jpg", [(681, 223), (1375, 112), (1380, 382), (679, 427)],
-     ("marcas", "v__77.jpg"), "Los Ángeles", "Un producto uruguayo, a la altura de cualquier ruta."),
+     ("marcas", "v__77.jpg#0.52,0.63"), "Los Ángeles", "Un producto uruguayo, a la altura de cualquier ruta."),
     ("revista.jpg", [(91, 419), (1017, 421), (1018, 1064), (91, 1063)],
      ("bodas", "nw__IMG_9717.jpg"), "Doble página", "Una boda que pide papel."),
     ("afiche_montevideo.jpg", [(233, 221), (979, 223), (981, 1270), (233, 1271)],
@@ -59,9 +62,30 @@ ESCENAS = [
 
 
 def ruta_foto(cat, nombre):
+    """Ruta de la foto; "nombre#fx,fy" fija el foco del recorte en el cartel
+    (fracción del ancho y del alto de la foto: lo que tiene que quedar al medio)."""
+    nombre = nombre.partition("#")[0]
     if cat == "captura":
         return os.path.join(CAP, nombre)
     return os.path.join(IMG, cat, "web", nombre)
+
+
+def foco_de(nombre):
+    f = nombre.partition("#")[2]
+    return tuple(float(x) for x in f.split(",")) if f else None
+
+
+def recorte_foco(foto, size, foco):
+    """El recorte más grande con la proporción del cartel y `foco` al medio
+    (si el borde no deja, se corre lo justo)."""
+    im = Image.open(foto).convert("RGB")
+    w, h = im.size
+    r = size[0] / size[1]
+    cw, ch = (w, w / r) if w / h < r else (h * r, h)
+    cx = min(max(foco[0] * w, cw / 2), w - cw / 2)
+    cy = min(max(foco[1] * h, ch / 2), h - ch / 2)
+    caja = (int(round(cx - cw / 2)), int(round(cy - ch / 2)), int(round(cx + cw / 2)), int(round(cy + ch / 2)))
+    return im.crop(caja).resize(size, Image.LANCZOS)
 
 
 def detectar(a):
@@ -77,7 +101,7 @@ def detectar(a):
     return [tuple(ap[np.argmin(s)]), tuple(ap[np.argmin(d)]), tuple(ap[np.argmax(s)]), tuple(ap[np.argmax(d)])]
 
 
-def montar(escena, quad, foto):
+def montar(escena, quad, foto, foco=None):
     """Deforma la foto al cartel y le pone la luz de la escena."""
     a = np.asarray(Image.open(os.path.join(ESC, escena)).convert("RGB"))
     h, w = a.shape[:2]
@@ -94,6 +118,8 @@ def montar(escena, quad, foto):
         else:
             ph = ph.crop((0, 0, ph.width, int(ph.width / r)))
         ph = np.asarray(ph.resize((fw, fh), Image.LANCZOS))
+    elif foco:
+        ph = np.asarray(recorte_foco(foto, (fw, fh), foco))
     else:
         ph = np.asarray(cargar_ok(foto, (fw, fh)))
     M = cv2.getPerspectiveTransform(np.float32([[0, 0], [fw, 0], [fw, fh], [0, fh]]), q)
@@ -113,10 +139,39 @@ def montar(escena, quad, foto):
     return Image.fromarray(out.clip(0, 255).astype(np.uint8))
 
 
+# Martin, 28/10/2026: nunca una foto horizontal en un lienzo vertical. Una
+# escena horizontal sale como posteo horizontal, en su proporción (1080 de
+# ancho, entre 1,91:1 y 4:5, lo que acepta Instagram), a sangre, sin fondo ni
+# franjas: el texto chico abajo, sobre un degradado suave.
+RATIO_MAX = 1.91
+
+
+def pieza_horizontal(im, lugar, frase):
+    W = 1080
+    r = min(im.width / im.height, RATIO_MAX)
+    H = int(round(W / r))
+    base = im.resize((W, int(round(im.height * W / im.width))), Image.LANCZOS)
+    if base.height > H:
+        base = base.crop((0, (base.height - H) // 2, W, (base.height - H) // 2 + H))
+    lienzo = base.convert("RGB")
+    m = 56
+    d = ImageDraw.Draw(lienzo)
+    px, ls, salto, alto = medir_titular(d, frase.upper(), W - 2 * m - 40, 46, max_lineas=2)
+    y = H - m - alto - 40
+    lienzo = velo_banda(lienzo, y - 30, H, objetivo=46, pluma=200, piso=0.30)
+    d = ImageDraw.Draw(lienzo)
+    escribir(d, (m, y), lugar.upper(), work(20, "SemiBold"), HUESO, 4)
+    titular(d, frase, m, y + 34, W - 2 * m - 40, 46, HUESO, max_lineas=2)
+    firma(d, W - m, y - 6, 0.8, True, "r")
+    return lienzo
+
+
 def pieza(im, lugar, frase):
-    """4:5. Las escenas verticales van a sangre con una franja de texto abajo;
-    las horizontales arriba, con el texto en negro debajo."""
+    """Las escenas verticales, 4:5 a sangre con una franja de texto abajo; las
+    horizontales, posteo horizontal (pieza_horizontal)."""
     W, H = POST
+    if im.width > im.height:
+        return pieza_horizontal(im, lugar, frase)
     if im.height >= im.width:
         base = im.resize((W, int(im.height * W / im.width)), Image.LANCZOS)
         base = base.crop((0, (base.height - H) // 2, W, (base.height - H) // 2 + H))
@@ -138,20 +193,25 @@ def pieza(im, lugar, frase):
     return lienzo
 
 
-def main():
+def main(desde=None):
+    """Lo que ya salió no se toca (con --solo, solo esas piezas)."""
     os.makedirs(DEST, exist_ok=True)
     indice = []
     for k, (escena, quad, (cat, nombre), lugar, frase) in enumerate(ESCENAS, 1):
-        im = montar(escena, quad, ruta_foto(cat, nombre))
         slug = f"{k:02d}_" + os.path.splitext(escena)[0]
+        indice.append({"n": k, "archivo": slug + ".jpg", "escena": escena,
+                       "foto": f"{cat}/{nombre.partition('#')[0]}", "lugar": lugar, "frase": frase})
+        if not se_puede_escribir(os.path.join(DEST, slug + ".jpg"), desde):
+            continue
+        im = montar(escena, quad, ruta_foto(cat, nombre), foco_de(nombre))
         im.save(os.path.join(DEST, slug + "_escena.jpg"), quality=90)
         pieza(im, lugar, frase).save(os.path.join(DEST, slug + ".jpg"), quality=90, optimize=True)
-        indice.append({"n": k, "archivo": slug + ".jpg", "escena": escena, "foto": f"{cat}/{nombre}",
-                       "lugar": lugar, "frase": frase})
+        print("  ", slug)
     guardar_cache()
     json.dump(indice, open(os.path.join(DEST, "indice.json"), "w"), ensure_ascii=False, indent=1)
     print(len(indice), "piezas")
 
 
 if __name__ == "__main__":
-    main()
+    import sys
+    main(opcion_desde(sys.argv))

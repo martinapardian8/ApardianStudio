@@ -283,6 +283,12 @@ def main():
                 items = [dict(it) for it in viejo[f.isoformat()]["items"]]
                 for it in items:
                     consumir(it.get("pieza") or "")
+                    # la pieza queda, pero si Luz la rehizo con otro texto (orden
+                    # del Centro) el título sale del índice de historias
+                    p = it.get("pieza") or ""
+                    if (it.get("tipo") == "Historia" and p.startswith("04-historias-organicas/")
+                            and titulos.get(os.path.basename(p))):
+                        it["titulo"] = titulos[os.path.basename(p)]
                 colocadas.extend((f, it["pieza"]) for it in items if it.get("pieza"))
                 dias.append(dict(viejo[f.isoformat()], items=items))
                 continue

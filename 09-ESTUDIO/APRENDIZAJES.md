@@ -62,6 +62,29 @@ que no la cumple.
   salvo que Martin confirme que tiene permiso.
 - **Nada de testimonios inventados.** Una cita con nombre de cliente solo si
   el cliente la dijo y Martin lo confirma.
+- **A un animal no se le inventa lo que pensó** (28/10/2026, orden del Centro:
+  "es una perra y no me gusta el titular"). Nada de "este no entendió nada":
+  si no sabés si es macho o hembra, no lo digas, y no le pongas pensamientos
+  ni chistes. El texto dice lo que se ve.
+- **Texto que no tenga que ver con la foto, no va** (28/10/2026: "no tiene
+  sentido el texto en esta foto, eso fue la feria del alfajor en el Latu").
+  "El fondo blanco no es una pared blanca" sobre un alfajor partido en una
+  feria: no. Si no sabés qué pasaba cuando se sacó, el texto describe la
+  foto y nada más.
+- **El motivo, al medio** (28/10/2026: "centrá la foto bien en el medio, el
+  barco", "ajustar el centro de mesa", "que se vea la marca del aceite"). El
+  barco, el centro de mesa, la etiqueta del producto quedan centrados y
+  enteros en el cuadro; el recorte automático no alcanza. En el código:
+  `encuadrar()` en `10-MOTOR/motor_ads.py` (con `ENCUADRE` en `historias.py`
+  y `generar_ads.py`) y el foco `"foto.jpg#fx,fy"` en `mundo.py`.
+- **Las fotos torcidas se enderezan** (28/10/2026: "enderezarla"). Si el
+  horizonte, una viga o una columna están inclinados, se gira la foto lo
+  justo antes de armar la pieza (`encuadrar(..., girar=)`), sin dejar
+  esquinas vacías.
+- **Montajes horizontales, posteo horizontal** (28/10/2026: "foto horizontal
+  en formato vertical no"). Las escenas horizontales de "Tus fotos en el
+  mundo" salen en su proporción (1080 de ancho, hasta 1,91:1), a sangre, sin
+  fondo negro ni franjas (`pieza_horizontal()` en `mundo.py`).
 
 ## Qué funciona
 - (vacío — se llena con la operación real)

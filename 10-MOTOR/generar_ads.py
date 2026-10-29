@@ -28,6 +28,14 @@ def slug(t):
 # decida. Si hace falta elegir una a mano, va acá la ruta.
 VERTICAL = {
     27: None,   # Una botella que se vende sola: no hay botella en vertical
+    17: os.path.join(IMG, "naturaleza", "web", "v__54.jpg"),   # el velero (orden del Centro 28/10)
+}
+
+# Motivo al medio y fotos derechas (Martin, orden del Centro 28/10/2026:
+# "centrá y ajustá la foto bien en el medio, el barco"): motor_ads.encuadrar.
+# centro = (x, y) del motivo en la foto original; girar en grados (antihorario).
+ENCUADRE = {
+    17: dict(centro=(605, 1050)),   # el velero, al medio
 }
 
 
@@ -86,7 +94,8 @@ def main(desde=None):
             if ruta is None:
                 raise ValueError("no hay una foto vertical de Martin que muestre lo que dice el texto")
             for destino, size, story in salidas:
-                render(c, size, story, ruta).save(destino, "JPEG", quality=90, optimize=True)
+                rp = encuadrar(ruta, size, nombre="p%03d" % i, **ENCUADRE[i]) if i in ENCUADRE else ruta
+                render(c, size, story, rp).save(destino, "JPEG", quality=90, optimize=True)
                 registrar(destino, [ruta])
             indice.append({"n": i, "campana": c["_camp"], "titular": c["titular"],
                            "cta": c["cta"], "archivo": nom,
