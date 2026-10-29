@@ -1,0 +1,152 @@
+<title>Pier 21 · Fotos y video</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Marcellus&family=Jost:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* Presupuesto corto de una hoja con la estética del presupuesto final: franja negra, beige y terracota. Letra grande para leer impreso. */
+:root{
+  --bg:#EFE7DA; --sheet:#F6F0E6; --line:#C9B9A2; --fg:#1A1512; --ink:#2E2620; --mute:#5A4D41;
+  --night:#17130F; --terra:#A9513A; --marble:#3E5A4C; --cream:#F3EADC; --tint:#EFE1D2;
+  --display:'Marcellus',Georgia,'Times New Roman',serif;
+  --body:'Jost','Futura','Century Gothic',system-ui,sans-serif;
+  color-scheme:light;
+}
+html,body{background:var(--bg);color:var(--fg)}
+body{font-family:var(--body);font-weight:400;font-size:10.5pt;line-height:1.38;-webkit-font-smoothing:antialiased;padding-block:24px}
+.page{box-sizing:border-box;width:210mm;max-width:calc(100% - 32px);min-height:297mm;margin:0 auto;background:var(--sheet);display:flex;flex-direction:column}
+.lb{font-size:8.5pt;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+.band{background:var(--night);color:var(--cream);padding:7mm 14mm 6mm;display:flex;flex-direction:column;gap:3mm}
+.band .top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.band .ap{font-family:'Anton','Impact',sans-serif;font-size:14pt;line-height:1;letter-spacing:.02em}
+.band .ap i{font-style:normal;color:#FF0033}
+.band .lb{color:#E2D6C4;text-align:right;line-height:1.8}
+.band .pier{font-weight:500;letter-spacing:.42em;font-size:10.5pt}
+.band h1{margin:1.5mm 0 0;font-family:var(--display);font-weight:400;font-size:28pt;line-height:1.05}
+.band h1 em{font-style:normal;color:#E39A78}
+.band p{margin:0;color:var(--cream);font-size:11.5pt}
+.in{padding:5mm 14mm 5mm;display:flex;flex-direction:column;gap:4.5mm;flex:1}
+h2{margin:0 0 1mm;display:flex;justify-content:space-between;align-items:baseline;gap:10px;padding-bottom:2mm;border-bottom:1.5px solid var(--fg);font-family:var(--display);font-weight:400;font-size:15pt}
+h2 small{font-family:var(--body);font-size:8.5pt;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
+.svc{display:grid;grid-template-columns:1fr 30mm;gap:6mm;padding:2.4mm 0;border-bottom:1px solid var(--line)}
+.svc h3{margin:0;font-family:var(--display);font-weight:400;font-size:14pt;line-height:1.15}
+.svc ul{margin:1mm 0 0;padding:0;list-style:none;display:grid;gap:.4mm}
+.svc li{display:grid;grid-template-columns:4.5mm 1fr;color:var(--ink)}
+.svc li::before{content:"—";color:var(--terra)}
+.svc .p{text-align:right;font-family:var(--display);font-size:17pt;line-height:1.1;white-space:nowrap;font-variant-numeric:tabular-nums}
+.svc .p small{display:block;font-family:var(--body);font-size:8.5pt;color:var(--mute)}
+.total{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:2.5mm;padding:3mm 5mm;background:var(--terra);color:var(--cream)}
+.total .lb{color:#F6E2D6}
+.total .v{font-family:var(--display);font-size:26pt;line-height:1;white-space:nowrap}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:8mm}
+.pay{width:100%;border-collapse:collapse}
+.pay td{padding:2mm 0;border-bottom:1px solid var(--line);color:var(--ink)}
+.pay td.n{text-align:right;font-family:var(--display);font-size:14pt;color:var(--fg);white-space:nowrap}
+ul.d{margin:2mm 0 0;padding:0;list-style:none;display:grid;gap:1.4mm}
+ul.d li{display:grid;grid-template-columns:4.5mm 1fr;color:var(--ink)}
+ul.d li::before{content:"—";color:var(--terra)}
+ul.d b{font-weight:500;color:var(--fg)}
+.next{padding:3mm 4mm;background:var(--tint);color:var(--fg)}
+.next b{font-weight:500}
+.sign{margin-top:auto;background:var(--night);color:var(--cream);padding:4mm 14mm 4mm;display:flex;flex-direction:column;gap:4mm}
+.sign .sig{display:grid;grid-template-columns:1fr 1fr;gap:10mm;padding-top:6mm}
+.sign .sig div{border-top:1px solid #E2D6C4;padding-top:1.5mm;color:#E2D6C4}
+.sign .foot{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;color:#E2D6C4}
+.sign .lb{color:#E2D6C4}
+@media (max-width:640px){
+  .page{min-height:0}
+  .band,.in,.sign{padding-left:16px;padding-right:16px}
+  .band h1{font-size:26px}
+  .two,.sign .sig{grid-template-columns:1fr}
+  .svc{grid-template-columns:1fr auto}
+}
+@page{size:A4;margin:0}
+@media print{
+  html,body{background:var(--sheet);padding:0;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .page{width:210mm;height:297mm;max-width:none;margin:0;overflow:hidden}
+}
+</style>
+
+<section class="page">
+  <div class="band">
+    <div class="top">
+      <div class="ap">APARDIAN<i>.</i></div>
+      <div class="lb">Presupuesto P21-004<br>29 · 10 · 2026 · Válido 15 días</div>
+    </div>
+    <div>
+      <div class="pier">PIER 21</div>
+      <h1>Fotos y video <em>para arrancar.</em></h1>
+    </div>
+    <p>Las fotos del lugar, el video con drone y el reel de apertura, editados y listos para usar en redes, Google y donde los necesiten.</p>
+  </div>
+
+  <div class="in">
+    <div>
+      <h2>Qué incluye <small>USD</small></h2>
+      <div class="svc">
+        <div>
+          <h3>Producción de fotos del lugar</h3>
+          <ul>
+            <li><span>3 visitas en el mes: mañana, atardecer y noche con el salón funcionando. Salón, terraza, barra, fachada, tragos y equipo.</span></li>
+            <li><span>Sin límite de fotos. Todas editadas en Lightroom.</span></li>
+          </ul>
+        </div>
+        <div class="p">680</div>
+      </div>
+      <div class="svc">
+        <div>
+          <h3>Video con drone</h3>
+          <ul>
+            <li><span>Vuelo al atardecer sobre Pier 21, la terraza y la rambla.</span></li>
+            <li><span>Video de 30 a 60 segundos en vertical y horizontal, y 10 clips cortos.</span></li>
+            <li><span>Si hay lluvia o viento fuerte, se reprograma sin costo.</span></li>
+          </ul>
+        </div>
+        <div class="p">280</div>
+      </div>
+      <div class="svc">
+        <div>
+          <h3>Reel de apertura</h3>
+          <ul>
+            <li><span>Un reel de hasta 1 minuto, con tomas del drone y del salón.</span></li>
+            <li><span>Entregado en vertical para Instagram y en horizontal para pantallas y web.</span></li>
+          </ul>
+        </div>
+        <div class="p">200</div>
+      </div>
+      <div class="total">
+        <div><div class="lb">Total</div><div style="margin-top:1mm">Fotos, drone y reel</div></div>
+        <div class="v">USD 1.160</div>
+      </div>
+    </div>
+
+    <div class="two">
+      <div>
+        <h2>Forma de pago <small>USD</small></h2>
+        <table class="pay">
+          <tr><td>50 % al confirmar. Reserva las fechas de las visitas.</td><td class="n">580</td></tr>
+          <tr><td>50 % al entregar el material.</td><td class="n">580</td></tr>
+        </table>
+        <ul class="d">
+          <li><span><b>Transferencia</b> en dólares, o en pesos al cambio BROU del día. Sin impuestos.</span></li>
+          <li><span>El material en alta calidad se entrega con el pago completo.</span></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Cómo trabajamos</h2>
+        <ul class="d">
+          <li><span><b>Entrega:</b> en 7 días después de la última visita, por link de descarga.</span></li>
+          <li><span><b>Del local:</b> un contacto por WhatsApp para coordinar, y los tragos listos el día de las fotos.</span></li>
+          <li><span><b>Uso:</b> las fotos y los videos son para que Pier 21 los use donde quiera.</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="next"><b>Más adelante:</b> cuando quieran sumar la web y la carta en varios idiomas, el material ya está hecho y arrancamos más rápido.</div>
+  </div>
+
+  <div class="sign">
+    <div class="sig lb"><div>Pier 21 · Firma y fecha</div><div>Martín Apardian · Apardian Studio</div></div>
+    <div class="foot lb"><span>apardianstudio.com · @apardian.studio</span><span>martinapardian8@gmail.com · WA +598 91 962 962</span></div>
+  </div>
+</section>
