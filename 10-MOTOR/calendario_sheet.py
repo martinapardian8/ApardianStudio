@@ -185,8 +185,24 @@ def fila(item, fecha, collage, campanas, mundo, base_mundo):
     }
 
 
+def version_pieza(f):
+    """Cambia si Luz rehace la pieza (otros archivos, otro peso u otro pie). La usa
+    el Centro para volver a pedir ✓ o ✗, y esta planilla para respetar un ✓ viejo
+    solo si la pieza no cambió."""
+    import hashlib
+    archivos = f["archivos"].split("|")
+    firma = f["archivos"] + "|" + f["pie"] + "|" + "|".join(str(os.path.getsize(os.path.join(IG, a))) for a in archivos)
+    return hashlib.sha1(firma.encode()).hexdigest()[:10]
+
+
+# Los ✓ que Martin marcó en el Centro antes de que existiera la hoja Calendario
+# (o mientras el flujo 07 no estaba prendido): {id: {"ver": ..., "en": ...}}.
+APROBADAS = os.path.join(IG, "aprobaciones_centro.json")
+
+
 def main():
     cal = json.load(open(os.path.join(IG, "calendario.json"), encoding="utf-8"))
+    aprobadas = json.load(open(APROBADAS, encoding="utf-8")) if os.path.exists(APROBADAS) else {}
     collage, campanas = pies_collage(), pies_campana()
     mundo = json.load(open(os.path.join(IG, "08-tus-fotos-en-el-mundo", "indice.json"), encoding="utf-8"))
     base_mundo = pie_mundo_base()
@@ -198,6 +214,10 @@ def main():
             f = fila(it, d["fecha"], collage, campanas, mundo, base_mundo)
             if f:
                 f["revision"] = lupa.revisar(f, vistos, cercanas)
+                a = aprobadas.get(f["id"])
+                if a and a.get("ver") == version_pieza(f) and f["estado"] == "pendiente" \
+                        and not f["revision"].startswith("frenado"):
+                    f.update(estado="aprobado", aprobado_por="Martin (Centro)", aprobado_en=a.get("en", ""))
                 filas.append(f)
     ids = [f["id"] for f in filas]
     assert len(ids) == len(set(ids)), "ids repetidos"
@@ -214,6 +234,7 @@ def main():
                       "frenadas_por_lupa": [f["id"] + ": " + f["revision"] for f in filas if f["revision"].startswith("frenado")],
                       "sin_pie": [f["id"] for f in filas if not f["pie"] and f["tipo"] != "STORY"],
                       "con_nota_de_lupa": sum("nota" in f["revision"] for f in filas),
+                      "aprobadas_en_el_centro": sum(f["aprobado_por"] == "Martin (Centro)" for f in filas),
                       "con_error": [f["id"] for f in filas if f["error"]]},
                      ensure_ascii=False, indent=1))
 
