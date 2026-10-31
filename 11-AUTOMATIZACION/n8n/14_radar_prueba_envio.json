@@ -1,0 +1,180 @@
+{
+ "name": "APARDIAN 14 · Radar: prueba de envío (a mi casilla)",
+ "nodes": [
+  {
+   "parameters": {},
+   "id": "9e20598d-6483-4f80-b545-fe138dceec3f",
+   "name": "Probar a mano",
+   "type": "n8n-nodes-base.manualTrigger",
+   "typeVersion": 1,
+   "position": [
+    0,
+    0
+   ]
+  },
+  {
+   "parameters": {
+    "assignments": {
+     "assignments": [
+      {
+       "id": "585c0461-3df9-4e7d-9d7b-62c3c1fc03b9",
+       "name": "SHEET_ID",
+       "value": "1r5y3eKsDaIwNYuHGpV7E9esgMd7WdnDlcDtkKgmfJTQ",
+       "type": "string"
+      },
+      {
+       "id": "2195d1d6-f56d-4e87-b9ff-3796938a20f6",
+       "name": "MI_EMAIL",
+       "value": "Martin Apardian <contacto@apardianstudio.com>",
+       "type": "string"
+      },
+      {
+       "id": "037dbf22-8a87-41c7-b3f0-57081194deaf",
+       "name": "PARA",
+       "value": "martinapardian8@gmail.com",
+       "type": "string"
+      },
+      {
+       "id": "ab586ad7-2226-47f7-ab05-aa6f767b8a15",
+       "name": "CANTIDAD",
+       "value": 5,
+       "type": "number"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "id": "cffad1cc-1571-4b61-96bc-8c36dff66375",
+   "name": "Config",
+   "type": "n8n-nodes-base.set",
+   "typeVersion": 3.4,
+   "position": [
+    220,
+    0
+   ]
+  },
+  {
+   "parameters": {
+    "operation": "read",
+    "documentId": {
+     "__rl": true,
+     "value": "={{ $('Config').first().json.SHEET_ID }}",
+     "mode": "id"
+    },
+    "sheetName": {
+     "__rl": true,
+     "value": "Leads",
+     "mode": "name"
+    },
+    "options": {}
+   },
+   "id": "d939e1e7-8cd9-4dff-b695-3a70eef0c083",
+   "name": "Leer Leads",
+   "type": "n8n-nodes-base.googleSheets",
+   "typeVersion": 4.5,
+   "position": [
+    440,
+    0
+   ],
+   "credentials": {
+    "googleSheetsOAuth2Api": {
+     "id": "REEMPLAZAR",
+     "name": "Google Sheets"
+    }
+   },
+   "executeOnce": true,
+   "alwaysOutputData": true
+  },
+  {
+   "parameters": {
+    "jsCode": "// Prueba de envío: toma hasta CANTIDAD mails de Radar ya redactados y los manda\n// a TU casilla (PARA), con copia oculta a contacto@ para que aparezcan en Enviados.\n// No le escribe a ningún cliente y no toca la planilla.\nconst c = $('Config').first().json;\nconst BAJA = \"Si no te interesa, respondé 'no' y no te escribo más.\";\nconst tieneBaja = t => /no te escribo m[aá]s|no le escribo m[aá]s|no vuelvo a escribir|won'?t (write|email)|n[aã]o (te |lhe )?escrevo mais/i.test(t);\nconst para = String(c.PARA || '').trim();\nif (!/^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$/.test(para)) throw new Error('Poné tu mail en Config → PARA');\nconst copia = (String(c.MI_EMAIL || '').match(/[\\w.+-]+@[\\w.-]+/) || [''])[0];\nconst leads = $('Leer Leads').all().map(r => r.json)\n  .filter(l => l.id && String(l.asunto || '').trim() && String(l.borrador || '').trim());\nconst orden = l => /^aprobado/.test(l.estado || '') ? 0 : 1;   // primero los que aprobaste\nreturn leads.sort((a, b) => orden(a) - orden(b))\n  .slice(0, Number(c.CANTIDAD) || 5)\n  .map(l => { let t = String(l.borrador).trim(); if (!tieneBaja(t)) t += '\\n\\n' + BAJA;\n    return { json: { para, copia,\n      asunto: '[PRUEBA] ' + String(l.asunto).trim(),\n      cuerpo: 'PRUEBA · Así le llega a ' + (l.nombre || 'el cliente') + ' (' + (l.email || 'sin mail') + '). ' +\n        'A esa persona no se le mandó nada.\\n\\n────────\\n\\n' + t } }; });\n"
+   },
+   "id": "04228ff0-998b-419f-9a17-6b1f8f386f63",
+   "name": "Elegir 5 para la prueba",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    660,
+    0
+   ]
+  },
+  {
+   "parameters": {
+    "fromEmail": "={{ $('Config').first().json.MI_EMAIL }}",
+    "toEmail": "={{ $json.para }}",
+    "subject": "={{ $json.asunto }}",
+    "emailFormat": "text",
+    "text": "={{ $json.cuerpo }}",
+    "options": {
+     "appendAttribution": false,
+     "bccEmail": "={{ $json.copia || '' }}"
+    }
+   },
+   "id": "c7d49d69-7787-4c17-a718-355fcc664b1a",
+   "name": "Enviar prueba (contacto@)",
+   "type": "n8n-nodes-base.emailSend",
+   "typeVersion": 2.1,
+   "position": [
+    880,
+    0
+   ],
+   "credentials": {
+    "smtp": {
+     "id": "REEMPLAZAR",
+     "name": "Hostinger SMTP (contacto@)"
+    }
+   }
+  }
+ ],
+ "connections": {
+  "Probar a mano": {
+   "main": [
+    [
+     {
+      "node": "Config",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Config": {
+   "main": [
+    [
+     {
+      "node": "Leer Leads",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Leer Leads": {
+   "main": [
+    [
+     {
+      "node": "Elegir 5 para la prueba",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Elegir 5 para la prueba": {
+   "main": [
+    [
+     {
+      "node": "Enviar prueba (contacto@)",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  }
+ },
+ "settings": {
+  "executionOrder": "v1",
+  "timezone": "America/Montevideo"
+ },
+ "active": false
+}
