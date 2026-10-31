@@ -1298,7 +1298,9 @@ return out;
 const d = (($json.data || [])[0]) || {};
 const usado = Number(d.quota_usage || 0), total = Number((d.config || {}).quota_total || 50);
 const f = $('¿Publicar?').first().json.fila;
-if ($json.error) return [{ json: { seguir: false, fila: f, telegram_text: '⚠️ No pude consultar el cupo de Instagram: ' + esc(JSON.stringify($json.error).slice(0, 300)) + '. Revisá el token.' } }];
+// Si la consulta del cupo falla, no frena: intenta publicar igual. Si el
+// problema es el token, la publicación falla con el error exacto de Instagram.
+if ($json.error) return [{ json: { seguir: true, fila: f } }];
 if (usado >= total - 1) return [{ json: { seguir: false, fila: f, telegram_text: '⏸️ Cupo de Instagram casi lleno (' + usado + '/' + total + '). ' + esc(f.titulo) + ' sale en la próxima vuelta con cupo.' } }];
 return [{ json: { seguir: true, fila: f } }];
 """)
