@@ -25,7 +25,7 @@ vive solo en n8n: no va en el chat, ni en la planilla, ni en un mail.
 4. Menú izquierdo → **Cuentas** → **Páginas** → **Agregar** → elegí la
    página del estudio.
 5. **Cuentas** → **Cuentas de Instagram** → **Agregar** → iniciá sesión con
-   apardianstudio.
+   apardian.studio.
 
 ## Parte C · La app de Meta (10 min)
 
@@ -47,13 +47,14 @@ vence, así que no hay que renovarlo cada 60 días.
 10. Volvé a https://business.facebook.com/settings → **Usuarios** →
     **Usuarios del sistema** → **Agregar** → nombre: **n8n-publicador** →
     rol: **Administrador** → **Crear usuario del sistema**.
-    Si ya tenés uno creado de antes, usá ese.
+    Ya existe: **n8n Editor**, con la app **APARDIAN Editor**. Usá ese.
 11. Con el usuario elegido → **Asignar activos**:
-    - **Apps** → APARDIAN Publicador → **Control total**
-    - **Páginas** → la página del estudio → **Control total**
-    - **Cuentas de Instagram** → apardianstudio → **Control total**
+    - **Apps** → APARDIAN Editor → **Control total**
+    - **Páginas** → Estudio Apardian → **Control total** (al 31/10 decía
+      "Aún no hay nada asignado": sin esto el token no ve la cuenta)
+    - **Cuentas de Instagram** → apardian.studio → **Control total**
     → **Guardar cambios**.
-12. **Generar token** → app: **APARDIAN Publicador** → caducidad: **Nunca** →
+12. **Generar token** → app: **APARDIAN Editor** → caducidad: **Nunca** →
     marcá estos permisos:
     - `instagram_basic`
     - `instagram_content_publish`
@@ -76,7 +77,7 @@ vence, así que no hay que renovarlo cada 60 días.
 15. Abrí https://developers.facebook.com/tools/explorer/ → en
     **Token de acceso** pegá tu token → en la barra escribí
     `me/accounts?fields=instagram_business_account{id,username}` →
-    **Enviar**. Tiene que aparecer `"username": "apardianstudio"` y
+    **Enviar**. Tiene que aparecer `"username": "apardian.studio"` y
     `"id": "17841449627698502"`. Ese id ya viene cargado en los flujos.
     Si sale otro número, avisame.
 
